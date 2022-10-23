@@ -1,0 +1,7 @@
+---
+title: "CLAMS - Command Line Algorithmic Music System"
+author: "M. Edward (Ed) Borasky"
+date: "2022-10-23"
+format: revealjs
+---
+
