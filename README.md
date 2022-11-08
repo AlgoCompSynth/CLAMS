@@ -9,12 +9,14 @@ M. Edward (Ed) Borasky
 
 CLAMS is an interactive environment for composing and performing music
 on a Raspberry Pi Pico or other board using the RP2040 microcontroller.
-It is intended to work on a Raspberry Pi Pico WH, which costs about
-\$9US and includes soldered male headers, a debugging connector, and a
-2.4 GHz WiFi transceiver.
+It is intended to work on a
+[Raspberry Pi Pico WH]()https://www.raspberrypi.com/products/raspberry-pi-pico/,
+which costs about \$9US and includes soldered male headers, a debugging connector,
+and a 2.4 GHz WiFi transceiver.
 
-To actually hear or record the music, you will need an audio pack. I use
-the Pimoroni audio pack.
+To actually hear or record the music, you will need an audio interface. I use
+the
+[Pimoroni Pico Audio Pack](https://shop.pimoroni.com/products/pico-audio-pack?variant=32369490853971).
 
 ## How does it work?
 
