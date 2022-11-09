@@ -67,3 +67,5 @@ Daisy, OWL and Teensy processors are all more powerful than the RP2040.
 By contrast, there’s not much for the Raspberry Pi Pico. There are some
 simple demos, and there’s a Eurorack module with an open source
 MicroPython software platform. CLAMS is more bare-metal.
+
+## References
