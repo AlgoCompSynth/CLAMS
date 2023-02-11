@@ -10,6 +10,24 @@
 <atom:link href="https://algocompsynth.github.io/CLAMS/index.xml" rel="self" type="application/rss+xml"/>
 <description>CLAMS Blog</description>
 <generator>quarto-1.1.251</generator>
-<lastBuildDate>Sat, 11 Feb 2023 21:59:30 GMT</lastBuildDate>
+<lastBuildDate>Sat, 11 Feb 2023 08:00:00 GMT</lastBuildDate>
+<item>
+  <title>Welcome To My Blog</title>
+  <dc:creator>M. Edward (Ed) Borasky</dc:creator>
+  <link>https://algocompsynth.github.io/CLAMS/posts/welcome/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This is the first post in a Quarto blog. Welcome!</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>https://algocompsynth.github.io/CLAMS/posts/welcome/index.html</guid>
+  <pubDate>Sat, 11 Feb 2023 08:00:00 GMT</pubDate>
+</item>
 </channel>
 </rss>

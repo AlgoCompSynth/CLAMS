@@ -2,10 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://algocompsynth.github.io/CLAMS/about.html</loc>
-    <lastmod>2023-02-11T21:59:29.698Z</lastmod>
+    <lastmod>2023-02-11T22:05:04.462Z</lastmod>
   </url>
   <url>
     <loc>https://algocompsynth.github.io/CLAMS/index.html</loc>
-    <lastmod>2023-02-11T21:59:30.044Z</lastmod>
+    <lastmod>2023-02-11T22:05:04.834Z</lastmod>
+  </url>
+  <url>
+    <loc>https://algocompsynth.github.io/CLAMS/posts/welcome/index.html</loc>
+    <lastmod>2023-02-11T22:05:05.602Z</lastmod>
   </url>
 </urlset>
