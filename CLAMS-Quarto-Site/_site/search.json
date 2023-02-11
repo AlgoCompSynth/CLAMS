@@ -1,16 +1,16 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "CLAMS-Quarto-Site",
-    "section": "",
-    "text": "To learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About This Site",
     "section": "",
-    "text": "1 + 1\n\n[1] 2"
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "section": "",
+    "text": "To learn more about Quarto websites visit https://quarto.org/docs/websites."
   }
 ]

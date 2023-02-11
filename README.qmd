@@ -3,7 +3,7 @@ title: "Command Line Algorithmic Music System (CLAMS)"
 author: "M. Edward (Ed) Borasky"
 format: gfm
 editor: visual
-bibliography: CLAMS.bib
+bibliography: CLAMS-Quarto-Site/CLAMS.bib
 ---
 
 > "I've never seen a happy clam. In fact, most of them were really steamed." \~ M. Edward (Ed) Borasky
