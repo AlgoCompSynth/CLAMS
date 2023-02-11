@@ -4,6 +4,8 @@ project:
 
 website:
   title: "Command Line Algorithmic Music System (CLAMS)"
+  site-url: "https://algocompsynth.github.io/CLAMS/"
+  description: "CLAMS Blog"
   navbar:
     right:
       - about.qmd
