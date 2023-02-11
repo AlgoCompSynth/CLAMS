@@ -9,18 +9,18 @@ M. Edward (Ed) Borasky
 
 `CLAMS` is a text-based interactive environment for composing and
 performing music on a [Raspberry Pi Pico H microcontroller
-board](https://www.raspberrypi.com/products/raspberry-pi-pico/).
+board](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html#raspberry-pi-pico-and-pico-h "Raspberry Pi Pico Website").
 This board costs about \$5US and includes soldered male headers and a
-debug connector. `CLAMS` could be ported to other boards that
-use the RP2040 microcontroller, but I have no plans to do so. To hear or
-record the music, you will need a [Pimoroni Pico Audio
+debug connector. `CLAMS` could be ported to other boards that use the
+RP2040 microcontroller, but I have no plans to do so. To hear or record
+the music, you will need a [Pimoroni Pico Audio
 Pack](https://shop.pimoroni.com/products/pico-audio-pack?variant=32369490853971).
 
 ## How does it work?
 
 `CLAMS` is a domain-specific language built on a Forth compiler /
-interpreter. The user connects to the board by a serial
-connection and enters `CLAMS` / Forth code interactively.
+interpreter. The user connects to the board, either by USB or a wireless
+connection, and enters `CLAMS` / Forth code interactively.
 
 ## Why Forth?
 
