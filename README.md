@@ -27,9 +27,9 @@ connection, and enters `CLAMS` / Forth code interactively.
 > “Premature optimization may be the root of all evil, but it is damned
 > fun!” \~ M. Edward (Ed) Borasky
 
-1.  Forth is an extensible interactive operating system. It supports
-    editing, assembling, compiling, debugging and running real-time
-    tasks from a terminal.
+1.  Forth (Brodie 2022) is an extensible interactive operating system.
+    It supports editing, assembling, compiling, debugging and running
+    real-time tasks from a terminal.
 2.  Forth is efficient. A well-designed Forth will usually run a task at
     no worse than half the speed of a hand-optimized assembly version.
     `CLAMS` will have several optimizations built in for the ultimate
@@ -113,31 +113,61 @@ assembler using the RP2040 C/C++ SDK. The desiderata were:
 - The ability to build in C/C++ libraries at link time and execute them
   as Forth words.
 
-  It turns out that there is an existing Forth that satisfies all of
-  these (and more!), except for the linking with existing C/C++
-  libraries. That Forth is [Travis Bemann’s
-  `zeptoforth`](https://github.com/tabemann/zeptoforth "zeptoforth on GitHub").
+It turns out that there is an existing Forth that satisfies all of these
+(and more!), except for the linking with existing C/C++ libraries. That
+Forth is [Travis Bemann’s
+`zeptoforth`](https://github.com/tabemann/zeptoforth "zeptoforth on GitHub").
 
-  Given the volatile current state of RP2040 audio hardware, there
-  aren’t really any device-specific libraries I can use aside from the
-  [Arduino
-  ecosystem](https://github.com/pschatzmann/arduino-audio-tools "Arduino Audio Tools on GitHub")
-  and MicroPython / CircuitPython. I’ll have to go straight to the
-  hardware anyhow, and `zeptoforth` has all the low-level words to do
-  that already.
+Given the volatile current state of RP2040 audio hardware, there aren’t
+really any device-specific libraries I can use aside from the [Arduino
+ecosystem](https://github.com/pschatzmann/arduino-audio-tools "Arduino Audio Tools on GitHub")
+and MicroPython / CircuitPython. I’ll have to go straight to the
+hardware anyhow, and `zeptoforth` has all the low-level words to do that
+already. I’ll be using Katz and Gentile (2005), chapter 5 as a guide.
 
-  So I will be building `CLAMS` on `zeptoforth`. I’m planning to write
-  enough documentation so that non-Forth programmers can follow along.
-  So, as the saying goes, “Watch this space.”
+So I will be building `CLAMS` on `zeptoforth`. For those of you
+following along at home:
+
+- I’m planning to write enough documentation so that non-Forth
+  programmers can follow along. If you’re new to Forth and want to get
+  started, Brodie (2022) is the place to start. Note: there are a few
+  PDF versions of *Starting Forth* on the web. They may well be older
+  versions; the one you want is the web version at
+  <https://www.forth.com/starting-forth/0-starting-forth/>
+- For those of you that are Forth programmers, the `zeptoforth` words
+  are documented at
+  [https://github.com/tabemann/zeptoforth/tree/master/html
+  (HTML)](https://github.com/tabemann/zeptoforth/tree/master/html "zeptoforth HTML word list")
+  and [https://github.com/tabemann/zeptoforth/tree/master/epub
+  (EPUB)](https://github.com/tabemann/zeptoforth/tree/master/epub "zeptoforth EPUB word list").
+  For more details, see the [`zeptoforth`
+  wiki](https://github.com/tabemann/zeptoforth/wiki "zeptoforth wiki").
+
+So, as the saying goes, “Watch this space.”
 
 ## References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
+<div id="ref-brodie2022" class="csl-entry">
+
+Brodie, Leo. 2022. “Starting Forth.” FORTH, Inc.
+<https://www.forth.com/starting-forth/0-starting-forth/>.
+
+</div>
+
 <div id="ref-forth2022" class="csl-entry">
 
 Forth 200x Committee. 2012. “Forth 2012 Standard.” Forth 200x Committee.
 <https://forth-standard.org/standard/words>.
+
+</div>
+
+<div id="ref-katz2005embedded" class="csl-entry">
+
+Katz, D. J., and R. Gentile. 2005. *Embedded Media Processing*.
+Electronics & Electrical. Elsevier Science.
+<https://books.google.com/books?id=4auaDSdzLwsC>.
 
 </div>
 

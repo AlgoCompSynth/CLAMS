@@ -20,7 +20,7 @@ bibliography: CLAMS-Quarto-Site/CLAMS.bib
 
 > "Premature optimization may be the root of all evil, but it is damned fun!" \~ M. Edward (Ed) Borasky
 
-1.  Forth is an extensible interactive operating system. It supports editing, assembling, compiling, debugging and running real-time tasks from a terminal.
+1.  Forth [@brodie2022] is an extensible interactive operating system. It supports editing, assembling, compiling, debugging and running real-time tasks from a terminal.
 2.  Forth is efficient. A well-designed Forth will usually run a task at no worse than half the speed of a hand-optimized assembly version. `CLAMS` will have several optimizations built in for the ultimate speed.
 3.  Forth is lean. There are very few concepts to learn, there is minimal run-time overhead in RAM, and the whole package takes up much less flash space than MicroPython or CircuitPython.
 
@@ -54,10 +54,15 @@ I've gotten back to this project over the past week and I have made a significan
 
 -   The ability to build in C/C++ libraries at link time and execute them as Forth words.
 
-    It turns out that there is an existing Forth that satisfies all of these (and more!), except for the linking with existing C/C++ libraries. That Forth is [Travis Bemann's `zeptoforth`](https://github.com/tabemann/zeptoforth "zeptoforth on GitHub").
+It turns out that there is an existing Forth that satisfies all of these (and more!), except for the linking with existing C/C++ libraries. That Forth is [Travis Bemann's `zeptoforth`](https://github.com/tabemann/zeptoforth "zeptoforth on GitHub").
 
-    Given the volatile current state of RP2040 audio hardware, there aren't really any device-specific libraries I can use aside from the [Arduino ecosystem](https://github.com/pschatzmann/arduino-audio-tools "Arduino Audio Tools on GitHub") and MicroPython / CircuitPython. I'll have to go straight to the hardware anyhow, and `zeptoforth` has all the low-level words to do that already.
+Given the volatile current state of RP2040 audio hardware, there aren't really any device-specific libraries I can use aside from the [Arduino ecosystem](https://github.com/pschatzmann/arduino-audio-tools "Arduino Audio Tools on GitHub") and MicroPython / CircuitPython. I'll have to go straight to the hardware anyhow, and `zeptoforth` has all the low-level words to do that already. I'll be using @katz2005embedded, chapter 5 as a guide.
 
-    So I will be building `CLAMS` on `zeptoforth`. I'm planning to write enough documentation so that non-Forth programmers can follow along. So, as the saying goes, "Watch this space."
+So I will be building `CLAMS` on `zeptoforth`. For those of you following along at home:
+
+-   I'm planning to write enough documentation so that non-Forth programmers can follow along. If you're new to Forth and want to get started, @brodie2022 is the place to start. Note: there are a few PDF versions of *Starting Forth* on the web. They may well be older versions; the one you want is the web version at <https://www.forth.com/starting-forth/0-starting-forth/>
+-   For those of you that are Forth programmers, the `zeptoforth` words are documented at [https://github.com/tabemann/zeptoforth/tree/master/html (HTML)](https://github.com/tabemann/zeptoforth/tree/master/html "zeptoforth HTML word list") and [https://github.com/tabemann/zeptoforth/tree/master/epub (EPUB)](https://github.com/tabemann/zeptoforth/tree/master/epub "zeptoforth EPUB word list"). For more details, see the [`zeptoforth` wiki](https://github.com/tabemann/zeptoforth/wiki "zeptoforth wiki").
+
+So, as the saying goes, "Watch this space."
 
 ## References
