@@ -1,8 +1,9 @@
 project:
   type: website
+  output-dir: ../docs
 
 website:
-  title: "CLAMS-Quarto-Blog"
+  title: "Command Line Algorithmic Music System (CLAMS)"
   navbar:
     right:
       - about.qmd
