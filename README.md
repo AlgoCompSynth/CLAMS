@@ -142,8 +142,12 @@ following along at home:
   (EPUB)](https://github.com/tabemann/zeptoforth/tree/master/epub "zeptoforth EPUB word list").
   For more details, see the [`zeptoforth`
   wiki](https://github.com/tabemann/zeptoforth/wiki "zeptoforth wiki").
+- There is now a [project
+  blog](https://algocompsynth.github.io/CLAMS-Blog/ "CLAMS Project Blog")!
+  It’s at <https://algocompsynth.github.io/CLAMS-Blog/>
 
-So, as the saying goes, “Watch this space.”
+So, as the saying goes, “Watch this space.” Well … watch ***that***
+space!
 
 ## References
 

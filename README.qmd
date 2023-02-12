@@ -3,7 +3,7 @@ title: "Command Line Algorithmic Music System (CLAMS)"
 author: "M. Edward (Ed) Borasky"
 format: gfm
 editor: visual
-bibliography: CLAMS-Quarto-Blog/CLAMS.bib
+bibliography: CLAMS.bib
 ---
 
 > "I've never seen a happy clam. In fact, most of them were really steamed." \~ M. Edward (Ed) Borasky
@@ -62,7 +62,8 @@ So I will be building `CLAMS` on `zeptoforth`. For those of you following along 
 
 -   I'm planning to write enough documentation so that non-Forth programmers can follow along. If you're new to Forth and want to get started, @brodie2022 is the place to start. Note: there are a few PDF versions of *Starting Forth* on the web. They may well be older versions; the one you want is the web version at <https://www.forth.com/starting-forth/0-starting-forth/>
 -   For those of you that are Forth programmers, the `zeptoforth` words are documented at [https://github.com/tabemann/zeptoforth/tree/master/html (HTML)](https://github.com/tabemann/zeptoforth/tree/master/html "zeptoforth HTML word list") and [https://github.com/tabemann/zeptoforth/tree/master/epub (EPUB)](https://github.com/tabemann/zeptoforth/tree/master/epub "zeptoforth EPUB word list"). For more details, see the [`zeptoforth` wiki](https://github.com/tabemann/zeptoforth/wiki "zeptoforth wiki").
+-   There is now a [project blog](https://algocompsynth.github.io/CLAMS-Blog/ "CLAMS Project Blog")! It's at <https://algocompsynth.github.io/CLAMS-Blog/>
 
-So, as the saying goes, "Watch this space."
+So, as the saying goes, "Watch this space." Well ... watch ***that*** space!
 
 ## References
