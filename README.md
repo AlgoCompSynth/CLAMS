@@ -19,8 +19,8 @@ Pack](https://shop.pimoroni.com/products/pico-audio-pack?variant=32369490853971)
 ## How does it work?
 
 `CLAMS` is a domain-specific language built on a Forth compiler /
-interpreter. The user connects to the board via a serial connection
-and enters `CLAMS` / Forth code interactively.
+interpreter. The user connects to the board via a serial connection and
+enters `CLAMS` / Forth code interactively.
 
 ## Why Forth?
 

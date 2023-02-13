@@ -14,7 +14,7 @@ bibliography: CLAMS.bib
 
 ## How does it work?
 
-`CLAMS` is a domain-specific language built on a Forth compiler / interpreter. The user connects to the board, either by USB or a wireless connection, and enters `CLAMS` / Forth code interactively.
+`CLAMS` is a domain-specific language built on a Forth compiler / interpreter. The user connects to the board via a serial connection and enters `CLAMS` / Forth code interactively.
 
 ## Why Forth?
 
