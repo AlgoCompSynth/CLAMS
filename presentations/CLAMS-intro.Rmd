@@ -1,0 +1,47 @@
+---
+title: "Command Line Algorithmic Music System (CLAMS)"
+author: "M. Edward (Ed) Borasky"
+date: 2023-02-20
+bibliography: ../CLAMS.bib
+output:
+  beamer_presentation:
+    theme: "Montpellier"
+---
+
+# Me and Forth
+
+## Me - retired scientific applications programmer
+
+- Got paid to write
+    - Assembly
+    - Fortran
+    - Awk / sed / grep / *nix shell
+    - Perl
+    - R
+
+## Me - learned for hobby projects
+
+- Lisp
+- Forth
+- Ruby
+    
+## Me - never learned
+
+- C/C++/Java/C#/D/Rust/Go
+- PHP
+- Python
+- JavaScript
+
+## Me and Forth - mid to late 1990s
+- Primary Forth engine was HP100LX Palmtop PC
+- Wrote some articles for FORTH Dimensions
+- Wrote a point and figure charting program
+- Used mostly hforth and Tom Almy's Forth compiler
+- Later ran the Forth that came with Jack Woehr's _Forth: The New Model_
+    - Google is drawing a blank on which Forth it was
+
+## When and why I stopped writing Forth
+- late 1990s - early 2000s
+- I wasn't using it at work
+- I got more powerful computers that could run my hobby stuff in Perl
+- I was learning Linux and R at work
