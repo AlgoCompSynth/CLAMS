@@ -127,6 +127,12 @@ output:
 - realistically, September
     - I want something other people can use at this point!
 
+## Stretch goal
+- R / Forth interface
+- Make Forth a first-class citizen in RStudio and Quarto
+- Will not be zeptoforth
+- Probably either gforth or pforth
+
 ## CLAMS on the web
 - GitHub: <https://github.com/AlgoCompSynth/CLAMS>
 - blog: <https://algocompsynth.github.io/CLAMS-Blog/>
