@@ -1,11 +1,11 @@
 ---
 title: "Command Line Algorithmic Music System (CLAMS)"
 author: "M. Edward (Ed) Borasky"
-date: 2023-02-23
+date: 2023-02-25
 bibliography: ../CLAMS.bib
 output:
   beamer_presentation:
-    theme: "Montpellier"
+    theme: "EastLansing"
     incremental: false
     slide_level: 2
 ---
@@ -27,21 +27,19 @@ output:
   
 ## I never learned
 - APL
-- C/C++ / Java / C# / Objective C / D / Rust / Go
+- C / C++ / Java / C# / Objective C / D / Rust / Go
 - PHP
 - Python
 - JavaScript
 
 ## Forth
-- late 1980s 
+- 1980s 
     - learned Forth via HESForth on Commodore 64
 - mid-late 1990s
     - primary Forth engine was HP100LX Palmtop PC
     - wrote some articles for FORTH Dimensions
     - wrote some trading system software
     - used mostly hforth and Tom Almy's Forth compiler
-    - later ran the Forth from Jack Woehr's _Forth: The New Model_
-    - Google is drawing a blank on which Forth that was
 
 ## Why I stopped writing Forth
 - by 1999 I had faster machines that ran my code in Perl
@@ -67,6 +65,7 @@ output:
     - designed for improvisation in real time
     - contained a real-time operating system
     - @andersonkiuvila1989, @andersonkiuvila1991
+    - Python successor: Numula <https://github.com/davidpanderson/Numula/wiki>
 - _Live Coding: A User's Manual_ [@blackwell2022live]
 - The TOPLAP Manifesto
     - "Show Us Your Screens"
@@ -88,7 +87,7 @@ output:
 - many primitives in assembly
 
 ## Close to the metal
-- word sets for nearly all the RP2040 hardware
+- words for nearly all the RP2040 hardware
 - has an RP2040 assembler
 - can compile to RAM or flash
 - real-time operating system capabilites
@@ -103,35 +102,29 @@ output:
 - <https://shop.pimoroni.com/products/pico-audio-pack>
 
 ## Proof of concept (v0.2.5)
-- direct digital synthesis
-- sine / triangle / sawtooth / pulse wave of any frequency
-- maybe a filter and envelope generator and low-frequency oscillator
+- direct digital synthesis / sine  wave of any frequency
 - maybe two oscillators and frequency modulation
-- early to mid March
+- maybe "triangle" / "sawtooth" / "pulse" waves
+- maybe a filter and envelope generator and low-frequency oscillator
+- target date: 2023-03-17
 
 ## First release (v0.5.0)
+- will re-scope project after proof of concept!
+    - need to assess audio performance constraints
 - all synthesis / audio I/O words
-- goal is everything you can do in Csound 7
+- goal is all synthesis algorithms in Csound 7
     - <https://flossmanual.csound.com/>
-- late March / early April
+- maybe other Pico audio hardware
+- target date: 2023-05-12
 
 ## Second release (v0.7.5)
-- signal flow graph
-- possibly other RP2040-based hardware
-- late April / early May
+- signal flow graph interpreter
+- target date: 2023-06-16
 
-## Full release (v1.0.0)
+## Full release (v0.9.0+)
 - live performance user interface
-- possibly other microcontroller audio hardware
-- optimistically, late July
-- realistically, September
-    - I want something other people can use at this point!
-
-## Stretch goal
-- R / Forth interface
-- Make Forth a first-class citizen in RStudio and Quarto
-- Will not be zeptoforth
-- Probably either gforth or pforth
+- possibly port to other audio microcontrollers
+- target date: 2023-07-14
 
 ## CLAMS on the web
 - GitHub: <https://github.com/AlgoCompSynth/CLAMS>
