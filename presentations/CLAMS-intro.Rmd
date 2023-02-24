@@ -1,104 +1,109 @@
 ---
 title: "Command Line Algorithmic Music System (CLAMS)"
 author: "M. Edward (Ed) Borasky"
-date: 2023-02-20
+date: 2023-02-23
 bibliography: ../CLAMS.bib
 output:
-  slidy_presentation:
-    incremental: true
+  beamer_presentation:
+    theme: "Montpellier"
+    incremental: false
     slide_level: 2
 ---
 
 # Me and Forth {.bigger}
 
 ## Me - retired scientific applications programmer
-- Got paid to write
+- I got paid to write
     - Assembly
     - Fortran
     - Awk / sed / grep / *nix shell
     - Perl
     - R
 
-## Me - learned for hobby projects
+## I learned for hobby projects
 - Lisp
 - Forth
 - Ruby
   
-## Me - never learned
+## I never learned
 - APL
 - C/C++ / Java / C# / Objective C / D / Rust / Go
 - PHP
 - Python
 - JavaScript
 
-## Forth - mid to late 1990s
-- Learned Forth via HESForth on Commodore 64 late 1980s
-- Primary Forth engine was HP100LX Palmtop PC
-- Wrote some articles for FORTH Dimensions
-- Wrote some trading system software in Forth
-- Used mostly hforth and Tom Almy's Forth compiler
-- Later ran the Forth that came with Jack Woehr's _Forth: The New Model_
+## Forth
+- late 1980s 
+    - learned Forth via HESForth on Commodore 64
+- mid-late 1990s
+    - primary Forth engine was HP100LX Palmtop PC
+    - wrote some articles for FORTH Dimensions
+    - wrote some trading system software
+    - used mostly hforth and Tom Almy's Forth compiler
+    - later ran the Forth from Jack Woehr's _Forth: The New Model_
     - Google is drawing a blank on which Forth that was
 
-## When and why I stopped writing Forth
-- late 1990s - early 2000s
+## Why I stopped writing Forth
+- by 1999 I had faster machines that ran my code in Perl
 - I wasn't using it at work
-- I owned faster computers that ran my hobby programs in Perl
 - I was learning Linux and R at work
 
-# Two sunspot cycles pass ... {.bigger}
+# (Two sunspot cycles pass ...)
 
-# He's baaack! And he brought ... CLAMS! {.bigger}
+# He's baaack! And he brought ... CLAMS!
 
 ## CLAMS goal
-- Algorithmic music composition and performance ...
+- algorithmic music composition and performance ...
 - live ...
 - in real time ...
 - on a Raspberry Pi Pico!
 
 ## Inspirations
 - Hierarchical Music Specification Language (HMSL)
-    - Lengthy history and experience with experimental composers
-    - Currently being actively enhanced!
+    - long history and experience with experimental composers
+    - currently being actively enhanced!
     - <https://github.com/philburk/hmsl.git>
 - FORMULA - FORth MUsic LAnguage
-    - Designed for improvisation in real time
-    - Contained a real-time operating system
+    - designed for improvisation in real time
+    - contained a real-time operating system
     - @andersonkiuvila1989, @andersonkiuvila1991
-- Live Coding: A User's Manual [@blackwell2022live]
+- _Live Coding: A User's Manual_ [@blackwell2022live]
 
 ## CLAMS architecture
-- A domain-specific language implemented in Forth
-- Conceptually, ChucK (<https://chuck.cs.princeton.edu/>), [@salazar2014programming] semantics with Forth syntax
-    - Low-level words: digital synthesis and microcontroller audio
-    - Mid-level words: construct signal flow graph
-    - High-level words: provide performance interface
+- a domain-specific language implemented in Forth
+- conceptually, ChucK (<https://chuck.cs.princeton.edu/>),
+[@salazar2014programming] semantics with Forth syntax
+    - low-level words: digital synthesis and microcontroller audio
+    - mid-level words: construct signal flow graph
+    - high-level words: provide performance interface
 
-# Forth base: zeptoforth {.bigger}
+# Forth base: zeptoforth
 
 ## Highly optimized!
-- Subroutine-threaded
-- Allows inline expansion of words
-- Many primitives in assembly
+- subroutine-threaded
+- allows inline expansion of words
+- many primitives in assembly
 
 ## Close to the metal
-- Word sets for nearly all the RP2040 hardware
-- Has an RP2040 assembler
-- Can compile to RAM or flash
+- word sets for nearly all the RP2040 hardware
+- has an RP2040 assembler
+- can compile to RAM or flash
 - real-time operating system capabilites
 
 ## zeptoforth on GitHub
 - repository: <https://github.com/tabemann/zeptoforth>
 - wiki: <https://github.com/tabemann/zeptoforth/wiki>
 
-# Road map {.bigger}
+# Road map
 
 ## Initial hardware: Pimoroni Pico Audio Pack
 - <https://shop.pimoroni.com/products/pico-audio-pack>
 
 ## Proof of concept (v0.2.5)
+- direct digital synthesis
 - sine / triangle / sawtooth / pulse wave of any frequency
 - maybe a filter and envelope generator and low-frequency oscillator
+- maybe two oscillators and frequency modulation
 - early to mid March
 
 ## First release (v0.5.0)
@@ -121,7 +126,7 @@ output:
 
 ## CLAMS on the web
 - GitHub: <https://github.com/AlgoCompSynth/CLAMS>
-- Blog: <https://algocompsynth.github.io/CLAMS-Blog/>
-- This presentation: <>
+- blog: <https://algocompsynth.github.io/CLAMS-Blog/>
+- this presentation: <>
 
 ## References
