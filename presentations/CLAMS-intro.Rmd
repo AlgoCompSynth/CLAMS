@@ -68,6 +68,9 @@ output:
     - contained a real-time operating system
     - @andersonkiuvila1989, @andersonkiuvila1991
 - _Live Coding: A User's Manual_ [@blackwell2022live]
+- The TOPLAP Manifesto
+    - "Show Us Your Screens"
+    - <https://toplap.org/wiki/ManifestoDraft>
 
 ## CLAMS architecture
 - a domain-specific language implemented in Forth
