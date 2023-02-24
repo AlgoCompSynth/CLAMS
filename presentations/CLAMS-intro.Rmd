@@ -4,14 +4,14 @@ author: "M. Edward (Ed) Borasky"
 date: 2023-02-20
 bibliography: ../CLAMS.bib
 output:
-  beamer_presentation:
-    theme: "Montpellier"
+  slidy_presentation:
+    incremental: true
+    slide_level: 2
 ---
 
-# Me and Forth
+# Me and Forth {.bigger}
 
 ## Me - retired scientific applications programmer
-
 - Got paid to write
     - Assembly
     - Fortran
@@ -20,28 +20,108 @@ output:
     - R
 
 ## Me - learned for hobby projects
-
 - Lisp
 - Forth
 - Ruby
-    
+  
 ## Me - never learned
-
-- C/C++/Java/C#/D/Rust/Go
+- APL
+- C/C++ / Java / C# / Objective C / D / Rust / Go
 - PHP
 - Python
 - JavaScript
 
-## Me and Forth - mid to late 1990s
+## Forth - mid to late 1990s
+- Learned Forth via HESForth on Commodore 64 late 1980s
 - Primary Forth engine was HP100LX Palmtop PC
 - Wrote some articles for FORTH Dimensions
-- Wrote a point and figure charting program
+- Wrote some trading system software in Forth
 - Used mostly hforth and Tom Almy's Forth compiler
 - Later ran the Forth that came with Jack Woehr's _Forth: The New Model_
-    - Google is drawing a blank on which Forth it was
+    - Google is drawing a blank on which Forth that was
 
 ## When and why I stopped writing Forth
 - late 1990s - early 2000s
 - I wasn't using it at work
-- I got more powerful computers that could run my hobby stuff in Perl
+- I owned faster computers that ran my hobby programs in Perl
 - I was learning Linux and R at work
+
+# Two sunspot cycles pass ... {.bigger}
+
+# He's baaack! And he brought ... CLAMS! {.bigger}
+
+## CLAMS goal
+- Algorithmic music composition and performance ...
+- live ...
+- in real time ...
+- on a Raspberry Pi Pico!
+
+## Inspirations
+- Hierarchical Music Specification Language (HMSL)
+    - Lengthy history and experience with experimental composers
+    - Currently being actively enhanced!
+    - <https://github.com/philburk/hmsl.git>
+- FORMULA - FORth MUsic LAnguage
+    - Designed for improvisation in real time
+    - Contained a real-time operating system
+    - @andersonkiuvila1989, @andersonkiuvila1991
+- Live Coding: A User's Manual [@blackwell2022live]
+
+## CLAMS architecture
+- A domain-specific language implemented in Forth
+- Conceptually, ChucK (<https://chuck.cs.princeton.edu/>), [@salazar2014programming] semantics with Forth syntax
+    - Low-level words: digital synthesis and microcontroller audio
+    - Mid-level words: construct signal flow graph
+    - High-level words: provide performance interface
+
+# Forth base: zeptoforth {.bigger}
+
+## Highly optimized!
+- Subroutine-threaded
+- Allows inline expansion of words
+- Many primitives in assembly
+
+## Close to the metal
+- Word sets for nearly all the RP2040 hardware
+- Has an RP2040 assembler
+- Can compile to RAM or flash
+- real-time operating system capabilites
+
+## zeptoforth on GitHub
+- repository: <https://github.com/tabemann/zeptoforth>
+- wiki: <https://github.com/tabemann/zeptoforth/wiki>
+
+# Road map {.bigger}
+
+## Initial hardware: Pimoroni Pico Audio Pack
+- <https://shop.pimoroni.com/products/pico-audio-pack>
+
+## Proof of concept (v0.2.5)
+- sine / triangle / sawtooth / pulse wave of any frequency
+- maybe a filter and envelope generator and low-frequency oscillator
+- early to mid March
+
+## First release (v0.5.0)
+- all synthesis / audio I/O words
+- goal is everything you can do in Csound 7
+    - <https://flossmanual.csound.com/>
+- late March / early April
+
+## Second release (v0.7.5)
+- signal flow graph
+- possibly other RP2040-based hardware
+- late April / early May
+
+## Full release (v1.0.0)
+- live performance user interface
+- possibly other microcontroller audio hardware
+- optimistically, late July
+- realistically, September
+    - I want something other people can use at this point!
+
+## CLAMS on the web
+- GitHub: <https://github.com/AlgoCompSynth/CLAMS>
+- Blog: <https://algocompsynth.github.io/CLAMS-Blog/>
+- This presentation: <>
+
+## References
