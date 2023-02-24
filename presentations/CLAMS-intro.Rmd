@@ -127,6 +127,6 @@ output:
 ## CLAMS on the web
 - GitHub: <https://github.com/AlgoCompSynth/CLAMS>
 - blog: <https://algocompsynth.github.io/CLAMS-Blog/>
-- this presentation: <>
+- this presentation: <https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/CLAMS-intro.pdf>
 
 ## References
