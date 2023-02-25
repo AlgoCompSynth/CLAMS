@@ -1,0 +1,6 @@
+[submodule "zeptoforth"]
+	path = zeptoforth
+	url = ../zeptoforth
+[submodule "rp2040-forth-builder"]
+	path = rp2040-forth-builder
+	url = ../rp2040-forth-builder
