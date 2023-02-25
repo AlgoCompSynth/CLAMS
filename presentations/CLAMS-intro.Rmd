@@ -77,7 +77,7 @@ output:
 [@salazar2014programming] semantics with Forth syntax
     - low-level words: digital synthesis and microcontroller audio
     - mid-level words: construct signal flow graph
-    - high-level words: provide performance interface
+    - high-level words: provide live performance interface
 
 # Forth base: zeptoforth
 
@@ -98,24 +98,32 @@ output:
 
 # Road map
 
-## Initial hardware: Pimoroni Pico Audio Pack
-- <https://shop.pimoroni.com/products/pico-audio-pack>
-
-## Proof of concept (v0.2.5)
+## Proof of concept (v0.2.5) - Software
 - direct digital synthesis / sine  wave of any frequency
 - maybe two oscillators and frequency modulation
 - maybe "triangle" / "sawtooth" / "pulse" waves
 - maybe a filter and envelope generator and low-frequency oscillator
 - target date: 2023-03-17
 
-## First release (v0.5.0)
+## Proof of concept (v0.2.5) - Hardware
+- Pimoroni Pico Audio Pack
+    - ships from the UK
+    - one in hand
+    - <https://shop.pimoroni.com/products/pico-audio-pack>
+
+## First release (v0.5.0) - Software
 - will re-scope project after proof of concept!
     - need to assess audio performance constraints
 - all synthesis / audio I/O words
 - goal is all synthesis algorithms in Csound 7
     - <https://flossmanual.csound.com/>
-- maybe other Pico audio hardware
 - target date: 2023-05-12
+
+## First release (v0.5.0) - Hardware
+- Waveshare Audio Expansion Module for Raspberry Pi Pico
+    - ships from China
+    - on order
+    - <https://www.waveshare.com/pico-audio.htm>
 
 ## Second release (v0.7.5)
 - signal flow graph interpreter
