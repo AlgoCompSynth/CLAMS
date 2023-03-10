@@ -55,7 +55,7 @@ git clone https://github.com/raspberrypi/pico-playground.git --recurse-submodule
 echo ""
 echo "Downloading Pimoroni examples"
 sleep 5
-git clone -b main https://github.com/pimoroni/pimoroni-pico.git --recurse-submodules
+git clone -b main git@github.com:AlgoCompSynth/pimoroni-pico.git --recurse-submodules
 
 echo ""
 echo "Downloading OpenOCD"
