@@ -15,7 +15,7 @@ do
   sleep 5
   rm -fr build; mkdir build; cd build
   cmake .. -DCMAKE_BUILD_TYPE=Debug -DPICO_SDK_POST_LIST_DIRS=$PICO_EXTRAS_PATH 2>&1 | tee cmake.log
-  /usr/bin/time make -j8 2>&1 | tee make.log || true
+  /usr/bin/time make --jobs=`nproc` --keep-going 2>&1 | tee make.log || true
   popd
 done
 
