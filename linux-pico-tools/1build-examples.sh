@@ -4,9 +4,6 @@ set -e
 
 source set_pico_envars
 
-echo ""
-echo "Building the examples"
-sleep 5
 for dir in $PICO_EXAMPLES_PATH $PICO_PLAYGROUND_PATH $PICO_PIMORONI_PATH
 do
   pushd $dir
@@ -14,8 +11,8 @@ do
   echo "Building $dir"
   sleep 5
   rm -fr build; mkdir build; cd build
-  cmake .. -DCMAKE_BUILD_TYPE=Debug -DPICO_SDK_POST_LIST_DIRS=$PICO_EXTRAS_PATH 2>&1 | tee cmake.log
-  /usr/bin/time make --jobs=`nproc` --keep-going 2>&1 | tee make.log || true
+  cmake .. -DCMAKE_BUILD_TYPE=Debug 2>&1 | tee cmake.log
+  /usr/bin/time make --jobs=`nproc` 2>&1 | tee make.log
   popd
 done
 
