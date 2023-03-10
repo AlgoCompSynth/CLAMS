@@ -10,7 +10,7 @@ output:
     slide_level: 2
 ---
 
-# Me and Forth {.bigger}
+# Me and Forth
 
 ## Me - retired scientific applications programmer
 - I got paid to write
