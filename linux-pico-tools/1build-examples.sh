@@ -11,8 +11,8 @@ do
   echo "Building $dir"
   sleep 5
   rm -fr build; mkdir build; cd build
-  cmake .. -DCMAKE_BUILD_TYPE=Debug 2>&1 | tee cmake.log
-  /usr/bin/time make --jobs=`nproc` 2>&1 | tee make.log
+  cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Debug 2>&1 | tee cmake.log
+  /usr/bin/time ninja -j `nproc` 2>&1 | tee ninja.log
   popd
 done
 

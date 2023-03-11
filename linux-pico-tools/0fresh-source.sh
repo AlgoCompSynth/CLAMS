@@ -25,6 +25,7 @@ sudo apt-get -qqy install \
   libstdc++-arm-none-eabi-newlib \
   libtool \
   libusb-1.0-0-dev \
+  ninja-build \
   software-properties-common \
   texinfo \
   time \
