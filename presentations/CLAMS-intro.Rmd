@@ -1,11 +1,11 @@
 ---
 title: "Command Line Algorithmic Music System (CLAMS)"
 author: "M. Edward (Ed) Borasky"
-date: 2023-02-25
+date: 2023-03-25
 bibliography: ../CLAMS.bib
 output:
-  beamer_presentation:
-    theme: "EastLansing"
+  ioslides_presentation:
+    widescreen: true
     incremental: false
     slide_level: 2
 ---
@@ -26,8 +26,10 @@ output:
 - Ruby
   
 ## I never learned
+- COBOL
 - APL
-- C / C++ / Java / C# / Objective C / D / Rust / Go
+- SNOBOL4
+- Algol / Pascal / C / C++ / Java / C# / Objective C / D / Rust / Go
 - PHP
 - Python
 - JavaScript
@@ -37,14 +39,16 @@ output:
     - learned Forth via HESForth on Commodore 64
 - mid-late 1990s
     - primary Forth engine was HP100LX Palmtop PC
+        - 16-bit 80186
     - wrote some articles for FORTH Dimensions
     - wrote some trading system software
     - used mostly hforth and Tom Almy's Forth compiler
 
 ## Why I stopped writing Forth
-- by 1999 I had faster machines that ran my code in Perl
+- by 1999 I had faster machines that ran my hobby code in Perl
 - I wasn't using it at work
 - I was learning Linux and R at work
+- Too much mental context switching kills productivity!
 
 # (Two sunspot cycles pass ...)
 
@@ -56,7 +60,7 @@ output:
 - in real time ...
 - on a Raspberry Pi Pico!
 
-## Inspirations
+## Software Inspirations - Forth
 - Hierarchical Music Specification Language (HMSL)
     - long history and experience with experimental composers
     - currently being actively enhanced!
@@ -66,10 +70,23 @@ output:
     - contained a real-time operating system
     - @andersonkiuvila1989, @andersonkiuvila1991
     - Python successor: Numula <https://github.com/davidpanderson/Numula/wiki>
+
+## Software Inspirations - Live coding
 - _Live Coding: A User's Manual_ [@blackwell2022live]
 - The TOPLAP Manifesto
     - "Show Us Your Screens"
     - <https://toplap.org/wiki/ManifestoDraft>
+- GitHub Awesome Live Coding
+    - <https://github.com/toplap/awesome-livecoding>
+
+## Musical inspirations
+- Iannis Xenakis [@xenakis1992formalized, especially chapter XIII, "Dynamic
+Stochastic Synthesis"]
+- Andrew R. Brown “Gendynish: Stochastic Synthesis on the Arduino"
+[@brown2019gendynish]
+- Nick Collins
+    - "Errant Sound Synthesis" [@collins2008errant]
+    - "Even More Errant Sound Synthesis" [@collins2012even]
 
 ## CLAMS architecture
 - a domain-specific language implemented in Forth
@@ -137,6 +154,7 @@ output:
 ## CLAMS on the web
 - GitHub: <https://github.com/AlgoCompSynth/CLAMS>
 - blog: <https://algocompsynth.github.io/CLAMS-Blog/>
-- this presentation: <https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/CLAMS-intro.pdf>
+- this presentation:
+<https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/CLAMS-intro.pdf>
 
-## References
+## References {.smaller}
