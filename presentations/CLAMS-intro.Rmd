@@ -15,7 +15,7 @@ output:
 ## Me - retired scientific applications / operating systems programmer
 - I got paid to write
     - Assembly - lots of assembly!
-    - Fortran - when management required me to
+    - Fortran - only when management required me to
     - Awk/sed/grep/*nix shell
     - Perl
     - R
