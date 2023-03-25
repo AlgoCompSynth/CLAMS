@@ -72,7 +72,7 @@ output:
 - 2 MB flash
 - four versions
     - Raspberry Pi Pico: $4US, surface mount
-    - Raspberry Pi Pico H: $5US, male headers and a debug connector
+    - Raspberry Pi Pico H: $5US, male headers and a serial wire debug (SWD) connector
     - Raspberry Pi Pico W: $6US, surface mount, 2.4 GHz wireless
     - Raspberry Pi Pico WH: $9US, male headers, 2.4 GHz wireless
 - the wireless ones tend to be hard to get ... usually bundled in starter kits
