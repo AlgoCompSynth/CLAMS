@@ -3,7 +3,13 @@ Command Line Algorithmic Music System (CLAMS)
 M. Edward (Ed) Borasky
 
 > “I’ve never seen a happy clam. In fact, most of them were really
-> steamed.” \~ M. Edward (Ed) Borasky
+> steamed.” ~ M. Edward (Ed) Borasky
+
+## Update 2023-09-27
+
+Major project re-scoping in progress - watch this space!
+
+Hint: I’m researching FPGAs (Field Programmable Gate Arrays)
 
 ## What is this?
 
@@ -25,7 +31,7 @@ enters `CLAMS` / Forth code interactively.
 ## Why Forth?
 
 > “Premature optimization may be the root of all evil, but it is damned
-> fun!” \~ M. Edward (Ed) Borasky
+> fun!” ~ M. Edward (Ed) Borasky
 
 1.  Forth (Brodie 2022) is an extensible interactive operating system.
     It supports editing, assembling, compiling, debugging and running
@@ -171,7 +177,6 @@ Forth 200x Committee. 2012. “Forth 2012 Standard.” Forth 200x Committee.
 
 Katz, D. J., and R. Gentile. 2005. *Embedded Media Processing*.
 Electronics & Electrical. Elsevier Science.
-<https://books.google.com/books?id=4auaDSdzLwsC>.
 
 </div>
 
@@ -179,7 +184,7 @@ Electronics & Electrical. Elsevier Science.
 
 Padgett, W., and D. Anderson. 2022. *Fixed-Point Signal Processing*.
 Synthesis Lectures on Signal Processing. Springer International
-Publishing. <https://books.google.com/books?id=r4ByEAAAQBAJ>.
+Publishing.
 
 </div>
 
@@ -187,7 +192,6 @@ Publishing. <https://books.google.com/books?id=r4ByEAAAQBAJ>.
 
 Salazar, S., A. Kapur, G. Wang, and P. Cook. 2014. *Programming for
 Musicians and Digital Artists: Creating Music with ChucK*. Manning.
-<https://books.google.com/books?id=YzkzEAAAQBAJ>.
 
 </div>
 
