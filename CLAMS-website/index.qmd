@@ -4,10 +4,10 @@ author: "M. Edward (Ed) Borasky"
 bibliography: CLAMS.bib
 ---
 
-> "I've never seen a happy clam. In fact, most of them were really steamed." \~ M. Edward (Ed) Borasky
+> "I've never seen a happy clam. In fact, most of them
+were really steamed." \~ M. Edward (Ed) Borasky
 
 * * * * *
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This is a Quarto website. To learn more about Quarto
+websites visit <https://quarto.org/docs/websites>.
