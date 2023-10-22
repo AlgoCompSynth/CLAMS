@@ -18,6 +18,41 @@
     "href": "index.html",
     "title": "Command Line Algorithmic Music System (CLAMS)",
     "section": "",
-    "text": "“I’ve never seen a happy clam. In fact, most of them were really steamed.” ~ M. Edward (Ed) Borasky\n\n\nThis is a Quarto website. To learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\n\n\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
+    "text": "“I’ve never seen a happy clam. In fact, most of them were really steamed.” ~ M. Edward (Ed) Borasky\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "section": "Overview",
+    "text": "Overview\nCLAMS is a text-based interactive environment for composing and performing music and visuals on a Pimoroni PicoVision. It can be made to work on other boards using the RP2040 microcontroller, but you will need additional hardware."
+  },
+  {
+    "objectID": "index.html#how-does-it-work",
+    "href": "index.html#how-does-it-work",
+    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "section": "How does it work?",
+    "text": "How does it work?\nCLAMS is a domain-specific language built on a Forth compiler / interpreter. The user connects to the board via a serial connection and enters CLAMS / Forth code interactively."
+  },
+  {
+    "objectID": "index.html#why-forth",
+    "href": "index.html#why-forth",
+    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "section": "Why Forth?",
+    "text": "Why Forth?\n\n“Premature optimization may be the root of all evil, but it is damned fun!” ~ M. Edward (Ed) Borasky\n\n\nForth (Brodie accessed 2023-10-21) is an extensible interactive operating system. It supports editing, assembling, compiling, debugging and running real-time tasks from a terminal.\nForth is efficient. A well-designed Forth will usually run a task at no worse than half the speed of a hand-optimized assembly version. CLAMS will have several optimizations built in for the ultimate speed.\nForth is lean. There are very few concepts to learn, there is minimal run-time overhead in RAM, and the whole package takes up much less flash space than MicroPython or CircuitPython."
+  },
+  {
+    "objectID": "index.html#what-about-forth-standard-forth2022-compatibility",
+    "href": "index.html#what-about-forth-standard-forth2022-compatibility",
+    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "section": "What about Forth standard (Forth 200x Committee 2012) compatibility?",
+    "text": "What about Forth standard (Forth 200x Committee 2012) compatibility?\nNot really. CLAMS is an extended subset of the standard. It won’t contain all of the standard’s core word set, and it will contain some extensions to support real-time audio and the RP2040 hardware.\nThe RP2040 is both limited and complex. It uses the ARM Cortex M0+ instruction set, which doesn’t even have a 32-bit multiply that produces a 64-bit product. Division is handled by a co-processor. There are also co-processors for programmable I/O and interpolation / multiply-accumulate operations.\nThat said, if a word in CLAMS does exist in one of the standard word sets, it should function the way it does in the standard. The search order word set will be implemented, and all of the specialized co-processor operations will be in specialized word sets."
+  },
+  {
+    "objectID": "index.html#what-about-portability",
+    "href": "index.html#what-about-portability",
+    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "section": "What about portability?",
+    "text": "What about portability?\nAgain, not really. There are a number of other micro-controller music boards, most notably the Electro-Smith Daisy and the Rebel Technology OWL platforms. But they have their own SDKs, so there’s not much need to port CLAMS to them. There are also a number of audio projects that use the Teensy® USB Development Board, which has a comprehensive audio library. Also, the Daisy, OWL and Teensy processors are all more powerful than the RP2040.\nBy contrast, there’s not much for the Raspberry Pi Pico / RP2040. There are some simple demos, a few do-it-yourself hardware offerings, and there’s the Allen Synthesis EuroPi, a Eurorack module with an open source MicroPython software platform. CLAMS will be a different approach.\nThe overall concept is an interactive language for making music on Raspberry Pi Pico / RP2040. I’m aiming for ChucK (Salazar et al. 2014) semantics with Forth syntax - a single text-based language to implement both the definitions of synthesized instruments and the sequences of sounds they make, intended for live coding / algorave performances.\n\nThis is a Quarto website. To learn more about Quarto websites visit https://quarto.org/docs/websites."
   }
 ]

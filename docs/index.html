@@ -21,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -107,7 +126,17 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work">How does it work?</a></li>
+  <li><a href="#why-forth" id="toc-why-forth" class="nav-link" data-scroll-target="#why-forth">Why Forth?</a></li>
+  <li><a href="#what-about-forth-standard-forth2022-compatibility" id="toc-what-about-forth-standard-forth2022-compatibility" class="nav-link" data-scroll-target="#what-about-forth-standard-forth2022-compatibility">What about Forth standard <span class="citation" data-cites="forth2022">(Forth 200x Committee 2012)</span> compatibility?</a></li>
+  <li><a href="#what-about-portability" id="toc-what-about-portability" class="nav-link" data-scroll-target="#what-about-portability">What about portability?</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -138,14 +167,57 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p>“I’ve never seen a happy clam. In fact, most of them were really steamed.” ~ M. Edward (Ed) Borasky</p>
 </blockquote>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p><code>CLAMS</code> is a text-based interactive environment for composing and performing music and visuals on a <a href="https://shop.pimoroni.com/products/picovision?variant=41048911904851">Pimoroni PicoVision</a>. It can be made to work on other boards using the RP2040 microcontroller, but you will need additional hardware.</p>
+</section>
+<section id="how-does-it-work" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-it-work">How does it work?</h2>
+<p><code>CLAMS</code> is a domain-specific language built on a Forth compiler / interpreter. The user connects to the board via a serial connection and enters <code>CLAMS</code> / Forth code interactively.</p>
+</section>
+<section id="why-forth" class="level2">
+<h2 class="anchored" data-anchor-id="why-forth">Why Forth?</h2>
+<blockquote class="blockquote">
+<p>“Premature optimization may be the root of all evil, but it is damned fun!” ~ M. Edward (Ed) Borasky</p>
+</blockquote>
+<ol type="1">
+<li>Forth <span class="citation" data-cites="brodie2022">(<a href="#ref-brodie2022" role="doc-biblioref">Brodie accessed 2023-10-21</a>)</span> is an extensible interactive operating system. It supports editing, assembling, compiling, debugging and running real-time tasks from a terminal.</li>
+<li>Forth is efficient. A well-designed Forth will usually run a task at no worse than half the speed of a hand-optimized assembly version. <code>CLAMS</code> will have several optimizations built in for the ultimate speed.</li>
+<li>Forth is lean. There are very few concepts to learn, there is minimal run-time overhead in RAM, and the whole package takes up much less flash space than MicroPython or CircuitPython.</li>
+</ol>
+</section>
+<section id="what-about-forth-standard-forth2022-compatibility" class="level2">
+<h2 class="anchored" data-anchor-id="what-about-forth-standard-forth2022-compatibility">What about Forth standard <span class="citation" data-cites="forth2022">(<a href="#ref-forth2022" role="doc-biblioref">Forth 200x Committee 2012</a>)</span> compatibility?</h2>
+<p>Not really. <code>CLAMS</code> is an extended subset of the standard. It won’t contain all of the standard’s core word set, and it will contain some extensions to support real-time audio and the RP2040 hardware.</p>
+<p>The RP2040 is both limited and complex. It uses the ARM Cortex M0+ instruction set, which doesn’t even have a 32-bit multiply that produces a 64-bit product. Division is handled by a co-processor. There are also co-processors for programmable I/O and interpolation / multiply-accumulate operations.</p>
+<p>That said, if a word in <code>CLAMS</code> does exist in one of the standard word sets, it should function the way it does in the standard. The search order word set will be implemented, and all of the specialized co-processor operations will be in specialized word sets.</p>
+</section>
+<section id="what-about-portability" class="level2">
+<h2 class="anchored" data-anchor-id="what-about-portability">What about portability?</h2>
+<p>Again, not really. There are a number of other micro-controller music boards, most notably the <a href="https://www.electro-smith.com/daisy%20%22Electro-Smith%20Daisy%22">Electro-Smith Daisy</a> and the <a href="https://github.com/RebelTechnology/OpenWare" title="Rebel Technology on GitHub">Rebel Technology OWL</a> platforms. But they have their own SDKs, so there’s not much need to port <code>CLAMS</code> to them. There are also a number of audio projects that use the <a href="https://www.pjrc.com/teensy/" title="Teensy Home Page">Teensy® USB Development Board</a>, which has a <a href="https://www.pjrc.com/teensy/td_libs_Audio.html" title="Teensy Audio Library">comprehensive audio library</a>. Also, the Daisy, OWL and Teensy processors are all more powerful than the RP2040.</p>
+<p>By contrast, there’s not much for the Raspberry Pi Pico / RP2040. There are some simple demos, a few do-it-yourself hardware offerings, and there’s the <a href="https://allensynthesis.co.uk/modules/europi.html%20%22EuroPi%20module%22">Allen Synthesis EuroPi</a>, a Eurorack module with an open source MicroPython software platform. <code>CLAMS</code> will be a different approach.</p>
+<p>The overall concept is an interactive language for making music on Raspberry Pi Pico / RP2040. I’m aiming for <a href="https://chuck.stanford.edu/" title="ChucK Home Page">ChucK</a> <span class="citation" data-cites="salazar2014programming">(<a href="#ref-salazar2014programming" role="doc-biblioref">Salazar et al. 2014</a>)</span> semantics with Forth syntax - a single text-based language to implement both the definitions of synthesized instruments and the sequences of sounds they make, intended for <a href="https://github.com/toplap/awesome-livecoding" title="Awesome Live Coding list on GitHub">live coding / algorave</a> performances.</p>
 <hr>
 <p>This is a Quarto website. To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
+<hr>
 
 
+
+</section>
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 <a property="dct:title" rel="cc:attributionURL" href="https://algocompsynth.github.io/CLAMS">Command Line Algorithmic Music System (CLAMS)</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/znmeb">M. Edward (Ed) Borasky</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a>
-</p></main> <!-- /main -->
+</p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-brodie2022" class="csl-entry" role="listitem">
+Brodie, Leo. accessed 2023-10-21. <em>Starting Forth</em>. FORTH, Inc. <a href="https://www.forth.com/starting-forth/0-starting-forth/">https://www.forth.com/starting-forth/0-starting-forth/</a>.
+</div>
+<div id="ref-forth2022" class="csl-entry" role="listitem">
+Forth 200x Committee. 2012. <span>“Forth 2012 Standard.”</span> Forth 200x Committee. <a href="https://forth-standard.org/standard/words">https://forth-standard.org/standard/words</a>.
+</div>
+<div id="ref-salazar2014programming" class="csl-entry" role="listitem">
+Salazar, S., A. Kapur, G. Wang, and P. Cook. 2014. <em>Programming for Musicians and Digital Artists: Creating Music with ChucK</em>. Manning.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
