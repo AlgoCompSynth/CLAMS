@@ -4,14 +4,14 @@
     "href": "about.html",
     "title": "About My Music",
     "section": "",
-    "text": "“AlgoCompSynth” is a word I made up to describe what it is that I want to do. It’s a compression of “algorithmic composition and digital sound synthesis.” That’s a pretty broad class of music; to narrow it down, the following are my main inspirations.\n\nIannis Xenakis’ Formalized Music (Xenakis 1992). Xenakis took the applied mathematics of his day, for example, operations research and game theory, and used these algorithms to create scores for conventional and electronic performers.\nAlternate tunings. Primary among these is William Sethares’ Tuning, Timbre Spectrum, Scale (Sethares 1998, 2013). Also influential: Wendy Carlos (Carlos 1987), Harry Partch (Partch 1979), Erv Wilson (Narushima 2019) and Nick Collins (Collins 2008, 2012).\nPhysical modeling synthesis. A comprehensive reference can be found at (Smith accessed 2023-10-21).\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
+    "text": "“Markovs of the world unite! You have nothing to lose but your chains!” ~ M. Edward (Ed) Borasky\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
   },
   {
     "objectID": "about.html#algocompsynth",
     "href": "about.html#algocompsynth",
     "title": "About My Music",
-    "section": "",
-    "text": "“AlgoCompSynth” is a word I made up to describe what it is that I want to do. It’s a compression of “algorithmic composition and digital sound synthesis.” That’s a pretty broad class of music; to narrow it down, the following are my main inspirations.\n\nIannis Xenakis’ Formalized Music (Xenakis 1992). Xenakis took the applied mathematics of his day, for example, operations research and game theory, and used these algorithms to create scores for conventional and electronic performers.\nAlternate tunings. Primary among these is William Sethares’ Tuning, Timbre Spectrum, Scale (Sethares 1998, 2013). Also influential: Wendy Carlos (Carlos 1987), Harry Partch (Partch 1979), Erv Wilson (Narushima 2019) and Nick Collins (Collins 2008, 2012).\nPhysical modeling synthesis. A comprehensive reference can be found at (Smith accessed 2023-10-21)."
+    "section": "AlgoCompSynth",
+    "text": "AlgoCompSynth\n“AlgoCompSynth” is a word I made up to describe what it is that I want to do. It’s a compression of “algorithmic composition and digital sound synthesis.” That’s a pretty broad class of music; to narrow it down, the following are my main inspirations.\n\nIannis Xenakis’ Formalized Music (Xenakis 1992). Xenakis took the applied mathematics of his day, for example, operations research and game theory, and used these algorithms to create scores for conventional and electronic performers. He also invented a technique called “Dynamic Stochastic Synthesis”, which uses Markov processes to specify not just the score of a piece but the parameters of the sound waveforms (Hoffmann 1996; Brown 2005; Xenakis 1992).\nAlternate tunings. Primary among these is William Sethares’ Tuning, Timbre Spectrum, Scale (Sethares 1998, 2013). Also influential: Wendy Carlos (Carlos 1987), Harry Partch (Partch 1979), Erv Wilson (Narushima 2019) and Nick Collins (Collins 2008, 2012).\nPhysical modeling synthesis. A comprehensive reference can be found at (Smith accessed 2023-10-21)."
   },
   {
     "objectID": "index.html",

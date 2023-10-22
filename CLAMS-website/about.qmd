@@ -3,6 +3,9 @@ title: "About My Music"
 bibliography: REFERENCES.bib
 ---
 
+> "Markovs of the world unite! You have nothing to lose but your chains!"
+\~ M. Edward (Ed) Borasky
+
 ## AlgoCompSynth
 "AlgoCompSynth" is a word I made up to describe what it is that I want to do.
 It's a compression of "algorithmic composition and digital sound synthesis."
@@ -12,7 +15,11 @@ main inspirations.
 - Iannis Xenakis' _Formalized Music_ [@xenakis1992formalized]. Xenakis took the
 applied mathematics of his day, for example, operations research and game
 theory, and used these algorithms to create scores for conventional and
-electronic performers.
+electronic performers. He also invented a technique called "Dynamic
+Stochastic Synthesis", which uses Markov processes to specify not just the
+score of a piece but the parameters of the sound waveforms
+[@hoffmann1996implementing; @brown2005extending; @xenakis1992formalized].
+
 - Alternate tunings. Primary among these is William Sethares' _Tuning, Timbre
 Spectrum, Scale_ [@sethares1998tuning; @sethares2013tuning]. Also influential:
 Wendy Carlos [@carlos1987tuning], Harry Partch [@partch1979genesis], Erv
