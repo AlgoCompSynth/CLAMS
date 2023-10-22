@@ -26,6 +26,6 @@ Wendy Carlos [@carlos1987tuning], Harry Partch [@partch1979genesis], Erv
 Wilson [@narushima2019microtonality] and Nick Collins [@collins2008errant;
 @collins2012even].
 - Physical modeling synthesis. A comprehensive reference can be found at
-[@PASPWEB2010].
+[@paspweb2010].
 
 * * * * *
