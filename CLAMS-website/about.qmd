@@ -1,5 +1,22 @@
 ---
-title: "About"
+title: "About My Music"
+bibliography: REFERENCES.bib
 ---
 
-About this site
+## AlgoCompSynth
+"AlgoCompSynth" is a word I made up to describe what it is that I want to do.
+It's a compression of "algorithmic composition and digital sound synthesis."
+That's a pretty broad class of music; to narrow it down, the following are my
+main inspirations.
+
+- Iannis Xenakis' _Formalized Music_ [@xenakis1992formalized]. Xenakis took the
+applied mathematics of his day, for example, operations research and game
+theory, and used these algorithms to create scores for conventional and
+electronic performers.
+- Alternate tunings. Primary among these is William Sethares' _Tuning, Timbre
+Spectrum, Scale_ [@sethares1998tuning; @sethares2013tuning]. Also influential:
+Wendy Carlos [@carlos1987tuning], Harry Partch [@partch1979genesis], Erv
+Wilson [@narushima2019microtonality] and Nick Collins [@collins2008errant;
+@collins2012even].
+- Physical modeling synthesis. A comprehensive reference can be found at
+[@PASPWEB2010].
