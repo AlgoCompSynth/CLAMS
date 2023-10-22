@@ -9,6 +9,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - CLAMS-Design-Overview.qmd
     right: 
       - href: https://github.com/AlgoCompSynth/CLAMS
         text: "CLAMS on GitHub"

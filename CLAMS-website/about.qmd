@@ -1,5 +1,6 @@
 ---
 title: "About My Music"
+author: "M. Edward (Ed) Borasky"
 bibliography: REFERENCES.bib
 ---
 

@@ -1,0 +1,26 @@
+---
+title: "CLAMS Design Overview"
+author: "M. Edward (Ed) Borasky"
+bibliography: REFERENCES.bib
+---
+
+> "Remember, if you're traveling to Bactria, Hump Day is Tuesday and Thursday"
+~ M. Edward (Ed) Borasky
+
+## General capabilities
+
+1. Cell size: while the speed and compactness of a 16-bit Forth are tempting,
+high-quality audio requires at least 24 bits during intermediate computations.
+It is also unclear how easy it would be to exploit the RAM in an RP2040 beyond
+a 65,536 byte dictionary. So CLAMS will have a 32-bit cell size.
+
+2. Raspberry Pi Pico C/C++ SDK compatibility: CLAMS will be constructed using
+the Raspberry Pi Pico C/C++ SDK [@raspberrypi2023a]. CLAMS code must be able
+to call code written in C, C++ or assembly. See [@smith2021rp2040] for the
+details.
+
+3. Arithmetic: because of the hardware limitations of the RP2040, calculations
+will need to be done in fixed point arithmetic. Standard Forth has a variety of
+integer operations available, but audio and digital signal processing will require
+adding fixed point fractional and block floating point arithmetic. See
+[@liu2008embedded, chapter 2] for the details.

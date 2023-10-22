@@ -1,17 +1,17 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About My Music",
+    "objectID": "CLAMS-Design-Overview.html",
+    "href": "CLAMS-Design-Overview.html",
+    "title": "CLAMS Design Overview",
     "section": "",
-    "text": "“Markovs of the world unite! You have nothing to lose but your chains!” ~ M. Edward (Ed) Borasky\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
+    "text": "“Remember, if you’re traveling to Bactria, Hump Day is Tuesday and Thursday”\n\nM. Edward (Ed) Borasky\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
   },
   {
-    "objectID": "about.html#algocompsynth",
-    "href": "about.html#algocompsynth",
-    "title": "About My Music",
-    "section": "AlgoCompSynth",
-    "text": "AlgoCompSynth\n“AlgoCompSynth” is a word I made up to describe what it is that I want to do. It’s a compression of “algorithmic composition and digital sound synthesis.” That’s a pretty broad class of music; to narrow it down, the following are my main inspirations.\n\nIannis Xenakis’ Formalized Music (Xenakis 1992). Xenakis took the applied mathematics of his day, for example, operations research and game theory, and used these algorithms to create scores for conventional and electronic performers. He also invented a technique called “Dynamic Stochastic Synthesis”, which uses Markov processes to specify not just the score of a piece but the parameters of the sound waveforms (Hoffmann 1996; Brown 2005; Xenakis 1992).\nAlternate tunings. Primary among these is William Sethares’ Tuning, Timbre Spectrum, Scale (Sethares 1998, 2013). Also influential: Wendy Carlos (Carlos 1987), Harry Partch (Partch 1979), Erv Wilson (Narushima 2019) and Nick Collins (Collins 2008, 2012).\nPhysical modeling synthesis. A comprehensive reference can be found at (Smith accessed 2023-10-21)."
+    "objectID": "CLAMS-Design-Overview.html#general-capabilities",
+    "href": "CLAMS-Design-Overview.html#general-capabilities",
+    "title": "CLAMS Design Overview",
+    "section": "General capabilities",
+    "text": "General capabilities\n\nCell size: while the speed and compactness of a 16-bit Forth are tempting, high-quality audio requires at least 24 bits during intermediate computations. It is also unclear how easy it would be to exploit the RAM in an RP2040 beyond a 65,536 byte dictionary. So CLAMS will have a 32-bit cell size.\nRaspberry Pi Pico C/C++ SDK compatibility: CLAMS will be constructed using the Raspberry Pi Pico C/C++ SDK (Ltd Accessed 2023-10-22). CLAMS code must be able to call code written in C, C++ or assembly. See (Smith 2021) for the details.\nArithmetic: because of the hardware limitations of the RP2040, calculations will need to be done in fixed point arithmetic. Standard Forth has a variety of integer operations available, but audio and digital signal processing will require adding fixed point fractional and block floating point arithmetic. See (Liu 2008, chap. 2) for the details."
   },
   {
     "objectID": "index.html",
@@ -39,7 +39,7 @@
     "href": "index.html#why-forth",
     "title": "Command Line Algorithmic Music System (CLAMS)",
     "section": "Why Forth?",
-    "text": "Why Forth?\n\n“Premature optimization may be the root of all evil, but it is damned fun!” ~ M. Edward (Ed) Borasky\n\n\nForth (Brodie accessed 2023-10-21) is an extensible interactive operating system. It supports editing, assembling, compiling, debugging and running real-time tasks from a terminal.\nForth is efficient. A well-designed Forth will usually run a task at no worse than half the speed of a hand-optimized assembly version. CLAMS will have several optimizations built in for the ultimate speed.\nForth is lean. There are very few concepts to learn, there is minimal run-time overhead in RAM, and the whole package takes up much less flash space than MicroPython or CircuitPython."
+    "text": "Why Forth?\n\n“Premature optimization may be the root of all evil, but it is damned fun!” ~ M. Edward (Ed) Borasky\n\n\nForth (Brodie 2022) is an extensible interactive operating system. It supports editing, assembling, compiling, debugging and running real-time tasks from a terminal.\nForth is efficient. A well-designed Forth will usually run a task at no worse than half the speed of a hand-optimized assembly version. CLAMS will have several optimizations built in for the ultimate speed.\nForth is lean. There are very few concepts to learn, there is minimal run-time overhead in RAM, and the whole package takes up much less flash space than MicroPython or CircuitPython."
   },
   {
     "objectID": "index.html#what-about-forth-standard-forth2022-compatibility",
@@ -54,5 +54,19 @@
     "title": "Command Line Algorithmic Music System (CLAMS)",
     "section": "What about portability?",
     "text": "What about portability?\nAgain, not really. There are a number of other micro-controller music boards, most notably the Electro-Smith Daisy and the Rebel Technology OWL platforms. But they have their own SDKs, so there’s not much need to port CLAMS to them. There are also a number of audio projects that use the Teensy® USB Development Board, which has a comprehensive audio library. Also, the Daisy, OWL and Teensy processors are all more powerful than the RP2040.\nBy contrast, there’s not much for the Raspberry Pi Pico / RP2040. There are some simple demos, a few do-it-yourself hardware offerings, and there’s the Allen Synthesis EuroPi, a Eurorack module with an open source MicroPython software platform. CLAMS will be a different approach.\nThe overall concept is an interactive language for making music on Raspberry Pi Pico / RP2040. I’m aiming for ChucK (Salazar et al. 2014) semantics with Forth syntax - a single text-based language to implement both the definitions of synthesized instruments and the sequences of sounds they make, intended for live coding / algorave performances.\n\nThis is a Quarto website. To learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About My Music",
+    "section": "",
+    "text": "“Markovs of the world unite! You have nothing to lose but your chains!” ~ M. Edward (Ed) Borasky\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
+  },
+  {
+    "objectID": "about.html#algocompsynth",
+    "href": "about.html#algocompsynth",
+    "title": "About My Music",
+    "section": "AlgoCompSynth",
+    "text": "AlgoCompSynth\n“AlgoCompSynth” is a word I made up to describe what it is that I want to do. It’s a compression of “algorithmic composition and digital sound synthesis.” That’s a pretty broad class of music; to narrow it down, the following are my main inspirations.\n\nIannis Xenakis’ Formalized Music (Xenakis 1992). Xenakis took the applied mathematics of his day, for example, operations research and game theory, and used these algorithms to create scores for conventional and electronic performers. He also invented a technique called “Dynamic Stochastic Synthesis”, which uses Markov processes to specify not just the score of a piece but the parameters of the sound waveforms (Hoffmann 1996; Brown 2005; Xenakis 1992).\nAlternate tunings. Primary among these is William Sethares’ Tuning, Timbre Spectrum, Scale (Sethares 1998, 2013). Also influential: Wendy Carlos (Carlos 1987), Harry Partch (Partch 1979), Erv Wilson (Narushima 2019) and Nick Collins (Collins 2008, 2012).\nPhysical modeling synthesis. A comprehensive reference can be found at (Smith accessed 2023-10-21)."
   }
 ]
