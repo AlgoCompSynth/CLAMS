@@ -24,3 +24,18 @@ will need to be done in fixed point arithmetic. Standard Forth has a variety of
 integer operations available, but audio and digital signal processing will require
 adding fixed point fractional and block floating point arithmetic. See
 [@liu2008embedded, chapter 2] for the details.
+
+## Forth extensions
+
+1. DSP extensions to the Forth virtual machine: Stephen Pelc [@pelc2008updating]
+has proposed adding some registers to the canonical Forth virtual machine to
+facilitate digital signal processing and memory management. CLAMS will use this
+virtual machine design.
+
+2. Arm Cortex M0+ assembler: CLAMS will provide a Forth assembler for the Arm
+Cortex M0+ instruction set architecture. This will require the search order
+extension to the Forth 2012 standard [@forth2022, chapter 16].
+
+3. Cooperative multitasking: Although it's not yet part of the standard, many
+Forth implementations have provided cooperative multitasking. CLAMS will provide
+a version similar to that defined by `gforth` [@gforthGforthManual, section 6.27].

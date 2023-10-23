@@ -136,6 +136,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#general-capabilities" id="toc-general-capabilities" class="nav-link active" data-scroll-target="#general-capabilities">General capabilities</a></li>
+  <li><a href="#forth-extensions" id="toc-forth-extensions" class="nav-link" data-scroll-target="#forth-extensions">Forth extensions</a></li>
   </ul>
 </nav>
     </div>
@@ -180,6 +181,14 @@ M. Edward (Ed) Borasky
 <li><p>Raspberry Pi Pico C/C++ SDK compatibility: CLAMS will be constructed using the Raspberry Pi Pico C/C++ SDK <span class="citation" data-cites="raspberrypi2023a">(<a href="#ref-raspberrypi2023a" role="doc-biblioref">Ltd Accessed 2023-10-22</a>)</span>. CLAMS code must be able to call code written in C, C++ or assembly. See <span class="citation" data-cites="smith2021rp2040">(<a href="#ref-smith2021rp2040" role="doc-biblioref">Smith 2021</a>)</span> for the details.</p></li>
 <li><p>Arithmetic: because of the hardware limitations of the RP2040, calculations will need to be done in fixed point arithmetic. Standard Forth has a variety of integer operations available, but audio and digital signal processing will require adding fixed point fractional and block floating point arithmetic. See <span class="citation" data-cites="liu2008embedded">(<a href="#ref-liu2008embedded" role="doc-biblioref">Liu 2008, chap. 2</a>)</span> for the details.</p></li>
 </ol>
+</section>
+<section id="forth-extensions" class="level2">
+<h2 class="anchored" data-anchor-id="forth-extensions">Forth extensions</h2>
+<ol type="1">
+<li><p>DSP extensions to the Forth virtual machine: Stephen Pelc <span class="citation" data-cites="pelc2008updating">(<a href="#ref-pelc2008updating" role="doc-biblioref">Pelc 2008</a>)</span> has proposed adding some registers to the canonical Forth virtual machine to facilitate digital signal processing and memory management. CLAMS will use this virtual machine design.</p></li>
+<li><p>Arm Cortex M0+ assembler: CLAMS will provide a Forth assembler for the Arm Cortex M0+ instruction set architecture. This will require the search order extension to the Forth 2012 standard <span class="citation" data-cites="forth2022">(<a href="#ref-forth2022" role="doc-biblioref">Forth 200x Committee 2012, chap. 16</a>)</span>.</p></li>
+<li><p>Cooperative multitasking: Although it’s not yet part of the standard, many Forth implementations have provided cooperative multitasking. CLAMS will provide a version similar to that defined by <code>gforth</code> <span class="citation" data-cites="gforthGforthManual">(<a href="#ref-gforthGforthManual" role="doc-biblioref">gforth.org Accessed 2023-10-22, sec. 6.27</a>)</span>.</p></li>
+</ol>
 
 
 
@@ -188,11 +197,20 @@ M. Edward (Ed) Borasky
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 <a property="dct:title" rel="cc:attributionURL" href="https://algocompsynth.github.io/CLAMS">Command Line Algorithmic Music System (CLAMS)</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/znmeb">M. Edward (Ed) Borasky</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a>
 </p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-forth2022" class="csl-entry" role="listitem">
+Forth 200x Committee. 2012. <span>“Forth 2012 Standard.”</span> Forth 200x Committee. <a href="https://forth-standard.org/standard/words">https://forth-standard.org/standard/words</a>.
+</div>
+<div id="ref-gforthGforthManual" class="csl-entry" role="listitem">
+gforth.org. Accessed 2023-10-22. <span>“<span>G</span>forth <span>M</span>anual.”</span> <a href="https://gforth.org/manual/" class="uri">https://gforth.org/manual/</a>; gforth.org.
+</div>
 <div id="ref-liu2008embedded" class="csl-entry" role="listitem">
 Liu, D. 2008. <em>Embedded DSP Processor Design: Application Specific Instruction Set Processors</em>. EngineeringPro Collection. Elsevier Science. <a href="https://books.google.com/books?id=B8hEDekXOG0C">https://books.google.com/books?id=B8hEDekXOG0C</a>.
 </div>
 <div id="ref-raspberrypi2023a" class="csl-entry" role="listitem">
 Ltd, Raspberry Pi. Accessed 2023-10-22. <span>“<span>R</span>aspberry <span>P</span>i <span>D</span>ocumentation - <span>T</span>he <span>C</span>/<span>C</span>++ <span>S</span><span>D</span><span>K</span>.”</span> <a href="https://www.raspberrypi.com/documentation/microcontrollers/c_sdk.html" class="uri">https://www.raspberrypi.com/documentation/microcontrollers/c_sdk.html</a>; Raspberry Pi Ltd.
+</div>
+<div id="ref-pelc2008updating" class="csl-entry" role="listitem">
+Pelc, Stephen. 2008. <span>“Updating the Forth Virtual Machine.”</span> In <em>24th EuroForth Conference</em>, 24–30.
 </div>
 <div id="ref-smith2021rp2040" class="csl-entry" role="listitem">
 Smith, S. 2021. <em>RP2040 Assembly Language Programming: ARM Cortex-M0+ on the Raspberry Pi Pico</em>. Apress.

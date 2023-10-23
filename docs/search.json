@@ -14,6 +14,13 @@
     "text": "General capabilities\n\nCell size: while the speed and compactness of a 16-bit Forth are tempting, high-quality audio requires at least 24 bits during intermediate computations. It is also unclear how easy it would be to exploit the RAM in an RP2040 beyond a 65,536 byte dictionary. So CLAMS will have a 32-bit cell size.\nRaspberry Pi Pico C/C++ SDK compatibility: CLAMS will be constructed using the Raspberry Pi Pico C/C++ SDK (Ltd Accessed 2023-10-22). CLAMS code must be able to call code written in C, C++ or assembly. See (Smith 2021) for the details.\nArithmetic: because of the hardware limitations of the RP2040, calculations will need to be done in fixed point arithmetic. Standard Forth has a variety of integer operations available, but audio and digital signal processing will require adding fixed point fractional and block floating point arithmetic. See (Liu 2008, chap. 2) for the details."
   },
   {
+    "objectID": "CLAMS-Design-Overview.html#forth-extensions",
+    "href": "CLAMS-Design-Overview.html#forth-extensions",
+    "title": "CLAMS Design Overview",
+    "section": "Forth extensions",
+    "text": "Forth extensions\n\nDSP extensions to the Forth virtual machine: Stephen Pelc (Pelc 2008) has proposed adding some registers to the canonical Forth virtual machine to facilitate digital signal processing and memory management. CLAMS will use this virtual machine design.\nArm Cortex M0+ assembler: CLAMS will provide a Forth assembler for the Arm Cortex M0+ instruction set architecture. This will require the search order extension to the Forth 2012 standard (Forth 200x Committee 2012, chap. 16).\nCooperative multitasking: Although it’s not yet part of the standard, many Forth implementations have provided cooperative multitasking. CLAMS will provide a version similar to that defined by gforth (gforth.org Accessed 2023-10-22, sec. 6.27)."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Command Line Algorithmic Music System (CLAMS)",
