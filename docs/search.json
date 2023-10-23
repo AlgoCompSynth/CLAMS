@@ -18,7 +18,7 @@
     "href": "CLAMS-Design-Overview.html#forth-extensions",
     "title": "CLAMS Design Overview",
     "section": "Forth extensions",
-    "text": "Forth extensions\n\nDSP extensions to the Forth virtual machine: Stephen Pelc (Pelc 2008) has proposed adding some registers to the canonical Forth virtual machine to facilitate digital signal processing and memory management. CLAMS will use this virtual machine design.\nArm Cortex M0+ assembler: CLAMS will provide a Forth assembler for the Arm Cortex M0+ instruction set architecture. This will require the search order extension to the Forth 2012 standard (Forth 200x Committee 2012, chap. 16).\nCooperative multitasking: Although it’s not yet part of the standard, many Forth implementations have provided cooperative multitasking. CLAMS will provide a version similar to that defined by gforth (gforth.org Accessed 2023-10-22, sec. 6.27)."
+    "text": "Forth extensions\n\nDSP extensions to the Forth virtual machine: Stephen Pelc (Pelc 2008) has proposed adding some registers to the canonical Forth virtual machine to facilitate digital signal processing and memory management. CLAMS will use this virtual machine design.\nArm Cortex M0+ assembler: CLAMS will provide a Forth assembler for the Arm Cortex M0+ instruction set architecture. This will require the search order extension to the Forth 2012 standard (Forth 200x Committee 2012, chap. 16).\nCooperative multitasking: Although it’s not yet part of the standard, many Forth implementations have provided cooperative multitasking. CLAMS will provide a version similar to that defined by gforth (gforthGforthManual?)."
   },
   {
     "objectID": "CLAMS-Design-Overview.html#audio-and-digital-signal-processing",
