@@ -1,3 +1,5 @@
 .Rproj.user
 .Rhistory
 README_files/*
+*.uf2
+*.zip
