@@ -137,6 +137,9 @@ div.csl-indent {
   <ul>
   <li><a href="#general-capabilities" id="toc-general-capabilities" class="nav-link active" data-scroll-target="#general-capabilities">General capabilities</a></li>
   <li><a href="#forth-extensions" id="toc-forth-extensions" class="nav-link" data-scroll-target="#forth-extensions">Forth extensions</a></li>
+  <li><a href="#audio-and-digital-signal-processing" id="toc-audio-and-digital-signal-processing" class="nav-link" data-scroll-target="#audio-and-digital-signal-processing">Audio and digital signal processing</a></li>
+  <li><a href="#input-output" id="toc-input-output" class="nav-link" data-scroll-target="#input-output">Input / output</a></li>
+  <li><a href="#displays-hdmi" id="toc-displays-hdmi" class="nav-link" data-scroll-target="#displays-hdmi">Displays / HDMI</a></li>
   </ul>
 </nav>
     </div>
@@ -189,6 +192,27 @@ M. Edward (Ed) Borasky
 <li><p>Arm Cortex M0+ assembler: CLAMS will provide a Forth assembler for the Arm Cortex M0+ instruction set architecture. This will require the search order extension to the Forth 2012 standard <span class="citation" data-cites="forth2022">(<a href="#ref-forth2022" role="doc-biblioref">Forth 200x Committee 2012, chap. 16</a>)</span>.</p></li>
 <li><p>Cooperative multitasking: Although it’s not yet part of the standard, many Forth implementations have provided cooperative multitasking. CLAMS will provide a version similar to that defined by <code>gforth</code> <span class="citation" data-cites="gforthGforthManual">(<a href="#ref-gforthGforthManual" role="doc-biblioref">gforth.org Accessed 2023-10-22, sec. 6.27</a>)</span>.</p></li>
 </ol>
+</section>
+<section id="audio-and-digital-signal-processing" class="level2">
+<h2 class="anchored" data-anchor-id="audio-and-digital-signal-processing">Audio and digital signal processing</h2>
+<ol type="1">
+<li><p>Block floating point vector library: CLAMS will provide a library of block floating point vector operations, including convolution and fast Fourier transforms.</p></li>
+<li><p>Audio output: CLAMS will provide mechanisms for playing blocks of stereo data to a digital-analog converter (DAC). Two channels of any bit-width up to 24 bits at a sample rate of at least 44.1 kHz will be supported. The target hardware does not have audio input, so that will not be supported for the initial release.</p></li>
+<li><p>Analysis and synthesis algorithms: The goal is to eventually provide all the analysis and synthesis algorithms in <em>Spectral Music Design</em> <span class="citation" data-cites="lazzarini2021spectral">(<a href="#ref-lazzarini2021spectral" role="doc-biblioref">Lazzarini 2021</a>)</span> and <em>Tuning, Timbre, Spectrum, Scale</em> <span class="citation" data-cites="sethares2013tuning">(<a href="#ref-sethares2013tuning" role="doc-biblioref">Sethares 2013</a>)</span>, but algorithms will be added as needed on a composition-by-composition basis.</p></li>
+<li><p>Stochastic operations: As with analysis and synthesis algorithms, these will be added on an as-needed basis.</p></li>
+</ol>
+</section>
+<section id="input-output" class="level2">
+<h2 class="anchored" data-anchor-id="input-output">Input / output</h2>
+<ol type="1">
+<li><p>SD card audio file operations: CLAMS will provide the ability to read and write <code>WAV</code> files to and from the SD card.</p></li>
+<li><p>SD card Forth BLOCK operations: CLAMS will provide these as defined in <span class="citation" data-cites="forth2022">(<a href="#ref-forth2022" role="doc-biblioref">Forth 200x Committee 2012</a>)</span>. A BLOCK editor will also be provided.</p></li>
+<li><p>USB serial connectivity: CLAMS will provide the standard Forth outer interpreter read-eval-print loop (REPL) to the USB port, seen by a host computer as a serial port. I can’t guarantee it will be tested on MacOS, but it will be tested on Windows 11, Raspberry Pi OS, and browsers on Windows and ChromeOS that support USB serial connections.</p></li>
+</ol>
+</section>
+<section id="displays-hdmi" class="level2">
+<h2 class="anchored" data-anchor-id="displays-hdmi">Displays / HDMI</h2>
+<p>This is a new capability for CLAMS, so I can’t give many details. The plan is to support all of the capabilities of the PicoVision HDMI output. Watch this space!</p>
 
 
 
@@ -203,6 +227,9 @@ Forth 200x Committee. 2012. <span>“Forth 2012 Standard.”</span> Forth 200x C
 <div id="ref-gforthGforthManual" class="csl-entry" role="listitem">
 gforth.org. Accessed 2023-10-22. <span>“<span>G</span>forth <span>M</span>anual.”</span> <a href="https://gforth.org/manual/" class="uri">https://gforth.org/manual/</a>; gforth.org.
 </div>
+<div id="ref-lazzarini2021spectral" class="csl-entry" role="listitem">
+Lazzarini, V. 2021. <em>Spectral Music Design: A Computational Approach</em>. Oxford University Press. <a href="https://books.google.com/books?id=sns_EAAAQBAJ">https://books.google.com/books?id=sns_EAAAQBAJ</a>.
+</div>
 <div id="ref-liu2008embedded" class="csl-entry" role="listitem">
 Liu, D. 2008. <em>Embedded DSP Processor Design: Application Specific Instruction Set Processors</em>. EngineeringPro Collection. Elsevier Science. <a href="https://books.google.com/books?id=B8hEDekXOG0C">https://books.google.com/books?id=B8hEDekXOG0C</a>.
 </div>
@@ -211,6 +238,9 @@ Ltd, Raspberry Pi. Accessed 2023-10-22. <span>“<span>R</span>aspberry <span>P<
 </div>
 <div id="ref-pelc2008updating" class="csl-entry" role="listitem">
 Pelc, Stephen. 2008. <span>“Updating the Forth Virtual Machine.”</span> In <em>24th EuroForth Conference</em>, 24–30.
+</div>
+<div id="ref-sethares2013tuning" class="csl-entry" role="listitem">
+Sethares, W. A. 2013. <em>Tuning, Timbre, Spectrum, Scale, Second Edition</em>. Springer London.
 </div>
 <div id="ref-smith2021rp2040" class="csl-entry" role="listitem">
 Smith, S. 2021. <em>RP2040 Assembly Language Programming: ARM Cortex-M0+ on the Raspberry Pi Pico</em>. Apress.

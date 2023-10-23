@@ -39,3 +39,42 @@ extension to the Forth 2012 standard [@forth2022, chapter 16].
 3. Cooperative multitasking: Although it's not yet part of the standard, many
 Forth implementations have provided cooperative multitasking. CLAMS will provide
 a version similar to that defined by `gforth` [@gforthGforthManual, section 6.27].
+
+## Audio and digital signal processing
+
+1. Block floating point vector library: CLAMS will provide a library of block
+floating point vector operations, including convolution and fast Fourier
+transforms.
+
+2. Audio output: CLAMS will provide mechanisms for playing blocks of stereo
+data to a digital-analog converter (DAC). Two channels of any bit-width up to
+24 bits at a sample rate of at least 44.1 kHz will be supported. The target
+hardware does not have audio input, so that will not be supported for the
+initial release.
+
+3. Analysis and synthesis algorithms: The goal is to eventually provide all the
+analysis and synthesis algorithms in _Spectral Music Design_
+[@lazzarini2021spectral] and _Tuning, Timbre, Spectrum, Scale_
+[@sethares2013tuning], but algorithms will be added as needed on a
+composition-by-composition basis.
+
+4. Stochastic operations: As with analysis and synthesis algorithms, these will
+be added on an as-needed basis.
+
+## Input / output
+1. SD card audio file operations: CLAMS will provide the ability to read and write
+`WAV` files to and from the SD card.
+
+2. SD card Forth BLOCK operations: CLAMS will provide these as defined in
+[@forth2022]. A BLOCK editor will also be provided.
+
+3. USB serial connectivity: CLAMS will provide the standard Forth outer
+interpreter read-eval-print loop (REPL) to the USB port, seen by a host computer
+as a serial port. I can't guarantee it will be tested on MacOS, but it will be
+tested on Windows 11, Raspberry Pi OS, and browsers on Windows and ChromeOS that
+support USB serial connections.
+
+## Displays / HDMI
+
+This is a new capability for CLAMS, so I can't give many details. The plan is to
+support all of the capabilities of the PicoVision HDMI output. Watch this space!

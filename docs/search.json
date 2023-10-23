@@ -21,6 +21,27 @@
     "text": "Forth extensions\n\nDSP extensions to the Forth virtual machine: Stephen Pelc (Pelc 2008) has proposed adding some registers to the canonical Forth virtual machine to facilitate digital signal processing and memory management. CLAMS will use this virtual machine design.\nArm Cortex M0+ assembler: CLAMS will provide a Forth assembler for the Arm Cortex M0+ instruction set architecture. This will require the search order extension to the Forth 2012 standard (Forth 200x Committee 2012, chap. 16).\nCooperative multitasking: Although it’s not yet part of the standard, many Forth implementations have provided cooperative multitasking. CLAMS will provide a version similar to that defined by gforth (gforth.org Accessed 2023-10-22, sec. 6.27)."
   },
   {
+    "objectID": "CLAMS-Design-Overview.html#audio-and-digital-signal-processing",
+    "href": "CLAMS-Design-Overview.html#audio-and-digital-signal-processing",
+    "title": "CLAMS Design Overview",
+    "section": "Audio and digital signal processing",
+    "text": "Audio and digital signal processing\n\nBlock floating point vector library: CLAMS will provide a library of block floating point vector operations, including convolution and fast Fourier transforms.\nAudio output: CLAMS will provide mechanisms for playing blocks of stereo data to a digital-analog converter (DAC). Two channels of any bit-width up to 24 bits at a sample rate of at least 44.1 kHz will be supported. The target hardware does not have audio input, so that will not be supported for the initial release.\nAnalysis and synthesis algorithms: The goal is to eventually provide all the analysis and synthesis algorithms in Spectral Music Design (Lazzarini 2021) and Tuning, Timbre, Spectrum, Scale (Sethares 2013), but algorithms will be added as needed on a composition-by-composition basis.\nStochastic operations: As with analysis and synthesis algorithms, these will be added on an as-needed basis."
+  },
+  {
+    "objectID": "CLAMS-Design-Overview.html#input-output",
+    "href": "CLAMS-Design-Overview.html#input-output",
+    "title": "CLAMS Design Overview",
+    "section": "Input / output",
+    "text": "Input / output\n\nSD card audio file operations: CLAMS will provide the ability to read and write WAV files to and from the SD card.\nSD card Forth BLOCK operations: CLAMS will provide these as defined in (Forth 200x Committee 2012). A BLOCK editor will also be provided.\nUSB serial connectivity: CLAMS will provide the standard Forth outer interpreter read-eval-print loop (REPL) to the USB port, seen by a host computer as a serial port. I can’t guarantee it will be tested on MacOS, but it will be tested on Windows 11, Raspberry Pi OS, and browsers on Windows and ChromeOS that support USB serial connections."
+  },
+  {
+    "objectID": "CLAMS-Design-Overview.html#displays-hdmi",
+    "href": "CLAMS-Design-Overview.html#displays-hdmi",
+    "title": "CLAMS Design Overview",
+    "section": "Displays / HDMI",
+    "text": "Displays / HDMI\nThis is a new capability for CLAMS, so I can’t give many details. The plan is to support all of the capabilities of the PicoVision HDMI output. Watch this space!"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Command Line Algorithmic Music System (CLAMS)",
