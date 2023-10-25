@@ -3,19 +3,22 @@
 set -e
 
 echo "Downloading diagram"
-wget -nc \
-  "https://cdn.shopify.com/s/files/1/0174/1800/files/picovision_diagram.pdf?v=1696414342" -O picovision_diagram.pdf || true
+curl -s \
+  "https://cdn.shopify.com/s/files/1/0174/1800/files/picovision_diagram.pdf?v=1696414342" > picovision_diagram.pdf
 
 export PICOVISION_VERSION="1.0.2"
 echo "Downloading Python release $PICOVISION_VERSION"
-wget -nc \
-  "https://github.com/pimoroni/picovision/releases/download/v$PICOVISION_VERSION/pimoroni-picovision-examples-v$PICOVISION_VERSION.zip" || true
-wget -nc \
-  "https://github.com/pimoroni/picovision/releases/download/v$PICOVISION_VERSION/pimoroni-picovision-v$PICOVISION_VERSION-micropython.uf2" || true
-wget -nc \
-  "https://github.com/pimoroni/picovision/releases/download/v$PICOVISION_VERSION/pimoroni-picovision-widescreen-v$PICOVISION_VERSION-micropython.uf2" || true
-wget -nc \
-  "https://github.com/pimoroni/picovision/archive/refs/tags/v$PICOVISION_VERSION.zip" -O source-v$PICOVISION_VERSION.zip || true
+curl -sOL \
+  "https://github.com/pimoroni/picovision/releases/download/v$PICOVISION_VERSION/pimoroni-picovision-examples-v$PICOVISION_VERSION.zip" #\
+curl -sOL \
+  "https://github.com/pimoroni/picovision/releases/download/v$PICOVISION_VERSION/pimoroni-picovision-v$PICOVISION_VERSION-micropython.uf2"
+curl -sOL \
+  "https://github.com/pimoroni/picovision/releases/download/v$PICOVISION_VERSION/pimoroni-picovision-widescreen-v$PICOVISION_VERSION-micropython.uf2"
+curl -sL \
+  "https://github.com/pimoroni/picovision/archive/refs/tags/v$PICOVISION_VERSION.zip" > source-v$PICOVISION_VERSION.zip
+
+echo "Downloading flash_nuke.uf2"
+curl -sOL https://datasheets.raspberrypi.com/soft/flash_nuke.uf2
 
 echo "Unpacking examples"
 rm -fr python-examples; mkdir -p python-examples; cd python-examples
