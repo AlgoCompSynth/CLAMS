@@ -28,3 +28,14 @@ cd ..
 echo "Unpacking source"
 rm -fr picovision-$PICOVISION_VERSION
 unzip source-v$PICOVISION_VERSION.zip
+
+echo "Creating fresh Mamba environment 'PicoVision'"
+. "$MAMBAFORGE_HOME/etc/profile.d/conda.sh"
+. "$MAMBAFORGE_HOME/etc/profile.d/mamba.sh"
+mamba create --force --yes --quiet --name PicoVision \
+  python \
+  pip
+mamba activate PicoVision
+pip install --quiet --upgrade mpremote
+
+echo "Finished!"
