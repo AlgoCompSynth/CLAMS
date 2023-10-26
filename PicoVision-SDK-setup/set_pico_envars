@@ -1,3 +1,4 @@
+export PICO_HOME=$HOME/Projects
 export PICO_PATH=$HOME/Projects/pico
 export PICO_SDK_PATH=$PICO_PATH/pico-sdk
 export PICO_EXAMPLES_PATH=$PICO_PATH/pico-examples
