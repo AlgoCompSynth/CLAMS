@@ -6,7 +6,7 @@ echo "Setting environment variables"
 source set_pico_envars
 
 echo "Building the examples"
-for dir in $PICO_EXAMPLES_PATH $PICO_PLAYGROUND_PATH $PICO_PIMORONI_PATH
+for dir in $PICO_EXAMPLES_PATH $PICO_PLAYGROUND_PATH $PICO_PIMORONI_PATH $PICO_PICOVISION_PROJECTS_PATH
 do
   pushd $dir
   echo ""
@@ -17,5 +17,4 @@ do
   popd
 done
 
-echo ""
 echo "Finished!"
