@@ -7,4 +7,5 @@ export PICO_PLAYGROUND_PATH=$PICO_PATH/pico-playground
 export PICO_PIMORONI_PATH=$PICO_PATH/pimoroni-pico
 export PICO_OPENOCD_PATH=$PICO_PATH/openocd
 export PICO_PICOTOOL_PATH=$PICO_PATH/picotool
+export PICO_PICOVISION_PATH=$PICO_PATH/picovision
 export PICO_PICOVISION_PROJECTS_PATH=$PICO_PATH/picovision-projects
