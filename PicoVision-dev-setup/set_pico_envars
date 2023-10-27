@@ -1,4 +1,13 @@
+# This is the Mambaforge default. If you want, you can change it but
+# I don't recommend it.
+export MAMBAFORGE_HOME=$HOME/mambaforge
+
+# There's no default for this. You can put this anywhere; if it 
+# doesn't exist it will be created.
 export PICO_HOME=$HOME/Projects
+echo "Creating $PICO_HOME if necessary"; mkdir --parents $PICO_HOME
+
+# Don't change any of these!
 export PICO_PATH=$HOME/Projects/pico
 export PICO_SDK_PATH=$PICO_PATH/pico-sdk
 export PICO_EXAMPLES_PATH=$PICO_PATH/pico-examples
@@ -9,3 +18,4 @@ export PICO_OPENOCD_PATH=$PICO_PATH/openocd
 export PICO_PICOTOOL_PATH=$PICO_PATH/picotool
 export PICO_PICOVISION_PATH=$PICO_PATH/picovision
 export PICO_PICOVISION_PROJECTS_PATH=$PICO_PATH/picovision-projects
+export PICOVISION_VERSION="1.0.2"
