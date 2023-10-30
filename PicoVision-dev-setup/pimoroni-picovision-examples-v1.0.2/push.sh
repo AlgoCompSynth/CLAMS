@@ -2,10 +2,7 @@
 
 set -e
 
-export MAMBAFORGE_HOME="$HOME/mambaforge"
-source $MAMBAFORGE_HOME/etc/profile.d/conda.sh
-source $MAMBAFORGE_HOME/etc/profile.d/mamba.sh
-mamba activate PicoVision
+source ../mpremote/bin/activate
 mpremote ls
 mpremote cp -r alert/ :
 mpremote cp -r bouncing_logo/ :
