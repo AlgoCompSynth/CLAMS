@@ -44,7 +44,7 @@ development.
 `3build-examples.sh` builds all the Raspberry Pi and Pimoroni examples. This
 takes a bit of time, but it's a necessary test of the toolchain, and as a
 bonus supplies numerous firmware examples to experiment with! On my Raspberry
-Pi 4GB CM4 it takes about half an hour.
+Pi 4GB CM4 it takes about 35 minutes.
 
 ### MicroPython tools
 `4MicroPython.sh` downloads the firmware files for PicoVision MicroPython.
