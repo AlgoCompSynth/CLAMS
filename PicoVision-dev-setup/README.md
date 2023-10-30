@@ -14,11 +14,11 @@ all the environment variables needed for the rest of the scripts.
 The scripts all do `source set_pico_envars` to read them.
 
 3. Run the numbered scripts in order:
-- 1pico-toolchain.sh -- you will need to reboot after running this one.
-- 2pimoroni-repos.sh
-- 3build-examples.log
-- 3build-examples.sh
-- 4MicroPython.sh
+    - 1pico-toolchain.sh -- you will need to reboot after running this one.
+    - 2pimoroni-repos.sh
+    - 3build-examples.log
+    - 3build-examples.sh
+    - 4MicroPython.sh
 
 4. Documentation: for C/C++ development, refer to
 <https://www.raspberrypi.com/documentation/microcontrollers/c_sdk.html>. The
