@@ -53,10 +53,8 @@ It then installs `python3-venv` if needed, then creates a virtual environment
 
 To use `mpremote`:
 
-    ```
     source ./mpremote/bin/activate
     mpremote --help
-    ```
 
 If you want to remove MicroPython and load other firmware, put the PicoVision
 in bootloader mode using `mpremote bootloader` and install `flash_nuke.uf2`.
