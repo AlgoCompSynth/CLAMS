@@ -178,7 +178,7 @@ div.csl-indent {
 <ul>
 <li>Compatibility with the Raspberry Pi Pico C/C++ SDK, drivers, and libraries: The ability to use the massive toolset the SDK and community open source projects provide is absolutely crucial to minimize developer time for complex projects. The USB and WiFi / Bluetooth stacks alone would take many months to duplicate in Forth.</li>
 <li>Optimized for speed: CLAMS16 will be written in RP2040 assembly <span class="citation" data-cites="smith2021rp2040">(<a href="#ref-smith2021rp2040" role="doc-biblioref">Smith 2021</a>)</span>. CLAMS16 will provide an RP2040 assembler, will use subroutine threading and will allow both calling and inlining <code>CODE</code> words written in assembly <span class="citation" data-cites="pintaske2018moving">(<a href="#ref-pintaske2018moving" role="doc-biblioref">Pintaske and Rodriguez 2018</a>)</span>.</li>
-<li>Cooperative multitasking: The RP2040 has two cores, and each core has a divide coprocessor and two interpolators. In addition, the RP2040 has two programmable input / output (PIO) blocks. Cooperative multitasking provides a way of exploiting this available concurrency and is well-supported by the SDK.</li>
+<li>Cooperative multitasking: The RP2040 has two cores, and each core has a divide coprocessor and two interpolators <span class="citation" data-cites="smith2021rp2040">(<a href="#ref-smith2021rp2040" role="doc-biblioref">Smith 2021, chap. 12</a>)</span>. In addition, the RP2040 has two programmable input / output (PIO) blocks. Cooperative multitasking provides a way of exploiting this available concurrency and is well-supported by the SDK.</li>
 </ul></li>
 <li>Desiderata
 <ul>
