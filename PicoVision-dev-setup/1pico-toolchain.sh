@@ -2,8 +2,12 @@
 
 set -e
 
-echo "Installing system '/usr/bin/time' command if needed"
-sudo apt-get install -qqy --no-install-recommends time
+echo "Installing command line utilities"
+sudo apt-get install -qqy --no-install-recommends
+  minicom \
+  time \
+  tree \
+  vim-nox
 
 echo "Setting up Pico SDK"
 source set_pico_envars
