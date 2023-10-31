@@ -1,0 +1,55 @@
+---
+title: "Command Line Algorithmic Music System (CLAMS)"
+author: "M. Edward (Ed) Borasky"
+bibliography: ../CLAMS-website/REFERENCES.bib
+---
+
+>  "If you've seen one Forth, well, you've seen one Forth."
+\~ Unknown
+
+## Overview
+
+`CLAMS16` is a 16-bit Forth for the Raspberry Pi Pico.
+1. Requirements:
+    - Compatibility with the Raspberry Pi Pico C/C++ SDK, drivers, and
+libraries: The ability to use the massive tool set the SDK and community
+open source projects provide is absolutely crucial to minimize developer
+time for complex projects. The USB and WiFi / Bluetooth stacks alone would
+take many months to duplicate in Forth.
+    - Optimized for speed: CLAMS16 will be written in RP2040 assembly
+[]. CLAMS16 will provide an RP2040 assembler, will use subroutine
+threading and will allow both calling and inlining words written in
+ assembly.
+    - Cooperative multitasking: The RP2040 has two cores as well as a
+divide coprocessor, multiple interpolators and an I/O coprocessor
+subsystem. Cooperative multitasking provides a way of exploiting the
+available concurrency and it well-supported by the SDK.
+2.  Desiderata:
+- Forth 2012 standard compatibility is a strong desire but not an absolute
+requirement. The assembler is, of course, not part of the standard. And
+there is currently no standard for cooperative multitasking; CLAMS16's 
+will be implementation-dependent and closely following the tools availble
+in the RP2040 and the SDK.
+- Portability to other boards with the RP2040 microcontroller is possible,
+but is not on the roadmap yet.
+- An enhanced Forth virtual machine, providing registers for indexing and
+intermendiate results as defined in []. 
+
+## Why only 16 bits?
+Since the RP2040 is a 32-bit processor, why only build a 16-bit Forth:
+1. The RP2040 does not provide full-width multiply. A true 32-bit
+architecture would allow multiplying two 32-bit integers to form
+a 64-bit product in two other registers.
+
+    The RP2040 can multiply two 32-bit integers, but only delivers
+the lower 32 bits of the product. This makes standard Forth
+multiple-precision operations like `*/MOD` difficult to code for a
+32-bit Forth.
+2. A 16-bit Forth uses less RAM. The RP2040 only has 246 kilobytes of
+RAM, and the intended application, music synthesis, requires numerous
+tables and buffers, not all of which can be stored in flash.
+
+    A 16-bit Forth can address a maximum of 65,536 bytes for its
+dictionary. This means that each core can have its own dictionary,
+stacks, user variables and task control blocks, with about half of
+the available RAM usable for buffers and tables.
