@@ -1,6 +1,3 @@
-# This is the Mambaforge default. If you want, you can change it but
-# I don't recommend it.
-export MAMBAFORGE_HOME=$HOME/mambaforge
 
 # There's no default for this. You can put this anywhere; if it 
 # doesn't exist it will be created.
