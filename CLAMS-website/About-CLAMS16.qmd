@@ -22,10 +22,10 @@ take many months to duplicate in Forth.
 subroutine threading and will allow both calling and inlining `CODE` words
 written in assembly [@pintaske2018moving].
     - Cooperative multitasking: The RP2040 has two cores, and each core has a
-    divide coprocessor and two interpolators. In addition, the RP2040 has
-    two programmable input / output (PIO) blocks. Cooperative multitasking
-    provides a way of exploiting this available concurrency and is
-    well-supported by the SDK.
+    divide coprocessor and two interpolators [@smith2021rp2040, chapter 12].
+    In addition, the RP2040 has two programmable input / output (PIO)
+    blocks. Cooperative multitasking provides a way of exploiting this
+    available concurrency and is well-supported by the SDK.
 2.  Desiderata
     - Forth 2012 standard compatibility [@forth2022] is a strong desire but not an absolute
 requirement. The assembler is, of course, not part of the standard. And
