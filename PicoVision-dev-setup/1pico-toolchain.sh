@@ -4,6 +4,7 @@ set -e
 
 echo "Installing command line utilities"
 sudo apt-get install -qqy --no-install-recommends \
+  info \
   minicom \
   time \
   tree \
