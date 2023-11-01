@@ -14,8 +14,8 @@ add_executable(CLAMS16
   CLAMS16.S
 )
 
-pico_enable_stdio_uart(CLAMS16 0)
-pico_enable_stdio_usb(CLAMS16 1)
+pico_enable_stdio_uart(CLAMS16 1)
+pico_enable_stdio_usb(CLAMS16 0)
 
 pico_add_extra_outputs(CLAMS16)
 
