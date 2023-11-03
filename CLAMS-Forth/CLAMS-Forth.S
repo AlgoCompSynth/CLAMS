@@ -1,5 +1,5 @@
 @
-@ CLAMS16 main program
+@ CLAMS-Forth main program
 @ Reference: Stephen Smith, _RP2040 Assembly Language Programming, Chapter 2
 @
 @ R0 - first parameter to printf
