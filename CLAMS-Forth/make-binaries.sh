@@ -12,6 +12,6 @@ echo "Running cmake for debug build"
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 
 echo "Building binaries"
-make --jobs=`nproc`
+make --jobs=6
 
-ls -Altr
+ls --color=auto -AFlrt
