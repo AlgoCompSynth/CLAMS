@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "The Book of CLAMS"
+  author: "M. Edward (Ed) Borasky"
+  date: "11/3/2023"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: darkly
+  pdf:
+    documentclass: scrreprt
+
+
+
