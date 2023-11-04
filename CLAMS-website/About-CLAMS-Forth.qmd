@@ -13,7 +13,8 @@ bibliography: REFERENCES.bib
 libraries: The ability to use the massive toolset the SDK and community
 open source projects provide is absolutely crucial to minimize developer
 time for complex projects. The USB and WiFi / Bluetooth stacks alone would
-take many months to duplicate in Forth.
+take many months to duplicate in Forth. See [@smith2021rp2040, chapter 8]
+for the details on how this works.
 
 2. Optimized for speed: CLAMS Forth will be written in RP2040 assembly
 [@smith2021rp2040]. CLAMS Forth will provide an RP2040 assembler, will use
@@ -39,6 +40,11 @@ the standard. And there is currently no standard for cooperative
 multitasking; CLAMS Forth will provide an implementation based on the tools
 available in the RP2040 and the SDK.
 
+    *Most* of the CORE word set and some of the CORE EXT word sets will be
+implemented, but a few tricky or risky words will be omitted. The
+Search-Order word set will be implmented, and all of the RP2040 or SDK
+specific words will be in specialized word sets.
+
     Optional word sets implemented:
         - Search-Order
         - Programming-Tools
@@ -46,6 +52,10 @@ available in the RP2040 and the SDK.
     Custom word sets implemented:
         - Cooperative multitasking
         - High-speed digital signal processing
+        - SDK access as needed, for example:
+            - WiFi, Bluetooth
+            - USB other than serial
+            - PicoVision-specific operations
 
 2. Portability to other boards with the RP2040 microcontroller is possible,
 but is not on the roadmap yet. As with CLAMS itself, the initial target is the
