@@ -22,41 +22,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -109,7 +94,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Command Line Algorithmic Music System (CLAMS)</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -137,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Command Line Algorithmic Music System (CLAMS)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -168,7 +153,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#command-line-algorithmic-music-system-clams" id="toc-command-line-algorithmic-music-system-clams" class="nav-link active" data-scroll-target="#command-line-algorithmic-music-system-clams">Command Line Algorithmic Music System (CLAMS)</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work">How does it work?</a></li>
+  <li><a href="#why-forth" id="toc-why-forth" class="nav-link" data-scroll-target="#why-forth">Why Forth?</a></li>
+  <li><a href="#what-about-forth-standard-forth2022-compatibility" id="toc-what-about-forth-standard-forth2022-compatibility" class="nav-link" data-scroll-target="#what-about-forth-standard-forth2022-compatibility">What about Forth standard <span class="citation" data-cites="forth2022">(Forth 200x Committee 2012)</span> compatibility?</a></li>
+  <li><a href="#what-about-portability" id="toc-what-about-portability" class="nav-link" data-scroll-target="#what-about-portability">What about portability?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -204,18 +196,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
+<section id="command-line-algorithmic-music-system-clams" class="level1 unnumbered">
+<h1 class="unnumbered">Command Line Algorithmic Music System (CLAMS)</h1>
+<blockquote class="blockquote">
+<p>“I’ve never seen a happy clam. In fact, most of them were really steamed.” ~ M. Edward (Ed) Borasky</p>
+</blockquote>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p><code>CLAMS</code> is a text-based interactive environment for composing and performing music and visuals on a <a href="https://shop.pimoroni.com/products/picovision?variant=41048911904851">Pimoroni PicoVision</a>. It can be made to work on other boards using the RP2040 microcontroller, but you will need to buy additional hardware and port some code.</p>
+</section>
+<section id="how-does-it-work" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-it-work">How does it work?</h2>
+<p><code>CLAMS</code> is a domain-specific language built on a Forth compiler / interpreter. The user connects to the board via a serial connection and enters <code>CLAMS</code> / Forth code interactively.</p>
+</section>
+<section id="why-forth" class="level2">
+<h2 class="anchored" data-anchor-id="why-forth">Why Forth?</h2>
+<blockquote class="blockquote">
+<p>“Premature optimization may be the root of all evil, but it is damned fun!” ~ M. Edward (Ed) Borasky</p>
+</blockquote>
+<ol type="1">
+<li>Forth <span class="citation" data-cites="brodie2022">(<a href="references.html#ref-brodie2022" role="doc-biblioref">Brodie 2022</a>)</span> is an extensible interactive operating system. It supports editing, assembling, compiling, debugging and running real-time tasks from a terminal.</li>
+<li>Forth is efficient. A well-designed Forth will usually run a task at no worse than half the speed of a hand-optimized assembly version. <code>CLAMS</code> will have several optimizations built in for the ultimate speed.</li>
+<li>Forth is lean. There are very few concepts to learn, there is minimal run-time overhead in RAM, and the whole package takes up much less flash space than MicroPython or CircuitPython.</li>
+</ol>
+</section>
+<section id="what-about-forth-standard-forth2022-compatibility" class="level2">
+<h2 class="anchored" data-anchor-id="what-about-forth-standard-forth2022-compatibility">What about Forth standard <span class="citation" data-cites="forth2022">(<a href="references.html#ref-forth2022" role="doc-biblioref">Forth 200x Committee 2012</a>)</span> compatibility?</h2>
+<p><code>CLAMS</code> is an extended subset of the standard. It won’t contain all of the standard’s core word set, and it will contain some extensions to support the Raspberry Pi Pico C/C++ SDK, RP2040 assembly language programming, the PicoVision hardware, cooperative multitasking, and high-speed digital signal processing.</p>
+</section>
+<section id="what-about-portability" class="level2">
+<h2 class="anchored" data-anchor-id="what-about-portability">What about portability?</h2>
+<p>Within the RP2040 ecosystem, as long as the PicoVision and C/C++ SDK work, porting should be straightforward, though tedious. And you will undoubtedly need to buy more hardware.</p>
+<p>Outside of the RP2040 ecosystem, there are a number of other micro-controller music boards, most notably the <a href="https://www.electro-smith.com/daisy%20%22Electro-Smith%20Daisy%22">Electro-Smith Daisy</a> and the <a href="https://github.com/RebelTechnology/OpenWare" title="Rebel Technology on GitHub">Rebel Technology OWL</a> platforms. But they have their own SDKs, so there’s not much need to port <code>CLAMS</code> to them.</p>
+<p>There are also a number of audio projects that use the <a href="https://www.pjrc.com/teensy/" title="Teensy Home Page">Teensy® USB Development Board</a>, which has a <a href="https://www.pjrc.com/teensy/td_libs_Audio.html%20%22Teensy%20Audio%20Library%22">comprehensive audio library</a>. Like the first two, it has its own SDK. And the Daisy, OWL and Teensy processors are all more powerful than the RP2040.</p>
+<p>By contrast, there’s not much music-specific development software for the Raspberry Pi Pico / RP2040. There are some simple demos, a few do-it-yourself hardware offerings, and there’s the <a href="https://allensynthesis.co.uk/modules/europi.html%20%22EuroPi%20module%22">Allen Synthesis EuroPi</a>, a Eurorack module with an open source MicroPython software platform. <code>CLAMS</code> will be a different approach.</p>
+<p>The overall concept is an interactive language for making music on Raspberry Pi Pico / RP2040. I’m aiming for <a href="https://chuck.stanford.edu/" title="ChucK Home Page">ChucK</a> <span class="citation" data-cites="salazar2014programming">(<a href="references.html#ref-salazar2014programming" role="doc-biblioref">Salazar et al. 2014</a>)</span> semantics with Forth syntax - a single text-based language to implement both the definitions of synthesized instruments and the sequences of sounds they make, intended for <a href="https://github.com/toplap/awesome-livecoding" title="Awesome Live Coding list on GitHub">live coding / algorave</a> performances.</p>
+<hr>
 <p>This is a Quarto book.</p>
 <p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+<hr>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+<a property="dct:title" rel="cc:attributionURL" href="https://algocompsynth.github.io/CLAMS/">The Book of CLAMS</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/znmeb">M. Edward (Ed) Borasky</a> is marked with <a href="http://creativecommons.org/publicdomain/zero/1.0?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC0 1.0 Universal<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/zero.svg?ref=chooser-v1"></a>
+</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-brodie2022" class="csl-entry" role="listitem">
+Brodie, Leo. 2022. <span>“Starting Forth.”</span> FORTH, Inc. <a href="https://www.forth.com/starting-forth/0-starting-forth/">https://www.forth.com/starting-forth/0-starting-forth/</a>.
+</div>
+<div id="ref-forth2022" class="csl-entry" role="listitem">
+Forth 200x Committee. 2012. <span>“Forth 2012 Standard.”</span> Forth 200x Committee. <a href="https://forth-standard.org/standard/words">https://forth-standard.org/standard/words</a>.
+</div>
+<div id="ref-salazar2014programming" class="csl-entry" role="listitem">
+Salazar, S., A. Kapur, G. Wang, and P. Cook. 2014. <em>Programming for Musicians and Digital Artists: Creating Music with ChucK</em>. Manning.
+</div>
+</div>
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -4,7 +4,42 @@
     "href": "index.html",
     "title": "The Book of CLAMS",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2"
+    "text": "Command Line Algorithmic Music System (CLAMS)"
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "The Book of CLAMS",
+    "section": "Overview",
+    "text": "Overview\nCLAMS is a text-based interactive environment for composing and performing music and visuals on a Pimoroni PicoVision. It can be made to work on other boards using the RP2040 microcontroller, but you will need to buy additional hardware and port some code."
+  },
+  {
+    "objectID": "index.html#how-does-it-work",
+    "href": "index.html#how-does-it-work",
+    "title": "The Book of CLAMS",
+    "section": "How does it work?",
+    "text": "How does it work?\nCLAMS is a domain-specific language built on a Forth compiler / interpreter. The user connects to the board via a serial connection and enters CLAMS / Forth code interactively."
+  },
+  {
+    "objectID": "index.html#why-forth",
+    "href": "index.html#why-forth",
+    "title": "The Book of CLAMS",
+    "section": "Why Forth?",
+    "text": "Why Forth?\n\n“Premature optimization may be the root of all evil, but it is damned fun!” ~ M. Edward (Ed) Borasky\n\n\nForth (Brodie 2022) is an extensible interactive operating system. It supports editing, assembling, compiling, debugging and running real-time tasks from a terminal.\nForth is efficient. A well-designed Forth will usually run a task at no worse than half the speed of a hand-optimized assembly version. CLAMS will have several optimizations built in for the ultimate speed.\nForth is lean. There are very few concepts to learn, there is minimal run-time overhead in RAM, and the whole package takes up much less flash space than MicroPython or CircuitPython."
+  },
+  {
+    "objectID": "index.html#what-about-forth-standard-forth2022-compatibility",
+    "href": "index.html#what-about-forth-standard-forth2022-compatibility",
+    "title": "The Book of CLAMS",
+    "section": "What about Forth standard (Forth 200x Committee 2012) compatibility?",
+    "text": "What about Forth standard (Forth 200x Committee 2012) compatibility?\nCLAMS is an extended subset of the standard. It won’t contain all of the standard’s core word set, and it will contain some extensions to support the Raspberry Pi Pico C/C++ SDK, RP2040 assembly language programming, the PicoVision hardware, cooperative multitasking, and high-speed digital signal processing."
+  },
+  {
+    "objectID": "index.html#what-about-portability",
+    "href": "index.html#what-about-portability",
+    "title": "The Book of CLAMS",
+    "section": "What about portability?",
+    "text": "What about portability?\nWithin the RP2040 ecosystem, as long as the PicoVision and C/C++ SDK work, porting should be straightforward, though tedious. And you will undoubtedly need to buy more hardware.\nOutside of the RP2040 ecosystem, there are a number of other micro-controller music boards, most notably the Electro-Smith Daisy and the Rebel Technology OWL platforms. But they have their own SDKs, so there’s not much need to port CLAMS to them.\nThere are also a number of audio projects that use the Teensy® USB Development Board, which has a comprehensive audio library. Like the first two, it has its own SDK. And the Daisy, OWL and Teensy processors are all more powerful than the RP2040.\nBy contrast, there’s not much music-specific development software for the Raspberry Pi Pico / RP2040. There are some simple demos, a few do-it-yourself hardware offerings, and there’s the Allen Synthesis EuroPi, a Eurorack module with an open source MicroPython software platform. CLAMS will be a different approach.\nThe overall concept is an interactive language for making music on Raspberry Pi Pico / RP2040. I’m aiming for ChucK (Salazar et al. 2014) semantics with Forth syntax - a single text-based language to implement both the definitions of synthesized instruments and the sequences of sounds they make, intended for live coding / algorave performances.\n\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n\nThe Book of CLAMS by M. Edward (Ed) Borasky is marked with CC0 1.0 Universal\n\n\n\n\n\nBrodie, Leo. 2022. “Starting Forth.” FORTH, Inc. https://www.forth.com/starting-forth/0-starting-forth/.\n\n\nForth 200x Committee. 2012. “Forth 2012 Standard.” Forth 200x Committee. https://forth-standard.org/standard/words.\n\n\nSalazar, S., A. Kapur, G. Wang, and P. Cook. 2014. Programming for Musicians and Digital Artists: Creating Music with ChucK. Manning."
   },
   {
     "objectID": "intro.html",
@@ -25,6 +60,6 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Brodie, Leo. 2022. “Starting Forth.” FORTH, Inc. https://www.forth.com/starting-forth/0-starting-forth/.\n\n\nForth 200x Committee. 2012. “Forth 2012 Standard.” Forth\n200x Committee. https://forth-standard.org/standard/words.\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.\n\n\nSalazar, S., A. Kapur, G. Wang, and P. Cook. 2014. Programming for\nMusicians and Digital Artists: Creating Music with ChucK. Manning."
   }
 ]
