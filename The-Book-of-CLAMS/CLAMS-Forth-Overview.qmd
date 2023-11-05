@@ -1,0 +1,60 @@
+# CLAMS-Forth Overview
+
+> "If you've seen one Forth, well, you've seen one Forth." ~ Unknown
+
+## Requirements
+
+1. Compatibility with the Raspberry Pi Pico C/C++ SDK, drivers, and
+libraries: The ability to use the massive toolset the SDK and community
+open source projects provide is absolutely crucial to minimize developer
+time for complex projects. The USB and WiFi / Bluetooth stacks alone would
+take many months to duplicate in Forth. The primary references for this
+are Stephen Smith's _RP2040 Assembly Language Programming_ [@smith2021rp2040],
+and, of course, _Raspberry Pi Pico C/C++ SDK_ [@raspberrypi2023a].
+
+2. Optimized for speed: CLAMS-Forth will be written in RP2040 assembly
+and will provide an RP2040 assembler. CLAMS-Forth will use subroutine
+threading and will allow both calling and inlining `CODE` words
+written in assembly.
+
+3. Cooperative multitasking: The RP2040 has two cores, and each core has a
+divide coprocessor and two interpolators. In addition, the RP2040 has
+two programmable input / output (PIO) blocks. Cooperative multitasking
+is the Forth way to exploit this available concurrency and is
+well-supported by the SDK.
+
+4. An enhanced Forth virtual machine, providing registers for indexing and
+intermendiate results as defined in Stephen Pelc's "Updating the Forth
+virtual machine" [@pelc2008updating]
+
+5. A high-speed block floating point digital signal processing library.
+
+## Desiderata
+
+1. Forth 2012 standard compatibility is a strong desire but not an absolute
+requirement. Most of the CORE word set and some of the CORE EXT word set
+will be implemented, but a few tricky or risky CORE words will be omitted. The
+Search-Order and Programming-Tools word sets will be implemented.
+
+Custom word sets will be provided for cooperative multitasking, high-speed
+digital signal processing, and SDK / hardware access. ***All access to
+the hardware / system level operations will be performed via C language calls to
+the SDK.***
+
+2. Portability to other boards with the RP2040 microcontroller is possible,
+but is not on the roadmap yet. As with CLAMS itself, the initial target is the
+Pimoroni PicoVision.
+
+3. Floating point support is desirable, but is a fairly low priority.
+Floating point arithmetic is convenient, and the RP2040 SDK provides
+optimized floating point libraries, but there's no hardware floating
+point arithmetic on the RP2040. So it's not obvious how useful
+this capability would be.
+
+## Design / architecture
+
+The top-level design / architecture are based on Dr. Chen-Hanson Ting's
+_eForth Overview_ [@pintaske2018eforth]. In eForth, a small number of primitive
+words are implemented with a macro assembler, then the rest of the system is
+built in Forth on top of those words. The lower-level design will follow
+_Irreducible Complexity: EForth for Discovery_ [@pintaske2019irreducible].
