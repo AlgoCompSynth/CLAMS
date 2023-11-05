@@ -19,9 +19,6 @@ enters `CLAMS` / Forth code interactively.
 
 ## Why Forth?
 
-> "Premature optimization may be the root of all evil, but it is damned fun!"
-\~ M. Edward (Ed) Borasky
-
 1. Forth [@brodie2022] is an extensible interactive operating system. It
 supports editing, assembling, compiling, debugging and running real-time
 tasks from a terminal.
