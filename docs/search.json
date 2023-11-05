@@ -1,142 +1,65 @@
 [
   {
-    "objectID": "CLAMS-Design-Overview.html",
-    "href": "CLAMS-Design-Overview.html",
-    "title": "CLAMS Design Overview",
-    "section": "",
-    "text": "“Remember, if you’re traveling to Bactria, Hump Day is Tuesday and Thursday”\n\nM. Edward (Ed) Borasky\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
-  },
-  {
-    "objectID": "CLAMS-Design-Overview.html#general-capabilities",
-    "href": "CLAMS-Design-Overview.html#general-capabilities",
-    "title": "CLAMS Design Overview",
-    "section": "General capabilities",
-    "text": "General capabilities\n\nCell size: while the speed and compactness of a 16-bit Forth are tempting, high-quality audio requires at least 24 bits during intermediate computations. It is also unclear how easy it would be to exploit the RAM in an RP2040 beyond a 65,536 byte dictionary. So CLAMS will have a 32-bit cell size.\nRaspberry Pi Pico C/C++ SDK compatibility: CLAMS will be constructed using the Raspberry Pi Pico C/C++ SDK (Ltd Accessed 2023-10-22). CLAMS code must be able to call code written in C, C++ or assembly. See (Smith 2021) for the details.\nArithmetic: because of the hardware limitations of the RP2040, calculations will need to be done in fixed point arithmetic. Standard Forth has a variety of integer operations available, but audio and digital signal processing will require adding fixed point fractional and block floating point arithmetic. See (Liu 2008, chap. 2) for the details."
-  },
-  {
-    "objectID": "CLAMS-Design-Overview.html#forth-extensions",
-    "href": "CLAMS-Design-Overview.html#forth-extensions",
-    "title": "CLAMS Design Overview",
-    "section": "Forth extensions",
-    "text": "Forth extensions\n\nDSP extensions to the Forth virtual machine: Stephen Pelc (Pelc 2008) has proposed adding some registers to the canonical Forth virtual machine to facilitate digital signal processing and memory management. CLAMS will use this virtual machine design.\nArm Cortex M0+ assembler: CLAMS will provide a Forth assembler for the Arm Cortex M0+ instruction set architecture. This will require the search order extension to the Forth 2012 standard (Forth 200x Committee 2012, chap. 16).\nCooperative multitasking: Although it’s not yet part of the standard, many Forth implementations have provided cooperative multitasking. CLAMS will provide a version similar to that defined by gforth (gforthGforthManual?)."
-  },
-  {
-    "objectID": "CLAMS-Design-Overview.html#audio-and-digital-signal-processing",
-    "href": "CLAMS-Design-Overview.html#audio-and-digital-signal-processing",
-    "title": "CLAMS Design Overview",
-    "section": "Audio and digital signal processing",
-    "text": "Audio and digital signal processing\n\nBlock floating point vector library: CLAMS will provide a library of block floating point vector operations, including convolution and fast Fourier transforms.\nAudio output: CLAMS will provide mechanisms for playing blocks of stereo data to a digital-analog converter (DAC). Two channels of any bit-width up to 24 bits at a sample rate of at least 44.1 kHz will be supported. The target hardware does not have audio input, so that will not be supported for the initial release.\nAnalysis and synthesis algorithms: The goal is to eventually provide all the analysis and synthesis algorithms in Spectral Music Design (Lazzarini 2021) and Tuning, Timbre, Spectrum, Scale (Sethares 2013), but algorithms will be added as needed on a composition-by-composition basis.\nStochastic operations: As with analysis and synthesis algorithms, these will be added on an as-needed basis."
-  },
-  {
-    "objectID": "CLAMS-Design-Overview.html#input-output",
-    "href": "CLAMS-Design-Overview.html#input-output",
-    "title": "CLAMS Design Overview",
-    "section": "Input / output",
-    "text": "Input / output\n\nSD card audio file operations: CLAMS will provide the ability to read and write WAV files to and from the SD card.\nSD card Forth BLOCK operations: CLAMS will provide these as defined in (Forth 200x Committee 2012). A BLOCK editor will also be provided.\nUSB serial connectivity: CLAMS will provide the standard Forth outer interpreter read-eval-print loop (REPL) to the USB port, seen by a host computer as a serial port. I can’t guarantee it will be tested on MacOS, but it will be tested on Windows 11, Raspberry Pi OS, and browsers on Windows and ChromeOS that support USB serial connections."
-  },
-  {
-    "objectID": "CLAMS-Design-Overview.html#displays-hdmi",
-    "href": "CLAMS-Design-Overview.html#displays-hdmi",
-    "title": "CLAMS Design Overview",
-    "section": "Displays / HDMI",
-    "text": "Displays / HDMI\nThis is a new capability for CLAMS, so I can’t give many details. The plan is to support all of the capabilities of the PicoVision HDMI output. Watch this space!"
-  },
-  {
-    "objectID": "About-CLAMS16.html",
-    "href": "About-CLAMS16.html",
-    "title": "About CLAMS16",
-    "section": "",
-    "text": "“If you’ve seen one Forth, well, you’ve seen one Forth.” ~ Unknown\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
-  },
-  {
-    "objectID": "About-CLAMS16.html#overview",
-    "href": "About-CLAMS16.html#overview",
-    "title": "About CLAMS16",
-    "section": "Overview",
-    "text": "Overview\nCLAMS16 is a 16-bit Forth for the Raspberry Pi Pico.\n\nRequirements\n\nCompatibility with the Raspberry Pi Pico C/C++ SDK, drivers, and libraries: The ability to use the massive toolset the SDK and community open source projects provide is absolutely crucial to minimize developer time for complex projects. The USB and WiFi / Bluetooth stacks alone would take many months to duplicate in Forth.\nOptimized for speed: CLAMS16 will be written in RP2040 assembly (Smith 2021). CLAMS16 will provide an RP2040 assembler, will use subroutine threading and will allow both calling and inlining CODE words written in assembly (Pintaske and Rodriguez 2018).\nCooperative multitasking: The RP2040 has two cores, and each core has a divide coprocessor and two interpolators (Smith 2021, chap. 12). In addition, the RP2040 has two programmable input / output (PIO) blocks. Cooperative multitasking provides a way of exploiting this available concurrency and is well-supported by the SDK.\n\nDesiderata\n\nForth 2012 standard compatibility (Forth 200x Committee 2012) is a strong desire but not an absolute requirement. The assembler is, of course, not part of the standard. And there is currently no standard for cooperative multitasking; CLAMS16’s will be implementation-dependent and closely following the tools availble in the RP2040 and the SDK.\nPortability to other boards with the RP2040 microcontroller is possible, but is not on the roadmap yet. As with CLAMS itself, the initial target is the Pimoroni PicoVision’s onboard Rapsberry Pi Pico W.\nAn enhanced Forth virtual machine, providing registers for indexing and intermendiate results as defined in (Pelc 2008)."
-  },
-  {
-    "objectID": "About-CLAMS16.html#why-only-16-bits",
-    "href": "About-CLAMS16.html#why-only-16-bits",
-    "title": "About CLAMS16",
-    "section": "Why only 16 bits?",
-    "text": "Why only 16 bits?\nSince the RP2040 is a 32-bit processor, why only build a 16-bit Forth?\n\nThe RP2040 does not provide full-width multiply. A true 32-bit architecture would allow multiplying two 32-bit integers to form a 64-bit product in two registers.\nThe RP2040 can multiply two 32-bit integers, but only delivers the lower 32 bits of the product. This makes standard Forth multiple-precision operations like */MOD difficult to code for a 32-bit Forth.\nA 16-bit Forth uses less RAM. The RP2040 only has 264 kilobytes of SRAM, and the intended application, music synthesis, requires numerous tables and buffers, not all of which can be stored in flash.\nA 16-bit Forth can address a maximum of 65,536 bytes for its dictionary. This means that each core can have its own dictionary, stacks, user variables and task control blocks, leaving about half of the available SRAM usable for buffers and tables."
-  },
-  {
-    "objectID": "About-CLAMS16.html#but-what-about-audio-quality",
-    "href": "About-CLAMS16.html#but-what-about-audio-quality",
-    "title": "About CLAMS16",
-    "section": "But what about audio quality?",
-    "text": "But what about audio quality?\nThis has been a concern of mine since I first conceived CLAMS, but there are numerous examples of successful music projects that use 16-bit pulse-code modulation data. The compact disk (CD) is, of course, one example, but there are others.\nCLAMS16 will have the full complement of double-precision operations a Forth 2012 standard system requires, and it will also have a library of block-floating-point vector operations, using shared SRAM outside of the dictionaries. Where precision above 16 bits is required, it will be provided."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "title": "The Book of CLAMS",
     "section": "",
-    "text": "“I’ve never seen a happy clam. In fact, most of them were really steamed.” ~ M. Edward (Ed) Borasky\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
+    "text": "Command Line Algorithmic Music System (CLAMS)"
   },
   {
     "objectID": "index.html#overview",
     "href": "index.html#overview",
-    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "title": "The Book of CLAMS",
     "section": "Overview",
-    "text": "Overview\nCLAMS is a text-based interactive environment for composing and performing music and visuals on a Pimoroni PicoVision. It can be made to work on other boards using the RP2040 microcontroller, but you will need additional hardware."
+    "text": "Overview\nCLAMS is a text-based interactive environment for composing and performing music and visuals on a Pimoroni PicoVision. It can be made to work on other boards using the RP2040 microcontroller, but you will need to buy additional hardware and port some code."
   },
   {
     "objectID": "index.html#how-does-it-work",
     "href": "index.html#how-does-it-work",
-    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "title": "The Book of CLAMS",
     "section": "How does it work?",
     "text": "How does it work?\nCLAMS is a domain-specific language built on a Forth compiler / interpreter. The user connects to the board via a serial connection and enters CLAMS / Forth code interactively."
   },
   {
     "objectID": "index.html#why-forth",
     "href": "index.html#why-forth",
-    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "title": "The Book of CLAMS",
     "section": "Why Forth?",
     "text": "Why Forth?\n\n“Premature optimization may be the root of all evil, but it is damned fun!” ~ M. Edward (Ed) Borasky\n\n\nForth (Brodie 2022) is an extensible interactive operating system. It supports editing, assembling, compiling, debugging and running real-time tasks from a terminal.\nForth is efficient. A well-designed Forth will usually run a task at no worse than half the speed of a hand-optimized assembly version. CLAMS will have several optimizations built in for the ultimate speed.\nForth is lean. There are very few concepts to learn, there is minimal run-time overhead in RAM, and the whole package takes up much less flash space than MicroPython or CircuitPython."
   },
   {
     "objectID": "index.html#what-about-forth-standard-forth2022-compatibility",
     "href": "index.html#what-about-forth-standard-forth2022-compatibility",
-    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "title": "The Book of CLAMS",
     "section": "What about Forth standard (Forth 200x Committee 2012) compatibility?",
-    "text": "What about Forth standard (Forth 200x Committee 2012) compatibility?\nNot really. CLAMS is an extended subset of the standard. It won’t contain all of the standard’s core word set, and it will contain some extensions to support real-time audio and the RP2040 hardware.\nThe RP2040 is both limited and complex. It uses the ARM Cortex M0+ instruction set, which doesn’t even have a 32-bit multiply that produces a 64-bit product. Division is handled by a co-processor. There are also co-processors for programmable I/O and interpolation / multiply-accumulate operations.\nThat said, if a word in CLAMS does exist in one of the standard word sets, it should function the way it does in the standard. The search order word set will be implemented, and all of the specialized co-processor operations will be in specialized word sets."
+    "text": "What about Forth standard (Forth 200x Committee 2012) compatibility?\nCLAMS is an extended subset of the standard. It won’t contain all of the standard’s core word set, and it will contain some extensions to support the Raspberry Pi Pico C/C++ SDK, RP2040 assembly language programming, the PicoVision hardware, cooperative multitasking, and high-speed digital signal processing."
   },
   {
     "objectID": "index.html#what-about-portability",
     "href": "index.html#what-about-portability",
-    "title": "Command Line Algorithmic Music System (CLAMS)",
+    "title": "The Book of CLAMS",
     "section": "What about portability?",
-    "text": "What about portability?\nAgain, not really. There are a number of other micro-controller music boards, most notably the Electro-Smith Daisy and the Rebel Technology OWL platforms. But they have their own SDKs, so there’s not much need to port CLAMS to them. There are also a number of audio projects that use the Teensy® USB Development Board, which has a comprehensive audio library. Also, the Daisy, OWL and Teensy processors are all more powerful than the RP2040.\nBy contrast, there’s not much for the Raspberry Pi Pico / RP2040. There are some simple demos, a few do-it-yourself hardware offerings, and there’s the Allen Synthesis EuroPi, a Eurorack module with an open source MicroPython software platform. CLAMS will be a different approach.\nThe overall concept is an interactive language for making music on Raspberry Pi Pico / RP2040. I’m aiming for ChucK (Salazar et al. 2014) semantics with Forth syntax - a single text-based language to implement both the definitions of synthesized instruments and the sequences of sounds they make, intended for live coding / algorave performances.\n\nThis is a Quarto website. To learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "What about portability?\nWithin the RP2040 ecosystem, as long as the PicoVision and C/C++ SDK work, porting should be straightforward, though tedious. And you will undoubtedly need to buy more hardware.\nOutside of the RP2040 ecosystem, there are a number of other micro-controller music boards, most notably the Electro-Smith Daisy and the Rebel Technology OWL platforms. But they have their own SDKs, so there’s not much need to port CLAMS to them.\nThere are also a number of audio projects that use the Teensy® USB Development Board, which has a comprehensive audio library. Like the first two, it has its own SDK. And the Daisy, OWL and Teensy processors are all more powerful than the RP2040.\nBy contrast, there’s not much music-specific development software for the Raspberry Pi Pico / RP2040. There are some simple demos, a few do-it-yourself hardware offerings, and there’s the Allen Synthesis EuroPi, a Eurorack module with an open source MicroPython software platform. CLAMS will be a different approach.\nThe overall concept is an interactive language for making music on Raspberry Pi Pico / RP2040. I’m aiming for ChucK (Salazar et al. 2014) semantics with Forth syntax - a single text-based language to implement both the definitions of synthesized instruments and the sequences of sounds they make, intended for live coding / algorave performances.\n\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n\nThe Book of CLAMS by M. Edward (Ed) Borasky is marked with CC0 1.0 Universal\n\n\n\n\n\nBrodie, Leo. 2022. “Starting Forth.” FORTH, Inc. https://www.forth.com/starting-forth/0-starting-forth/.\n\n\nForth 200x Committee. 2012. “Forth 2012 Standard.” Forth 200x Committee. https://forth-standard.org/standard/words.\n\n\nSalazar, S., A. Kapur, G. Wang, and P. Cook. 2014. Programming for Musicians and Digital Artists: Creating Music with ChucK. Manning."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About My Music",
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
     "section": "",
-    "text": "“Markovs of the world unite! You have nothing to lose but your chains!” ~ M. Edward (Ed) Borasky\nCommand Line Algorithmic Music System (CLAMS) by M. Edward (Ed) Borasky is licensed under CC BY 4.0"
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
-    "objectID": "about.html#algocompsynth",
-    "href": "about.html#algocompsynth",
-    "title": "About My Music",
-    "section": "AlgoCompSynth",
-    "text": "AlgoCompSynth\n“AlgoCompSynth” is a word I made up to describe what it is that I want to do. It’s a compression of “algorithmic composition and digital sound synthesis.” That’s a pretty broad class of music; to narrow it down, the following are my main inspirations.\n\nIannis Xenakis’ Formalized Music (Xenakis 1992). Xenakis took the applied mathematics of his day, for example, operations research and game theory, and used these algorithms to create scores for conventional and electronic performers. He also invented a technique called “Dynamic Stochastic Synthesis”, which uses Markov processes to specify not just the score of a piece but the parameters of the sound waveforms (Hoffmann 1996; Brown 2005; Xenakis 1992).\nAlternate tunings. Primary among these is William Sethares’ Tuning, Timbre Spectrum, Scale (Sethares 1998, 2013). Also influential: Wendy Carlos (Carlos 1987), Harry Partch (Partch 1979), Erv Wilson (Narushima 2019) and Nick Collins (Collins 2008, 2012).\nPhysical modeling synthesis. A comprehensive reference can be found at (Smith accessed 2023-10-21).\nSpectral music. This is another advanced synthesis methodology; a recent reference is (Lazzarini 2021)"
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
   },
   {
-    "objectID": "about.html#examples",
-    "href": "about.html#examples",
-    "title": "About My Music",
-    "section": "Examples",
-    "text": "Examples\nMy current home for published music is on Bandcamp at https://algocompsynth.bandcamp.com/. The test case for CLAMS is a work in progress called “A Musical Clambake”, submitted as a proposal to the Hybrid Live Coding Interfaces Workshop 2023:\n\n“A Musical Clambake”: A five minute algorithmic microtonal video produced on a Pimoroni PicoVision (https://shop.pimoroni.com/products/picovision?variant=41048911904851) using the CLAMS (https://algocompsynth.github.io/CLAMS) live coding system. “A Musical Clambake” revisits the birth of live coding, made possible by inexpensive personal computers and the Forth programming language, and explores what happens when the computer is a musical collaborator via dynamic stochastic synthesis.\n\nI am also planning to submit “A Musical Clambake” to the Pimoroni PicoVision Demoscene Competition."
-  },
-  {
-    "objectID": "about.html#other-algocompsynth-projects",
-    "href": "about.html#other-algocompsynth-projects",
-    "title": "About My Music",
-    "section": "Other AlgoCompSynth projects",
-    "text": "Other AlgoCompSynth projects\n\nAlgoCompSynth-One: This is a platform for doing high-performance digital signal processing and musical AI on NVIDIA GPUs. I currently support Windows 11 WSL Ubuntu 22.04 LTS and NVIDIA Jetson JetPack 5. If I can make everything work I will be supporting native Windows 11.\neikosany: This is an R package for algorithmic composition with musical scales derived by Erv Wilson and students of his theories.\nconsonaR: This is an R package to perform the computations described in Tuning, Timbre, Spectrum, Scale (Sethares 2013). This is a superset of any such algorithms that will be deployed in CLAMS; only calculations that need to be performed during a performance need to be deployed in CLAMS."
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Brodie, Leo. 2022. “Starting Forth.” FORTH, Inc. https://www.forth.com/starting-forth/0-starting-forth/.\n\n\nForth 200x Committee. 2012. “Forth 2012 Standard.” Forth\n200x Committee. https://forth-standard.org/standard/words.\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.\n\n\nSalazar, S., A. Kapur, G. Wang, and P. Cook. 2014. Programming for\nMusicians and Digital Artists: Creating Music with ChucK. Manning."
   }
 ]
