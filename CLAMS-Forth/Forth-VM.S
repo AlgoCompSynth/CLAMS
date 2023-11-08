@@ -28,66 +28,76 @@
 
 /*
 
-  ## Requirements
+  ## CLAMS-Forth requirements
 
   > "If you've seen one Forth, well, you've seen one Forth." ~ Unknown
 
-  1. Compatibility with the Raspberry Pi Pico C/C++ SDK, drivers, and
-  libraries: The ability to use the massive toolset the SDK and community
-  open source projects provide is absolutely crucial to minimize developer
-  time for complex projects. The USB and WiFi / Bluetooth stacks alone would
-  take many months to duplicate in Forth. The primary reference for this
-  is Stephen Smith's _RP2040 Assembly Language Programming_, and, of course
-  the Raspberry Pi Pico C/C++ SDK documentation and GitHub example
-  repositories.
+  1. Compatibility with the Raspberry Pi Pico C/C++ SDK, drivers, and libraries:
+  ***All access to the hardware / system level operations will be performed via
+  the Raspberry Pi Pico C/C++ SDK and vendor supplied libraries and drivers for
+  supported peripherals.***
 
-  2. Optimized for speed: CLAMS-Forth will be written in RP2040 assembly
-  and will provide an RP2040 assembler. CLAMS-Forth will use subroutine
-  threading and will allow both calling and inlining `CODE` words
-  written in assembly.
+  The SDK and community open source projects provide absolutely crucial tools
+  to minimize complex project developer time. The USB and WiFi / Bluetooth
+  stacks alone would take many months to duplicate in Forth. The primary
+  references for this are Stephen Smith's _RP2040 Assembly Language
+  Programming_, and, of course the Raspberry Pi Pico C/C++ SDK and Pimoroni
+  documentation and GitHub example repositories.
+
+  2. Optimized for speed: CLAMS-Forth will be written in RP2040 assembly and
+  will provide an RP2040 assembler. CLAMS-Forth will use subroutine threading
+  and will allow both calling and inlining `CODE` words written in assembly.
 
   3. Cooperative multitasking: The RP2040 has two cores, and each core has a
-  divide coprocessor and two interpolators. In addition, the RP2040 has
-  two programmable input / output (PIO) blocks. Cooperative multitasking
-  is the Forth way to exploit this available concurrency and is
-  well-supported by the SDK.
+  divide coprocessor and two interpolators. In addition, the RP2040 has two
+  programmable input / output (PIO) blocks. Cooperative multitasking is the
+  Forth way to exploit this available concurrency and is well-supported by the
+  SDK.
 
   4. An enhanced Forth virtual machine, providing registers for indexing and
-  intermendiate results as defined in Stephen Pelc's "Updating the Forth
-  virtual machine."
+  intermendiate results as defined in Stephen Pelc's "Updating the Forth virtual
+  machine."
 
   5. A high-speed block floating point digital signal processing library.
-
 
   ## Desiderata
 
   1. Forth 2012 standard compatibility is a strong desire but not an absolute
-  requirement. Most of the CORE word set and some of the CORE EXT word set
-  will be implemented, but a few tricky or risky words will be omitted. The
-  Search-Order and Programming-Tools word sets will be implemented.
+  requirement. CLAMS-Forth will implement most of the CORE word set and some of
+  the CORE EXT word set, but a few tricky or risky words will be omitted.
 
-  Custom word sets will be provided for cooperative multitasking, high-speed
-  digital signal processing, and SDK / hardware access. ***All access to
-  the hardware / system level operations will be performed via the SDK.***
+  The most notable omissions are `>R` and `R>`. CLAMS-Forth is designed for
+  compatibility with the C/C++ SDK and uses subroutine threading. This means
+  the CLAMS-Forth virtual machine and the SDK both use the system stack pointer
+  register and stack contents and must use them only for the purpose of
+  subroutine calls and returns.
+
+  Most uses of `>R` and `R>` I've seen in existing Forth code are for managing
+  control flow or as a "third hand" for complicated parameter stack
+  manipulations. The CLAMS-Forth virtual machine provides a control flow stack
+  for the first purpose and four scratch data / index registers for the second.
+  
+  The Search-Order and Programming-Tools word sets will be implemented, and
+  custom word sets will be provided for cooperative multitasking, high-speed
+  digital signal processing, and SDK / hardware access.
 
   2. Portability to other boards with the RP2040 microcontroller is possible,
   but is not on the roadmap yet. As with CLAMS itself, the initial target is the
   Pimoroni PicoVision.
 
-  3. Floating point support is desirable, but is a fairly low priority.
-  Floating point arithmetic is convenient, and the RP2040 SDK provides
-  optimized floating point libraries, but there's no hardware floating
-  point arithmentic on the RP2040. So it's not obvious how useful
-  this capability would be.
+  3. Floating point support is desirable, but is a fairly low priority. Floating
+  point arithmetic is convenient, and the RP2040 SDK provides optimized floating
+  point libraries, but there's no hardware floating point arithmentic on the
+  RP2040. So it's not obvious how useful this capability would be.
 
 */
 
 @ Top-level design / architecture
 
-@ The top-level design / architecture are based on Dr. Chen-Hanson Ting's
-@ _eForth Overview_. A small number of primitive words are implemented
-@ in assembly, then the rest of the system is built in Forth on top of
-@ those words. 
+@@ The top-level design / architecture are based on Dr. Chen-Hanson Ting's
+@@ _eForth Overview_. A small number of primitive words are implemented in
+@@ assembly, then the rest of the system is built in Forth on top of those
+@@ words. 
 
 @ Forth virtual machine
 
@@ -96,7 +106,15 @@
 @@ control flow stack. See Forth 2012 standard.
 
 @@ CLAMS-Forth uses the system return stack for its return stack so we can
-@@ interface with SDK C libraries.
+@@ interface with SDK C libraries. The other two stacks are in SRAM.
+
+.thumb_func
+.global _pstack
+.global _cstack
+.global _tib
+.global _token
+
+.data @ read/write segment
 
         .equ bytes_per_cell, 4
         .equ cells_per_stack, 64
@@ -104,31 +122,39 @@
 
 @@@ parameter stack
 _pstack:
-        .fill cells_per_stack, bytes_per_cell, 0
+        .align 4
+        .rept cells_per_stack
+        .word 0
+        .endr
 
 @@ control stack
 _cstack:
-        .fill cells_per_stack, bytes_per_cell, 0
+        .rept cells_per_stack
+        .word 0
+        .endr
 
 @@ Text buffers
 
 @@@ terminal input buffer
         .equ max_input_length, 128
+        .equ tib_ints, max_input_length/bytes_per_cell
 _tib:
-        .fill max_input_length, 1, 0
+        .rept tib_ints
+        .word 0
+        .endr
 
 @@@ parsed token
-        .equ max_token_length, 32 @ 31 characters plus a count or terminating 0
+        .equ max_token_length, 32 @ 31 chars plus a count or terminating 0
+        .equ token_ints, max_token_length/bytes_per_cell
 _token:
-        .fill max_token_length, 1, 0
+        .rept token_ints
+        .word 0
+        .endr
 
-/* Forth virtual machine
+@@ Dictionary
 
-  ## Dictionary
-  Because the RP2040 instruction set uses a lot of operations that depend on
-  references to locations near the current Program Counter, CLAMS-Forth will
-  have a dictionary where the name space, code space and data space are all
-  intertwined. We use Dr. Chen-Hanson Ting's "Irreducible Complexity: EForth for
-  Discovery" as a model.
-
-*/
+@@ Because the RP2040 instruction set uses a lot of operations that depend on
+@@ references to locations near the current Program Counter, CLAMS-Forth will
+@@ have a dictionary where the name space, code space and data space are all
+@@ intertwined. We use Dr. Chen-Hanson Ting's _Irreducible Complexity: EForth
+@@ for Discovery_ as a model.
