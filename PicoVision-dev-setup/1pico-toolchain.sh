@@ -6,6 +6,7 @@ echo "Installing command line utilities"
 sudo apt-get install -qqy --no-install-recommends \
   info \
   minicom \
+  obs-studio \
   time \
   tree \
   vim-nox
