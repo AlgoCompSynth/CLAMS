@@ -13,6 +13,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 add_executable(CLAMS-Forth
   CLAMS-Forth.S
   Forth-VM.S
+  Symbol-Defs.S
 )
 
 pico_enable_stdio_uart(CLAMS-Forth 1)

@@ -1,25 +1,28 @@
 
-@ A Forth "Hello, World"
+@ test harness for Forth VM
+
+.include "Symbol-Defs.S"
 
 .thumb_func
 .global main
 
 main:
-        @ initialize the hardware
-	BL stdio_init_all
+	BL stdio_init_all @ initialize standard I/O
+        MOV R0, #1
+        BL .push1
+        MOV R1, #2
+        BL .push2
+        MOV R2, #3
+        BL .push3
+        MOV R3, #4
+        BL .push4
 
-loop:
-        @print "Ok"
-	LDR R0, =Ok
-	BL printf
+	.align cell
 
-        @ sleep for about 1/4 second
-	@ MOV R0, #255
-	@ BL sleep_ms
+five:
+	.word 5
+seven:
+        .word 7
 
-        @ loop forever
-	B loop
-
-.data
-        .align 4
-Ok:     .asciz "Ok\n"
+format:
+        .asciz "\npsp, tos = %x, %x\n"
