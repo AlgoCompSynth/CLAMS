@@ -26,6 +26,9 @@
 
 */
 
-psp .req r7 @parameter stack pointer
+psp .req r7 @ parameter stack pointer
+y   .req r6 @ y index / address register
+x   .req r5 @ x index / address register
+tos .req r4 @ top of stack
 .equ cell, 4 @ bytes per cell
 .equ stack_size, 32 @ stack size in cells
