@@ -28,55 +28,11 @@
 
 .include "Symbol-Defs.S"
 
-.global .push1
-.push1:
-        STM psp!, {R0}
-        BX LR
-
-.global .push2
-.push2:
-        STM psp!, {R0-R1}
-        BX LR
-
-.global .push3
-.push3:
-        STM psp!, {R0- R2}
-        BX LR
-
-.global .push4
-.push4:
-        STM psp!, {R0- R3}
-        BX LR
-
-.global .pop1
-.pop1:
-        SUB psp, psp, #cell
-        LDM psp, {R0, psp}
-        BX LR
-
-.global .pop2
-.pop2:
-        SUB psp, psp, #cellx2
-        LDM psp, {R0-R1, psp}
-        BX LR
-
-.global .pop3
-.pop3:
-        SUB psp, psp, #cellx3
-        LDM psp, {R0-R2, psp}
-        BX LR
-
-.global .pop4
-.pop4:
-        SUB psp, psp, #cellx4
-        LDM psp, {R0-R3, psp}
-        BX LR
-
 .data
 .align cell
 
 .global .parameter_stack
 .parameter_stack:
-.rept cells_per_stack
+.rept stack_size
   .word 0
 .endr

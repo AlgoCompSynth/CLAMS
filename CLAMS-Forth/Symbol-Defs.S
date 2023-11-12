@@ -26,9 +26,6 @@
 
 */
 
-psp .req r7
-.equ cell, 4
-.equ cellx2, 8
-.equ cellx3, 12
-.equ cellx4, 16
-.equ cells_per_stack, 32
+psp .req r7 @parameter stack pointer
+.equ cell, 4 @ bytes per cell
+.equ stack_size, 32 @ stack size in cells
