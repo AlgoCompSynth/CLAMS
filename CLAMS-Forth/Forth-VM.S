@@ -28,13 +28,14 @@
 
 .include "Symbol-Defs.S"
 
-.thumb_func
 
+.thumb_func
 .global get_dict_start
 get_dict_start:
         LDR r0, =_plus
         BX LR
 
+.thumb_func
 .global get_dict_end
 get_dict_end:
         LDR r0, =_dict_end
@@ -44,36 +45,18 @@ get_dict_end:
 .align _cell
 
 _plus:
-        .align _cell
-        .byte 1
-        .ascii "+"
-        .align _cell
-        .word 0
-        SUB psp, psp, #_cell
-        LDR r0, [psp]
-        ADD tos, r0, tos
+        _DICT_HEADER 1, "+"
+        _BINARY ADD
         _EXIT
 
 _minus:
-        .align _cell
-        .byte 1
-        .ascii "-"
-        .align _cell
-        .word . - _plus
-        SUB psp, psp, #_cell
-        LDR r0, [psp]
-        SUB tos, r0, tos
+        _DICT_HEADER 1, "-", _plus
+        _BINARY SUB
         _EXIT
         
 _star:
-        .align _cell
-        .byte 1
-        .ascii "*"
-        .align _cell
-        .word . - _minus
-        SUB psp, psp, #_cell
-        LDR r0, [psp]
-        MUL tos, r0, tos
+        _DICT_HEADER 1, "-", _minus
+        _BINARY MUL
         _EXIT
 
 .set _dict_end, .
