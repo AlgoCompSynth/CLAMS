@@ -34,6 +34,16 @@
 .global main
 
 main:
-	BL stdio_init_all @ initialize standard I/O
+	BL stdio_init_all
 
-	.align cell
+        BL get_dict_start
+        MOV r1, r0  
+        BL get_dict_end
+        MOV r2, r0
+	LDR R0, =format
+	BL printf
+
+.data
+.align _cell
+format:
+        .asciz "\nstart, end = %x, %x\n"
