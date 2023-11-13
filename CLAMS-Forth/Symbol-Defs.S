@@ -27,8 +27,13 @@
 */
 
 psp .req r7 @ parameter stack pointer
-y   .req r6 @ y index / address register
-x   .req r5 @ x index / address register
-tos .req r4 @ top of stack
-.equ cell, 4 @ bytes per cell
-.equ stack_size, 32 @ stack size in cells
+tos .req r6 @ top of stack
+.set _cell, 4 @ bytes per cell
+
+@ dictionary entry macros
+        .macro _counted_string count:req, name:req
+        .align _cell
+        .byte \count
+	.ascii "\name()"
+        .align _cell
+        .endm

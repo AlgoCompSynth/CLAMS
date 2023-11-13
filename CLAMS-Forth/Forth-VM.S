@@ -28,11 +28,43 @@
 
 .include "Symbol-Defs.S"
 
-.data
-.align cell
+.thumb_func
 
-.global .parameter_stack
-.parameter_stack:
-.rept stack_size
-  .word 0
-.endr
+.global get_dict_start
+get_dict_start:
+        LDR r0, =_plus
+        BX LR
+
+.global get_dict_end
+get_dict_end:
+        LDR r0, =_dict_end
+        BX LR
+
+.data
+.align _cell
+
+_plus:
+        _counted_string 1, +
+        .word 0
+        SUB psp, psp, #_cell
+        LDR r0, [psp]
+        ADD tos, r0, tos
+        BX LR
+
+_minus:
+        _counted_string 1, -
+        .word . - _plus
+        SUB psp, psp, #_cell
+        LDR r0, [psp]
+        SUB tos, r0, tos
+        BX LR
+
+_star:
+        _counted_string 1, *
+        .word . - _minus
+        SUB psp, psp, #_cell
+        LDR r0, [psp]
+        MUL tos, r0, tos
+        BX LR
+
+.set _dict_end, .
