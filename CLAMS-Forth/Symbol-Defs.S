@@ -31,9 +31,6 @@ tos .req r6 @ top of stack
 .set _cell, 4 @ bytes per cell
 
 @ dictionary entry macros
-        .macro _counted_string count:req, name:req
-        .align _cell
-        .byte \count
-	.ascii "\name()"
-        .align _cell
+        .macro _EXIT
+        BX LR
         .endm

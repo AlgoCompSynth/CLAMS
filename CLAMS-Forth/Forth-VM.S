@@ -44,27 +44,36 @@ get_dict_end:
 .align _cell
 
 _plus:
-        _counted_string 1, +
+        .align _cell
+        .byte 1
+        .ascii "+"
+        .align _cell
         .word 0
         SUB psp, psp, #_cell
         LDR r0, [psp]
         ADD tos, r0, tos
-        BX LR
+        _EXIT
 
 _minus:
-        _counted_string 1, -
+        .align _cell
+        .byte 1
+        .ascii "-"
+        .align _cell
         .word . - _plus
         SUB psp, psp, #_cell
         LDR r0, [psp]
         SUB tos, r0, tos
-        BX LR
-
+        _EXIT
+        
 _star:
-        _counted_string 1, *
+        .align _cell
+        .byte 1
+        .ascii "*"
+        .align _cell
         .word . - _minus
         SUB psp, psp, #_cell
         LDR r0, [psp]
         MUL tos, r0, tos
-        BX LR
+        _EXIT
 
 .set _dict_end, .

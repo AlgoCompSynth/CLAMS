@@ -14,6 +14,7 @@ add_executable(CLAMS-Forth
   CLAMS-Forth.S
   Forth-VM.S
   Symbol-Defs.S
+  Wrappers.c
 )
 
 pico_enable_stdio_uart(CLAMS-Forth 1)
