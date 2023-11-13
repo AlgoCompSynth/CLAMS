@@ -28,9 +28,28 @@
 
 psp .req r7 @ parameter stack pointer
 tos .req r6 @ top of stack
+.set _byte, 1 @ bytes
 .set _cell, 4 @ bytes per cell
 
 @ dictionary entry macros
         .macro _EXIT
         BX LR
+        .endm
+
+        .macro _DICT_HEADER count, name, backlink=0
+        .balign _cell, 0
+        .byte \count
+        .ascii "\name"
+        .balign _cell, 0
+        .if \backlink == 0
+          .word 0
+        .else
+          .word . - \backlink
+        .endif
+        .endm
+
+        .macro _BINARY opcode
+        SUB psp, psp, #_cell
+        LDR r0, [psp]
+        \opcode tos, r0, tos
         .endm
