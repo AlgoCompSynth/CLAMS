@@ -36,6 +36,7 @@
 main:
 	BL stdio_init_all
 
+loop:
         BL get_dict_start
         MOV r1, r0  
         BL get_dict_end
@@ -43,7 +44,14 @@ main:
 	LDR R0, =format
 	BL printf
 
+        LDR r0, =sleep_ms
+        BL pico_sleep_ms
+
+        B loop
+
 .data
 .align _cell
 format:
         .asciz "\nstart, end = %x, %x\n"
+sleep_ms:
+        .word 10000
