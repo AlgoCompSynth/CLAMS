@@ -18,7 +18,7 @@ add_executable(CLAMS-Forth
 )
 
 pico_enable_stdio_uart(CLAMS-Forth 1)
-pico_enable_stdio_usb(CLAMS-Forth 0)
+pico_enable_stdio_usb(CLAMS-Forth 1)
 
 pico_add_extra_outputs(CLAMS-Forth)
 
