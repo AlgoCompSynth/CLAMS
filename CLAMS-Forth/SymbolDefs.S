@@ -26,18 +26,8 @@
 
 */
 
-@ parameter stack logic
-
-@ 1. The stack grows from low to high memory addresses. This makes things easy
-@    when we want to push / pull multiple cells.
-
-@ 2. The top of the stack is in the `tostk` register. It is *not* saved in RAM.
-
-@ 3. The parameter stack pointer `psp` points to where the top of the stack
-@    would be if it was in RAM.
-
-psptr .req r7 @ parameter stack pointer
-tostk .req r6 @ top of stack value
+spnxt .req r7 @ pointer to next available stack cell
+tscpy .req r6 @ cached copy of the top of stack
 
 @ symbols for addressing expressions
 .set _byte, 1 @ bytes
@@ -50,14 +40,14 @@ tostk .req r6 @ top of stack value
         @ name = word name in dictionary - what the Forth system searches for
         @ w_bytes = how many bytes in name
         @ h_label = label in the code for the header. By convention, this is
-        @           the standard pronunciation for the word with an underscore
-        @           prepended and dashes replaced by underscores.
+        @    the standard pronunciation for the word with an underscore
+        @    prepended and dashes replaced by underscores.
         @ te_label = label in the code for the test entry point. By convention
-        @            this is the standard pronunciation for the word with an
-        @            dashes replaced by underscores.
+        @    this is the standard pronunciation for the word with dashes
+        @    replaced by underscores.
         @ h_link = backwards offset to previous word = the number of bytes to
-        @          go back to find the previous word. Zero marks the end of the
-        @          dictionary!
+        @    go back to find the previous word. Zero marks the end of the
+        @    dictionary!
 
         .macro _DICT_HEADER name, w_bytes, h_label, te_label, h_link=0
 
@@ -85,11 +75,18 @@ tostk .req r6 @ top of stack value
         .endm
 
 
-        @ code for word using single instruction binary op on top 2 stack cells
+        @ Common code for a word that uses a single instruction binary op on the
+        @ top two stack cells. Such words have the stack effect
+        @
+        @    ( left right -- result )
+        @
+        @ For example, the postfix `left right <op>` has the same `result` as
+        @ the infix `left <op> right`.
         .macro _BINARY_OP opcode
-        SUB psptr, psptr, #_cell @ decrement stack pointer first
-        LDR r0, [psptr] @ get second cell to r0
-        \opcode tostk, r0, tostk @ second cell <OP> top cell
+        SUB spnxt, spnxt, #_cell*2 @ point to left operand
+        LDR r0, [spnxt] @ fetch left operand
+        \opcode tscpy, r0, tscpy @ tscpy := left <OP> tscpy
+        STM spnxt!, {tscpy} @ save and advance pointer
         .endm
 
         @ return to caller

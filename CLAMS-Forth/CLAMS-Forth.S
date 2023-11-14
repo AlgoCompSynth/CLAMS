@@ -43,13 +43,13 @@ loop:
         MOV r1, #2
         MOV r2, #3
         BL push3
-        BL print_top3
+        BL stkprint3
 
         MOV r0, #17
         MOV r1, #18
         MOV r2, #19
         BL push3
-        BL print_top3
+        BL stkprint3
 
         LDR r0, sleep_ms
         BL sdk_sleep_ms
@@ -58,4 +58,4 @@ loop:
 
 .balign 4
 sleep_ms:
-        .word 10000
+        .word 1000
