@@ -41,23 +41,14 @@ get_dict_end:
         LDR r0, =_dict_end
         _EXIT
 
-_plus:
-        _DICT_HEADER 1, "+"
-        _ENTRY plus
-        _BINARY ADD
-        _EXIT
+.set _dict_start, .
 
-_minus:
-        _DICT_HEADER 1, "-", _plus
-        _ENTRY minus
-        _BINARY SUB
-        _EXIT
-
-_star:
-        _DICT_HEADER 1, "-", _minus
-        _ENTRY star
-        _BINARY MUL
-        _EXIT
+        _BINARY_WORD "+", 1, _plus, plus, ADD, 0
+        _BINARY_WORD "-", 1, _minus, minus, SUB, _plus
+        _BINARY_WORD "*", 1, _star, star, MUL, _minus
+        _BINARY_WORD "AND", 3, _and, and, AND, _star
+        _BINARY_WORD "OR", 2, _or, or, ORR, _and
+        _BINARY_WORD "XOR", 3, _x_or, x_or, EOR, _or
 
 .set _dict_end, .
 
