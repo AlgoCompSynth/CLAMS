@@ -37,16 +37,12 @@ clear_stack:
         _EXIT
 
 .thumb_func
-.global print_stack
-print_stack:
+.global print_top3
+print_top3:
         _NEST
         LDR r0, =_stack_format_a
-        LDR r1, =_stack_start
-        ADD r2, r1, #_cell
-        ADD r3, r2, #_cell
-        LDR r1, [r1]
-        LDR r2, [r2]
-        LDR r3, [r3]
+        SUB psptr, #_cell*4
+_ldm:   LDM psptr!, {r1-r3}
         BL printf
 _unnest:
         _UNNEST
@@ -55,6 +51,20 @@ _unnest:
 .global push1
 push1:
         STM psptr!, {r0}
+        MOV tostk, r0 @ *copy* top of stack to tostk
+        _EXIT
+
+.thumb_func
+.global push2
+push2:
+        STM psptr!, {r0-r1}
+        MOV tostk, r0 @ *copy* top of stack to tostk
+        _EXIT
+
+.thumb_func
+.global push3
+push3:
+        STM psptr!, {r0-r3}
         MOV tostk, r0 @ *copy* top of stack to tostk
         _EXIT
 

@@ -39,14 +39,17 @@ main:
 loop:
         BL clear_stack
 
-        MOV r0, #5
-        BL push1
-        MOV r0, #11
-        BL push1
-        MOV r0, #17
-        BL push1
+        MOV r0, #1
+        MOV r1, #2
+        MOV r2, #3
+        BL push3
+        BL print_top3
 
-        BL print_stack
+        MOV r0, #17
+        MOV r1, #18
+        MOV r2, #19
+        BL push3
+        BL print_top3
 
         LDR r0, sleep_ms
         BL sdk_sleep_ms
