@@ -40,11 +40,11 @@ loop:
         BL clear_stack
 
         MOV r0, #5
-        BL push_r0
+        BL push1
         MOV r0, #11
-        BL push_r0
+        BL push1
         MOV r0, #17
-        BL push_r0
+        BL push1
 
         BL print_stack
 

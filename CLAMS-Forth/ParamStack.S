@@ -33,7 +33,7 @@
 .thumb_func
 .global clear_stack
 clear_stack:
-        LDR psp, =_stack_start
+        LDR psptr, =_stack_start
         _EXIT
 
 .thumb_func
@@ -42,21 +42,21 @@ print_stack:
         _NEST
         LDR r0, =_stack_format_a
         LDR r1, =_stack_start
-        MOV r2, psp
+        MOV r2, psptr
         LDR r3, =_stack_end
         BL printf
 
         LDR r0, =_stack_format_v
-        MOV r1, [tos]
+        LDR r1, [tostk]
         BL printf
 
         _UNNEST
 
 .thumb_func
-.global push_r0
-push_r0:
-        STR r0, [psp]
-        ADD psp, #_cell
+.global push1
+push1:
+        STM psptr!, {r0}
+        MOV tostk, r0 @ *copy* top of stack to tostk
         _EXIT
 
 _stack_format_a: .asciz "stack addr - start, top, end: %x, %x, %x\n"
