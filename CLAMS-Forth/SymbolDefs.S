@@ -103,3 +103,12 @@ tos .req r6 @ top of stack value
         _BINARY_OP \opcode
         _EXIT
         .endm
+
+        @ macros for nested calls
+        .macro _NEST
+        PUSH {LR}
+        .endm
+
+        .macro _UNNEST
+        POP {PC}
+        .endm

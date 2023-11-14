@@ -37,21 +37,22 @@ main:
 	BL stdio_init_all
 
 loop:
-        BL get_dict_start
-        MOV r1, r0
-        BL get_dict_end
-        MOV r2, r0
-	LDR R0, =format
-	BL printf
+        BL clear_stack
 
-        LDR r0, =sleep_ms
+        MOV r0, #5
+        BL push_r0
+        MOV r0, #11
+        BL push_r0
+        MOV r0, #17
+        BL push_r0
+
+        BL print_stack
+
+        LDR r0, sleep_ms
         BL sdk_sleep_ms
 
         B loop
 
-.data
-.align _cell
-format:
-        .asciz "\nstart, end = %x, %x\n"
+.balign 4
 sleep_ms:
         .word 10000

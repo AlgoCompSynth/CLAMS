@@ -28,13 +28,47 @@
 
 .include "SymbolDefs.S"
 
+@ stack / dictionary test code
+
+.thumb_func
+.global clear_stack
+clear_stack:
+        LDR psp, =_stack_start
+        _EXIT
+
+.thumb_func
+.global print_stack
+print_stack:
+        _NEST
+        LDR r0, =_stack_format_a
+        LDR r1, =_stack_start
+        MOV r2, psp
+        LDR r3, =_stack_end
+        BL printf
+
+        LDR r0, =_stack_format_v
+        MOV r1, [tos]
+        BL printf
+
+        _UNNEST
+
+.thumb_func
+.global push_r0
+push_r0:
+        STR r0, [psp]
+        ADD psp, #_cell
+        _EXIT
+
+_stack_format_a: .asciz "stack addr - start, top, end: %x, %x, %x\n"
+_stack_format_v: .asciz "stack top value: %x\n\n"
+
 .data
 .balign _cell, 0
 
 @ The parameter stack
 .set _stack_cells, 64
-_stack_bottom:
+_stack_start:
         .rept _stack_cells
         .word 0
         .endr
-.set _stack_top, .
+.set _stack_end, .
