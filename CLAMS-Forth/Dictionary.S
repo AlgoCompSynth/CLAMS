@@ -26,32 +26,28 @@
 
 */
 
-@ test harness for Forth VM
-
 .include "SymbolDefs.S"
 
+@ dictionary functions
 .thumb_func
-.global main
+.global get_dict_start
+get_dict_start:
+        LDR r0, =_plus
+        _EXIT
 
-main:
-	BL stdio_init_all
+.thumb_func
+.global get_dict_end
+get_dict_end:
+        LDR r0, =_dict_end
+        _EXIT
 
-loop:
-        BL get_dict_start
-        MOV r1, r0
-        BL get_dict_end
-        MOV r2, r0
-	LDR R0, =format
-	BL printf
+.set _dict_start, .
 
-        LDR r0, =sleep_ms
-        BL sdk_sleep_ms
+        _BINARY_WORD "+", 1, _plus, plus, ADD, 0
+        _BINARY_WORD "-", 1, _minus, minus, SUB, _plus
+        _BINARY_WORD "*", 1, _star, star, MUL, _minus
+        _BINARY_WORD "AND", 3, _and, and, AND, _star
+        _BINARY_WORD "OR", 2, _or, or, ORR, _and
+        _BINARY_WORD "XOR", 3, _x_or, x_or, EOR, _or
 
-        B loop
-
-.data
-.align _cell
-format:
-        .asciz "\nstart, end = %x, %x\n"
-sleep_ms:
-        .word 10000
+.set _dict_end, .

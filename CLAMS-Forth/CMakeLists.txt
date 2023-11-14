@@ -12,8 +12,9 @@ include_directories(${CMAKE_SOURCE_DIR})
 
 add_executable(CLAMS-Forth
   CLAMS-Forth.S
-  Forth-VM.S
-  Symbol-Defs.S
+  ParamStack.S
+  Dictionary.S
+  SymbolDefs.S
   Wrappers.c
 )
 
