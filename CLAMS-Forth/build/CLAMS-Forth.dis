@@ -370,11 +370,11 @@ Disassembly of section .text:
 10000358 <loop>:
 10000358:	f000 f812 	bl	10000380 <clear_stack>
 1000035c:	2005      	movs	r0, #5
-1000035e:	f000 f81d 	bl	1000039c <push_r0>
+1000035e:	f000 f81d 	bl	1000039c <push1>
 10000362:	200b      	movs	r0, #11
-10000364:	f000 f81a 	bl	1000039c <push_r0>
+10000364:	f000 f81a 	bl	1000039c <push1>
 10000368:	2011      	movs	r0, #17
-1000036a:	f000 f817 	bl	1000039c <push_r0>
+1000036a:	f000 f817 	bl	1000039c <push1>
 1000036e:	f000 f809 	bl	10000384 <print_stack>
 10000372:	4802      	ldr	r0, [pc, #8]	; (1000037c <sleep_ms>)
 10000374:	f000 f83e 	bl	100003f4 <sdk_sleep_ms>
@@ -396,13 +396,13 @@ Disassembly of section .text:
 1000038c:	4b17      	ldr	r3, [pc, #92]	; (100003ec <_stack_format_v+0x20>)
 1000038e:	f004 fa57 	bl	10004840 <__wrap_printf>
 10000392:	4817      	ldr	r0, [pc, #92]	; (100003f0 <_stack_format_v+0x24>)
-10000394:	1c31      	adds	r1, r6, #0
+10000394:	6831      	ldr	r1, [r6, #0]
 10000396:	f004 fa53 	bl	10004840 <__wrap_printf>
 1000039a:	bd00      	pop	{pc}
 
-1000039c <push_r0>:
-1000039c:	6038      	str	r0, [r7, #0]
-1000039e:	3704      	adds	r7, #4
+1000039c <push1>:
+1000039c:	c701      	stmia	r7!, {r0}
+1000039e:	1c06      	adds	r6, r0, #0
 100003a0:	4770      	bx	lr
 
 100003a2 <_stack_format_a>:

@@ -26,18 +26,18 @@
 
 */
 
-@ parameter stack coding
+@ parameter stack logic
 
 @ 1. The stack grows from low to high memory addresses. This makes things easy
 @    when we want to push / pull multiple cells.
 
-@ 2. The top of the stack is in the `tos` register. It is *not* saved in RAM.
+@ 2. The top of the stack is in the `tostk` register. It is *not* saved in RAM.
 
 @ 3. The parameter stack pointer `psp` points to where the top of the stack
 @    would be if it was in RAM.
 
-psp .req r7 @ parameter stack pointer
-tos .req r6 @ top of stack value
+psptr .req r7 @ parameter stack pointer
+tostk .req r6 @ top of stack value
 
 @ symbols for addressing expressions
 .set _byte, 1 @ bytes
@@ -87,9 +87,9 @@ tos .req r6 @ top of stack value
 
         @ code for word using single instruction binary op on top 2 stack cells
         .macro _BINARY_OP opcode
-        SUB psp, psp, #_cell @ decrement stack pointer first
-        LDR r0, [psp] @ get second cell to r0
-        \opcode tos, r0, tos @ second cell <OP> top cell
+        SUB psptr, psptr, #_cell @ decrement stack pointer first
+        LDR r0, [psptr] @ get second cell to r0
+        \opcode tostk, r0, tostk @ second cell <OP> top cell
         .endm
 
         @ return to caller
