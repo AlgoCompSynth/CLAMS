@@ -28,35 +28,46 @@
 
 .include "Symbol-Defs.S"
 
-
+@ dictionary functions
 .thumb_func
 .global get_dict_start
 get_dict_start:
         LDR r0, =_plus
-        BX LR
+        _EXIT
 
 .thumb_func
 .global get_dict_end
 get_dict_end:
         LDR r0, =_dict_end
-        BX LR
-
-.data
-.align _cell
+        _EXIT
 
 _plus:
         _DICT_HEADER 1, "+"
+        _ENTRY plus
         _BINARY ADD
         _EXIT
 
 _minus:
         _DICT_HEADER 1, "-", _plus
+        _ENTRY minus
         _BINARY SUB
         _EXIT
 
 _star:
         _DICT_HEADER 1, "-", _minus
+        _ENTRY star
         _BINARY MUL
         _EXIT
 
 .set _dict_end, .
+
+.data
+.balign _cell, 0
+
+@ The parameter stack
+.set _stack_cells, 64
+_stack_bottom:
+        .rept _stack_cells
+        .word 0
+        .endr
+.set _stack_top, .

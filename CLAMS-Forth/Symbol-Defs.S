@@ -49,9 +49,13 @@ tos .req r6 @ top of stack
         .endm
 
         .macro _BINARY opcode
-        .thumb_func
-        .global opcode
         SUB psp, psp, #_cell
         LDR r0, [psp]
         \opcode tos, r0, tos
+        .endm
+
+        .macro _ENTRY label
+        .thumb_func
+        .global \label
+        .set \label, .
         .endm
