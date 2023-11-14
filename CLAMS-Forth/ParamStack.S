@@ -26,31 +26,7 @@
 
 */
 
-.include "Symbol-Defs.S"
-
-@ dictionary functions
-.thumb_func
-.global get_dict_start
-get_dict_start:
-        LDR r0, =_plus
-        _EXIT
-
-.thumb_func
-.global get_dict_end
-get_dict_end:
-        LDR r0, =_dict_end
-        _EXIT
-
-.set _dict_start, .
-
-        _BINARY_WORD "+", 1, _plus, plus, ADD, 0
-        _BINARY_WORD "-", 1, _minus, minus, SUB, _plus
-        _BINARY_WORD "*", 1, _star, star, MUL, _minus
-        _BINARY_WORD "AND", 3, _and, and, AND, _star
-        _BINARY_WORD "OR", 2, _or, or, ORR, _and
-        _BINARY_WORD "XOR", 3, _x_or, x_or, EOR, _or
-
-.set _dict_end, .
+.include "SymbolDefs.S"
 
 .data
 .balign _cell, 0
