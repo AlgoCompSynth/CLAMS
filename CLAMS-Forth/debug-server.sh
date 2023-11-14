@@ -12,6 +12,3 @@ openocd \
   --log_output openocd.log &
 sleep 15
 ps -ef | grep openocd
-
-echo "Starting minicom"
-minicom -b 115200 -o -D /dev/ttyACM0
