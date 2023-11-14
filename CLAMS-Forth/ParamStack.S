@@ -42,14 +42,13 @@ print_stack:
         _NEST
         LDR r0, =_stack_format_a
         LDR r1, =_stack_start
-        MOV r2, psptr
-        LDR r3, =_stack_end
+        ADD r2, r1, #_cell
+        ADD r3, r2, #_cell
+        LDR r1, [r1]
+        LDR r2, [r2]
+        LDR r3, [r3]
         BL printf
-
-        LDR r0, =_stack_format_v
-        LDR r1, [tostk]
-        BL printf
-
+_unnest:
         _UNNEST
 
 .thumb_func
@@ -59,8 +58,7 @@ push1:
         MOV tostk, r0 @ *copy* top of stack to tostk
         _EXIT
 
-_stack_format_a: .asciz "stack addr - start, top, end: %x, %x, %x\n"
-_stack_format_v: .asciz "stack top value: %x\n\n"
+_stack_format_a: .asciz "stack data: %x, %x, %x\n"
 
 .data
 .balign _cell, 0
