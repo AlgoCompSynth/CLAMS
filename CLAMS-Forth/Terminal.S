@@ -36,8 +36,8 @@
 .set _cr, 13 @ carriage return
 .set _space, 32 @ space
 .set _del, 127 @ delete
-.set _O, 79
-.set _K, 75
+.set _o, 111
+.set _k, 107
 
 .thumb_func
 .global echo
@@ -54,9 +54,9 @@ loop:
         CMP r0, #_bs
         BEQ backspace
         CMP r0, #_cr
-        BEQ return
+        BEQ ok
         CMP r0, #_lf
-        BEQ linefeed
+        BEQ ok
         
         @ the rest are either standard printables or will be replaced by space
         CMP r0, #_space
@@ -75,28 +75,26 @@ space:
         MOV r0, #_space
         B emit
 
-linefeed:
-        BL sdk_emit
-        MOV r0, #_cr
-        BL sdk_emit
-OK:
-        MOV r0, #_O @ Starting to look like Forth :-)
-        BL sdk_emit
-        MOV r0, #_K
-        BL sdk_emit
-        MOV r0, #_space
-        BL sdk_emit
-        _UNNEST
-
-return:
-        BL sdk_emit
-        MOV r0, #_lf
-        BL sdk_emit
-        B OK
-
 backspace:
         BL sdk_emit
         MOV r0, #_space
         BL sdk_emit
         MOV r0, #_bs
         B emit
+
+ok:
+        MOV r0, #_space
+        BL sdk_emit
+        MOV r0, #_space
+        BL sdk_emit
+        MOV r0, #_o @ Starting to look like Forth :-)
+        BL sdk_emit
+        MOV r0, #_k
+        BL sdk_emit
+        MOV r0, #_space
+        BL sdk_emit
+        MOV r0, #_cr
+        BL sdk_emit
+        MOV r0, #_lf
+        BL sdk_emit
+        _UNNEST
