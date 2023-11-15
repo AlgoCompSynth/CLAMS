@@ -30,23 +30,16 @@
 
 @ parameter stack logic:
 
-@ 1. The stack grows from low addresses upwards. Register `spnxt` points to the
-@    next available cell. This allows pushing and fetching multiple cells with
-@    `STM` and `LDM`.
-
-@ 2. The whole stack, including the top cell, is stored in RAM. A *copy* of the
-@    top cell is kept in register `tscpy`, and words that affect the stack must
-@    make sure both RAM and the stack control registers have the correct values.
-
-@ 3. Stack error checking will be implemented, but isn't at present. Life is too
-@    short for a stack-based language to allow undetected stack errors! 
+@ The stack grows from low addresses upwards. Register `pt2nd` points to the
+@ second element of the parameter stack. The top of the stack is stored in
+@ register `pstop`.
 
 .include "SymbolDefs.S"
 
 .thumb_func
 .global clear_stack
 clear_stack:
-        LDR spnxt, =_stack_start
+        LDR pt2nd, =_stack_start
         _EXIT
 
 .thumb_func
@@ -54,8 +47,10 @@ clear_stack:
 stkprint3:
         _NEST
         LDR r0, =_stack_format_3
-        SUB spnxt, #_cell*3
-        LDM spnxt!, {r1-r3}
+        SUB r1, pt2nd, #_cell @ point to third
+        LDR r1, [r1] @ get third
+        LDR r2, [pt2nd] @ get second
+        MOV r3, pstop @ get top
         BL printf
         _UNNEST
 
@@ -64,8 +59,8 @@ stkprint3:
 stkprint2:
         _NEST
         LDR r0, =_stack_format_2
-        SUB spnxt, #_cell*2
-        LDM spnxt!, {r1-r2}
+        LDR r1, [pt2nd] @ get second
+        MOV r2, pstop @ get top
         BL printf
         _UNNEST
 
@@ -74,30 +69,37 @@ stkprint2:
 stkprint1:
         _NEST
         LDR r0, =_stack_format_1
-        SUB spnxt, #_cell
-        LDM spnxt!, {r1}
+        MOV r1, pstop @ get top
         BL printf
         _UNNEST
 
 .thumb_func
 .global push1
 push1:
-        STM spnxt!, {r0}
-        MOV tscpy, r0 @ *copy* top of stack to tscpy
+        ADD pt2nd, #_cell @ pt2nd points to existing stack second!
+        STM pt2nd!, {pstop} @ save old stack top
+
+        MOV pstop, r0 @ new stack top
         _EXIT
 
 .thumb_func
 .global push2
 push2:
-        STM spnxt!, {r0-r1}
-        MOV tscpy, r1 @ *copy* top of stack to tscpy
+        ADD pt2nd, #_cell @ pt2nd points to existing stack second!
+        STM pt2nd!, {pstop} @ save old stack top
+
+        STM pt2nd!, {r0} @ new stack second
+        MOV pstop, r1 @ new stack top
         _EXIT
 
 .thumb_func
 .global push3
 push3:
-        STM spnxt!, {r0-r2}
-        MOV tscpy, r2 @ *copy* top of stack to tscpy
+        ADD pt2nd, #_cell @ pt2nd points to existing stack second!
+        STM pt2nd!, {pstop} @ save old stack top
+
+        STM pt2nd!, {r0-r1} @ new stack third and second
+        MOV pstop, r2 @ new stack top
         _EXIT
 
 _stack_format_3: .asciz "stack data: %x, %x, %x\n"
