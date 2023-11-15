@@ -55,3 +55,14 @@ void sdk_enable_usb () {
 void sdk_disable_usb () {
   stdio_set_driver_enabled(&stdio_usb, false);
 }
+
+uint32_t timeout_us = 0xFFFFFFFF; // maximum timeout - about 71.6 minutes
+int sdk_key () {
+    int key = getchar_timeout_us(timeout_us);
+    return(key);
+}
+
+int sdk_emit(int character) {
+    int code = putchar_raw (character);
+    return(code);
+}

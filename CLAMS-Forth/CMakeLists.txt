@@ -15,6 +15,7 @@ add_executable(CLAMS-Forth
   ParamStack.S
   Dictionary.S
   SymbolDefs.S
+  Terminal.S
   Wrappers.c
 )
 

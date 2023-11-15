@@ -37,42 +37,6 @@ main:
 	BL stdio_init_all
 
 loop:
-        BL clear_stack
-
-        MOV r0, #1
-        MOV r1, #2
-        BL push2
-        LDR r0, =tplus
-        BL printf
-        BL stkprint2
-        BL plus
-        BL stkprint2
-
-        MOV r0, #4
-        BL push1
-        LDR r0, =tminus
-        BL printf
-        BL stkprint2
-        BL minus
-        BL stkprint2
-
-        MOV r0, #5
-        BL push1
-        LDR r0, =tstar
-        BL printf
-        BL stkprint2
-        BL star
-        BL stkprint2
-
-        LDR r0, sleep_ms
-        BL sdk_sleep_ms
+        BL echo
 
         B loop
-
-.balign 4
-sleep_ms:
-        .word 5000
-
-tplus: .asciz "\n\nplus:\n"
-tminus: .asciz "\nminus:\n"
-tstar: .asciz "\nstar:\n"
