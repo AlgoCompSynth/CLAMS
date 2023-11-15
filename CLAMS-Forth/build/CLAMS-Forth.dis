@@ -31,11 +31,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      0000009f  00000000  00000000  0000bce8  2**0
                   CONTENTS, READONLY
- 14 .debug_line   00016fe8  00000000  00000000  0000bd87  2**0
+ 14 .debug_line   00016fe9  00000000  00000000  0000bd87  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_info   00030ed6  00000000  00000000  00022d6f  2**0
+ 15 .debug_info   00030ed6  00000000  00000000  00022d70  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_abbrev 000084f1  00000000  00000000  00053c45  2**0
+ 16 .debug_abbrev 000084f1  00000000  00000000  00053c46  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_aranges 000015d8  00000000  00000000  0005c138  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -379,11 +379,11 @@ Disassembly of section .text:
 10000362:	f000 f82d 	bl	100003c0 <sdk_key>
 10000366:	4020      	ands	r0, r4
 10000368:	2808      	cmp	r0, #8
-1000036a:	d021      	beq.n	100003b0 <backspace>
+1000036a:	d00c      	beq.n	10000386 <backspace>
 1000036c:	280d      	cmp	r0, #13
-1000036e:	d019      	beq.n	100003a4 <return>
+1000036e:	d011      	beq.n	10000394 <ok>
 10000370:	280a      	cmp	r0, #10
-10000372:	d008      	beq.n	10000386 <linefeed>
+10000372:	d00f      	beq.n	10000394 <ok>
 10000374:	2820      	cmp	r0, #32
 10000376:	db04      	blt.n	10000382 <space>
 10000378:	287f      	cmp	r0, #127	; 0x7f
@@ -397,33 +397,29 @@ Disassembly of section .text:
 10000382:	2020      	movs	r0, #32
 10000384:	e7fa      	b.n	1000037c <emit>
 
-10000386 <linefeed>:
+10000386 <backspace>:
 10000386:	f000 f823 	bl	100003d0 <sdk_emit>
-1000038a:	200d      	movs	r0, #13
+1000038a:	2020      	movs	r0, #32
 1000038c:	f000 f820 	bl	100003d0 <sdk_emit>
+10000390:	2008      	movs	r0, #8
+10000392:	e7f3      	b.n	1000037c <emit>
 
-10000390 <OK>:
-10000390:	204f      	movs	r0, #79	; 0x4f
-10000392:	f000 f81d 	bl	100003d0 <sdk_emit>
-10000396:	204b      	movs	r0, #75	; 0x4b
-10000398:	f000 f81a 	bl	100003d0 <sdk_emit>
-1000039c:	2020      	movs	r0, #32
-1000039e:	f000 f817 	bl	100003d0 <sdk_emit>
-100003a2:	bd00      	pop	{pc}
-
-100003a4 <return>:
-100003a4:	f000 f814 	bl	100003d0 <sdk_emit>
-100003a8:	200a      	movs	r0, #10
-100003aa:	f000 f811 	bl	100003d0 <sdk_emit>
-100003ae:	e7ef      	b.n	10000390 <OK>
-
-100003b0 <backspace>:
-100003b0:	f000 f80e 	bl	100003d0 <sdk_emit>
-100003b4:	2020      	movs	r0, #32
-100003b6:	f000 f80b 	bl	100003d0 <sdk_emit>
-100003ba:	2008      	movs	r0, #8
-100003bc:	e7de      	b.n	1000037c <emit>
-	...
+10000394 <ok>:
+10000394:	2020      	movs	r0, #32
+10000396:	f000 f81b 	bl	100003d0 <sdk_emit>
+1000039a:	2020      	movs	r0, #32
+1000039c:	f000 f818 	bl	100003d0 <sdk_emit>
+100003a0:	206f      	movs	r0, #111	; 0x6f
+100003a2:	f000 f815 	bl	100003d0 <sdk_emit>
+100003a6:	206b      	movs	r0, #107	; 0x6b
+100003a8:	f000 f812 	bl	100003d0 <sdk_emit>
+100003ac:	2020      	movs	r0, #32
+100003ae:	f000 f80f 	bl	100003d0 <sdk_emit>
+100003b2:	200d      	movs	r0, #13
+100003b4:	f000 f80c 	bl	100003d0 <sdk_emit>
+100003b8:	200a      	movs	r0, #10
+100003ba:	f000 f809 	bl	100003d0 <sdk_emit>
+100003be:	bd00      	pop	{pc}
 
 100003c0 <sdk_key>:
 100003c0:	b510      	push	{r4, lr}
