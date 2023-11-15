@@ -26,8 +26,8 @@
 
 */
 
-spnxt .req r7 @ pointer to next available stack cell
-tscpy .req r6 @ cached copy of the top of stack
+pt2nd .req r7 @ pointer to second parameter stack cell
+pstop .req r6 @ top cell of parameter stack
 
 @ symbols for addressing expressions
 .set _byte, 1 @ bytes
@@ -83,10 +83,9 @@ tscpy .req r6 @ cached copy of the top of stack
         @ For example, the postfix `left right <op>` has the same `result` as
         @ the infix `left <op> right`.
         .macro _BINARY_OP opcode
-        SUB spnxt, spnxt, #_cell*2 @ point to left operand
-        LDR r0, [spnxt] @ fetch left operand
-        \opcode tscpy, r0, tscpy @ tscpy := left <OP> tscpy
-        STM spnxt!, {tscpy} @ save and advance pointer
+        LDR r0, [pt2nd] @ fetch left operand
+        \opcode pstop, r0, pstop @ pstop := left <OP> pstop
+        SUB pt2nd, #_cell @ "pop" the stack
         .endm
 
         @ return to caller
