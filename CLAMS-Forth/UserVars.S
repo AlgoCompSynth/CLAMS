@@ -129,6 +129,11 @@ _stack_start:
 _USER_VARIABLE _BASE, 10 @ base for number I/O
 _USER_VARIABLE _STATE, 0 @ true when compiling, false otherwise
 
+@ buffer addresses / pointers / counts
+_USER_VARIABLE INBUF_ADDR, 0 @ address of input buffer
+_USER_VARIABLE INBUF_COUNT, 0 @ number of characters in the input buffer
+_USER_VARIABLE INBUF_CURSOR, 0 @ next address to scan
+
 @ String buffers
         .macro _STRING_BUF name:req
         .global \name
