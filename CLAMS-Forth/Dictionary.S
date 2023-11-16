@@ -28,26 +28,81 @@
 
 .include "SymbolDefs.S"
 
+@ dictionary construction macros
+
+@ dictionary header
+
+@ wname = word name in dictionary - what the Forth system searches for
+
+@ n_bytes = how many bytes in name
+
+@ pronunciation = Forth specifies how to pronounce most words. We make labels
+@ from these, substituting an underscore for each dash in the pronunciation.
+
+@ b_offset = backwards offset to previous word = the number of bytes to go back
+@ to find the previous word. A backwards offset of zero marks the end of the
+@ dictionary!
+
+        .macro _DICT_HEADER wname, n_bytes, pronunciation, b_offset=0
+
+        @ define header label
+        .balign _cell, 0
+        .set _\pronunciation, .
+
+        @ build name field
+        .byte \n_bytes
+        .ascii "\wname"
+
+        @ build link field
+        .balign _cell, 0
+        .if \b_offset == 0
+          .word 0
+        .else
+          .word . - \b_offset
+        .endif
+
+        @ define test entry point
+        .thumb_func
+        .global \pronunciation
+        .set \pronunciation, .
+
+        .endm
+
+@ Common code for a word that uses a single instruction binary operator on the
+@ top two stack cells. Such words have the stack effect
+@
+@    ( left right -- result )
+@
+@ where `result` = `left <op> right`. That is, the postfix `left right <op>` has
+@ the same `result` as the infix `left <op> right`.
+
+        .macro _BINARY_OP opcode
+        LDR r0, [pt2nd] @ fetch left operand
+        \opcode pstop, r0, pstop @ pstop := left <OP> pstop
+        SUB pt2nd, #_cell @ "pop" the stack
+        .endm
+
+        @ build a dictionary entry for a binary word
+        .macro _BINARY_WORD wname, n_bytes, pronunciation, opcode, b_offset=0
+        _DICT_HEADER \wname, \n_bytes, \pronunciation, \b_offset
+        _BINARY_OP \opcode
+        _EXIT
+        .endm
+
 @ dictionary functions
-.thumb_func
-.global get_dict_start
-get_dict_start:
-        LDR r0, =_plus
-        _EXIT
 
-.thumb_func
-.global get_dict_end
-get_dict_end:
-        LDR r0, =_dict_end
-        _EXIT
+.global _system_dict_start
+.set _system_dict_start, .
 
-.set _dict_start, .
+        @ binary operators
+        _BINARY_WORD "+", 1, plus, ADD, 0
+        _BINARY_WORD "-", 1, minus, SUB, _plus
+        _BINARY_WORD "*", 1, star, MUL, _minus
+        _BINARY_WORD "AND", 3, and, AND, _star
+        _BINARY_WORD "OR", 2, or, ORR, _and
+        _BINARY_WORD "XOR", 3, x_or, EOR, _or
 
-        _BINARY_WORD "+", 1, _plus, plus, ADD, 0
-        _BINARY_WORD "-", 1, _minus, minus, SUB, _plus
-        _BINARY_WORD "*", 1, _star, star, MUL, _minus
-        _BINARY_WORD "AND", 3, _and, and, AND, _star
-        _BINARY_WORD "OR", 2, _or, or, ORR, _and
-        _BINARY_WORD "XOR", 3, _x_or, x_or, EOR, _or
+        @ terminal I/O
 
-.set _dict_end, .
+.global _system_dict_end
+.set _system_dict_end, .
