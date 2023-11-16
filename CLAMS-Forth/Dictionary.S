@@ -140,8 +140,6 @@ _accl:
         BEQ _accb @ do the backspace
         CMP r0, #_cr
         BEQ _accz @ clean up stack and exit
-        CMP r0, #_lf
-        BEQ _accz @ clean up stack and exit
         
         @ the rest are either standard printables or will be replaced by space
         CMP r0, #_space
