@@ -102,7 +102,113 @@
         _BINARY_WORD "OR", 2, or, ORR, _and
         _BINARY_WORD "XOR", 3, x_or, EOR, _or
 
-        @ terminal I/O
+        @ terminal I/O words
+        _DICT_HEADER "KEY", 3, key, _x_or
+        _NEST
+        BL sdk_key
+        _PUSHR0
+        _UNNEST
+
+        _DICT_HEADER "EMIT", 4, emit, _key
+        _NEST
+        MOV pstop, r0
+        BL sdk_emit
+        _DROP
+        _UNNEST
+        
+@ character codes
+.set _bs, 8 @ backspace
+.set _lf, 10 @ line feed
+.set _cr, 13 @ carriage return
+.set _space, 32 @ space
+.set _del, 127 @ delete
+
+        _DICT_HEADER "ACCEPT", 6, accept, _emit
+        _NEST
+
+        @ On entry, the top of the stack has the maximum allowed characters and
+        @ the second has the address of the buffer. On exit, the address has
+        @ been consumed and the actual count is on the top of the stack.
+        MOV tmpra, pstop @ save maximum count in `tmpra`
+        LDR indxa, [pt2nd] @ load the address to `indxa`
+        MOV pstop, #0 @ the count ends up here!
+_accl:
+        BL sdk_key @ wait for character, which will show up in r0
+
+        @ test for specific control characters
+        CMP r0, #_bs
+        BEQ _accb @ do the backspace
+        CMP r0, #_cr
+        BEQ _accz @ clean up stack and exit
+        CMP r0, #_lf
+        BEQ _accz @ clean up stack and exit
+        
+        @ the rest are either standard printables or will be replaced by space
+        CMP r0, #_space
+        BLT _accs @ emit a space
+        CMP r0, #_del
+        BGE _accs @ emit a space
+
+        @ an ordinary printable character - echo it and append to buffer
+_acce:
+        BL sdk_emit @ printable - send it out!
+
+        STR r0, [indxa] @ append to buffer and count
+        ADD indxa, #1
+        ADD pstop, #1
+
+        @ did we hit the limit?
+        CMP pstop, tmpra
+        BEQ _accz @ early exit if limit hit
+
+	B _accl @ go back for more!
+
+        @ space or unprintable
+_accs:
+        MOV r0, #_space @ force a space and emit / store / count
+        B _acce
+
+        @ backspace - uncount previous character and erase it
+_accb:
+        CMP pstop, #0 @ is buffer empty?
+        BEQ accl @ ignore a backspace if buffer is empty
+
+        @ un-count
+        SUB indxa, #1
+        SUB pstop, #1
+
+        @ erase previous character
+        BL sdk_emit
+        MOV r0, #_space
+        BL sdk_emit
+        MOV r0, #_bs
+        B _acce
+
+        @ clean up and exit
+_accz:
+        @ stack top is correct - it has the count - but we need to fix `pt2nd`
+        SUB pt2nd, #_cell
+        _UNNEST
+        @ whew!
+
+        _DICT_HEADER "TYPE", 4, type, _accept
+        _NEST
+        CMP pstop, #0 @ check for early exit
+        BLE typz
+
+        LDR indxa, [pt2nd] @ get the address
+
+typl:
+        LDR r0, [indxa]
+        BL sdk_emit @ emit the character
+        ADD indxa, #1 @ next in buffer
+        SUB pstop, #1 @ count down
+        BNE typl @ continue if count not zero
+
+typz:
+        SUB pt2nd, #_cell*2 @ we consumed two cells
+        LDR pstop, [pt2nd, #_cell] @ fix top of stack
+        _UNNEST
 
 .global _system_dict_end
 .set _system_dict_end, .

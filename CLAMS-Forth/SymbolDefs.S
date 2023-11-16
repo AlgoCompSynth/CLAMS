@@ -26,8 +26,22 @@
 
 */
 
+@ Registers r4 - r11 are saved by SDK functions, so we can use them without
+@ saving. However, r8 - r11 have limited functionality, so we reserve them for
+@ temporary storage.
+
+tmpra .req r8
+tmprb .req r9
+tmprc .req r10
+tmprd .req r11
+
+@ parameter stack registers
 pt2nd .req r7 @ pointer to second parameter stack cell
 pstop .req r6 @ top cell of parameter stack
+
+@ general-purpose address / count registers for loops
+indxa .req r5 @ index register a
+indxb .req r4 @ index register b
 
 @ symbols for addressing expressions
 .set _byte, 1 @ bytes
@@ -47,4 +61,14 @@ pstop .req r6 @ top cell of parameter stack
 
         .macro _UNNEST
         POP {PC}
+        .endm
+
+        .macro _PUSHR0
+        STM pt2nd!, {pstop} @ push top onto stack
+        MOV pstop, r0
+        .endm
+
+        .macro _DROP
+        LDR pstop, [pt2nd]
+        SUB pt2nd, #_cell
         .endm
