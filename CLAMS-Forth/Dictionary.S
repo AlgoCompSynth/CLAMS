@@ -48,6 +48,7 @@
         @ define header label
         .balign _cell, 0
         .set _\pronunciation, .
+        .set _last_offset, . - _system_dict_start
 
         @ build name field
         .byte \n_bytes
@@ -91,6 +92,8 @@
 
 @ dictionary functions
 
+.data
+.balign _cell
 .global _system_dict_start
 .set _system_dict_start, .
 
@@ -210,3 +213,8 @@ typz:
 
 .global _system_dict_end
 .set _system_dict_end, .
+
+.global _system_last_offset
+.set _system_last_offset, .
+        .word _last_offset
+
