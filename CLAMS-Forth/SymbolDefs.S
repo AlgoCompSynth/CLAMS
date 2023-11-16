@@ -33,71 +33,11 @@ pstop .req r6 @ top cell of parameter stack
 .set _byte, 1 @ bytes
 .set _cell, 4 @ bytes per cell
 
-@ dictionary construction macros
-
-        @ dictionary header
-
-        @ name = word name in dictionary - what the Forth system searches for
-        @ w_bytes = how many bytes in name
-        @ h_label = label in the code for the header. By convention, this is
-        @    the standard pronunciation for the word with an underscore
-        @    prepended and dashes replaced by underscores.
-        @ te_label = label in the code for the test entry point. By convention
-        @    this is the standard pronunciation for the word with dashes
-        @    replaced by underscores.
-        @ h_link = backwards offset to previous word = the number of bytes to
-        @    go back to find the previous word. Zero marks the end of the
-        @    dictionary!
-
-        .macro _DICT_HEADER name, w_bytes, h_label, te_label, h_link=0
-
-        @ define header label
-        .balign _cell, 0
-        .set \h_label, .
-
-        @ build name field
-        .byte \w_bytes
-        .ascii "\name"
-
-        @ build link field
-        .balign _cell, 0
-        .if \h_link == 0
-          .word 0
-        .else
-          .word . - \h_link
-        .endif
-
-        @ define test entry point
-        .thumb_func
-        .global \te_label
-        .set \te_label, .
-
-        .endm
-
-
-        @ Common code for a word that uses a single instruction binary op on the
-        @ top two stack cells. Such words have the stack effect
-        @
-        @    ( left right -- result )
-        @
-        @ For example, the postfix `left right <op>` has the same `result` as
-        @ the infix `left <op> right`.
-        .macro _BINARY_OP opcode
-        LDR r0, [pt2nd] @ fetch left operand
-        \opcode pstop, r0, pstop @ pstop := left <OP> pstop
-        SUB pt2nd, #_cell @ "pop" the stack
-        .endm
+@ system-wide macros
 
         @ return to caller
         .macro _EXIT
         BX LR
-        .endm
-
-        @ build a dictionary entry for a binary word
-        .macro _BINARY_WORD word, w_bytes, h_label, te_label, opcode, h_link=0
-        _DICT_HEADER \word, \w_bytes, \h_label, \te_label, \h_link
-        _BINARY_OP \opcode
-        _EXIT
         .endm
 
         @ macros for nested calls
