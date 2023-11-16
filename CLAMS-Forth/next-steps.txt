@@ -1,1 +1,1 @@
-Code QUIT, EVALUATE, PARSE and FIND. Test the whole mess.
+Code QUIT, EVALUATE, PARSE, >IN, SOURCE, PARSE-NAME and FIND. Test the whole mess.
