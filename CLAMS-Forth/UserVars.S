@@ -111,8 +111,33 @@ _stack_format_1: .asciz "stack data: %x\n"
 
 @ The parameter stack
 .set _stack_cells, 64
+.global _stack_start
 _stack_start:
         .rept _stack_cells
         .word 0
         .endr
+.global _stack_end
 .set _stack_end, .
+
+@ User variables
+        .macro _USER_VARIABLE name:req, default=0
+        .global \name
+        .set \name, .
+        .word \default
+        .endm
+
+_USER_VARIABLE _BASE, 10 @ base for number I/O
+_USER_VARIABLE _STATE, 0 @ true when compiling, false otherwise
+
+@ String buffers
+        .macro _STRING_BUF name:req
+        .global \name
+        .set \name, .
+        .rept 256
+        .byte 0
+        .endr
+        .endm
+
+_STRING_BUF _SCRATCH_PAD @ returned by `PAD`
+_STRING_BUF _INPUT_BUFFER @ terminal input read here
+_STRING_BUF _WORD_NAME @ what we search for in dictionary lookup

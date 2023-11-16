@@ -12,7 +12,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 
 add_executable(CLAMS-Forth
   CLAMS-Forth.S
-  ParamStack.S
+  UserVars.S
   Dictionary.S
   SymbolDefs.S
   Terminal.S
