@@ -26,14 +26,14 @@
 
 */
 
-@ Registers r4 - r11 are saved by SDK functions, so we can use them without
-@ saving. However, r8 - r11 have limited functionality, so we reserve them for
-@ temporary storage.
+@ SDK functions save registers r4 - r11, so we can use them without saving.
+@ However, r8 - r11 have limited functionality, so we reserve them for
+@ frequently used constants and temporary storage.
 
-tmpra .req r8
-tmprb .req r9
-tmprc .req r10
-tmprd .req r11
+tmpra .req r11
+tmprb .req r10
+tmprc .req r9
+tmprd .req r8
 
 @ parameter stack registers
 pt2nd .req r7 @ pointer to second parameter stack cell
@@ -64,9 +64,11 @@ indxb .req r4 @ index register b
         POP {PC}
         .endm
 
+        @ parameter stack macros
         .macro _PUSHR0
-        STM pt2nd!, {pstop} @ push current top onto stack
-        MOV pstop, r0
+        SUB pt2nd, #_cell @ stack grows downward
+        STR pstop, [pt2nd] @ save top to RAM
+        MOV pstop, r0 @ save argument to `pstop`
         .endm
 
         .macro _SWAP
@@ -77,7 +79,7 @@ indxb .req r4 @ index register b
 
         .macro _DROP
         LDR pstop, [pt2nd]
-        SUB pt2nd, #_cell
+        ADD pt2nd, #_cell
         .endm
 
         .macro _DUP
@@ -86,11 +88,9 @@ indxb .req r4 @ index register b
         .endm
 
         .macro _ROT
-        LDR r2, [pt2nd] @ get 2nd
-        SUB r0, pt2nd, #_cell @ address of 3rd
-        LDR r3, [r0] @ get 3rd
-
-        STR r2, [r0] @ new 3rd
-        STR pstop, [pt2nd] @ new 2nd
-        MOV pstop, r3 @ new top
+        @ x1, x2, x3 -> x2, x3, x1
+        LDR r0, [pt2nd] @ get x2
+        STR pstop, [pt2nd] @ stash x3
+        LDR pstop, [pt2nd, #_cell] @ get x1
+        STR r0, [pt2nd, #_cell] @ stash x2
         .endm
