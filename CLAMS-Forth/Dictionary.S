@@ -113,8 +113,57 @@
         _SWAP
         _EXIT
 
+        _DICT_HEADER "!", 1, store, _swap
+        LDM pt2nd!, {r0-r1}
+        STR r0, [pstop]
+        MOV pstop, r1
+        _EXIT
+
+        _DICT_HEADER "+!", 2, plus_store, _store
+        LDM pt2nd!, {r0-r1}
+        LDR r2, [pstop]
+        ADD r2, r0
+        STR r2, [pstop]
+        MOV pstop, r1
+        _EXIT
+
+        _DICT_HEADER "0<", 2, zero_less, _plus_store
+        CMP pstop, #0
+        BLT _c1
+        MOV pstop, #0
+        _EXIT
+_c1:
+        LDR pstop, _true
+        _EXIT
+
+        _DICT_HEADER "0=", 2, zero_equals, _zero_less
+        CMP pstop, #0
+        BEQ _c2
+        MOV pstop, #0
+        _EXIT
+_c2:
+        LDR pstop, _true
+        _EXIT
+
+        _DICT_HEADER "1+", 2, one_plus, _zero_equals
+        ADD pstop, #1
+        _EXIT
+
+        _DICT_HEADER "1-", 2, one_minus, _one_plus
+        SUB pstop, #1
+        _EXIT
+
+        _DICT_HEADER "2*", 2, two_star, _one_minus
+        LSL pstop, #1
+        _EXIT
+
+        _DICT_HEADER "2/", 2, two_slash, _two_star
+        ASR pstop, #1
+        _EXIT
+
+@ next up <
         @ binary operators
-        _BINARY_WORD "+", 1, plus, ADD, _swap
+        _BINARY_WORD "+", 1, plus, ADD, _two_slash
         _BINARY_WORD "-", 1, minus, SUB, _plus
         _BINARY_WORD "*", 1, star, MUL, _minus
         _BINARY_WORD "AND", 3, and, AND, _star
@@ -263,3 +312,5 @@ quil:
 .global _system_last_offset
 .set _system_last_offset, .
         .word _last_offset
+
+_true:   .word 0xFFFFFFFF
