@@ -46,6 +46,7 @@ indxb .req r4 @ index register b
 @ symbols for addressing expressions
 .set _byte, 1 @ bytes
 .set _cell, 4 @ bytes per cell
+.set _cell_shift, 2 @ bits to shift for cell - byte conversions
 
 @ system-wide macros
 
