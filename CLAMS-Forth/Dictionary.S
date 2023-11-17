@@ -50,17 +50,17 @@
         .set _\pronunciation, .
         .set _last_offset, . - _system_dict_start
 
-        @ build name field
-        .byte \n_bytes
-        .ascii "\wname"
-
         @ build link field
-        .balign _cell, 0
         .if \b_offset == 0
           .word 0
         .else
           .word . - \b_offset
         .endif
+
+        @ build name field
+        .byte \n_bytes
+        .ascii "\wname"
+        .balign _cell, 0
 
         @ define test entry point
         .thumb_func
@@ -131,7 +131,7 @@
 
         _DICT_HEADER "EMIT", 4, emit, _key
         _NEST
-        MOV pstop, r0
+        MOV r0, pstop
         BL sdk_emit
         _DROP
         _UNNEST
@@ -159,11 +159,11 @@ _accl:
         CMP r0, #_bs
         BEQ _accb @ do the backspace
         CMP r0, #_cr
-        BEQ _accz @ clean up stack and exit
+        BEQ _accz @ line finished - clean up stack and exit
         
         @ the rest are either standard printables or will be replaced by space
         CMP r0, #_space
-        BLT _accs @ emit a space
+        BLE _accs @ emit and append a space
         CMP r0, #_del
         BGE _accs @ emit a space
 
@@ -196,10 +196,10 @@ _accb:
         SUB pstop, #1
 
         @ erase previous character
-        BL sdk_emit
+        BL sdk_emit @ emit the backspace we have
         MOV r0, #_space
-        BL sdk_emit
-        MOV r0, #_bs
+        BL sdk_emit @ "erase" the character
+        MOV r0, #_bs @ queue up another backspace
         B _acce
 
         @ clean up and exit
@@ -233,7 +233,7 @@ typz:
         _NEST
         @ we ***don't*** clear the return stack - that is a big hairy no-no!
 quil:
-        @ get input buffer address and length to stack
+        @ push input buffer address and length to stack
         BL _inbuf_addr
         _PUSHR0
         BL _inbuf_max
@@ -253,6 +253,10 @@ quil:
         @ repeat forever-ish
         B quil
 
+        _UNNEST
+
+        _DICT_HEADER "EVALUATE", 8, evaluate, _quit
+        _NEST
         _UNNEST
 
 .global _system_dict_end
