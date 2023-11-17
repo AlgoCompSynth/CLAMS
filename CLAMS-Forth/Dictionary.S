@@ -36,7 +36,7 @@
 
 @ n_bytes = how many bytes in name
 
-@ pronunciation = Forth specifies how to pronounce most words. We make labels
+@ pronunciation = Forth specifies how to pronounce many words. We make labels
 @ from these, substituting an underscore for each dash in the pronunciation.
 
 @ b_offset = backwards offset to previous word = the number of bytes to go back
@@ -78,9 +78,8 @@
 @ the same `result` as the infix `left <op> right`.
 
         .macro _BINARY_OP opcode
-        LDR r0, [pt2nd] @ fetch left operand
+        LDM pt2nd, {r0, pt2nd} @ pop left operand
         \opcode pstop, r0, pstop @ pstop := left <OP> pstop
-        SUB pt2nd, #_cell @ "pop" the stack
         .endm
 
         @ build a dictionary entry for a binary word
@@ -138,9 +137,8 @@
         
 @ character codes
 .set _bs, 8 @ backspace
-.set _lf, 10 @ line feed
 .set _cr, 13 @ carriage return
-.set _space, 32 @ space
+.set _bl, 32 @ space
 .set _del, 127 @ delete
 
         _DICT_HEADER "ACCEPT", 6, accept, _emit
@@ -151,7 +149,7 @@
         @ been consumed and the actual count is on the top of the stack.
         MOV tmpra, pstop @ save maximum count in `tmpra`
         LDR indxa, [pt2nd] @ load the address to `indxa`
-        MOV pstop, #0 @ the count ends up here!
+        MOV pstop, #0 @ the actual count ends up here!
 _accl:
         BL sdk_key @ wait for character, which will show up in r0
 
@@ -162,28 +160,26 @@ _accl:
         BEQ _accz @ line finished - clean up stack and exit
         
         @ the rest are either standard printables or will be replaced by space
-        CMP r0, #_space
+        CMP r0, #_bl
         BLE _accs @ emit and append a space
         CMP r0, #_del
-        BGE _accs @ emit a space
+        BGE _accs @ emit and append a space
 
         @ an ordinary printable character - echo it and append to buffer
 _acce:
+        STR r0, [indxa] @ append to buffer
         BL sdk_emit @ printable - send it out!
 
-        STR r0, [indxa] @ append to buffer and count
+        @ count
         ADD indxa, #1
         ADD pstop, #1
-
-        @ did we hit the limit?
-        CMP pstop, tmpra
+        CMP pstop, tmpra @ did we hit the limit?
         BEQ _accz @ early exit if limit hit
-
 	B _accl @ go back for more!
 
         @ space or unprintable
 _accs:
-        MOV r0, #_space @ force a space and emit / store / count
+        MOV r0, #_bl @ force a space and emit / store / count
         B _acce
 
         @ backspace - uncount previous character and erase it
@@ -197,15 +193,16 @@ _accb:
 
         @ erase previous character
         BL sdk_emit @ emit the backspace we have
-        MOV r0, #_space
+        MOV r0, #_bl
         BL sdk_emit @ "erase" the character
         MOV r0, #_bs @ queue up another backspace
-        B _acce
+        BL sdk_emit
+        B _accl @ back for more!
 
         @ clean up and exit
 _accz:
         @ stack top is correct - it has the count - but we need to fix `pt2nd`
-        SUB pt2nd, #_cell
+        ADD pt2nd, #_cell
         _UNNEST
         @ whew!
 
@@ -224,14 +221,16 @@ typl:
         BNE typl @ continue if count not zero
 
 typz:
-        SUB pt2nd, #_cell*2 @ we consumed two cells
+        ADD pt2nd, #_cell*2 @ we consumed two cells
         LDR pstop, [pt2nd, #_cell] @ fix top of stack
         _UNNEST
 
 @ finally, the text interpreter!!
         _DICT_HEADER "QUIT", 4, quit, _accept
-        _NEST
+
         @ we ***don't*** clear the return stack - that is a big hairy no-no!
+        @ and we don't need _NEST / _UNNEST because we weren't called and won't
+        @ return.
 quil:
         @ push input buffer address and length to stack
         BL _inbuf_addr
@@ -253,10 +252,9 @@ quil:
         @ repeat forever-ish
         B quil
 
-        _UNNEST
-
         _DICT_HEADER "EVALUATE", 8, evaluate, _quit
         _NEST
+        @ TBD
         _UNNEST
 
 .global _system_dict_end

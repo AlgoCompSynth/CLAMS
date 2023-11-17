@@ -26,14 +26,59 @@
 
 */
 
-@ test harness for Forth VM
+@ parameter stack logic:
+
+@ The stack grows from high addresses downwards. Register `pt2nd` points to the
+@ second element of the parameter stack. The top of the stack is stored in
+@ register `pstop`.
 
 .include "SymbolDefs.S"
 
 .thumb_func
-.global main
+.global clear_stack
+clear_stack:
+        LDR pt2nd, =_stack_bottom
+        _EXIT
 
-main:
+.thumb_func
+.global stkprint3
+stkprint3:
         _NEST
-	BL stdio_init_all
+        LDR r0, =_stack_format_3
+        MOV r1, pstop
+        LDM pt2nd, {r2, r3, pt2nd}
+        BL printf
         _UNNEST
+
+.thumb_func
+.global stkprint2
+stkprint2:
+        _NEST
+        LDR r0, =_stack_format_2
+        MOV r1, pstop
+        LDR r2, [pt2nd]
+        BL printf
+        _UNNEST
+
+.thumb_func
+.global stkprint1
+stkprint1:
+        _NEST
+        LDR r0, =_stack_format_1
+        MOV r1, pstop
+        BL printf
+        _UNNEST
+
+_stack_format_3: .asciz "stack top => %x, %x, %x\n"
+_stack_format_2: .asciz "stack top => %x, %x\n"
+_stack_format_1: .asciz "stack top => %x\n"
+
+@ The parameter stack itself
+.data
+.balign _cell, 0
+.set _stack_cells, 64
+_stack_start:
+        .rept _stack_cells
+        .word 0
+        .endr
+.set _stack_bottom, .

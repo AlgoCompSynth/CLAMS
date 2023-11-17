@@ -26,98 +26,7 @@
 
 */
 
-@ stack test code
-
-@ parameter stack logic:
-
-@ The stack grows from low addresses upwards. Register `pt2nd` points to the
-@ second element of the parameter stack. The top of the stack is stored in
-@ register `pstop`.
-
 .include "SymbolDefs.S"
-
-.thumb_func
-.global clear_stack
-clear_stack:
-        LDR pt2nd, =_stack_start
-        _EXIT
-
-.thumb_func
-.global stkprint3
-stkprint3:
-        _NEST
-        LDR r0, =_stack_format_3
-        SUB r1, pt2nd, #_cell @ point to third
-        LDR r1, [r1] @ get third
-        LDR r2, [pt2nd] @ get second
-        MOV r3, pstop @ get top
-        BL printf
-        _UNNEST
-
-.thumb_func
-.global stkprint2
-stkprint2:
-        _NEST
-        LDR r0, =_stack_format_2
-        LDR r1, [pt2nd] @ get second
-        MOV r2, pstop @ get top
-        BL printf
-        _UNNEST
-
-.thumb_func
-.global stkprint1
-stkprint1:
-        _NEST
-        LDR r0, =_stack_format_1
-        MOV r1, pstop @ get top
-        BL printf
-        _UNNEST
-
-.thumb_func
-.global push1
-push1:
-        ADD pt2nd, #_cell @ pt2nd points to existing stack second!
-        STM pt2nd!, {pstop} @ save old stack top
-
-        MOV pstop, r0 @ new stack top
-        _EXIT
-
-.thumb_func
-.global push2
-push2:
-        ADD pt2nd, #_cell @ pt2nd points to existing stack second!
-        STM pt2nd!, {pstop} @ save old stack top
-
-        STM pt2nd!, {r0} @ new stack second
-        MOV pstop, r1 @ new stack top
-        _EXIT
-
-.thumb_func
-.global push3
-push3:
-        ADD pt2nd, #_cell @ pt2nd points to existing stack second!
-        STM pt2nd!, {pstop} @ save old stack top
-
-        STM pt2nd!, {r0-r1} @ new stack third and second
-        MOV pstop, r2 @ new stack top
-        _EXIT
-
-_stack_format_3: .asciz "stack data: %x, %x, %x\n"
-_stack_format_2: .asciz "stack data: %x, %x\n"
-_stack_format_1: .asciz "stack data: %x\n"
-
-.data
-.balign _cell, 0
-
-@ The parameter stack
-.set _stack_cells, 64
-.global _stack_start
-_stack_start:
-        .rept _stack_cells
-        .word 0
-        .endr
-.global _stack_end
-.set _stack_end, .
 
 @ User variables
         .macro _USER_VARIABLE name:req, default=0
@@ -125,9 +34,6 @@ _stack_start:
         .set \name, .
         .word \default
         .endm
-
-_USER_VARIABLE _BASE, 10 @ base for number I/O
-_USER_VARIABLE _STATE, 0 @ true when compiling, false otherwise
 
 @ String buffers
         .macro _STRING_BUF name:req
@@ -150,7 +56,6 @@ _USER_VARIABLE _STATE, 0 @ true when compiling, false otherwise
         .thumb_func
         MOV r0, #255
         _EXIT
-
         .endm
 
 _STRING_BUF _inbuf @ terminal input read here
