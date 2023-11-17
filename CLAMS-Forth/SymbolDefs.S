@@ -64,11 +64,32 @@ indxb .req r4 @ index register b
         .endm
 
         .macro _PUSHR0
-        STM pt2nd!, {pstop} @ push top onto stack
+        STM pt2nd!, {pstop} @ push current top onto stack
+        MOV pstop, r0
+        .endm
+
+        .macro _SWAP
+        LDR r0, [pt2nd]
+        STR pstop, [pt2nd]
         MOV pstop, r0
         .endm
 
         .macro _DROP
         LDR pstop, [pt2nd]
         SUB pt2nd, #_cell
+        .endm
+
+        .macro _DUP
+        MOV r0, pstop
+        _PUSHR0
+        .endm
+
+        .macro _ROT
+        LDR r2, [pt2nd] @ get 2nd
+        SUB r0, pt2nd, #_cell @ address of 3rd
+        LDR r3, [r0] @ get 3rd
+
+        STR r2, [r0] @ new 3rd
+        STR pstop, [pt2nd] @ new 2nd
+        MOV pstop, r3 @ new top
         .endm
