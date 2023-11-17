@@ -97,8 +97,25 @@
 .global _system_dict_start
 .set _system_dict_start, .
 
+        @ stack operators
+        _DICT_HEADER "DROP", 4, drop, 0
+        _DROP
+        _EXIT
+
+        _DICT_HEADER "DUP", 3, dupe, _drop
+        _DUP
+        _EXIT
+
+        _DICT_HEADER "ROT", 3, rote, _dupe
+        _ROT
+        _EXIT
+
+        _DICT_HEADER "SWAP", 4, swap, _rote
+        _SWAP
+        _EXIT
+
         @ binary operators
-        _BINARY_WORD "+", 1, plus, ADD, 0
+        _BINARY_WORD "+", 1, plus, ADD, _swap
         _BINARY_WORD "-", 1, minus, SUB, _plus
         _BINARY_WORD "*", 1, star, MUL, _minus
         _BINARY_WORD "AND", 3, and, AND, _star
@@ -211,10 +228,36 @@ typz:
         LDR pstop, [pt2nd, #_cell] @ fix top of stack
         _UNNEST
 
+@ finally, the text interpreter!!
+        _DICT_HEADER "QUIT", 4, quit, _accept
+        _NEST
+        @ we ***don't*** clear the return stack - that is a big hairy no-no!
+quil:
+        @ get input buffer address and length to stack
+        BL _inbuf_addr
+        _PUSHR0
+        BL _inbuf_max
+        _PUSHR0
+
+        @ get a line from user
+        BL accept
+
+        @ top of stack now has count
+        BL _inbuf_addr
+        _PUSHR0
+        _SWAP
+
+        @ and interpret
+        BL evaluate
+
+        @ repeat forever-ish
+        B quil
+
+        _UNNEST
+
 .global _system_dict_end
 .set _system_dict_end, .
 
 .global _system_last_offset
 .set _system_last_offset, .
         .word _last_offset
-

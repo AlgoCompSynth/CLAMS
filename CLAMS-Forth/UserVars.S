@@ -129,20 +129,28 @@ _stack_start:
 _USER_VARIABLE _BASE, 10 @ base for number I/O
 _USER_VARIABLE _STATE, 0 @ true when compiling, false otherwise
 
-@ buffer addresses / pointers / counts
-_USER_VARIABLE INBUF_ADDR, 0 @ address of input buffer
-_USER_VARIABLE INBUF_COUNT, 0 @ number of characters in the input buffer
-_USER_VARIABLE INBUF_CURSOR, 0 @ next address to scan
-
 @ String buffers
         .macro _STRING_BUF name:req
+
+        @ make the buffer
         .global \name
         .set \name, .
         .rept 256
         .byte 0
         .endr
+
+        @ routines to get address and length
+        .set \name\()_addr, .
+        .global \name\()_addr
+        .thumb_func
+        LDR r0, =\name
+        _EXIT
+        .set \name\()_max, .
+        .global \name\()_max
+        .thumb_func
+        MOV r0, #255
+        _EXIT
+
         .endm
 
-_STRING_BUF _SCRATCH_PAD @ returned by `PAD`
-_STRING_BUF _INPUT_BUFFER @ terminal input read here
-_STRING_BUF _WORD_NAME @ what we search for in dictionary lookup
+_STRING_BUF _inbuf @ terminal input read here
