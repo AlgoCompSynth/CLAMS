@@ -34,6 +34,17 @@
 .global main
 
 main:
-        _NEST
 	BL stdio_init_all
-        _UNNEST
+
+loop:
+        LDR r0, =dict_format
+        BL get_dict_addrs
+        BL printf
+
+        LDR r0, sleep_ms
+        BL sdk_sleep_ms
+        B loop
+
+.balign _cell, 0
+sleep_ms: .word 5000
+dict_format: .asciz "dictionary start, end: %x, %x\n"

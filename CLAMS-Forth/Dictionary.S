@@ -28,6 +28,14 @@
 
 .include "SymbolDefs.S"
 
+@ address getters
+.thumb_func
+.global get_dict_addrs
+get_dict_addrs:
+        LDR r1, =_system_dict_start
+        LDR r2, =_system_dict_end
+        _EXIT
+
 @ dictionary construction macros
 
 @ dictionary header
@@ -109,7 +117,6 @@
 
 @ dictionary functions
 
-.data
 .balign _cell
 .global _system_dict_start
 .set _system_dict_start, .
@@ -271,7 +278,7 @@ _accs:
         @ backspace - uncount previous character and erase it
 _accb:
         CMP pstop, #0 @ is buffer empty?
-        BEQ accl @ ignore a backspace if buffer is empty
+        BEQ _accl @ ignore a backspace if buffer is empty
 
         @ un-count
         SUB indxa, #1
