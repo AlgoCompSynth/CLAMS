@@ -65,9 +65,13 @@ indxb .req r4 @ index register b
         .endm
 
         @ parameter stack macros
-        .macro _PUSHR0
+        .macro _DUP
         SUB pt2nd, #_cell @ stack grows downward
         STR pstop, [pt2nd] @ save top to RAM
+        .endm
+
+        .macro _PUSHR0
+        _DUP
         MOV pstop, r0 @ save argument to `pstop`
         .endm
 
@@ -80,11 +84,6 @@ indxb .req r4 @ index register b
         .macro _DROP
         LDR pstop, [pt2nd]
         ADD pt2nd, #_cell
-        .endm
-
-        .macro _DUP
-        MOV r0, pstop
-        _PUSHR0
         .endm
 
         .macro _ROT
