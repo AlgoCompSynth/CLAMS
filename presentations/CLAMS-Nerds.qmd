@@ -26,17 +26,33 @@ bibliography: ../The-Book-of-CLAMS/references.bib
 - 2 MiB of flash
 - 2.4 GHz WiFi / Bluetooth
 - $7US with debug connector / headers for breadboarding
+- Dozens of compatible devices!
 
-## Build with Raspberry Pi Pico C/C++ SDK
-
-- Documentation:  [@raspberrypi2023a]
+## Initial target device: Pimoroni PicoVision
+- Documentation: [@pimoroni2023a]
+- Raspberry Pi Pico W
+- "GPU" - an overclocked RP2040
+- I2S audio output
+- HDMI output
+- MicroSD card
+- USB
+- ~ $37US
 
 ## Premature optimizations
 - Dictionary split between RAM and flash
 - Subroutine threading
 - Inline coding / assembly
-- Top of stack in register
+- Top of stack / stack pointer in register
 - Engine in assembly
 
-## References
+## Build with Raspberry Pi Pico C/C++ SDK
+- Documentation:  [@raspberrypi2023a]
+- Reference: [@smith2021rp2040]
+- Why this requirement?
+- Coding libraries / drivers ***each*** multi-month projects in ASM / Forth!
+    - USB
+    - WiFi / Bluetooth
+    - I2S audio / HDMI
+    - SD card
 
+## References {.smaller}
