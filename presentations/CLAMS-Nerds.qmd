@@ -9,3 +9,34 @@ format:
 bibliography: ../The-Book-of-CLAMS/references.bib
 ---
 
+# The Prime Directives
+
+## Forth 2012 compatibility?
+- Extended subject of Forth 2012 [@forth2022] standard
+- Not all CORE words implemented
+- Some non-standard word sets implemented
+- But ... 
+    * CLAMS-Forth words ***in*** Forth 2012 work the same way.
+
+## Run on a Raspberry Pi Pico WH
+- Documentation: [@raspberrypi2023b]
+- RP2040 CPU: Dual-core Arm Cortex M0+ with 264 KiB of SRAM
+- Co-processors for division and digital signal processing
+- I/O state machine (PIO) and ***oodles*** of real-world connectivity
+- 2 MiB of flash
+- 2.4 GHz WiFi / Bluetooth
+- $7US with debug connector / headers for breadboarding
+
+## Build with Raspberry Pi Pico C/C++ SDK
+
+- Documentation:  [@raspberrypi2023a]
+
+## Premature optimizations
+- Dictionary split between RAM and flash
+- Subroutine threading
+- Inline coding / assembly
+- Top of stack in register
+- Engine in assembly
+
+## References
+
