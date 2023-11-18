@@ -1,0 +1,11 @@
+---
+title: "CLAMS-Forth for Forth Nerds"
+author: "M. Edward (Ed) Borasky"
+format:
+  beamer:
+    theme: "Montpellier"
+    incremental: false
+    slide_level: 2
+bibliography: ../The-Book-of-CLAMS/references.bib
+---
+
