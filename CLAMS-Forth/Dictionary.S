@@ -167,6 +167,11 @@
 
         @ binary comparison operators
         _BINARY_COMPARE "<", 1, less_than, BLT, _two_slash
+
+        @ The "as" macro processor chokes with mysterious errors if the equal
+        @ sign in the following invocation is enclosed in double quotes rather
+        @ than single quotes. Maybe I'll develop a reprex and file an issue.
+        @ Maybe I won't.
         _BINARY_COMPARE '=', 1, equals, BEQ, _less_than
         _BINARY_COMPARE ">", 1, greater_than, BGT, _equals
         _BINARY_COMPARE "U>", 2, u_greater_than, BHI, _greater_than
@@ -332,6 +337,11 @@ quil:
 
         @ repeat forever-ish
         B quil
+
+        _DICT_HEADER "'", 8, tick, _quit
+        _NEST
+        @ TBD
+        _UNNEST
 
         _DICT_HEADER "EVALUATE", 8, evaluate, _quit
         _NEST
