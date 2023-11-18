@@ -78,15 +78,33 @@
 @ the same `result` as the infix `left <op> right`.
 
         .macro _BINARY_OP opcode
-        LDM pt2nd, {r0, pt2nd} @ pop left operand
-        \opcode pstop, r0, pstop @ pstop := left <OP> pstop
+        LDM pt2nd!, {r0} @ pop left operand => r0
+        \opcode\() pstop, r0, pstop @ pstop := left <OP> pstop
+        _EXIT
         .endm
 
         @ build a dictionary entry for a binary word
         .macro _BINARY_WORD wname, n_bytes, pronunciation, opcode, b_offset=0
         _DICT_HEADER \wname, \n_bytes, \pronunciation, \b_offset
         _BINARY_OP \opcode
+        .endm
+
+@ same thing for comparisons!
+        .macro _BINARY_CP opcode
+        LDM pt2nd!, {r0} @ pop left operand => r0
+        CMP r0, pstop
+        \opcode\() 1f @ branch if true
+        MOV pstop, #0 @ false - set flag to zero
         _EXIT
+1:
+        LDR pstop, _true @ set all-ones true flag
+        _EXIT
+        .endm
+
+        @ build a dictionary entry for a binary compare
+        .macro _BINARY_COMPARE wname, n_bytes, pronunciation, opcode, b_offset=0
+        _DICT_HEADER \wname, \n_bytes, \pronunciation, \b_offset
+        _BINARY_CP \opcode
         .endm
 
 @ dictionary functions
@@ -113,7 +131,11 @@
         _SWAP
         _EXIT
 
-        _DICT_HEADER "!", 1, store, _swap
+        _DICT_HEADER "@" 1, fetch, _swap
+        LDR pstop, [pstop]
+        _EXIT
+
+        _DICT_HEADER "!", 1, store, _fetch
         LDM pt2nd!, {r0-r1}
         STR r0, [pstop]
         MOV pstop, r1
@@ -127,25 +149,7 @@
         MOV pstop, r1
         _EXIT
 
-        _DICT_HEADER "0<", 2, zero_less, _plus_store
-        CMP pstop, #0
-        BLT _c1
-        MOV pstop, #0
-        _EXIT
-_c1:
-        LDR pstop, _true
-        _EXIT
-
-        _DICT_HEADER "0=", 2, zero_equals, _zero_less
-        CMP pstop, #0
-        BEQ _c2
-        MOV pstop, #0
-        _EXIT
-_c2:
-        LDR pstop, _true
-        _EXIT
-
-        _DICT_HEADER "1+", 2, one_plus, _zero_equals
+        _DICT_HEADER "1+", 2, one_plus, _plus_store
         ADD pstop, #1
         _EXIT
 
@@ -161,17 +165,45 @@ _c2:
         ASR pstop, #1
         _EXIT
 
-@ next up <
-        @ binary operators
-        _BINARY_WORD "+", 1, plus, ADD, _two_slash
+        @ binary comparison operators
+        _BINARY_COMPARE "<", 1, less_than, BLT, _two_slash
+        _BINARY_COMPARE '=', 1, equals, BEQ, _less_than
+        _BINARY_COMPARE ">", 1, greater_than, BGT, _equals
+        _BINARY_COMPARE "U>", 2, u_greater_than, BHI, _greater_than
+        _BINARY_COMPARE "U<", 2, u_less_than, BLO, _u_greater_than
+
+        @ arithmetic operators
+        _BINARY_WORD "+", 1, plus, ADD, _u_less_than
         _BINARY_WORD "-", 1, minus, SUB, _plus
         _BINARY_WORD "*", 1, star, MUL, _minus
-        _BINARY_WORD "AND", 3, and, AND, _star
+
+        _DICT_HEADER "NEGATE", 6, negate, _star
+        MVN pstop, pstop
+        _EXIT
+
+        @ boolean operators
+        _BINARY_WORD "AND", 3, and, AND, _negate
         _BINARY_WORD "OR", 2, or, ORR, _and
         _BINARY_WORD "XOR", 3, x_or, EOR, _or
 
+        _DICT_HEADER "INVERT", 6, invert, _x_or
+        MVN pstop, pstop
+        _EXIT
+
+        _DICT_HEADER "LSHIFT", 6, l_shift, _invert
+        LDM pt2nd!, {r0}
+        LSL r0, pstop
+        MOV pstop, r0
+        _EXIT
+
+        _DICT_HEADER "RSHIFT", 6, r_shift, _l_shift
+        LDM pt2nd!, {r0}
+        LSR r0, pstop
+        MOV pstop, r0
+        _EXIT
+
         @ terminal I/O words
-        _DICT_HEADER "KEY", 3, key, _x_or
+        _DICT_HEADER "KEY", 3, key, _r_shift
         _NEST
         BL sdk_key
         _PUSHR0
