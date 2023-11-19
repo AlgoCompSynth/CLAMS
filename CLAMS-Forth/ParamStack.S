@@ -38,6 +38,9 @@
 .global clear_stack
 clear_stack:
         LDR pt2nd, =_stack_bottom
+        LDR r0, =_hamburger
+        _PUSHR0
+        _PUSHR0
         _EXIT
 
 .thumb_func
@@ -72,6 +75,7 @@ stkprint1:
 _stack_format_3: .asciz "stack top => %x, %x, %x\n"
 _stack_format_2: .asciz "stack top => %x, %x\n"
 _stack_format_1: .asciz "stack top => %x\n"
+_hamburger: .word 0xdeadbeef
 
 @ The parameter stack itself
 .data
