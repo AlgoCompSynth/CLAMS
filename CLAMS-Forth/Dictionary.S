@@ -362,4 +362,4 @@ quil:
 .set _system_last_offset, .
         .word _last_offset
 
-_true:   .word 0xFFFFFFFF
+_true:  .word 0xFFFFFFFF
