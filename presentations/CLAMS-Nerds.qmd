@@ -41,18 +41,51 @@ bibliography: ../The-Book-of-CLAMS/references.bib
 ## Premature optimizations
 - Dictionary split between RAM and flash
 - Subroutine threading
-- Inline coding / assembly
-- Top of stack / stack pointer in register
+- Inline compiling / assembly
+- Top of stack / stack pointer in registers
 - Engine in assembly
+- Support multiprocessing and multitasking
+- High-performance vector block floating point DSP library
 
 ## Build with Raspberry Pi Pico C/C++ SDK
 - Documentation:  [@raspberrypi2023a]
 - Reference: [@smith2021rp2040]
-- Why this requirement?
-- Coding libraries / drivers ***each*** multi-month projects in ASM / Forth!
-    - USB
-    - WiFi / Bluetooth
-    - I2S audio / HDMI
-    - SD card
+- Why require Pico SDK?
+
+## Why?
+
+Because coding libraries / drivers are ***each*** multi-month projects in ASM / Forth!
+
+- USB
+- WiFi / Bluetooth
+- I2S audio / HDMI
+- SD card
+- FreeRTOS
+
+# Project status / road map
+
+## Rough schedule
+
+- 2023-11-17: Most of the inner interpreter is done
+- Text interpreter should be done November 24
+- Basic colon compiler should be done December 1
+- I2S audio / HDMI should be done December 8
+- Spend the rest of 2023 building PicoVision demos!!
+
+# Implementation Details
+
+## Workflow
+
+## Languages
+
+## The Forth virtual machine
+
+## The dictionary
+
+## The terminal and USB serial I/O
+
+## I2S audio output
+
+## HDMI video output
 
 ## References {.smaller}
