@@ -38,13 +38,13 @@ bibliography: ../The-Book-of-CLAMS/references.bib
 - USB
 - ~ $37US
 
-## Premature optimizations
+## Premature optimizations / extensions
 - Dictionary split between RAM and flash
-- Subroutine threading
-- Inline compiling / assembly
+- Subroutine threading / inline compiling / assembly
+- Engine in assembly
 - Top of stack / stack pointer in registers
 - Engine in assembly
-- Support multiprocessing and multitasking
+- Support multiprocessing, multitasking, and halfword arithmetic
 - High-performance vector block floating point DSP library
 
 ## Build with Raspberry Pi Pico C/C++ SDK
