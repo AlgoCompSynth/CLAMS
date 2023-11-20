@@ -35,11 +35,14 @@
 #include "pico/stdio.h"
 #include "pico/stdio_usb.h"
 #include "pico/stdio_uart.h"
+#include "hardware/divider.h"
 
+// sleep for specified time in milliseconds
 void sdk_sleep_ms(uint32_t ms) {
   sleep_ms(ms);
 }
 
+// terminal I/O
 void sdk_enable_uart () {
   stdio_set_driver_enabled(&stdio_uart, true);
 }
@@ -65,4 +68,15 @@ int sdk_key () {
 int sdk_emit(int character) {
     int code = putchar_raw(character);
     return(code);
+}
+
+// arithmetic
+int32_t rem;
+int32_t sdk_slash(int32_t dividend, int32_t divisor) {
+    int32_t quotient = divmod_s32s32_rem (dividend, divisor, &rem)
+    return(quotient)
+}
+int32_t sdk_mod(int32_t dividend, int32_t divisor) {
+    int32_t quotient = divmod_s32s32_rem (dividend, divisor, &rem)
+    return(rem)
 }
