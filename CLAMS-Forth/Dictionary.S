@@ -130,7 +130,11 @@ get_dict_addrs:
         _DUP
         _EXIT
 
-        _DICT_HEADER "ROT", 3, rote, _dupe
+        _DICT_HEADER "OVER", 4, over, _dupe
+        _DUP
+        _EXIT
+
+        _DICT_HEADER "ROT", 3, rote, _over
         _ROT
         _EXIT
 
@@ -189,7 +193,23 @@ get_dict_addrs:
         _BINARY_WORD "-", 1, minus, SUB, _plus
         _BINARY_WORD "*", 1, star, MUL, _minus
 
-        _DICT_HEADER "NEGATE", 6, negate, _star
+        _DICT_HEADER "/", 1, slash, _star
+        _NEST
+        LDM pt2nd!, {r0}
+        MOV r0, pstop
+        BL sdk_slash
+        MOV pstop, r0
+        _UNNEST
+
+        _DICT_HEADER "MOD", 1, mod, _slash
+        _NEST
+        LDM pt2nd!, {r0}
+        MOV r0, pstop
+        BL sdk_mod
+        MOV pstop, r0
+        _UNNEST
+
+        _DICT_HEADER "NEGATE", 6, negate, _slash
         MVN pstop, pstop
         _EXIT
 
