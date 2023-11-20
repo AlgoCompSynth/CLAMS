@@ -71,12 +71,11 @@ int sdk_emit(int character) {
 }
 
 // arithmetic
-int32_t rem;
 int32_t sdk_slash(int32_t dividend, int32_t divisor) {
-    int32_t quotient = divmod_s32s32_rem (dividend, divisor, &rem)
-    return(quotient)
+    divmod_result_t result = hw_divider_divmod_s32(dividend, divisor);
+    return(to_quotient_s32(result));
 }
 int32_t sdk_mod(int32_t dividend, int32_t divisor) {
-    int32_t quotient = divmod_s32s32_rem (dividend, divisor, &rem)
-    return(rem)
+    divmod_result_t result = hw_divider_divmod_s32(dividend, divisor);
+    return(to_remainder_s32(result));
 }
