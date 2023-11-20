@@ -35,6 +35,9 @@
 
 main:
 	BL stdio_init_all
+        MOV r0, #255
+        LDR r1, neg127
+        BL sdk_slash_mod
 
 loop:
         LDR r0, =dict_format
@@ -47,4 +50,5 @@ loop:
 
 .balign _cell, 0
 sleep_ms: .word 5000
+neg127: .word -127
 dict_format: .asciz "dictionary start, end: %x, %x\n"

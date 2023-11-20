@@ -71,11 +71,9 @@ int sdk_emit(int character) {
 }
 
 // arithmetic
-int32_t sdk_slash(int32_t dividend, int32_t divisor) {
+
+// returns quotient in r0 and remainder in r1!
+int32_t sdk_slash_mod(int32_t dividend, int32_t divisor) {
     divmod_result_t result = hw_divider_divmod_s32(dividend, divisor);
-    return(to_quotient_s32(result));
-}
-int32_t sdk_mod(int32_t dividend, int32_t divisor) {
-    divmod_result_t result = hw_divider_divmod_s32(dividend, divisor);
-    return(to_remainder_s32(result));
+    return(result);
 }

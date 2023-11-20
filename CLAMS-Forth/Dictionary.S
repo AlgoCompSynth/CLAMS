@@ -193,23 +193,29 @@ get_dict_addrs:
         _BINARY_WORD "-", 1, minus, SUB, _plus
         _BINARY_WORD "*", 1, star, MUL, _minus
 
-        _DICT_HEADER "/", 1, slash, _star
+        _DICT_HEADER "/MOD", 4, slash_mod, _star
         _NEST
-        LDM pt2nd!, {r0}
-        MOV r0, pstop
-        BL sdk_slash
-        MOV pstop, r0
+        LDR r0, [pt2nd] @ dividend => r0
+        MOV r1, pstop @ divisor => r1
+        BL sdk_slash_mod
+        MOV pstop, r0 @ quotient => top of stack
+        STR r1, [pt2nd] @ remainder => 2nd
         _UNNEST
 
-        _DICT_HEADER "MOD", 1, mod, _slash
+        _DICT_HEADER "/", 1, slash, _slash_mod
         _NEST
-        LDM pt2nd!, {r0}
-        MOV r0, pstop
-        BL sdk_mod
-        MOV pstop, r0
+        BL slash_mod
+        _SWAP
+        _DROP
         _UNNEST
 
-        _DICT_HEADER "NEGATE", 6, negate, _slash
+        _DICT_HEADER "MOD", 3, mod, _slash
+        _NEST
+        BL slash_mod
+        _DROP
+        _UNNEST
+
+        _DICT_HEADER "NEGATE", 6, negate, _mod
         MVN pstop, pstop
         _EXIT
 
