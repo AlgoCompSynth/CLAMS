@@ -75,6 +75,11 @@ indxb .req r4 @ index register b
         MOV pstop, r0 @ save argument to `pstop`
         .endm
 
+        .macro _OVER
+        _DUP
+        LDR pstop, [pt2nd, #_cell*2] @ replace top of stack with 3rd
+        .endm
+
         .macro _SWAP
         LDR r0, [pt2nd]
         STR pstop, [pt2nd]
