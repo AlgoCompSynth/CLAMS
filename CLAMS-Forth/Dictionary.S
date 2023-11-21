@@ -77,6 +77,43 @@ get_dict_addrs:
 
         .endm
 
+        .macro _CREATE wname, pronunciation, flags=0
+        .set _IMMEDIATE, 1 @ immediate word
+        .set _COMPILE_ONLY, 2 @ compile-only word
+        .set _MACRO, 4 @ copy this word into a definition rather than call it
+
+        @ define header label
+        .balign _cell, 0
+        .set _\pronunciation, .
+
+        @ build link field
+        .if . == _system_dict_start
+          .hword 0
+        .else
+          .hword . - _previous_link_address
+        .endif
+        .set _previous_link_address, . - 2
+
+        @ build flags field
+        .hword \flags
+
+        @ build name field
+        .set _count, 1f - . - 1
+        .byte _count
+        .ascii "\wname"
+1:
+        .balign _cell, 0
+
+        @ define test entry point
+        .thumb_func
+        .global \pronunciation
+        .set \pronunciation, .
+
+        .endm
+
+        _CREATE "DUMMY1", dummy1, _MACRO + _IMMEDIATE + _COMPILE_ONLY
+        _CREATE "MUDDY22", muddy22
+
 @ Common code for a word that uses a single instruction binary operator on the
 @ top two stack cells. Such words have the stack effect
 @
