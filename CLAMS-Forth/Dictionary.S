@@ -51,33 +51,7 @@ get_dict_addrs:
 @ to find the previous word. A backwards offset of zero marks the end of the
 @ dictionary!
 
-        .macro _DICT_HEADER wname, n_bytes, pronunciation, b_offset=0
-
-        @ define header label
-        .balign _cell, 0
-        .set _\pronunciation, .
-        .set _last_offset, . - _system_dict_start
-
-        @ build link field
-        .if \b_offset == 0
-          .word 0
-        .else
-          .word . - \b_offset
-        .endif
-
-        @ build name field
-        .byte \n_bytes
-        .ascii "\wname"
-        .balign _cell, 0
-
-        @ define test entry point
-        .thumb_func
-        .global \pronunciation
-        .set \pronunciation, .
-
-        .endm
-
-        .macro _CREATE wname, pronunciation, flags=0
+        .macro _HEADER wname, pronunciation, flags=0
         .set _IMMEDIATE, 1 @ immediate word
         .set _COMPILE_ONLY, 2 @ compile-only word
         .set _INLINE, 4 @ copy this word into a definition rather than call it
@@ -111,8 +85,8 @@ get_dict_addrs:
 
         .endm
 
-        _CREATE "MUDDY22", muddy22
-        _CREATE "DUMMY1", dummy1, _INLINE + _IMMEDIATE + _COMPILE_ONLY
+        _HEADER "MUDDY22", muddy22
+        _HEADER "DUMMY1", dummy1, _INLINE + _IMMEDIATE + _COMPILE_ONLY
 
 @ Common code for a word that uses a single instruction binary operator on the
 @ top two stack cells. Such words have the stack effect
@@ -129,8 +103,8 @@ get_dict_addrs:
         .endm
 
         @ build a dictionary entry for a binary word
-        .macro _BINARY_WORD wname, n_bytes, pronunciation, opcode, b_offset=0
-        _DICT_HEADER \wname, \n_bytes, \pronunciation, \b_offset
+        .macro _BINARY_WORD wname, pronunciation, opcode, flags
+        _HEADER \wname, \pronunciation, \flags
         _BINARY_OP \opcode
         .endm
 
@@ -147,8 +121,8 @@ get_dict_addrs:
         .endm
 
         @ build a dictionary entry for a binary compare
-        .macro _BINARY_COMPARE wname, n_bytes, pronunciation, opcode, b_offset=0
-        _DICT_HEADER \wname, \n_bytes, \pronunciation, \b_offset
+        .macro _BINARY_COMPARE wname, pronunciation, opcode, flags
+        _HEADER \wname, \pronunciation, \flags
         _BINARY_CP \opcode
         .endm
 
@@ -159,37 +133,37 @@ get_dict_addrs:
 .set _system_dict_start, .
 
         @ stack operators
-        _DICT_HEADER "DROP", 4, drop, 0
+        _HEADER "DROP", drop, _INLINE
         _DROP
         _EXIT
 
-        _DICT_HEADER "DUP", 3, dupe, _drop
+        _HEADER "DUP", dupe, _INLINE
         _DUP
         _EXIT
 
-        _DICT_HEADER "OVER", 4, over, _dupe
+        _HEADER "OVER", over, _INLINE
         _DUP
         _EXIT
 
-        _DICT_HEADER "ROT", 3, rote, _over
+        _HEADER "ROT", rote, _INLINE
         _ROT
         _EXIT
 
-        _DICT_HEADER "SWAP", 4, swap, _rote
+        _HEADER "SWAP", swap, _INLINE
         _SWAP
         _EXIT
 
-        _DICT_HEADER "@" 1, fetch, _swap
+        _HEADER "@", fetch, _INLINE
         LDR pstop, [pstop]
         _EXIT
 
-        _DICT_HEADER "!", 1, store, _fetch
+        _HEADER "!", store, _INLINE
         LDM pt2nd!, {r0-r1}
         STR r0, [pstop]
         MOV pstop, r1
         _EXIT
 
-        _DICT_HEADER "+!", 2, plus_store, _store
+        _HEADER "+!", plus_store, _INLINE
         LDM pt2nd!, {r0-r1}
         LDR r2, [pstop]
         ADD r2, r0
@@ -197,40 +171,40 @@ get_dict_addrs:
         MOV pstop, r1
         _EXIT
 
-        _DICT_HEADER "1+", 2, one_plus, _plus_store
+        _HEADER "1+", one_plus, _INLINE
         ADD pstop, #1
         _EXIT
 
-        _DICT_HEADER "1-", 2, one_minus, _one_plus
+        _HEADER "1-", one_minus, _INLINE
         SUB pstop, #1
         _EXIT
 
-        _DICT_HEADER "2*", 2, two_star, _one_minus
+        _HEADER "2*", two_star, _INLINE
         LSL pstop, #1
         _EXIT
 
-        _DICT_HEADER "2/", 2, two_slash, _two_star
+        _HEADER "2/", two_slash, _INLINE
         ASR pstop, #1
         _EXIT
 
         @ binary comparison operators
-        _BINARY_COMPARE "<", 1, less_than, BLT, _two_slash
+        _BINARY_COMPARE "<", less_than, BLT, _INLINE
 
         @ The "as" macro processor chokes with mysterious errors if the equal
         @ sign in the following invocation is enclosed in double quotes rather
         @ than single quotes. Maybe I'll develop a reprex and file an issue.
         @ Maybe I won't.
-        _BINARY_COMPARE '=', 1, equals, BEQ, _less_than
-        _BINARY_COMPARE ">", 1, greater_than, BGT, _equals
-        _BINARY_COMPARE "U>", 2, u_greater_than, BHI, _greater_than
-        _BINARY_COMPARE "U<", 2, u_less_than, BLO, _u_greater_than
+        _BINARY_COMPARE '=', equals, BEQ, _INLINE
+        _BINARY_COMPARE ">", greater_than, BGT, _INLINE
+        _BINARY_COMPARE "U>", u_greater_than, BHI, _INLINE
+        _BINARY_COMPARE "U<", u_less_than, BLO, _INLINE
 
         @ arithmetic operators
-        _BINARY_WORD "+", 1, plus, ADD, _u_less_than
-        _BINARY_WORD "-", 1, minus, SUB, _plus
-        _BINARY_WORD "*", 1, star, MUL, _minus
+        _BINARY_WORD "+", plus, ADD, _INLINE
+        _BINARY_WORD "-", minus, SUB, _INLINE
+        _BINARY_WORD "*", star, MUL, _INLINE
 
-        _DICT_HEADER "/MOD", 4, slash_mod, _star
+        _HEADER "/MOD", slash_mod
         _NEST
         LDR r0, [pt2nd] @ dividend => r0
         MOV r1, pstop @ divisor => r1
@@ -239,52 +213,52 @@ get_dict_addrs:
         STR r1, [pt2nd] @ remainder => 2nd
         _UNNEST
 
-        _DICT_HEADER "/", 1, slash, _slash_mod
+        _HEADER "/", slash
         _NEST
         BL slash_mod
         _SWAP
         _DROP
         _UNNEST
 
-        _DICT_HEADER "MOD", 3, mod, _slash
+        _HEADER "MOD", mod
         _NEST
         BL slash_mod
         _DROP
         _UNNEST
 
-        _DICT_HEADER "NEGATE", 6, negate, _mod
+        _HEADER "NEGATE", negate, _INLINE
         MVN pstop, pstop
         _EXIT
 
         @ boolean operators
-        _BINARY_WORD "AND", 3, and, AND, _negate
-        _BINARY_WORD "OR", 2, or, ORR, _and
-        _BINARY_WORD "XOR", 3, x_or, EOR, _or
+        _BINARY_WORD "AND", and, AND, _INLINE
+        _BINARY_WORD "OR", or, ORR, _INLINE
+        _BINARY_WORD "XOR", x_or, EOR, _INLINE
 
-        _DICT_HEADER "INVERT", 6, invert, _x_or
+        _HEADER "INVERT", invert, _INLINE
         MVN pstop, pstop
         _EXIT
 
-        _DICT_HEADER "LSHIFT", 6, l_shift, _invert
+        _HEADER "LSHIFT", l_shift, _INLINE
         LDM pt2nd!, {r0}
         LSL r0, pstop
         MOV pstop, r0
         _EXIT
 
-        _DICT_HEADER "RSHIFT", 6, r_shift, _l_shift
+        _HEADER "RSHIFT", r_shift, _INLINE
         LDM pt2nd!, {r0}
         LSR r0, pstop
         MOV pstop, r0
         _EXIT
 
         @ terminal I/O words
-        _DICT_HEADER "KEY", 3, key, _r_shift
+        _HEADER "KEY", key
         _NEST
         BL sdk_key
         _PUSHR0
         _UNNEST
 
-        _DICT_HEADER "EMIT", 4, emit, _key
+        _HEADER "EMIT", emit
         _NEST
         MOV r0, pstop
         BL sdk_emit
@@ -297,7 +271,7 @@ get_dict_addrs:
 .set _bl, 32 @ space
 .set _del, 127 @ delete
 
-        _DICT_HEADER "ACCEPT", 6, accept, _emit
+        _HEADER "ACCEPT", accept
         _NEST
 
         @ On entry, the top of the stack has the maximum allowed characters and
@@ -362,7 +336,7 @@ _accz:
         _UNNEST
         @ whew!
 
-        _DICT_HEADER "TYPE", 4, type, _accept
+        _HEADER "TYPE", type
         _NEST
         CMP pstop, #0 @ check for early exit
         BLE typz
@@ -382,7 +356,7 @@ typz:
         _UNNEST
 
 @ finally, the text interpreter!!
-        _DICT_HEADER "QUIT", 4, quit, _accept
+        _HEADER "QUIT", quit
 
         @ we ***don't*** clear the return stack - that is a big hairy no-no!
         @ and we don't need _NEST / _UNNEST because we weren't called and won't
@@ -408,12 +382,12 @@ quil:
         @ repeat forever-ish
         B quil
 
-        _DICT_HEADER "'", 8, tick, _quit
+        _HEADER "'", tick
         _NEST
         @ TBD
         _UNNEST
 
-        _DICT_HEADER "EVALUATE", 8, evaluate, _quit
+        _HEADER "EVALUATE", evaluate
         _NEST
         @ TBD
         _UNNEST
@@ -421,8 +395,8 @@ quil:
 .global _system_dict_end
 .set _system_dict_end, .
 
-.global _system_last_offset
-.set _system_last_offset, .
-        .word _last_offset
+.global _system_last_link
+.set _system_last_link, .
+        .word _previous_link_address
 
 _true:  .word 0xFFFFFFFF
