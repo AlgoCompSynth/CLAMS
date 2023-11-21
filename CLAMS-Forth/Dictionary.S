@@ -80,7 +80,7 @@ get_dict_addrs:
         .macro _CREATE wname, pronunciation, flags=0
         .set _IMMEDIATE, 1 @ immediate word
         .set _COMPILE_ONLY, 2 @ compile-only word
-        .set _MACRO, 4 @ copy this word into a definition rather than call it
+        .set _INLINE, 4 @ copy this word into a definition rather than call it
 
         @ define header label
         .balign _cell, 0
@@ -111,8 +111,8 @@ get_dict_addrs:
 
         .endm
 
-        _CREATE "DUMMY1", dummy1, _MACRO + _IMMEDIATE + _COMPILE_ONLY
         _CREATE "MUDDY22", muddy22
+        _CREATE "DUMMY1", dummy1, _INLINE + _IMMEDIATE + _COMPILE_ONLY
 
 @ Common code for a word that uses a single instruction binary operator on the
 @ top two stack cells. Such words have the stack effect
