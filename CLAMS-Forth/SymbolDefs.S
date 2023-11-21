@@ -26,22 +26,32 @@
 
 */
 
-@ SDK functions save registers r4 - r11, so we can use them without saving.
-@ However, r8 - r11 have limited functionality, so we reserve them for
-@ frequently used constants and temporary storage.
-
-tmpra .req r11
-tmprb .req r10
-tmprc .req r9
-tmprd .req r8
+@ Pico SDK functions save registers r4 - r11, so we can use them without saving.
+@ However, r8 - r11 have limited functionality - essentially only source and
+@ destination of a MOV and one operand of a CMP.
 
 @ parameter stack registers
 pt2nd .req r7 @ pointer to second parameter stack cell
 pstop .req r6 @ top cell of parameter stack
 
-@ general-purpose address / count registers for loops
+@ see Pelc, Stephen, "Updating the Forth Virtual Machine", 
+@ https://www.complang.tuwien.ac.at/anton/euroforth/ef08/papers/pelc.pdf,
+@ accessed 2023-11-20
+
+@ index-scratch registers
 indxa .req r5 @ index register a
 indxb .req r4 @ index register b
+
+@ memory pointer - base + literal addressing
+@ Pelc only calls for two of these but we have the registers to spare. These can
+@ be used as a third, fourth, fifth and sixth hand to eliminate a lot of memory
+@ traffic. The addressing operations Pelc assigns to these registers must be
+@ done via a working register among r0-r3, which costs one cycle. We anticipate
+@ such operations will be inlined in compiled words.
+mptrw .req r11
+mptrx .req r10
+mptry .req r9
+mptrz .req r8
 
 @ symbols for addressing expressions
 .set _byte, 1 @ bytes

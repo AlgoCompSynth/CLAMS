@@ -277,7 +277,7 @@ get_dict_addrs:
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
-        MOV tmpra, pstop @ save maximum count in `tmpra`
+        MOV mptrw, pstop @ save maximum count in `mptrw`
         LDR indxa, [pt2nd] @ load the address to `indxa`
         MOV pstop, #0 @ the actual count ends up here!
 _accl:
@@ -303,7 +303,7 @@ _acce:
         @ count
         ADD indxa, #1
         ADD pstop, #1
-        CMP pstop, tmpra @ did we hit the limit?
+        CMP pstop, mptrw @ did we hit the limit?
         BEQ _accz @ early exit if limit hit
 	B _accl @ go back for more!
 
