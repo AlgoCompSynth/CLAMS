@@ -413,7 +413,7 @@ Disassembly of section .text:
 100003bc:	0031594d 	.word	0x0031594d
 
 100003c0 <_system_dict_start>:
-100003c0:	00000000 	.word	0x00000000
+100003c0:	0004000c 	.word	0x0004000c
 100003c4:	4f524404 	.word	0x4f524404
 100003c8:	00000050 	.word	0x00000050
 
@@ -424,7 +424,7 @@ Disassembly of section .text:
 	...
 
 100003d4 <_dupe>:
-100003d4:	00000014 	.word	0x00000014
+100003d4:	00040014 	.word	0x00040014
 100003d8:	50554403 	.word	0x50554403
 
 100003dc <dupe>:
@@ -434,7 +434,7 @@ Disassembly of section .text:
 	...
 
 100003e4 <_over>:
-100003e4:	00000010 	.word	0x00000010
+100003e4:	00040010 	.word	0x00040010
 100003e8:	45564f04 	.word	0x45564f04
 100003ec:	00000052 	.word	0x00000052
 
@@ -445,7 +445,7 @@ Disassembly of section .text:
 	...
 
 100003f8 <_rote>:
-100003f8:	00000014 	.word	0x00000014
+100003f8:	00040014 	.word	0x00040014
 100003fc:	544f5203 	.word	0x544f5203
 
 10000400 <rote>:
@@ -457,7 +457,7 @@ Disassembly of section .text:
 	...
 
 1000040c <_swap>:
-1000040c:	00000014 	.word	0x00000014
+1000040c:	00040014 	.word	0x00040014
 10000410:	41575304 	.word	0x41575304
 10000414:	00000050 	.word	0x00000050
 
@@ -468,7 +468,7 @@ Disassembly of section .text:
 1000041e:	4770      	bx	lr
 
 10000420 <_fetch>:
-10000420:	00000014 	.word	0x00000014
+10000420:	00040014 	.word	0x00040014
 10000424:	00004001 	.word	0x00004001
 
 10000428 <fetch>:
@@ -476,7 +476,7 @@ Disassembly of section .text:
 1000042a:	4770      	bx	lr
 
 1000042c <_store>:
-1000042c:	0000000c 	.word	0x0000000c
+1000042c:	0004000c 	.word	0x0004000c
 10000430:	00002101 	.word	0x00002101
 
 10000434 <store>:
@@ -486,7 +486,7 @@ Disassembly of section .text:
 1000043a:	4770      	bx	lr
 
 1000043c <_plus_store>:
-1000043c:	00000010 	.word	0x00000010
+1000043c:	00040010 	.word	0x00040010
 10000440:	00212b02 	.word	0x00212b02
 
 10000444 <plus_store>:
@@ -498,7 +498,7 @@ Disassembly of section .text:
 1000044e:	4770      	bx	lr
 
 10000450 <_one_plus>:
-10000450:	00000014 	.word	0x00000014
+10000450:	00040014 	.word	0x00040014
 10000454:	002b3102 	.word	0x002b3102
 
 10000458 <one_plus>:
@@ -506,7 +506,7 @@ Disassembly of section .text:
 1000045a:	4770      	bx	lr
 
 1000045c <_one_minus>:
-1000045c:	0000000c 	.word	0x0000000c
+1000045c:	0004000c 	.word	0x0004000c
 10000460:	002d3102 	.word	0x002d3102
 
 10000464 <one_minus>:
@@ -514,7 +514,7 @@ Disassembly of section .text:
 10000466:	4770      	bx	lr
 
 10000468 <_two_star>:
-10000468:	0000000c 	.word	0x0000000c
+10000468:	0004000c 	.word	0x0004000c
 1000046c:	002a3202 	.word	0x002a3202
 
 10000470 <two_star>:
@@ -522,7 +522,7 @@ Disassembly of section .text:
 10000472:	4770      	bx	lr
 
 10000474 <_two_slash>:
-10000474:	0000000c 	.word	0x0000000c
+10000474:	0004000c 	.word	0x0004000c
 10000478:	002f3202 	.word	0x002f3202
 
 1000047c <two_slash>:
@@ -530,7 +530,7 @@ Disassembly of section .text:
 1000047e:	4770      	bx	lr
 
 10000480 <_less_than>:
-10000480:	0000000c 	.word	0x0000000c
+10000480:	0004000c 	.word	0x0004000c
 10000484:	00003c01 	.word	0x00003c01
 
 10000488 <less_than>:
@@ -544,8 +544,8 @@ Disassembly of section .text:
 	...
 
 10000498 <_equals>:
-10000498:	00000018 	.word	0x00000018
-1000049c:	00313601 	.word	0x00313601
+10000498:	00040018 	.word	0x00040018
+1000049c:	00313602 	.word	0x00313602
 
 100004a0 <equals>:
 100004a0:	cf01      	ldmia	r7!, {r0}
@@ -558,7 +558,7 @@ Disassembly of section .text:
 	...
 
 100004b0 <_greater_than>:
-100004b0:	00000018 	.word	0x00000018
+100004b0:	00040018 	.word	0x00040018
 100004b4:	00003e01 	.word	0x00003e01
 
 100004b8 <greater_than>:
@@ -572,7 +572,7 @@ Disassembly of section .text:
 	...
 
 100004c8 <_u_greater_than>:
-100004c8:	00000018 	.word	0x00000018
+100004c8:	00040018 	.word	0x00040018
 100004cc:	003e5502 	.word	0x003e5502
 
 100004d0 <u_greater_than>:
@@ -586,7 +586,7 @@ Disassembly of section .text:
 	...
 
 100004e0 <_u_less_than>:
-100004e0:	00000018 	.word	0x00000018
+100004e0:	00040018 	.word	0x00040018
 100004e4:	003c5502 	.word	0x003c5502
 
 100004e8 <u_less_than>:
@@ -600,7 +600,7 @@ Disassembly of section .text:
 	...
 
 100004f8 <_plus>:
-100004f8:	00000018 	.word	0x00000018
+100004f8:	00040018 	.word	0x00040018
 100004fc:	00002b01 	.word	0x00002b01
 
 10000500 <plus>:
@@ -610,7 +610,7 @@ Disassembly of section .text:
 	...
 
 10000508 <_minus>:
-10000508:	00000010 	.word	0x00000010
+10000508:	00040010 	.word	0x00040010
 1000050c:	00002d01 	.word	0x00002d01
 
 10000510 <minus>:
@@ -620,7 +620,7 @@ Disassembly of section .text:
 	...
 
 10000518 <_star>:
-10000518:	00000010 	.word	0x00000010
+10000518:	00040010 	.word	0x00040010
 1000051c:	00002a01 	.word	0x00002a01
 
 10000520 <star>:
@@ -670,7 +670,7 @@ Disassembly of section .text:
 10000572:	bd00      	pop	{pc}
 
 10000574 <_negate>:
-10000574:	00000014 	.word	0x00000014
+10000574:	00040014 	.word	0x00040014
 10000578:	47454e06 	.word	0x47454e06
 1000057c:	00455441 	.word	0x00455441
 
@@ -679,7 +679,7 @@ Disassembly of section .text:
 10000582:	4770      	bx	lr
 
 10000584 <_and>:
-10000584:	00000010 	.word	0x00000010
+10000584:	00040010 	.word	0x00040010
 10000588:	444e4103 	.word	0x444e4103
 
 1000058c <and>:
@@ -689,7 +689,7 @@ Disassembly of section .text:
 	...
 
 10000594 <_or>:
-10000594:	00000010 	.word	0x00000010
+10000594:	00040010 	.word	0x00040010
 10000598:	00524f02 	.word	0x00524f02
 
 1000059c <or>:
@@ -699,7 +699,7 @@ Disassembly of section .text:
 	...
 
 100005a4 <_x_or>:
-100005a4:	00000010 	.word	0x00000010
+100005a4:	00040010 	.word	0x00040010
 100005a8:	524f5803 	.word	0x524f5803
 
 100005ac <x_or>:
@@ -709,7 +709,7 @@ Disassembly of section .text:
 	...
 
 100005b4 <_invert>:
-100005b4:	00000010 	.word	0x00000010
+100005b4:	00040010 	.word	0x00040010
 100005b8:	564e4906 	.word	0x564e4906
 100005bc:	00545245 	.word	0x00545245
 
@@ -718,7 +718,7 @@ Disassembly of section .text:
 100005c2:	4770      	bx	lr
 
 100005c4 <_l_shift>:
-100005c4:	00000010 	.word	0x00000010
+100005c4:	00040010 	.word	0x00040010
 100005c8:	48534c06 	.word	0x48534c06
 100005cc:	00544649 	.word	0x00544649
 
@@ -729,7 +729,7 @@ Disassembly of section .text:
 100005d6:	4770      	bx	lr
 
 100005d8 <_r_shift>:
-100005d8:	00000014 	.word	0x00000014
+100005d8:	00040014 	.word	0x00040014
 100005dc:	48535206 	.word	0x48535206
 100005e0:	00544649 	.word	0x00544649
 
@@ -843,7 +843,7 @@ Disassembly of section .text:
 	...
 
 100006a4 <_quit>:
-100006a4:	00000084 	.word	0x00000084
+100006a4:	00000028 	.word	0x00000028
 100006a8:	49555104 	.word	0x49555104
 100006ac:	00000054 	.word	0x00000054
 
@@ -870,14 +870,14 @@ Disassembly of section .text:
 
 100006e0 <_tick>:
 100006e0:	0000003c 	.word	0x0000003c
-100006e4:	00002708 	.word	0x00002708
+100006e4:	00002701 	.word	0x00002701
 
 100006e8 <tick>:
 100006e8:	b500      	push	{lr}
 100006ea:	bd00      	pop	{pc}
 
 100006ec <_evaluate>:
-100006ec:	00000048 	.word	0x00000048
+100006ec:	0000000c 	.word	0x0000000c
 100006f0:	41564508 	.word	0x41564508
 100006f4:	5441554c 	.word	0x5441554c
 100006f8:	00000045 	.word	0x00000045
@@ -887,7 +887,7 @@ Disassembly of section .text:
 100006fe:	bd00      	pop	{pc}
 
 10000700 <_system_dict_end>:
-10000700:	0000032c 	.word	0x0000032c
+10000700:	100006ec 	.word	0x100006ec
 
 10000704 <_true>:
 10000704:	ffffffff 	.word	0xffffffff
