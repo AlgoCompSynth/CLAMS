@@ -39,8 +39,8 @@ pstop .req r6 @ top cell of parameter stack
 @ accessed 2023-11-20
 
 @ index-scratch registers
-indxa .req r5 @ index register a
-indxb .req r4 @ index register b
+INDXA .req r5 @ index register a
+INDXB .req r4 @ index register b
 
 @ memory pointer - base + literal addressing
 @ Pelc only calls for two of these but we have the registers to spare. These can
@@ -48,10 +48,10 @@ indxb .req r4 @ index register b
 @ traffic. The addressing operations Pelc assigns to these registers must be
 @ done via a working register among r0-r3, which costs one cycle. We anticipate
 @ such operations will be inlined in compiled words.
-mptrw .req r11
-mptrx .req r10
-mptry .req r9
-mptrz .req r8
+MPTRW .req r11
+MPTRX .req r10
+MPTRY .req r9
+MPTRZ .req r8
 
 @ symbols for addressing expressions
 .set _byte, 1 @ bytes
@@ -107,4 +107,62 @@ mptrz .req r8
         STR pstop, [pt2nd] @ stash x3
         LDR pstop, [pt2nd, #_cell] @ get x1
         STR r0, [pt2nd, #_cell] @ stash x2
+        .endm
+
+        @ enhanced register macros
+        @ to and from stack
+        .macro _TO_INDX register
+        MOV INDX\register, pstop
+        _DROP
+        .endm
+        .macro _INDX_FROM register
+        _DUP
+        MOV pstop, INDX\register
+        .endm
+        .macro _TO_MPTR register
+        MOV MPTR\register, pstop
+        _DROP
+        .endm
+        .macro _MPTR_FROM register
+        _DUP
+        MOV pstop, MPTR\register
+        .endm
+
+        @ index operations
+        .macro _POST_OP post_op=""
+        .if \post_op == "+"
+          ADD INDX\register, #_cell
+        .elseif \post_op == "-"
+          SUB INDX\register, #_cell
+        .elseif \post_op == "+C"
+          ADD INDX\register, #1
+        .elseif \post_op == "-C"
+          SUB INDX\register, #1
+        .endif
+        .endm
+        .macro _FETCH_INDX register, post_op=""
+        _DUP
+        LDR pstop, [INDX\register]
+        _POST_OP \post_op
+        .endm
+        .macro _STORE_INDX register, post_op=""
+        STR pstop, [INDX\register]
+        _DROP
+        _POST_OP \post_op=""
+        .endm
+
+        @ memory pointer operations
+        @ these clobber r0!!!
+        .macro _ADD_OFFSET register
+        MOV r0, MPTR\register
+        ADD r0, pstop
+        .endm
+        .macro _FETCH_MPTR register
+        _ADD_OFFSET \register
+        LDR pstop, [r0]
+        .endm
+        .macro _STORE_MPTR register
+        _ADD_OFFSET \register
+        _DROP
+        STR pstop, [r0]
         .endm

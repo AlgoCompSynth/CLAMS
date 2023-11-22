@@ -277,8 +277,8 @@ get_dict_addrs:
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
-        MOV mptrw, pstop @ save maximum count in `mptrw`
-        LDR indxa, [pt2nd] @ load the address to `indxa`
+        MOV MPTRW, pstop @ save maximum count in `MPTRW`
+        LDR INDXA, [pt2nd] @ load the address to `INDXA`
         MOV pstop, #0 @ the actual count ends up here!
 _accl:
         BL sdk_key @ wait for character, which will show up in r0
@@ -297,13 +297,13 @@ _accl:
 
         @ an ordinary printable character - echo it and append to buffer
 _acce:
-        STR r0, [indxa] @ append to buffer
+        STR r0, [INDXA] @ append to buffer
         BL sdk_emit @ printable - send it out!
 
         @ count
-        ADD indxa, #1
+        ADD INDXA, #1
         ADD pstop, #1
-        CMP pstop, mptrw @ did we hit the limit?
+        CMP pstop, MPTRW @ did we hit the limit?
         BEQ _accz @ early exit if limit hit
 	B _accl @ go back for more!
 
@@ -318,7 +318,7 @@ _accb:
         BEQ _accl @ ignore a backspace if buffer is empty
 
         @ un-count
-        SUB indxa, #1
+        SUB INDXA, #1
         SUB pstop, #1
 
         @ erase previous character
@@ -341,12 +341,12 @@ _accz:
         CMP pstop, #0 @ check for early exit
         BLE typz
 
-        LDR indxa, [pt2nd] @ get the address
+        LDR INDXA, [pt2nd] @ get the address
 
 typl:
-        LDR r0, [indxa]
+        LDR r0, [INDXA]
         BL sdk_emit @ emit the character
-        ADD indxa, #1 @ next in buffer
+        ADD INDXA, #1 @ next in buffer
         SUB pstop, #1 @ count down
         BNE typl @ continue if count not zero
 
@@ -354,6 +354,16 @@ typz:
         ADD pt2nd, #_cell*2 @ we consumed two cells
         LDR pstop, [pt2nd, #_cell] @ fix top of stack
         _UNNEST
+
+        @ number input/output
+        _HEADER "BASE", "base"
+        _NEST
+        MOV r0, pstop
+        _PUSHR0
+        BL _base_addr
+        MOV pstop, r0
+        _UNNEST
+
 
 @ finally, the text interpreter!!
         _HEADER "QUIT", quit
@@ -365,7 +375,7 @@ quil:
         @ push input buffer address and length to stack
         BL _inbuf_addr
         _PUSHR0
-        BL _inbuf_max
+        BL _inbuf_length
         _PUSHR0
 
         @ get a line from user

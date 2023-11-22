@@ -29,32 +29,42 @@
 .include "SymbolDefs.S"
 
 @ User variables
-        .macro _USER_VARIABLE name:req, default=0
-        .global \name
+
+        .macro _USER_VARIABLE name:req, value=0
+
+        @ make the variable
         .set \name, .
-        .word \default
+        .word \value
+
+        @ address getter function
+        .global \name\()_addr
+        .thumb_func
+        .set \name\()_addr, .
+        LDR r0, =\name
+        _EXIT
         .endm
 
+_USER_VARIABLE _base, 10 @ base for numeric input/output
+
 @ String buffers
-        .macro _STRING_BUF name:req
+        .macro _STRING_BUF name:req, length=128
 
         @ make the buffer
-        .global \name
         .set \name, .
-        .rept 256
+        .rept \length
         .byte 0
         .endr
 
-        @ routines to get address and length
-        .set \name\()_addr, .
+        @ functions to get address and length
         .global \name\()_addr
         .thumb_func
+        .set \name\()_addr, .
         LDR r0, =\name
         _EXIT
-        .set \name\()_max, .
-        .global \name\()_max
+        .global \name\()_length
         .thumb_func
-        MOV r0, #255
+        .set \name\()_length, .
+        LDR r0, =\length
         _EXIT
         .endm
 
