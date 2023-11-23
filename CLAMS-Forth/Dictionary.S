@@ -28,6 +28,15 @@
 
 .include "SymbolDefs.S"
 
+@ C function call macros
+
+        @ We need to call our SDK wrappers with a BLX; they're too far away for BL.
+        .macro sdk_func_call name
+        .global \name
+        LDR r3, =\name @ get the address
+        BLX r3
+        .endm
+
 @ dictionary construction macros
 
 @ dictionary header
@@ -202,21 +211,21 @@
         _NEST
         LDR r0, [pt2nd] @ dividend => r0
         MOV r1, pstop @ divisor => r1
-        BL sdk_slash_mod
+        sdk_func_call sdk_slash_mod
         MOV pstop, r0 @ quotient => top of stack
         STR r1, [pt2nd] @ remainder => 2nd
         _UNNEST
 
         _HEADER "/", slash
         _NEST
-        BL slash_mod
+        sdk_func_call sdk_slash_mod
         _SWAP
         _DROP
         _UNNEST
 
         _HEADER "MOD", mod
         _NEST
-        BL slash_mod
+        sdk_func_call sdk_slash_mod
         _DROP
         _UNNEST
 
@@ -248,109 +257,109 @@
         @ terminal I/O words
         _HEADER "KEY", key
         _NEST
-        BL sdk_key
+        sdk_func_call sdk_key
         _PUSHR0
         _UNNEST
 
         _HEADER "EMIT", emit
         _NEST
         MOV r0, pstop
-        BL sdk_emit
+        sdk_func_call sdk_emit
         _DROP
         _UNNEST
 
-        _HEADER "ACCEPT", accept
-        _NEST
+        @ _HEADER "ACCEPT", accept
+        @ _NEST
 
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
-        MOV MPTRW, pstop @ save maximum count in `MPTRW`
-        LDR INDXA, [pt2nd] @ load the address to `INDXA`
-        MOV pstop, #0 @ the actual count ends up here!
+        @ MOV MPTRW, pstop @ save maximum count in `MPTRW`
+        @ LDR INDXA, [pt2nd] @ load the address to `INDXA`
+        @ MOV pstop, #0 @ the actual count ends up here!
 _accl:
-        BL sdk_key @ wait for character, which will show up in r0
+        @ BL sdk_key @ wait for character, which will show up in r0
 
         @ test for specific control characters
-        CMP r0, #_BS
-        BEQ _accb @ do the backspace
-        CMP r0, #_CR
-        BEQ _accz @ line finished - clean up stack and exit
+        @ CMP r0, #_BS
+        @ BEQ _accb @ do the backspace
+        @ CMP r0, #_CR
+        @ BEQ _accz @ line finished - clean up stack and exit
         
         @ the rest are either standard printables or will be replaced by space
-        CMP r0, #_BL
-        BLE _accs @ emit and append a space
-        CMP r0, #_DEL
-        BGE _accs @ emit and append a space
+        @ CMP r0, #_BL
+        @ BLE _accs @ emit and append a space
+        @ CMP r0, #_DEL
+        @ BGE _accs @ emit and append a space
 
         @ an ordinary printable character - echo it and append to buffer
 _acce:
-        STR r0, [INDXA] @ append to buffer
-        BL sdk_emit @ printable - send it out!
+        @ STR r0, [INDXA] @ append to buffer
+        @ BL sdk_emit @ printable - send it out!
 
         @ count
-        ADD INDXA, #1
-        ADD pstop, #1
-        CMP pstop, MPTRW @ did we hit the limit?
-        BEQ _accz @ early exit if limit hit
-	B _accl @ go back for more!
+        @ ADD INDXA, #1
+        @ ADD pstop, #1
+        @ CMP pstop, MPTRW @ did we hit the limit?
+        @ BEQ _accz @ early exit if limit hit
+	@ B _accl @ go back for more!
 
         @ space or unprintable
 _accs:
-        MOV r0, #_BL @ force a space and emit / store / count
-        B _acce
+        @ MOV r0, #_BL @ force a space and emit / store / count
+        @ B _acce
 
         @ backspace - uncount previous character and erase it
 _accb:
-        CMP pstop, #0 @ is buffer empty?
-        BEQ _accl @ ignore a backspace if buffer is empty
+        @ CMP pstop, #0 @ is buffer empty?
+        @ BEQ _accl @ ignore a backspace if buffer is empty
 
         @ un-count
-        SUB INDXA, #1
-        SUB pstop, #1
+        @ SUB INDXA, #1
+        @ SUB pstop, #1
 
         @ erase previous character
-        BL sdk_emit @ emit the backspace we have
-        MOV r0, #_BL
-        BL sdk_emit @ "erase" the character
-        MOV r0, #_BS @ queue up another backspace
-        BL sdk_emit
-        B _accl @ back for more!
+        @ BL sdk_emit @ emit the backspace we have
+        @ MOV r0, #_BL
+        @ BL sdk_emit @ "erase" the character
+        @ MOV r0, #_BS @ queue up another backspace
+        @ BL sdk_emit
+        @ B _accl @ back for more!
 
         @ clean up and exit
 _accz:
         @ stack top is correct - it has the count - but we need to fix `pt2nd`
-        ADD pt2nd, #_cell
-        _UNNEST
+        @ ADD pt2nd, #_cell
+        @ _UNNEST
         @ whew!
 
-        _HEADER "TYPE", type
-        _NEST
-        CMP pstop, #0 @ check for early exit
-        BLE typz
+        @ _HEADER "TYPE", type
+        @ _NEST
+        @ CMP pstop, #0 @ check for early exit
+        @ BLE typz
 
-        LDR INDXA, [pt2nd] @ get the address
+        @ LDR INDXA, [pt2nd] @ get the address
 
 typl:
-        LDR r0, [INDXA]
-        BL sdk_emit @ emit the character
-        ADD INDXA, #1 @ next in buffer
-        SUB pstop, #1 @ count down
-        BNE typl @ continue if count not zero
+        @ LDR r0, [INDXA]
+        @ BL sdk_emit @ emit the character
+        @ ADD INDXA, #1 @ next in buffer
+        @ SUB pstop, #1 @ count down
+        @ BNE typl @ continue if count not zero
 
 typz:
-        ADD pt2nd, #_cell*2 @ we consumed two cells
-        LDR pstop, [pt2nd, #_cell] @ fix top of stack
-        _UNNEST
+        @ ADD pt2nd, #_cell*2 @ we consumed two cells
+        @ LDR pstop, [pt2nd, #_cell] @ fix top of stack
+        @ _UNNEST
 
         @ number input/output
-        _HEADER "BASE", "base"
-        _NEST
-        MOV r0, pstop
-        _PUSHR0
-        BL _base_addr
-        MOV pstop, r0
-        _UNNEST
+        @ _HEADER "BASE", "base"
+        @ _NEST
+        @ MOV r0, pstop
+        @ _PUSHR0
+        @ BL _base_addr
+        @ MOV pstop, r0
+        @ _UNNEST
 
 
 @ finally, the text interpreter!!
@@ -361,24 +370,24 @@ typz:
         @ return.
 quil:
         @ push input buffer address and length to stack
-        BL _inbuf_addr
-        _PUSHR0
-        BL _inbuf_length
-        _PUSHR0
+        @ BL _inbuf_addr
+        @ _PUSHR0
+        @ BL _inbuf_length
+        @ _PUSHR0
 
         @ get a line from user
-        BL accept
+        @ BL accept
 
         @ top of stack now has count
-        BL _inbuf_addr
-        _PUSHR0
-        _SWAP
+        @ BL _inbuf_addr
+        @ _PUSHR0
+        @ _SWAP
 
         @ and interpret
-        BL evaluate
+        @ BL evaluate
 
         @ repeat forever-ish
-        B quil
+        @ B quil
 
         _HEADER "'", tick
         _NEST
@@ -389,4 +398,3 @@ quil:
         _NEST
         @ TBD
         _UNNEST
-

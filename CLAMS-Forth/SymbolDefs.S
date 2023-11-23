@@ -43,15 +43,8 @@ INDXA .req r5 @ index register a
 INDXB .req r4 @ index register b
 
 @ memory pointer - base + literal addressing
-@ Pelc only calls for two of these but we have the registers to spare. These can
-@ be used as a third, fourth, fifth and sixth hand to eliminate a lot of memory
-@ traffic. The addressing operations Pelc assigns to these registers must be
-@ done via a working register among r0-r3, which costs one cycle. We anticipate
-@ such operations will be inlined in compiled words.
-MPTRW .req r11
-MPTRX .req r10
-MPTRY .req r9
-MPTRZ .req r8
+MPTRX .req r9
+MPTRY .req r8
 
 @ symbols for addressing expressions
 .set _byte, 1 @ bytes
