@@ -28,8 +28,6 @@
 
 .include "SymbolDefs.S"
 
-@ C function call macros
-
         @ We need to call our SDK wrappers with a BLX; they're too far away for BL.
         .macro sdk_func_call name
         .global \name
@@ -43,7 +41,7 @@
 
 @ wname = word name in dictionary - what the Forth system searches for
 
-@ n_bytes = how many bytes in name
+@ n_BYTEs = how many bytes in name
 
 @ pronunciation = Forth specifies how to pronounce many words. We make labels
 @ from these, substituting an underscore for each dash in the pronunciation.
@@ -52,13 +50,10 @@
 @ to find the previous word. A backwards offset of zero marks the end of the
 @ dictionary!
 
-        .macro _HEADER wname, pronunciation, flags=0
-        .set _IMMEDIATE, 1 @ immediate word
-        .set _COMPILE_ONLY, 2 @ compile-only word
-        .set _INLINE, 4 @ copy this word into a definition rather than call it
+        .macro _HEADER wname, pronunciation
 
         @ define header label
-        .balign _cell, 0
+        .balign _CELL, 0
         .set _\pronunciation, .
 
         @ build link field
@@ -69,15 +64,15 @@
         .endif
         .set _previous_link_address, . - 2
 
-        @ build flags field
-        .hword \flags
+        @ reserve flags field
+        .hword 0
 
         @ build name field
         .set _count, 1f - . - 1
         .byte _count
         .ascii "\wname"
 1:
-        .balign _cell, 0
+        .balign _CELL, 0
 
         @ define test entry point
         .thumb_func
@@ -95,34 +90,38 @@
 @ the same `result` as the infix `left <op> right`.
 
         .macro _BINARY_OP opcode
-        LDM pt2nd!, {r0} @ pop left operand => r0
-        \opcode\() pstop, r0, pstop @ pstop := left <OP> pstop
-        _EXIT
+        LDM PT2ND!, {r0} @ pop left operand => r0
+        \opcode\() PSTOP, r0, PSTOP @ PSTOP := left <OP> PSTOP
         .endm
 
         @ build a dictionary entry for a binary word
-        .macro _BINARY_WORD wname, pronunciation, opcode, flags
-        _HEADER \wname, \pronunciation, \flags
+        .macro _BINARY_WORD wname, opcode, pronunciation
+        _HEADER \wname, \pronunciation
         _BINARY_OP \opcode
         .endm
 
 @ same thing for comparisons!
         .macro _BINARY_CP opcode
-        LDM pt2nd!, {r0} @ pop left operand => r0
-        CMP r0, pstop
+        LDM PT2ND!, {r0} @ pop left operand => r0
+        CMP r0, PSTOP
         \opcode\() 1f @ branch if true
-        MOV pstop, #0 @ false - set flag to zero
+        MOV PSTOP, #0 @ false - set flag to zero
         _EXIT
 1:
-        MOV pstop, #0
-        MVN pstop, pstop @ set all-ones true flag
+        MOV PSTOP, #0
+        MVN PSTOP, PSTOP @ set all-ones true flag
         _EXIT
         .endm
 
         @ build a dictionary entry for a binary compare
-        .macro _BINARY_COMPARE wname, pronunciation, opcode, flags
-        _HEADER \wname, \pronunciation, \flags
+        .macro _BINARY_COMPARE wname, opcode, pronunciation
+        _HEADER \wname, \pronunciation
         _BINARY_CP \opcode
+        .endm
+
+        @ terminate an inline word
+        .macro _ITRM
+        .hword 0xFFFF
         .endm
 
 @ character codes
@@ -133,87 +132,189 @@
 
 @ the dictionary itself!
 .data
-.balign _cell
+.balign _CELL
+
+        @ The first group of operators are simple enough that they can be copied
+        @ inline to a colon word instead of called. This saves two cycles for
+        @ each inlined word whenever the colon word is called.
+
+        @ For readability, we have two forms of each in the dictionary. For
+        @ example, "+" (plus) is the callable form and "+i" (plus_i) is the
+        @ inline form.
 
         @ stack operators
-        _HEADER "DROP", drop, _INLINE
+        _HEADER "DROP", drop
         _DROP
         _EXIT
+        _HEADER "DROPi", drop_i
+        _DROP
+        _ITRM
 
-        _HEADER "DUP", dupe, _INLINE
+        _HEADER "DUP", dupe
         _DUP
         _EXIT
-
-        _HEADER "OVER", over, _INLINE
+        _HEADER "DUPi", dupe_i
         _DUP
-        _EXIT
+        _ITRM
 
-        _HEADER "ROT", rote, _INLINE
+        _HEADER "OVER", over
+        _OVER
+        _EXIT
+        _HEADER "OVERi", over_i
+        _OVER
+        _ITRM
+
+        _HEADER "ROT", rote
         _ROT
         _EXIT
+        _HEADER "ROTi", rote_i
+        _ROT
+        _ITRM
 
-        _HEADER "SWAP", swap, _INLINE
+        _HEADER "SWAP", swap
         _SWAP
         _EXIT
+        _HEADER "SWAPi", swap_i
+        _SWAP
+        _ITRM
 
-        _HEADER "@", fetch, _INLINE
-        LDR pstop, [pstop]
+        _HEADER "@", fetch
+        LDR PSTOP, [PSTOP]
         _EXIT
+        _HEADER "@i", fetch_i
+        LDR PSTOP, [PSTOP]
+        _ITRM
 
-        _HEADER "!", store, _INLINE
-        LDM pt2nd!, {r0-r1}
-        STR r0, [pstop]
-        MOV pstop, r1
+        _HEADER "!", store
+        LDM PT2ND!, {r0-r1}
+        STR r0, [PSTOP]
+        MOV PSTOP, r1
         _EXIT
+        _HEADER "!i", store_i
+        LDM PT2ND!, {r0-r1}
+        STR r0, [PSTOP]
+        MOV PSTOP, r1
+        _ITRM
 
-        _HEADER "+!", plus_store, _INLINE
-        LDM pt2nd!, {r0-r1}
-        LDR r2, [pstop]
+        _HEADER "+!", plus_store
+        LDM PT2ND!, {r0-r1}
+        LDR r2, [PSTOP]
         ADD r2, r0
-        STR r2, [pstop]
-        MOV pstop, r1
+        STR r2, [PSTOP]
+        MOV PSTOP, r1
         _EXIT
+        _HEADER "+!i", plus_store_i
+        LDM PT2ND!, {r0-r1}
+        LDR r2, [PSTOP]
+        ADD r2, r0
+        STR r2, [PSTOP]
+        MOV PSTOP, r1
+        _ITRM
 
-        _HEADER "1+", one_plus, _INLINE
-        ADD pstop, #1
+        _HEADER "1+", one_plus
+        ADD PSTOP, #1
         _EXIT
+        _HEADER "1+i", one_plus_i
+        ADD PSTOP, #1
+        _ITRM
 
-        _HEADER "1-", one_minus, _INLINE
-        SUB pstop, #1
+        _HEADER "1-", one_minus
+        SUB PSTOP, #1
         _EXIT
+        _HEADER "1-i", one_minus_i
+        SUB PSTOP, #1
+        _ITRM
 
-        _HEADER "2*", two_star, _INLINE
-        LSL pstop, #1
+        _HEADER "2*", two_star
+        LSL PSTOP, #1
         _EXIT
+        _HEADER "2*i", two_star_i
+        LSL PSTOP, #1
+        _ITRM
 
-        _HEADER "2/", two_slash, _INLINE
-        ASR pstop, #1
+        _HEADER "2/", two_slash
+        ASR PSTOP, #1
         _EXIT
-
-        @ binary comparison operators
-        _BINARY_COMPARE "<", less_than, BLT, _INLINE
-
-        @ The "as" macro processor chokes with mysterious errors if the equal
-        @ sign in the following invocation is enclosed in double quotes rather
-        @ than single quotes. Maybe I'll develop a reprex and file an issue.
-        @ Maybe I won't.
-        _BINARY_COMPARE '=', equals, BEQ, _INLINE
-        _BINARY_COMPARE ">", greater_than, BGT, _INLINE
-        _BINARY_COMPARE "U>", u_greater_than, BHI, _INLINE
-        _BINARY_COMPARE "U<", u_less_than, BLO, _INLINE
+        _HEADER "2/i", two_slash_i
+        ASR PSTOP, #1
+        _ITRM
 
         @ arithmetic operators
-        _BINARY_WORD "+", plus, ADD, _INLINE
-        _BINARY_WORD "-", minus, SUB, _INLINE
-        _BINARY_WORD "*", star, MUL, _INLINE
+        _BINARY_WORD "+", ADD, plus
+        _EXIT
+        _BINARY_WORD "+i", ADD, plus_i
+        _ITRM
 
+        _BINARY_WORD "-", SUB, minus
+        _EXIT
+        _BINARY_WORD "-i", SUB, minus_i
+        _ITRM
+
+        _BINARY_WORD "*", MUL, star
+        _EXIT
+        _BINARY_WORD "*i", MUL, star_i
+        _ITRM
+
+        _HEADER "NEGATE", negate
+        MVN PSTOP, PSTOP
+        _EXIT
+        _HEADER "NEGATEi", negate_i
+        MVN PSTOP, PSTOP
+        _ITRM
+
+        @ boolean operators
+        _BINARY_WORD "AND", AND, and
+        _EXIT
+        _BINARY_WORD "ANDi", AND, and_i
+        _ITRM
+
+        _BINARY_WORD "OR", ORR, or
+        _EXIT
+        _BINARY_WORD "ORi", ORR, or_i
+        _ITRM
+
+        _BINARY_WORD "XOR", EOR, x_or
+        _EXIT
+        _BINARY_WORD "XORi", EOR, x_or_i
+        _ITRM
+
+        _HEADER "INVERT", invert
+        MVN PSTOP, PSTOP
+        _EXIT
+        _HEADER "INVERTi", invert_i
+        MVN PSTOP, PSTOP
+        _ITRM
+
+        _HEADER "LSHIFT", l_shift
+        LDM PT2ND!, {r0}
+        LSL r0, PSTOP
+        MOV PSTOP, r0
+        _EXIT
+        _HEADER "LSHIFTi", l_shift_i
+        LDM PT2ND!, {r0}
+        LSL r0, PSTOP
+        MOV PSTOP, r0
+        _ITRM
+
+        _HEADER "RSHIFT", r_shift
+        LDM PT2ND!, {r0}
+        LSR r0, PSTOP
+        MOV PSTOP, r0
+        _EXIT
+        _HEADER "RSHIFTi", r_shift_i
+        LDM PT2ND!, {r0}
+        LSR r0, PSTOP
+        MOV PSTOP, r0
+        _ITRM
+
+        @ division operators - use the SDK and hardware divider
         _HEADER "/MOD", slash_mod
         _NEST
-        LDR r0, [pt2nd] @ dividend => r0
-        MOV r1, pstop @ divisor => r1
+        LDR r0, [PT2ND] @ dividend => r0
+        MOV r1, PSTOP @ divisor => r1
         sdk_func_call sdk_slash_mod
-        MOV pstop, r0 @ quotient => top of stack
-        STR r1, [pt2nd] @ remainder => 2nd
+        MOV PSTOP, r0 @ quotient => top of stack
+        STR r1, [PT2ND] @ remainder => 2nd
         _UNNEST
 
         _HEADER "/", slash
@@ -229,30 +330,17 @@
         _DROP
         _UNNEST
 
-        _HEADER "NEGATE", negate, _INLINE
-        MVN pstop, pstop
-        _EXIT
+        @ binary comparison operators
+        _BINARY_COMPARE "<", BLT, less_than
 
-        @ boolean operators
-        _BINARY_WORD "AND", and, AND, _INLINE
-        _BINARY_WORD "OR", or, ORR, _INLINE
-        _BINARY_WORD "XOR", x_or, EOR, _INLINE
-
-        _HEADER "INVERT", invert, _INLINE
-        MVN pstop, pstop
-        _EXIT
-
-        _HEADER "LSHIFT", l_shift, _INLINE
-        LDM pt2nd!, {r0}
-        LSL r0, pstop
-        MOV pstop, r0
-        _EXIT
-
-        _HEADER "RSHIFT", r_shift, _INLINE
-        LDM pt2nd!, {r0}
-        LSR r0, pstop
-        MOV pstop, r0
-        _EXIT
+        @ The "as" macro processor chokes with mysterious errors if the equal
+        @ sign in the following invocation is enclosed in double quotes rather
+        @ than single quotes. Maybe I'll develop a reprex and file an issue.
+        @ Maybe I won't.
+        _BINARY_COMPARE '=', BEQ, equals
+        _BINARY_COMPARE ">", BGT, greater_than
+        _BINARY_COMPARE "U>", BHI, u_greater_than
+        _BINARY_COMPARE "U<", BLO, u_less_than
 
         @ terminal I/O words
         _HEADER "KEY", key
@@ -263,7 +351,7 @@
 
         _HEADER "EMIT", emit
         _NEST
-        MOV r0, pstop
+        MOV r0, PSTOP
         sdk_func_call sdk_emit
         _DROP
         _UNNEST
@@ -274,9 +362,9 @@
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
-        @ MOV MPTRW, pstop @ save maximum count in `MPTRW`
-        @ LDR INDXA, [pt2nd] @ load the address to `INDXA`
-        @ MOV pstop, #0 @ the actual count ends up here!
+        @ MOV MPTRW, PSTOP @ save maximum count in `MPTRW`
+        @ LDR INDXA, [PT2ND] @ load the address to `INDXA`
+        @ MOV PSTOP, #0 @ the actual count ends up here!
 _accl:
         @ BL sdk_key @ wait for character, which will show up in r0
 
@@ -299,8 +387,8 @@ _acce:
 
         @ count
         @ ADD INDXA, #1
-        @ ADD pstop, #1
-        @ CMP pstop, MPTRW @ did we hit the limit?
+        @ ADD PSTOP, #1
+        @ CMP PSTOP, MPTRW @ did we hit the limit?
         @ BEQ _accz @ early exit if limit hit
 	@ B _accl @ go back for more!
 
@@ -311,12 +399,12 @@ _accs:
 
         @ backspace - uncount previous character and erase it
 _accb:
-        @ CMP pstop, #0 @ is buffer empty?
+        @ CMP PSTOP, #0 @ is buffer empty?
         @ BEQ _accl @ ignore a backspace if buffer is empty
 
         @ un-count
         @ SUB INDXA, #1
-        @ SUB pstop, #1
+        @ SUB PSTOP, #1
 
         @ erase previous character
         @ BL sdk_emit @ emit the backspace we have
@@ -328,37 +416,37 @@ _accb:
 
         @ clean up and exit
 _accz:
-        @ stack top is correct - it has the count - but we need to fix `pt2nd`
-        @ ADD pt2nd, #_cell
+        @ stack top is correct - it has the count - but we need to fix `PT2ND`
+        @ ADD PT2ND, #_CELL
         @ _UNNEST
         @ whew!
 
         @ _HEADER "TYPE", type
         @ _NEST
-        @ CMP pstop, #0 @ check for early exit
+        @ CMP PSTOP, #0 @ check for early exit
         @ BLE typz
 
-        @ LDR INDXA, [pt2nd] @ get the address
+        @ LDR INDXA, [PT2ND] @ get the address
 
 typl:
         @ LDR r0, [INDXA]
         @ BL sdk_emit @ emit the character
         @ ADD INDXA, #1 @ next in buffer
-        @ SUB pstop, #1 @ count down
+        @ SUB PSTOP, #1 @ count down
         @ BNE typl @ continue if count not zero
 
 typz:
-        @ ADD pt2nd, #_cell*2 @ we consumed two cells
-        @ LDR pstop, [pt2nd, #_cell] @ fix top of stack
+        @ ADD PT2ND, #_CELL*2 @ we consumed two cells
+        @ LDR PSTOP, [PT2ND, #_CELL] @ fix top of stack
         @ _UNNEST
 
         @ number input/output
         @ _HEADER "BASE", "base"
         @ _NEST
-        @ MOV r0, pstop
+        @ MOV r0, PSTOP
         @ _PUSHR0
         @ BL _base_addr
-        @ MOV pstop, r0
+        @ MOV PSTOP, r0
         @ _UNNEST
 
 

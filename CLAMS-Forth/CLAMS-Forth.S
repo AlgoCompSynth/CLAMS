@@ -44,7 +44,7 @@ loop:
         BL sdk_sleep_ms
         B loop
 
-.balign _cell, 0
+.balign _CELL, 0
 sleep_ms: .word 5000
 regs: .asciz "r1, r2, r3: %x, %x, %x\n"
 
