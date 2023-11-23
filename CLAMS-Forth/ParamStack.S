@@ -28,16 +28,16 @@
 
 @ parameter stack logic:
 
-@ The stack grows from high addresses downwards. Register `pt2nd` points to the
+@ The stack grows from high addresses downwards. Register `PT2ND` points to the
 @ second element of the parameter stack. The top of the stack is stored in
-@ register `pstop`.
+@ register `PSTOP`.
 
 .include "SymbolDefs.S"
 
 .thumb_func
 .global clear_stack
 clear_stack:
-        LDR pt2nd, =_stack_bottom
+        LDR PT2ND, =_stack_bottom
         LDR r0, =_hamburger
         _PUSHR0
         _PUSHR0
@@ -48,8 +48,8 @@ clear_stack:
 stkprint3:
         _NEST
         LDR r0, =_stack_format_3
-        MOV r1, pstop
-        LDM pt2nd, {r2, r3, pt2nd}
+        MOV r1, PSTOP
+        LDM PT2ND, {r2, r3, PT2ND}
         BL printf
         _UNNEST
 
@@ -58,8 +58,8 @@ stkprint3:
 stkprint2:
         _NEST
         LDR r0, =_stack_format_2
-        MOV r1, pstop
-        LDR r2, [pt2nd]
+        MOV r1, PSTOP
+        LDR r2, [PT2ND]
         BL printf
         _UNNEST
 
@@ -68,7 +68,7 @@ stkprint2:
 stkprint1:
         _NEST
         LDR r0, =_stack_format_1
-        MOV r1, pstop
+        MOV r1, PSTOP
         BL printf
         _UNNEST
 
@@ -79,10 +79,10 @@ _hamburger: .word 0xdeadbeef
 
 @ The parameter stack itself
 .data
-.balign _cell, 0
-.set _stack_cells, 64
+.balign _CELL, 0
+.set _stack_CELLs, 64
 _stack_start:
-        .rept _stack_cells
+        .rept _stack_CELLs
         .word 0
         .endr
 .set _stack_bottom, .

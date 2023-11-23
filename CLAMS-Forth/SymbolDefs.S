@@ -31,8 +31,8 @@
 @ destination of a MOV and one operand of a CMP.
 
 @ parameter stack registers
-pt2nd .req r7 @ pointer to second parameter stack cell
-pstop .req r6 @ top cell of parameter stack
+PT2ND .req r7 @ pointer to second parameter stack cell
+PSTOP .req r6 @ top cell of parameter stack
 
 @ see Pelc, Stephen, "Updating the Forth Virtual Machine", 
 @ https://www.complang.tuwien.ac.at/anton/euroforth/ef08/papers/pelc.pdf,
@@ -46,12 +46,110 @@ INDXB .req r4 @ index register b
 MPTRX .req r9
 MPTRY .req r8
 
+@ registers r12 - r15 are reserved for the SDK!
+@ registers r10 - r11 are used without saving in the Forth VM
+@ registers r0 - r3 are used without saving in the Forth VM and for parameter
+@ and result passing by SDK functions.
+
 @ symbols for addressing expressions
-.set _byte, 1 @ bytes
-.set _cell, 4 @ bytes per cell
-.set _cell_shift, 2 @ bits to shift for cell - byte conversions
+.set _BYTE, 1 @ bytes
+.set _CELL, 4 @ bytes per cell
+.set _CELL_SHIFT, 2 @ bits to shift for cell - byte conversions
 
 @ system-wide macros
+
+        @ parameter stack macros
+        .macro _DUP
+        SUB PT2ND, #_CELL @ stack grows downward
+        STR PSTOP, [PT2ND] @ save top to RAM
+        .endm
+
+        .macro _PUSHR0
+        _DUP
+        MOV PSTOP, r0 @ save argument to `PSTOP`
+        .endm
+
+        .macro _OVER
+        _DUP
+        LDR PSTOP, [PT2ND, #_CELL*2] @ replace top of stack with 3rd
+        .endm
+
+        .macro _SWAP
+        LDR r0, [PT2ND]
+        STR PSTOP, [PT2ND]
+        MOV PSTOP, r0
+        .endm
+
+        .macro _DROP
+        LDR PSTOP, [PT2ND]
+        ADD PT2ND, #_CELL
+        .endm
+
+        .macro _ROT
+        @ x1, x2, x3 -> x2, x3, x1
+        LDR r0, [PT2ND] @ get x2
+        STR PSTOP, [PT2ND] @ stash x3
+        LDR PSTOP, [PT2ND, #_CELL] @ get x1
+        STR r0, [PT2ND, #_CELL] @ stash x2
+        .endm
+
+        @ enhanced register macros
+        @ to and from stack
+        .macro _TO_INDX register
+        MOV INDX\register, PSTOP
+        _DROP
+        .endm
+        .macro _INDX_FROM register
+        _DUP
+        MOV PSTOP, INDX\register
+        .endm
+        .macro _TO_MPTR register
+        MOV MPTR\register, PSTOP
+        _DROP
+        .endm
+        .macro _MPTR_FROM register
+        _DUP
+        MOV PSTOP, MPTR\register
+        .endm
+
+        @ index operations
+        .macro _POST_OP register, post_op=""
+        .if \post_op == "+"
+          ADD INDX\register, #_CELL
+        .elseif \post_op == "-"
+          SUB INDX\register, #_CELL
+        .elseif \post_op == "+C"
+          ADD INDX\register, #1
+        .elseif \post_op == "-C"
+          SUB INDX\register, #1
+        .endif
+        .endm
+        .macro _FETCH_INDX register, post_op=""
+        _DUP
+        LDR PSTOP, [INDX\register]
+        _POST_OP \register, \post_op
+        .endm
+        .macro _STORE_INDX register, post_op=""
+        STR PSTOP, [INDX\register]
+        _DROP
+        _POST_OP \register, \post_op=""
+        .endm
+
+        @ memory pointer operations
+        @ these clobber r0!!!
+        .macro _ADD_OFFSET register
+        MOV r0, MPTR\register
+        ADD r0, PSTOP
+        .endm
+        .macro _FETCH_MPTR register
+        _ADD_OFFSET \register
+        LDR PSTOP, [r0]
+        .endm
+        .macro _STORE_MPTR register
+        _ADD_OFFSET \register
+        _DROP
+        STR PSTOP, [r0]
+        .endm
 
         @ return to caller
         .macro _EXIT
@@ -65,97 +163,4 @@ MPTRY .req r8
 
         .macro _UNNEST
         POP {PC}
-        .endm
-
-        @ parameter stack macros
-        .macro _DUP
-        SUB pt2nd, #_cell @ stack grows downward
-        STR pstop, [pt2nd] @ save top to RAM
-        .endm
-
-        .macro _PUSHR0
-        _DUP
-        MOV pstop, r0 @ save argument to `pstop`
-        .endm
-
-        .macro _OVER
-        _DUP
-        LDR pstop, [pt2nd, #_cell*2] @ replace top of stack with 3rd
-        .endm
-
-        .macro _SWAP
-        LDR r0, [pt2nd]
-        STR pstop, [pt2nd]
-        MOV pstop, r0
-        .endm
-
-        .macro _DROP
-        LDR pstop, [pt2nd]
-        ADD pt2nd, #_cell
-        .endm
-
-        .macro _ROT
-        @ x1, x2, x3 -> x2, x3, x1
-        LDR r0, [pt2nd] @ get x2
-        STR pstop, [pt2nd] @ stash x3
-        LDR pstop, [pt2nd, #_cell] @ get x1
-        STR r0, [pt2nd, #_cell] @ stash x2
-        .endm
-
-        @ enhanced register macros
-        @ to and from stack
-        .macro _TO_INDX register
-        MOV INDX\register, pstop
-        _DROP
-        .endm
-        .macro _INDX_FROM register
-        _DUP
-        MOV pstop, INDX\register
-        .endm
-        .macro _TO_MPTR register
-        MOV MPTR\register, pstop
-        _DROP
-        .endm
-        .macro _MPTR_FROM register
-        _DUP
-        MOV pstop, MPTR\register
-        .endm
-
-        @ index operations
-        .macro _POST_OP post_op=""
-        .if \post_op == "+"
-          ADD INDX\register, #_cell
-        .elseif \post_op == "-"
-          SUB INDX\register, #_cell
-        .elseif \post_op == "+C"
-          ADD INDX\register, #1
-        .elseif \post_op == "-C"
-          SUB INDX\register, #1
-        .endif
-        .endm
-        .macro _FETCH_INDX register, post_op=""
-        _DUP
-        LDR pstop, [INDX\register]
-        _POST_OP \post_op
-        .endm
-        .macro _STORE_INDX register, post_op=""
-        STR pstop, [INDX\register]
-        _DROP
-        _POST_OP \post_op=""
-        .endm
-
-        @ memory pointer operations
-        @ these clobber r0!!!
-        .macro _ADD_OFFSET register
-        MOV r0, MPTR\register
-        ADD r0, pstop
-        .endm
-        .macro _FETCH_MPTR register
-        _ADD_OFFSET \register
-        LDR pstop, [r0]
-        .endm
-        .macro _STORE_MPTR register
-        _ADD_OFFSET \register
-        _DROP
-        STR pstop, [r0]
         .endm
