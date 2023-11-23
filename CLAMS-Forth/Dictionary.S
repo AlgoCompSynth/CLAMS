@@ -28,14 +28,6 @@
 
 .include "SymbolDefs.S"
 
-@ address getters
-.thumb_func
-.global get_dict_addrs
-get_dict_addrs:
-        LDR r1, =_system_dict_start
-        LDR r2, =_system_dict_end
-        _EXIT
-
 @ dictionary construction macros
 
 @ dictionary header
@@ -85,9 +77,6 @@ get_dict_addrs:
 
         .endm
 
-        _HEADER "MUDDY22", muddy22
-        _HEADER "DUMMY1", dummy1, _INLINE + _IMMEDIATE + _COMPILE_ONLY
-
 @ Common code for a word that uses a single instruction binary operator on the
 @ top two stack cells. Such words have the stack effect
 @
@@ -116,7 +105,8 @@ get_dict_addrs:
         MOV pstop, #0 @ false - set flag to zero
         _EXIT
 1:
-        LDR pstop, _true @ set all-ones true flag
+        MOV pstop, #0
+        MVN pstop, pstop @ set all-ones true flag
         _EXIT
         .endm
 
@@ -126,11 +116,15 @@ get_dict_addrs:
         _BINARY_CP \opcode
         .endm
 
-@ dictionary functions
+@ character codes
+.set _BS, 8 @ backspace
+.set _CR, 13 @ carriage return
+.set _BL, 32 @ space
+.set _DEL, 127 @ delete
 
+@ the dictionary itself!
+.data
 .balign _cell
-.global _system_dict_start
-.set _system_dict_start, .
 
         @ stack operators
         _HEADER "DROP", drop, _INLINE
@@ -264,12 +258,6 @@ get_dict_addrs:
         BL sdk_emit
         _DROP
         _UNNEST
-        
-@ character codes
-.set _bs, 8 @ backspace
-.set _cr, 13 @ carriage return
-.set _bl, 32 @ space
-.set _del, 127 @ delete
 
         _HEADER "ACCEPT", accept
         _NEST
@@ -284,15 +272,15 @@ _accl:
         BL sdk_key @ wait for character, which will show up in r0
 
         @ test for specific control characters
-        CMP r0, #_bs
+        CMP r0, #_BS
         BEQ _accb @ do the backspace
-        CMP r0, #_cr
+        CMP r0, #_CR
         BEQ _accz @ line finished - clean up stack and exit
         
         @ the rest are either standard printables or will be replaced by space
-        CMP r0, #_bl
+        CMP r0, #_BL
         BLE _accs @ emit and append a space
-        CMP r0, #_del
+        CMP r0, #_DEL
         BGE _accs @ emit and append a space
 
         @ an ordinary printable character - echo it and append to buffer
@@ -309,7 +297,7 @@ _acce:
 
         @ space or unprintable
 _accs:
-        MOV r0, #_bl @ force a space and emit / store / count
+        MOV r0, #_BL @ force a space and emit / store / count
         B _acce
 
         @ backspace - uncount previous character and erase it
@@ -323,9 +311,9 @@ _accb:
 
         @ erase previous character
         BL sdk_emit @ emit the backspace we have
-        MOV r0, #_bl
+        MOV r0, #_BL
         BL sdk_emit @ "erase" the character
-        MOV r0, #_bs @ queue up another backspace
+        MOV r0, #_BS @ queue up another backspace
         BL sdk_emit
         B _accl @ back for more!
 
@@ -402,11 +390,3 @@ quil:
         @ TBD
         _UNNEST
 
-.global _system_dict_end
-.set _system_dict_end, .
-
-.global _system_last_link
-.set _system_last_link, .
-        .word _previous_link_address
-
-_true:  .word 0xFFFFFFFF
