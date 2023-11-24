@@ -15184,7 +15184,7 @@ Disassembly of section .data:
 20000bd4:	4f524405 	.word	0x4f524405
 20000bd8:	00005f50 	.word	0x00005f50
 	...
-20000bf4:	0000002c 	.word	0x0000002c
+20000bf4:	0002002c 	.word	0x0002002c
 
 20000bf8 <drop_underscore>:
 20000bf8:	683e      	ldr	r6, [r7, #0]
@@ -15206,7 +15206,7 @@ Disassembly of section .data:
 20000c2c:	50554404 	.word	0x50554404
 20000c30:	0000005f 	.word	0x0000005f
 	...
-20000c4c:	0000002c 	.word	0x0000002c
+20000c4c:	0002002c 	.word	0x0002002c
 
 20000c50 <dupe_underscore>:
 20000c50:	3f04      	subs	r7, #4
@@ -15229,7 +15229,7 @@ Disassembly of section .data:
 20000c84:	45564f05 	.word	0x45564f05
 20000c88:	00005f52 	.word	0x00005f52
 	...
-20000ca4:	0000002c 	.word	0x0000002c
+20000ca4:	0002002c 	.word	0x0002002c
 
 20000ca8 <over_underscore>:
 20000ca8:	3f04      	subs	r7, #4
@@ -15254,7 +15254,7 @@ Disassembly of section .data:
 20000ce0:	544f5204 	.word	0x544f5204
 20000ce4:	0000005f 	.word	0x0000005f
 	...
-20000d00:	00000030 	.word	0x00000030
+20000d00:	00020030 	.word	0x00020030
 
 20000d04 <rote_underscore>:
 20000d04:	6838      	ldr	r0, [r7, #0]
@@ -15279,7 +15279,7 @@ Disassembly of section .data:
 20000d3c:	41575305 	.word	0x41575305
 20000d40:	00005f50 	.word	0x00005f50
 	...
-20000d5c:	0000002c 	.word	0x0000002c
+20000d5c:	0002002c 	.word	0x0002002c
 
 20000d60 <swap_underscore>:
 20000d60:	6838      	ldr	r0, [r7, #0]
@@ -15299,7 +15299,7 @@ Disassembly of section .data:
 20000d90 <_fetch_underscore>:
 20000d90:	005f4002 	.word	0x005f4002
 	...
-20000db0:	00000028 	.word	0x00000028
+20000db0:	00020028 	.word	0x00020028
 
 20000db4 <fetch_underscore>:
 20000db4:	6836      	ldr	r6, [r6, #0]
@@ -15319,7 +15319,7 @@ Disassembly of section .data:
 20000de4 <_store_underscore>:
 20000de4:	005f2102 	.word	0x005f2102
 	...
-20000e04:	0000002c 	.word	0x0000002c
+20000e04:	0002002c 	.word	0x0002002c
 
 20000e08 <store_underscore>:
 20000e08:	cf03      	ldmia	r7!, {r0, r1}
@@ -15343,7 +15343,7 @@ Disassembly of section .data:
 20000e40 <_plus_store_underscore>:
 20000e40:	5f212b03 	.word	0x5f212b03
 	...
-20000e60:	00000030 	.word	0x00000030
+20000e60:	00020030 	.word	0x00020030
 
 20000e64 <plus_store_underscore>:
 20000e64:	cf03      	ldmia	r7!, {r0, r1}
@@ -15365,7 +15365,7 @@ Disassembly of section .data:
 20000e98 <_one_plus_underscore>:
 20000e98:	5f2b3103 	.word	0x5f2b3103
 	...
-20000eb8:	00000028 	.word	0x00000028
+20000eb8:	00020028 	.word	0x00020028
 
 20000ebc <one_plus_underscore>:
 20000ebc:	3601      	adds	r6, #1
@@ -15383,7 +15383,7 @@ Disassembly of section .data:
 20000ee8 <_one_minus_underscore>:
 20000ee8:	5f2d3103 	.word	0x5f2d3103
 	...
-20000f08:	00000028 	.word	0x00000028
+20000f08:	00020028 	.word	0x00020028
 
 20000f0c <one_minus_underscore>:
 20000f0c:	3e01      	subs	r6, #1
@@ -15401,7 +15401,7 @@ Disassembly of section .data:
 20000f38 <_two_star_underscore>:
 20000f38:	5f2a3203 	.word	0x5f2a3203
 	...
-20000f58:	00000028 	.word	0x00000028
+20000f58:	00020028 	.word	0x00020028
 
 20000f5c <two_star_underscore>:
 20000f5c:	0076      	lsls	r6, r6, #1
@@ -15419,7 +15419,7 @@ Disassembly of section .data:
 20000f88 <_two_slash_underscore>:
 20000f88:	5f2f3203 	.word	0x5f2f3203
 	...
-20000fa8:	00000028 	.word	0x00000028
+20000fa8:	00020028 	.word	0x00020028
 
 20000fac <two_slash_underscore>:
 20000fac:	1076      	asrs	r6, r6, #1
@@ -15439,7 +15439,7 @@ Disassembly of section .data:
 20000fdc <_plus_underscore>:
 20000fdc:	005f2b02 	.word	0x005f2b02
 	...
-20000ffc:	0000002c 	.word	0x0000002c
+20000ffc:	0002002c 	.word	0x0002002c
 
 20001000 <plus_underscore>:
 20001000:	cf01      	ldmia	r7!, {r0}
@@ -15460,7 +15460,7 @@ Disassembly of section .data:
 20001034 <_minus_underscore>:
 20001034:	005f2d02 	.word	0x005f2d02
 	...
-20001054:	0000002c 	.word	0x0000002c
+20001054:	0002002c 	.word	0x0002002c
 
 20001058 <minus_underscore>:
 20001058:	cf01      	ldmia	r7!, {r0}
@@ -15481,7 +15481,7 @@ Disassembly of section .data:
 2000108c <_star_underscore>:
 2000108c:	005f2a02 	.word	0x005f2a02
 	...
-200010ac:	0000002c 	.word	0x0000002c
+200010ac:	0002002c 	.word	0x0002002c
 
 200010b0 <star_underscore>:
 200010b0:	cf01      	ldmia	r7!, {r0}
@@ -15502,7 +15502,7 @@ Disassembly of section .data:
 200010e0:	47454e07 	.word	0x47454e07
 200010e4:	5f455441 	.word	0x5f455441
 	...
-20001100:	00000028 	.word	0x00000028
+20001100:	00020028 	.word	0x00020028
 
 20001104 <negate_underscore>:
 20001104:	43f6      	mvns	r6, r6
@@ -15523,7 +15523,7 @@ Disassembly of section .data:
 20001134:	444e4104 	.word	0x444e4104
 20001138:	0000005f 	.word	0x0000005f
 	...
-20001154:	0000002c 	.word	0x0000002c
+20001154:	0002002c 	.word	0x0002002c
 
 20001158 <and_underscore>:
 20001158:	cf01      	ldmia	r7!, {r0}
@@ -15544,7 +15544,7 @@ Disassembly of section .data:
 2000118c <_or_underscore>:
 2000118c:	5f524f03 	.word	0x5f524f03
 	...
-200011ac:	0000002c 	.word	0x0000002c
+200011ac:	0002002c 	.word	0x0002002c
 
 200011b0 <or_underscore>:
 200011b0:	cf01      	ldmia	r7!, {r0}
@@ -15566,7 +15566,7 @@ Disassembly of section .data:
 200011e4:	524f5804 	.word	0x524f5804
 200011e8:	0000005f 	.word	0x0000005f
 	...
-20001204:	0000002c 	.word	0x0000002c
+20001204:	0002002c 	.word	0x0002002c
 
 20001208 <x_or_underscore>:
 20001208:	cf01      	ldmia	r7!, {r0}
@@ -15587,7 +15587,7 @@ Disassembly of section .data:
 20001238:	564e4907 	.word	0x564e4907
 2000123c:	5f545245 	.word	0x5f545245
 	...
-20001258:	00000028 	.word	0x00000028
+20001258:	00020028 	.word	0x00020028
 
 2000125c <invert_underscore>:
 2000125c:	43f6      	mvns	r6, r6
@@ -15609,7 +15609,7 @@ Disassembly of section .data:
 2000128c:	48534c07 	.word	0x48534c07
 20001290:	5f544649 	.word	0x5f544649
 	...
-200012ac:	0000002c 	.word	0x0000002c
+200012ac:	0002002c 	.word	0x0002002c
 
 200012b0 <l_shift_underscore>:
 200012b0:	cf01      	ldmia	r7!, {r0}
@@ -15633,7 +15633,7 @@ Disassembly of section .data:
 200012e4:	48535207 	.word	0x48535207
 200012e8:	5f544649 	.word	0x5f544649
 	...
-20001304:	0000002c 	.word	0x0000002c
+20001304:	0002002c 	.word	0x0002002c
 
 20001308 <r_shift_underscore>:
 20001308:	cf01      	ldmia	r7!, {r0}

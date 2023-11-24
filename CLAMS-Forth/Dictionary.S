@@ -142,42 +142,42 @@
         _HEADER "DROP", drop
         _DROP
         _EXIT
-        _HEADER "DROP_", drop_underscore
+        _HEADER "DROP_", drop_underscore, _COMPILE_ONLY
         _DROP
         _ITRM
 
         _HEADER "DUP", dupe
         _DUP
         _EXIT
-        _HEADER "DUP_", dupe_underscore
+        _HEADER "DUP_", dupe_underscore, _COMPILE_ONLY
         _DUP
         _ITRM
 
         _HEADER "OVER", over
         _OVER
         _EXIT
-        _HEADER "OVER_", over_underscore
+        _HEADER "OVER_", over_underscore, _COMPILE_ONLY
         _OVER
         _ITRM
 
         _HEADER "ROT", rote
         _ROT
         _EXIT
-        _HEADER "ROT_", rote_underscore
+        _HEADER "ROT_", rote_underscore, _COMPILE_ONLY
         _ROT
         _ITRM
 
         _HEADER "SWAP", swap
         _SWAP
         _EXIT
-        _HEADER "SWAP_", swap_underscore
+        _HEADER "SWAP_", swap_underscore, _COMPILE_ONLY
         _SWAP
         _ITRM
 
         _HEADER "@", fetch
         LDR PSTOP, [PSTOP]
         _EXIT
-        _HEADER "@_", fetch_underscore
+        _HEADER "@_", fetch_underscore, _COMPILE_ONLY
         LDR PSTOP, [PSTOP]
         _ITRM
 
@@ -186,7 +186,7 @@
         STR r0, [PSTOP]
         MOV PSTOP, r1
         _EXIT
-        _HEADER "!_", store_underscore
+        _HEADER "!_", store_underscore, _COMPILE_ONLY
         LDM PT2ND!, {r0-r1}
         STR r0, [PSTOP]
         MOV PSTOP, r1
@@ -199,7 +199,7 @@
         STR r2, [PSTOP]
         MOV PSTOP, r1
         _EXIT
-        _HEADER "+!_", plus_store_underscore
+        _HEADER "+!_", plus_store_underscore, _COMPILE_ONLY
         LDM PT2ND!, {r0-r1}
         LDR r2, [PSTOP]
         ADD r2, r0
@@ -210,28 +210,28 @@
         _HEADER "1+", one_plus
         ADD PSTOP, #1
         _EXIT
-        _HEADER "1+_", one_plus_underscore
+        _HEADER "1+_", one_plus_underscore, _COMPILE_ONLY
         ADD PSTOP, #1
         _ITRM
 
         _HEADER "1-", one_minus
         SUB PSTOP, #1
         _EXIT
-        _HEADER "1-_", one_minus_underscore
+        _HEADER "1-_", one_minus_underscore, _COMPILE_ONLY
         SUB PSTOP, #1
         _ITRM
 
         _HEADER "2*", two_star
         LSL PSTOP, #1
         _EXIT
-        _HEADER "2*_", two_star_underscore
+        _HEADER "2*_", two_star_underscore, _COMPILE_ONLY
         LSL PSTOP, #1
         _ITRM
 
         _HEADER "2/", two_slash
         ASR PSTOP, #1
         _EXIT
-        _HEADER "2/_", two_slash_underscore
+        _HEADER "2/_", two_slash_underscore, _COMPILE_ONLY
         ASR PSTOP, #1
         _ITRM
 
@@ -239,28 +239,28 @@
         _HEADER "+", plus
         _BINARY_ALU ADD
         _EXIT
-        _HEADER "+_", plus_underscore
+        _HEADER "+_", plus_underscore, _COMPILE_ONLY
         _BINARY_ALU ADD
         _ITRM
 
         _HEADER "-", minus
         _BINARY_ALU SUB
         _EXIT
-        _HEADER "-_", minus_underscore
+        _HEADER "-_", minus_underscore, _COMPILE_ONLY
         _BINARY_ALU SUB
         _ITRM
 
         _HEADER "*", star
         _BINARY_ALU MUL
         _EXIT
-        _HEADER "*_", star_underscore
+        _HEADER "*_", star_underscore, _COMPILE_ONLY
         _BINARY_ALU MUL
         _ITRM
 
         _HEADER "NEGATE", negate
         MVN PSTOP, PSTOP
         _EXIT
-        _HEADER "NEGATE_", negate_underscore
+        _HEADER "NEGATE_", negate_underscore, _COMPILE_ONLY
         MVN PSTOP, PSTOP
         _ITRM
 
@@ -268,28 +268,28 @@
         _HEADER "AND", and
         _BINARY_ALU AND
         _EXIT
-        _HEADER "AND_", and_underscore
+        _HEADER "AND_", and_underscore, _COMPILE_ONLY
         _BINARY_ALU AND
         _ITRM
 
         _HEADER "OR", or
         _BINARY_ALU ORR
         _EXIT
-        _HEADER "OR_", or_underscore
+        _HEADER "OR_", or_underscore, _COMPILE_ONLY
         _BINARY_ALU ORR
         _ITRM
 
         _HEADER "XOR", x_or
         _BINARY_ALU EOR
         _EXIT
-        _HEADER "XOR_", x_or_underscore
+        _HEADER "XOR_", x_or_underscore, _COMPILE_ONLY
         _BINARY_ALU EOR
         _ITRM
 
         _HEADER "INVERT", invert
         MVN PSTOP, PSTOP
         _EXIT
-        _HEADER "INVERT_", invert_underscore
+        _HEADER "INVERT_", invert_underscore, _COMPILE_ONLY
         MVN PSTOP, PSTOP
         _ITRM
 
@@ -298,7 +298,7 @@
         LSL r0, PSTOP
         MOV PSTOP, r0
         _EXIT
-        _HEADER "LSHIFT_", l_shift_underscore
+        _HEADER "LSHIFT_", l_shift_underscore, _COMPILE_ONLY
         LDM PT2ND!, {r0}
         LSL r0, PSTOP
         MOV PSTOP, r0
@@ -309,7 +309,7 @@
         LSR r0, PSTOP
         MOV PSTOP, r0
         _EXIT
-        _HEADER "RSHIFT_", r_shift_underscore
+        _HEADER "RSHIFT_", r_shift_underscore, _COMPILE_ONLY
         LDM PT2ND!, {r0}
         LSR r0, PSTOP
         MOV PSTOP, r0
