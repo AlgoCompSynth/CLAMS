@@ -29,7 +29,7 @@
 .include "SymbolDefs.S"
 
         @ We need to call our SDK wrappers with a BLX; they're too far away for BL.
-        .macro sdk_func_call name
+        .macro _SDK_FUNC_CALL name
         .global \name
         LDR r3, =\name @ get the address
         BLX r3
@@ -38,9 +38,7 @@
 @ dictionary construction macros
 
 @ dictionary header
-
 @ wname = word name in dictionary - what the Forth system searches for
-
 @ n_BYTEs = how many bytes in name
 
 @ pronunciation = Forth specifies how to pronounce many words. We make labels
@@ -312,21 +310,21 @@
         _NEST
         LDR r0, [PT2ND] @ dividend => r0
         MOV r1, PSTOP @ divisor => r1
-        sdk_func_call sdk_slash_mod
+        _SDK_FUNC_CALL sdk_slash_mod
         MOV PSTOP, r0 @ quotient => top of stack
         STR r1, [PT2ND] @ remainder => 2nd
         _UNNEST
 
         _HEADER "/", slash
         _NEST
-        sdk_func_call sdk_slash_mod
+        _SDK_FUNC_CALL sdk_slash_mod
         _SWAP
         _DROP
         _UNNEST
 
         _HEADER "MOD", mod
         _NEST
-        sdk_func_call sdk_slash_mod
+        _SDK_FUNC_CALL sdk_slash_mod
         _DROP
         _UNNEST
 
@@ -345,110 +343,120 @@
         @ terminal I/O words
         _HEADER "KEY", key
         _NEST
-        sdk_func_call sdk_key
+        _SDK_FUNC_CALL sdk_key
         _PUSHR0
         _UNNEST
 
         _HEADER "EMIT", emit
         _NEST
         MOV r0, PSTOP
-        sdk_func_call sdk_emit
+        _SDK_FUNC_CALL sdk_emit
         _DROP
         _UNNEST
 
-        @ _HEADER "ACCEPT", accept
-        @ _NEST
+        _HEADER "ACCEPT", accept
+        _NEST
 
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
-        @ MOV MPTRW, PSTOP @ save maximum count in `MPTRW`
-        @ LDR INDXA, [PT2ND] @ load the address to `INDXA`
-        @ MOV PSTOP, #0 @ the actual count ends up here!
+        MOV r11, PSTOP @ save maximum count in `r11`
+        MOV PSTOP, #0 @ the actual count ends up here!
 _accl:
-        @ BL sdk_key @ wait for character, which will show up in r0
+        _SDK_FUNC_CALL sdk_key @ wait for character, which will show up in r0
 
         @ test for specific control characters
-        @ CMP r0, #_BS
-        @ BEQ _accb @ do the backspace
-        @ CMP r0, #_CR
-        @ BEQ _accz @ line finished - clean up stack and exit
+        CMP r0, #_BS
+        BEQ _accb @ do the backspace
+        CMP r0, #_CR
+        BEQ _accz @ line finished - clean up stack and exit
         
         @ the rest are either standard printables or will be replaced by space
-        @ CMP r0, #_BL
-        @ BLE _accs @ emit and append a space
-        @ CMP r0, #_DEL
-        @ BGE _accs @ emit and append a space
+        CMP r0, #_BL
+        BLE _accs @ emit and append a space
+        CMP r0, #_DEL
+        BGE _accs @ emit and append a space
 
         @ an ordinary printable character - echo it and append to buffer
 _acce:
-        @ STR r0, [INDXA] @ append to buffer
-        @ BL sdk_emit @ printable - send it out!
+        LDR r1, [PT2ND] @ buffer address is in second of stack!
+        STR r0, [r1] @ append char to buffer
+        _SDK_FUNC_CALL sdk_emit @ printable - send it out!
 
         @ count
-        @ ADD INDXA, #1
-        @ ADD PSTOP, #1
-        @ CMP PSTOP, MPTRW @ did we hit the limit?
-        @ BEQ _accz @ early exit if limit hit
-	@ B _accl @ go back for more!
+        ADD r1, #1 @ next address
+        STR r1, [PT2ND]
+        ADD PSTOP, #1 @ character count
+        CMP PSTOP, r11 @ did we hit the limit?
+        BEQ _accz @ early exit if limit hit!
+	B _accl @ there's room - go back for more!
 
         @ space or unprintable
 _accs:
-        @ MOV r0, #_BL @ force a space and emit / store / count
-        @ B _acce
+        MOV r0, #_BL @ force a space and emit / store / count
+        B _acce
 
-        @ backspace - uncount previous character and erase it
+        @ backspace - un-count previous character and erase it
 _accb:
-        @ CMP PSTOP, #0 @ is buffer empty?
-        @ BEQ _accl @ ignore a backspace if buffer is empty
+        CMP PSTOP, #0 @ is buffer empty?
+        BEQ _accl @ ignore a backspace if buffer is empty
 
         @ un-count
-        @ SUB INDXA, #1
-        @ SUB PSTOP, #1
+        LDR r1, [PT2ND] @ decrement buffer address
+        SUB r1, #1
+        STR r1, [PT2ND]
+        SUB PSTOP, #1 @ decrement char count
 
         @ erase previous character
-        @ BL sdk_emit @ emit the backspace we have
-        @ MOV r0, #_BL
-        @ BL sdk_emit @ "erase" the character
-        @ MOV r0, #_BS @ queue up another backspace
-        @ BL sdk_emit
-        @ B _accl @ back for more!
+        _SDK_FUNC_CALL sdk_emit @ emit the backspace we have
+        MOV r0, #_BL
+        _SDK_FUNC_CALL sdk_emit @ "erase" the character
+        MOV r0, #_BS @ queue up another backspace
+        _SDK_FUNC_CALL sdk_emit
+        B _accl @ back for more!
 
         @ clean up and exit
 _accz:
         @ stack top is correct - it has the count - but we need to fix `PT2ND`
-        @ ADD PT2ND, #_CELL
-        @ _UNNEST
+        ADD PT2ND, #_CELL
+        _UNNEST
         @ whew!
 
-        @ _HEADER "TYPE", type
-        @ _NEST
-        @ CMP PSTOP, #0 @ check for early exit
-        @ BLE typz
+        _HEADER "TYPE", type
+        _NEST
+        CMP PSTOP, #0 @ check for early exit
+        BLE typz
 
-        @ LDR INDXA, [PT2ND] @ get the address
 
 typl:
-        @ LDR r0, [INDXA]
-        @ BL sdk_emit @ emit the character
-        @ ADD INDXA, #1 @ next in buffer
-        @ SUB PSTOP, #1 @ count down
-        @ BNE typl @ continue if count not zero
+        LDR r1, [PT2ND] @ get the address
+        LDR r0, [r1] @ get the character
+        ADD r1, #1 @ increment address
+        STR r1, [PT2ND]
+        _SDK_FUNC_CALL sdk_emit @ emit the character
+        SUB PSTOP, #1 @ count down
+        BNE typl @ continue if count not zero
 
 typz:
-        @ ADD PT2ND, #_CELL*2 @ we consumed two cells
-        @ LDR PSTOP, [PT2ND, #_CELL] @ fix top of stack
-        @ _UNNEST
+        ADD PT2ND, #_CELL*2 @ we consumed two cells
+        LDR PSTOP, [PT2ND, #_CELL] @ fix top of stack
+        _UNNEST
 
         @ number input/output
-        @ _HEADER "BASE", "base"
-        @ _NEST
-        @ MOV r0, PSTOP
-        @ _PUSHR0
-        @ BL _base_addr
-        @ MOV PSTOP, r0
-        @ _UNNEST
+        _HEADER "BASE", "base"
+        _NEST
+        _DUP
+        BL _base_addr
+        MOV PSTOP, r0
+        _UNNEST
 
+        @ parsing
+        _HEADER ">IN", "to_in"
+        _NEST
+        _DUP
+        BL _to_in_addr
+        MOV PSTOP, r0
+        _UNNEST
 
 @ finally, the text interpreter!!
         _HEADER "QUIT", quit
@@ -458,24 +466,24 @@ typz:
         @ return.
 quil:
         @ push input buffer address and length to stack
-        @ BL _inbuf_addr
-        @ _PUSHR0
-        @ BL _inbuf_length
-        @ _PUSHR0
+        BL _tib_addr
+        _PUSHR0
+        BL _tib_length
+        _PUSHR0
 
         @ get a line from user
-        @ BL accept
+        BL accept
 
         @ top of stack now has count
-        @ BL _inbuf_addr
-        @ _PUSHR0
-        @ _SWAP
+        BL _tib_addr
+        _PUSHR0
+        _SWAP
 
         @ and interpret
-        @ BL evaluate
+        BL evaluate
 
         @ repeat forever-ish
-        @ B quil
+        B quil
 
         _HEADER "'", tick
         _NEST
