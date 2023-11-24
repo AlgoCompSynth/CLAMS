@@ -379,13 +379,11 @@ _accl:
 
         @ an ordinary printable character - echo it and append to buffer
 _acce:
-        LDR r1, [PT2ND] @ buffer address is in second of stack!
-        STR r0, [r1] @ append char to buffer
+        LDR r3, [PT2ND] @ buffer address is in second of stack!
+        STRB r0, [r3, PSTOP] @ append char to buffer
         _SDK_FUNC_CALL sdk_emit @ printable - send it out!
 
         @ count
-        ADD r1, #1 @ next address
-        STR r1, [PT2ND]
         ADD PSTOP, #1 @ character count
         CMP PSTOP, r11 @ did we hit the limit?
         BEQ _accz @ early exit if limit hit!
@@ -402,9 +400,6 @@ _accb:
         BEQ _accl @ ignore a backspace if buffer is empty
 
         @ un-count
-        LDR r1, [PT2ND] @ decrement buffer address
-        SUB r1, #1
-        STR r1, [PT2ND]
         SUB PSTOP, #1 @ decrement char count
 
         @ erase previous character
@@ -424,18 +419,19 @@ _accz:
 
         _HEADER "TYPE", type
         _NEST
+        @ count is in PSTOP
         CMP PSTOP, #0 @ check for early exit
         BLE typz
-
+        LDR r3, [PT2ND] @ get the address into r11
 
 typl:
-        LDR r1, [PT2ND] @ get the address
-        LDR r0, [r1] @ get the character
-        ADD r1, #1 @ increment address
-        STR r1, [PT2ND]
+        LDRB r0, [r3] @ get the character
+        MOV r11, r3 @ save r3 before function call!
         _SDK_FUNC_CALL sdk_emit @ emit the character
+        MOV r3, r11 @ restore r3
+        ADD r3, #1 @ increment the address
         SUB PSTOP, #1 @ count down
-        BNE typl @ continue if count not zero
+        BGT typl @ continue if count not zero
 
 typz:
         ADD PT2ND, #_CELL*2 @ we consumed two cells
