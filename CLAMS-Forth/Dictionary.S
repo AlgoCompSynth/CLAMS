@@ -97,34 +97,22 @@
 @ where `result` = `left <op> right`. That is, the postfix `left right <op>` has
 @ the same `result` as the infix `left <op> right`.
 
-        .macro _BINARY_OP opcode
+        .macro _BINARY_ALU opcode
         LDM PT2ND!, {r0} @ pop left operand => r0
         \opcode\() PSTOP, r0, PSTOP @ PSTOP := left <OP> PSTOP
         .endm
 
-        @ build a dictionary entry for a binary word
-        .macro _BINARY_WORD wname, opcode, pronunciation
-        _HEADER \wname, \pronunciation
-        _BINARY_OP \opcode
-        .endm
-
 @ same thing for comparisons!
-        .macro _BINARY_CP opcode
+        .macro _BINARY_CMP opcode
         LDM PT2ND!, {r0} @ pop left operand => r0
         CMP r0, PSTOP
         \opcode\() 1f @ branch if true
         MOV PSTOP, #0 @ false - set flag to zero
-        _EXIT
+        B 2f
 1:
         MOV PSTOP, #0
         MVN PSTOP, PSTOP @ set all-ones true flag
-        _EXIT
-        .endm
-
-        @ build a dictionary entry for a binary compare
-        .macro _BINARY_COMPARE wname, opcode, pronunciation
-        _HEADER \wname, \pronunciation
-        _BINARY_CP \opcode
+2:
         .endm
 
         @ terminate an inline word
@@ -147,49 +135,49 @@
         @ each inlined word whenever the colon word is called.
 
         @ For readability, we have two forms of each in the dictionary. For
-        @ example, "+" (plus) is the callable form and "+i" (plus_i) is the
+        @ example, "+" (plus) is the callable form and "+_" (plus_underscore) is the
         @ inline form.
 
         @ stack operators
         _HEADER "DROP", drop
         _DROP
         _EXIT
-        _HEADER "DROPi", drop_i
+        _HEADER "DROP_", drop_underscore
         _DROP
         _ITRM
 
         _HEADER "DUP", dupe
         _DUP
         _EXIT
-        _HEADER "DUPi", dupe_i
+        _HEADER "DUP_", dupe_underscore
         _DUP
         _ITRM
 
         _HEADER "OVER", over
         _OVER
         _EXIT
-        _HEADER "OVERi", over_i
+        _HEADER "OVER_", over_underscore
         _OVER
         _ITRM
 
         _HEADER "ROT", rote
         _ROT
         _EXIT
-        _HEADER "ROTi", rote_i
+        _HEADER "ROT_", rote_underscore
         _ROT
         _ITRM
 
         _HEADER "SWAP", swap
         _SWAP
         _EXIT
-        _HEADER "SWAPi", swap_i
+        _HEADER "SWAP_", swap_underscore
         _SWAP
         _ITRM
 
         _HEADER "@", fetch
         LDR PSTOP, [PSTOP]
         _EXIT
-        _HEADER "@i", fetch_i
+        _HEADER "@_", fetch_underscore
         LDR PSTOP, [PSTOP]
         _ITRM
 
@@ -198,7 +186,7 @@
         STR r0, [PSTOP]
         MOV PSTOP, r1
         _EXIT
-        _HEADER "!i", store_i
+        _HEADER "!_", store_underscore
         LDM PT2ND!, {r0-r1}
         STR r0, [PSTOP]
         MOV PSTOP, r1
@@ -211,7 +199,7 @@
         STR r2, [PSTOP]
         MOV PSTOP, r1
         _EXIT
-        _HEADER "+!i", plus_store_i
+        _HEADER "+!_", plus_store_underscore
         LDM PT2ND!, {r0-r1}
         LDR r2, [PSTOP]
         ADD r2, r0
@@ -222,74 +210,86 @@
         _HEADER "1+", one_plus
         ADD PSTOP, #1
         _EXIT
-        _HEADER "1+i", one_plus_i
+        _HEADER "1+_", one_plus_underscore
         ADD PSTOP, #1
         _ITRM
 
         _HEADER "1-", one_minus
         SUB PSTOP, #1
         _EXIT
-        _HEADER "1-i", one_minus_i
+        _HEADER "1-_", one_minus_underscore
         SUB PSTOP, #1
         _ITRM
 
         _HEADER "2*", two_star
         LSL PSTOP, #1
         _EXIT
-        _HEADER "2*i", two_star_i
+        _HEADER "2*_", two_star_underscore
         LSL PSTOP, #1
         _ITRM
 
         _HEADER "2/", two_slash
         ASR PSTOP, #1
         _EXIT
-        _HEADER "2/i", two_slash_i
+        _HEADER "2/_", two_slash_underscore
         ASR PSTOP, #1
         _ITRM
 
         @ arithmetic operators
-        _BINARY_WORD "+", ADD, plus
+        _HEADER "+", plus
+        _BINARY_ALU ADD
         _EXIT
-        _BINARY_WORD "+i", ADD, plus_i
+        _HEADER "+_", plus_underscore
+        _BINARY_ALU ADD
         _ITRM
 
-        _BINARY_WORD "-", SUB, minus
+        _HEADER "-", minus
+        _BINARY_ALU SUB
         _EXIT
-        _BINARY_WORD "-i", SUB, minus_i
+        _HEADER "-_", minus_underscore
+        _BINARY_ALU SUB
         _ITRM
 
-        _BINARY_WORD "*", MUL, star
+        _HEADER "*", star
+        _BINARY_ALU MUL
         _EXIT
-        _BINARY_WORD "*i", MUL, star_i
+        _HEADER "*_", star_underscore
+        _BINARY_ALU MUL
         _ITRM
 
         _HEADER "NEGATE", negate
         MVN PSTOP, PSTOP
         _EXIT
-        _HEADER "NEGATEi", negate_i
+        _HEADER "NEGATE_", negate_underscore
         MVN PSTOP, PSTOP
         _ITRM
 
         @ boolean operators
-        _BINARY_WORD "AND", AND, and
+        _HEADER "AND", and
+        _BINARY_ALU AND
         _EXIT
-        _BINARY_WORD "ANDi", AND, and_i
+        _HEADER "AND_", and_underscore
+        _BINARY_ALU AND
         _ITRM
 
-        _BINARY_WORD "OR", ORR, or
+        _HEADER "OR", or
+        _BINARY_ALU ORR
         _EXIT
-        _BINARY_WORD "ORi", ORR, or_i
+        _HEADER "OR_", or_underscore
+        _BINARY_ALU ORR
         _ITRM
 
-        _BINARY_WORD "XOR", EOR, x_or
+        _HEADER "XOR", x_or
+        _BINARY_ALU EOR
         _EXIT
-        _BINARY_WORD "XORi", EOR, x_or_i
+        _HEADER "XOR_", x_or_underscore
+        _BINARY_ALU EOR
         _ITRM
 
         _HEADER "INVERT", invert
         MVN PSTOP, PSTOP
         _EXIT
-        _HEADER "INVERTi", invert_i
+        _HEADER "INVERT_", invert_underscore
         MVN PSTOP, PSTOP
         _ITRM
 
@@ -298,7 +298,7 @@
         LSL r0, PSTOP
         MOV PSTOP, r0
         _EXIT
-        _HEADER "LSHIFTi", l_shift_i
+        _HEADER "LSHIFT_", l_shift_underscore
         LDM PT2ND!, {r0}
         LSL r0, PSTOP
         MOV PSTOP, r0
@@ -309,7 +309,7 @@
         LSR r0, PSTOP
         MOV PSTOP, r0
         _EXIT
-        _HEADER "RSHIFTi", r_shift_i
+        _HEADER "RSHIFT_", r_shift_underscore
         LDM PT2ND!, {r0}
         LSR r0, PSTOP
         MOV PSTOP, r0
@@ -339,16 +339,29 @@
         _UNNEST
 
         @ binary comparison operators
-        _BINARY_COMPARE "<", BLT, less_than
+        _HEADER "<", less_than
+        _BINARY_CMP BLT
+        _EXIT
 
         @ The "as" macro processor chokes with mysterious errors if the equal
         @ sign in the following invocation is enclosed in double quotes rather
         @ than single quotes. Maybe I'll develop a reprex and file an issue.
         @ Maybe I won't.
-        _BINARY_COMPARE '=', BEQ, equals
-        _BINARY_COMPARE ">", BGT, greater_than
-        _BINARY_COMPARE "U>", BHI, u_greater_than
-        _BINARY_COMPARE "U<", BLO, u_less_than
+        _HEADER '=', equals
+        _BINARY_CMP BEQ
+        _EXIT
+
+        _HEADER ">", greater_than
+        _BINARY_CMP BGT
+        _EXIT
+
+        _HEADER "U>", u_greater_than
+        _BINARY_CMP BHI
+        _EXIT
+
+        _HEADER "U<", u_less_than
+        _BINARY_CMP BLO
+        _EXIT
 
         @ terminal I/O words
         _HEADER "KEY", key
