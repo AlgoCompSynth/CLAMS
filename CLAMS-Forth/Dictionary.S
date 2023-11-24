@@ -468,7 +468,7 @@ quil:
         @ push input buffer address and length to stack
         BL _tib_addr
         _PUSHR0
-        BL _tib_length
+        BL _tib_maxl
         _PUSHR0
 
         @ get a line from user
