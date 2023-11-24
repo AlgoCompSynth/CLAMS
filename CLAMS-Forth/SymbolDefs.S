@@ -27,7 +27,7 @@
 */
 
 @ Pico SDK functions save registers r4 - r11, so we can use them without saving.
-@ However, r8 - r11 have limited functionality - essentially only source and
+@ However, r8 - r11 have limited functionality - essentially only source or
 @ destination of a MOV and one operand of a CMP.
 
 @ parameter stack registers
@@ -52,9 +52,10 @@ MPTRY .req r8
 @ and result passing by SDK functions.
 
 @ symbols for addressing expressions
-.set _BYTE, 1 @ bytes
-.set _CELL, 4 @ bytes per cell
-.set _CELL_SHIFT, 2 @ bits to shift for cell - byte conversions
+.set _BYTE, 1 @ address units per byte
+.set _CHAR, 1 @ address units per character
+.set _CELL, 4 @ address units per cell
+.set _CELL_SHIFT, 2 @ bits to shift for cell - address unit conversions
 
 @ system-wide macros
 
@@ -119,9 +120,9 @@ MPTRY .req r8
         .elseif \post_op == "-"
           SUB INDX\register, #_CELL
         .elseif \post_op == "+C"
-          ADD INDX\register, #1
+          ADD INDX\register, #_CHAR
         .elseif \post_op == "-C"
-          SUB INDX\register, #1
+          SUB INDX\register, #_CHAR
         .endif
         .endm
         .macro _FETCH_INDX register, post_op=""
