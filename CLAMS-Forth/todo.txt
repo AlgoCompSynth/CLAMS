@@ -1,1 +1,1 @@
-double precision in C
+switch to fixed length dictionary names
