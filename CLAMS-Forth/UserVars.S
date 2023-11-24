@@ -28,11 +28,15 @@
 
 .include "SymbolDefs.S"
 
+@ data segment!
+.data
+
 @ User variables
 
         .macro _USER_VARIABLE name:req, value=0
 
         @ make the variable
+        .balign _CELL
         .set \name, .
         .word \value
 
@@ -45,11 +49,13 @@
         .endm
 
 _USER_VARIABLE _base, 10 @ base for numeric input/output
+_USER_VARIABLE _to_in, 0 @ parsing pointer
 
 @ String buffers
         .macro _STRING_BUF name:req, length=128
 
         @ make the buffer
+        .balign _CELL
         .set \name, .
         .rept \length
         .byte 0
@@ -68,4 +74,4 @@ _USER_VARIABLE _base, 10 @ base for numeric input/output
         _EXIT
         .endm
 
-_STRING_BUF _inbuf @ terminal input read here
+_STRING_BUF _tib @ terminal input read here
