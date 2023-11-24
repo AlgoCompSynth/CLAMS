@@ -52,26 +52,77 @@ _USER_VARIABLE _base, 10 @ base for numeric input/output
 _USER_VARIABLE _to_in, 0 @ parsing pointer
 
 @ String buffers
-        .macro _STRING_BUF name:req, length=128
+
+@ String buffers store counted strings. The first byte is the count, second and 
+@ succeeding characters are data, and buffers are initialized with zeroes. String
+@ buffers have four methods:
+
+@ an `_addr` method, which returns the address of the first (count) byte of the
+@ buffer,
+
+@ a `_maxl` method, which returns the length of @ the buffer minus 1,
+
+@ a `_count` method, which sets the count byte to the correct count of the rest
+@ of the buffer,
+
+@ and an `_init` method, which sets the whole buffer to zeroes.
+
+        .macro _STRING_BUF name:req, maxl=255
 
         @ make the buffer
         .balign _CELL
         .set \name, .
-        .rept \length
+        .rept \maxl + 1
         .byte 0
         .endr
 
-        @ functions to get address and length
+        @ getter / setter functions
         .global \name\()_addr
         .thumb_func
         .set \name\()_addr, .
         LDR r0, =\name
         _EXIT
-        .global \name\()_length
+
+        .global \name\()_maxl
         .thumb_func
-        .set \name\()_length, .
-        LDR r0, =\length
+        .set \name\()_maxl, .
+        MOV r0, #\maxl
         _EXIT
+
+        .global \name\()_init
+        .thumb_func
+        .set \name\()_init, .
+        MOV r3, #0 @ count
+        LDR r2, =\name @ address
+        MOV r0, #0 @ and a zero to store
+
+1:
+        STRB r0, [r2, r3]
+        ADD r3, #1
+        CMP r3, #\maxl
+        BLE 1b
+        _EXIT
+
+        .global \name\()_count
+        .thumb_func
+        .set \name\()_count, .
+        MOV r3, #0 @ count
+        LDR r2, =\name @ address
+        ADD r2, #1
+
+1:
+        LDRB r0, [r2, r3] @ get the character
+        CMP r0, #0
+        BEQ 2f @ we're done if it's zero
+        ADD r3, #1 @ count the character
+        CMP r3, #\maxl @ have we hit the end?
+        BLT 1b @ not at end - keep going
+
+2:
+        LDR r2, =\name @ get the buffer address back
+        STRB r3, [r2] @ save the count
+        _EXIT
+
         .endm
 
 _STRING_BUF _tib @ terminal input read here
