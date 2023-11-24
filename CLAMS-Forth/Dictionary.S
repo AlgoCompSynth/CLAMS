@@ -38,41 +38,51 @@
 @ dictionary construction macros
 
 @ dictionary header
+
 @ wname = word name in dictionary - what the Forth system searches for
-@ n_BYTEs = how many bytes in name
 
 @ pronunciation = Forth specifies how to pronounce many words. We make labels
 @ from these, substituting an underscore for each dash in the pronunciation.
 
-@ b_offset = backwards offset to previous word = the number of bytes to go back
-@ to find the previous word. A backwards offset of zero marks the end of the
-@ dictionary!
+@ flags = various bits about the word
+.set _IMMEDIATE, 1
+.set _COMPILE_ONLY, 2
 
-        .macro _HEADER wname, pronunciation
+        .macro _HEADER wname, pronunciation, flags=0
 
         @ define header label
         .balign _CELL, 0
-        .set _\pronunciation, .
-
-        @ build link field
-        .if . == _system_dict_start
-          .hword 0
-        .else
-          .hword . - _previous_link_address
-        .endif
-        .set _previous_link_address, . - 2
-
-        @ reserve flags field
-        .hword 0
+        .set _name_field, .
+        .set _link_field, _name_field + 32
+        .set _flags_field, link_field + 2
+        .set _code_field, flags_field + 2
 
         @ build name field
+        .set _\pronunciation, . @ define a debugging symbol for the name field
         .set _count, 1f - . - 1
         .byte _count
         .ascii "\wname"
 1:
-        .balign _CELL, 0
 
-        @ define test entry point
+        @ build link field
+        .set _padding, _link_field - .
+        .if _padding > 0
+          .rept _padding
+          .byte 0
+          .endr
+        .endif
+
+        .if .name_field == _system_dict_start
+          .hword 0
+        .else
+          .hword _name_field - _previous_name_field
+        .endif
+        .set _previous_name_field, _name_field
+
+        @ build flags field
+        .hword \flags
+
+        @ define call entry point to code field
         .thumb_func
         .global \pronunciation
         .set \pronunciation, .
