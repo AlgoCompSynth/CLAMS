@@ -58,7 +58,7 @@
         .set _code_field, flags_field + 2
 
         @ build name field
-        .set _\pronunciation, . @ define a debugging symbol for the name field
+        .set _\pronunciation\()_name, . @ debugging symbol for name field
         .set _count, 1f - . - 1
         .byte _count
         .ascii "\wname"
@@ -72,6 +72,7 @@
           .endr
         .endif
 
+        .set _\pronunciation\()_link, . @ debugging symbol for link field
         .if .name_field == _system_dict_start
           .hword 0
         .else
@@ -80,6 +81,7 @@
         .set _previous_name_field, _name_field
 
         @ build flags field
+        .set _\pronunciation\()_flags, . @ debugging symbol for flags field
         .hword \flags
 
         @ define call entry point to code field
@@ -315,6 +317,47 @@
         MOV PSTOP, r0
         _ITRM
 
+        @ binary comparison operators
+        _HEADER "<", less_than
+        _BINARY_CMP BLT
+        _EXIT
+
+        _HEADER "<=", less_or_equals
+        _BINARY_CMP BLE
+        _EXIT
+
+        _HEADER "=", equals
+        _BINARY_CMP BEQ
+        _EXIT
+
+        _HEADER "<>", not_equals
+        _BINARY_CMP BNE
+        _EXIT
+
+        _HEADER ">", greater_than
+        _BINARY_CMP BGT
+        _EXIT
+
+        _HEADER ">=", greater_or_equals
+        _BINARY_CMP BGE
+        _EXIT
+
+        _HEADER "U>", u_greater_than
+        _BINARY_CMP BHI
+        _EXIT
+
+        _HEADER "U>=", u_greater_or_equals
+        _BINARY_CMP BHS
+        _EXIT
+
+        _HEADER "U<", u_less_than
+        _BINARY_CMP BLO
+        _EXIT
+
+        _HEADER "U<=", u_less_or_equals
+        _BINARY_CMP BLS
+        _EXIT
+
         @ division operators - use the SDK and hardware divider
         _HEADER "/MOD", slash_mod
         _NEST
@@ -337,31 +380,6 @@
         _SDK_FUNC_CALL sdk_slash_mod
         _DROP
         _UNNEST
-
-        @ binary comparison operators
-        _HEADER "<", less_than
-        _BINARY_CMP BLT
-        _EXIT
-
-        @ The "as" macro processor chokes with mysterious errors if the equal
-        @ sign in the following invocation is enclosed in double quotes rather
-        @ than single quotes. Maybe I'll develop a reprex and file an issue.
-        @ Maybe I won't.
-        _HEADER '=', equals
-        _BINARY_CMP BEQ
-        _EXIT
-
-        _HEADER ">", greater_than
-        _BINARY_CMP BGT
-        _EXIT
-
-        _HEADER "U>", u_greater_than
-        _BINARY_CMP BHI
-        _EXIT
-
-        _HEADER "U<", u_less_than
-        _BINARY_CMP BLO
-        _EXIT
 
         @ terminal I/O words
         _HEADER "KEY", key
