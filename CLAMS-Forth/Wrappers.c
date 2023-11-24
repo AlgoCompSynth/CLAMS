@@ -35,7 +35,7 @@
 #include "pico/stdio.h"
 #include "pico/stdio_usb.h"
 #include "pico/stdio_uart.h"
-#include "hardware/divider.h"
+#include "pico/divider.h"
 
 // sleep for specified time in milliseconds
 void sdk_sleep_ms(uint32_t ms) {
@@ -72,8 +72,39 @@ int sdk_emit(int character) {
 
 // arithmetic
 
-// returns quotient in r0 and remainder in r1!
-int32_t sdk_slash_mod(int32_t dividend, int32_t divisor) {
-    divmod_result_t result = hw_divider_divmod_s32(dividend, divisor);
+// division
+// https://www.raspberrypi.com/documentation/pico-sdk/runtime.html#pico_divider
+
+// These are all we need - we can call them and drop unwanted results
+// returns quotient in r0 and remainder in r1
+divmod_result_t sdk_slash_mod(int32_t dividend, int32_t divisor) {
+    divmod_result_t result = divmod_s32s32(dividend, divisor);
+    return(result);
+}
+
+// quotient in r0/r1, remainder in r2/r3
+uint64_t sdk_u_m_slash_mod(uint64_t dividend, uint32_t divisor) {
+    uint64_t promoted = divisor;
+    uint64_t result = divmod_u64u64(dividend, promoted);
+    return(result);
+}
+
+// 64-bit multiplies
+int64_t sdk_m_star(int32_t multiplicand, int32_t multiplier) {
+    int64_t product = multiplicand*multiplier;
+    return(product);
+}
+uint64_t sdk_u_m_star(uint32_t multiplicand, uint32_t multiplier) {
+    uint64_t product = multiplicand*multiplier;
+    return(product);
+}
+
+// mixed multiplies followed by divides
+int64_t sdk_star_slash_mod(
+    int32_t multiplicand, int32_t multiplier, int32_t divisor
+) {
+    int64_t product = sdk_m_star(multiplicand, multiplier);
+    int64_t promoted = divisor;
+    int64_t result = divmod_s64s64(product, promoted);
     return(result);
 }
