@@ -73,7 +73,7 @@
         .endif
 
         .set _\pronunciation\()_link, . @ debugging symbol for link field
-        .if .name_field == _system_dict_start
+        .if _name_field == _system_dict_start
           .hword 0
         .else
           .hword _name_field - _previous_name_field
@@ -131,6 +131,7 @@
 @ the dictionary itself!
 .data
 .balign _CELL
+.set _system_dict_start, .
 
         @ The first group of operators are simple enough that they can be copied
         @ inline to a colon word instead of called. This saves two cycles for
@@ -358,28 +359,24 @@
         _BINARY_CMP BLS
         _EXIT
 
-        @ division operators - use the SDK and hardware divider
-        _HEADER "/MOD", slash_mod
-        _NEST
-        LDR r0, [PT2ND] @ dividend => r0
-        MOV r1, PSTOP @ divisor => r1
-        _SDK_FUNC_CALL sdk_slash_mod
-        MOV PSTOP, r0 @ quotient => top of stack
-        STR r1, [PT2ND] @ remainder => 2nd
-        _UNNEST
-
-        _HEADER "/", slash
-        _NEST
-        _SDK_FUNC_CALL sdk_slash_mod
-        _SWAP
+        @ character / string words
+        _HEADER "FILL", fill
+        MOV r0, PSTOP @ character => r0
         _DROP
-        _UNNEST
+        MOV r3, PSTOP @ count => r3
+        _DROP @ address now in PSTOP
 
-        _HEADER "MOD", mod
-        _NEST
-        _SDK_FUNC_CALL sdk_slash_mod
+fil1:
+        CMP r3, #0 @ is count zero or less?
+        BLE filz @ exit, stage left!
+        STRB r0, [PSTOP]
+        ADD PSTOP, #_CHAR
+        SUB r3, #1
+        B fil1
+filz:
+        @ done - one last _DROP
         _DROP
-        _UNNEST
+        _EXIT
 
         @ terminal I/O words
         _HEADER "KEY", key
@@ -579,4 +576,27 @@ quil:
         _HEADER "EVALUATE", evaluate
         _NEST
         @ TBD
+        _UNNEST
+
+        @ division operators - use the SDK and hardware divider
+        _HEADER "/MOD", slash_mod
+        _NEST
+        LDR r0, [PT2ND] @ dividend => r0
+        MOV r1, PSTOP @ divisor => r1
+        _SDK_FUNC_CALL sdk_slash_mod
+        MOV PSTOP, r0 @ quotient => top of stack
+        STR r1, [PT2ND] @ remainder => 2nd
+        _UNNEST
+
+        _HEADER "/", slash
+        _NEST
+        _SDK_FUNC_CALL sdk_slash_mod
+        _SWAP
+        _DROP
+        _UNNEST
+
+        _HEADER "MOD", mod
+        _NEST
+        _SDK_FUNC_CALL sdk_slash_mod
+        _DROP
         _UNNEST
