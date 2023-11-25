@@ -39,12 +39,12 @@ PSTOP .req r6 @ top cell of parameter stack
 @ accessed 2023-11-20
 
 @ index-scratch registers
-INDXA .req r5 @ index register a
-INDXB .req r4 @ index register b
+INDXA .req r4 @ index register a
+INDXB .req r5 @ index register b
 
 @ memory pointer - base + literal addressing
-MPTRX .req r9
-MPTRY .req r8
+MPTRX .req r8
+MPTRY .req r9
 
 @ registers r12 - r15 are reserved for the SDK!
 @ registers r10 - r11 are used without saving in the Forth VM
