@@ -378,102 +378,90 @@ filz:
         _DROP
         _EXIT
 
-        @ terminal I/O words
-        _HEADER "KEY", key
-        _NEST
-        _SDK_FUNC_CALL sdk_key
-        _PUSHR0
-        _UNNEST
-
-        _HEADER "EMIT", emit
-        _NEST
-        MOV r0, PSTOP
-        _SDK_FUNC_CALL sdk_emit
-        _DROP
-        _UNNEST
-
         _HEADER "ACCEPT", accept
         _NEST
 
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
-        MOV r11, PSTOP @ save maximum count in `r11`
-        MOV PSTOP, #0 @ the actual count ends up here!
+        _TO_MPTR X @ pop max count to MPTRX
+        _TO_INDX A @ pop address to INDXA
+        MOV INDXB, #0 @ 0 to counter
 _accl:
-        _SDK_FUNC_CALL sdk_key @ wait for character, which will show up in r0
+        BL key @ wait for character, which will show up in PSTOP
 
         @ test for specific control characters
-        CMP r0, #_BS
+        CMP PSTOP, #_BS
         BEQ _accb @ do the backspace
-        CMP r0, #_CR
+        CMP PSTOP, #_CR
         BEQ _accz @ line finished - clean up stack and exit
         
         @ the rest are either standard printables or will be replaced by space
-        CMP r0, #_BL
+        CMP PSTOP, #_BL
         BLE _accs @ emit and append a space
-        CMP r0, #_DEL
+        CMP PSTOP, #_DEL
         BGE _accs @ emit and append a space
 
         @ an ordinary printable character - echo it and append to buffer
 _acce:
-        LDR r3, [PT2ND] @ buffer address is in second of stack!
-        STRB r0, [r3, PSTOP] @ append char to buffer
-        _SDK_FUNC_CALL sdk_emit @ printable - send it out!
+        STRB PSTOP, [INDXA, INDXB] @ append char to buffer
+        BL emit @ printable - send it out!
 
         @ count
-        ADD PSTOP, #1 @ character count
-        CMP PSTOP, r11 @ did we hit the limit?
+        ADD INDXB, #1 @ character count
+        CMP INDXB, MPTRX @ did we hit the limit?
         BEQ _accz @ early exit if limit hit!
 	B _accl @ there's room - go back for more!
 
         @ space or unprintable
 _accs:
-        MOV r0, #_BL @ force a space and emit / store / count
+        MOV PSTOP, #_BL @ force a space and emit / store / count
         B _acce
 
         @ backspace - un-count previous character and erase it
 _accb:
-        CMP PSTOP, #0 @ is buffer empty?
+        CMP INDXB, #0 @ is buffer empty?
         BEQ _accl @ ignore a backspace if buffer is empty
 
         @ un-count
-        SUB PSTOP, #1 @ decrement char count
+        SUB INDXB, #1 @ decrement char count
 
         @ erase previous character
-        _SDK_FUNC_CALL sdk_emit @ emit the backspace we have
+        BL emit @ emit the backspace we have
         MOV r0, #_BL
-        _SDK_FUNC_CALL sdk_emit @ "erase" the character
+        _PUSHR0
+        BL emit @ "erase" the character
         MOV r0, #_BS @ queue up another backspace
-        _SDK_FUNC_CALL sdk_emit
+        _PUSHR0
+        BL emit
         B _accl @ back for more!
 
         @ clean up and exit
 _accz:
-        @ stack top is correct - it has the count - but we need to fix `PT2ND`
-        ADD PT2ND, #_CELL
+        @ push count and exit
+        _PUSHREG INDXB
         _UNNEST
         @ whew!
 
         _HEADER "TYPE", type
         _NEST
-        @ count is in PSTOP
-        CMP PSTOP, #0 @ check for early exit
-        BLE typz
-        LDR r3, [PT2ND] @ get the address into r11
+        _TO_INDX B @ count to INDXB
+        _TO_INDX A @ address to INDXA
 
 typl:
-        LDRB r0, [r3] @ get the character
-        MOV r11, r3 @ save r3 before function call!
-        _SDK_FUNC_CALL sdk_emit @ emit the character
-        MOV r3, r11 @ restore r3
-        ADD r3, #1 @ increment the address
-        SUB PSTOP, #1 @ count down
-        BGT typl @ continue if count not zero
+        CMP INDXB, #0 @ are we done?
+        BLE typz @ exit!
+
+        LDRB r0, [INDXA] @ get the character
+        CMP r0, #0 @ is it a null terminator?
+        BEQ typz @ exit on null terminator
+        _PUSHR0
+        BL emit @ emit the character
+        ADD INDXA, #1 @ increment the address
+        SUB INDXB, #1 @ count down
+        BGT typl @ continue
 
 typz:
-        ADD PT2ND, #_CELL*2 @ we consumed two cells
-        LDR PSTOP, [PT2ND, #_CELL] @ fix top of stack
         _UNNEST
 
         @ number input/output
@@ -598,5 +586,19 @@ quil:
         _HEADER "MOD", mod
         _NEST
         _SDK_FUNC_CALL sdk_slash_mod
+        _DROP
+        _UNNEST
+
+        @ terminal I/O words
+        _HEADER "KEY", key
+        _NEST
+        _SDK_FUNC_CALL sdk_key
+        _PUSHR0
+        _UNNEST
+
+        _HEADER "EMIT", emit
+        _NEST
+        MOV r0, PSTOP
+        _SDK_FUNC_CALL sdk_emit
         _DROP
         _UNNEST

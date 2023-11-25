@@ -66,6 +66,11 @@ MPTRY .req r9
         STR PSTOP, [PT2ND] @ save top to RAM
         .endm
 
+        .macro _PUSHREG register=r0
+        _DUP
+        MOV PSTOP, \register @ save argument to `PSTOP`
+        .endm
+
         .macro _PUSHR0
         _DUP
         MOV PSTOP, r0 @ save argument to `PSTOP`
