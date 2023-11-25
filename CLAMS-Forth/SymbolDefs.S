@@ -52,7 +52,8 @@ MPTRY .req r8
 @ and result passing by SDK functions.
 
 @ symbols for addressing expressions
-.set _BYTE, 1 @ address units per byte
+@ reference: Forth 2012 standard, section D2.2
+@ For the Arm Cortex series, an address unit is 8 bits aka a byte
 .set _CHAR, 1 @ address units per character
 .set _CELL, 4 @ address units per cell
 .set _CELL_SHIFT, 2 @ bits to shift for cell - address unit conversions
