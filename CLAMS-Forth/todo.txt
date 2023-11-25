@@ -1,3 +1,4 @@
+add index / pointer register saves to nest and unnest
 fix SOURCE - needs variables
 code COMPARE
 code FIND and tick
