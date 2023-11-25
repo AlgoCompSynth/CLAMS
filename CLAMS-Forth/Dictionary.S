@@ -495,6 +495,55 @@ typz:
         MOV PSTOP, r0
         _UNNEST
 
+        _HEADER "SOURCE", "source"
+        _NEST
+        _DUP @ make room for two cells on the stack
+        _DUP
+        BL _tib_addr @ address of _tib => r0
+        LDRB PSTOP, [r0] @ count => PSTOP
+        ADD r0, #1 @ point to first non-count character
+        STR r0, [PT2ND] @ address => 2nd
+        _UNNEST
+
+        _HEADER "PARSE-NAME", "parse_name"
+        _NEST
+        BL source @ buffer address in [PT2ND], count in PSTOP
+        _DROP @ drop count - buffers are null-terminated
+        _TO_INDX A @ pop address to INDXA
+        BL to_in @ get address of input buffer count
+        _TO_INDX B @ pop >IN address to INDXB
+        LDR r3, [INDXB] @ >IN to r3
+
+pn1:
+        LDRB r2, [INDXA, r3] @ get a character
+        CMP r2, #0 @ buffers are null-terminated
+        BEQ pnz @ that's all, folks!
+        CMP r2, #_BL @ is it a space?
+        BNE pn2 @ first non-delimiter!
+        ADD r3, #_CHAR
+        B pn1 @ next character
+
+pn2:
+        ADD r0, INDXA, r3 @ we have the buffer address!
+        _PUSHR0 @ push it to the stack
+        MOV r1, #1 @ initial count
+
+pn3:
+        ADD r3, #_CHAR
+        LDRB r2, [INDXA, r3]
+        CMP r2, #0
+        BEQ pnz
+        CMP r2, #_BL
+        BEQ pnz @ blank - finish up
+        ADD r1, #1 @ count and go back for more
+        B pn3
+
+pnz:
+        STR r3, [INDXB] @ first order of business - save new >IN value
+        MOV r0, r1 @ push count and exit
+        _PUSHR0
+        _UNNEST 
+
 @ finally, the text interpreter!!
         _HEADER "QUIT", quit
 
