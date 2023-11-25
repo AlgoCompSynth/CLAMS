@@ -126,3 +126,4 @@ _USER_VARIABLE _to_in, 0 @ parsing pointer
         .endm
 
 _STRING_BUF _tib @ terminal input read here
+_STRING_BUF _searching_for @ the word we're trying to find in the dictionary
