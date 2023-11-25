@@ -160,9 +160,15 @@ MPTRY .req r8
 
         @ macros for nested calls
         .macro _NEST
-        PUSH {LR}
+        PUSH {INDXA, INDXB, LR}
+        MOV INDXA, MPTRX
+        MOV INDXB, MPTRY
+        PUSH {INDXA, INDXB}
         .endm
 
         .macro _UNNEST
-        POP {PC}
+        POP {INDXA, INDXB}
+        MOV MPTRX, INDXA
+        MOV MPTRY, INDXB
+        POP {INDXA, INDXB, PC}
         .endm
