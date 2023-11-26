@@ -129,7 +129,6 @@
 .set _DEL, 127 @ delete
 
 @ the dictionary itself!
-.data
 .balign _CELL
 .set _system_dict_start, .
 
@@ -602,3 +601,5 @@ quil:
         _SDK_FUNC_CALL sdk_emit
         _DROP
         _UNNEST
+
+.set _system_dict_end, .
