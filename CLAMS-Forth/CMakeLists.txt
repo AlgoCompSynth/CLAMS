@@ -15,6 +15,7 @@ add_executable(CLAMS-Forth
   Dictionary.S
   ParamStack.S
   SymbolDefs.S
+  TextInterpreter.S
   UserVars.S
   Wrappers.c
 )
