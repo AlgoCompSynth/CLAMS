@@ -388,8 +388,8 @@ filz:
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
-        _TO_MPTR X @ pop max count to MPTRX
-        _TO_INDX A @ pop address to INDXA
+        _TO_REG MPTRX @ pop max count to MPTRX
+        _TO_REG INDXA @ pop address to INDXA
         MOV INDXB, #0 @ 0 to counter
 _accl:
         BL key @ wait for character, which will show up in PSTOP
@@ -433,10 +433,10 @@ _accb:
         @ erase previous character
         BL emit @ emit the backspace we have
         MOV r0, #_BL
-        _PUSHR0
+        _PUSHREG r0
         BL emit @ "erase" the character
         MOV r0, #_BS @ queue up another backspace
-        _PUSHR0
+        _PUSHREG r0
         BL emit
         B _accl @ back for more!
 
@@ -449,8 +449,8 @@ _accz:
 
         _HEADER "TYPE", type
         _NEST
-        _TO_INDX B @ count to INDXB
-        _TO_INDX A @ address to INDXA
+        _TO_REG INDXB @ count to INDXB
+        _TO_REG INDXA @ address to INDXA
 
 typl:
         CMP INDXB, #0 @ are we done?
@@ -459,7 +459,7 @@ typl:
         LDRB r0, [INDXA] @ get the character
         CMP r0, #0 @ is it a null terminator?
         BEQ typz @ exit on null terminator
-        _PUSHR0
+        _PUSHREG r0
         BL emit @ emit the character
         ADD INDXA, #1 @ increment the address
         SUB INDXB, #1 @ count down
@@ -498,9 +498,9 @@ typz:
         _NEST
         BL source @ buffer address in [PT2ND], count in PSTOP
         _DROP @ drop count - buffers are null-terminated
-        _TO_INDX A @ pop address to INDXA
+        _TO_REG INDXA @ pop address to INDXA
         BL to_in @ get address of input buffer count
-        _TO_INDX B @ pop >IN address to INDXB
+        _TO_REG INDXB @ pop >IN address to INDXB
         LDR r3, [INDXB] @ >IN to r3
 
 pn1:
@@ -514,7 +514,7 @@ pn1:
 
 pn2:
         ADD r0, INDXA, r3 @ we have the buffer address!
-        _PUSHR0 @ push it to the stack
+        _PUSHREG r0 @ push it to the stack
         MOV r1, #1 @ initial count
 
 pn3:
@@ -530,7 +530,7 @@ pn3:
 pnz:
         STR r3, [INDXB] @ first order of business - save new >IN value
         MOV r0, r1 @ push count and exit
-        _PUSHR0
+        _PUSHREG r0
         _UNNEST 
 
 @ finally, the text interpreter!!
@@ -542,16 +542,16 @@ pnz:
 quil:
         @ push input buffer address and length to stack
         BL _tib_addr
-        _PUSHR0
+        _PUSHREG r0
         BL _tib_maxl
-        _PUSHR0
+        _PUSHREG r0
 
         @ get a line from user
         BL accept
 
         @ top of stack now has count
         BL _tib_addr
-        _PUSHR0
+        _PUSHREG r0
         _SWAP
 
         @ and interpret
@@ -597,7 +597,7 @@ quil:
         _HEADER "KEY", key
         _NEST
         _SDK_FUNC_CALL sdk_key
-        _PUSHR0
+        _PUSHREG r0
         _UNNEST
 
         _HEADER "EMIT", emit

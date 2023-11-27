@@ -71,11 +71,6 @@ MPTRY .req r9
         MOV PSTOP, \register @ save argument to `PSTOP`
         .endm
 
-        .macro _PUSHR0
-        _DUP
-        MOV PSTOP, r0 @ save argument to `PSTOP`
-        .endm
-
         .macro _OVER
         _DUP
         LDR PSTOP, [PT2ND, #_CELL*2] @ replace top of stack with 3rd
@@ -102,60 +97,54 @@ MPTRY .req r9
 
         @ enhanced register macros
         @ to and from stack
-        .macro _TO_INDX register
-        MOV INDX\register, PSTOP
+        .macro _TO_REG register=r0
+        MOV \register, PSTOP
         _DROP
         .endm
-        .macro _INDX_FROM register
+        .macro _REG_FROM register=r0
         _DUP
-        MOV PSTOP, INDX\register
-        .endm
-        .macro _TO_MPTR register
-        MOV MPTR\register, PSTOP
-        _DROP
-        .endm
-        .macro _MPTR_FROM register
-        _DUP
-        MOV PSTOP, MPTR\register
+        MOV PSTOP, register
         .endm
 
-        @ index operations
-        .macro _POST_OP register, post_op=""
-        .if \post_op == "+"
-          ADD INDX\register, #_CELL
-        .elseif \post_op == "-"
-          SUB INDX\register, #_CELL
-        .elseif \post_op == "+C"
-          ADD INDX\register, #_CHAR
-        .elseif \post_op == "-C"
-          SUB INDX\register, #_CHAR
+        @ index operations - only work for r0 - r7
+        .macro _POST_OP register=r0, post_op=""
+        .if \post_op\() == "+"
+          ADD register, #_CELL
+        .elseif \post_op\() == "-"
+          SUB register, #_CELL
+        .elseif \post_op\() == "+C"
+          ADD register, #_CHAR
+        .elseif \post_op\() == "-C"
+          SUB register, #_CHAR
         .endif
         .endm
-        .macro _FETCH_INDX register, post_op=""
+
+        .macro _FETCH_LO register=r0, post_op=""
         _DUP
-        LDR PSTOP, [INDX\register]
-        _POST_OP \register, \post_op
+        LDR PSTOP, [register]
+        _POST_OP \register, \post_op\()
         .endm
-        .macro _STORE_INDX register, post_op=""
-        STR PSTOP, [INDX\register]
+        .macro _STORE_LO register=r0, post_op=""
+        STR PSTOP, [register]
         _DROP
-        _POST_OP \register, \post_op=""
+        _POST_OP \register, \post_op\()=""
         .endm
 
         @ memory pointer operations
         @ these clobber r0!!!
-        .macro _ADD_OFFSET register
-        MOV r0, MPTR\register
+        .macro _ADD_OFFSET register=r11
+        MOV r0, register
         ADD r0, PSTOP
         .endm
-        .macro _FETCH_MPTR register
+        .macro _FETCH_HI register=r11
         _ADD_OFFSET \register
         LDR PSTOP, [r0]
         .endm
-        .macro _STORE_MPTR register
+        .macro _STORE_HI register=r11
         _ADD_OFFSET \register
         _DROP
         STR PSTOP, [r0]
+        _DROP
         .endm
 
         @ return to caller
