@@ -39,8 +39,8 @@
 clear_stack:
         LDR PT2ND, =_stack_bottom
         LDR r0, =_hamburger
-        _PUSHR0
-        _PUSHR0
+        _PUSHREG r0
+        _PUSHREG r0
         _EXIT
 
 .thumb_func
