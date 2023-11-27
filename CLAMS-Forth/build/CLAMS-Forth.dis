@@ -15178,7 +15178,7 @@ Disassembly of section .data:
 	...
 
 20000bca <_drop_flags>:
-	...
+20000bca:	8000      	.short	0x8000
 
 20000bcc <drop>:
 20000bcc:	683e      	ldr	r6, [r7, #0]
@@ -15186,18 +15186,18 @@ Disassembly of section .data:
 20000bd0:	4770      	bx	lr
 	...
 
-20000bd4 <_drop_underscore_name>:
+20000bd4 <_drop_comma_name>:
 20000bd4:	4f524405 	.word	0x4f524405
-20000bd8:	00005f50 	.word	0x00005f50
+20000bd8:	00002c50 	.word	0x00002c50
 	...
 
-20000bf4 <_drop_underscore_link>:
+20000bf4 <_drop_comma_link>:
 20000bf4:	002c      	.short	0x002c
 
-20000bf6 <_drop_underscore_flags>:
-20000bf6:	0002      	.short	0x0002
+20000bf6 <_drop_comma_flags>:
+20000bf6:	8006      	.short	0x8006
 
-20000bf8 <drop_underscore>:
+20000bf8 <drop_comma>:
 20000bf8:	683e      	ldr	r6, [r7, #0]
 20000bfa:	3704      	adds	r7, #4
 20000bfc:	0000ffff 	.word	0x0000ffff
@@ -15210,7 +15210,7 @@ Disassembly of section .data:
 20000c20:	002c      	.short	0x002c
 
 20000c22 <_dupe_flags>:
-	...
+20000c22:	8000      	.short	0x8000
 
 20000c24 <dupe>:
 20000c24:	3f04      	subs	r7, #4
@@ -15218,18 +15218,18 @@ Disassembly of section .data:
 20000c28:	4770      	bx	lr
 	...
 
-20000c2c <_dupe_underscore_name>:
+20000c2c <_dupe_comma_name>:
 20000c2c:	50554404 	.word	0x50554404
-20000c30:	0000005f 	.word	0x0000005f
+20000c30:	0000002c 	.word	0x0000002c
 	...
 
-20000c4c <_dupe_underscore_link>:
+20000c4c <_dupe_comma_link>:
 20000c4c:	002c      	.short	0x002c
 
-20000c4e <_dupe_underscore_flags>:
-20000c4e:	0002      	.short	0x0002
+20000c4e <_dupe_comma_flags>:
+20000c4e:	8006      	.short	0x8006
 
-20000c50 <dupe_underscore>:
+20000c50 <dupe_comma>:
 20000c50:	3f04      	subs	r7, #4
 20000c52:	603e      	str	r6, [r7, #0]
 20000c54:	0000ffff 	.word	0x0000ffff
@@ -15243,7 +15243,7 @@ Disassembly of section .data:
 20000c78:	002c      	.short	0x002c
 
 20000c7a <_over_flags>:
-	...
+20000c7a:	8000      	.short	0x8000
 
 20000c7c <over>:
 20000c7c:	3f04      	subs	r7, #4
@@ -15251,18 +15251,18 @@ Disassembly of section .data:
 20000c80:	68be      	ldr	r6, [r7, #8]
 20000c82:	4770      	bx	lr
 
-20000c84 <_over_underscore_name>:
+20000c84 <_over_comma_name>:
 20000c84:	45564f05 	.word	0x45564f05
-20000c88:	00005f52 	.word	0x00005f52
+20000c88:	00002c52 	.word	0x00002c52
 	...
 
-20000ca4 <_over_underscore_link>:
+20000ca4 <_over_comma_link>:
 20000ca4:	002c      	.short	0x002c
 
-20000ca6 <_over_underscore_flags>:
-20000ca6:	0002      	.short	0x0002
+20000ca6 <_over_comma_flags>:
+20000ca6:	8006      	.short	0x8006
 
-20000ca8 <over_underscore>:
+20000ca8 <over_comma>:
 20000ca8:	3f04      	subs	r7, #4
 20000caa:	603e      	str	r6, [r7, #0]
 20000cac:	68be      	ldr	r6, [r7, #8]
@@ -15276,7 +15276,7 @@ Disassembly of section .data:
 20000cd0:	002c      	.short	0x002c
 
 20000cd2 <_rote_flags>:
-	...
+20000cd2:	8000      	.short	0x8000
 
 20000cd4 <rote>:
 20000cd4:	6838      	ldr	r0, [r7, #0]
@@ -15286,18 +15286,18 @@ Disassembly of section .data:
 20000cdc:	4770      	bx	lr
 	...
 
-20000ce0 <_rote_underscore_name>:
+20000ce0 <_rote_comma_name>:
 20000ce0:	544f5204 	.word	0x544f5204
-20000ce4:	0000005f 	.word	0x0000005f
+20000ce4:	0000002c 	.word	0x0000002c
 	...
 
-20000d00 <_rote_underscore_link>:
+20000d00 <_rote_comma_link>:
 20000d00:	0030      	.short	0x0030
 
-20000d02 <_rote_underscore_flags>:
-20000d02:	0002      	.short	0x0002
+20000d02 <_rote_comma_flags>:
+20000d02:	8006      	.short	0x8006
 
-20000d04 <rote_underscore>:
+20000d04 <rote_comma>:
 20000d04:	6838      	ldr	r0, [r7, #0]
 20000d06:	603e      	str	r6, [r7, #0]
 20000d08:	687e      	ldr	r6, [r7, #4]
@@ -15313,7 +15313,7 @@ Disassembly of section .data:
 20000d30:	0030      	.short	0x0030
 
 20000d32 <_swap_flags>:
-	...
+20000d32:	8000      	.short	0x8000
 
 20000d34 <swap>:
 20000d34:	6838      	ldr	r0, [r7, #0]
@@ -15321,18 +15321,18 @@ Disassembly of section .data:
 20000d38:	1c06      	adds	r6, r0, #0
 20000d3a:	4770      	bx	lr
 
-20000d3c <_swap_underscore_name>:
+20000d3c <_swap_comma_name>:
 20000d3c:	41575305 	.word	0x41575305
-20000d40:	00005f50 	.word	0x00005f50
+20000d40:	00002c50 	.word	0x00002c50
 	...
 
-20000d5c <_swap_underscore_link>:
+20000d5c <_swap_comma_link>:
 20000d5c:	002c      	.short	0x002c
 
-20000d5e <_swap_underscore_flags>:
-20000d5e:	0002      	.short	0x0002
+20000d5e <_swap_comma_flags>:
+20000d5e:	8006      	.short	0x8006
 
-20000d60 <swap_underscore>:
+20000d60 <swap_comma>:
 20000d60:	6838      	ldr	r0, [r7, #0]
 20000d62:	603e      	str	r6, [r7, #0]
 20000d64:	1c06      	adds	r6, r0, #0
@@ -15346,23 +15346,23 @@ Disassembly of section .data:
 20000d88:	002c      	.short	0x002c
 
 20000d8a <_fetch_flags>:
-	...
+20000d8a:	8000      	.short	0x8000
 
 20000d8c <fetch>:
 20000d8c:	6836      	ldr	r6, [r6, #0]
 20000d8e:	4770      	bx	lr
 
-20000d90 <_fetch_underscore_name>:
-20000d90:	005f4002 	.word	0x005f4002
+20000d90 <_fetch_comma_name>:
+20000d90:	002c4002 	.word	0x002c4002
 	...
 
-20000db0 <_fetch_underscore_link>:
+20000db0 <_fetch_comma_link>:
 20000db0:	0028      	.short	0x0028
 
-20000db2 <_fetch_underscore_flags>:
-20000db2:	0002      	.short	0x0002
+20000db2 <_fetch_comma_flags>:
+20000db2:	8006      	.short	0x8006
 
-20000db4 <fetch_underscore>:
+20000db4 <fetch_comma>:
 20000db4:	6836      	ldr	r6, [r6, #0]
 20000db6:	ffff      	.short	0xffff
 
@@ -15374,7 +15374,7 @@ Disassembly of section .data:
 20000dd8:	0028      	.short	0x0028
 
 20000dda <_store_flags>:
-	...
+20000dda:	8000      	.short	0x8000
 
 20000ddc <store>:
 20000ddc:	cf03      	ldmia	r7!, {r0, r1}
@@ -15382,17 +15382,17 @@ Disassembly of section .data:
 20000de0:	1c0e      	adds	r6, r1, #0
 20000de2:	4770      	bx	lr
 
-20000de4 <_store_underscore_name>:
-20000de4:	005f2102 	.word	0x005f2102
+20000de4 <_store_comma_name>:
+20000de4:	002c2102 	.word	0x002c2102
 	...
 
-20000e04 <_store_underscore_link>:
+20000e04 <_store_comma_link>:
 20000e04:	002c      	.short	0x002c
 
-20000e06 <_store_underscore_flags>:
-20000e06:	0002      	.short	0x0002
+20000e06 <_store_comma_flags>:
+20000e06:	8006      	.short	0x8006
 
-20000e08 <store_underscore>:
+20000e08 <store_comma>:
 20000e08:	cf03      	ldmia	r7!, {r0, r1}
 20000e0a:	6030      	str	r0, [r6, #0]
 20000e0c:	1c0e      	adds	r6, r1, #0
@@ -15406,7 +15406,7 @@ Disassembly of section .data:
 20000e30:	002c      	.short	0x002c
 
 20000e32 <_plus_store_flags>:
-	...
+20000e32:	8000      	.short	0x8000
 
 20000e34 <plus_store>:
 20000e34:	cf03      	ldmia	r7!, {r0, r1}
@@ -15416,17 +15416,17 @@ Disassembly of section .data:
 20000e3c:	1c0e      	adds	r6, r1, #0
 20000e3e:	4770      	bx	lr
 
-20000e40 <_plus_store_underscore_name>:
-20000e40:	5f212b03 	.word	0x5f212b03
+20000e40 <_plus_store_comma_name>:
+20000e40:	2c212b03 	.word	0x2c212b03
 	...
 
-20000e60 <_plus_store_underscore_link>:
+20000e60 <_plus_store_comma_link>:
 20000e60:	0030      	.short	0x0030
 
-20000e62 <_plus_store_underscore_flags>:
-20000e62:	0002      	.short	0x0002
+20000e62 <_plus_store_comma_flags>:
+20000e62:	8006      	.short	0x8006
 
-20000e64 <plus_store_underscore>:
+20000e64 <plus_store_comma>:
 20000e64:	cf03      	ldmia	r7!, {r0, r1}
 20000e66:	6832      	ldr	r2, [r6, #0]
 20000e68:	1812      	adds	r2, r2, r0
@@ -15442,23 +15442,23 @@ Disassembly of section .data:
 20000e90:	0030      	.short	0x0030
 
 20000e92 <_one_plus_flags>:
-	...
+20000e92:	8000      	.short	0x8000
 
 20000e94 <one_plus>:
 20000e94:	3601      	adds	r6, #1
 20000e96:	4770      	bx	lr
 
-20000e98 <_one_plus_underscore_name>:
-20000e98:	5f2b3103 	.word	0x5f2b3103
+20000e98 <_one_plus_comma_name>:
+20000e98:	2c2b3103 	.word	0x2c2b3103
 	...
 
-20000eb8 <_one_plus_underscore_link>:
+20000eb8 <_one_plus_comma_link>:
 20000eb8:	0028      	.short	0x0028
 
-20000eba <_one_plus_underscore_flags>:
-20000eba:	0002      	.short	0x0002
+20000eba <_one_plus_comma_flags>:
+20000eba:	8006      	.short	0x8006
 
-20000ebc <one_plus_underscore>:
+20000ebc <one_plus_comma>:
 20000ebc:	3601      	adds	r6, #1
 20000ebe:	ffff      	.short	0xffff
 
@@ -15470,23 +15470,23 @@ Disassembly of section .data:
 20000ee0:	0028      	.short	0x0028
 
 20000ee2 <_one_minus_flags>:
-	...
+20000ee2:	8000      	.short	0x8000
 
 20000ee4 <one_minus>:
 20000ee4:	3e01      	subs	r6, #1
 20000ee6:	4770      	bx	lr
 
-20000ee8 <_one_minus_underscore_name>:
-20000ee8:	5f2d3103 	.word	0x5f2d3103
+20000ee8 <_one_minus_comma_name>:
+20000ee8:	2c2d3103 	.word	0x2c2d3103
 	...
 
-20000f08 <_one_minus_underscore_link>:
+20000f08 <_one_minus_comma_link>:
 20000f08:	0028      	.short	0x0028
 
-20000f0a <_one_minus_underscore_flags>:
-20000f0a:	0002      	.short	0x0002
+20000f0a <_one_minus_comma_flags>:
+20000f0a:	8006      	.short	0x8006
 
-20000f0c <one_minus_underscore>:
+20000f0c <one_minus_comma>:
 20000f0c:	3e01      	subs	r6, #1
 20000f0e:	ffff      	.short	0xffff
 
@@ -15498,23 +15498,23 @@ Disassembly of section .data:
 20000f30:	0028      	.short	0x0028
 
 20000f32 <_two_star_flags>:
-	...
+20000f32:	8000      	.short	0x8000
 
 20000f34 <two_star>:
 20000f34:	0076      	lsls	r6, r6, #1
 20000f36:	4770      	bx	lr
 
-20000f38 <_two_star_underscore_name>:
-20000f38:	5f2a3203 	.word	0x5f2a3203
+20000f38 <_two_star_comma_name>:
+20000f38:	2c2a3203 	.word	0x2c2a3203
 	...
 
-20000f58 <_two_star_underscore_link>:
+20000f58 <_two_star_comma_link>:
 20000f58:	0028      	.short	0x0028
 
-20000f5a <_two_star_underscore_flags>:
-20000f5a:	0002      	.short	0x0002
+20000f5a <_two_star_comma_flags>:
+20000f5a:	8006      	.short	0x8006
 
-20000f5c <two_star_underscore>:
+20000f5c <two_star_comma>:
 20000f5c:	0076      	lsls	r6, r6, #1
 20000f5e:	ffff      	.short	0xffff
 
@@ -15526,23 +15526,23 @@ Disassembly of section .data:
 20000f80:	0028      	.short	0x0028
 
 20000f82 <_two_slash_flags>:
-	...
+20000f82:	8000      	.short	0x8000
 
 20000f84 <two_slash>:
 20000f84:	1076      	asrs	r6, r6, #1
 20000f86:	4770      	bx	lr
 
-20000f88 <_two_slash_underscore_name>:
-20000f88:	5f2f3203 	.word	0x5f2f3203
+20000f88 <_two_slash_comma_name>:
+20000f88:	2c2f3203 	.word	0x2c2f3203
 	...
 
-20000fa8 <_two_slash_underscore_link>:
+20000fa8 <_two_slash_comma_link>:
 20000fa8:	0028      	.short	0x0028
 
-20000faa <_two_slash_underscore_flags>:
-20000faa:	0002      	.short	0x0002
+20000faa <_two_slash_comma_flags>:
+20000faa:	8006      	.short	0x8006
 
-20000fac <two_slash_underscore>:
+20000fac <two_slash_comma>:
 20000fac:	1076      	asrs	r6, r6, #1
 20000fae:	ffff      	.short	0xffff
 
@@ -15554,7 +15554,7 @@ Disassembly of section .data:
 20000fd0:	0028      	.short	0x0028
 
 20000fd2 <_plus_flags>:
-	...
+20000fd2:	8000      	.short	0x8000
 
 20000fd4 <plus>:
 20000fd4:	cf01      	ldmia	r7!, {r0}
@@ -15562,17 +15562,17 @@ Disassembly of section .data:
 20000fd8:	4770      	bx	lr
 	...
 
-20000fdc <_plus_underscore_name>:
-20000fdc:	005f2b02 	.word	0x005f2b02
+20000fdc <_plus_comma_name>:
+20000fdc:	002c2b02 	.word	0x002c2b02
 	...
 
-20000ffc <_plus_underscore_link>:
+20000ffc <_plus_comma_link>:
 20000ffc:	002c      	.short	0x002c
 
-20000ffe <_plus_underscore_flags>:
-20000ffe:	0002      	.short	0x0002
+20000ffe <_plus_comma_flags>:
+20000ffe:	8006      	.short	0x8006
 
-20001000 <plus_underscore>:
+20001000 <plus_comma>:
 20001000:	cf01      	ldmia	r7!, {r0}
 20001002:	1986      	adds	r6, r0, r6
 20001004:	0000ffff 	.word	0x0000ffff
@@ -15585,7 +15585,7 @@ Disassembly of section .data:
 20001028:	002c      	.short	0x002c
 
 2000102a <_minus_flags>:
-	...
+2000102a:	8000      	.short	0x8000
 
 2000102c <minus>:
 2000102c:	cf01      	ldmia	r7!, {r0}
@@ -15593,17 +15593,17 @@ Disassembly of section .data:
 20001030:	4770      	bx	lr
 	...
 
-20001034 <_minus_underscore_name>:
-20001034:	005f2d02 	.word	0x005f2d02
+20001034 <_minus_comma_name>:
+20001034:	002c2d02 	.word	0x002c2d02
 	...
 
-20001054 <_minus_underscore_link>:
+20001054 <_minus_comma_link>:
 20001054:	002c      	.short	0x002c
 
-20001056 <_minus_underscore_flags>:
-20001056:	0002      	.short	0x0002
+20001056 <_minus_comma_flags>:
+20001056:	8006      	.short	0x8006
 
-20001058 <minus_underscore>:
+20001058 <minus_comma>:
 20001058:	cf01      	ldmia	r7!, {r0}
 2000105a:	1b86      	subs	r6, r0, r6
 2000105c:	0000ffff 	.word	0x0000ffff
@@ -15616,7 +15616,7 @@ Disassembly of section .data:
 20001080:	002c      	.short	0x002c
 
 20001082 <_star_flags>:
-	...
+20001082:	8000      	.short	0x8000
 
 20001084 <star>:
 20001084:	cf01      	ldmia	r7!, {r0}
@@ -15624,17 +15624,17 @@ Disassembly of section .data:
 20001088:	4770      	bx	lr
 	...
 
-2000108c <_star_underscore_name>:
-2000108c:	005f2a02 	.word	0x005f2a02
+2000108c <_star_comma_name>:
+2000108c:	002c2a02 	.word	0x002c2a02
 	...
 
-200010ac <_star_underscore_link>:
+200010ac <_star_comma_link>:
 200010ac:	002c      	.short	0x002c
 
-200010ae <_star_underscore_flags>:
-200010ae:	0002      	.short	0x0002
+200010ae <_star_comma_flags>:
+200010ae:	8006      	.short	0x8006
 
-200010b0 <star_underscore>:
+200010b0 <star_comma>:
 200010b0:	cf01      	ldmia	r7!, {r0}
 200010b2:	4346      	muls	r6, r0
 200010b4:	0000ffff 	.word	0x0000ffff
@@ -15648,24 +15648,24 @@ Disassembly of section .data:
 200010d8:	002c      	.short	0x002c
 
 200010da <_negate_flags>:
-	...
+200010da:	8000      	.short	0x8000
 
 200010dc <negate>:
 200010dc:	43f6      	mvns	r6, r6
 200010de:	4770      	bx	lr
 
-200010e0 <_negate_underscore_name>:
+200010e0 <_negate_comma_name>:
 200010e0:	47454e07 	.word	0x47454e07
-200010e4:	5f455441 	.word	0x5f455441
+200010e4:	2c455441 	.word	0x2c455441
 	...
 
-20001100 <_negate_underscore_link>:
+20001100 <_negate_comma_link>:
 20001100:	0028      	.short	0x0028
 
-20001102 <_negate_underscore_flags>:
-20001102:	0002      	.short	0x0002
+20001102 <_negate_comma_flags>:
+20001102:	8006      	.short	0x8006
 
-20001104 <negate_underscore>:
+20001104 <negate_comma>:
 20001104:	43f6      	mvns	r6, r6
 20001106:	ffff      	.short	0xffff
 
@@ -15677,7 +15677,7 @@ Disassembly of section .data:
 20001128:	0028      	.short	0x0028
 
 2000112a <_and_flags>:
-	...
+2000112a:	8000      	.short	0x8000
 
 2000112c <and>:
 2000112c:	cf01      	ldmia	r7!, {r0}
@@ -15685,18 +15685,18 @@ Disassembly of section .data:
 20001130:	4770      	bx	lr
 	...
 
-20001134 <_and_underscore_name>:
+20001134 <_and_comma_name>:
 20001134:	444e4104 	.word	0x444e4104
-20001138:	0000005f 	.word	0x0000005f
+20001138:	0000002c 	.word	0x0000002c
 	...
 
-20001154 <_and_underscore_link>:
+20001154 <_and_comma_link>:
 20001154:	002c      	.short	0x002c
 
-20001156 <_and_underscore_flags>:
-20001156:	0002      	.short	0x0002
+20001156 <_and_comma_flags>:
+20001156:	8006      	.short	0x8006
 
-20001158 <and_underscore>:
+20001158 <and_comma>:
 20001158:	cf01      	ldmia	r7!, {r0}
 2000115a:	4006      	ands	r6, r0
 2000115c:	0000ffff 	.word	0x0000ffff
@@ -15709,7 +15709,7 @@ Disassembly of section .data:
 20001180:	002c      	.short	0x002c
 
 20001182 <_or_flags>:
-	...
+20001182:	8000      	.short	0x8000
 
 20001184 <or>:
 20001184:	cf01      	ldmia	r7!, {r0}
@@ -15717,17 +15717,17 @@ Disassembly of section .data:
 20001188:	4770      	bx	lr
 	...
 
-2000118c <_or_underscore_name>:
-2000118c:	5f524f03 	.word	0x5f524f03
+2000118c <_or_comma_name>:
+2000118c:	2c524f03 	.word	0x2c524f03
 	...
 
-200011ac <_or_underscore_link>:
+200011ac <_or_comma_link>:
 200011ac:	002c      	.short	0x002c
 
-200011ae <_or_underscore_flags>:
-200011ae:	0002      	.short	0x0002
+200011ae <_or_comma_flags>:
+200011ae:	8006      	.short	0x8006
 
-200011b0 <or_underscore>:
+200011b0 <or_comma>:
 200011b0:	cf01      	ldmia	r7!, {r0}
 200011b2:	4306      	orrs	r6, r0
 200011b4:	0000ffff 	.word	0x0000ffff
@@ -15740,7 +15740,7 @@ Disassembly of section .data:
 200011d8:	002c      	.short	0x002c
 
 200011da <_x_or_flags>:
-	...
+200011da:	8000      	.short	0x8000
 
 200011dc <x_or>:
 200011dc:	cf01      	ldmia	r7!, {r0}
@@ -15748,18 +15748,18 @@ Disassembly of section .data:
 200011e0:	4770      	bx	lr
 	...
 
-200011e4 <_x_or_underscore_name>:
+200011e4 <_x_or_comma_name>:
 200011e4:	524f5804 	.word	0x524f5804
-200011e8:	0000005f 	.word	0x0000005f
+200011e8:	0000002c 	.word	0x0000002c
 	...
 
-20001204 <_x_or_underscore_link>:
+20001204 <_x_or_comma_link>:
 20001204:	002c      	.short	0x002c
 
-20001206 <_x_or_underscore_flags>:
-20001206:	0002      	.short	0x0002
+20001206 <_x_or_comma_flags>:
+20001206:	8006      	.short	0x8006
 
-20001208 <x_or_underscore>:
+20001208 <x_or_comma>:
 20001208:	cf01      	ldmia	r7!, {r0}
 2000120a:	4046      	eors	r6, r0
 2000120c:	0000ffff 	.word	0x0000ffff
@@ -15773,24 +15773,24 @@ Disassembly of section .data:
 20001230:	002c      	.short	0x002c
 
 20001232 <_invert_flags>:
-	...
+20001232:	8000      	.short	0x8000
 
 20001234 <invert>:
 20001234:	43f6      	mvns	r6, r6
 20001236:	4770      	bx	lr
 
-20001238 <_invert_underscore_name>:
+20001238 <_invert_comma_name>:
 20001238:	564e4907 	.word	0x564e4907
-2000123c:	5f545245 	.word	0x5f545245
+2000123c:	2c545245 	.word	0x2c545245
 	...
 
-20001258 <_invert_underscore_link>:
+20001258 <_invert_comma_link>:
 20001258:	0028      	.short	0x0028
 
-2000125a <_invert_underscore_flags>:
-2000125a:	0002      	.short	0x0002
+2000125a <_invert_comma_flags>:
+2000125a:	8006      	.short	0x8006
 
-2000125c <invert_underscore>:
+2000125c <invert_comma>:
 2000125c:	43f6      	mvns	r6, r6
 2000125e:	ffff      	.short	0xffff
 
@@ -15803,7 +15803,7 @@ Disassembly of section .data:
 20001280:	0028      	.short	0x0028
 
 20001282 <_l_shift_flags>:
-	...
+20001282:	8000      	.short	0x8000
 
 20001284 <l_shift>:
 20001284:	cf01      	ldmia	r7!, {r0}
@@ -15811,18 +15811,18 @@ Disassembly of section .data:
 20001288:	1c06      	adds	r6, r0, #0
 2000128a:	4770      	bx	lr
 
-2000128c <_l_shift_underscore_name>:
+2000128c <_l_shift_comma_name>:
 2000128c:	48534c07 	.word	0x48534c07
-20001290:	5f544649 	.word	0x5f544649
+20001290:	2c544649 	.word	0x2c544649
 	...
 
-200012ac <_l_shift_underscore_link>:
+200012ac <_l_shift_comma_link>:
 200012ac:	002c      	.short	0x002c
 
-200012ae <_l_shift_underscore_flags>:
-200012ae:	0002      	.short	0x0002
+200012ae <_l_shift_comma_flags>:
+200012ae:	8006      	.short	0x8006
 
-200012b0 <l_shift_underscore>:
+200012b0 <l_shift_comma>:
 200012b0:	cf01      	ldmia	r7!, {r0}
 200012b2:	40b0      	lsls	r0, r6
 200012b4:	1c06      	adds	r6, r0, #0
@@ -15837,7 +15837,7 @@ Disassembly of section .data:
 200012d8:	002c      	.short	0x002c
 
 200012da <_r_shift_flags>:
-	...
+200012da:	8000      	.short	0x8000
 
 200012dc <r_shift>:
 200012dc:	cf01      	ldmia	r7!, {r0}
@@ -15845,18 +15845,18 @@ Disassembly of section .data:
 200012e0:	1c06      	adds	r6, r0, #0
 200012e2:	4770      	bx	lr
 
-200012e4 <_r_shift_underscore_name>:
+200012e4 <_r_shift_comma_name>:
 200012e4:	48535207 	.word	0x48535207
-200012e8:	5f544649 	.word	0x5f544649
+200012e8:	2c544649 	.word	0x2c544649
 	...
 
-20001304 <_r_shift_underscore_link>:
+20001304 <_r_shift_comma_link>:
 20001304:	002c      	.short	0x002c
 
-20001306 <_r_shift_underscore_flags>:
-20001306:	0002      	.short	0x0002
+20001306 <_r_shift_comma_flags>:
+20001306:	8006      	.short	0x8006
 
-20001308 <r_shift_underscore>:
+20001308 <r_shift_comma>:
 20001308:	cf01      	ldmia	r7!, {r0}
 2000130a:	40f0      	lsrs	r0, r6
 2000130c:	1c06      	adds	r6, r0, #0
@@ -15870,7 +15870,7 @@ Disassembly of section .data:
 20001330:	002c      	.short	0x002c
 
 20001332 <_less_than_flags>:
-	...
+20001332:	8000      	.short	0x8000
 
 20001334 <less_than>:
 20001334:	cf01      	ldmia	r7!, {r0}
@@ -15890,7 +15890,7 @@ Disassembly of section .data:
 20001364:	0034      	.short	0x0034
 
 20001366 <_less_or_equals_flags>:
-	...
+20001366:	8000      	.short	0x8000
 
 20001368 <less_or_equals>:
 20001368:	cf01      	ldmia	r7!, {r0}
@@ -15910,7 +15910,7 @@ Disassembly of section .data:
 20001398:	0034      	.short	0x0034
 
 2000139a <_equals_flags>:
-	...
+2000139a:	8000      	.short	0x8000
 
 2000139c <equals>:
 2000139c:	cf01      	ldmia	r7!, {r0}
@@ -15930,7 +15930,7 @@ Disassembly of section .data:
 200013cc:	0034      	.short	0x0034
 
 200013ce <_not_equals_flags>:
-	...
+200013ce:	8000      	.short	0x8000
 
 200013d0 <not_equals>:
 200013d0:	cf01      	ldmia	r7!, {r0}
@@ -15950,7 +15950,7 @@ Disassembly of section .data:
 20001400:	0034      	.short	0x0034
 
 20001402 <_greater_than_flags>:
-	...
+20001402:	8000      	.short	0x8000
 
 20001404 <greater_than>:
 20001404:	cf01      	ldmia	r7!, {r0}
@@ -15970,7 +15970,7 @@ Disassembly of section .data:
 20001434:	0034      	.short	0x0034
 
 20001436 <_greater_or_equals_flags>:
-	...
+20001436:	8000      	.short	0x8000
 
 20001438 <greater_or_equals>:
 20001438:	cf01      	ldmia	r7!, {r0}
@@ -15990,7 +15990,7 @@ Disassembly of section .data:
 20001468:	0034      	.short	0x0034
 
 2000146a <_u_greater_than_flags>:
-	...
+2000146a:	8000      	.short	0x8000
 
 2000146c <u_greater_than>:
 2000146c:	cf01      	ldmia	r7!, {r0}
@@ -16010,7 +16010,7 @@ Disassembly of section .data:
 2000149c:	0034      	.short	0x0034
 
 2000149e <_u_greater_or_equals_flags>:
-	...
+2000149e:	8000      	.short	0x8000
 
 200014a0 <u_greater_or_equals>:
 200014a0:	cf01      	ldmia	r7!, {r0}
@@ -16030,7 +16030,7 @@ Disassembly of section .data:
 200014d0:	0034      	.short	0x0034
 
 200014d2 <_u_less_than_flags>:
-	...
+200014d2:	8000      	.short	0x8000
 
 200014d4 <u_less_than>:
 200014d4:	cf01      	ldmia	r7!, {r0}
@@ -16050,7 +16050,7 @@ Disassembly of section .data:
 20001504:	0034      	.short	0x0034
 
 20001506 <_u_less_or_equals_flags>:
-	...
+20001506:	8000      	.short	0x8000
 
 20001508 <u_less_or_equals>:
 20001508:	cf01      	ldmia	r7!, {r0}
@@ -16071,7 +16071,7 @@ Disassembly of section .data:
 20001538:	0034      	.short	0x0034
 
 2000153a <_fill_flags>:
-	...
+2000153a:	8000      	.short	0x8000
 
 2000153c <fill>:
 2000153c:	1c30      	adds	r0, r6, #0
@@ -16104,7 +16104,7 @@ Disassembly of section .data:
 2000157c:	0044      	.short	0x0044
 
 2000157e <_accept_flags>:
-	...
+2000157e:	8000      	.short	0x8000
 
 20001580 <accept>:
 20001580:	b530      	push	{r4, r5, lr}
@@ -16178,7 +16178,7 @@ Disassembly of section .data:
 20001610:	0094      	.short	0x0094
 
 20001612 <_type_flags>:
-	...
+20001612:	8000      	.short	0x8000
 
 20001614 <type>:
 20001614:	b530      	push	{r4, r5, lr}
@@ -16222,7 +16222,7 @@ Disassembly of section .data:
 2000166c:	005c      	.short	0x005c
 
 2000166e <_base_flags>:
-	...
+2000166e:	8000      	.short	0x8000
 
 20001670 <base>:
 20001670:	b530      	push	{r4, r5, lr}
@@ -16247,7 +16247,7 @@ Disassembly of section .data:
 200016ac:	0040      	.short	0x0040
 
 200016ae <_to_in_flags>:
-	...
+200016ae:	8000      	.short	0x8000
 
 200016b0 <to_in>:
 200016b0:	b530      	push	{r4, r5, lr}
@@ -16273,7 +16273,7 @@ Disassembly of section .data:
 200016ec:	0040      	.short	0x0040
 
 200016ee <_source_flags>:
-	...
+200016ee:	8000      	.short	0x8000
 
 200016f0 <source>:
 200016f0:	b530      	push	{r4, r5, lr}
@@ -16304,7 +16304,7 @@ Disassembly of section .data:
 20001734:	0048      	.short	0x0048
 
 20001736 <_parse_name_flags>:
-	...
+20001736:	8000      	.short	0x8000
 
 20001738 <parse_name>:
 20001738:	b530      	push	{r4, r5, lr}
@@ -16369,7 +16369,7 @@ Disassembly of section .data:
 200017b4:	0080      	.short	0x0080
 
 200017b6 <_quit_flags>:
-	...
+200017b6:	8000      	.short	0x8000
 
 200017b8 <quit>:
 200017b8:	f000 f978 	bl	20001aac <_tib_addr>
@@ -16400,7 +16400,7 @@ Disassembly of section .data:
 20001808:	0054      	.short	0x0054
 
 2000180a <_tick_flags>:
-	...
+2000180a:	8000      	.short	0x8000
 
 2000180c <tick>:
 2000180c:	b530      	push	{r4, r5, lr}
@@ -16422,7 +16422,7 @@ Disassembly of section .data:
 2000183c:	0034      	.short	0x0034
 
 2000183e <_evaluate_flags>:
-	...
+2000183e:	8000      	.short	0x8000
 
 20001840 <evaluate>:
 20001840:	b530      	push	{r4, r5, lr}
@@ -16443,7 +16443,7 @@ Disassembly of section .data:
 20001870:	0034      	.short	0x0034
 
 20001872 <_slash_mod_flags>:
-	...
+20001872:	8000      	.short	0x8000
 
 20001874 <slash_mod>:
 20001874:	b530      	push	{r4, r5, lr}
@@ -16469,7 +16469,7 @@ Disassembly of section .data:
 200018b0:	0040      	.short	0x0040
 
 200018b2 <_slash_flags>:
-	...
+200018b2:	8000      	.short	0x8000
 
 200018b4 <slash>:
 200018b4:	b530      	push	{r4, r5, lr}
@@ -16497,7 +16497,7 @@ Disassembly of section .data:
 200018f4:	0044      	.short	0x0044
 
 200018f6 <_mod_flags>:
-	...
+200018f6:	8000      	.short	0x8000
 
 200018f8 <mod>:
 200018f8:	b530      	push	{r4, r5, lr}
@@ -16521,7 +16521,7 @@ Disassembly of section .data:
 20001930:	003c      	.short	0x003c
 
 20001932 <_key_flags>:
-	...
+20001932:	8000      	.short	0x8000
 
 20001934 <key>:
 20001934:	b530      	push	{r4, r5, lr}
@@ -16548,7 +16548,7 @@ Disassembly of section .data:
 20001970:	0040      	.short	0x0040
 
 20001972 <_emit_flags>:
-	...
+20001972:	8000      	.short	0x8000
 
 20001974 <emit>:
 20001974:	b530      	push	{r4, r5, lr}
