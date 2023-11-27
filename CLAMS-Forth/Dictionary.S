@@ -47,8 +47,9 @@
 @ flags = various bits about the word
 .set _IMMEDIATE, 1
 .set _COMPILE_ONLY, 2
-
-        .macro _HEADER wname, pronunciation, flags=0
+.set _INLINE, 4
+.set _FLAG_HW, 0x8000
+        .macro _HEADER wname, pronunciation, flags=0x8000
 
         @ define header label
         .balign _CELL, 0
@@ -61,7 +62,7 @@
         .set _\pronunciation\()_name, . @ debugging symbol for name field
         .set _count, 1f - . - 1
         .byte _count
-        .ascii "\wname"
+        .ascii "\wname\()"
 1:
 
         @ build link field
@@ -142,49 +143,49 @@
         @ each inlined word whenever the colon word is called.
 
         @ For readability, we have two forms of each in the dictionary. For
-        @ example, "+" (plus) is the callable form and "+_" (plus_underscore) is the
+        @ example, "+" (plus) is the callable form and "+," (plus_comma) is the
         @ inline form.
 
         @ stack operators
         _HEADER "DROP", drop
         _DROP
         _EXIT
-        _HEADER "DROP_", drop_underscore, _COMPILE_ONLY
+        _HEADER "DROP,", drop_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _DROP
         _ITRM
 
         _HEADER "DUP", dupe
         _DUP
         _EXIT
-        _HEADER "DUP_", dupe_underscore, _COMPILE_ONLY
+        _HEADER "DUP,", dupe_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _DUP
         _ITRM
 
         _HEADER "OVER", over
         _OVER
         _EXIT
-        _HEADER "OVER_", over_underscore, _COMPILE_ONLY
+        _HEADER "OVER,", over_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _OVER
         _ITRM
 
         _HEADER "ROT", rote
         _ROT
         _EXIT
-        _HEADER "ROT_", rote_underscore, _COMPILE_ONLY
+        _HEADER "ROT,", rote_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _ROT
         _ITRM
 
         _HEADER "SWAP", swap
         _SWAP
         _EXIT
-        _HEADER "SWAP_", swap_underscore, _COMPILE_ONLY
+        _HEADER "SWAP,", swap_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _SWAP
         _ITRM
 
         _HEADER "@", fetch
         LDR PSTOP, [PSTOP]
         _EXIT
-        _HEADER "@_", fetch_underscore, _COMPILE_ONLY
+        _HEADER "@,", fetch_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDR PSTOP, [PSTOP]
         _ITRM
 
@@ -193,7 +194,7 @@
         STR r0, [PSTOP]
         MOV PSTOP, r1
         _EXIT
-        _HEADER "!_", store_underscore, _COMPILE_ONLY
+        _HEADER "!,", store_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDM PT2ND!, {r0-r1}
         STR r0, [PSTOP]
         MOV PSTOP, r1
@@ -206,7 +207,7 @@
         STR r2, [PSTOP]
         MOV PSTOP, r1
         _EXIT
-        _HEADER "+!_", plus_store_underscore, _COMPILE_ONLY
+        _HEADER "+!,", plus_store_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDM PT2ND!, {r0-r1}
         LDR r2, [PSTOP]
         ADD r2, r0
@@ -217,28 +218,28 @@
         _HEADER "1+", one_plus
         ADD PSTOP, #1
         _EXIT
-        _HEADER "1+_", one_plus_underscore, _COMPILE_ONLY
+        _HEADER "1+,", one_plus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         ADD PSTOP, #1
         _ITRM
 
         _HEADER "1-", one_minus
         SUB PSTOP, #1
         _EXIT
-        _HEADER "1-_", one_minus_underscore, _COMPILE_ONLY
+        _HEADER "1-,", one_minus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         SUB PSTOP, #1
         _ITRM
 
         _HEADER "2*", two_star
         LSL PSTOP, #1
         _EXIT
-        _HEADER "2*_", two_star_underscore, _COMPILE_ONLY
+        _HEADER "2*,", two_star_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LSL PSTOP, #1
         _ITRM
 
         _HEADER "2/", two_slash
         ASR PSTOP, #1
         _EXIT
-        _HEADER "2/_", two_slash_underscore, _COMPILE_ONLY
+        _HEADER "2/,", two_slash_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         ASR PSTOP, #1
         _ITRM
 
@@ -246,28 +247,28 @@
         _HEADER "+", plus
         _BINARY_ALU ADD
         _EXIT
-        _HEADER "+_", plus_underscore, _COMPILE_ONLY
+        _HEADER "+,", plus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU ADD
         _ITRM
 
         _HEADER "-", minus
         _BINARY_ALU SUB
         _EXIT
-        _HEADER "-_", minus_underscore, _COMPILE_ONLY
+        _HEADER "-,", minus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU SUB
         _ITRM
 
         _HEADER "*", star
         _BINARY_ALU MUL
         _EXIT
-        _HEADER "*_", star_underscore, _COMPILE_ONLY
+        _HEADER "*,", star_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU MUL
         _ITRM
 
         _HEADER "NEGATE", negate
         MVN PSTOP, PSTOP
         _EXIT
-        _HEADER "NEGATE_", negate_underscore, _COMPILE_ONLY
+        _HEADER "NEGATE,", negate_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         MVN PSTOP, PSTOP
         _ITRM
 
@@ -275,28 +276,28 @@
         _HEADER "AND", and
         _BINARY_ALU AND
         _EXIT
-        _HEADER "AND_", and_underscore, _COMPILE_ONLY
+        _HEADER "AND,", and_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU AND
         _ITRM
 
         _HEADER "OR", or
         _BINARY_ALU ORR
         _EXIT
-        _HEADER "OR_", or_underscore, _COMPILE_ONLY
+        _HEADER "OR,", or_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU ORR
         _ITRM
 
         _HEADER "XOR", x_or
         _BINARY_ALU EOR
         _EXIT
-        _HEADER "XOR_", x_or_underscore, _COMPILE_ONLY
+        _HEADER "XOR,", x_or_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU EOR
         _ITRM
 
         _HEADER "INVERT", invert
         MVN PSTOP, PSTOP
         _EXIT
-        _HEADER "INVERT_", invert_underscore, _COMPILE_ONLY
+        _HEADER "INVERT,", invert_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         MVN PSTOP, PSTOP
         _ITRM
 
@@ -305,7 +306,7 @@
         LSL r0, PSTOP
         MOV PSTOP, r0
         _EXIT
-        _HEADER "LSHIFT_", l_shift_underscore, _COMPILE_ONLY
+        _HEADER "LSHIFT,", l_shift_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDM PT2ND!, {r0}
         LSL r0, PSTOP
         MOV PSTOP, r0
@@ -316,7 +317,7 @@
         LSR r0, PSTOP
         MOV PSTOP, r0
         _EXIT
-        _HEADER "RSHIFT_", r_shift_underscore, _COMPILE_ONLY
+        _HEADER "RSHIFT,", r_shift_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDM PT2ND!, {r0}
         LSR r0, PSTOP
         MOV PSTOP, r0
