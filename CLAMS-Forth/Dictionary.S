@@ -130,13 +130,14 @@
 .set _DEL, 127 @ delete
 
 @ the dictionary itself!
-.balign _CELL
 
 @ dictionary has to be in data segment - the internal BL operations won't work if it
 @ is split over the flash - RAM address space!
 
 #.data
-.set _system_dict_start, .
+.balign _CELL
+.global _system_dict_start
+_system_dict_start: .word .
 
         @ The first group of operators are simple enough that they can be copied
         @ inline to a colon word instead of called. This saves two cycles for
@@ -608,4 +609,9 @@ quil:
         _DROP
         _UNNEST
 
-.set _system_dict_end, .
+.balign _CELL
+.global _system_dict_end
+_system_dict_end: .word .
+
+.global _system_dict_bytes
+_system_dict_bytes: .word _system_dict_end - _system_dict_start
