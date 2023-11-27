@@ -35,10 +35,17 @@
 
 main:
 	BL stdio_init_all
+        BL clear_stack
+        BL stkprint3
 
 loop:
-        LDR r0, =regs
-        BL printf
+        MOV r0, #2
+        _PUSHREG r0
+        MOV r0, #3
+        _PUSHREG r0
+        BL stkprint3
+        BL plus
+        BL stkprint3
 
         LDR r0, sleep_ms
         BL sdk_sleep_ms

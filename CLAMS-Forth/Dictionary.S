@@ -135,7 +135,7 @@
 @ dictionary has to be in data segment - the internal BL operations won't work if it
 @ is split over the flash - RAM address space!
 
-.data
+#.data
 .set _system_dict_start, .
 
         @ The first group of operators are simple enough that they can be copied
