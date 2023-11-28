@@ -28,12 +28,6 @@
 
 .include "SymbolDefs.S"
 
-        @ We need to call our SDK wrappers with a BLX; they're too far away for BL.
-        .macro _SDK_FUNC_CALL func_addr
-        LDR INDXA, \func_addr @ get the address
-        BLX INDXA
-        .endm
-
 @ dictionary construction macros
 
 @ dictionary header
@@ -576,44 +570,44 @@ quil:
         _NEST
         LDR r0, [PT2ND] @ dividend => r0
         MOV r1, PSTOP @ divisor => r1
-        _SDK_FUNC_CALL _addr_sdk_slash_mod
+        _BLX_FUNC_CALL _addr_sdk_slash_mod
         MOV PSTOP, r0 @ quotient => top of stack
         STR r1, [PT2ND] @ remainder => 2nd
         _UNNEST
 
         _HEADER "/", slash
         _NEST
-        _SDK_FUNC_CALL _addr_sdk_slash_mod
+        _BLX_FUNC_CALL _addr_sdk_slash_mod
         _SWAP
         _DROP
         _UNNEST
 
         _HEADER "MOD", mod
         _NEST
-        _SDK_FUNC_CALL _addr_sdk_slash_mod
+        _BLX_FUNC_CALL _addr_sdk_slash_mod
         _DROP
         _UNNEST
 
         @ terminal I/O words
         _HEADER "KEY", key
         _NEST
-        _SDK_FUNC_CALL _addr_sdk_key
+        _BLX_FUNC_CALL _addr_sdk_key
         _PUSHREG r0
         _UNNEST
 
         _HEADER "EMIT", emit
         _NEST
         MOV r0, PSTOP
-        _SDK_FUNC_CALL _addr_sdk_emit
+        _BLX_FUNC_CALL _addr_sdk_emit
         _DROP
         _UNNEST
 
 .balign _CELL
 
-@ SDK call vector table
-_addr_sdk_slash_mod: .word sdk_slash_mod
-_addr_sdk_key: .word sdk_key
-_addr_sdk_emit: .word sdk_emit
+@ BLX call vector table
+_BLX_FUNC_ADDR sdk_slash_mod
+_BLX_FUNC_ADDR sdk_key
+_BLX_FUNC_ADDR sdk_emit
 
 .global _system_dict_end
 _system_dict_end: .word .
