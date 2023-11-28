@@ -1811,7 +1811,7 @@ Disassembly of section .text:
 100011a0:	100011a0 	.word	0x100011a0
 
 100011a4 <_system_dict_bytes>:
-100011a4:	00000df8 	.word	0x00000df8
+100011a4:	00000df9 	.word	0x00000df9
 
 100011a8 <clear_stack>:
 100011a8:	4f28      	ldr	r7, [pc, #160]	; (1000124c <_hamburger+0x7>)

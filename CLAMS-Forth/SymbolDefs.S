@@ -166,3 +166,19 @@ MPTRY .req r9
         MOV MPTRY, INDXB
         POP {INDXA, INDXB, PC}
         .endm
+
+        @ We sometimes need to call functions in SRAM from flash and _vice versa_.
+        @ The BLX instruction allows us to do this.
+
+        @ macro to call a function
+        .macro _BLX_FUNC_CALL func_addr
+        LDR INDXA, \func_addr @ get the address
+        BLX INDXA
+        .endm
+
+        @ macro to create a "func_addr" word
+        .macro _BLX_FUNC_ADDR func_name
+        .balign _CELL
+        .set _addr_\func_name, .
+        .word \func_name
+        .endm
