@@ -1,5 +1,0 @@
-Code QUIT, EVALUATE, PARSE, >IN, SOURCE, PARSE-NAME and FIND. Test the whole mess.
-
-
-"Macro assembler": instead of op codes, Forth words with commas, for example, 
-`+,`, `DUP,`, `UM*/MOD,`
