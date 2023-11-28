@@ -87,7 +87,7 @@
 
          WHILE parse token length is greater than zero
 
-             Classify the token with `CLASSIFY-TOKEN`. `CLASSIFY-TOKEN` returns a
+             Classify the token with `CLASSIFY-TOKEN`. `CLASSIFY-TOKEN` returns
              two or three cells on the stack. The stack top is the classification
              of the token:
 
