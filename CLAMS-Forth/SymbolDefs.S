@@ -171,8 +171,8 @@ MPTRY .req r9
         @ The BLX instruction allows us to do this.
 
         @ macro to call a function
-        .macro _BLX_FUNC_CALL func_addr
-        LDR INDXA, \func_addr @ get the address
+        .macro _BLX_FUNC_CALL func_name
+        LDR INDXA, _addr_\func_name @ get the address
         BLX INDXA
         .endm
 
@@ -181,4 +181,17 @@ MPTRY .req r9
         .balign _CELL
         .set _addr_\func_name, .
         .word \func_name
+        .endm
+
+        @ crash with a message
+        .macro _CRASH message:req
+        LDR r0, _ADDR_MESSAGE
+        _BLX_FUNC_CALL printf
+        _BLX_FUNC_CALL abort
+
+        .balign _CELL
+        .set _ADDR_MESSAGE, .
+        .word _MESSAGE
+        .set _MESSAGE, .
+        .asciz "\message\()"
         .endm
