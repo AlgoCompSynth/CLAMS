@@ -327,7 +327,7 @@ MPTRY .req r9
         _binary_cmp LT
         .endm
 
-        .macro _less_or_equals
+        .macro _less_or_equal
         _binary_cmp LE
         .endm
 
@@ -335,7 +335,7 @@ MPTRY .req r9
         _binary_cmp EQ
         .endm
 
-        .macro _not_equals
+        .macro _not_equal
         _binary_cmp NE
         .endm
 
@@ -343,7 +343,7 @@ MPTRY .req r9
         _binary_cmp GT
         .endm
 
-        .macro _greater_or_equals
+        .macro _greater_or_equal
         _binary_cmp GE
         .endm
 
@@ -351,7 +351,7 @@ MPTRY .req r9
         _binary_cmp HI
         .endm
 
-        .macro _u_greater_or_equals
+        .macro _u_greater_or_equal
         _binary_cmp HS
         .endm
 
@@ -359,6 +359,6 @@ MPTRY .req r9
         _binary_cmp LO
         .endm
 
-        .macro _u_less_or_equals
+        .macro _u_less_or_equal
         _binary_cmp LS
         .endm
