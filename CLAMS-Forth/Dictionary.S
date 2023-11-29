@@ -143,42 +143,42 @@ _system_dict_start: .word .
         @ stack operators
         _HEADER "DROP", drop
         _DROP
-        _EXIT
+        _return
         _HEADER "DROP,", drop_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _DROP
         _ITRM
 
         _HEADER "DUP", dupe
         _DUP
-        _EXIT
+        _return
         _HEADER "DUP,", dupe_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _DUP
         _ITRM
 
         _HEADER "OVER", over
         _OVER
-        _EXIT
+        _return
         _HEADER "OVER,", over_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _OVER
         _ITRM
 
         _HEADER "ROT", rote
         _ROT
-        _EXIT
+        _return
         _HEADER "ROT,", rote_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _ROT
         _ITRM
 
         _HEADER "SWAP", swap
         _SWAP
-        _EXIT
+        _return
         _HEADER "SWAP,", swap_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _SWAP
         _ITRM
 
         _HEADER "@", fetch
         LDR PSTOP, [PSTOP]
-        _EXIT
+        _return
         _HEADER "@,", fetch_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDR PSTOP, [PSTOP]
         _ITRM
@@ -187,7 +187,7 @@ _system_dict_start: .word .
         LDM PT2ND!, {r0-r1}
         STR r0, [PSTOP]
         MOV PSTOP, r1
-        _EXIT
+        _return
         _HEADER "!,", store_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDM PT2ND!, {r0-r1}
         STR r0, [PSTOP]
@@ -200,7 +200,7 @@ _system_dict_start: .word .
         ADD r2, r0
         STR r2, [PSTOP]
         MOV PSTOP, r1
-        _EXIT
+        _return
         _HEADER "+!,", plus_store_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDM PT2ND!, {r0-r1}
         LDR r2, [PSTOP]
@@ -211,28 +211,28 @@ _system_dict_start: .word .
 
         _HEADER "1+", one_plus
         ADD PSTOP, #1
-        _EXIT
+        _return
         _HEADER "1+,", one_plus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         ADD PSTOP, #1
         _ITRM
 
         _HEADER "1-", one_minus
         SUB PSTOP, #1
-        _EXIT
+        _return
         _HEADER "1-,", one_minus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         SUB PSTOP, #1
         _ITRM
 
         _HEADER "2*", two_star
         LSL PSTOP, #1
-        _EXIT
+        _return
         _HEADER "2*,", two_star_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LSL PSTOP, #1
         _ITRM
 
         _HEADER "2/", two_slash
         ASR PSTOP, #1
-        _EXIT
+        _return
         _HEADER "2/,", two_slash_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         ASR PSTOP, #1
         _ITRM
@@ -240,28 +240,28 @@ _system_dict_start: .word .
         @ arithmetic operators
         _HEADER "+", plus
         _BINARY_ALU ADD
-        _EXIT
+        _return
         _HEADER "+,", plus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU ADD
         _ITRM
 
         _HEADER "-", minus
         _BINARY_ALU SUB
-        _EXIT
+        _return
         _HEADER "-,", minus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU SUB
         _ITRM
 
         _HEADER "*", star
         _BINARY_ALU MUL
-        _EXIT
+        _return
         _HEADER "*,", star_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU MUL
         _ITRM
 
         _HEADER "NEGATE", negate
         MVN PSTOP, PSTOP
-        _EXIT
+        _return
         _HEADER "NEGATE,", negate_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         MVN PSTOP, PSTOP
         _ITRM
@@ -269,28 +269,28 @@ _system_dict_start: .word .
         @ boolean operators
         _HEADER "AND", and
         _BINARY_ALU AND
-        _EXIT
+        _return
         _HEADER "AND,", and_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU AND
         _ITRM
 
         _HEADER "OR", or
         _BINARY_ALU ORR
-        _EXIT
+        _return
         _HEADER "OR,", or_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU ORR
         _ITRM
 
         _HEADER "XOR", x_or
         _BINARY_ALU EOR
-        _EXIT
+        _return
         _HEADER "XOR,", x_or_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         _BINARY_ALU EOR
         _ITRM
 
         _HEADER "INVERT", invert
         MVN PSTOP, PSTOP
-        _EXIT
+        _return
         _HEADER "INVERT,", invert_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         MVN PSTOP, PSTOP
         _ITRM
@@ -299,7 +299,7 @@ _system_dict_start: .word .
         LDM PT2ND!, {r0}
         LSL r0, PSTOP
         MOV PSTOP, r0
-        _EXIT
+        _return
         _HEADER "LSHIFT,", l_shift_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDM PT2ND!, {r0}
         LSL r0, PSTOP
@@ -310,7 +310,7 @@ _system_dict_start: .word .
         LDM PT2ND!, {r0}
         LSR r0, PSTOP
         MOV PSTOP, r0
-        _EXIT
+        _return
         _HEADER "RSHIFT,", r_shift_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
         LDM PT2ND!, {r0}
         LSR r0, PSTOP
@@ -320,43 +320,43 @@ _system_dict_start: .word .
         @ binary comparison operators
         _HEADER "<", less_than
         _BINARY_CMP BLT
-        _EXIT
+        _return
 
         _HEADER "<=", less_or_equals
         _BINARY_CMP BLE
-        _EXIT
+        _return
 
         _HEADER "=", equals
         _BINARY_CMP BEQ
-        _EXIT
+        _return
 
         _HEADER "<>", not_equals
         _BINARY_CMP BNE
-        _EXIT
+        _return
 
         _HEADER ">", greater_than
         _BINARY_CMP BGT
-        _EXIT
+        _return
 
         _HEADER ">=", greater_or_equals
         _BINARY_CMP BGE
-        _EXIT
+        _return
 
         _HEADER "U>", u_greater_than
         _BINARY_CMP BHI
-        _EXIT
+        _return
 
         _HEADER "U>=", u_greater_or_equals
         _BINARY_CMP BHS
-        _EXIT
+        _return
 
         _HEADER "U<", u_less_than
         _BINARY_CMP BLO
-        _EXIT
+        _return
 
         _HEADER "U<=", u_less_or_equals
         _BINARY_CMP BLS
-        _EXIT
+        _return
 
         @ character / string words
         _HEADER "FILL", fill
@@ -375,7 +375,7 @@ fil1:
 filz:
         @ done - one last _DROP
         _DROP
-        _EXIT
+        _return
 
         _HEADER "ACCEPT", accept
         _NEST
@@ -428,17 +428,17 @@ _accb:
         @ erase previous character
         BL emit @ emit the backspace we have
         MOV r0, #_BL
-        _PUSHREG r0
+        _reg_from r0
         BL emit @ "erase" the character
         MOV r0, #_BS @ queue up another backspace
-        _PUSHREG r0
+        _reg_from r0
         BL emit
         B _accl @ back for more!
 
         @ clean up and exit
 _accz:
         @ push count and exit
-        _PUSHREG INDXB
+        _reg_from INDXB
         _UNNEST
         @ whew!
 
@@ -454,7 +454,7 @@ typl:
         LDRB r0, [INDXA] @ get the character
         CMP r0, #0 @ is it a null terminator?
         BEQ typz @ exit on null terminator
-        _PUSHREG r0
+        _reg_from r0
         BL emit @ emit the character
         ADD INDXA, #1 @ increment the address
         SUB INDXB, #1 @ count down
@@ -509,7 +509,7 @@ pn1:
 
 pn2:
         ADD r0, INDXA, r3 @ we have the buffer address!
-        _PUSHREG r0 @ push it to the stack
+        _reg_from r0 @ push it to the stack
         MOV r1, #1 @ initial count
 
 pn3:
@@ -525,7 +525,7 @@ pn3:
 pnz:
         STR r3, [INDXB] @ first order of business - save new >IN value
         MOV r0, r1 @ push count and exit
-        _PUSHREG r0
+        _reg_from r0
         _UNNEST 
 
 @ finally, the text interpreter!!
@@ -537,16 +537,16 @@ pnz:
 quil:
         @ push input buffer address and length to stack
         BL _tib_addr
-        _PUSHREG r0
+        _reg_from r0
         BL _tib_maxl
-        _PUSHREG r0
+        _reg_from r0
 
         @ get a line from user
         BL accept
 
         @ top of stack now has count
         BL _tib_addr
-        _PUSHREG r0
+        _reg_from r0
         _SWAP
 
         @ and interpret
@@ -570,40 +570,40 @@ quil:
         _NEST
         LDR r0, [PT2ND] @ dividend => r0
         MOV r1, PSTOP @ divisor => r1
-        _BLX_FUNC_CALL sdk_slash_mod
+        _x_call sdk_slash_mod
         MOV PSTOP, r0 @ quotient => top of stack
         STR r1, [PT2ND] @ remainder => 2nd
         _UNNEST
 
         _HEADER "/", slash
         _NEST
-        _BLX_FUNC_CALL sdk_slash_mod
+        _x_call sdk_slash_mod
         _SWAP
         _DROP
         _UNNEST
 
         _HEADER "MOD", mod
         _NEST
-        _BLX_FUNC_CALL sdk_slash_mod
+        _x_call sdk_slash_mod
         _DROP
         _UNNEST
 
         @ terminal I/O words
         _HEADER "KEY", key
         _NEST
-        _BLX_FUNC_CALL sdk_key
-        _PUSHREG r0
+        _x_call sdk_key
+        _reg_from r0
         _UNNEST
 
         _HEADER "EMIT", emit
         _NEST
         MOV r0, PSTOP
-        _BLX_FUNC_CALL sdk_emit
+        _x_call sdk_emit
         _DROP
         _UNNEST
 
         _HEADER "ABORT", abort
-        _BLX_FUNC_CALL clear_stack @ this is the standard behavior
+        _x_call clear_stack @ this is the standard behavior
         B quit @ quit never returns
 
         @ text interpreter calls this if it finds a token that's neither a name
@@ -614,12 +614,12 @@ quil:
 .balign _CELL
 
 @ BLX call vector table
-_BLX_FUNC_ADDR sdk_slash_mod
-_BLX_FUNC_ADDR sdk_key
-_BLX_FUNC_ADDR sdk_emit
-_BLX_FUNC_ADDR printf
-_BLX_FUNC_ADDR abort
-_BLX_FUNC_ADDR clear_stack
+_x_addr sdk_slash_mod
+_x_addr sdk_key
+_x_addr sdk_emit
+_x_addr printf
+_x_addr abort
+_x_addr clear_stack
 
 .global _system_dict_end
 _system_dict_end: .word .

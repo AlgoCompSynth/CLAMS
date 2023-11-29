@@ -45,7 +45,7 @@
         .thumb_func
         .set \name\()_addr, .
         LDR r0, =\name
-        _EXIT
+        _return
         .endm
 
 _USER_VARIABLE _base, 10 @ base for numeric input/output
@@ -81,13 +81,13 @@ _USER_VARIABLE _to_in, 0 @ parsing pointer
         .thumb_func
         .set \name\()_addr, .
         LDR r0, =\name
-        _EXIT
+        _return
 
         .global \name\()_maxl
         .thumb_func
         .set \name\()_maxl, .
         MOV r0, #\maxl
-        _EXIT
+        _return
 
         .global \name\()_init
         .thumb_func
@@ -101,7 +101,7 @@ _USER_VARIABLE _to_in, 0 @ parsing pointer
         ADD r3, #1
         CMP r3, #\maxl
         BLE 1b
-        _EXIT
+        _return
 
         .global \name\()_count
         .thumb_func
@@ -121,7 +121,7 @@ _USER_VARIABLE _to_in, 0 @ parsing pointer
 2:
         LDR r2, =\name @ get the buffer address back
         STRB r3, [r2] @ save the count
-        _EXIT
+        _return
 
         .endm
 
