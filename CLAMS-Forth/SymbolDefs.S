@@ -26,9 +26,24 @@
 
 */
 
-@ Pico SDK functions save registers r4 - r11, so we can use them without saving.
-@ However, r8 - r11 have limited functionality - essentially only source or
-@ destination of a MOV and one operand of a CMP.
+@ coding conventions:
+
+@ 1. Names intended to be internal to the CLAMS-Forth system have a leading
+@ underscore and are restricted to the character set of Arm GNU assembler symbols.
+@ Function names and variables use only lower-case letters, constants use only
+@ upper case letters.
+
+@ 2. Names intended to represent Forth words have the Forth syntax. Words that are 
+@ defined in the Forth standard use only upper case letters and behave the same way
+@ they do in the standard. Names created by the user can use any case and the
+@ system is case-sensitive.
+
+@ 3. Register usage: Pico SDK functions save registers r4 - r11, so we can use
+@ them without saving. However, r8 - r11 have limited functionality - essentially
+@ only source or destination of a MOV, one operand of a CMP or a computed branch.
+@ Registers r0 - r3 are work registers and are used to interact with SDK functions.
+@ They are not saved / restored. Although the SDK allows more than four parameters,
+@ there are by design no CLAMS-Forth functions that do.
 
 @ parameter stack registers
 PT2ND .req r7 @ pointer to second parameter stack cell
@@ -42,7 +57,7 @@ PSTOP .req r6 @ top cell of parameter stack
 INDXA .req r4 @ index register a
 INDXB .req r5 @ index register b
 
-@ memory pointer - base + literal addressing
+@ memory pointer / base + literal addressing registers
 MPTRX .req r8
 MPTRY .req r9
 
@@ -61,33 +76,28 @@ MPTRY .req r9
 @ system-wide macros
 
         @ parameter stack macros
-        .macro _DUP
+        .macro _dup
         SUB PT2ND, #_CELL @ stack grows downward
         STR PSTOP, [PT2ND] @ save top to RAM
         .endm
 
-        .macro _PUSHREG register=r0
-        _DUP
-        MOV PSTOP, \register @ save argument to `PSTOP`
-        .endm
-
-        .macro _OVER
-        _DUP
+        .macro _over
+        _dup
         LDR PSTOP, [PT2ND, #_CELL*2] @ replace top of stack with 3rd
         .endm
 
-        .macro _SWAP
+        .macro _swap
         LDR r0, [PT2ND]
         STR PSTOP, [PT2ND]
         MOV PSTOP, r0
         .endm
 
-        .macro _DROP
+        .macro _drop
         LDR PSTOP, [PT2ND]
         ADD PT2ND, #_CELL
         .endm
 
-        .macro _ROT
+        .macro _rot
         @ x1, x2, x3 -> x2, x3, x1
         LDR r0, [PT2ND] @ get x2
         STR PSTOP, [PT2ND] @ stash x3
@@ -97,17 +107,17 @@ MPTRY .req r9
 
         @ enhanced register macros
         @ to and from stack
-        .macro _TO_REG register=r0
+        .macro _to_reg register=r0
         MOV \register, PSTOP
-        _DROP
+        _drop
         .endm
-        .macro _REG_FROM register=r0
-        _DUP
-        MOV PSTOP, register
+        .macro _reg_from register=r0
+        _dup
+        MOV PSTOP, \register
         .endm
 
         @ index operations - only work for r0 - r7
-        .macro _POST_OP register=r0, post_op=""
+        .macro _post_op register=r0, post_op=""
         .if \post_op\() == "+"
           ADD register, #_CELL
         .elseif \post_op\() == "-"
@@ -119,48 +129,48 @@ MPTRY .req r9
         .endif
         .endm
 
-        .macro _FETCH_LO register=r0, post_op=""
-        _DUP
+        .macro _fetch_lo register=r0, post_op=""
+        _dup
         LDR PSTOP, [register]
-        _POST_OP \register, \post_op\()
+        _post_op \register, \post_op\()
         .endm
-        .macro _STORE_LO register=r0, post_op=""
+        .macro _store_lo register=r0, post_op=""
         STR PSTOP, [register]
-        _DROP
-        _POST_OP \register, \post_op\()=""
+        _drop
+        _post_op \register, \post_op\()=""
         .endm
 
         @ memory pointer operations
         @ these clobber r0!!!
-        .macro _ADD_OFFSET register=r11
+        .macro _plus_offset register=r11
         MOV r0, register
         ADD r0, PSTOP
         .endm
-        .macro _FETCH_HI register=r11
-        _ADD_OFFSET \register
+        .macro _fetch_hi register=r11
+        _plus_offset \register
         LDR PSTOP, [r0]
         .endm
-        .macro _STORE_HI register=r11
-        _ADD_OFFSET \register
-        _DROP
+        .macro _store_hi register=r11
+        _plus_offset \register
+        _drop
         STR PSTOP, [r0]
-        _DROP
+        _drop
         .endm
 
         @ return to caller
-        .macro _EXIT
+        .macro _return
         BX LR
         .endm
 
         @ macros for nested calls
-        .macro _NEST
+        .macro _nest
         PUSH {INDXA, INDXB, LR}
         MOV INDXA, MPTRX
         MOV INDXB, MPTRY
         PUSH {INDXA, INDXB}
         .endm
 
-        .macro _UNNEST
+        .macro _unnest
         POP {INDXA, INDXB}
         MOV MPTRX, INDXA
         MOV MPTRY, INDXB
@@ -170,24 +180,29 @@ MPTRY .req r9
         @ We sometimes need to call functions in SRAM from flash and _vice versa_.
         @ The BLX instruction allows us to do this.
 
-        @ macro to call a function
-        .macro _BLX_FUNC_CALL func_name
+        @ macro to call a function "locally" (within plus or minus 16 MiB)
+        .macro _l_call func_name
+        BL \func_name
+        .endm
+
+        @ macro to call a function anywhere
+        .macro _x_call func_name
         LDR INDXA, _addr_\func_name @ get the address
         BLX INDXA
         .endm
 
         @ macro to create a "func_addr" word
-        .macro _BLX_FUNC_ADDR func_name
+        .macro _x_addr func_name
         .balign _CELL
         .set _addr_\func_name, .
         .word \func_name
         .endm
 
         @ crash with a message
-        .macro _CRASH message:req
+        .macro _crash message:req
         LDR r0, _ADDR_MESSAGE
-        _BLX_FUNC_CALL printf
-        _BLX_FUNC_CALL abort
+        _x_call printf
+        _x_call abort
 
         .balign _CELL
         .set _ADDR_MESSAGE, .

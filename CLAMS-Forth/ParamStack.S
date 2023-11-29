@@ -39,9 +39,9 @@
 clear_stack:
         LDR PT2ND, =_stack_bottom
         LDR r0, =_hamburger
-        _PUSHREG r0
-        _PUSHREG r0
-        _EXIT
+        _reg_from r0
+        _reg_from r0
+        _return
 
 .thumb_func
 .global stkprint3

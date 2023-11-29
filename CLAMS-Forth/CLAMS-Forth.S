@@ -40,9 +40,9 @@ main:
 
 loop:
         MOV r0, #2
-        _PUSHREG r0
+        _reg_from r0
         MOV r0, #3
-        _PUSHREG r0
+        _reg_from r0
         BL stkprint3
         BL plus
         BL stkprint3
