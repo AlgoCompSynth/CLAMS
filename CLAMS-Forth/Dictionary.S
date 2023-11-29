@@ -38,18 +38,28 @@
 @ from these, substituting an underscore for each dash in the pronunciation.
 
 @ flags = various bits about the word
-.set _IMMEDIATE, 1
-.set _COMPILE_ONLY, 2
-.set _INLINE, 4
-.set _FLAG_HW, 0x8000
-        .macro _HEADER wname, pronunciation, flags=0x8000
+.set _IMMEDIATE, 1 @ IMMEDIATE word
+.set _COMPILE_ONLY, 2 @ COMPILE-ONLY word
+.set _INLINE, 4 @ word can be inlined
+.set _COMPLETE, 0x8000 @ word is complete - compiler sets this when done
 
-        @ define header label
+        .macro _header wname, pronunciation, flags=0x8000
+
+        @ build link field
         .balign _CELL, 0
-        .set _name_field, .
-        .set _link_field, _name_field + 32
-        .set _flags_field, link_field + 2
-        .set _code_field, flags_field + 2
+        .set _link_field, .
+        .set _\pronunciation\()_link, . @ debugging symbol for link field
+        .if _link_field == _system_dict_start
+          .hword 0
+        .else
+          .hword _link_field - _previous_link_field
+        .endif
+        .set _previous_link_field, _link_field
+
+        @ build flags field
+        .set _flags_field, .
+        .set _\pronunciation\()_flags, . @ debugging symbol for flags field
+        .hword \flags
 
         @ build name field
         .set _\pronunciation\()_name, . @ debugging symbol for name field
@@ -58,36 +68,12 @@
         .ascii "\wname\()"
 1:
 
-        @ build link field
-        .set _padding, _link_field - .
-        .if _padding > 0
-          .rept _padding
-          .byte 0
-          .endr
-        .endif
-
-        .set _\pronunciation\()_link, . @ debugging symbol for link field
-        .if _name_field == _system_dict_start
-          .hword 0
-        .else
-          .hword _name_field - _previous_name_field
-        .endif
-        .set _previous_name_field, _name_field
-
-        @ build flags field
-        .set _\pronunciation\()_flags, . @ debugging symbol for flags field
-        .hword \flags
-
         @ define call entry point to code field
+        .balign _CELL, 0
         .thumb_func
         .global \pronunciation
         .set \pronunciation, .
 
-        .endm
-
-        @ terminate an inline word
-        .macro _ITRM
-        .hword 0xFFFF
         .endm
 
 @ character codes
@@ -98,10 +84,6 @@
 
 @ the dictionary itself!
 
-@ dictionary has to be in data segment - the internal BL operations won't work if it
-@ is split over the flash - RAM address space!
-
-#.data
 .balign _CELL
 .global _system_dict_start
 _system_dict_start: .word .
@@ -110,230 +92,140 @@ _system_dict_start: .word .
         @ inline to a colon word instead of called. This saves two cycles for
         @ each inlined word whenever the colon word is called.
 
-        @ For readability, we have two forms of each in the dictionary. For
-        @ example, "+" (plus) is the callable form and "+," (plus_comma) is the
-        @ inline form.
-
         @ stack operators
-        _HEADER "DROP", drop
-        _DROP
+        _header "DROP", drop, _COMPLETE + _INLINE
+        _drop
         _return
-        _HEADER "DROP,", drop_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _DROP
-        _ITRM
 
-        _HEADER "DUP", dupe
-        _DUP
+        _header "DUP", dupe, _COMPLETE + _INLINE
+        _dup
         _return
-        _HEADER "DUP,", dupe_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _DUP
-        _ITRM
 
-        _HEADER "OVER", over
-        _OVER
+        _header "OVER", over, _COMPLETE + _INLINE
+        _over
         _return
-        _HEADER "OVER,", over_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _OVER
-        _ITRM
 
-        _HEADER "ROT", rote
-        _ROT
+        _header "ROT", rote, _COMPLETE + _INLINE
+        _rot
         _return
-        _HEADER "ROT,", rote_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _ROT
-        _ITRM
 
-        _HEADER "SWAP", swap
+        _header "SWAP", swap, _COMPLETE + _INLINE
         _SWAP
         _return
-        _HEADER "SWAP,", swap_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _SWAP
-        _ITRM
 
-        _HEADER "@", fetch
-        LDR PSTOP, [PSTOP]
+        _header "@", fetch, _COMPLETE + _INLINE
+        _fetch
         _return
-        _HEADER "@,", fetch_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        LDR PSTOP, [PSTOP]
-        _ITRM
 
-        _HEADER "!", store
-        LDM PT2ND!, {r0-r1}
-        STR r0, [PSTOP]
-        MOV PSTOP, r1
+        _header "!", store, _COMPLETE + _INLINE
+        _store
         _return
-        _HEADER "!,", store_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        LDM PT2ND!, {r0-r1}
-        STR r0, [PSTOP]
-        MOV PSTOP, r1
-        _ITRM
 
-        _HEADER "+!", plus_store
-        LDM PT2ND!, {r0-r1}
-        LDR r2, [PSTOP]
-        ADD r2, r0
-        STR r2, [PSTOP]
-        MOV PSTOP, r1
+        _header "+!", plus_store, _COMPLETE + _INLINE
+        _plus_store
         _return
-        _HEADER "+!,", plus_store_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        LDM PT2ND!, {r0-r1}
-        LDR r2, [PSTOP]
-        ADD r2, r0
-        STR r2, [PSTOP]
-        MOV PSTOP, r1
-        _ITRM
 
-        _HEADER "1+", one_plus
-        ADD PSTOP, #1
+        _header "1+", one_plus, _COMPLETE + _INLINE
+        _one_plus
         _return
-        _HEADER "1+,", one_plus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        ADD PSTOP, #1
-        _ITRM
 
-        _HEADER "1-", one_minus
-        SUB PSTOP, #1
+        _header "1-", one_minus, _COMPLETE + _INLINE
+        _one_minus
         _return
-        _HEADER "1-,", one_minus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        SUB PSTOP, #1
-        _ITRM
 
-        _HEADER "2*", two_star
-        LSL PSTOP, #1
+        _header "2*", two_star, _COMPLETE + _INLINE
+        _two_star
         _return
-        _HEADER "2*,", two_star_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        LSL PSTOP, #1
-        _ITRM
 
-        _HEADER "2/", two_slash
-        ASR PSTOP, #1
+        _header "2/", two_slash, _COMPLETE + _INLINE
+        _two_slash
         _return
-        _HEADER "2/,", two_slash_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        ASR PSTOP, #1
-        _ITRM
 
         @ arithmetic operators
-        _HEADER "+", plus
-        _BINARY_ALU ADD
+        _header "+", plus, _COMPLETE + _INLINE
+        _plus
         _return
-        _HEADER "+,", plus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _BINARY_ALU ADD
-        _ITRM
 
-        _HEADER "-", minus
-        _BINARY_ALU SUB
+        _header "-", minus, _COMPLETE + _INLINE
+        _minus
         _return
-        _HEADER "-,", minus_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _BINARY_ALU SUB
-        _ITRM
 
-        _HEADER "*", star
-        _BINARY_ALU MUL
+        _header "*", star, _COMPLETE + _INLINE
+        _star
         _return
-        _HEADER "*,", star_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _BINARY_ALU MUL
-        _ITRM
 
-        _HEADER "NEGATE", negate
-        MVN PSTOP, PSTOP
+        _header "NEGATE", negate, _COMPLETE + _INLINE
+        _negate
         _return
-        _HEADER "NEGATE,", negate_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        MVN PSTOP, PSTOP
-        _ITRM
 
         @ boolean operators
-        _HEADER "AND", and
-        _BINARY_ALU AND
+        _header "AND", and, _COMPLETE + _INLINE
+        _and
         _return
-        _HEADER "AND,", and_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _BINARY_ALU AND
-        _ITRM
 
-        _HEADER "OR", or
-        _BINARY_ALU ORR
+        _header "OR", or, _COMPLETE + _INLINE
+        _or
         _return
-        _HEADER "OR,", or_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _BINARY_ALU ORR
-        _ITRM
 
-        _HEADER "XOR", x_or
-        _BINARY_ALU EOR
+        _header "XOR", x_or, _COMPLETE + _INLINE
+        _x_or
         _return
-        _HEADER "XOR,", x_or_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        _BINARY_ALU EOR
-        _ITRM
 
-        _HEADER "INVERT", invert
-        MVN PSTOP, PSTOP
+        _header "INVERT", invert, _COMPLETE + _INLINE
+        _invert
         _return
-        _HEADER "INVERT,", invert_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        MVN PSTOP, PSTOP
-        _ITRM
 
-        _HEADER "LSHIFT", l_shift
-        LDM PT2ND!, {r0}
-        LSL r0, PSTOP
-        MOV PSTOP, r0
+        _header "LSHIFT", l_shift, _COMPLETE + _INLINE
+        _l_shift
         _return
-        _HEADER "LSHIFT,", l_shift_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        LDM PT2ND!, {r0}
-        LSL r0, PSTOP
-        MOV PSTOP, r0
-        _ITRM
 
-        _HEADER "RSHIFT", r_shift
-        LDM PT2ND!, {r0}
-        LSR r0, PSTOP
-        MOV PSTOP, r0
+        _header "RSHIFT", r_shift, _COMPLETE + _INLINE
+        _r_shift
         _return
-        _HEADER "RSHIFT,", r_shift_comma, _COMPILE_ONLY + _INLINE + _FLAG_HW
-        LDM PT2ND!, {r0}
-        LSR r0, PSTOP
-        MOV PSTOP, r0
-        _ITRM
 
         @ binary comparison operators
-        _HEADER "<", less_than
-        _BINARY_CMP LT
+        _header "<", less_than, _COMPLETE + _INLINE
+        _less_than
         _return
 
-        _HEADER "<=", less_or_equals
-        _BINARY_CMP LE
+        _header "<=", less_or_equal, _COMPLETE + _INLINE
+        _less_or_equal
         _return
 
-        _HEADER "=", equals
-        _BINARY_CMP EQ
+        _header "=", equals, _COMPLETE + _INLINE
+        _equals
         _return
 
-        _HEADER "<>", not_equals
-        _BINARY_CMP NE
+        _header "<>", not_equal, _COMPLETE + _INLINE
+        _not_equal
         _return
 
-        _HEADER ">", greater_than
-        _BINARY_CMP GT
+        _header ">", greater_than, _COMPLETE + _INLINE
+        _greater_than
         _return
 
-        _HEADER ">=", greater_or_equals
-        _BINARY_CMP GE
+        _header ">=", greater_or_equal, _COMPLETE + _INLINE
+        _greater_or_equal
         _return
 
-        _HEADER "U>", u_greater_than
-        _BINARY_CMP HI
+        _header "U>", u_greater_than, _COMPLETE + _INLINE
+        _u_greater_than
         _return
 
-        _HEADER "U>=", u_greater_or_equals
-        _BINARY_CMP HS
+        _header "U>=", u_greater_or_equal, _COMPLETE + _INLINE
+        _u_greater_or_equal
         _return
 
-        _HEADER "U<", u_less_than
-        _BINARY_CMP LO
+        _header "U<", u_less_than, _COMPLETE + _INLINE
+        _u_less_than
         _return
 
-        _HEADER "U<=", u_less_or_equals
-        _BINARY_CMP LS
+        _header "U<=", u_less_or_equal, _COMPLETE + _INLINE
+        _u_less_or_equal
         _return
 
         @ character / string words
-        _HEADER "FILL", fill
+        _header "FILL", fill
         MOV r0, PSTOP @ character => r0
         _DROP
         MOV r3, PSTOP @ count => r3
@@ -351,8 +243,8 @@ filz:
         _DROP
         _return
 
-        _HEADER "ACCEPT", accept
-        _NEST
+        _header "ACCEPT", accept
+        _nest
 
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
@@ -413,11 +305,11 @@ _accb:
 _accz:
         @ push count and exit
         _reg_from INDXB
-        _UNNEST
+        _unnest
         @ whew!
 
-        _HEADER "TYPE", type
-        _NEST
+        _header "TYPE", type
+        _nest
         _TO_REG INDXB @ count to INDXB
         _TO_REG INDXA @ address to INDXA
 
@@ -435,36 +327,36 @@ typl:
         BGT typl @ continue
 
 typz:
-        _UNNEST
+        _unnest
 
         @ number input/output
-        _HEADER "BASE", "base"
-        _NEST
+        _header "BASE", "base"
+        _nest
         _DUP
         BL _base_addr
         MOV PSTOP, r0
-        _UNNEST
+        _unnest
 
         @ parsing
-        _HEADER ">IN", "to_in"
-        _NEST
+        _header ">IN", "to_in"
+        _nest
         _DUP
         BL _to_in_addr
         MOV PSTOP, r0
-        _UNNEST
+        _unnest
 
-        _HEADER "SOURCE", "source"
-        _NEST
+        _header "SOURCE", "source"
+        _nest
         _DUP @ make room for two cells on the stack
         _DUP
         BL _tib_addr @ address of _tib => r0
         LDRB PSTOP, [r0] @ count => PSTOP
         ADD r0, #1 @ point to first non-count character
         STR r0, [PT2ND] @ address => 2nd
-        _UNNEST
+        _unnest
 
-        _HEADER "PARSE-NAME", "parse_name"
-        _NEST
+        _header "PARSE-NAME", "parse_name"
+        _nest
         BL source @ buffer address in [PT2ND], count in PSTOP
         _DROP @ drop count - buffers are null-terminated
         _TO_REG INDXA @ pop address to INDXA
@@ -500,13 +392,13 @@ pnz:
         STR r3, [INDXB] @ first order of business - save new >IN value
         MOV r0, r1 @ push count and exit
         _reg_from r0
-        _UNNEST 
+        _unnest 
 
 @ finally, the text interpreter!!
-        _HEADER "QUIT", quit
+        _header "QUIT", quit
 
         @ we ***don't*** clear the return stack - that is a big hairy no-no!
-        @ and we don't need _NEST / _UNNEST because we weren't called and won't
+        @ and we don't need _nest / _unnest because we weren't called and won't
         @ return.
 quil:
         @ push input buffer address and length to stack
@@ -529,60 +421,60 @@ quil:
         @ repeat forever-ish
         B quil
 
-        _HEADER "'", tick
-        _NEST
+        _header "'", tick
+        _nest
         @ TBD
-        _UNNEST
+        _unnest
 
-        _HEADER "EVALUATE", evaluate
-        _NEST
+        _header "EVALUATE", evaluate
+        _nest
         @ TBD
-        _UNNEST
+        _unnest
 
         @ division operators - use the SDK and hardware divider
-        _HEADER "/MOD", slash_mod
-        _NEST
+        _header "/MOD", slash_mod
+        _nest
         LDR r0, [PT2ND] @ dividend => r0
         MOV r1, PSTOP @ divisor => r1
         _x_call sdk_slash_mod
         MOV PSTOP, r0 @ quotient => top of stack
         STR r1, [PT2ND] @ remainder => 2nd
-        _UNNEST
+        _unnest
 
-        _HEADER "/", slash
-        _NEST
+        _header "/", slash
+        _nest
         _x_call sdk_slash_mod
         _SWAP
         _DROP
-        _UNNEST
+        _unnest
 
-        _HEADER "MOD", mod
-        _NEST
+        _header "MOD", mod
+        _nest
         _x_call sdk_slash_mod
         _DROP
-        _UNNEST
+        _unnest
 
         @ terminal I/O words
-        _HEADER "KEY", key
-        _NEST
+        _header "KEY", key
+        _nest
         _x_call sdk_key
         _reg_from r0
-        _UNNEST
+        _unnest
 
-        _HEADER "EMIT", emit
-        _NEST
+        _header "EMIT", emit
+        _nest
         MOV r0, PSTOP
         _x_call sdk_emit
         _DROP
-        _UNNEST
+        _unnest
 
-        _HEADER "ABORT", abort
+        _header "ABORT", abort
         _x_call clear_stack @ this is the standard behavior
         B quit @ quit never returns
 
         @ text interpreter calls this if it finds a token that's neither a name
         @ found in the dictionary nor a valid number
-        _HEADER "GARBAGE-TOKEN", garbage_token
+        _header "GARBAGE-TOKEN", garbage_token
         _CRASH "garbage token"
 
 .balign _CELL
