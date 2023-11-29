@@ -177,14 +177,12 @@ MPTRY .req r9
         POP {INDXA, INDXB, PC}
         .endm
 
-        @ We sometimes need to call functions in SRAM from flash and _vice versa_.
-        @ The BLX instruction allows us to do this.
-
         @ macro to call a function "locally" (within plus or minus 16 MiB)
         .macro _l_call func_name
         BL \func_name
         .endm
 
+        @ We sometimes need to call functions in SRAM from flash and _vice versa_.
         @ macro to call a function anywhere
         .macro _x_call func_name
         LDR INDXA, _addr_\func_name @ get the address
@@ -209,4 +207,158 @@ MPTRY .req r9
         .word _MESSAGE
         .set _MESSAGE, .
         .asciz "\message\()"
+        .endm
+
+@ Common code for a word that uses a single instruction binary operator on the
+@ top two stack cells. Such words have the stack effect
+@
+@    ( left right -- result )
+@
+@ where `result` = `left <op> right`. That is, the postfix `left right <op>` has
+@ the same `result` as the infix `left <op> right`.
+
+        .macro _binary_alu opcode
+        LDM PT2ND!, {r0} @ pop left operand => r0
+        \opcode\() PSTOP, r0, PSTOP @ PSTOP := left <OP> PSTOP
+        .endm
+
+@ Common code for a word that compares the top two cells on the stack. Such words
+@ have the stack effect
+@
+@    ( left right -- flag )
+@
+@ where `flag` = true (all ones) if `left <cmp> right` is true, and false (all
+@ zeroes) if `left <cmp> right` is false.
+
+        .macro _binary_cmp cmp
+        LDM PT2ND!, {r0} @ pop left operand => r0
+        CMP r0, PSTOP
+        B\cmp\() 1f @ branch if true
+        MOV PSTOP, #0 @ false - set flag to zero
+        B 2f
+1:
+        MOV PSTOP, #0
+        MVN PSTOP, PSTOP @ set all-ones true flag
+2:
+        .endm
+
+        @ position-independent operations
+        .macro _fetch
+        LDR PSTOP, [PSTOP]
+        .endm
+
+        .macro _store
+        LDM PT2ND!, {r0-r1}
+        STR r0, [PSTOP]
+        .endm
+
+        .macro _plus_store
+        LDM PT2ND!, {r0-r1}
+        LDR r2, [PSTOP]
+        ADD r2, r0
+        STR r2, [PSTOP]
+        MOV PSTOP, r1
+        .endm
+
+        .macro _one_plus
+        ADD PSTOP, #1
+        .endm
+
+        .macro _one_minus
+        SUB PSTOP, #1
+        .endm
+
+        .macro _two_star
+        LSL PSTOP, #1
+        .endm
+
+        .macro _two_slash
+        ASR PSTOP, #1
+        .endm
+
+        @ arithmetic operators
+        .macro _plus
+        _binary_alu ADD
+        .endm
+
+        .macro _minus
+        _binary_alu SUB
+        .endm
+
+        .macro _star
+        _binary_alu MUL
+        .endm
+
+        .macro _negate
+        MVN PSTOP, PSTOP
+        .endm
+
+        @ boolean operators
+        .macro _and
+        _binary_alu AND
+        .endm
+
+        .macro _or
+        _binary_alu ORR
+        .endm
+
+        .macro _x_or
+        _binary_alu EOR
+        .endm
+
+        .macro _invert
+        MVN PSTOP, PSTOP
+        .endm
+
+        .macro _l_shift
+        LDM PT2ND!, {r0}
+        LSL r0, PSTOP
+        MOV PSTOP, r0
+        .endm
+
+        .macro _r_shift
+        LDM PT2ND!, {r0}
+        LSR r0, PSTOP
+        MOV PSTOP, r0
+        .endm
+
+        @ binary comparison operators
+        .macro _less_than
+        _binary_cmp LT
+        .endm
+
+        .macro _less_or_equals
+        _binary_cmp LE
+        .endm
+
+        .macro _equals
+        _binary_cmp EQ
+        .endm
+
+        .macro _not_equals
+        _binary_cmp NE
+        .endm
+
+        .macro _greater_than
+        _binary_cmp GT
+        .endm
+
+        .macro _greater_or_equals
+        _binary_cmp GE
+        .endm
+
+        .macro _u_greater_than
+        _binary_cmp HI
+        .endm
+
+        .macro _u_greater_or_equals
+        _binary_cmp HS
+        .endm
+
+        .macro _u_less_than
+        _binary_cmp LO
+        .endm
+
+        .macro _u_less_or_equals
+        _binary_cmp LS
         .endm
