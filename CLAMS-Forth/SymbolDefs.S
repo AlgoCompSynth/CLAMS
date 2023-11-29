@@ -119,23 +119,23 @@ MPTRY .req r9
         @ index operations - only work for r0 - r7
         .macro _post_op register=r0, post_op=""
         .if \post_op\() == "+"
-          ADD register, #_CELL
+          ADD \register, #_CELL
         .elseif \post_op\() == "-"
-          SUB register, #_CELL
+          SUB \register, #_CELL
         .elseif \post_op\() == "+C"
-          ADD register, #_CHAR
+          ADD \register, #_CHAR
         .elseif \post_op\() == "-C"
-          SUB register, #_CHAR
+          SUB \register, #_CHAR
         .endif
         .endm
 
         .macro _fetch_lo register=r0, post_op=""
         _dup
-        LDR PSTOP, [register]
+        LDR PSTOP, [\register]
         _post_op \register, \post_op\()
         .endm
         .macro _store_lo register=r0, post_op=""
-        STR PSTOP, [register]
+        STR PSTOP, [\register]
         _drop
         _post_op \register, \post_op\()=""
         .endm
@@ -143,7 +143,7 @@ MPTRY .req r9
         @ memory pointer operations
         @ these clobber r0!!!
         .macro _plus_offset register=r11
-        MOV r0, register
+        MOV r0, \register
         ADD r0, PSTOP
         .endm
         .macro _fetch_hi register=r11
