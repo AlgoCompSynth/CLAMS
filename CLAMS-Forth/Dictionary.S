@@ -85,32 +85,6 @@
 
         .endm
 
-@ Common code for a word that uses a single instruction binary operator on the
-@ top two stack cells. Such words have the stack effect
-@
-@    ( left right -- result )
-@
-@ where `result` = `left <op> right`. That is, the postfix `left right <op>` has
-@ the same `result` as the infix `left <op> right`.
-
-        .macro _BINARY_ALU opcode
-        LDM PT2ND!, {r0} @ pop left operand => r0
-        \opcode\() PSTOP, r0, PSTOP @ PSTOP := left <OP> PSTOP
-        .endm
-
-@ same thing for comparisons!
-        .macro _BINARY_CMP opcode
-        LDM PT2ND!, {r0} @ pop left operand => r0
-        CMP r0, PSTOP
-        \opcode\() 1f @ branch if true
-        MOV PSTOP, #0 @ false - set flag to zero
-        B 2f
-1:
-        MOV PSTOP, #0
-        MVN PSTOP, PSTOP @ set all-ones true flag
-2:
-        .endm
-
         @ terminate an inline word
         .macro _ITRM
         .hword 0xFFFF
@@ -319,43 +293,43 @@ _system_dict_start: .word .
 
         @ binary comparison operators
         _HEADER "<", less_than
-        _BINARY_CMP BLT
+        _BINARY_CMP LT
         _return
 
         _HEADER "<=", less_or_equals
-        _BINARY_CMP BLE
+        _BINARY_CMP LE
         _return
 
         _HEADER "=", equals
-        _BINARY_CMP BEQ
+        _BINARY_CMP EQ
         _return
 
         _HEADER "<>", not_equals
-        _BINARY_CMP BNE
+        _BINARY_CMP NE
         _return
 
         _HEADER ">", greater_than
-        _BINARY_CMP BGT
+        _BINARY_CMP GT
         _return
 
         _HEADER ">=", greater_or_equals
-        _BINARY_CMP BGE
+        _BINARY_CMP GE
         _return
 
         _HEADER "U>", u_greater_than
-        _BINARY_CMP BHI
+        _BINARY_CMP HI
         _return
 
         _HEADER "U>=", u_greater_or_equals
-        _BINARY_CMP BHS
+        _BINARY_CMP HS
         _return
 
         _HEADER "U<", u_less_than
-        _BINARY_CMP BLO
+        _BINARY_CMP LO
         _return
 
         _HEADER "U<=", u_less_or_equals
-        _BINARY_CMP BLS
+        _BINARY_CMP LS
         _return
 
         @ character / string words
