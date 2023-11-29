@@ -118,13 +118,16 @@ MPTRY .req r9
 
         @ index operations - only work for r0 - r7
         .macro _post_op register=r0, post_op=""
-        .if \post_op\() == "+"
+        .ifc \post_op\(), '+'
           ADD \register, #_CELL
-        .elseif \post_op\() == "-"
+        .endif
+        .ifc \post_op\(), '-'
           SUB \register, #_CELL
-        .elseif \post_op\() == "+C"
+        .endif
+        .ifc \post_op\(), '+C'
           ADD \register, #_CHAR
-        .elseif \post_op\() == "-C"
+        .endif
+        .ifc \post_op\(), '-C'
           SUB \register, #_CHAR
         .endif
         .endm
