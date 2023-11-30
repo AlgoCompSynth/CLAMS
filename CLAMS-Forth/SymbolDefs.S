@@ -93,8 +93,7 @@ MPTRY .req r9
         .endm
 
         .macro _drop
-        LDR PSTOP, [PT2ND]
-        ADD PT2ND, #_CELL
+        LDM PT2ND!, {PSTOP}
         .endm
 
         .macro _rote
@@ -364,4 +363,65 @@ MPTRY .req r9
 
         .macro _u_less_or_equal
         _binary_cmp LS
+        .endm
+
+
+
+
+@ User variables are single-cell word-aligned values in RAM. Dictionary words need
+@ to be able to get their addresses. Examples are SOURCE (where text interpreter 
+@ input comes from), >IN (index to current text interpreter input), BASE (number
+@ base), and STATE (interpreting or compiling).
+
+        .macro _user_var name:req, default=0
+
+        @ make the variable
+        .data
+        .balign _CELL
+        .set \name, .
+        .word \default
+
+        @ address getter function
+        .text
+        .balign _CELL
+        .global _addr_\name
+        .thumb_func
+        .set _addr_\name, .
+        _dupe
+        LDR PSTOP, =\name
+        _return
+        .endm
+
+@ String buffers store counted strings. The first byte is the count, second and 
+@ succeeding characters are data, and buffers are initialized with zeroes. String
+@ buffers are at most 256 bytes long - a count byte and up to 255 data bytes.
+
+        .macro _STRING_BUF name:req, maxl=255
+
+        @ make the buffer
+        .data
+        .balign _CELL
+        .set \name, .
+        .rept \maxl + 1
+        .byte 0
+        .endr
+
+        @ address getter function
+        .text
+        .balign _CELL
+        .global _addr_\name
+        .thumb_func
+        .set _addr_\name, .
+        _dupe
+        LDR PSTOP, =\name
+        _return
+
+        @ max length getter function
+        .global _maxl_\name
+        .thumb_func
+        .set _addr_\name, .
+        _dupe
+        LDR PSTOP, =\maxl
+        _return
+
         .endm
