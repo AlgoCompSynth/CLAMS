@@ -28,19 +28,19 @@
 
 .include "SymbolDefs.S"
 
-@ data segment!
-.data
-
 @ User variables
 
         .macro _USER_VARIABLE name:req, value=0
 
         @ make the variable
+        .data
         .balign _CELL
         .set \name, .
         .word \value
 
         @ address getter function
+        .text
+        .balign _CELL
         .global \name\()_addr
         .thumb_func
         .set \name\()_addr, .
@@ -70,6 +70,7 @@ _USER_VARIABLE _to_in, 0 @ parsing pointer
         .macro _STRING_BUF name:req, maxl=255
 
         @ make the buffer
+        .data
         .balign _CELL
         .set \name, .
         .rept \maxl + 1
@@ -77,21 +78,21 @@ _USER_VARIABLE _to_in, 0 @ parsing pointer
         .endr
 
         @ getter / setter functions
-        .global \name\()_addr
+        .text
+        .balign _CELL
+        .global \name\()_addr_maxl
         .thumb_func
-        .set \name\()_addr, .
+        .set \name\()_addr_maxl, .
         LDR r0, =\name
-        _return
-
-        .global \name\()_maxl
-        .thumb_func
-        .set \name\()_maxl, .
-        MOV r0, #\maxl
+        ADD r0, #1 @ point to address after count
+        MOV r1, #\maxl
+        SUB r1, #2 @ leave some room at the end
         _return
 
         .global \name\()_init
         .thumb_func
         .set \name\()_init, .
+        _nest @ we'll call the address / maxl getter after initializing
         MOV r3, #0 @ count
         LDR r2, =\name @ address
         MOV r0, #0 @ and a zero to store
@@ -101,7 +102,9 @@ _USER_VARIABLE _to_in, 0 @ parsing pointer
         ADD r3, #1
         CMP r3, #\maxl
         BLE 1b
-        _return
+
+        BL \name\()_addr_maxl @ return the address and max length
+        _unnest
 
         .global \name\()_count
         .thumb_func
@@ -111,7 +114,7 @@ _USER_VARIABLE _to_in, 0 @ parsing pointer
         ADD r2, #1
 
 1:
-        LDRB r0, [r2, r3] @ get the character
+        LDRB r0, [r2, r3] @ get a character
         CMP r0, #0
         BEQ 2f @ we're done if it's zero
         ADD r3, #1 @ count the character
@@ -119,9 +122,9 @@ _USER_VARIABLE _to_in, 0 @ parsing pointer
         BLT 1b @ not at end - keep going
 
 2:
-        LDR r2, =\name @ get the buffer address back
-        STRB r3, [r2] @ save the count
-        _return
+        LDR r0, =\name @ get the buffer address back
+        STRB r3, [r0] @ save the count
+        _return @ address of count byte is returned!
 
         .endm
 

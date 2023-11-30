@@ -39,22 +39,16 @@ main:
         BL stkprint3
 
 loop:
-        MOV r0, #2
-        _reg_from r0
-        MOV r0, #3
-        _reg_from r0
-        BL stkprint3
-        BL plus
-        BL stkprint3
+        LDR r0, =prompt
+        BL printf
+
+        BL _clear_tib
+        BL accept
 
         LDR r0, sleep_ms
         BL sdk_sleep_ms
         B loop
 
+prompt: .asciz "\n> "
 .balign _CELL, 0
-sleep_ms: .word 5000
-regs: .asciz "r1, r2, r3: %x, %x, %x\n"
-
-@ engage the linker!
-        BL drop
-        BL evaluate
+sleep_ms: .word 1000

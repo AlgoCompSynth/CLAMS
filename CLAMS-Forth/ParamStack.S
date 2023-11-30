@@ -38,7 +38,7 @@
 .global clear_stack
 clear_stack:
         LDR PT2ND, =_stack_bottom
-        LDR r0, =_hamburger
+        LDR r0, _hamburger
         _reg_from r0
         _reg_from r0
         _return
@@ -75,14 +75,17 @@ stkprint1:
 _stack_format_3: .asciz "stack top => %x, %x, %x\n"
 _stack_format_2: .asciz "stack top => %x, %x\n"
 _stack_format_1: .asciz "stack top => %x\n"
+.balign _CELL, 0
 _hamburger: .word 0xdeadbeef
 
 @ The parameter stack itself
 .data
 .balign _CELL, 0
-.set _stack_CELLs, 64
+.set _stack_cells, 64
+.global _stack_start
 _stack_start:
-        .rept _stack_CELLs
+        .rept _stack_cells
         .word 0
         .endr
+.global _stack_bottom
 .set _stack_bottom, .
