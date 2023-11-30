@@ -42,7 +42,6 @@ loop:
         LDR r0, =prompt
         BL printf
 
-        BL _clear_tib
         BL accept
 
         LDR r0, sleep_ms

@@ -159,12 +159,6 @@ filz:
         _drop
         _return
 
-        _header "_clear_tib", _clear_tib, _COMPLETE
-        _nest
-        @_x_call _tib_init
-        BL _tib_init
-        _unnest
-
         _header "ACCEPT", accept, _COMPLETE
         _nest
 
@@ -255,27 +249,27 @@ typz:
         _header "BASE", "base", _COMPLETE
         _nest
         _dupe
-        BL _base_addr
-        MOV PSTOP, r0
+        BL _addr_base_v
         _unnest
 
         @ parsing
         _header ">IN", "to_in", _COMPLETE
         _nest
         _dupe
-        BL _to_in_addr
-        MOV PSTOP, r0
+        BL _addr_to_in_v
         _unnest
 
-        @ _header "SOURCE", "source", _COMPLETE
-        @ _nest
-        @ _dupe @ make room for two cells on the stack
-        @ _dupe
-        @ BL _tib_addr @ address of _tib => r0
-        @ LDRB PSTOP, [r0] @ count => PSTOP
-        @ ADD r0, #1 @ point to first non-count character
-        @ STR r0, [PT2ND] @ address => 2nd
-        @ _unnest
+        _header "SOURCE", "source", _COMPLETE
+        _nest
+        _dupe
+        BL _addr_source_v
+        _unnest
+
+        _header "STATE", "state", _COMPLETE
+        _nest
+        _dupe
+        BL _addr_state_v
+        _unnest
 
         @ _header "PARSE-NAME", "parse_name", _COMPLETE
         @ _nest
@@ -408,7 +402,6 @@ _x_addr sdk_emit
 _x_addr printf
 _x_addr abort
 _x_addr clear_stack
-_x_addr _tib_init
 
 .global _system_dict_end
 _system_dict_end: .word .

@@ -29,104 +29,12 @@
 .include "SymbolDefs.S"
 
 @ User variables
-
-        .macro _USER_VARIABLE name:req, value=0
-
-        @ make the variable
-        .data
-        .balign _CELL
-        .set \name, .
-        .word \value
-
-        @ address getter function
-        .text
-        .balign _CELL
-        .global \name\()_addr
-        .thumb_func
-        .set \name\()_addr, .
-        LDR r0, =\name
-        _return
-        .endm
-
-_USER_VARIABLE _base, 10 @ base for numeric input/output
-_USER_VARIABLE _to_in, 0 @ parsing pointer
+_user_var base_v, 10 @ base for numeric input/output
+_user_var source_v, 0 @ parsing source string
+_user_var to_in_v, 0 @ parsing pointer
+_user_var state_v, 0 @ text interpreter / compiler state
 
 @ String buffers
-
-@ String buffers store counted strings. The first byte is the count, second and 
-@ succeeding characters are data, and buffers are initialized with zeroes. String
-@ buffers have four methods:
-
-@ an `_addr` method, which returns the address of the first (count) byte of the
-@ buffer,
-
-@ a `_maxl` method, which returns the length of @ the buffer minus 1,
-
-@ a `_count` method, which sets the count byte to the correct count of the rest
-@ of the buffer,
-
-@ and an `_init` method, which sets the whole buffer to zeroes.
-
-        .macro _STRING_BUF name:req, maxl=255
-
-        @ make the buffer
-        .data
-        .balign _CELL
-        .set \name, .
-        .rept \maxl + 1
-        .byte 0
-        .endr
-
-        @ getter / setter functions
-        .text
-        .balign _CELL
-        .global \name\()_addr_maxl
-        .thumb_func
-        .set \name\()_addr_maxl, .
-        LDR r0, =\name
-        ADD r0, #1 @ point to address after count
-        MOV r1, #\maxl
-        SUB r1, #2 @ leave some room at the end
-        _return
-
-        .global \name\()_init
-        .thumb_func
-        .set \name\()_init, .
-        _nest @ we'll call the address / maxl getter after initializing
-        MOV r3, #0 @ count
-        LDR r2, =\name @ address
-        MOV r0, #0 @ and a zero to store
-
-1:
-        STRB r0, [r2, r3]
-        ADD r3, #1
-        CMP r3, #\maxl
-        BLE 1b
-
-        BL \name\()_addr_maxl @ return the address and max length
-        _unnest
-
-        .global \name\()_count
-        .thumb_func
-        .set \name\()_count, .
-        MOV r3, #0 @ count
-        LDR r2, =\name @ address
-        ADD r2, #1
-
-1:
-        LDRB r0, [r2, r3] @ get a character
-        CMP r0, #0
-        BEQ 2f @ we're done if it's zero
-        ADD r3, #1 @ count the character
-        CMP r3, #\maxl @ have we hit the end?
-        BLT 1b @ not at end - keep going
-
-2:
-        LDR r0, =\name @ get the buffer address back
-        STRB r3, [r0] @ save the count
-        _return @ address of count byte is returned!
-
-        .endm
-
-_STRING_BUF _tib @ terminal input read here
-_STRING_BUF _searching_for @ the word we're trying to find in the dictionary
+_STRING_BUF tib @ terminal input read here
+_STRING_BUF pad @ numeric output built here
+_STRING_BUF word @ the word we're trying to find in the dictionary
