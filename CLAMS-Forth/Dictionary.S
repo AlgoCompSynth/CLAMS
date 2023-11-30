@@ -227,9 +227,9 @@ _system_dict_start: .word .
         @ character / string words
         _header "FILL", fill
         MOV r0, PSTOP @ character => r0
-        _DROP
+        _drop
         MOV r3, PSTOP @ count => r3
-        _DROP @ address now in PSTOP
+        _drop @ address now in PSTOP
 
 fil1:
         CMP r3, #0 @ is count zero or less?
@@ -239,9 +239,15 @@ fil1:
         SUB r3, #1
         B fil1
 filz:
-        @ done - one last _DROP
-        _DROP
+        @ done - one last _drop
+        _drop
         _return
+
+        _header "_clear_tib", _clear_tib
+        _nest
+        @_x_call _tib_init
+        BL _tib_init
+        _unnest
 
         _header "ACCEPT", accept
         _nest
@@ -249,8 +255,8 @@ filz:
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
-        _TO_REG MPTRX @ pop max count to MPTRX
-        _TO_REG INDXA @ pop address to INDXA
+        _to_reg MPTRX @ pop max count to MPTRX
+        _to_reg INDXA @ pop address to INDXA
         MOV INDXB, #0 @ 0 to counter
 _accl:
         BL key @ wait for character, which will show up in PSTOP
@@ -310,8 +316,8 @@ _accz:
 
         _header "TYPE", type
         _nest
-        _TO_REG INDXB @ count to INDXB
-        _TO_REG INDXA @ address to INDXA
+        _to_reg INDXB @ count to INDXB
+        _to_reg INDXA @ address to INDXA
 
 typl:
         CMP INDXB, #0 @ are we done?
@@ -345,81 +351,81 @@ typz:
         MOV PSTOP, r0
         _unnest
 
-        _header "SOURCE", "source"
-        _nest
-        _DUP @ make room for two cells on the stack
-        _DUP
-        BL _tib_addr @ address of _tib => r0
-        LDRB PSTOP, [r0] @ count => PSTOP
-        ADD r0, #1 @ point to first non-count character
-        STR r0, [PT2ND] @ address => 2nd
-        _unnest
+        @ _header "SOURCE", "source"
+        @ _nest
+        @ _DUP @ make room for two cells on the stack
+        @ _DUP
+        @ BL _tib_addr @ address of _tib => r0
+        @ LDRB PSTOP, [r0] @ count => PSTOP
+        @ ADD r0, #1 @ point to first non-count character
+        @ STR r0, [PT2ND] @ address => 2nd
+        @ _unnest
 
-        _header "PARSE-NAME", "parse_name"
-        _nest
-        BL source @ buffer address in [PT2ND], count in PSTOP
-        _DROP @ drop count - buffers are null-terminated
-        _TO_REG INDXA @ pop address to INDXA
-        BL to_in @ get address of input buffer count
-        _TO_REG INDXB @ pop >IN address to INDXB
-        LDR r3, [INDXB] @ >IN to r3
+        @ _header "PARSE-NAME", "parse_name"
+        @ _nest
+        @ BL source @ buffer address in [PT2ND], count in PSTOP
+        @ _drop @ drop count - buffers are null-terminated
+        @ _to_reg INDXA @ pop address to INDXA
+        @ BL to_in @ get address of input buffer count
+        @ _to_reg INDXB @ pop >IN address to INDXB
+        @ LDR r3, [INDXB] @ >IN to r3
 
 pn1:
-        LDRB r2, [INDXA, r3] @ get a character
-        CMP r2, #0 @ buffers are null-terminated
-        BEQ pnz @ that's all, folks!
-        CMP r2, #_BL @ is it a space?
-        BNE pn2 @ first non-delimiter!
-        ADD r3, #_CHAR
-        B pn1 @ next character
+        @ LDRB r2, [INDXA, r3] @ get a character
+        @ CMP r2, #0 @ buffers are null-terminated
+        @ BEQ pnz @ that's all, folks!
+        @ CMP r2, #_BL @ is it a space?
+        @ BNE pn2 @ first non-delimiter!
+        @ ADD r3, #_CHAR
+        @ B pn1 @ next character
 
 pn2:
-        ADD r0, INDXA, r3 @ we have the buffer address!
-        _reg_from r0 @ push it to the stack
-        MOV r1, #1 @ initial count
+        @ ADD r0, INDXA, r3 @ we have the buffer address!
+        @ _reg_from r0 @ push it to the stack
+        @ MOV r1, #1 @ initial count
 
 pn3:
-        ADD r3, #_CHAR
-        LDRB r2, [INDXA, r3]
-        CMP r2, #0
-        BEQ pnz
-        CMP r2, #_BL
-        BEQ pnz @ blank - finish up
-        ADD r1, #1 @ count and go back for more
-        B pn3
+        @ ADD r3, #_CHAR
+        @ LDRB r2, [INDXA, r3]
+        @ CMP r2, #0
+        @ BEQ pnz
+        @ CMP r2, #_BL
+        @ BEQ pnz @ blank - finish up
+        @ ADD r1, #1 @ count and go back for more
+        @ B pn3
 
 pnz:
-        STR r3, [INDXB] @ first order of business - save new >IN value
-        MOV r0, r1 @ push count and exit
-        _reg_from r0
-        _unnest 
+        @ STR r3, [INDXB] @ first order of business - save new >IN value
+        @ MOV r0, r1 @ push count and exit
+        @ _reg_from r0
+        @ _unnest 
 
 @ finally, the text interpreter!!
-        _header "QUIT", quit
+        @ _header "QUIT", quit
 
         @ we ***don't*** clear the return stack - that is a big hairy no-no!
         @ and we don't need _nest / _unnest because we weren't called and won't
         @ return.
 quil:
         @ push input buffer address and length to stack
-        BL _tib_addr
-        _reg_from r0
-        BL _tib_maxl
-        _reg_from r0
+        @ BL _tib_addr
+        @ _reg_from r0
+        @ BL _tib_maxl
+        @ _reg_from r0
 
         @ get a line from user
-        BL accept
+        @ BL accept
 
         @ top of stack now has count
-        BL _tib_addr
-        _reg_from r0
-        _SWAP
+        @ BL _tib_addr
+        @ _reg_from r0
+        @ _SWAP
 
         @ and interpret
-        BL evaluate
+        @ BL evaluate
 
         @ repeat forever-ish
-        B quil
+        @ B quil
 
         _header "'", tick
         _nest
@@ -445,13 +451,13 @@ quil:
         _nest
         _x_call sdk_slash_mod
         _SWAP
-        _DROP
+        _drop
         _unnest
 
         _header "MOD", mod
         _nest
         _x_call sdk_slash_mod
-        _DROP
+        _drop
         _unnest
 
         @ terminal I/O words
@@ -465,12 +471,12 @@ quil:
         _nest
         MOV r0, PSTOP
         _x_call sdk_emit
-        _DROP
+        _drop
         _unnest
 
-        _header "ABORT", abort
-        _x_call clear_stack @ this is the standard behavior
-        B quit @ quit never returns
+        @ _header "ABORT", abort
+        @ _x_call clear_stack @ this is the standard behavior
+        @ B quit @ quit never returns
 
         @ text interpreter calls this if it finds a token that's neither a name
         @ found in the dictionary nor a valid number
@@ -486,6 +492,7 @@ _x_addr sdk_emit
 _x_addr printf
 _x_addr abort
 _x_addr clear_stack
+_x_addr _tib_init
 
 .global _system_dict_end
 _system_dict_end: .word .
