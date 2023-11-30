@@ -31,21 +31,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      0000009f  00000000  00000000  0000d848  2**0
                   CONTENTS, READONLY
- 14 .debug_line   00018c92  00000000  00000000  0000d8e7  2**0
+ 14 .debug_line   00018c72  00000000  00000000  0000d8e7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_info   00037710  00000000  00000000  00026579  2**0
+ 15 .debug_info   00037710  00000000  00000000  00026559  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_abbrev 00009b5c  00000000  00000000  0005dc89  2**0
+ 16 .debug_abbrev 00009b5c  00000000  00000000  0005dc69  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_aranges 00001758  00000000  00000000  000677e8  2**3
+ 17 .debug_aranges 00001758  00000000  00000000  000677c8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00008041  00000000  00000000  00068f40  2**0
+ 18 .debug_str    00008041  00000000  00000000  00068f20  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_loc    0001b073  00000000  00000000  00070f81  2**0
+ 19 .debug_loc    0001b073  00000000  00000000  00070f61  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_ranges 00004e38  00000000  00000000  0008bff8  2**3
+ 20 .debug_ranges 00004e38  00000000  00000000  0008bfd8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00002e5c  00000000  00000000  00090e30  2**2
+ 21 .debug_frame  00002e5c  00000000  00000000  00090e10  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 /home/znmeb/Projects/CLAMS/CLAMS-Forth/build/CLAMS-Forth.elf:     file format elf32-littlearm

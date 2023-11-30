@@ -76,13 +76,13 @@ MPTRY .req r9
 @ system-wide macros
 
         @ parameter stack macros
-        .macro _dup
+        .macro _dupe
         SUB PT2ND, #_CELL @ stack grows downward
         STR PSTOP, [PT2ND] @ save top to RAM
         .endm
 
         .macro _over
-        _dup
+        _dupe
         LDR PSTOP, [PT2ND, #_CELL*2] @ replace top of stack with 3rd
         .endm
 
@@ -97,7 +97,7 @@ MPTRY .req r9
         ADD PT2ND, #_CELL
         .endm
 
-        .macro _rot
+        .macro _rote
         @ x1, x2, x3 -> x2, x3, x1
         LDR r0, [PT2ND] @ get x2
         STR PSTOP, [PT2ND] @ stash x3
@@ -112,7 +112,7 @@ MPTRY .req r9
         _drop
         .endm
         .macro _reg_from register=r0
-        _dup
+        _dupe
         MOV PSTOP, \register
         .endm
 
@@ -133,7 +133,7 @@ MPTRY .req r9
         .endm
 
         .macro _fetch_lo register=r0, post_op=""
-        _dup
+        _dupe
         LDR PSTOP, [\register]
         _post_op \register, \post_op\()
         .endm
@@ -212,7 +212,7 @@ MPTRY .req r9
         .asciz "\message\()"
         .endm
 
-@ Common code for a word that uses a single instruction binary operator on the
+@ Common code for a word that uses a single instruction binary ALU operator on the
 @ top two stack cells. Such words have the stack effect
 @
 @    ( left right -- result )
