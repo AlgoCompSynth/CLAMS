@@ -90,142 +90,58 @@ _system_dict_start: .word .
 
         @ The first group of operators are simple enough that they can be copied
         @ inline to a colon word instead of called. This saves two cycles for
-        @ each inlined word whenever the colon word is called.
+        @ each inlined word whenever the colon word is called. These are all
+        @ defined as macros in SymbolDefs.S, so we can define a macro that creates
+        @ them with a single line each.
+
+        .macro _wrapm name, pronunciation
+        _header "\name\()", \pronunciation\(), _COMPLETE + _INLINE
+        _\pronunciation\()
+        _return
+        .endm
 
         @ stack operators
-        _header "DROP", drop, _COMPLETE + _INLINE
-        _drop
-        _return
-
-        _header "DUP", dupe, _COMPLETE + _INLINE
-        _dup
-        _return
-
-        _header "OVER", over, _COMPLETE + _INLINE
-        _over
-        _return
-
-        _header "ROT", rote, _COMPLETE + _INLINE
-        _rot
-        _return
-
-        _header "SWAP", swap, _COMPLETE + _INLINE
-        _SWAP
-        _return
-
-        _header "@", fetch, _COMPLETE + _INLINE
-        _fetch
-        _return
-
-        _header "!", store, _COMPLETE + _INLINE
-        _store
-        _return
-
-        _header "+!", plus_store, _COMPLETE + _INLINE
-        _plus_store
-        _return
-
-        _header "1+", one_plus, _COMPLETE + _INLINE
-        _one_plus
-        _return
-
-        _header "1-", one_minus, _COMPLETE + _INLINE
-        _one_minus
-        _return
-
-        _header "2*", two_star, _COMPLETE + _INLINE
-        _two_star
-        _return
-
-        _header "2/", two_slash, _COMPLETE + _INLINE
-        _two_slash
-        _return
+        _wrapm "DROP", drop
+        _wrapm "DUP", dupe
+        _wrapm "OVER", over
+        _wrapm "ROT", rote
+        _wrapm "SWAP", swap
+        _wrapm "@", fetch
+        _wrapm "!", store
+        _wrapm "+!", plus_store
+        _wrapm "1+", one_plus
+        _wrapm "1-", one_minus
+        _wrapm "2*", two_star
+        _wrapm "2/", two_slash
 
         @ arithmetic operators
-        _header "+", plus, _COMPLETE + _INLINE
-        _plus
-        _return
-
-        _header "-", minus, _COMPLETE + _INLINE
-        _minus
-        _return
-
-        _header "*", star, _COMPLETE + _INLINE
-        _star
-        _return
-
-        _header "NEGATE", negate, _COMPLETE + _INLINE
-        _negate
-        _return
+        _wrapm "+", plus
+        _wrapm "-", minus
+        _wrapm "*", star
+        _wrapm "NEGATE", negate
 
         @ boolean operators
-        _header "AND", and, _COMPLETE + _INLINE
-        _and
-        _return
-
-        _header "OR", or, _COMPLETE + _INLINE
-        _or
-        _return
-
-        _header "XOR", x_or, _COMPLETE + _INLINE
-        _x_or
-        _return
-
-        _header "INVERT", invert, _COMPLETE + _INLINE
-        _invert
-        _return
-
-        _header "LSHIFT", l_shift, _COMPLETE + _INLINE
-        _l_shift
-        _return
-
-        _header "RSHIFT", r_shift, _COMPLETE + _INLINE
-        _r_shift
-        _return
+        _wrapm "AND", and
+        _wrapm "OR", or
+        _wrapm "XOR", x_or
+        _wrapm "INVERT", invert
+        _wrapm "LSHIFT", l_shift
+        _wrapm "RSHIFT", r_shift
 
         @ binary comparison operators
-        _header "<", less_than, _COMPLETE + _INLINE
-        _less_than
-        _return
-
-        _header "<=", less_or_equal, _COMPLETE + _INLINE
-        _less_or_equal
-        _return
-
-        _header "=", equals, _COMPLETE + _INLINE
-        _equals
-        _return
-
-        _header "<>", not_equal, _COMPLETE + _INLINE
-        _not_equal
-        _return
-
-        _header ">", greater_than, _COMPLETE + _INLINE
-        _greater_than
-        _return
-
-        _header ">=", greater_or_equal, _COMPLETE + _INLINE
-        _greater_or_equal
-        _return
-
-        _header "U>", u_greater_than, _COMPLETE + _INLINE
-        _u_greater_than
-        _return
-
-        _header "U>=", u_greater_or_equal, _COMPLETE + _INLINE
-        _u_greater_or_equal
-        _return
-
-        _header "U<", u_less_than, _COMPLETE + _INLINE
-        _u_less_than
-        _return
-
-        _header "U<=", u_less_or_equal, _COMPLETE + _INLINE
-        _u_less_or_equal
-        _return
+        _wrapm "<", less_than
+        _wrapm "<=", less_or_equal
+        _wrapm "=", equals
+        _wrapm "<>", not_equal
+        _wrapm ">", greater_than
+        _wrapm ">=", greater_or_equal
+        _wrapm "U>", u_greater_than
+        _wrapm "U>=", u_greater_or_equal
+        _wrapm "U<", u_less_than
+        _wrapm "U<=", u_less_or_equal
 
         @ character / string words
-        _header "FILL", fill
+        _header "FILL", fill, _COMPLETE
         MOV r0, PSTOP @ character => r0
         _drop
         MOV r3, PSTOP @ count => r3
@@ -243,13 +159,13 @@ filz:
         _drop
         _return
 
-        _header "_clear_tib", _clear_tib
+        _header "_clear_tib", _clear_tib, _COMPLETE
         _nest
         @_x_call _tib_init
         BL _tib_init
         _unnest
 
-        _header "ACCEPT", accept
+        _header "ACCEPT", accept, _COMPLETE
         _nest
 
         @ On entry, the top of the stack has the maximum allowed characters and
@@ -314,7 +230,7 @@ _accz:
         _unnest
         @ whew!
 
-        _header "TYPE", type
+        _header "TYPE", type, _COMPLETE
         _nest
         _to_reg INDXB @ count to INDXB
         _to_reg INDXA @ address to INDXA
@@ -336,32 +252,32 @@ typz:
         _unnest
 
         @ number input/output
-        _header "BASE", "base"
+        _header "BASE", "base", _COMPLETE
         _nest
-        _DUP
+        _dupe
         BL _base_addr
         MOV PSTOP, r0
         _unnest
 
         @ parsing
-        _header ">IN", "to_in"
+        _header ">IN", "to_in", _COMPLETE
         _nest
-        _DUP
+        _dupe
         BL _to_in_addr
         MOV PSTOP, r0
         _unnest
 
-        @ _header "SOURCE", "source"
+        @ _header "SOURCE", "source", _COMPLETE
         @ _nest
-        @ _DUP @ make room for two cells on the stack
-        @ _DUP
+        @ _dupe @ make room for two cells on the stack
+        @ _dupe
         @ BL _tib_addr @ address of _tib => r0
         @ LDRB PSTOP, [r0] @ count => PSTOP
         @ ADD r0, #1 @ point to first non-count character
         @ STR r0, [PT2ND] @ address => 2nd
         @ _unnest
 
-        @ _header "PARSE-NAME", "parse_name"
+        @ _header "PARSE-NAME", "parse_name", _COMPLETE
         @ _nest
         @ BL source @ buffer address in [PT2ND], count in PSTOP
         @ _drop @ drop count - buffers are null-terminated
@@ -401,7 +317,7 @@ pnz:
         @ _unnest 
 
 @ finally, the text interpreter!!
-        @ _header "QUIT", quit
+        @ _header "QUIT", quit, _COMPLETE
 
         @ we ***don't*** clear the return stack - that is a big hairy no-no!
         @ and we don't need _nest / _unnest because we weren't called and won't
@@ -427,18 +343,18 @@ quil:
         @ repeat forever-ish
         @ B quil
 
-        _header "'", tick
+        _header "'", tick, _COMPLETE
         _nest
         @ TBD
         _unnest
 
-        _header "EVALUATE", evaluate
+        _header "EVALUATE", evaluate, _COMPLETE
         _nest
         @ TBD
         _unnest
 
         @ division operators - use the SDK and hardware divider
-        _header "/MOD", slash_mod
+        _header "/MOD", slash_mod, _COMPLETE
         _nest
         LDR r0, [PT2ND] @ dividend => r0
         MOV r1, PSTOP @ divisor => r1
@@ -447,40 +363,40 @@ quil:
         STR r1, [PT2ND] @ remainder => 2nd
         _unnest
 
-        _header "/", slash
+        _header "/", slash, _COMPLETE
         _nest
         _x_call sdk_slash_mod
         _SWAP
         _drop
         _unnest
 
-        _header "MOD", mod
+        _header "MOD", mod, _COMPLETE
         _nest
         _x_call sdk_slash_mod
         _drop
         _unnest
 
         @ terminal I/O words
-        _header "KEY", key
+        _header "KEY", key, _COMPLETE
         _nest
         _x_call sdk_key
         _reg_from r0
         _unnest
 
-        _header "EMIT", emit
+        _header "EMIT", emit, _COMPLETE
         _nest
         MOV r0, PSTOP
         _x_call sdk_emit
         _drop
         _unnest
 
-        @ _header "ABORT", abort
+        @ _header "ABORT", abort, _COMPLETE
         @ _x_call clear_stack @ this is the standard behavior
         @ B quit @ quit never returns
 
         @ text interpreter calls this if it finds a token that's neither a name
         @ found in the dictionary nor a valid number
-        _header "GARBAGE-TOKEN", garbage_token
+        _header "GARBAGE-TOKEN", garbage_token, _COMPLETE
         _CRASH "garbage token"
 
 .balign _CELL
