@@ -78,6 +78,7 @@
 
 @ character codes
 .set _BS, 8 @ backspace
+.set _LF, 13 @ line feed
 .set _CR, 13 @ carriage return
 .set _BL, 32 @ space
 .set _DEL, 127 @ delete
@@ -335,31 +336,24 @@ pnz:
         @ _unnest 
 
 @ finally, the text interpreter!!
-        @ _header "QUIT", quit, _COMPLETE
+        _header "QUIT", quit, _COMPLETE
 
         @ we ***don't*** clear the return stack - that is a big hairy no-no!
         @ and we don't need _nest / _unnest because we weren't called and won't
         @ return.
-quil:
-        @ push input buffer address and length to stack
-        @ BL _tib_addr
-        @ _reg_from r0
-        @ BL _tib_maxc
-        @ _reg_from r0
 
-        @ get a line from user
-        @ BL accept
+quit1:
+        BL clear_tib @ zero out the buffer
+        BL accept @ get a line from the user
+        BL _addr_tib @ get address back
+        ADD PSTOP, #1 @ skip count byte
+        _swap
+        BL evaluate @ the text interpreter is called "EVALUATE"
+        LDR r0, =OllKorrect
+        BL printf @ pretend to be Forth!
+        B quit1 @ repeat forever-ish
 
-        @ top of stack now has count
-        @ BL _tib_addr
-        @ _reg_from r0
-        @ _SWAP
-
-        @ and interpret
-        @ BL evaluate
-
-        @ repeat forever-ish
-        @ B quil
+OllKorrect: .asciz " Ok\n"
 
         _header "'", tick, _COMPLETE
         _nest
