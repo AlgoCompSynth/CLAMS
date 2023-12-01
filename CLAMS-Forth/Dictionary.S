@@ -77,11 +77,14 @@
         .endm
 
 @ character codes
-.set _BS, 8 @ backspace
-.set _LF, 13 @ line feed
-.set _CR, 13 @ carriage return
-.set _BL, 32 @ space
-.set _DEL, 127 @ delete
+.set _BEL, 0x07 @ bell
+.set _BS, 0x08 @ backspace
+.set _LF, 0x0A @ line feed
+.set _CR, 0x0D @ carriage return
+.set _BL, 0x20 @ space
+.set _O, 0x4B @ letter "K"
+.set _O, 0x4F @ letter "O"
+.set _DEL, 0x7F @ delete
 
 @ the dictionary itself!
 
@@ -166,9 +169,11 @@ filz:
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
+
+        @ use saved registers for loop control because KEY calls the SDK!
         _to_reg MPTRX @ pop max count to MPTRX
         _to_reg INDXA @ pop address to INDXA
-        MOV INDXB, #0 @ 0 to counter
+        MOV INDXB, #0 @ character count
 _accl:
         BL key @ wait for character, which will show up in PSTOP
 
@@ -186,11 +191,11 @@ _accl:
 
         @ an ordinary printable character - echo it and append to buffer
 _acce:
+        ADD INDXB, #1 @ count the character
         STRB PSTOP, [INDXA, INDXB] @ append char to buffer
         BL emit @ printable - send it out!
 
-        @ count
-        ADD INDXB, #1 @ character count
+        @ check for buffer end
         CMP INDXB, MPTRX @ did we hit the limit?
         BEQ _accz @ early exit if limit hit!
 	B _accl @ there's room - go back for more!
@@ -220,7 +225,8 @@ _accb:
 
         @ clean up and exit
 _accz:
-        @ push count and exit
+        @ save and push count; exit
+        STRB INDXB, [INDXA]
         _reg_from INDXB
         _unnest
         @ whew!
