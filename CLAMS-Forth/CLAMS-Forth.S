@@ -39,11 +39,7 @@ main:
         BL stkprint2
 
 loop:
-        LDR r0, =prompt
-        BL printf
-
-        BL clear_tib
-        BL accept
+        BL quit
 
         LDR r0, sleep_ms
         BL sdk_sleep_ms
