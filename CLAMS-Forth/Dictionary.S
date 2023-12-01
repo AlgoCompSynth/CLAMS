@@ -261,14 +261,38 @@ typz:
 
         _header "SOURCE", "source", _COMPLETE
         _nest
-        _dupe
-        BL _addr_source_v
+        BL _addr_tib
+        BL count
         _unnest
 
         _header "STATE", "state", _COMPLETE
         _nest
         _dupe
         BL _addr_state_v
+        _unnest
+
+        _header "COUNT", "count", _COMPLETE
+        LDRB r0, [PSTOP] @ fetch count byte
+        ADD PSTOP, #1 @ fix address
+        _dupe
+        MOV PSTOP, r0
+        _return
+
+        _header "clear-buffer", "clear_buffer", _COMPLETE
+        LDR r2, [PT2ND] @ second of stack has buffer address
+        MOV r3, PSTOP @ top of stack has max chars.
+        MOV r0, #0 @ zero => r0
+cbuf:
+        STRB r0, [r2, r3]
+        SUB r3, #1 @ count down
+        BGE cbuf @ go all the way to count byte!
+        _return
+
+        _header "clear-tib", "clear_tib", _COMPLETE
+        _nest
+        BL _addr_tib @ address of tib => PSTOP
+        BL _maxc_tib @ max chars of tib => PSTOP
+        BL clear_buffer
         _unnest
 
         @ _header "PARSE-NAME", "parse_name", _COMPLETE
@@ -320,7 +344,7 @@ quil:
         @ push input buffer address and length to stack
         @ BL _tib_addr
         @ _reg_from r0
-        @ BL _tib_maxl
+        @ BL _tib_maxc
         @ _reg_from r0
 
         @ get a line from user

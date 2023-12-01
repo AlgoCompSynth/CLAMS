@@ -36,18 +36,19 @@
 main:
 	BL stdio_init_all
         BL clear_stack
-        BL stkprint3
+        BL stkprint2
 
 loop:
         LDR r0, =prompt
         BL printf
 
+        BL clear_tib
         BL accept
 
         LDR r0, sleep_ms
         BL sdk_sleep_ms
         B loop
 
-prompt: .asciz "\n> "
+prompt: .asciz " Ok\n> "
 .balign _CELL, 0
 sleep_ms: .word 1000

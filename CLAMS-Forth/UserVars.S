@@ -30,11 +30,10 @@
 
 @ User variables
 _user_var base_v, 10 @ base for numeric input/output
-_user_var source_v, 0 @ parsing source string
 _user_var to_in_v, 0 @ parsing pointer
 _user_var state_v, 0 @ text interpreter / compiler state
 
 @ String buffers
-_STRING_BUF tib @ terminal input read here
-_STRING_BUF pad @ numeric output built here
-_STRING_BUF word @ the word we're trying to find in the dictionary
+_string_buf tib @ terminal input buffer
+_string_buf pad @ numeric output built here
+_string_buf word @ the word we're trying to find in the dictionary
