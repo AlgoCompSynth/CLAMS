@@ -37,6 +37,7 @@
 .thumb_func
 .global clear_stack
 clear_stack:
+        @ burn two cells so pointers are valid
         LDR PT2ND, =_stack_bottom
         LDR r0, _hamburger
         _reg_from r0
@@ -46,34 +47,34 @@ clear_stack:
 .thumb_func
 .global stkprint3
 stkprint3:
-        _NEST
+        _nest
         LDR r0, =_stack_format_3
         MOV r1, PSTOP
         LDM PT2ND, {r2, r3, PT2ND}
         BL printf
-        _UNNEST
+        _unnest
 
 .thumb_func
 .global stkprint2
 stkprint2:
-        _NEST
+        _nest
         LDR r0, =_stack_format_2
         MOV r1, PSTOP
         LDR r2, [PT2ND]
         BL printf
-        _UNNEST
+        _unnest
 
 .thumb_func
 .global stkprint1
 stkprint1:
-        _NEST
+        _nest
         LDR r0, =_stack_format_1
         MOV r1, PSTOP
         BL printf
-        _UNNEST
+        _unnest
 
-_stack_format_3: .asciz "stack top => %x, %x, %x\n"
-_stack_format_2: .asciz "stack top => %x, %x\n"
+_stack_format_3: .asciz "stack top, second, third => %x, %x, %x\n"
+_stack_format_2: .asciz "stack top, second => %x, %x\n"
 _stack_format_1: .asciz "stack top => %x\n"
 .balign _CELL, 0
 _hamburger: .word 0xdeadbeef
@@ -82,7 +83,7 @@ _hamburger: .word 0xdeadbeef
 .data
 .balign _CELL, 0
 .set _stack_cells, 64
-.global _stack_start
+.global _stack_top
 _stack_start:
         .rept _stack_cells
         .word 0

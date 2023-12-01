@@ -396,13 +396,13 @@ MPTRY .req r9
 @ succeeding characters are data, and buffers are initialized with zeroes. String
 @ buffers are at most 256 bytes long - a count byte and up to 255 data bytes.
 
-        .macro _STRING_BUF name:req, maxl=255
+        .macro _STRING_BUF name:req, maxc=255 @ maxc is maximum number of chars
 
         @ make the buffer
         .data
         .balign _CELL
         .set \name, .
-        .rept \maxl + 1
+        .rept \maxc + 1
         .byte 0
         .endr
 
@@ -417,11 +417,11 @@ MPTRY .req r9
         _return
 
         @ max length getter function
-        .global _maxl_\name
+        .global _maxc_\name
         .thumb_func
-        .set _addr_\name, .
+        .set _maxc_\name, .
         _dupe
-        LDR PSTOP, =\maxl
+        LDR PSTOP, =\maxc
         _return
 
         .endm
