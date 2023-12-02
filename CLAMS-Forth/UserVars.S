@@ -34,6 +34,6 @@ _user_var to_in_v, 0 @ parsing pointer
 _user_var state_v, 0 @ text interpreter / compiler state
 
 @ String buffers
-_string_buf tib @ terminal input buffer
-_string_buf pad @ numeric output built here
-_string_buf word @ the word we're trying to find in the dictionary
+_string_buf term_buf @ terminal input buffer
+_string_buf num_buf @ numeric output built here
+_string_buf word_buf @ the word we're trying to find in the dictionary
