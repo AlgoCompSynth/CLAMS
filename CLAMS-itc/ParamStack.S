@@ -1,0 +1,92 @@
+/*
+
+  ## License
+
+  MIT License
+
+  Copyright (c) 2023 M. Edward (Ed) Borasky
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+*/
+
+@ parameter stack logic:
+
+@ The stack grows from high addresses downwards. Register `PT2ND` points to the
+@ second element of the parameter stack. The top of the stack is stored in
+@ register `PSTOP`.
+
+.include "SymbolDefs.S"
+
+.thumb_func
+.global clear_stack
+clear_stack:
+        @ burn two cells so pointers are valid
+        LDR PT2ND, =_stack_bottom
+        LDR r0, _hamburger
+        _reg_from r0
+        _reg_from r0
+        _return
+
+.thumb_func
+.global stkprint3
+stkprint3:
+        _nest
+        LDR r0, =_stack_format_3
+        MOV r1, PSTOP
+        LDM PT2ND, {r2, r3, PT2ND}
+        BL printf
+        _unnest
+
+.thumb_func
+.global stkprint2
+stkprint2:
+        _nest
+        LDR r0, =_stack_format_2
+        MOV r1, PSTOP
+        LDR r2, [PT2ND]
+        BL printf
+        _unnest
+
+.thumb_func
+.global stkprint1
+stkprint1:
+        _nest
+        LDR r0, =_stack_format_1
+        MOV r1, PSTOP
+        BL printf
+        _unnest
+
+_stack_format_3: .asciz "stack top, second, third => %x, %x, %x\n"
+_stack_format_2: .asciz "stack top, second => %x, %x\n"
+_stack_format_1: .asciz "stack top => %x\n"
+.balign _CELL, 0
+_hamburger: .word 0xdeadbeef
+
+@ The parameter stack itself
+.data
+.balign _CELL, 0
+.set _stack_cells, 64
+.global _stack_top
+_stack_start:
+        .rept _stack_cells
+        .word 0
+        .endr
+.global _stack_bottom
+.set _stack_bottom, .
