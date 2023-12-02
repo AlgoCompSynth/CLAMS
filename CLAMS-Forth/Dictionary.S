@@ -268,7 +268,7 @@ typz:
 
         _header "SOURCE", "source", _COMPLETE
         _nest
-        BL _addr_tib
+        BL _addr_term_buf
         BL count
         _unnest
 
@@ -295,10 +295,10 @@ cbuf:
         BGE cbuf @ go all the way to count byte!
         _return
 
-        _header "clear-tib", "clear_tib", _COMPLETE
+        _header "clear-term_buf", "clear_term_buf", _COMPLETE
         _nest
-        BL _addr_tib @ address of tib => PSTOP
-        BL _maxc_tib @ max chars of tib => PSTOP
+        BL _addr_term_buf @ address of term_buf => PSTOP
+        BL _maxc_term_buf @ max chars of term_buf => PSTOP
         BL clear_buffer
         _unnest
 
@@ -349,9 +349,9 @@ pnz:
         @ return.
 
 quit1:
-        BL clear_tib @ zero out the buffer
+        BL clear_term_buf @ zero out the buffer
         BL accept @ get a line from the user
-        BL _addr_tib @ get address back
+        BL _addr_term_buf @ get address back
         ADD PSTOP, #1 @ skip count byte
         _swap
         BL evaluate @ the text interpreter is called "EVALUATE"
