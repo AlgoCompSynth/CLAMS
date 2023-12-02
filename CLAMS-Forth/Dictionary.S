@@ -354,6 +354,14 @@ quit1:
         BL _addr_term_buf @ get address back
         ADD PSTOP, #1 @ skip count byte
         _swap
+
+        @ set ">IN" to zero
+        BL _addr_to_in_v @ push address to top of stack
+        MOV r0, #0
+        _reg_from r0 @ push zero
+        BL store
+
+        @ evaluate term_buf
         BL evaluate @ the text interpreter is called "EVALUATE"
         LDR r0, =OllKorrect
         BL printf @ pretend to be Forth!
