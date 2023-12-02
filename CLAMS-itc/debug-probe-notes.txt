@@ -1,0 +1,8 @@
+1. The Raspberry Pi Pico shows up as a USB serial device `/dev/ttyACMx`. The
+Raspberry Pi Debug Probe also shows up as a USB serial device `/dev/ttyACMy`.
+
+2. The adapters are recognized in random order, so if you want to set them to
+specific values, power them on after the host is booted in the order you want.
+
+3. Example: I want the Pico on /dev/ttyACM0 and the debug probe on /dev/ttyACM1.
+So I power the Pico up first after boot and the debug probe second. 
