@@ -1,0 +1,4 @@
+build/*
+*.log
+CLAMS-Forth
+pico_sdk_import.cmake
