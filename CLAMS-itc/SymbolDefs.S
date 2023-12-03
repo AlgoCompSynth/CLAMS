@@ -102,3 +102,11 @@ XRG .req r3 @ "eXecute" register - used for branching
         .set _addr_\func_name, .
         .word \func_name
         .endm
+
+        @ "next" macro
+        .macro _next
+        LDR WRD, [INP] @ get next address
+        ADD INP, #_CELL @ advance INP
+        LDR XRG, [WRD] @ get the code field
+        BX XRG @ jump to next code routine
+        .endm
