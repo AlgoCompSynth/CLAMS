@@ -35,11 +35,10 @@
 
 main:
 	BL stdio_init_all
-        BL clear_stack
-        BL stkprint2
 
 loop:
-        BL quit
+        LDR r0, =prompt
+        BL printf
 
         LDR r0, sleep_ms
         BL sdk_sleep_ms
