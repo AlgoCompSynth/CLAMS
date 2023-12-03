@@ -68,20 +68,13 @@
         .ascii "\wname\()"
 1:
 
-        @ define global address of code field
         .balign _CELL, 0
         .thumb_func
-        .global \pronunciation
-        .set \pronunciation, .
-
+        .global _\pronunciation\()
+        .set _\pronunciation\(), .
         .endm
 
-        @ header for a CODE word
-        .macro _code wname, pronunciation, flags=0x8000
-        _header \wname\(), \pronunciation\(), flags\()
-`
-        @ The inner interpreter loads the CODE field into a register and does a BX
-        @ to the register. So the CODE field must have the lowest bit set.
+        .macro _code_word
         .word . + _CELL | 1
         .endm
 
@@ -95,6 +88,15 @@
 .set _O, 0x4F @ letter "O"
 .set _DEL, 0x7F @ delete
 
+@ inner interpreters
+_next:
+        LDR WRD, [INP] @ get next address
+        ADD INP, #_CELL @ advance INP
+        LDR r0, [WRD] @ branch target => r0
+        MOV XRG, #1 @ force the thumb bit before branching!
+        ORR XRG, r0
+        BX XRG @ jump to next code routine
+
 @ the dictionary itself!
 
 .balign _CELL
@@ -104,32 +106,54 @@ _system_dict_start: .word .
         @ code words for base VM
 
         _header "DUP", dupe, _COMPLETE
+        _code_word
         LDR r0, [PSP]
-        _push_from_reg r0
-        _next
+        _push_from r0
+        B _next
 
         _header "OVER", over, _COMPLETE
+        _code_word
         LDR r0, [PSP, #_CELL]
-        _push_from_reg r0
-        _next
+        _push_from r0
+        B _next
 
         _header "SWAP", swap, _COMPLETE
+        _code_word
         LDM PSP!, {r1, r2} @ top => r1, 2nd => r2
-        _push_from_reg r1
-        _push_from_reg r2
-        _next
+        _push_from r1
+        _push_from r2
+        B _next
 
         _header "DROP", drop, _COMPLETE
-        _pop_to_reg r0
-        _next
+        _code_word
+        _pop_to r0
+        B _next
 
         _header "ROT", rote, _COMPLETE
+        _code_word
         @ x1, x2, x3 -> x2, x3, x1
         LDM PSP!, {r1, r2, r3} @ x3 => r1, x2 => r2, x1 => r3
-        _push_from_reg r2 @ push x2
-        _push_from_reg r1 @ push x3
-        _push_from_reg r3 @ push x1
-        _next
+        _push_from r2 @ push x2
+        _push_from r1 @ push x3
+        _push_from r3 @ push x1
+        B _next
+
+        @ terminal I/O words
+        _header "KEY", key, _COMPLETE
+        _code_word
+        _x_call sdk_key
+        _push_from r0
+        B _next
+
+        _header "EMIT", emit, _COMPLETE
+        _code_word
+        _pop_to r0
+        _x_call sdk_emit
+        B _next
+
+@ BLX call vector table
+_x_addr sdk_key
+_x_addr sdk_emit
 
 .global _system_dict_end
 _system_dict_end: .word .
