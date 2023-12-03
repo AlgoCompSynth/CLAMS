@@ -71,11 +71,18 @@ XRG .req r3 @ "eXecute" register - used for branching
         .macro _pop_to regname
         LDM PSP!, {\regname}
         .endm
+        .macro _poprs_to regname
+        LDM RSP!, {\regname}
+        .endm
 
         @ push from register
         .macro _push_from regname
         SUB PSP, #_CELL
         STR \regname, [PSP]
+        .endm
+        .macro _pushrs_from regname
+        SUB RSP, #_CELL
+        STR \regname, [RSP]
         .endm
 
         @ macros for nested SDK calls
