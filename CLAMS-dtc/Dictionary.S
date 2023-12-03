@@ -81,7 +81,7 @@
 
         @ assemble code field for a colon definition
         .macro _colon_word
-        BL _doColon
+        BL _doLIST
         .endm
 
 @ character codes
@@ -96,13 +96,13 @@
 
 @ inner interpreters
 @ see F83
-_doColon:
+_doLIST:
 	ADD WRD, #_CELL @ point to first word of thread
         _push_to RS INP @ nest INP
         MOV INP, WRD @ "branch indirect" to INP
         _next
 
-_doConstant:
+_doLIT:
         ADD WRD, #_CELL @ point to constant
         LDR r0, [WRD]
         _push_to PS r0 @ push the constant
@@ -161,6 +161,13 @@ _system_dict_start: .word .
         _pop_to r0, PS
         _x_call sdk_emit
         _next
+
+        _header "EXECUTE", execute, _COMPLETE
+        _code_word
+        _pop_to r0, PS @ get execution token
+        MOV XRG, #1 @ set thumb bit
+        ORR XRG, r0 @ ready for BX
+        BX XRG
 
 @ BLX call vector table
 _x_addr sdk_key
