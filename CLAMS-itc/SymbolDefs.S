@@ -68,30 +68,37 @@ XRG .req r3 @ "eXecute" register - used for branching
         @ parameter stack macros
 
         @ pop to register
-        .macro _pop_to_reg regname
+        .macro _pop_to regname
         LDM PSP!, {\regname}
         .endm
 
         @ push from register
-        .macro _push_from_reg regname
+        .macro _push_from regname
         SUB PSP, #_CELL
         STR \regname, [PSP]
         .endm
 
-        @ macros for nested calls
-        .macro _nest
+        @ macros for nested SDK calls
+        .macro _sdk_nest
         PUSH {LR}
         .endm
-
-        .macro _unnest
+        .macro _sdk_unnest
         POP {PC}
         .endm
 
-        .macro _next @ indirect threaded inner interpreter
-        LDR WRD, [INP] @ get next address
-        ADD INP, #_CELL @ advance INP
-        LDR r0, [WRD] @ branch target => r0
+        @ macro to call a function via XRG
+        .macro _x_call func_name
+        LDR r0, _addr_\func_name @ get the address
         MOV XRG, #1 @ force the thumb bit before branching!
         ORR XRG, r0
-        BX XRG @ jump to next code routine
+        _sdk_nest
+        BLX XRG
+        _sdk_unnest
+        .endm
+
+        @ macro to create a "func_addr" word
+        .macro _x_addr func_name
+        .balign _CELL
+        .set _addr_\func_name, .
+        .word \func_name
         .endm
