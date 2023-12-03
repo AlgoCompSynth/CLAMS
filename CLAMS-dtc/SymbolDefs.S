@@ -67,22 +67,15 @@ XRG .req r3 @ "eXecute" register - used for branching
 
         @ parameter stack macros
 
-        @ pop to register
-        .macro _pop_to regname
-        LDM PSP!, {\regname}
-        .endm
-        .macro _poprs_to regname
-        LDM RSP!, {\regname}
+        @ pop to register from stack
+        .macro _pop_to regname, stack
+        LDM \stack\()P!, {\regname}
         .endm
 
-        @ push from register
-        .macro _push_from regname
-        SUB PSP, #_CELL
-        STR \regname, [PSP]
-        .endm
-        .macro _pushrs_from regname
-        SUB RSP, #_CELL
-        STR \regname, [RSP]
+        @ push to stack from register
+        .macro _push_to stack regname
+        SUB \stack\()P, #_CELL
+        STR \regname, [\stack\()P]
         .endm
 
         @ macros for nested SDK calls
@@ -114,6 +107,5 @@ XRG .req r3 @ "eXecute" register - used for branching
         .macro _next
         LDR WRD, [INP] @ get next address
         ADD INP, #_CELL @ advance INP
-        LDR XRG, [WRD] @ get the code field
-        BX XRG @ jump to next code routine
+        BX WRD @ jump to next code routine
         .endm

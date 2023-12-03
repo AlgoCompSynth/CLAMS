@@ -77,12 +77,11 @@
 
         @ assemble code field for a machine code word
         .macro _code_word
-        .word . + _CELL | 1
         .endm
 
         @ assemble code field for a colon definition
         .macro _colon_word
-        .word _doColon
+        BL _doColon
         .endm
 
 @ character codes
@@ -99,14 +98,14 @@
 @ see F83
 _doColon:
 	ADD WRD, #_CELL @ point to first word of thread
-        _pushrs_from INP @ nest INP
+        _push_to RS INP @ nest INP
         MOV INP, WRD @ "branch indirect" to INP
         _next
 
 _doConstant:
         ADD WRD, #_CELL @ point to constant
         LDR r0, [WRD]
-        _push_from r0 @ push the constant
+        _push_to PS r0 @ push the constant
         _next
 
 @ the dictionary itself!
@@ -120,50 +119,48 @@ _system_dict_start: .word .
         _header "DUP", dupe, _COMPLETE
         _code_word
         LDR r0, [PSP]
-        _push_from r0
+        _push_to PS, r0
         _next
 
         _header "OVER", over, _COMPLETE
         _code_word
         LDR r0, [PSP, #_CELL]
-        _push_from r0
+        _push_to PS, r0
         _next
 
         _header "SWAP", swap, _COMPLETE
         _code_word
         LDM PSP!, {r1, r2} @ top => r1, 2nd => r2
-        _push_from r1
-        _push_from r2
+        _push_to PS, r1
+        _push_to PS, r2
         _next
 
         _header "DROP", drop, _COMPLETE
         _code_word
-        _pop_to r0
+        _pop_to r0, PS
         _next
 
         _header "ROT", rote, _COMPLETE
         _code_word
         @ x1, x2, x3 -> x2, x3, x1
         LDM PSP!, {r1, r2, r3} @ x3 => r1, x2 => r2, x1 => r3
-        _push_from r2 @ push x2
-        _push_from r1 @ push x3
-        _push_from r3 @ push x1
+        _push_to PS, r2 @ push x2
+        _push_to PS, r1 @ push x3
+        _push_to PS, r3 @ push x1
         _next
 
         @ terminal I/O words
         _header "KEY", key, _COMPLETE
         _code_word
         _x_call sdk_key
-        _push_from r0
+        _push_to PS, r0
         _next
 
         _header "EMIT", emit, _COMPLETE
         _code_word
-        _pop_to r0
+        _pop_to r0, PS
         _x_call sdk_emit
         _next
-
-        @ type " Ok"
 
 @ BLX call vector table
 _x_addr sdk_key
