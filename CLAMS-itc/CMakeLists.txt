@@ -13,9 +13,8 @@ include_directories(${CMAKE_SOURCE_DIR})
 add_executable(CLAMS-itc
   CLAMS-itc.S
   Dictionary.S
-  ParamStack.S
+  Stacks.S
   SymbolDefs.S
-  UserVars.S
   Wrappers.c
 )
 

@@ -26,67 +26,56 @@
 
 */
 
-@ parameter stack logic:
+@ Stack logic:
 
-@ The stack grows from high addresses downwards. Register `PT2ND` points to the
-@ second element of the parameter stack. The top of the stack is stored in
-@ register `PSTOP`.
+@ The stacks grow from high addresses downwards. Register `PSP` points to the
+@ top element of the parameter stack, and register `RSP` points to the top of the
+@ return stack.
 
 .include "SymbolDefs.S"
 
+@ print top three cells of the parameter stack
 .thumb_func
-.global clear_stack
-clear_stack:
-        @ burn two cells so pointers are valid
-        LDR PT2ND, =_stack_bottom
-        LDR r0, _hamburger
-        _reg_from r0
-        _reg_from r0
-        _return
-
-.thumb_func
-.global stkprint3
-stkprint3:
+.global param_top3
+param_top3:
         _nest
+        LDR r0, =_param_format
+        LDM PSP, { r1, r2, r3, PSP}
+        BL printf
+        _unnest
+
+@ print top three cells of the return stack
+.thumb_func
+.global return_top3
+return_top3:
+        _nest
+        LDR r0, =_return_format
         LDR r0, =_stack_format_3
-        MOV r1, PSTOP
-        LDM PT2ND, {r2, r3, PT2ND}
+        LDM RSP, { r1, r2, r3, RSP}
         BL printf
         _unnest
 
-.thumb_func
-.global stkprint2
-stkprint2:
-        _nest
-        LDR r0, =_stack_format_2
-        MOV r1, PSTOP
-        LDR r2, [PT2ND]
-        BL printf
-        _unnest
+_param_format: .asciz "parameter stack top, second, third => %x, %x, %x\n"
+_return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
 
-.thumb_func
-.global stkprint1
-stkprint1:
-        _nest
-        LDR r0, =_stack_format_1
-        MOV r1, PSTOP
-        BL printf
-        _unnest
-
-_stack_format_3: .asciz "stack top, second, third => %x, %x, %x\n"
-_stack_format_2: .asciz "stack top, second => %x, %x\n"
-_stack_format_1: .asciz "stack top => %x\n"
-.balign _CELL, 0
-_hamburger: .word 0xdeadbeef
-
-@ The parameter stack itself
+@ The stacks
 .data
 .balign _CELL, 0
-.set _stack_cells, 64
-.global _stack_top
-_stack_start:
-        .rept _stack_cells
-        .word 0
+
+@ parameter stack
+.global _param_stack_top
+.set _param_stack_top, .
+        .rept _STACK_CELLS
+        .word 0xdeadbeef
         .endr
-.global _stack_bottom
-.set _stack_bottom, .
+.global _param_stack_bottom
+.set _param_stack_bottom, .
+
+@ return stack
+.global _return_stack_top
+.set _return_stack_top, .
+        .rept _STACK_CELLS
+        .word 0xdeadbeef
+        .endr
+.global _return_stack_bottom
+.set _return_stack_bottom, .
