@@ -123,6 +123,7 @@ _system_dict_start: .word .
         _wrapm "-", minus
         _wrapm "*", star
         _wrapm "NEGATE", negate
+        _wrapm "ALIGNED", aligned
 
         @ boolean operators
         _wrapm "AND", and
@@ -285,6 +286,89 @@ typz:
         MOV PSTOP, r0
         _return
 
+        _header "cs-match", "c_s_match", _COMPLETE
+        @ (c-addr1 c-addr2 -- caddr1 flag)
+        @ flag is true if strings are identical, false otherwise
+        _nest
+        _to_reg INDXA @ pop c-addr2 => INDXA
+        LDRB r1, [PSTOP] @ count of c-addr1 => r1
+        LDRB r2, [INDXA] @ count of c-addr2 => r2
+        CMP r1, r2
+        BNE csmf @ fail fast!
+
+csml:
+        LDRB r0, [INDXA, r2]
+        LDRB r1, [PSTOP, r2]
+        BNE csmf @ fail a bit slower
+        SUB r2, #1 @ count down
+        BGT csml @ we already compared the counts
+
+csms:
+        @ success!
+        _dupe @ push c-addr1 back on stack
+        MOV PSTOP, #0
+        _invert @ true flag
+        _unnest
+
+csmf:
+        @ failure
+        _dupe @ push c-addr1 back on stack
+        MOV PSTOP, #0 @ false flag
+        _unnest
+
+        _header "FIND", "find", _COMPLETE
+        @ ( c-addr –– c-addr 0 | xt 1 | xt -1 )
+        _nest 
+
+        @ Outer loop - start with most recent link and walk backwards
+        LDR INDXA, _latest_link_field @ link addr => INDXA
+
+fndl:
+        CMP INDXA, #0
+        BEQ fndz @ link is zero - we hit the end
+        @    compare name with target
+        MOV r0, INDXA
+        ADD r0, #_CELL @ name field address => r0
+        _reg_from r0 @ push name c-addr
+        BL c_s_match
+        CMP PSTOP, #0
+        BNE fndm @ it matched!
+
+        @ no match: INDXA - link offset => INDXA
+        _drop @ get rid of flag
+        LDRH r0, [INDXA] @ link field is a halfword offset to previous link!
+        SUB INDXA, r0 @ do the offset
+        B fndl
+
+fndm:
+        @ match: exit with xt and flag
+        _drop @ flag
+        _drop @ matched target c-addr
+        _reg_from INDXA @ push successful link addr
+        ADD PSTOP, #_CELL @ name field c-addr
+        LDRB r0, [PSTOP] @ name field count byte
+        ADD PSTOP, r0
+        ADD PSTOP, #1 @ next available address => PSTOP
+        _aligned @ now we have XT
+
+        _dupe @ make room for flag
+        MOV PSTOP, #1 @ assume it's immediate
+        MOV r0, #_IMMEDIATE
+        LDRH r1, [INDXA, #2] @ get the dictionary flags
+        AND r0, r1
+        BNE fnds @ successful exit
+        _negate @ not immediate - change to -1
+
+        @ success!
+fnds: 
+        _unnest
+        
+fndz:
+        @ failed search - push a zero and return
+        _dupe
+        MOV PSTOP, #0
+        _unnest
+
         _header "clear-buffer", "clear_buffer", _COMPLETE
         LDR r2, [PT2ND] @ second of stack has buffer address
         MOV r3, PSTOP @ top of stack has max chars.
@@ -425,9 +509,11 @@ OllKorrect: .asciz " Ok\n"
         _header "GARBAGE-TOKEN", garbage_token, _COMPLETE
         _CRASH "garbage token"
 
-.balign _CELL
+
+
 
 @ BLX call vector table
+.balign _CELL
 _x_addr sdk_slash_mod
 _x_addr sdk_key
 _x_addr sdk_emit
@@ -435,9 +521,11 @@ _x_addr printf
 _x_addr abort
 _x_addr clear_stack
 
+@ dictionary parameters
+.global _latest_link_field
+_latest_link_field: .word _previous_link_field
 .global _system_dict_end
 _system_dict_end: .word .
-
 .global _system_dict_bytes
 _system_dict_bytes: .word _system_dict_end - _system_dict_start
 

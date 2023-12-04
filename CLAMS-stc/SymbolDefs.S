@@ -292,7 +292,21 @@ MPTRY .req r9
         .endm
 
         .macro _negate
-        MVN PSTOP, PSTOP
+        NEG PSTOP, PSTOP
+        .endm
+
+        .macro _aligned
+1:
+        _dupe
+        MOV PSTOP, #_CELL
+        SUB PSTOP, #1 @ bitmask => PSTOP
+        _and
+        BEQ 2f @ we're aligned - exit!
+        _drop
+        ADD PSTOP, #1
+        B 1b
+2:      
+        _drop
         .endm
 
         @ boolean operators
