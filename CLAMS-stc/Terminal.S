@@ -28,7 +28,7 @@
 
 @ Terminal operations and testing
 
-.include "SymbolDefs.S"
+.include "MacroDefs.S"
 
 @ character codes
 .set _bs, 8 @ backspace

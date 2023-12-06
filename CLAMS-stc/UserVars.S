@@ -26,7 +26,7 @@
 
 */
 
-.include "SymbolDefs.S"
+.include "MacroDefs.S"
 
 @ User variables
 _user_var base_v, 10 @ base for numeric input/output
