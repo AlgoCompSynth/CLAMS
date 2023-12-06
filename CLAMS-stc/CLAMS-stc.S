@@ -28,15 +28,15 @@
 
 @ test harness for Forth VM
 
-.include "SymbolDefs.S"
+.include "MacroDefs.S"
 
 .thumb_func
 .global main
 
 main:
 	BL stdio_init_all
-        BL clear_stack
-        BL stkprint2
+        BL clear_param_stack
+        BL p_s_top_two
 
 loop:
         BL quit
@@ -46,5 +46,5 @@ loop:
         B loop
 
 prompt: .asciz " Ok\n> "
-.balign _CELL, 0
+.balign _AU_CELL, 0
 sleep_ms: .word 1000

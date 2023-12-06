@@ -32,56 +32,11 @@
 @ second element of the parameter stack. The top of the stack is stored in
 @ register `PSTOP`.
 
-.include "SymbolDefs.S"
-
-.thumb_func
-.global clear_stack
-clear_stack:
-        @ burn two cells so pointers are valid
-        LDR PT2ND, =_stack_bottom
-        LDR r0, _hamburger
-        _reg_from r0
-        _reg_from r0
-        _return
-
-.thumb_func
-.global stkprint3
-stkprint3:
-        _nest
-        LDR r0, =_stack_format_3
-        MOV r1, PSTOP
-        LDM PT2ND, {r2, r3, PT2ND}
-        BL printf
-        _unnest
-
-.thumb_func
-.global stkprint2
-stkprint2:
-        _nest
-        LDR r0, =_stack_format_2
-        MOV r1, PSTOP
-        LDR r2, [PT2ND]
-        BL printf
-        _unnest
-
-.thumb_func
-.global stkprint1
-stkprint1:
-        _nest
-        LDR r0, =_stack_format_1
-        MOV r1, PSTOP
-        BL printf
-        _unnest
-
-_stack_format_3: .asciz "stack top, second, third => %x, %x, %x\n"
-_stack_format_2: .asciz "stack top, second => %x, %x\n"
-_stack_format_1: .asciz "stack top => %x\n"
-.balign _CELL, 0
-_hamburger: .word 0xdeadbeef
+.include "MacroDefs.S"
 
 @ The parameter stack itself
 .data
-.balign _CELL, 0
+.balign _AU_CELL, 0
 .set _stack_cells, 64
 .global _stack_top
 _stack_start:

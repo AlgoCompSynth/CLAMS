@@ -40,18 +40,39 @@
 
 @ 3. Register usage: Pico SDK functions save registers r4 - r11, so we can use
 @ them without saving. However, r8 - r11 have limited functionality - essentially
-@ only source or destination of a MOV, one operand of a CMP or a computed branch.
+@ only source or destination of a MOV, one operand of a CMP, ADD, or a computed
+@ branch.
+
 @ Registers r0 - r3 are work registers and are used to interact with SDK functions.
 @ They are not saved / restored. Although the SDK allows more than four parameters,
 @ there are by design no CLAMS-Forth functions that do.
 
-@ parameter stack registers
+@ 4. Stacks: Because CLAMS-stc is subroutine-threaded, the return stack is the SDK
+@ stack. As a result, using the return stack and the stack pointer register SP for
+@ purposes other than calling functions and saving / restoring clobbered registers
+@ is strongly discouraged. I have no plans to implement words like `>R` and `R>`
+@ that explicitly reference the return stack, and constructs like `DO ... LOOP` that
+@ use it implicitly will use other registers as a "third hand".
+
+@ The parameter stack registers is managed by two registers: `PSTOP`, which holds
+@ the top cell in the stack, and `PT2ND`, which holds the address in RAM of the
+@ second cell in the stack. This stack grows downward in RAM and is currently
+@ allocated 64 cells in RAM plus `PSTOP`, for 65 cells total.
+
+@ Register definitions
+
+@ Registers r0 - r3 are used without saving in the Forth VM and for parameter
+@ and result passing between the Forth VM and SDK functions. Registers r10 - r11 are
+@ used without saving in the Forth VM. Registers r12 - r15 are reserved for the SDK!
+
+@ Parameter stack control registers
 PT2ND .req r7 @ pointer to second parameter stack cell
 PSTOP .req r6 @ top cell of parameter stack
 
-@ see Pelc, Stephen, "Updating the Forth Virtual Machine", 
+@ Extra addressing registers for the Forth VM
+@ See Pelc, Stephen, "Updating the Forth Virtual Machine", 
 @ https://www.complang.tuwien.ac.at/anton/euroforth/ef08/papers/pelc.pdf,
-@ accessed 2023-11-20
+@ accessed 2023-11-20.
 
 @ index-scratch registers
 INDXA .req r4 @ index register a
@@ -61,29 +82,24 @@ INDXB .req r5 @ index register b
 MPTRX .req r8
 MPTRY .req r9
 
-@ registers r12 - r15 are reserved for the SDK!
-@ registers r10 - r11 are used without saving in the Forth VM
-@ registers r0 - r3 are used without saving in the Forth VM and for parameter
-@ and result passing by SDK functions.
-
 @ symbols for addressing expressions
 @ reference: Forth 2012 standard, section D2.2
 @ For the Arm Cortex series, an address unit is 8 bits aka a byte
-.set _CHAR, 1 @ address units per character
-.set _CELL, 4 @ address units per cell
-.set _CELL_SHIFT, 2 @ bits to shift for cell - address unit conversions
+.set _AU_CHAR, 1 @ address units per character
+.set _AU_CELL, 4 @ address units per cell
+.set _SHIFT_CELL, 2 @ bits to shift for cell - address unit conversions
 
 @ system-wide macros
 
         @ parameter stack macros
         .macro _dupe
-        SUB PT2ND, #_CELL @ stack grows downward
+        SUB PT2ND, #_AU_CELL @ stack grows downward
         STR PSTOP, [PT2ND] @ save top to RAM
         .endm
 
         .macro _over
         _dupe
-        LDR PSTOP, [PT2ND, #_CELL*2] @ replace top of stack with 3rd
+        LDR PSTOP, [PT2ND, #_AU_CELL*2] @ replace top of stack with 3rd
         .endm
 
         .macro _swap
@@ -100,60 +116,60 @@ MPTRY .req r9
         @ x1, x2, x3 -> x2, x3, x1
         LDR r0, [PT2ND] @ get x2
         STR PSTOP, [PT2ND] @ stash x3
-        LDR PSTOP, [PT2ND, #_CELL] @ get x1
-        STR r0, [PT2ND, #_CELL] @ stash x2
+        LDR PSTOP, [PT2ND, #_AU_CELL] @ get x1
+        STR r0, [PT2ND, #_AU_CELL] @ stash x2
         .endm
 
         @ enhanced register macros
         @ to and from stack
-        .macro _to_reg register=r0
-        MOV \register, PSTOP
+        .macro _pop_to register:req
+        MOV \register\(), PSTOP
         _drop
         .endm
-        .macro _reg_from register=r0
+        .macro _push_from register:req
         _dupe
-        MOV PSTOP, \register
+        MOV PSTOP, \register\()
         .endm
 
         @ index operations - only work for r0 - r7
-        .macro _post_op register=r0, post_op=""
+        .macro _post_op register:req, post_op=""
         .ifc \post_op\(), '+'
-          ADD \register, #_CELL
+          ADD \register\(), #_AU_CELL
         .endif
         .ifc \post_op\(), '-'
-          SUB \register, #_CELL
+          SUB \register\(), #_AU_CELL
         .endif
         .ifc \post_op\(), '+C'
-          ADD \register, #_CHAR
+          ADD \register\(), #_CHAR
         .endif
         .ifc \post_op\(), '-C'
-          SUB \register, #_CHAR
+          SUB \register\(), #_CHAR
         .endif
         .endm
 
-        .macro _fetch_lo register=r0, post_op=""
+        .macro _fetch_lo register:req, post_op=""
         _dupe
-        LDR PSTOP, [\register]
-        _post_op \register, \post_op\()
+        LDR PSTOP, [\register\()]
+        _post_op \register\(), \post_op\()
         .endm
-        .macro _store_lo register=r0, post_op=""
-        STR PSTOP, [\register]
+        .macro _store_lo register:req, post_op=""
+        STR PSTOP, [\register\()]
         _drop
-        _post_op \register, \post_op\()=""
+        _post_op \register\(), \post_op\()=""
         .endm
 
         @ memory pointer operations
         @ these clobber r0!!!
-        .macro _plus_offset register=r11
-        MOV r0, \register
+        .macro _plus_offset register:req
+        MOV r0, \register\()
         ADD r0, PSTOP
         .endm
-        .macro _fetch_hi register=r11
-        _plus_offset \register
+        .macro _fetch_hi register:req
+        _plus_offset \register\()
         LDR PSTOP, [r0]
         .endm
-        .macro _store_hi register=r11
-        _plus_offset \register
+        .macro _store_hi register:req
+        _plus_offset \register\()
         _drop
         STR PSTOP, [r0]
         _drop
@@ -181,21 +197,21 @@ MPTRY .req r9
 
         @ macro to call a function "locally" (within plus or minus 16 MiB)
         .macro _l_call func_name
-        BL \func_name
+        BL \func_name\()
         .endm
 
         @ We sometimes need to call functions in SRAM from flash and _vice versa_.
         @ macro to call a function anywhere
         .macro _x_call func_name
-        LDR INDXA, _addr_\func_name @ get the address
+        LDR INDXA, _addr_\func_name\() @ get the address
         BLX INDXA
         .endm
 
         @ macro to create a "func_addr" word
         .macro _x_addr func_name
-        .balign _CELL
-        .set _addr_\func_name, .
-        .word \func_name
+        .balign _AU_CELL
+        .set _addr_\func_name\(), .
+        .word \func_name\()
         .endm
 
         @ crash with a message
@@ -204,7 +220,7 @@ MPTRY .req r9
         _x_call printf
         _x_call abort
 
-        .balign _CELL
+        .balign _AU_CELL
         .set _ADDR_MESSAGE, .
         .word _MESSAGE
         .set _MESSAGE, .
@@ -219,7 +235,7 @@ MPTRY .req r9
 @ where `result` = `left <op> right`. That is, the postfix `left right <op>` has
 @ the same `result` as the infix `left <op> right`.
 
-        .macro _binary_alu opcode
+        .macro _binary_alu opcode:req
         LDM PT2ND!, {r0} @ pop left operand => r0
         \opcode\() PSTOP, r0, PSTOP @ PSTOP := left <OP> PSTOP
         .endm
@@ -232,16 +248,14 @@ MPTRY .req r9
 @ where `flag` = true (all ones) if `left <cmp> right` is true, and false (all
 @ zeroes) if `left <cmp> right` is false.
 
-        .macro _binary_cmp cmp
+        .macro _binary_cmp cmp:req
+        LDR r1, _TRUE_FLAG @ true flag => r1
         LDM PT2ND!, {r0} @ pop left operand => r0
         CMP r0, PSTOP
         B\cmp\() 1f @ branch if true
-        MOV PSTOP, #0 @ false - set flag to zero
-        B 2f
+        MVN r1, r1 @ "invert" the true flag
 1:
-        MOV PSTOP, #0
-        MVN PSTOP, PSTOP @ set all-ones true flag
-2:
+        MOV PSTOP, r1 @ flag => PSTOP
         .endm
 
         @ position-independent operations
@@ -250,8 +264,9 @@ MPTRY .req r9
         .endm
 
         .macro _store
-        LDM PT2ND!, {r0-r1}
+        LDM PT2ND!, {r0-r1} @ pop 2nd and 3rd => r0, r1
         STR r0, [PSTOP]
+        MOV PSTOP, r1
         .endm
 
         .macro _plus_store
@@ -278,6 +293,29 @@ MPTRY .req r9
         ASR PSTOP, #1
         .endm
 
+        .macro _cell_plus
+        ADD PSTOP, #_AU_CELL
+        .endm
+
+        .macro _cell_minus
+        SUB PSTOP, #_AU_CELL
+        .endm
+
+        .macro _cells
+        LSL PSTOP, #_SHIFT_CELL
+        .endm
+
+        .macro _char_plus
+        ADD PSTOP, #_AU_CHAR
+        .endm
+
+        .macro _char_minus
+        SUB PSTOP, #_AU_CHAR
+        .endm
+
+        .macro _chars
+        .endm
+
         @ arithmetic operators
         .macro _plus
         _binary_alu ADD
@@ -296,17 +334,11 @@ MPTRY .req r9
         .endm
 
         .macro _aligned
-1:
-        _dupe
-        MOV PSTOP, #_CELL
-        SUB PSTOP, #1 @ bitmask => PSTOP
-        _and
-        BEQ 2f @ we're aligned - exit!
-        _drop
-        ADD PSTOP, #1
-        B 1b
-2:      
-        _drop
+        MOV r0, #_AU_CELL
+        NEG r0, r0 @ # bitmask => r0
+        ADD PSTOP, #_AU_CELL
+        SUB PSTOP, #1
+        AND PSTOP, r0
         .endm
 
         @ boolean operators
@@ -379,30 +411,27 @@ MPTRY .req r9
         _binary_cmp LS
         .endm
 
-
-
-
 @ User variables are single-cell word-aligned values in RAM. Dictionary words need
 @ to be able to get their addresses. Examples are SOURCE (where text interpreter 
 @ input comes from), >IN (index to current text interpreter input), BASE (number
 @ base), and STATE (interpreting or compiling).
 
-        .macro _user_var name:req, default=0
+        .macro _user_var name:req, value=0
 
         @ make the variable
         .data
-        .balign _CELL
-        .set \name, .
-        .word \default
+        .balign _AU_CELL
+        .set \name\(), .
+        .word \value\()
 
-        @ address getter function
+        @ address getter function - push address to parameter stack
         .text
-        .balign _CELL
-        .global _addr_\name
+        .balign _AU_CELL
+        .global _addr_\name\()
         .thumb_func
-        .set _addr_\name, .
+        .set _addr_\name\(), .
         _dupe
-        LDR PSTOP, =\name
+        LDR PSTOP, =\name\()
         _return
         .endm
 
@@ -414,28 +443,28 @@ MPTRY .req r9
 
         @ make the buffer
         .data
-        .balign _CELL
-        .set \name, .
-        .rept \maxc + 1
+        .balign _AU_CELL
+        .set \name\(), .
+        .rept \maxc\() + 1
         .byte 0
         .endr
 
         @ address getter function
         .text
-        .balign _CELL
-        .global _addr_\name
+        .balign _AU_CELL
+        .global _addr_\name\()
         .thumb_func
-        .set _addr_\name, .
+        .set _addr_\name\(), .
         _dupe
-        LDR PSTOP, =\name
+        LDR PSTOP, =\name\()
         _return
 
         @ max length getter function
-        .global _maxc_\name
+        .global _maxc_\name\()
         .thumb_func
-        .set _maxc_\name, .
+        .set _maxc_\name\(), .
         _dupe
-        LDR PSTOP, =\maxc
+        LDR PSTOP, =\maxc\()
         _return
 
         .endm

@@ -26,7 +26,7 @@
 
 */
 
-.include "SymbolDefs.S"
+.include "MacroDefs.S"
 
 @ dictionary construction macros
 
@@ -46,7 +46,7 @@
         .macro _header wname, pronunciation, flags=0x8000
 
         @ build link field
-        .balign _CELL, 0
+        .balign _AU_CELL, 0
         .set _link_field, .
         .set _\pronunciation\()_link, . @ debugging symbol for link field
         .if _link_field == _system_dict_start
@@ -69,7 +69,7 @@
 1:
 
         @ define call entry point to code field
-        .balign _CELL, 0
+        .balign _AU_CELL, 0
         .thumb_func
         .global \pronunciation
         .set \pronunciation, .
@@ -88,14 +88,14 @@
 
 @ the dictionary itself!
 
-.balign _CELL
+.balign _AU_CELL
 .global _system_dict_start
 _system_dict_start: .word .
 
         @ The first group of operators are simple enough that they can be copied
         @ inline to a colon word instead of called. This saves two cycles for
         @ each inlined word whenever the colon word is called. These are all
-        @ defined as macros in SymbolDefs.S, so we can define a macro that creates
+        @ defined as macros in MacroDefs.S, so we can define a macro that creates
         @ them with a single line each.
 
         .macro _wrapm name, pronunciation
@@ -117,6 +117,12 @@ _system_dict_start: .word .
         _wrapm "1-", one_minus
         _wrapm "2*", two_star
         _wrapm "2/", two_slash
+        _wrapm "CELL+", cell_plus
+        _wrapm "CELL-", cell_minus
+        _wrapm "CELLs", cells
+        _wrapm "CHAR+", char_plus
+        _wrapm "CHAR-", char_minus
+        _wrapm "CHARs", chars
 
         @ arithmetic operators
         _wrapm "+", plus
@@ -145,6 +151,9 @@ _system_dict_start: .word .
         _wrapm "U<", u_less_than
         _wrapm "U<=", u_less_or_equal
 
+.balign _AU_CELL, 0
+_TRUE_FLAG: .word 0xFFFFFFFF
+
         @ character / string words
         _header "FILL", fill, _COMPLETE
         MOV r0, PSTOP @ character => r0
@@ -156,7 +165,7 @@ fil1:
         CMP r3, #0 @ is count zero or less?
         BLE filz @ exit, stage left!
         STRB r0, [PSTOP]
-        ADD PSTOP, #_CHAR
+        ADD PSTOP, #_AU_CHAR
         SUB r3, #1
         B fil1
 filz:
@@ -172,8 +181,8 @@ filz:
         @ been consumed and the actual count is on the top of the stack.
 
         @ use saved registers for loop control because KEY calls the SDK!
-        _to_reg MPTRX @ pop max count to MPTRX
-        _to_reg INDXA @ pop address to INDXA
+        _pop_to MPTRX @ pop max count to MPTRX
+        _pop_to INDXA @ pop address to INDXA
         MOV INDXB, #0 @ character count
 _accl:
         BL key @ wait for character, which will show up in PSTOP
@@ -217,10 +226,10 @@ _accb:
         @ erase previous character
         BL emit @ emit the backspace we have
         MOV r0, #_BL
-        _reg_from r0
+        _push_from r0
         BL emit @ "erase" the character
         MOV r0, #_BS @ queue up another backspace
-        _reg_from r0
+        _push_from r0
         BL emit
         B _accl @ back for more!
 
@@ -228,14 +237,14 @@ _accb:
 _accz:
         @ save and push count; exit
         STRB INDXB, [INDXA]
-        _reg_from INDXB
+        _push_from INDXB
         _unnest
         @ whew!
 
         _header "TYPE", type, _COMPLETE
         _nest
-        _to_reg INDXB @ count to INDXB
-        _to_reg INDXA @ address to INDXA
+        _pop_to INDXB @ count to INDXB
+        _pop_to INDXA @ address to INDXA
 
 typl:
         CMP INDXB, #0 @ are we done?
@@ -244,7 +253,7 @@ typl:
         LDRB r0, [INDXA] @ get the character
         CMP r0, #0 @ is it a null terminator?
         BEQ typz @ exit on null terminator
-        _reg_from r0
+        _push_from r0
         BL emit @ emit the character
         ADD INDXA, #1 @ increment the address
         SUB INDXB, #1 @ count down
@@ -290,7 +299,7 @@ typz:
         @ (c-addr1 c-addr2 -- caddr1 flag)
         @ flag is true if strings are identical, false otherwise
         _nest
-        _to_reg INDXA @ pop c-addr2 => INDXA
+        _pop_to INDXA @ pop c-addr2 => INDXA
         LDRB r1, [PSTOP] @ count of c-addr1 => r1
         LDRB r2, [INDXA] @ count of c-addr2 => r2
         CMP r1, r2
@@ -328,8 +337,8 @@ fndl:
         BEQ fndz @ link is zero - we hit the end
         @    compare name with target
         MOV r0, INDXA
-        ADD r0, #_CELL @ name field address => r0
-        _reg_from r0 @ push name c-addr
+        ADD r0, #_AU_CELL @ name field address => r0
+        _push_from r0 @ push name c-addr
         BL c_s_match
         CMP PSTOP, #0
         BNE fndm @ it matched!
@@ -344,8 +353,8 @@ fndm:
         @ match: exit with xt and flag
         _drop @ flag
         _drop @ matched target c-addr
-        _reg_from INDXA @ push successful link addr
-        ADD PSTOP, #_CELL @ name field c-addr
+        _push_from INDXA @ push successful link addr
+        ADD PSTOP, #_AU_CELL @ name field c-addr
         LDRB r0, [PSTOP] @ name field count byte
         ADD PSTOP, r0
         ADD PSTOP, #1 @ next available address => PSTOP
@@ -390,9 +399,9 @@ cbuf:
         @ _nest
         @ BL source @ buffer address in [PT2ND], count in PSTOP
         @ _drop @ drop count - buffers are null-terminated
-        @ _to_reg INDXA @ pop address to INDXA
+        @ _pop_to INDXA @ pop address to INDXA
         @ BL to_in @ get address of input buffer count
-        @ _to_reg INDXB @ pop >IN address to INDXB
+        @ _pop_to INDXB @ pop >IN address to INDXB
         @ LDR r3, [INDXB] @ >IN to r3
 
 pn1:
@@ -401,16 +410,16 @@ pn1:
         @ BEQ pnz @ that's all, folks!
         @ CMP r2, #_BL @ is it a space?
         @ BNE pn2 @ first non-delimiter!
-        @ ADD r3, #_CHAR
+        @ ADD r3, #_AU_CHAR
         @ B pn1 @ next character
 
 pn2:
         @ ADD r0, INDXA, r3 @ we have the buffer address!
-        @ _reg_from r0 @ push it to the stack
+        @ _push_from r0 @ push it to the stack
         @ MOV r1, #1 @ initial count
 
 pn3:
-        @ ADD r3, #_CHAR
+        @ ADD r3, #_AU_CHAR
         @ LDRB r2, [INDXA, r3]
         @ CMP r2, #0
         @ BEQ pnz
@@ -422,7 +431,7 @@ pn3:
 pnz:
         @ STR r3, [INDXB] @ first order of business - save new >IN value
         @ MOV r0, r1 @ push count and exit
-        @ _reg_from r0
+        @ _push_from r0
         @ _unnest 
 
 @ finally, the text interpreter!!
@@ -442,7 +451,7 @@ quit1:
         @ set ">IN" to zero
         BL _addr_to_in_v @ push address to top of stack
         MOV r0, #0
-        _reg_from r0 @ push zero
+        _push_from r0 @ push zero
         BL store
 
         @ evaluate term_buf
@@ -490,7 +499,7 @@ OllKorrect: .asciz " Ok\n"
         _header "KEY", key, _COMPLETE
         _nest
         _x_call sdk_key
-        _reg_from r0
+        _push_from r0
         _unnest
 
         _header "EMIT", emit, _COMPLETE
@@ -498,6 +507,40 @@ OllKorrect: .asciz " Ok\n"
         MOV r0, PSTOP
         _x_call sdk_emit
         _drop
+        _unnest
+
+        _header "clear-param-stack", clear_param_stack, _COMPLETE
+        @ ( -- 0xDEADBEEF 0XDEADBEEF ) *** after clearing the stack *** 
+        LDR PT2ND, _ADDR_STACK_BOTTOM
+        LDR PSTOP, _HAMBURGER
+        _dupe
+        _return
+
+.balign _AU_CELL, 0
+_HAMBURGER: .word 0xDEADBEEF
+_ADDR_STACK_BOTTOM: .word _stack_bottom
+
+        _header "ps-top-three", p_s_top_three, _COMPLETE
+        _nest
+        LDR r0, _STACK_FORMAT_3
+        MOV r1, PSTOP
+        LDM PT2ND, {r2, r3, PT2ND}
+        BL printf
+        _unnest
+
+        _header "ps-top-two", p_s_top_two, _COMPLETE
+        _nest
+        LDR r0, _STACK_FORMAT_2
+        MOV r1, PSTOP
+        LDR r2, [PT2ND]
+        BL printf
+        _unnest
+
+        _header "ps-top", p_s_top, _COMPLETE
+        _nest
+        LDR r0, _STACK_FORMAT_1
+        MOV r1, PSTOP
+        BL printf
         _unnest
 
         @ _header "ABORT", abort, _COMPLETE
@@ -509,20 +552,28 @@ OllKorrect: .asciz " Ok\n"
         _header "GARBAGE-TOKEN", garbage_token, _COMPLETE
         _CRASH "garbage token"
 
-
-
+@ stack print formats
+.balign _AU_CELL, 0
+_STACK_FORMAT_3: .word . + _AU_CELL
+                 .asciz "stack top, second, third => %x, %x, %x\n"
+.balign _AU_CELL, 0
+_STACK_FORMAT_2: .word . + _AU_CELL
+                 .asciz "stack top, second => %x, %x\n"
+.balign _AU_CELL, 0
+_STACK_FORMAT_1: .word . + _AU_CELL
+                 .asciz "stack top => %x\n"
 
 @ BLX call vector table
-.balign _CELL
+.balign _AU_CELL
 _x_addr sdk_slash_mod
 _x_addr sdk_key
 _x_addr sdk_emit
 _x_addr printf
 _x_addr abort
-_x_addr clear_stack
+
+@ constants
 
 @ dictionary parameters
-.global _latest_link_field
 _latest_link_field: .word _previous_link_field
 .global _system_dict_end
 _system_dict_end: .word .

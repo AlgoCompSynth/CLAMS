@@ -14,7 +14,7 @@ add_executable(CLAMS-stc
   CLAMS-stc.S
   Dictionary.S
   ParamStack.S
-  SymbolDefs.S
+  MacroDefs.S
   UserVars.S
   Wrappers.c
 )
