@@ -208,6 +208,12 @@ noise.configure(
 synth.play()
 
 while True:
+
+    # clear the screen
+    display.set_pen(0)
+    display.clear()
+    display.update()
+
     # play a scale
     for note in ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"]:
         noise.frequency(TONES[note])
@@ -222,6 +228,7 @@ while True:
 
     # 19 EDO!
     WHITE = display.create_pen(255, 255, 255)
+    AMBER = display.create_pen(0xFF, 0xBF, 0)
     for note in rounded_frequencies:
         frequency_label = f"Playing frequency {note}"
 
@@ -230,7 +237,7 @@ while True:
         display.clear()
 
         # create a pen and set the drawing color
-        display.set_pen(WHITE)
+        display.set_pen(AMBER)
 
         # draw text
         vector.text(frequency_label, 0, 0)
