@@ -1,9 +1,15 @@
 # This basic example shows how you can use PicoSynth to play simple tones.
 # It doesn't do anything with the display.
 
+# synthesizer imports
 from picosynth import PicoSynth, Channel
 import time
 import math
+
+# initialize display
+from picovision import PicoVision, PEN_RGB555
+display = PicoVision(PEN_RGB555, 640, 480)
+display.set_font("bitmap8")
 
 VOLUME = 0.5
 
@@ -103,7 +109,7 @@ TONES = {
 # do 19-EDO calculations
 base_frequency = 130.8128
 notes_per_octave = 19
-ratio = math.pow(2, (1 / notes_per_octave))
+ratio = math.pow(2.0, (1.0 / notes_per_octave))
 frequencies = [base_frequency]
 rounded_frequencies = [round(base_frequency)]
 
@@ -111,13 +117,12 @@ for index in range(1, 2 * notes_per_octave + 1):
     frequencies.append(ratio * frequencies[index - 1])
     rounded_frequencies.append(round(frequencies[index]))
 
-print(frequencies)
-print(rounded_frequencies)
-
+# initialize synthesizer
 synth = PicoSynth()
 
 # create a new noise channel
 noise = synth.channel(0)
+
 # change these details to modify the sound
 # waveforms you can use are NOISE, SQUARE, SAW, TRIANGLE, SINE, or WAVE
 # you can combine more than one, like this: waveforms=Channel.SQUARE | Channel.SAW,
@@ -148,7 +153,21 @@ while True:
         time.sleep(0.5)
 
     # 19 EDO!
+    WHITE = display.create_pen(255, 255, 255)
     for note in rounded_frequencies:
+        frequency_label = f"Playing frequency {note}"
+
+        # clear the screen
+        display.set_pen(0)
+        display.clear()
+
+        # create a pen and set the drawing color
+        display.set_pen(WHITE)
+
+        # draw text
+        display.text(frequency_label, 0, 0, scale=6)
+        display.update()
+
         noise.frequency(note)
         noise.trigger_attack()
         time.sleep(1.0)
