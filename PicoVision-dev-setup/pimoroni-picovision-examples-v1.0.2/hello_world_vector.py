@@ -35,6 +35,7 @@ while True:
     display.set_pen(BLACK)
     display.clear()
     # set the vector font and size
+    print("basic/spicy_soup.af 72")
     vector.set_font("basic/spicy_soup.af", 72)
     # draw the text seven times
     for i in range(7):
@@ -50,6 +51,7 @@ while True:
 
     display.set_pen(BLACK)
     display.clear()
+    print("basic/next_sunday.af 55")
     vector.set_font("basic/next_sunday.af", 55)
     # draw the text ten times, sideways
     for i in range(10):
@@ -62,6 +64,7 @@ while True:
 
     display.set_pen(BLACK)
     display.clear()
+    print("basic/coolvetica_rg.af 60")
     vector.set_font("basic/coolvetica_rg.af", 60)
     # draw the text many times
     for i in range(30):
@@ -74,6 +77,7 @@ while True:
 
     display.set_pen(BLACK)
     display.clear()
+    print("basic/coolvetica_rg.af 100")
     vector.set_font("basic/coolvetica_rg.af", 100)
     # draw the text many times
     for i in range(50):
