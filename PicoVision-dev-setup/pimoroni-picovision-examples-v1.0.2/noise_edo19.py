@@ -3,13 +3,20 @@
 
 # synthesizer imports
 from picosynth import PicoSynth, Channel
-import time
-import math
 
 # initialize display
 from picovision import PicoVision, PEN_RGB555
+from picovector import PicoVector, ANTIALIAS_X16
+
+# general imports
+import time
+import math
+
 display = PicoVision(PEN_RGB555, 640, 480)
 display.set_font("bitmap8")
+vector = PicoVector(display)
+vector.set_antialiasing(ANTIALIAS_X16)
+vector.set_font("/floppy_birb/OpenSans-Regular.af", 50)
 
 VOLUME = 0.5
 
@@ -226,7 +233,7 @@ while True:
         display.set_pen(WHITE)
 
         # draw text
-        display.text(frequency_label, 0, 0, scale=6)
+        vector.text(frequency_label, 0, 0)
         display.update()
 
         noise.frequency(note)
