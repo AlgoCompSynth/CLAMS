@@ -36,28 +36,7 @@ def arpeggio_frequencies(arpeggio_degrees, freq_table, root):
         frequencies.append(freq_table[note])
     return frequencies
 
-# main program
-display = PicoVision(PEN_RGB555, 640, 480)
-display.set_font("bitmap8")
-vector = PicoVector(display)
-vector.set_antialiasing(ANTIALIAS_X16)
-vector.set_font("/floppy_birb/OpenSans-Regular.af", 24)
-
-VOLUME = 0.5
-
-# do 19-EDO calculations
-base_frequency = 130.8128 # an octave below middle C
-notes_per_octave = 19
-ratio = math.pow(2.0, (1.0 / notes_per_octave))
-frequencies = [base_frequency]
-
-# PicoSynth uses 16-bit integer frequencies :-(
-rounded_frequencies = [round(base_frequency)] 
-
-for index in range(1, 2 * notes_per_octave + 1):
-    frequencies.append(ratio * frequencies[index - 1])
-    rounded_frequencies.append(round(frequencies[index]))
-
+# scale and arpeggio / chord data
 # named 19-EDO scales from https://en.xen.wiki/w/Strictly_proper_19edo_scales
 ## 3 3 3 3 3 4 Deutone[6]
 ## 1 3 3 3 3 3 3 Deutone[7]
@@ -149,15 +128,37 @@ ARPEGGIOS_19_EDO = {
     "major seven sharp five": [0, 6, 12, 18]
 }
 
-# initialize synthesizer
+# main program
+display = PicoVision(PEN_RGB555, 640, 480)
+BLACK = display.create_pen(0, 0, 0)
+AMBER = display.create_pen(0xFF, 0xBF, 0)
+
+vector = PicoVector(display)
+vector.set_antialiasing(ANTIALIAS_X16)
+FONT_SIZE = 36
+vector.set_font("/floppy_birb/OpenSans-Regular.af", FONT_SIZE)
+
+VOLUME = 0.5
+
+# do 19-EDO calculations
+base_frequency = 130.8128 # an octave below middle C
+notes_per_octave = 19
+ratio = math.pow(2.0, (1.0 / notes_per_octave))
+frequencies = [base_frequency]
+
+# PicoSynth uses 16-bit integer frequencies :-(
+rounded_frequencies = [round(base_frequency)] 
+
+for index in range(1, 2 * notes_per_octave + 1):
+    frequencies.append(ratio * frequencies[index - 1])
+    rounded_frequencies.append(round(frequencies[index]))
+
+# create a new synthesizer
 synth = PicoSynth()
 
 # create a new noise channel
 noise = synth.channel(0)
 
-# change these details to modify the sound
-# waveforms you can use are NOISE, SQUARE, SAW, TRIANGLE, SINE, or WAVE
-# you can combine more than one, like this: waveforms=Channel.SQUARE | Channel.SAW,
 noise.configure(
     waveforms=Channel.TRIANGLE,
     attack=0.1,
@@ -171,61 +172,141 @@ noise.configure(
 
 synth.play()
 
-while True:
 
-    BLACK = display.create_pen(0, 0, 0)
-    AMBER = display.create_pen(0xFF, 0xBF, 0)
+# Introduction
+display.set_pen(BLACK)
+display.clear()
+display.set_pen(AMBER)
+vector.text("CLAMS", 0, 0)
+vector.text("- (Command Line Algorithmic Music System)", 0, FONT_SIZE)
+vector.text("- A work in progress on GitHub at", 0, 2*FONT_SIZE)
+vector.text("- AlgoCompSynth/CLAMS", 0, 3*FONT_SIZE)
+display.update()
+time.sleep(12.0)
 
-    noise.trigger_release()
+display.set_pen(BLACK)
+display.clear()
+display.set_pen(AMBER)
+vector.text("What is CLAMS?", 0, 0)
+vector.text("- Interactive live coding system", 0, FONT_SIZE)
+vector.text("- Based on Forth", 0, 2*FONT_SIZE)
+vector.text("- Optimized for Pimoroni PicoVision", 0, 3*FONT_SIZE)
+vector.text("- Generates both audio and HDMI video", 0, 4*FONT_SIZE)
+display.update()
+time.sleep(12.0)
+
+display.set_pen(BLACK)
+display.clear()
+display.set_pen(AMBER)
+vector.text("Musical goals", 0, 0)
+vector.text("- Algorithmic composition", 0, FONT_SIZE)
+vector.text("- Algorithmic timbre design", 0, 2*FONT_SIZE)
+vector.text("- Microtonal scales and chords", 0, 3*FONT_SIZE)
+vector.text("- Dynamic stochastic synthesis", 0, 4*FONT_SIZE)
+display.update()
+time.sleep(12.0)
+
+display.set_pen(BLACK)
+display.clear()
+display.set_pen(AMBER)
+vector.text("Language goals", 0, 0)
+vector.text("- Collaborative interactions", 0, FONT_SIZE)
+vector.text("- Command line / terminal UI", 0, 2*FONT_SIZE)
+vector.text("- Easy to extend", 0, 3*FONT_SIZE)
+display.update()
+time.sleep(12.0)
+
+display.set_pen(BLACK)
+display.clear()
+display.set_pen(AMBER)
+vector.text("Related projects on GitHub", 0, 0)
+vector.text("- AlgoCompSynth/Eikosany", 0, FONT_SIZE)
+vector.text("- AlgoCompSynth/consonaR", 0, 2*FONT_SIZE)
+vector.text("- AlgoCompSynth/AlgoCompSynth-One", 0, 3*FONT_SIZE)
+display.update()
+time.sleep(12.0)
+
+display.set_pen(BLACK)
+display.clear()
+display.set_pen(AMBER)
+vector.text("Project status", 0, 0)
+vector.text("- TL;DR - not ready for prime time", 0, FONT_SIZE)
+vector.text("- First release by Christmas", 0, 2*FONT_SIZE)
+vector.text("- Will run on Pimoroni PicoVision", 0, 3*FONT_SIZE)
+display.update()
+time.sleep(12.0)
+
+display.set_pen(BLACK)
+display.clear()
+display.set_pen(AMBER)
+vector.text("So while we're waiting ...", 0, 0)
+vector.text("- Demo of target arpeggios and scales", 0, FONT_SIZE)
+vector.text("- Done with MicroPython on the PicoVision", 0, 2*FONT_SIZE)
+vector.text("- Recorded with OBS Studio", 0, 3*FONT_SIZE)
+vector.text("- Released version will have better synth!", 0, 4*FONT_SIZE)
+display.update()
+time.sleep(12.0)
+
+for name, degrees in ARPEGGIOS_19_EDO.items():
+    scale_label = f"Arpeggio {name} frequencies:"
+    frequencies = arpeggio_frequencies(degrees, rounded_frequencies, 0)
+    frequency_label = f"{frequencies}"
+
     display.set_pen(BLACK)
     display.clear()
-    time.sleep(5.0)
-    for name, degrees in ARPEGGIOS_19_EDO.items():
-        scale_label = f"Arpeggio {name} frequencies:"
-        frequencies = arpeggio_frequencies(degrees, rounded_frequencies, 0)
-        frequency_label = f"{frequencies}"
+    display.set_pen(AMBER)
+    vector.text(scale_label, 0, 0)
+    vector.text(frequency_label, 0, FONT_SIZE)
+    display.update()
 
-        display.set_pen(BLACK)
-        display.clear()
-        display.set_pen(AMBER)
-        vector.text(scale_label, 0, 0)
-        vector.text(frequency_label, 0, 24)
-        display.update()
+    for freq in frequencies:
+        noise.frequency(freq)
+        noise.trigger_attack()
+        time.sleep(0.5)
+        noise.trigger_release()
 
-        for freq in frequencies:
-            noise.frequency(freq)
-            noise.trigger_attack()
-            time.sleep(1.0)
+    frequencies.reverse()
+    for freq in frequencies:
+        noise.frequency(freq)
+        noise.trigger_attack()
+        time.sleep(0.5)
+        noise.trigger_release()
 
-        frequencies.reverse()
-        for freq in frequencies:
-            noise.frequency(freq)
-            noise.trigger_attack()
-            time.sleep(1.0)
+    time.sleep(2.0)
 
-    noise.trigger_release()
+display.set_pen(BLACK)
+display.clear()
+time.sleep(2.0)
+for name, degrees in SCALES_19_EDO.items():
+    scale_label = f"Scale {name} frequencies:"
+    frequencies = scale_frequencies(degrees, rounded_frequencies, 0)
+    frequency_label = f"{frequencies}"
+
     display.set_pen(BLACK)
     display.clear()
-    time.sleep(5.0)
-    for name, degrees in SCALES_19_EDO.items():
-        scale_label = f"Scale {name} frequencies:"
-        frequencies = scale_frequencies(degrees, rounded_frequencies, 0)
-        frequency_label = f"{frequencies}"
+    display.set_pen(AMBER)
+    vector.text(scale_label, 0, 0)
+    vector.text(frequency_label, 0, FONT_SIZE)
+    display.update()
 
-        display.set_pen(BLACK)
-        display.clear()
-        display.set_pen(AMBER)
-        vector.text(scale_label, 0, 0)
-        vector.text(frequency_label, 0, 24)
-        display.update()
+    for freq in frequencies:
+        noise.frequency(freq)
+        noise.trigger_attack()
+        time.sleep(0.5)
+        noise.trigger_release()
 
-        for freq in frequencies:
-            noise.frequency(freq)
-            noise.trigger_attack()
-            time.sleep(0.5)
+    frequencies.reverse()
+    for freq in frequencies:
+        noise.frequency(freq)
+        noise.trigger_attack()
+        time.sleep(0.5)
+        noise.trigger_release()
 
-        frequencies.reverse()
-        for freq in frequencies:
-            noise.frequency(freq)
-            noise.trigger_attack()
-            time.sleep(0.5)
+    time.sleep(2.0)
+
+display.set_pen(BLACK)
+display.clear()
+display.set_pen(AMBER)
+vector.text("Thanks for watching!", 0, 0)
+display.update()
+time.sleep(3600.0)
