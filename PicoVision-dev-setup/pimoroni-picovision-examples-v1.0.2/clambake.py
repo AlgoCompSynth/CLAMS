@@ -1,10 +1,10 @@
-# This basic example shows how you can use PicoSynth to play simple tones.
-# It doesn't do anything with the display.
+# Based on Pimoroni "noise" demo from
+# https://github.com/pimoroni/picovision/blob/main/examples/basic/noise.py
 
 # synthesizer imports
 from picosynth import PicoSynth, Channel
 
-# initialize display
+# display imports
 from picovision import PicoVision, PEN_RGB555
 from picovector import PicoVector, ANTIALIAS_X16
 
@@ -129,6 +129,8 @@ ARPEGGIOS_19_EDO = {
 }
 
 # main program
+
+# set display up for basic vector text output
 display = PicoVision(PEN_RGB555, 640, 480)
 BLACK = display.create_pen(0, 0, 0)
 AMBER = display.create_pen(0xFF, 0xBF, 0)
@@ -137,8 +139,6 @@ vector = PicoVector(display)
 vector.set_antialiasing(ANTIALIAS_X16)
 FONT_SIZE = 36
 vector.set_font("/floppy_birb/OpenSans-Regular.af", FONT_SIZE)
-
-VOLUME = 0.5
 
 # do 19-EDO calculations
 base_frequency = 130.8128 # an octave below middle C
@@ -158,7 +158,9 @@ synth = PicoSynth()
 
 # create a new noise channel
 noise = synth.channel(0)
+VOLUME = 0.5
 
+# configure the channel
 noise.configure(
     waveforms=Channel.TRIANGLE,
     attack=0.1,
@@ -170,10 +172,13 @@ noise.configure(
 # for more details on what attack, decay, sustain and release mean, see:
 # https://en.wikipedia.org/wiki/Synthesizer#ADSR_envelope
 
+# start the synth up
 synth.play()
 
 
-# Introduction
+# Setup is done - demo follows
+
+# Slides
 display.set_pen(BLACK)
 display.clear()
 display.set_pen(AMBER)
@@ -182,7 +187,7 @@ vector.text("- (Command Line Algorithmic Music System)", 0, FONT_SIZE)
 vector.text("- A work in progress on GitHub at", 0, 2*FONT_SIZE)
 vector.text("- AlgoCompSynth/CLAMS", 0, 3*FONT_SIZE)
 display.update()
-time.sleep(12.0)
+time.sleep(10.0)
 
 display.set_pen(BLACK)
 display.clear()
@@ -193,7 +198,7 @@ vector.text("- Based on Forth", 0, 2*FONT_SIZE)
 vector.text("- Optimized for Pimoroni PicoVision", 0, 3*FONT_SIZE)
 vector.text("- Generates both audio and HDMI video", 0, 4*FONT_SIZE)
 display.update()
-time.sleep(12.0)
+time.sleep(10.0)
 
 display.set_pen(BLACK)
 display.clear()
@@ -204,17 +209,18 @@ vector.text("- Algorithmic timbre design", 0, 2*FONT_SIZE)
 vector.text("- Microtonal scales and chords", 0, 3*FONT_SIZE)
 vector.text("- Dynamic stochastic synthesis", 0, 4*FONT_SIZE)
 display.update()
-time.sleep(12.0)
+time.sleep(10.0)
 
 display.set_pen(BLACK)
 display.clear()
 display.set_pen(AMBER)
 vector.text("Language goals", 0, 0)
-vector.text("- Collaborative interactions", 0, FONT_SIZE)
+vector.text("- Musical theory language kit", 0, FONT_SIZE)
 vector.text("- Command line / terminal UI", 0, 2*FONT_SIZE)
-vector.text("- Easy to extend", 0, 3*FONT_SIZE)
+vector.text("- Collaborative interactions", 0, 3*FONT_SIZE)
+vector.text("- Easy to extend", 0, 4*FONT_SIZE)
 display.update()
-time.sleep(12.0)
+time.sleep(10.0)
 
 display.set_pen(BLACK)
 display.clear()
@@ -224,7 +230,7 @@ vector.text("- AlgoCompSynth/Eikosany", 0, FONT_SIZE)
 vector.text("- AlgoCompSynth/consonaR", 0, 2*FONT_SIZE)
 vector.text("- AlgoCompSynth/AlgoCompSynth-One", 0, 3*FONT_SIZE)
 display.update()
-time.sleep(12.0)
+time.sleep(10.0)
 
 display.set_pen(BLACK)
 display.clear()
@@ -234,7 +240,7 @@ vector.text("- TL;DR - not ready for prime time", 0, FONT_SIZE)
 vector.text("- First release by Christmas", 0, 2*FONT_SIZE)
 vector.text("- Will run on Pimoroni PicoVision", 0, 3*FONT_SIZE)
 display.update()
-time.sleep(12.0)
+time.sleep(10.0)
 
 display.set_pen(BLACK)
 display.clear()
@@ -245,8 +251,9 @@ vector.text("- Done with MicroPython on the PicoVision", 0, 2*FONT_SIZE)
 vector.text("- Recorded with OBS Studio", 0, 3*FONT_SIZE)
 vector.text("- Released version will have better synth!", 0, 4*FONT_SIZE)
 display.update()
-time.sleep(12.0)
+time.sleep(10.0)
 
+# play the arpeggios
 for name, degrees in ARPEGGIOS_19_EDO.items():
     scale_label = f"Arpeggio {name} frequencies:"
     frequencies = arpeggio_frequencies(degrees, rounded_frequencies, 0)
@@ -274,9 +281,9 @@ for name, degrees in ARPEGGIOS_19_EDO.items():
 
     time.sleep(2.0)
 
+# play the scales
 display.set_pen(BLACK)
 display.clear()
-time.sleep(2.0)
 for name, degrees in SCALES_19_EDO.items():
     scale_label = f"Scale {name} frequencies:"
     frequencies = scale_frequencies(degrees, rounded_frequencies, 0)
@@ -304,6 +311,7 @@ for name, degrees in SCALES_19_EDO.items():
 
     time.sleep(2.0)
 
+# closing credits
 display.set_pen(BLACK)
 display.clear()
 display.set_pen(AMBER)
