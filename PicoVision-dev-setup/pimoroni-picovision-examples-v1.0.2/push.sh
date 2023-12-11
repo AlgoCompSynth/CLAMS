@@ -2,7 +2,6 @@
 
 set -e
 
-#source ../mpremote/bin/activate
 mpremote ls
 mpremote cp -r alert/ :
 mpremote cp -r basic/ :
