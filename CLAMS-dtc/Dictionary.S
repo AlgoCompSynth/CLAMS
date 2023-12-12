@@ -203,15 +203,15 @@ _system_dict_start: .word .
 
         _header "OVER", over, _COMPLETE
         _code_word
-        LDR r0, [PSP, #_CELL]
+        LDR r0, [PSP, #_CELL] @ 2nd => r0
         _push_to PS, r0
         _next
 
         _header "SWAP", swap, _COMPLETE
         _code_word
-        LDM PSP!, {r1, r2} @ top => r1, 2nd => r2
-        _push_to PS, r1
-        _push_to PS, r2
+        LDM PSP, {r0, r1, PSP} @ top => r0, 2nd => r1
+        STR r1, [PSP]
+        STR r0, [PSP, #_CELL]
         _next
 
         _header "DROP", drop, _COMPLETE
@@ -222,10 +222,10 @@ _system_dict_start: .word .
         _header "ROT", rote, _COMPLETE
         _code_word
         @ x1, x2, x3 -> x2, x3, x1
-        LDM PSP!, {r1, r2, r3} @ x3 => r1, x2 => r2, x1 => r3
-        _push_to PS, r2 @ push x2
-        _push_to PS, r1 @ push x3
-        _push_to PS, r3 @ push x1
+        LDM PSP, {r0, r1, r2, PSP} @ x3 => r0, x2 => r1, x1 => r2
+        STR r1, [PSP, #_CELL*2] @ stash x2
+        STR r0, [PSP, #_CELL] @ stash x3
+        STR r2, [PSP] @ stash x1
         _next
 
         @ terminal I/O words
@@ -250,7 +250,7 @@ _x_addr sdk_emit
         _pop_from PS, r0 @ get execution token
         MOV XRG, #1 @ set thumb bit
         ORR XRG, r0 @ ready for BX
-        BX XRG
+        BX XRG @ unconditional branch without link
 
         @ stacks grow downwards - top of stack is the lowest address
         @ _param_stack_top is the lowest address that can legally contain a cell
@@ -285,7 +285,6 @@ crs1:
 
 _x_addr _return_stack_bottom
 _x_addr _return_stack_top
-
 .balign _CELL, 0
 _hamburger: .word 0xDEADBEEF
 
