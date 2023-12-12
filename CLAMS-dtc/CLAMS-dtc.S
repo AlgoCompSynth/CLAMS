@@ -47,5 +47,4 @@ loop:
 prompt: .asciz " Ok\n> "
 .balign _CELL, 0
 sleep_ms: .word 1000
-
-_x_addr _dupe
+dupe: .word dupe @ link in the dictionary
