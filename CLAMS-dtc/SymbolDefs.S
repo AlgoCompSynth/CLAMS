@@ -28,34 +28,41 @@
 
 @ coding conventions:
 
-@ 1. Names intended to be internal to the CLAMSsystem have a leading underscore and
-@ are restricted to the character set of Arm GNU assembler symbols. Function name
-@ s and variables use only lower-case letters, constants use only upper case
-@ letters.
+@ 1. Names internal to the CLAMS system have a leading underscore and are restricted
+@ to the character set of Arm GNU assembler symbols. Function names and variables
+@ use only lower-case letters, constants use only upper case letters.
 
 @ 2. Names intended to represent Forth words have the Forth syntax. Words that are 
 @ defined in the Forth standard use only upper case letters and behave the same way
-@ they do in the standard. Names created by the user can use any case and the
+@ they do in the standard. Names created by the user can use either case and the
 @ system is case-sensitive.
 
 @ 3. Register usage: Pico SDK functions save registers r4 - r11, so we can use
 @ them without saving. However, r8 - r11 have limited functionality - essentially
-@ only source or destination of a MOV, one operand of a CMP or a computed branch.
+@ only source or destination of a MOV, one operand of an ADD or CMP, or as a branch
+@ target.
+@
 @ Registers r0 - r3 are work registers and are used to interact with SDK functions.
-@ They are not saved / restored. Although the SDK allows more than four parameters,
-@ there are by design no CLAMS functions that do.
+@ They are not saved / restored, either by the SDK or by Forth words. Although the
+@ SDK allows more than four parameters, there are by design no CLAMS functions
+@ that do.
+@
+@ Register r3 is also called XRG and is used to contain the address of code to be
+@ executed, either with a BX (unconditional branch with exchange) or a BLX (branch
+@ and link with exchange).
 
 @ Inner interpreter registers
-@ These are the conventional indirect threading registers - see "Moving Forth".
+@ These are the conventional direct threading registers - see "Moving Forth".
 WRD .req r7 @ "Word" register
 INP .req r6 @ Interpreter pointer - the Forth VM's program counter
 PSP .req r5 @ Parameter stack pointer
 RSP .req r4 @ Return stack pointer
-XRG .req r3 @ "eXecute" register - used for branching
+XRG .req r3 @ "eXecute" register - used for branching and calling code functions
 
 @ symbols for addressing expressions
 @ reference: Forth 2012 standard, section D2.2
-@ For the Arm Cortex series, an address unit is 8 bits aka a byte
+@ For the RP2040 SDK, an address unit is 8 bits aka a byte, and addressing is
+@ little-endian.
 .set _CHAR, 1 @ address units per character
 .set _CELL, 4 @ address units per cell
 .set _CELL_SHIFT, 2 @ bits to shift for cell - address unit conversions
