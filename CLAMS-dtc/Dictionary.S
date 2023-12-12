@@ -28,11 +28,11 @@
 
 .include "SymbolDefs.S"
 
-@ parameter stack macros
+@ stack macros
 @ stacks grow downwards and stack pointers point to top element
 
-        @ pop to register from stack
-        .macro _pop_to regname, stack
+        @ pop from stack to register
+        .macro _pop_from stack, regname
         LDM \stack\()P!, {\regname}
         .endm
 
@@ -40,6 +40,16 @@
         .macro _push_to stack regname
         SUB \stack\()P, #_CELL
         STR \regname, [\stack\()P]
+        .endm
+
+        @ pop two elements to r0, r1
+        .macro _pop_two stack
+        LDM \stack\()P!, {r0, r1}
+        .endm
+
+        @ pop three elements to r0, r1, r2
+        .macro _pop_three stack
+        LDM \stack\()P!, {r0, r1, r2}
         .endm
 
 @ macros for external addressing and function calls
@@ -206,7 +216,7 @@ _system_dict_start: .word .
 
         _header "DROP", drop, _COMPLETE
         _code_word
-        _pop_to r0, PS
+        _pop_from PS, r0
         _next
 
         _header "ROT", rote, _COMPLETE
@@ -229,7 +239,7 @@ _x_addr sdk_key
 
         _header "EMIT", emit, _COMPLETE
         _code_word
-        _pop_to r0, PS
+        _pop_from PS, r0
         _x_call sdk_emit
         _next
 
@@ -237,7 +247,7 @@ _x_addr sdk_emit
 
         _header "EXECUTE", execute, _COMPLETE
         _code_word
-        _pop_to r0, PS @ get execution token
+        _pop_from PS, r0 @ get execution token
         MOV XRG, #1 @ set thumb bit
         ORR XRG, r0 @ ready for BX
         BX XRG
