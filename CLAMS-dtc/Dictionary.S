@@ -42,7 +42,7 @@
         STR \regname, [\stack\()P]
         .endm
 
-@ macros for external function calls
+@ macros for external addressing and function calls
 
         @ nest
         .macro _x_nest
@@ -54,16 +54,22 @@
         POP {PC}
         .endm
 
-        @ macro to create a "func_addr" word
-        .macro _x_addr func_name
+        @ macro to create an "x_addr" word
+        .macro _x_addr name
         .balign _CELL
-        .set _addr_\func_name, .
-        .word \func_name
+        .set _addr_\name\(), .
+        .word \name
+        .endm
+
+        @ macro to load an "x_addr" word
+        .macro _x_load reg, name
+        LDR \reg, _addr_\name\() @ get the address
         .endm
 
         @ macro to call a function via XRG
-        .macro _x_call func_name
-        LDR r0, _addr_\func_name @ get the address
+        .macro _x_call name
+        @LDR r0, _addr_\name\() @ get the address
+        _x_load r0, \name\()
         MOV XRG, #1 @ force the thumb bit before branching!
         ORR XRG, r0
         _x_nest
@@ -219,11 +225,15 @@ _system_dict_start: .word .
         _push_to PS, r0
         _next
 
+_x_addr sdk_key
+
         _header "EMIT", emit, _COMPLETE
         _code_word
         _pop_to r0, PS
         _x_call sdk_emit
         _next
+
+_x_addr sdk_emit
 
         _header "EXECUTE", execute, _COMPLETE
         _code_word
@@ -231,6 +241,43 @@ _system_dict_start: .word .
         MOV XRG, #1 @ set thumb bit
         ORR XRG, r0 @ ready for BX
         BX XRG
+
+        @ stacks grow downwards - top of stack is the lowest address
+        @ _param_stack_top is the lowest address that can legally contain a cell
+        @ _param_stack_bottom is one cell *above* the highest address that can
+        @ legally contain a cell!
+        _header "clear_param_stack", clear_param_stack, _COMPLETE
+        _code_word
+        _x_load PSP, _param_stack_bottom
+        _x_load r1, _param_stack_top
+        LDR r0, _hamburger
+cps1:
+        STR r0, [r1]
+        ADD r1, #_CELL
+        CMP r1, PSP
+        BLO cps1
+        _next
+
+_x_addr _param_stack_bottom
+_x_addr _param_stack_top
+
+        _header "clear_return_stack", clear_return_stack, _COMPLETE
+        _code_word
+        _x_load RSP, _return_stack_bottom
+        _x_load r1, _return_stack_top
+        LDR r0, _hamburger
+crs1:
+        STR r0, [r1]
+        ADD r1, #_CELL
+        CMP r1, RSP
+        BLO crs1
+        _next
+
+_x_addr _return_stack_bottom
+_x_addr _return_stack_top
+
+.balign _CELL, 0
+_hamburger: .word 0xDEADBEEF
 
         _header "param_top_3", param_top_3, _COMPLETE
         _code_word
@@ -249,13 +296,10 @@ _system_dict_start: .word .
         _x_call printf
         _x_unnest
 
+_x_addr printf
+
 _param_format: .asciz "parameter stack top, second, third => %x, %x, %x\n"
 _return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
-
-@ BLX call vector table
-_x_addr sdk_key
-_x_addr sdk_emit
-_x_addr printf
 
 .global _system_dict_end
 _system_dict_end: .word .
