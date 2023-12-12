@@ -34,30 +34,6 @@
 
 .include "SymbolDefs.S"
 
-@ print top three cells of the parameter stack
-.thumb_func
-.global param_top3
-param_top3:
-        _sdk_nest
-        LDR r0, =_param_format
-        LDM PSP, { r1, r2, r3, PSP}
-        BL printf
-        _sdk_unnest
-
-@ print top three cells of the return stack
-.thumb_func
-.global return_top3
-return_top3:
-        _sdk_nest
-        LDR r0, =_return_format
-        LDR r0, =_stack_format_3
-        LDM RSP, { r1, r2, r3, RSP}
-        BL printf
-        _sdk_unnest
-
-_param_format: .asciz "parameter stack top, second, third => %x, %x, %x\n"
-_return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
-
 @ The stacks
 .data
 .balign _CELL, 0
@@ -74,6 +50,7 @@ _return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
         @ guard words
         .word 0xdeadbeef
         .word 0xdeadbeef
+        .word 0xdeadbeef
 
 @ return stack
 .global _return_stack_top
@@ -85,5 +62,6 @@ _return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
 .set _return_stack_bottom, .
 
         @ guard words
+        .word 0xdeadbeef
         .word 0xdeadbeef
         .word 0xdeadbeef
