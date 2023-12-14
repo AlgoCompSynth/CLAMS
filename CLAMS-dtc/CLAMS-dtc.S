@@ -45,6 +45,6 @@ loop:
         B loop
 
 prompt: .asciz " Ok\n> "
-.balign _CELL, 0
+.balign _AU_CELL, 0
 sleep_ms: .word 1000
 dupe: .word dupe @ link in the dictionary

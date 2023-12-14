@@ -63,7 +63,7 @@ XRG .req r3 @ "eXecute" register - used for branching and calling code functions
 @ reference: Forth 2012 standard, section D2.2
 @ For the RP2040 SDK, an address unit is 8 bits aka a byte, and addressing is
 @ little-endian.
-.set _CHAR, 1 @ address units per character
-.set _CELL, 4 @ address units per cell
+.set _AU_CHAR, 1 @ address units per character
+.set _AU_CELL, 4 @ address units per cell
 .set _CELL_SHIFT, 2 @ bits to shift for cell - address unit conversions
 .set _STACK_CELLS, 64 @ number of cells in a stack

@@ -38,7 +38,7 @@
 
         @ push to stack from register
         .macro _push_to stack regname
-        SUB \stack\()P, #_CELL
+        SUB \stack\()P, #_AU_CELL
         STR \regname, [\stack\()P]
         .endm
 
@@ -66,7 +66,7 @@
 
         @ macro to create an "x_addr" word
         .macro _x_addr name
-        .balign _CELL
+        .balign _AU_CELL
         .set _addr_\name\(), .
         .word \name
         .endm
@@ -102,7 +102,7 @@
         @ build link field
         @ The CLAMS link field holds the distance in bytes to the previous link
         @ field
-        .balign _CELL, 0
+        .balign _AU_CELL, 0
         .set _link_field, .
         .set _\pronunciation\()_link, . @ debugging symbol for link field
         .if _link_field == _system_dict_start
@@ -129,7 +129,7 @@
 1:
 
         @ define global symbol for debugging / testing / internal reference.
-        .balign _CELL, 0
+        .balign _AU_CELL, 0
         .thumb_func
         .global _\pronunciation\()
         .set _\pronunciation\(), .
@@ -149,7 +149,7 @@
         @ "next" macro
         .macro _next
         LDR WRD, [INP] @ get next address
-        ADD INP, #_CELL @ advance INP
+        ADD INP, #_AU_CELL @ advance INP
         BX WRD @ jump to next code routine
         .endm
 
@@ -174,7 +174,7 @@
 .global _doLIST
 .thumb_func
 _doLIST:
-	ADD WRD, #_CELL @ point to first word of thread
+	ADD WRD, #_AU_CELL @ point to first word of thread
         _push_to RS INP @ nest INP
         MOV INP, WRD @ "branch indirect" to INP
         _next
@@ -182,14 +182,14 @@ _doLIST:
 .global _doLIT
 .thumb_func
 _doLIT:
-        ADD WRD, #_CELL @ point to constant
+        ADD WRD, #_AU_CELL @ point to constant
         LDR r0, [WRD]
         _push_to PS r0 @ push the constant
         _next
 
 @ the dictionary itself!
 
-.balign _CELL
+.balign _AU_CELL
 .global _system_dict_start
 _system_dict_start: .word .
 
@@ -203,7 +203,7 @@ _system_dict_start: .word .
 
         _header "OVER", over, _COMPLETE
         _code_word
-        LDR r0, [PSP, #_CELL] @ 2nd => r0
+        LDR r0, [PSP, #_AU_CELL] @ 2nd => r0
         _push_to PS, r0
         _next
 
@@ -211,7 +211,7 @@ _system_dict_start: .word .
         _code_word
         LDM PSP, {r0, r1, PSP} @ top => r0, 2nd => r1
         STR r1, [PSP]
-        STR r0, [PSP, #_CELL]
+        STR r0, [PSP, #_AU_CELL]
         _next
 
         _header "DROP", drop, _COMPLETE
@@ -223,8 +223,8 @@ _system_dict_start: .word .
         _code_word
         @ x1, x2, x3 -> x2, x3, x1
         LDM PSP, {r0, r1, r2, PSP} @ x3 => r0, x2 => r1, x1 => r2
-        STR r1, [PSP, #_CELL*2] @ stash x2
-        STR r0, [PSP, #_CELL] @ stash x3
+        STR r1, [PSP, #_AU_CELL*2] @ stash x2
+        STR r0, [PSP, #_AU_CELL] @ stash x3
         STR r2, [PSP] @ stash x1
         _next
 
@@ -263,7 +263,7 @@ _x_addr sdk_emit
         LDR r0, _hamburger
 cps1:
         STR r0, [r1]
-        ADD r1, #_CELL
+        ADD r1, #_AU_CELL
         CMP r1, PSP
         BLO cps1
         _next
@@ -278,14 +278,14 @@ _x_addr _param_stack_top
         LDR r0, _hamburger
 crs1:
         STR r0, [r1]
-        ADD r1, #_CELL
+        ADD r1, #_AU_CELL
         CMP r1, RSP
         BLO crs1
         _next
 
 _x_addr _return_stack_bottom
 _x_addr _return_stack_top
-.balign _CELL, 0
+.balign _AU_CELL, 0
 _hamburger: .word 0xDEADBEEF
 
         _header "param_top_3", param_top_3, _COMPLETE

@@ -26,17 +26,29 @@
 
 */
 
+@ We put all of the data space into a single file, so we can manage it at assembly
+@ time and know how much space it takes up. Unlike many Forths, CLAMS has ***no***
+@ transient areas - all flash and RAM areas are allocated ahead of time with global
+@ names the linker knows about. The only variable-sized data structure in CLAMS is
+@ the data space portion of the dictionary - the part created by the user at run
+@ time. And it has a pre-defined maximum size.
+
+.include "SymbolDefs.S"
+
+.data
+.balign _AU_CELL, 0
+
+.global _start_data_space
+.set _start_data_space, .
+
 @ Stack logic:
 
 @ The stacks grow from high addresses downwards. Register `PSP` points to the
 @ top element of the parameter stack, and register `RSP` points to the top of the
 @ return stack.
 
-.include "SymbolDefs.S"
 
 @ The stacks
-.data
-.balign _CELL, 0
 
 @ parameter stack
 .global _param_stack_top
@@ -65,3 +77,9 @@
         .word 0xdeadbeef
         .word 0xdeadbeef
         .word 0xdeadbeef
+
+.global _end_data_space
+.set _end_data_space, .
+
+.global _data_space_bytes
+.set _data_space_bytes, _end_data_space - _start_data_space
