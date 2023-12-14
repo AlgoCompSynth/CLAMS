@@ -153,6 +153,46 @@
         BX WRD @ jump to next code routine
         .endm
 
+@ Common code for a word that uses a single instruction binary ALU operator on the
+@ top two stack cells. Such words have the stack effect
+@
+@    ( left right -- result )
+@
+@ where `result` = `left <op> right`. That is, the postfix `left right <op>` has
+@ the same `result` as the infix `left <op> right`.
+
+        .macro _binary_alu opcode:req
+        _pop_two PS @ pop left operand => r0, right operand => r1
+        \opcode\() r0, r1 @ r0 := left <OP> right
+        _push_to PS, r0
+        .endm
+
+@ Common code for a word that compares the top two cells on the stack. Such words
+@ have the stack effect
+@
+@    ( left right -- flag )
+@
+@ where `flag` = true (all ones) if `left <cmp> right` is true, and false (all
+@ zeroes) if `left <cmp> right` is false.
+
+        .macro _binary_cmp cmp:req
+        _pop_two PS @ pop left operand => r0, right operand => r1
+        LDR r2, _TRUE_FLAG @ true flag => r2
+        CMP r0, r1
+        B\cmp\() 1f @ branch if true
+        MVN r2, r2 @ "invert" the true flag
+1:
+        _push_to PS, r2 @ push flag to parameter stack
+        .endm
+
+@ Common code for unary operations
+
+        .macro _unary_op instruction:req
+        LDR r0, [PSP]
+        \instruction\()
+        STR r0, [PSP]
+        .endm
+
 @ character codes
 .set _NUL, 0x00 @ null / string terminator
 .set _BEL, 0x07 @ bell
@@ -227,6 +267,186 @@ _system_dict_start: .word .
         STR r0, [PSP, #_AU_CELL] @ stash x3
         STR r2, [PSP] @ stash x1
         _next
+
+        @ position-independent operations
+        _header "@", fetch, _COMPLETE
+        _code_word
+        LDR r0, [PSP] @ address => r0
+        LDR r0, [r0] @ data => r0
+        _push_to PS, r0
+        _next
+
+        _header "!", store, _COMPLETE
+        _code_word
+        _pop_two PS @ pop data => r0, address => r1
+        STR r0, [r1]
+        _next
+
+        _header "1+", one_plus, _COMPLETE
+        _code_word
+        _unary_op "ADD r0, #1"
+        _next
+
+        _header "1-", one_minus, _COMPLETE
+        _code_word
+        _unary_op "SUB r0, #1"
+        _next
+
+        _header "2*", two_star, _COMPLETE
+        _code_word
+        _unary_op "LSL r0, #1"
+        _next
+
+        _header "2/", two_slash, _COMPLETE
+        _code_word
+        _unary_op "ASR r0, #1"
+        _next
+
+        _header "CELL+", cell_plus, _COMPLETE
+        _code_word
+        _unary_op "ADD r0, #_AU_CELL"
+        _next
+
+        _header "CELL-", cell_minus, _COMPLETE
+        _code_word
+        _unary_op "SUB r0, #_AU_CELL"
+        _next
+
+        _header "CELLS", cells, _COMPLETE
+        _code_word
+        _unary_op "LSL r0, #_CELL_SHIFT"
+        _next
+
+        _header "CHAR+", char_plus, _COMPLETE
+        _code_word
+        _unary_op "ADD r0, #_AU_CHAR"
+        _next
+
+        _header "CHAR-", char_minus, _COMPLETE
+        _code_word
+        _unary_op "SUB r0, #_AU_CHAR"
+        _next
+
+        _header "CHARS", chars, _COMPLETE
+        _code_word
+        _next
+
+        @ arithmetic operators
+        _header "+", plus, _COMPLETE
+        _code_word
+        _binary_alu ADD
+        _next
+
+        _header "-", minus, _COMPLETE
+        _code_word
+        _binary_alu SUB
+        _next
+
+        _header "*", star, _COMPLETE
+        _code_word
+        _binary_alu MUL
+        _next
+
+        _header "NEGATE", negate, _COMPLETE
+        _code_word
+        _unary_op "NEG r0, r0"
+        _next
+
+        _header "ALIGNED", aligned, _COMPLETE
+        _code_word
+        LDR r0, [PSP]
+        MOV r1, #_AU_CELL
+        NEG r1, r1 @ # bitmask => r1
+        ADD r0, #_AU_CELL
+        SUB r0, #1
+        AND r0, r1
+        STR r0, [PSP]
+        _next
+
+        @ boolean operators
+        _header "AND", and, _COMPLETE
+        _code_word
+        _binary_alu AND
+        _next
+
+        _header "OR", or, _COMPLETE
+        _code_word
+        _binary_alu ORR
+        _next
+
+        _header "XOR", x_or, _COMPLETE
+        _code_word
+        _binary_alu EOR
+        _next
+
+        _header "INVERT", invert, _COMPLETE
+        _code_word
+        MVN r0, r0
+        _next
+
+        _header "LSHIFT", l_shift, _COMPLETE
+        _code_word
+        _binary_alu LSL
+        _next
+
+        _header "RSHIFT", r_shift, _COMPLETE
+        _code_word
+        _binary_alu LSR
+        _next
+
+        @ binary comparison operators
+        _header "<", less_than, _COMPLETE
+        _code_word
+        _binary_cmp LT
+        _next
+
+        _header "<=", less_or_equal, _COMPLETE
+        _code_word
+        _binary_cmp LE
+        _next
+
+        _header "=", equals, _COMPLETE
+        _code_word
+        _binary_cmp EQ
+        _next
+
+        _header "<>", not_equal, _COMPLETE
+        _code_word
+        _binary_cmp NE
+        _next
+
+        _header ">", greater_than, _COMPLETE
+        _code_word
+        _binary_cmp GT
+        _next
+
+        _header ">=", greater_or_equal, _COMPLETE
+        _code_word
+        _binary_cmp GE
+        _next
+
+        _header "U>", u_greater_than, _COMPLETE
+        _code_word
+        _binary_cmp HI
+        _next
+
+        _header "U>=", u_greater_or_equal, _COMPLETE
+        _code_word
+        _binary_cmp HS
+        _next
+
+        _header "U<", u_less_than, _COMPLETE
+        _code_word
+        _binary_cmp LO
+        _next
+
+        _header "U<=", u_less_or_equal, _COMPLETE
+        _code_word
+        _binary_cmp LS
+        _next
+
+.balign _AU_CELL, 0
+_TRUE_FLAG: .word 0xFFFFFFFF
 
         @ terminal I/O words
         _header "KEY", key, _COMPLETE
