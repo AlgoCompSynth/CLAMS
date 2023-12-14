@@ -13,7 +13,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 add_executable(CLAMS-dtc
   CLAMS-dtc.S
   Dictionary.S
-  Stacks.S
+  DataSegment.S
   SymbolDefs.S
   Wrappers.c
 )
