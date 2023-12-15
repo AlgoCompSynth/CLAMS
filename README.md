@@ -24,9 +24,9 @@ enters `CLAMS` / Forth code interactively.
 > “Premature optimization may be the root of all evil, but it is damned
 > fun!” ~ M. Edward (Ed) Borasky
 
-1.  Forth (Brodie accessed 2023-10-21) is an extensible interactive
-    operating system. It supports editing, assembling, compiling,
-    debugging and running real-time tasks from a terminal.
+1.  Forth (Brodie 2022) is an extensible interactive operating system.
+    It supports editing, assembling, compiling, debugging and running
+    real-time tasks from a terminal.
 2.  Forth is efficient. A well-designed Forth will usually run a task at
     no worse than half the speed of a hand-optimized assembly version.
     `CLAMS` will have several optimizations built in for the ultimate
@@ -90,7 +90,7 @@ performances.
 
 <div id="ref-brodie2022" class="csl-entry">
 
-Brodie, Leo. accessed 2023-10-21. *Starting Forth*. FORTH, Inc.
+Brodie, Leo. 2022. “Starting Forth.” FORTH, Inc.
 <https://www.forth.com/starting-forth/0-starting-forth/>.
 
 </div>
@@ -98,7 +98,7 @@ Brodie, Leo. accessed 2023-10-21. *Starting Forth*. FORTH, Inc.
 <div id="ref-forth2022" class="csl-entry">
 
 Forth 200x Committee. 2012. “Forth 2012 Standard.” Forth 200x Committee.
-<https://forth-standard.org/standard/words>.
+<http://www.forth200x.org/documents/forth-2012.pdf>.
 
 </div>
 
