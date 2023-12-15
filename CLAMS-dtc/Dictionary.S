@@ -448,19 +448,58 @@ _system_dict_start: .word .
 .balign _AU_CELL, 0
 _TRUE_FLAG: .word 0xFFFFFFFF
 
+        @ division operators - use the SDK and hardware divider
+        _header "/MOD", slash_mod, _COMPLETE
+        @ ( dividend divisor –– remainder quotient )
+        _code_word
+        _x_nest
+        _pop_from PS, r1 @ divisor => r1
+        _pop_from PS, r0 @ dividend => r0
+        _x_call sdk_slash_mod
+        _push_to PS, r1 @ push remainder
+        _push_to PS, r0 @ push quotient
+        _x_unnest
+        _next
+
+        _header "/", slash, _COMPLETE
+        _code_word
+        _x_nest
+        _pop_from PS, r1 @ divisor => r1
+        _pop_from PS, r0 @ dividend => r0
+        _x_call sdk_slash_mod
+        _push_to PS, r0 @ push quotient
+        _x_unnest
+        _next
+
+        _header "MOD", mod, _COMPLETE
+        _code_word
+        _x_nest
+        _pop_from PS, r1 @ divisor => r1
+        _pop_from PS, r0 @ dividend => r0
+        _x_call sdk_slash_mod
+        _push_to PS, r1 @ push remainder
+        _x_unnest
+        _next
+
+_x_addr sdk_slash_mod
+
         @ terminal I/O words
         _header "KEY", key, _COMPLETE
         _code_word
+        _x_nest
         _x_call sdk_key
         _push_to PS, r0
+        _x_unnest
         _next
 
 _x_addr sdk_key
 
         _header "EMIT", emit, _COMPLETE
         _code_word
+        _x_nest
         _pop_from PS, r0
         _x_call sdk_emit
+        _x_unnest
         _next
 
 _x_addr sdk_emit
