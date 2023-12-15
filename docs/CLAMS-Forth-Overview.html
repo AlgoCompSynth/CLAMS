@@ -155,6 +155,7 @@ div.csl-indent {
   <li><a href="#requirements" id="toc-requirements" class="nav-link active" data-scroll-target="#requirements"><span class="header-section-number">2.1</span> Requirements</a></li>
   <li><a href="#desiderata" id="toc-desiderata" class="nav-link" data-scroll-target="#desiderata"><span class="header-section-number">2.2</span> Desiderata</a></li>
   <li><a href="#design-architecture" id="toc-design-architecture" class="nav-link" data-scroll-target="#design-architecture"><span class="header-section-number">2.3</span> Design / architecture</a></li>
+  <li><a href="#status-roadmap" id="toc-status-roadmap" class="nav-link" data-scroll-target="#status-roadmap"><span class="header-section-number">2.4</span> Status / roadmap</a></li>
   </ul>
 </nav>
     </div>
@@ -184,41 +185,54 @@ div.csl-indent {
 <section id="requirements" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="requirements"><span class="header-section-number">2.1</span> Requirements</h2>
 <ol type="1">
-<li><p>Compatibility with the Raspberry Pi Pico C/C++ SDK, drivers, and libraries: The ability to use the massive toolset the SDK and community open source projects provide is absolutely crucial to minimize developer time for complex projects. The USB and WiFi / Bluetooth stacks alone would take many months to duplicate in Forth. The primary references for this are Stephen Smith’s <em>RP2040 Assembly Language Programming</em> <span class="citation" data-cites="smith2021rp2040">(<a href="references.html#ref-smith2021rp2040" role="doc-biblioref">Smith 2021</a>)</span>, and, of course, <em>Raspberry Pi Pico C/C++ SDK</em> <span class="citation" data-cites="raspberrypi2023a">(<a href="references.html#ref-raspberrypi2023a" role="doc-biblioref">Ltd Accessed 2023-10-22</a>)</span>.</p></li>
-<li><p>Optimized for speed: CLAMS-Forth will be written in RP2040 assembly and will provide an RP2040 assembler. CLAMS-Forth will use subroutine threading and will allow both calling and inlining <code>CODE</code> words written in assembly.</p></li>
-<li><p>Cooperative multitasking: The RP2040 has two cores, and each core has a divide coprocessor and two interpolators. In addition, the RP2040 has two programmable input / output (PIO) blocks. Cooperative multitasking is the Forth way to exploit this available concurrency and is well-supported by the SDK.</p></li>
-<li><p>An enhanced Forth virtual machine, providing registers for indexing and intermendiate results as defined in Stephen Pelc’s “Updating the Forth virtual machine” <span class="citation" data-cites="pelc2008updating">(<a href="references.html#ref-pelc2008updating" role="doc-biblioref">Pelc 2008</a>)</span></p></li>
-<li><p>A high-speed block floating point digital signal processing library.</p></li>
+<li><p>Compatibility with the Raspberry Pi Pico C/C++ SDK, drivers, and libraries: The ability to use the massive toolset the SDK and community open source projects provide is absolutely crucial to minimize developer time for complex projects. The USB and WiFi / Bluetooth stacks alone would take many months to duplicate in Forth. The primary references for this are Stephen Smith’s <em>RP2040 Assembly Language Programming</em> <span class="citation" data-cites="smith2021rp2040">(<a href="references.html#ref-smith2021rp2040" role="doc-biblioref">Smith 2021</a>)</span>, and, of course, <em>Raspberry Pi Pico C/C++ SDK</em> <span class="citation" data-cites="raspberrypi2023a">(<a href="references.html#ref-raspberrypi2023a" role="doc-biblioref">Raspberry Pi Ltd Accessed 2023-10-22</a>)</span>.</p></li>
+<li><p>Optimized for speed: CLAMS-Forth will be written in RP2040 assembly and will provide an RP2040 assembler.</p></li>
+<li><p>Digital signal processing: A high-speed block floating point digital signal processing library will be provided.</p></li>
 </ol>
 </section>
 <section id="desiderata" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="desiderata"><span class="header-section-number">2.2</span> Desiderata</h2>
 <ol type="1">
-<li>Forth 2012 standard compatibility is a strong desire but not an absolute requirement. Most of the CORE word set and some of the CORE EXT word set will be implemented, but a few tricky or risky CORE words will be omitted. The Search-Order and Programming-Tools word sets will be implemented.</li>
-</ol>
-<p>Custom word sets will be provided for cooperative multitasking, high-speed digital signal processing, and SDK / hardware access. <strong><em>All access to the hardware / system level operations will be performed via C language calls to the SDK.</em></strong></p>
-<ol start="2" type="1">
+<li><p>Forth 2012 standard compatibility is a strong desire but not an absolute requirement. Much of the CORE word set and some of the CORE EXT word set will be implemented, but a number of tricky, risky or little-used CORE words will be omitted. Many of the two-cell operations, for example, aren’t really needed in a Forth running on a 32-bit architecture like the RP2040.</p>
+<p>Parts of the Search-Order and Programming-Tools word sets will be implemented. I want to have the Block word set using blocks in flash memory, but that’s not going to be in the first release.</p>
+<p>Custom word sets will be provided for high-speed digital signal processing and SDK / hardware access. <strong><em>All access to the hardware / system level operations will be performed via C language calls to the SDK.</em></strong></p></li>
+<li><p>Cooperative multitasking: The RP2040 has two cores, and each core has a divide coprocessor and two interpolators. In addition, the RP2040 has two programmable input / output (PIO) blocks. Cooperative multitasking is the Forth way to exploit this available concurrency and is well-supported by the SDK.</p></li>
 <li><p>Portability to other boards with the RP2040 microcontroller is possible, but is not on the roadmap yet. As with CLAMS itself, the initial target is the Pimoroni PicoVision.</p></li>
-<li><p>Floating point support is desirable, but is a fairly low priority. Floating point arithmetic is convenient, and the RP2040 SDK provides optimized floating point libraries, but there’s no hardware floating point arithmetic on the RP2040. So it’s not obvious how useful this capability would be.</p></li>
+<li><p>Floating point support is desirable, but is a fairly low priority. Floating point arithmetic is convenient, and the RP2040 SDK provides optimized floating point libraries, but there’s no hardware floating point arithmetic on the RP2040. It’s too slow for real-time digital signal processing, so it’s not obvious how useful this capability would be.</p></li>
 </ol>
 </section>
 <section id="design-architecture" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="design-architecture"><span class="header-section-number">2.3</span> Design / architecture</h2>
-<p>The top-level design / architecture are based on Dr.&nbsp;Chen-Hanson Ting’s <em>eForth Overview</em> <span class="citation" data-cites="pintaske2018eforth">(<a href="references.html#ref-pintaske2018eforth" role="doc-biblioref">Pintaske and Ting 2018</a>)</span>. In eForth, a small number of primitive words are implemented with a macro assembler, then the rest of the system is built in Forth on top of those words. The lower-level design will follow <em>Irreducible Complexity: EForth for Discovery</em> <span class="citation" data-cites="pintaske2019irreducible">(<a href="references.html#ref-pintaske2019irreducible" role="doc-biblioref">Pintaske and Ting 2019</a>)</span>.</p>
+<p>The top-level design and architecture are based on Dr.&nbsp;Chen-Hanson Ting’s <em>eForth Overview</em> <span class="citation" data-cites="pintaske2018eforth">(<a href="references.html#ref-pintaske2018eforth" role="doc-biblioref">Pintaske and Ting 2018</a>)</span>. In eForth, a small number of primitive words are implemented with a macro assembler, then the rest of the system is built in Forth on top of those words. Brad Rodriguez’ CamelForth <span class="citation" data-cites="pintaske2018moving">(<a href="references.html#ref-pintaske2018moving" role="doc-biblioref">Pintaske and Rodriguez 2018</a>)</span> also provides some implementation guidance.</p>
+<p>The original plan for CLAMS-Forth was to use subroutine threading and inline code. There is a partial implementation, but I decided to switch to a more “traditional” but less efficient direct threaded implementation. There are two main reasons:</p>
+<ol type="1">
+<li><p>The branch instructions in the RP2040 are program counter relative, and the available target distances are limited by the instruction formats. In particular, the function call (<code>BL</code>) instruction has an available range of plus or minus 16 megabytes. While this is enough within the RP2040’s flash or SRAM, it is <em>not</em> enough to cross the address space distance between SRAM and flash.</p>
+<p>CLAMS-Forth will have a dictionary split between flash and SRAM. The entire system dictionary - Forth virtual machine, text interpreter and compiler - will be in flash. Only words created by the user at run time will be in SRAM.</p>
+<p>Dr.&nbsp;Ting’s <em>eForth for Discovery</em> <span class="citation" data-cites="pintaske2019irreducible">(<a href="references.html#ref-pintaske2019irreducible" role="doc-biblioref">Pintaske and Ting 2019</a>)</span> gets around this limitation by copying the system dictionary from flash to RAM at boot time. But the hardware he used has more RAM and a more complete instruction set than the RP2040. The RP2040 only has 264 kilobytes of SRAM and much of that will be used for audio buffers. The more code and tables safely stashed away in the 2 megabytes of flash, the better.</p></li>
+<li><p>Even with a dictionary entirely in SRAM at run time, constructing a <code>BL</code> function call instruction while compiling a user “colon” definition is a tricky process, difficult to document, understand and maintain. If you’re interested in the details, see <span class="citation" data-cites="pintaske2019irreducible">(<a href="references.html#ref-pintaske2019irreducible" role="doc-biblioref">Pintaske and Ting 2019, sec. 3.5.5</a>)</span>. I decided to switch to direct threading, rather than spend an extra week coding both a flash-to-SRAM relocation and an algorithm to compute a relative branch address that is then split into four separate bit fields of two 16-bit <code>thumb</code> instructions.</p></li>
+</ol>
+</section>
+<section id="status-roadmap" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="status-roadmap"><span class="header-section-number">2.4</span> Status / roadmap</h2>
+<ol type="1">
+<li><p>There is a partial implementation of a subroutine-threaded version with inlining. I am leaving that in the repository in a development branch but won’t be working on it unless I find that the direct-threaded version cannot meet speed requirements. The subroutine-threaded version is in branch <code>forth-stc</code>.</p></li>
+<li><p>The direct-threaded version is nearing a release. I expect to have the system dictionary, text interpreter and compiler done by January 1, 2024. It is in the branch <code>forth-dtc</code>.</p></li>
+<li><p>The next step is to implement synthesis algorithms. The general process will be to prototype them in Forth, converting to assembler when needed. That will create the requirements for the digital signal processing library.</p></li>
+</ol>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-raspberrypi2023a" class="csl-entry" role="listitem">
-Ltd, Raspberry Pi. Accessed 2023-10-22. <span>“Raspberry Pi Pico c/c++ SDK.”</span> <a href="https://www.raspberrypi.com/documentation/microcontrollers/c_sdk.html" class="uri">https://www.raspberrypi.com/documentation/microcontrollers/c_sdk.html</a>; Raspberry Pi Ltd.
-</div>
-<div id="ref-pelc2008updating" class="csl-entry" role="listitem">
-Pelc, Stephen. 2008. <span>“Updating the Forth Virtual Machine.”</span> In <em>24th EuroForth Conference</em>, 24–30.
+<div id="ref-pintaske2018moving" class="csl-entry" role="listitem">
+Pintaske, J., and B. Rodriguez. 2018. <em>Moving Forth - Internals and TTL Processor: Forth Internals</em>. Amazon Digital Services LLC - Kdp Print Us.
 </div>
 <div id="ref-pintaske2018eforth" class="csl-entry" role="listitem">
 Pintaske, J., and C. H. Ting. 2018. <em>EForth Overview: C. H. Ting</em>. Amazon Digital Services LLC - Kdp. <a href="https://books.google.com/books?id=OpEDygEACAAJ">https://books.google.com/books?id=OpEDygEACAAJ</a>.
 </div>
 <div id="ref-pintaske2019irreducible" class="csl-entry" role="listitem">
 ———. 2019. <em>Irreducible Complexity: EForth for Discovery</em>. Amazon Digital Services LLC - Kdp Print Us.
+</div>
+<div id="ref-raspberrypi2023a" class="csl-entry" role="listitem">
+Raspberry Pi Ltd. Accessed 2023-10-22. <span>“Raspberry Pi Pico <span>C/C++</span> SDK.”</span> <a href="https://www.raspberrypi.com/documentation/microcontrollers/c_sdk.html" class="uri">https://www.raspberrypi.com/documentation/microcontrollers/c_sdk.html</a>; <span>Raspberry Pi Ltd</span>.
 </div>
 <div id="ref-smith2021rp2040" class="csl-entry" role="listitem">
 Smith, S. 2021. <em>RP2040 Assembly Language Programming: ARM Cortex-M0+ on the Raspberry Pi Pico</em>. Apress.
