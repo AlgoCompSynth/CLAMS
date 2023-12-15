@@ -13,48 +13,91 @@ are Stephen Smith's _RP2040 Assembly Language Programming_ [@smith2021rp2040],
 and, of course, _Raspberry Pi Pico C/C++ SDK_ [@raspberrypi2023a].
 
 2. Optimized for speed: CLAMS-Forth will be written in RP2040 assembly
-and will provide an RP2040 assembler. CLAMS-Forth will use subroutine
-threading and will allow both calling and inlining `CODE` words
-written in assembly.
+and will provide an RP2040 assembler.
 
-3. Cooperative multitasking: The RP2040 has two cores, and each core has a
-divide coprocessor and two interpolators. In addition, the RP2040 has
-two programmable input / output (PIO) blocks. Cooperative multitasking
-is the Forth way to exploit this available concurrency and is
-well-supported by the SDK.
-
-4. An enhanced Forth virtual machine, providing registers for indexing and
-intermendiate results as defined in Stephen Pelc's "Updating the Forth
-virtual machine" [@pelc2008updating]
-
-5. A high-speed block floating point digital signal processing library.
+3. Digital signal processing: A high-speed block floating point digital signal processing library will be provided.
 
 ## Desiderata
 
 1. Forth 2012 standard compatibility is a strong desire but not an absolute
-requirement. Most of the CORE word set and some of the CORE EXT word set
-will be implemented, but a few tricky or risky CORE words will be omitted. The
-Search-Order and Programming-Tools word sets will be implemented.
+requirement. Much of the CORE word set and some of the CORE EXT word set
+will be implemented, but a number of tricky, risky or little-used CORE words
+will be omitted. Many of the two-cell operations, for example, aren't really
+needed in a Forth running on a 32-bit architecture like the RP2040.
 
-Custom word sets will be provided for cooperative multitasking, high-speed
-digital signal processing, and SDK / hardware access. ***All access to
-the hardware / system level operations will be performed via C language calls to
-the SDK.***
+    Parts of the Search-Order and Programming-Tools word sets will be
+    implemented. I want to have the Block word set using blocks in flash memory,
+    but that's not going to be in the first release.
 
-2. Portability to other boards with the RP2040 microcontroller is possible,
+    Custom word sets will be provided for high-speed digital signal processing
+    and SDK / hardware access. ***All access to the hardware / system level
+    operations will be performed via C language calls to the SDK.***
+
+2. Cooperative multitasking: The RP2040 has two cores, and each core has a
+divide coprocessor and two interpolators. In addition, the RP2040 has two
+programmable input / output (PIO) blocks. Cooperative multitasking is the Forth
+way to exploit this available concurrency and is well-supported by the SDK.
+
+3. Portability to other boards with the RP2040 microcontroller is possible,
 but is not on the roadmap yet. As with CLAMS itself, the initial target is the
 Pimoroni PicoVision.
 
-3. Floating point support is desirable, but is a fairly low priority.
-Floating point arithmetic is convenient, and the RP2040 SDK provides
-optimized floating point libraries, but there's no hardware floating
-point arithmetic on the RP2040. So it's not obvious how useful
-this capability would be.
+4. Floating point support is desirable, but is a fairly low priority. Floating
+point arithmetic is convenient, and the RP2040 SDK provides optimized floating
+point libraries, but there's no hardware floating point arithmetic on the
+RP2040. It's too slow for real-time digital signal processing, so it's not
+obvious how useful this capability would be.
 
 ## Design / architecture
 
-The top-level design / architecture are based on Dr. Chen-Hanson Ting's
+The top-level design and architecture are based on Dr. Chen-Hanson Ting's
 _eForth Overview_ [@pintaske2018eforth]. In eForth, a small number of primitive
 words are implemented with a macro assembler, then the rest of the system is
-built in Forth on top of those words. The lower-level design will follow
-_Irreducible Complexity: EForth for Discovery_ [@pintaske2019irreducible].
+built in Forth on top of those words. Brad Rodriguez' CamelForth
+[@pintaske2018moving] also provides some implementation guidance.
+
+The original plan for CLAMS-Forth was to use subroutine threading and inline
+code. There is a partial implementation, but I decided to switch to a more
+"traditional" but less efficient direct threaded implementation. There are two
+main reasons:
+
+1. The branch instructions in the RP2040 are program counter relative, and the
+available target distances are limited by the instruction formats. In particular,
+the function call (`BL`) instruction has an available range of plus or minus
+16 megabytes. While this is enough within the RP2040's flash or SRAM, it is
+*not* enough to cross the address space distance between SRAM and flash.
+
+    CLAMS-Forth will have a dictionary split between flash and SRAM. The entire
+    system dictionary - Forth virtual machine, text interpreter and compiler -
+    will be in flash. Only words created by the user at run time will be in
+    SRAM.
+    
+    Dr. Ting's _eForth for Discovery_ [@pintaske2019irreducible] gets around
+    this limitation by copying the system dictionary from flash to RAM at boot
+    time. But the hardware he used has more RAM and a more complete instruction
+    set than the RP2040. The RP2040 only has 264 kilobytes of SRAM and much of
+    that will be used for audio buffers. The more code and tables safely stashed
+    away in the 2 megabytes of flash, the better.
+
+2. Even with a dictionary entirely in SRAM at run time, constructing a `BL`
+function call instruction while compiling a user "colon" definition is a tricky process, difficult to document,
+understand and maintain. If you're interested in the details, see 
+[@pintaske2019irreducible, section 3.5.5 ]. I decided to switch to direct
+threading, rather than spend an extra week coding both a flash-to-SRAM
+relocation and an algorithm to compute a relative branch address that is then
+split into four separate bit fields of two 16-bit `thumb` instructions.
+
+## Status / roadmap
+
+1. There is a partial implementation of a subroutine-threaded version with
+inlining. I am leaving that in the repository in a development branch but won't
+be working on it unless I find that the direct-threaded version cannot meet
+speed requirements. The subroutine-threaded version is in branch `forth-stc`.
+
+2. The direct-threaded version is nearing a release. I expect to have the
+system dictionary, text interpreter and compiler done by January 1, 2024. It is
+in the branch `forth-dtc`.
+
+3. The next step is to implement synthesis algorithms. The general process will
+be to prototype them in Forth, converting to assembler when needed. That will
+create the requirements for the digital signal processing library.
