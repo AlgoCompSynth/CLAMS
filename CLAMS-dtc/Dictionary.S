@@ -54,14 +54,14 @@
 
 @ macros for external addressing and function calls
 
-        @ nest
+        @ external nest
         .macro _x_nest
-        PUSH {LR}
+        PUSH {r0-r3, LR}
         .endm
 
-        @ SDK unnest
+        @ external unnest
         .macro _x_unnest
-        POP {PC}
+        POP {r0-r3, PC}
         .endm
 
         @ macro to create an "x_addr" word
@@ -78,11 +78,10 @@
 
         @ macro to call a function via XRG
         .macro _x_call name
-        @LDR r0, _addr_\name\() @ get the address
+        _x_nest
         _x_load r0, \name\()
         MOV XRG, #1 @ force the thumb bit before branching!
         ORR XRG, r0
-        _x_nest
         BLX XRG
         _x_unnest
         .endm
