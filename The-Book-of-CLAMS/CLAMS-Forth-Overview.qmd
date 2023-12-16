@@ -80,23 +80,26 @@ the function call (`BL`) instruction has an available range of plus or minus
     away in the 2 megabytes of flash, the better.
 
 2. Even with a dictionary entirely in SRAM at run time, constructing a `BL`
-function call instruction while compiling a user "colon" definition is a tricky process, difficult to document,
-understand and maintain. If you're interested in the details, see 
-[@pintaske2019irreducible, section 3.5.5 ]. I decided to switch to direct
-threading, rather than spend an extra week coding both a flash-to-SRAM
-relocation and an algorithm to compute a relative branch address that is then
-split into four separate bit fields of two 16-bit `thumb` instructions.
+function call instruction while compiling a user "colon" definition is a tricky
+process, difficult to document, understand and maintain. If you're interested
+in the details, see [@pintaske2019irreducible, section 3.5.5 ]. I decided to
+switch to direct threading, rather than spend an extra week coding both a
+flash-to-SRAM relocation and an algorithm to compute a relative branch address
+that is then split into four separate bit fields of two 16-bit `thumb`
+instructions.
 
 ## Status / roadmap
 
 1. There is a partial implementation of a subroutine-threaded version with
 inlining. I am leaving that in the repository in a development branch but won't
 be working on it unless I find that the direct-threaded version cannot meet
-speed requirements. The subroutine-threaded version is in branch `forth-stc`.
+speed requirements. The subroutine-threaded version is in branch
+[`forth-stc`](https://github.com/AlgoCompSynth/CLAMS/tree/forth-stc).
 
 2. The direct-threaded version is nearing a release. I expect to have the
 system dictionary, text interpreter and compiler done by January 1, 2024. It is
-in the branch `forth-dtc`.
+in the branch
+[`forth-dtc`](https://github.com/AlgoCompSynth/CLAMS/tree/forth-stc).
 
 3. The next step is to implement synthesis algorithms. The general process will
 be to prototype them in Forth, converting to assembler when needed. That will
