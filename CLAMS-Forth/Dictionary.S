@@ -209,7 +209,7 @@
 .set _IMMEDIATE, 0x20 @ IMMEDIATE word
 
 @ inner interpreters
-@ see F83
+@ see _Moving Forth_ and _eForth Overview_
 .global _doLIST
 .thumb_func
 _doLIST:
@@ -275,10 +275,41 @@ _system_dict_start: .word .
         _push_to PS, r0
         _next
 
+        _header "C@", c_fetch, _COMPLETE
+        _code_word
+        LDR r0, [PSP] @ address => r0
+        LDRB r0, [r0] @ data => r0
+        _push_to PS, r0
+        _next
+
         _header "!", store, _COMPLETE
         _code_word
         _pop_two PS @ pop data => r0, address => r1
         STR r0, [r1]
+        _next
+
+        _header "C!", c_store, _COMPLETE
+        _code_word
+        _pop_two PS @ pop data => r0, address => r1
+        STRB r0, [r1]
+        _next
+
+        _header ">R", to_r, _COMPLETE | _COMPILE_ONLY
+        _code_word
+        _pop_from PS, r0 @ pop parameter stack => r0
+        _push_to RS, r0 @ push r0 => return stack
+        _next
+
+        _header "R>", r_from, _COMPLETE | _COMPILE_ONLY
+        _code_word
+        _pop_from RS, r0 @ pop return stack => r0
+        _push_to PS, r0 @ push r0 => parameter stack
+        _next
+
+        _header "R@", r_fetch, _COMPLETE | _COMPILE_ONLY
+        _code_word
+        LDR r0, [RSP] @ top of return stack => r0
+        _push_to PS, r0 @ push r0 => parameter stack
         _next
 
         _header "1+", one_plus, _COMPLETE

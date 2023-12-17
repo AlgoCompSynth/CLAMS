@@ -1,5 +1,5 @@
 
-/home/znmeb/Projects/CLAMS/CLAMS-dtc/build/CLAMS-dtc.elf:     file format elf32-littlearm
+/home/znmeb/Projects/CLAMS/CLAMS-Forth/build/CLAMS-dtc.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
@@ -31,24 +31,24 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      0000009f  00000000  00000000  0000bce8  2**0
                   CONTENTS, READONLY
- 14 .debug_line   000170de  00000000  00000000  0000bd87  2**0
+ 14 .debug_line   000170e2  00000000  00000000  0000bd87  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_info   00031140  00000000  00000000  00022e65  2**0
+ 15 .debug_info   00031140  00000000  00000000  00022e69  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_abbrev 00008508  00000000  00000000  00053fa5  2**0
+ 16 .debug_abbrev 00008508  00000000  00000000  00053fa9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_aranges 000015e0  00000000  00000000  0005c4b0  2**3
+ 17 .debug_aranges 000015e0  00000000  00000000  0005c4b8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00007a0c  00000000  00000000  0005da90  2**0
+ 18 .debug_str    00007a12  00000000  00000000  0005da98  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_loc    00019546  00000000  00000000  0006549c  2**0
+ 19 .debug_loc    00019546  00000000  00000000  000654aa  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_ranges 00004dd0  00000000  00000000  0007e9e8  2**3
+ 20 .debug_ranges 00004dd0  00000000  00000000  0007e9f0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00002bc0  00000000  00000000  000837b8  2**2
+ 21 .debug_frame  00002bc0  00000000  00000000  000837c0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
-/home/znmeb/Projects/CLAMS/CLAMS-dtc/build/CLAMS-dtc.elf:     file format elf32-littlearm
+/home/znmeb/Projects/CLAMS/CLAMS-Forth/build/CLAMS-dtc.elf:     file format elf32-littlearm
 
 
 Disassembly of section .boot2:
