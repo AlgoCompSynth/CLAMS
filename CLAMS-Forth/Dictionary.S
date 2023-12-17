@@ -219,9 +219,9 @@ _enter:
         MOV INP, WRD @ "branch indirect" to INP
         _next
 
-.global _doLIT
+.global _dolit
 .thumb_func
-_doLIT:
+_dolit:
         ADD WRD, #_AU_CELL @ point to constant
         LDR r0, [WRD]
         _push_to PS r0 @ push the constant

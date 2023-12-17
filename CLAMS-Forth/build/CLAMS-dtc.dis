@@ -395,7 +395,7 @@ Disassembly of section .text:
 10000386:	3604      	adds	r6, #4
 10000388:	4738      	bx	r7
 
-1000038a <_doLIT>:
+1000038a <_dolit>:
 1000038a:	3704      	adds	r7, #4
 1000038c:	6838      	ldr	r0, [r7, #0]
 1000038e:	3d04      	subs	r5, #4
