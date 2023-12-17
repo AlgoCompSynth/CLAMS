@@ -135,9 +135,9 @@
         .endm
 
         @ assemble code field for a machine code word
-        @ In direct threading, the code field has the first instruction(s) of the
-        @ code, so this is empty.
+        @ For indirect threading, the code field address points to the next cell
         .macro _code_word
+        .word . + _AU_CELL
         .endm
 
         @ assemble code field for a colon definition
@@ -206,25 +206,33 @@
 
         @ "next" macro
         .macro _next
-        LDR WRD, [INP] @ get next address
+        LDR WRD, [INP] @ next code field address => WRD
         ADD INP, #_AU_CELL @ advance INP
-        BX WRD @ jump to next code routine
+        LDR XRG, [WRD] @ next branch target => XRG
+        BX XRG @ jump to next code routine
         .endm
 
 .global _enter
 .thumb_func
 _enter:
-	ADD WRD, #_AU_CELL @ point to first word of thread
         _push_to RS INP @ nest INP
+	ADD WRD, #_AU_CELL @ point to first word of thread
         MOV INP, WRD @ "branch indirect" to INP
         _next
 
-.global _dolit
+.global _dovar
 .thumb_func
-_dolit:
-        ADD WRD, #_AU_CELL @ point to constant
-        LDR r0, [WRD]
-        _push_to PS r0 @ push the constant
+_dovar:
+        ADD WRD, #_AU_CELL @ address of variable => WRD
+        _push_to PS WRD @ push to parameter stack
+        _next
+
+.global _docon
+.thumb_func
+_docon:
+        ADD WRD, #_AU_CELL @ address of constant => WRD
+        LDR r0, [WRD] @ constant value => r0
+        _push_to PS r0 @ push to parameter stack
         _next
 
 @ the dictionary itself!
