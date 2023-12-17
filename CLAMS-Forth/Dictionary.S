@@ -145,13 +145,6 @@
         .word _doLIST
         .endm
 
-        @ "next" macro
-        .macro _next
-        LDR WRD, [INP] @ get next address
-        ADD INP, #_AU_CELL @ advance INP
-        BX WRD @ jump to next code routine
-        .endm
-
 @ Common code for a word that uses a single instruction binary ALU operator on the
 @ top two stack cells. Such words have the stack effect
 @
@@ -210,9 +203,17 @@
 
 @ inner interpreters
 @ see _Moving Forth_ and _eForth Overview_
-.global _doLIST
+
+        @ "next" macro
+        .macro _next
+        LDR WRD, [INP] @ get next address
+        ADD INP, #_AU_CELL @ advance INP
+        BX WRD @ jump to next code routine
+        .endm
+
+.global _enter
 .thumb_func
-_doLIST:
+_enter:
 	ADD WRD, #_AU_CELL @ point to first word of thread
         _push_to RS INP @ nest INP
         MOV INP, WRD @ "branch indirect" to INP
@@ -233,6 +234,11 @@ _doLIT:
 _system_dict_start: .word .
 
         @ code words for base VM
+
+        _header "EXIT", exit, _COMPLETE | _COMPILE_ONLY
+        _code_word
+        _pop_from RS, INP @ un-nest the return stack to INP
+        _next
 
         _header "DUP", dupe, _COMPLETE
         _code_word
@@ -589,7 +595,6 @@ _hamburger: .word 0xDEADBEEF
         _code_word
         _x_nest
         LDR r0, =_return_format
-        LDR r0, =_stack_format_3
         LDM RSP, { r1, r2, r3, RSP}
         _x_call printf
         _x_unnest
