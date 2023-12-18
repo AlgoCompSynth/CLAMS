@@ -67,3 +67,37 @@ XRG .req r3 @ "eXecute" register - used for branching and calling code functions
 .set _AU_CELL, 4 @ address units per cell
 .set _CELL_SHIFT, 2 @ bits to shift for cell - address unit conversions
 .set _STACK_CELLS, 64 @ number of cells in a stack
+
+@ macros for external addressing and function calls
+
+        @ external nest
+        .macro _x_nest
+        PUSH {r0-r3, LR}
+        .endm
+
+        @ external unnest
+        .macro _x_unnest
+        POP {r0-r3, PC}
+        .endm
+
+        @ macro to create an "x_addr" word
+        .macro _x_addr name
+        .balign _AU_CELL
+        .set _addr_\name\(), .
+        .word \name
+        .endm
+
+        @ macro to load an "x_addr" word
+        .macro _x_load reg, name
+        LDR \reg, _addr_\name\() @ get the address
+        .endm
+
+        @ macro to call a function via XRG
+        .macro _x_call name
+        _x_nest
+        _x_load r0, \name\()
+        MOV XRG, #1 @ force the thumb bit before branching!
+        ORR XRG, r0
+        BLX XRG
+        _x_unnest
+        .endm
