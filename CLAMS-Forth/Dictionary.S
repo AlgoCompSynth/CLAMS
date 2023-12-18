@@ -508,15 +508,11 @@ _x_addr sdk_slash_mod
         _push_to PS, r0
         _next
 
-_x_addr sdk_key
-
         _header "EMIT", emit, _COMPLETE
         _code_word
         _pop_from PS, r0
         _x_call sdk_emit
         _next
-
-_x_addr sdk_emit
 
         @ stacks grow downwards - top of stack is the lowest address
         @ _param_stack_top is the lowest address that can legally contain a cell
@@ -526,7 +522,7 @@ _x_addr sdk_emit
         _code_word
         _x_load PSP, _param_stack_bottom
         _x_load r1, _param_stack_top
-        LDR r0, _hamburger
+        LDR r0, _HAMBURGER
 cps1:
         STR r0, [r1]
         ADD r1, #_AU_CELL
@@ -541,7 +537,7 @@ _x_addr _param_stack_top
         _code_word
         _x_load RSP, _return_stack_bottom
         _x_load r1, _return_stack_top
-        LDR r0, _hamburger
+        LDR r0, _HAMBURGER
 crs1:
         STR r0, [r1]
         ADD r1, #_AU_CELL
@@ -552,7 +548,7 @@ crs1:
 _x_addr _return_stack_bottom
 _x_addr _return_stack_top
 .balign _AU_CELL, 0
-_hamburger: .word 0xDEADBEEF
+_HAMBURGER: .word 0xDEADBEEF
 
         _header "param_top_3", param_top_3, _COMPLETE
         _code_word
@@ -580,6 +576,339 @@ _x_addr printf
         .word _plus
         .word _param_top_3
         .word _exit
+
+        _header "ABORT", abort, _COMPLETE
+        _colon_word
+        .word _clear_param_stack
+        .word _quit
+        .word _exit @ this should never get executed because QUIT never exits
+
+        _header "QUIT", quit, _COMPLETE
+        _colon_word
+        .word _clear_return_stack
+        @ .word _begin
+        .word _accept
+        @ .word _evaluate
+        .word _oll_korrect
+        @ .word _again
+        .word _exit
+
+        _header "oll-korrect", oll_korrect, _COMPLETE
+        _code_word
+        LDR r0, =OllKorrect
+        BL printf @ pretend to be Forth!
+        _next
+
+OllKorrect: .asciz " Ok\n"
+
+        _header "FILL", fill, _COMPLETE
+        @ ( c-addr u char –– )
+        _code_word
+        _pop_three PS @ char => r0, u => r1, c-addr => r2
+
+fil1:
+        CMP r1, #0 @ is count zero or less?
+        BLE filz @ exit, stage left!
+        STRB r0, [r2]
+        ADD r2, #_AU_CHAR
+        SUB r1, #1
+        B fil1
+filz:
+        @ done
+        _next
+
+        _header "ACCEPT", accept, _COMPLETE
+        @ ( c-addr +n1 –– +n2 )
+        _code_word
+
+        @ On entry, the top of the stack has the maximum allowed characters and
+        @ the second has the address of the buffer. On exit, the address has
+        @ been consumed and the actual count is on the top of the stack.
+
+        _pop_from PS, r3 @ pop max count => r3
+        _pop_from PS, r2 @ pop address => r2
+        MOV r1, #0 @ character count => r1
+_accl:
+        PUSH {r1, r2, r3} @ save loop controls
+        _x_call sdk_key @ wait for character, which will show up in r0
+        POP {r1, r2, r3} @ restore loop controls
+
+        @ test for specific control characters
+        CMP r0, #_BS
+        BEQ _accb @ do the backspace
+        CMP r0, #_CR
+        BEQ _accz @ line finished - clean up stack and exit
+        
+        @ the rest are either standard printables or will be replaced by space
+        CMP r0, #_BL
+        BLE _accs @ emit and append a space
+        CMP r0, #_DEL
+        BGE _accs @ emit and append a space
+
+        @ a printable character - echo it and append to buffer
+_acce:
+        STRB r0, [r2, r1] @ append char to buffer
+        ADD r1, #1 @ count the character
+
+        PUSH {r1, r2, r3} @ save loop controls
+        _x_call sdk_emit @ printable - send it out!
+        POP {r1, r2, r3} @ restore loop controls
+
+        @ check for buffer end
+        CMP r1, r3 @ did we hit the limit?
+        BEQ _accz @ early exit if limit hit!
+	B _accl @ there's room - go back for more!
+
+        @ space or unprintable
+_accs:
+        MOV r0, #_BL @ force a space and emit / store / count
+        B _acce
+
+        @ backspace - un-count previous character and erase it
+_accb:
+        CMP r1, #0 @ is buffer empty?
+        BEQ _accl @ ignore a backspace if buffer is empty
+
+        @ un-count
+        SUB r1, #1 @ decrement char count
+
+        @ erase previous character
+        PUSH {r1, r2, r3} @ save loop controls
+        _x_call sdk_emit @ emit the backspace we already have
+        POP {r1, r2, r3} @ restore loop controls
+
+        MOV r0, #_BL
+        PUSH {r1, r2, r3} @ save loop controls
+        _x_call sdk_emit @ "erase" the character at the cursor
+        POP {r1, r2, r3} @ restore loop controls
+
+        MOV r0, #_BS @ queue up another backspace
+        PUSH {r1, r2, r3} @ save loop controls
+        _x_call sdk_emit @ move cursor back
+        POP {r1, r2, r3} @ restore loop controls
+
+        B _accl @ back for more!
+
+        @ clean up and exit
+_accz:
+        @ push count; exit
+        _push_to PS, r1
+        _next
+
+        _header "TYPE", type, _COMPLETE
+        @ ( c-addr u –– )
+        _code_word
+
+        _pop_from PS, r1 @ count => r1
+        _pop_from PS, r2 @ address => r2
+
+typl:
+        CMP r1, #0 @ are we done?
+        BLE typz @ exit!
+
+        LDRB r0, [r2] @ character => r0
+        CMP r0, #0 @ is it a null terminator?
+        BEQ typz @ exit on null terminator
+
+        PUSH {r1, r2} @ save loop controls
+        _x_call sdk_emit @ emit the character
+        PUSH {r1, r2} @ save loop controls
+
+        ADD r2, #1 @ increment the address
+        SUB r1, #1 @ count down
+        B typl @ continue
+
+typz:
+        _next
+
+_x_addr sdk_key
+_x_addr sdk_emit
+
+/*
+        @ number input/output
+        @_header "BASE", "base", _COMPLETE
+        @_nest
+        @_dupe
+        @BL _addr_base_v
+        @_unnest
+
+        @ parsing
+        @_header ">IN", "to_in", _COMPLETE
+        @_nest
+        @_dupe
+        @BL _addr_to_in_v
+        @_unnest
+
+        _header "SOURCE", "source", _COMPLETE
+        @_nest
+        @BL _addr_term_buf
+        @BL count
+        @_unnest
+
+        _header "STATE", "state", _COMPLETE
+        @_nest
+        @_dupe
+        @BL _addr_state_v
+        @_unnest
+
+        @_header "COUNT", "count", _COMPLETE
+        @LDRB r0, [r0] @ fetch count byte
+        @ADD PSTOP, #1 @ fix address
+        @_dupe
+        @MOV PSTOP, r0
+        @_return
+
+        @_header "cs-match", "c_s_match", _COMPLETE
+        @ (c-addr1 c-addr2 -- caddr1 flag)
+        @ flag is true if strings are identical, false otherwise
+        @_nest
+        @_pop_to INDXA @ pop c-addr2 => INDXA
+        @LDRB r1, [PSTOP] @ count of c-addr1 => r1
+        @LDRB r2, [INDXA] @ count of c-addr2 => r2
+        @CMP r1, r2
+        @BNE csmf @ fail fast!
+
+csml:
+        @LDRB r0, [INDXA, r2]
+        @LDRB r1, [PSTOP, r2]
+        @BNE csmf @ fail a bit slower
+        @SUB r2, #1 @ count down
+        @BGT csml @ we already compared the counts
+
+csms:
+        @ success!
+        @_dupe @ push c-addr1 back on stack
+        @MOV PSTOP, #0
+        @_invert @ true flag
+        @_unnest
+
+csmf:
+        @ failure
+        @_dupe @ push c-addr1 back on stack
+        @MOV PSTOP, #0 @ false flag
+        @_unnest
+
+        @_header "FIND", "find", _COMPLETE
+        @ ( c-addr –– c-addr 0 | xt 1 | xt -1 )
+        @_nest 
+
+        @ Outer loop - start with most recent link and walk backwards
+        @LDR INDXA, _latest_link_field @ link addr => INDXA
+@
+fndl:
+        @CMP INDXA, #0
+        @BEQ fndz @ link is zero - we hit the end
+        @@    compare name with target
+        @MOV r0, INDXA
+        @ADD r0, #_AU_CELL @ name field address => r0
+        @_push_from r0 @ push name c-addr
+        @BL c_s_match
+        @CMP PSTOP, #0
+        @BNE fndm @ it matched!
+
+        @@ no match: INDXA - link offset => INDXA
+        @_drop @ get rid of flag
+        @LDRH r0, [INDXA] @ link field is a halfword offset to previous link!
+        @SUB INDXA, r0 @ do the offset
+        @B fndl
+@
+@fndm:
+        @@ match: exit with xt and flag
+        _drop @ flag
+        _drop @ matched target c-addr
+        _push_from INDXA @ push successful link addr
+        ADD PSTOP, #_AU_CELL @ name field c-addr
+        LDRB r0, [PSTOP] @ name field count byte
+        ADD PSTOP, r0
+        ADD PSTOP, #1 @ next available address => PSTOP
+        _aligned @ now we have XT
+
+        _dupe @ make room for flag
+        MOV PSTOP, #1 @ assume it's immediate
+        MOV r0, #_IMMEDIATE
+        LDRH r1, [INDXA, #2] @ get the dictionary flags
+        AND r0, r1
+        BNE fnds @ successful exit
+        _negate @ not immediate - change to -1
+
+        @ success!
+fnds: 
+        _unnest
+        
+fndz:
+        @ failed search - push a zero and return
+        _dupe
+        MOV PSTOP, #0
+        _unnest
+
+        _header "clear-buffer", "clear_buffer", _COMPLETE
+        LDR r2, [PT2ND] @ second of stack has buffer address
+        MOV r3, PSTOP @ top of stack has max chars.
+        MOV r0, #0 @ zero => r0
+cbuf:
+        STRB r0, [r2, r3]
+        SUB r3, #1 @ count down
+        BGE cbuf @ go all the way to count byte!
+        _return
+
+        _header "clear-term_buf", "clear_term_buf", _COMPLETE
+        _nest
+        BL _addr_term_buf @ address of term_buf => PSTOP
+        BL _maxc_term_buf @ max chars of term_buf => PSTOP
+        BL clear_buffer
+        _unnest
+
+        @ _header "PARSE-NAME", "parse_name", _COMPLETE
+        @ _nest
+        @ BL source @ buffer address in [PT2ND], count in PSTOP
+        @ _drop @ drop count - buffers are null-terminated
+        @ _pop_to INDXA @ pop address to INDXA
+        @ BL to_in @ get address of input buffer count
+        @ _pop_to INDXB @ pop >IN address to INDXB
+        @ LDR r3, [INDXB] @ >IN to r3
+
+pn1:
+        @ LDRB r2, [INDXA, r3] @ get a character
+        @ CMP r2, #0 @ buffers are null-terminated
+        @ BEQ pnz @ that's all, folks!
+        @ CMP r2, #_BL @ is it a space?
+        @ BNE pn2 @ first non-delimiter!
+        @ ADD r3, #_AU_CHAR
+        @ B pn1 @ next character
+
+pn2:
+        @ ADD r0, INDXA, r3 @ we have the buffer address!
+        @ _push_from r0 @ push it to the stack
+        @ MOV r1, #1 @ initial count
+
+pn3:
+        @ ADD r3, #_AU_CHAR
+        @ LDRB r2, [INDXA, r3]
+        @ CMP r2, #0
+        @ BEQ pnz
+        @ CMP r2, #_BL
+        @ BEQ pnz @ blank - finish up
+        @ ADD r1, #1 @ count and go back for more
+        @ B pn3
+
+pnz:
+        @ STR r3, [INDXB] @ first order of business - save new >IN value
+        @ MOV r0, r1 @ push count and exit
+        @ _push_from r0
+        @ _unnest 
+
+        _header "'", tick, _COMPLETE
+        _nest
+        @ TBD
+        _unnest
+
+        _header "EVALUATE", evaluate, _COMPLETE
+        _nest
+        @ TBD
+        _unnest
+
+*/
+
 
 _param_format: .asciz "parameter stack top, second, third => %x, %x, %x\n"
 _return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
