@@ -248,6 +248,20 @@ _system_dict_start: .word .
         _pop_from RS, INP @ un-nest the return stack to INP
         _next
 
+        _header "LITERAL", literal, _COMPLETE
+        _code_word
+        LDR r0, [INP] @ literal value => r0
+        _push_to PS r0 @ push to parameter stack
+        ADD INP, #_AU_CELL @ skip over the literal!
+        _next
+
+        _header "EXECUTE", execute, _COMPLETE
+        _code_word
+        _pop_from PS, r0 @ get execution token
+        MOV XRG, #1 @ set thumb bit
+        ORR XRG, r0 @ ready for BX
+        BX XRG @ unconditional branch without link
+
         _header "DUP", dupe, _COMPLETE
         _code_word
         LDR r0, [PSP]
@@ -547,13 +561,6 @@ _x_addr sdk_key
         _next
 
 _x_addr sdk_emit
-
-        _header "EXECUTE", execute, _COMPLETE
-        _code_word
-        _pop_from PS, r0 @ get execution token
-        MOV XRG, #1 @ set thumb bit
-        ORR XRG, r0 @ ready for BX
-        BX XRG @ unconditional branch without link
 
         @ stacks grow downwards - top of stack is the lowest address
         @ _param_stack_top is the lowest address that can legally contain a cell
