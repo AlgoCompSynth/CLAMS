@@ -52,40 +52,6 @@
         LDM \stack\()P!, {r0, r1, r2}
         .endm
 
-@ macros for external addressing and function calls
-
-        @ external nest
-        .macro _x_nest
-        PUSH {r0-r3, LR}
-        .endm
-
-        @ external unnest
-        .macro _x_unnest
-        POP {r0-r3, PC}
-        .endm
-
-        @ macro to create an "x_addr" word
-        .macro _x_addr name
-        .balign _AU_CELL
-        .set _addr_\name\(), .
-        .word \name
-        .endm
-
-        @ macro to load an "x_addr" word
-        .macro _x_load reg, name
-        LDR \reg, _addr_\name\() @ get the address
-        .endm
-
-        @ macro to call a function via XRG
-        .macro _x_call name
-        _x_nest
-        _x_load r0, \name\()
-        MOV XRG, #1 @ force the thumb bit before branching!
-        ORR XRG, r0
-        BLX XRG
-        _x_unnest
-        .endm
-
 @ dictionary construction macros
 
 @ dictionary header
@@ -510,33 +476,27 @@ _TRUE_FLAG: .word 0xFFFFFFFF
         _header "/MOD", slash_mod, _COMPLETE
         @ ( dividend divisor –– remainder quotient )
         _code_word
-        _x_nest
         _pop_from PS, r1 @ divisor => r1
         _pop_from PS, r0 @ dividend => r0
         _x_call sdk_slash_mod
         _push_to PS, r1 @ push remainder
         _push_to PS, r0 @ push quotient
-        _x_unnest
         _next
 
         _header "/", slash, _COMPLETE
         _code_word
-        _x_nest
         _pop_from PS, r1 @ divisor => r1
         _pop_from PS, r0 @ dividend => r0
         _x_call sdk_slash_mod
         _push_to PS, r0 @ push quotient
-        _x_unnest
         _next
 
         _header "MOD", mod, _COMPLETE
         _code_word
-        _x_nest
         _pop_from PS, r1 @ divisor => r1
         _pop_from PS, r0 @ dividend => r0
         _x_call sdk_slash_mod
         _push_to PS, r1 @ push remainder
-        _x_unnest
         _next
 
 _x_addr sdk_slash_mod
@@ -544,20 +504,16 @@ _x_addr sdk_slash_mod
         @ terminal I/O words
         _header "KEY", key, _COMPLETE
         _code_word
-        _x_nest
         _x_call sdk_key
         _push_to PS, r0
-        _x_unnest
         _next
 
 _x_addr sdk_key
 
         _header "EMIT", emit, _COMPLETE
         _code_word
-        _x_nest
         _pop_from PS, r0
         _x_call sdk_emit
-        _x_unnest
         _next
 
 _x_addr sdk_emit
@@ -600,19 +556,17 @@ _hamburger: .word 0xDEADBEEF
 
         _header "param_top_3", param_top_3, _COMPLETE
         _code_word
-        _x_nest
         LDR r0, =_param_format
         LDM PSP, { r1, r2, r3, PSP}
         _x_call printf
-        _x_unnest
+        _next
 
         _header "return_top_3", return_top_3, _COMPLETE
         _code_word
-        _x_nest
         LDR r0, =_return_format
         LDM RSP, { r1, r2, r3, RSP}
         _x_call printf
-        _x_unnest
+        _next
 
 _x_addr printf
 
