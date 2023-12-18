@@ -178,6 +178,18 @@
         BX XRG @ jump to next code routine
         .endm
 
+        @ unconditional branch macro
+        .macro _ubranch target
+        .word _branch
+        .word \target\()
+        .endm
+
+        @ conditional branch macro
+        .macro _qbranch target
+        .word _question_branch
+        .word \target\()
+        .endm
+
 .global _enter
 .thumb_func
 _enter:
@@ -214,7 +226,7 @@ _system_dict_start: .word .
         _pop_from RS, INP @ un-nest the return stack to INP
         _next
 
-        _header "LITERAL", literal, _COMPLETE
+        _header "LITERAL", literal, _COMPLETE | _COMPILE_ONLY
         _code_word
         LDR r0, [INP] @ literal value => r0
         _push_to PS r0 @ push to parameter stack
@@ -227,6 +239,22 @@ _system_dict_start: .word .
         MOV XRG, #1 @ set thumb bit
         ORR XRG, r0 @ ready for BX
         BX XRG @ unconditional branch without link
+
+        _header "branch", branch, _COMPLETE | _COMPILE_ONLY
+        _code_word
+        LDR INP, [INP]
+        _next
+
+        _header "?branch", question_branch, _COMPLETE | _COMPILE_ONLY
+        _code_word
+        _pop_from PS, r0 @ flag => r0
+        CMP r0, #0
+        BNE qbz @ branch if flag is TRUE
+        LDR INP, [INP] @ flag is false - take the branch
+        _next
+qbz:
+        ADD INP, #_AU_CELL @ flag is true - skip branch destination
+        _next
 
         _header "DUP", dupe, _COMPLETE
         _code_word
@@ -577,6 +605,31 @@ _x_addr printf
         .word _param_top_3
         .word _exit
 
+        _header "crash", crash, _COMPLETE
+        _code_word
+        LDR r0, =_CRASH_FMT_1
+        BL printf @ dump r1, r2, r3
+
+        MOV r1, INP
+        MOV r2, WRD
+        LDR r0, =_CRASH_FMT_2
+        BL printf @ dump INP and WRD
+
+        MOV r1, PSP
+        MOV r2, RSP
+        LDR r0, =_CRASH_FMT_3
+        BL printf @ dump PSP and RSP
+
+        LDR INP, _ABORT_CFA
+        _next
+
+_CRASH_FMT_1: .asciz "\nr1, r2, XRG: %x, %x, %x"
+_CRASH_FMT_2: .asciz "\nINP, WRD: %x, %x"
+_CRASH_FMT_3: .asciz "\nPSP, RSP: %x, %x\n"
+
+.balign _AU_CELL, 0
+_ABORT_CFA: .word _abort
+
         _header "ABORT", abort, _COMPLETE
         _colon_word
         .word _clear_param_stack
@@ -586,11 +639,16 @@ _x_addr printf
         _header "QUIT", quit, _COMPLETE
         _colon_word
         .word _clear_return_stack
-        @ .word _begin
+
+quil:
         .word _accept
-        @ .word _evaluate
+        .word _evaluate
         .word _oll_korrect
-        @ .word _again
+        _ubranch quil
+        .word _exit @ this should never get executed
+
+        _header "EVALUATE", evaluate, _COMPLETE
+        _colon_word
         .word _exit
 
         _header "oll-korrect", oll_korrect, _COMPLETE
@@ -898,11 +956,6 @@ pnz:
         @ _unnest 
 
         _header "'", tick, _COMPLETE
-        _nest
-        @ TBD
-        _unnest
-
-        _header "EVALUATE", evaluate, _COMPLETE
         _nest
         @ TBD
         _unnest
