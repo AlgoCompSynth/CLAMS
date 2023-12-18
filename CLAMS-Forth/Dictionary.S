@@ -137,12 +137,12 @@
         @ assemble code field for a machine code word
         @ For indirect threading, the code field address points to the next cell
         .macro _code_word
-        .word . + _AU_CELL
+        .word . + _AU_CELL | 1
         .endm
 
         @ assemble code field for a colon definition
         .macro _colon_word
-        .word _doLIST
+        .word _enter
         .endm
 
 @ Common code for a word that uses a single instruction binary ALU operator on the
@@ -615,6 +615,17 @@ _hamburger: .word 0xDEADBEEF
         _x_unnest
 
 _x_addr printf
+
+        _header "colon-test", colon_test, _COMPLETE
+        _colon_word
+        .word _literal
+        .word 2
+        .word _literal
+        .word 3
+        .word _param_top_3
+        .word _plus
+        .word _param_top_3
+        .word _exit
 
 _param_format: .asciz "parameter stack top, second, third => %x, %x, %x\n"
 _return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
