@@ -72,9 +72,9 @@ _system_dict_start: .word .
 
         _header "EXECUTE", execute, _COMPLETE
         _code_word
-        _pop_from PS, r0 @ get execution token
+        _pop_from PS, WRD @ execution token => WRD
         MOV XRG, #1 @ set thumb bit
-        ORR XRG, r0 @ ready for BX
+        ORR XRG, WRD @ ready for BX
         BX XRG @ unconditional branch without link
 
         _header "branch", branch, _COMPLETE | _COMPILE_ONLY

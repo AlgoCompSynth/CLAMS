@@ -472,9 +472,9 @@ Disassembly of section .text:
 
 1000040c <_execute>:
 1000040c:	10000410 	.word	0x10000410
-10000410:	cd01      	ldmia	r5!, {r0}
+10000410:	cd80      	ldmia	r5!, {r7}
 10000412:	2301      	movs	r3, #1
-10000414:	4303      	orrs	r3, r0
+10000414:	433b      	orrs	r3, r7
 10000416:	4718      	bx	r3
 
 10000418 <_branch_link>:
