@@ -58,31 +58,31 @@ _system_dict_start: .word .
 
         @ code words for base VM
 
-        _header "EXIT", exit, _COMPLETE | _COMPILE_ONLY
+        _header "EXIT", exit, _COMPILE_ONLY
         _code_word
         _pop_from RS, INP @ un-nest the return stack to INP
         _next
 
-        _header "LITERAL", literal, _COMPLETE | _COMPILE_ONLY
+        _header "LITERAL", literal, _COMPILE_ONLY
         _code_word
         LDR r0, [INP] @ literal value => r0
         _push_to PS r0 @ push to parameter stack
         ADD INP, #_AU_CELL @ skip over the literal!
         _next
 
-        _header "EXECUTE", execute, _COMPLETE
+        _header "EXECUTE", execute
         _code_word
         _pop_from PS, WRD @ execution token => WRD
         MOV XRG, #1 @ set thumb bit
         ORR XRG, WRD @ ready for BX
         BX XRG @ unconditional branch without link
 
-        _header "branch", branch, _COMPLETE | _COMPILE_ONLY
+        _header "branch", branch, _COMPILE_ONLY
         _code_word
         LDR INP, [INP]
         _next
 
-        _header "?branch", question_branch, _COMPLETE | _COMPILE_ONLY
+        _header "?branch", question_branch, _COMPILE_ONLY
         _code_word
         _pop_from PS, r0 @ flag => r0
         CMP r0, #0
@@ -93,31 +93,31 @@ qbz:
         ADD INP, #_AU_CELL @ flag is true - skip branch destination
         _next
 
-        _header "DUP", dupe, _COMPLETE
+        _header "DUP", dupe
         _code_word
         LDR r0, [PSP]
         _push_to PS, r0
         _next
 
-        _header "OVER", over, _COMPLETE
+        _header "OVER", over
         _code_word
         LDR r0, [PSP, #_AU_CELL] @ 2nd => r0
         _push_to PS, r0
         _next
 
-        _header "SWAP", swap, _COMPLETE
+        _header "SWAP", swap
         _code_word
         LDM PSP, {r0, r1, PSP} @ top => r0, 2nd => r1
         STR r1, [PSP]
         STR r0, [PSP, #_AU_CELL]
         _next
 
-        _header "DROP", drop, _COMPLETE
+        _header "DROP", drop
         _code_word
         _pop_from PS, r0
         _next
 
-        _header "ROT", rote, _COMPLETE
+        _header "ROT", rote
         _code_word
         @ x1, x2, x3 -> x2, x3, x1
         LDM PSP, {r0, r1, r2, PSP} @ x3 => r0, x2 => r1, x1 => r2
@@ -127,121 +127,121 @@ qbz:
         _next
 
         @ position-independent operations
-        _header "@", fetch, _COMPLETE
+        _header "@", fetch
         _code_word
         LDR r0, [PSP] @ address => r0
         LDR r0, [r0] @ data => r0
         _push_to PS, r0
         _next
 
-        _header "C@", c_fetch, _COMPLETE
+        _header "C@", c_fetch
         _code_word
         LDR r0, [PSP] @ address => r0
         LDRB r0, [r0] @ data => r0
         _push_to PS, r0
         _next
 
-        _header "!", store, _COMPLETE
+        _header "!", store
         _code_word
         _pop_two PS @ pop data => r0, address => r1
         STR r0, [r1]
         _next
 
-        _header "C!", c_store, _COMPLETE
+        _header "C!", c_store
         _code_word
         _pop_two PS @ pop data => r0, address => r1
         STRB r0, [r1]
         _next
 
-        _header ">R", to_r, _COMPLETE | _COMPILE_ONLY
+        _header ">R", to_r, _COMPILE_ONLY
         _code_word
         _pop_from PS, r0 @ pop parameter stack => r0
         _push_to RS, r0 @ push r0 => return stack
         _next
 
-        _header "R>", r_from, _COMPLETE | _COMPILE_ONLY
+        _header "R>", r_from, _COMPILE_ONLY
         _code_word
         _pop_from RS, r0 @ pop return stack => r0
         _push_to PS, r0 @ push r0 => parameter stack
         _next
 
-        _header "R@", r_fetch, _COMPLETE | _COMPILE_ONLY
+        _header "R@", r_fetch, _COMPILE_ONLY
         _code_word
         LDR r0, [RSP] @ top of return stack => r0
         _push_to PS, r0 @ push r0 => parameter stack
         _next
 
-        _header "1+", one_plus, _COMPLETE
+        _header "1+", one_plus
         _code_word
         _unary_op "ADD r0, #1"
         _next
 
-        _header "1-", one_minus, _COMPLETE
+        _header "1-", one_minus
         _code_word
         _unary_op "SUB r0, #1"
         _next
 
-        _header "2*", two_star, _COMPLETE
+        _header "2*", two_star
         _code_word
         _unary_op "LSL r0, #1"
         _next
 
-        _header "2/", two_slash, _COMPLETE
+        _header "2/", two_slash
         _code_word
         _unary_op "ASR r0, #1"
         _next
 
-        _header "CELL+", cell_plus, _COMPLETE
+        _header "CELL+", cell_plus
         _code_word
         _unary_op "ADD r0, #_AU_CELL"
         _next
 
-        _header "CELL-", cell_minus, _COMPLETE
+        _header "CELL-", cell_minus
         _code_word
         _unary_op "SUB r0, #_AU_CELL"
         _next
 
-        _header "CELLS", cells, _COMPLETE
+        _header "CELLS", cells
         _code_word
         _unary_op "LSL r0, #_CELL_SHIFT"
         _next
 
-        _header "CHAR+", char_plus, _COMPLETE
+        _header "CHAR+", char_plus
         _code_word
         _unary_op "ADD r0, #_AU_CHAR"
         _next
 
-        _header "CHAR-", char_minus, _COMPLETE
+        _header "CHAR-", char_minus
         _code_word
         _unary_op "SUB r0, #_AU_CHAR"
         _next
 
-        _header "CHARS", chars, _COMPLETE
+        _header "CHARS", chars
         _code_word
         _next
 
         @ arithmetic operators
-        _header "+", plus, _COMPLETE
+        _header "+", plus
         _code_word
         _binary_alu ADD
         _next
 
-        _header "-", minus, _COMPLETE
+        _header "-", minus
         _code_word
         _binary_alu SUB
         _next
 
-        _header "*", star, _COMPLETE
+        _header "*", star
         _code_word
         _binary_alu MUL
         _next
 
-        _header "NEGATE", negate, _COMPLETE
+        _header "NEGATE", negate
         _code_word
         _unary_op "NEG r0, r0"
         _next
 
-        _header "ALIGNED", aligned, _COMPLETE
+        _header "ALIGNED", aligned
         _code_word
         LDR r0, [PSP]
         MOV r1, #_AU_CELL
@@ -253,83 +253,83 @@ qbz:
         _next
 
         @ boolean operators
-        _header "AND", and, _COMPLETE
+        _header "AND", and
         _code_word
         _binary_alu AND
         _next
 
-        _header "OR", or, _COMPLETE
+        _header "OR", or
         _code_word
         _binary_alu ORR
         _next
 
-        _header "XOR", x_or, _COMPLETE
+        _header "XOR", x_or
         _code_word
         _binary_alu EOR
         _next
 
-        _header "INVERT", invert, _COMPLETE
+        _header "INVERT", invert
         _code_word
         MVN r0, r0
         _next
 
-        _header "LSHIFT", l_shift, _COMPLETE
+        _header "LSHIFT", l_shift
         _code_word
         _binary_alu LSL
         _next
 
-        _header "RSHIFT", r_shift, _COMPLETE
+        _header "RSHIFT", r_shift
         _code_word
         _binary_alu LSR
         _next
 
         @ binary comparison operators
-        _header "<", less_than, _COMPLETE
+        _header "<", less_than
         _code_word
         _binary_cmp LT
         _next
 
-        _header "<=", less_or_equal, _COMPLETE
+        _header "<=", less_or_equal
         _code_word
         _binary_cmp LE
         _next
 
-        _header "=", equals, _COMPLETE
+        _header "=", equals
         _code_word
         _binary_cmp EQ
         _next
 
-        _header "<>", not_equal, _COMPLETE
+        _header "<>", not_equal
         _code_word
         _binary_cmp NE
         _next
 
-        _header ">", greater_than, _COMPLETE
+        _header ">", greater_than
         _code_word
         _binary_cmp GT
         _next
 
-        _header ">=", greater_or_equal, _COMPLETE
+        _header ">=", greater_or_equal
         _code_word
         _binary_cmp GE
         _next
 
-        _header "U>", u_greater_than, _COMPLETE
+        _header "U>", u_greater_than
         _code_word
         _binary_cmp HI
         _next
 
-        _header "U>=", u_greater_or_equal, _COMPLETE
+        _header "U>=", u_greater_or_equal
         _code_word
         _binary_cmp HS
         _next
 
-        _header "U<", u_less_than, _COMPLETE
+        _header "U<", u_less_than
         _code_word
         _binary_cmp LO
         _next
 
-        _header "U<=", u_less_or_equal, _COMPLETE
+        _header "U<=", u_less_or_equal
         _code_word
         _binary_cmp LS
         _next
@@ -338,7 +338,7 @@ qbz:
 _TRUE_FLAG: .word 0xFFFFFFFF
 
         @ division operators - use the SDK and hardware divider
-        _header "/MOD", slash_mod, _COMPLETE
+        _header "/MOD", slash_mod
         @ ( dividend divisor –– remainder quotient )
         _code_word
         _pop_from PS, r1 @ divisor => r1
@@ -348,7 +348,7 @@ _TRUE_FLAG: .word 0xFFFFFFFF
         _push_to PS, r0 @ push quotient
         _next
 
-        _header "/", slash, _COMPLETE
+        _header "/", slash
         _code_word
         _pop_from PS, r1 @ divisor => r1
         _pop_from PS, r0 @ dividend => r0
@@ -356,7 +356,7 @@ _TRUE_FLAG: .word 0xFFFFFFFF
         _push_to PS, r0 @ push quotient
         _next
 
-        _header "MOD", mod, _COMPLETE
+        _header "MOD", mod
         _code_word
         _pop_from PS, r1 @ divisor => r1
         _pop_from PS, r0 @ dividend => r0
@@ -367,13 +367,13 @@ _TRUE_FLAG: .word 0xFFFFFFFF
 _x_addr sdk_slash_mod
 
         @ terminal I/O words
-        _header "KEY", key, _COMPLETE
+        _header "KEY", key
         _code_word
         _x_call sdk_key
         _push_to PS, r0
         _next
 
-        _header "EMIT", emit, _COMPLETE
+        _header "EMIT", emit
         _code_word
         _pop_from PS, r0
         _x_call sdk_emit
@@ -383,7 +383,7 @@ _x_addr sdk_slash_mod
         @ _param_stack_top is the lowest address that can legally contain a cell
         @ _param_stack_bottom is one cell *above* the highest address that can
         @ legally contain a cell!
-        _header "clear_param_stack", clear_param_stack, _COMPLETE
+        _header "clear_param_stack", clear_param_stack
         _code_word
         _x_load PSP, _param_stack_bottom
         _x_load r1, _param_stack_top
@@ -398,7 +398,7 @@ cps1:
 _x_addr _param_stack_bottom
 _x_addr _param_stack_top
 
-        _header "clear_return_stack", clear_return_stack, _COMPLETE
+        _header "clear_return_stack", clear_return_stack
         _code_word
         _x_load RSP, _return_stack_bottom
         _x_load r1, _return_stack_top
@@ -415,14 +415,14 @@ _x_addr _return_stack_top
 .balign _AU_CELL, 0
 _HAMBURGER: .word 0xDEADBEEF
 
-        _header "param_top_3", param_top_3, _COMPLETE
+        _header "param_top_3", param_top_3
         _code_word
         LDR r0, =_param_format
         LDM PSP, { r1, r2, r3, PSP}
         _x_call printf
         _next
 
-        _header "return_top_3", return_top_3, _COMPLETE
+        _header "return_top_3", return_top_3
         _code_word
         LDR r0, =_return_format
         LDM RSP, { r1, r2, r3, RSP}
@@ -431,7 +431,7 @@ _HAMBURGER: .word 0xDEADBEEF
 
 _x_addr printf
 
-        _header "colon-test", colon_test, _COMPLETE
+        _header "colon-test", colon_test
         _colon_word
         .word _literal
         .word 2
@@ -442,7 +442,7 @@ _x_addr printf
         .word _param_top_3
         .word _exit
 
-        _header "crash", crash, _COMPLETE
+        _header "crash", crash
         _code_word
         LDR r0, =_CRASH_FMT_1
         BL printf @ dump r1, r2, r3
@@ -467,13 +467,13 @@ _CRASH_FMT_3: .asciz "\nPSP, RSP: %x, %x\n"
 .balign _AU_CELL, 0
 _ABORT_CFA: .word _abort
 
-        _header "ABORT", abort, _COMPLETE
+        _header "ABORT", abort
         _colon_word
         .word _clear_param_stack
         .word _quit
         .word _exit @ this should never get executed because QUIT never exits
 
-        _header "QUIT", quit, _COMPLETE
+        _header "QUIT", quit
         _colon_word
         .word _clear_return_stack
 
@@ -484,11 +484,11 @@ quil:
         _ubranch quil
         .word _exit @ this should never get executed
 
-        _header "EVALUATE", evaluate, _COMPLETE
+        _header "EVALUATE", evaluate
         _colon_word
         .word _exit
 
-        _header "oll-korrect", oll_korrect, _COMPLETE
+        _header "oll-korrect", oll_korrect
         _code_word
         LDR r0, =OllKorrect
         BL printf @ pretend to be Forth!
@@ -496,7 +496,7 @@ quil:
 
 OllKorrect: .asciz " Ok\n"
 
-        _header "FILL", fill, _COMPLETE
+        _header "FILL", fill
         @ ( c-addr u char –– )
         _code_word
         _pop_from PS, r0 @ char => r0,
@@ -512,7 +512,7 @@ filz:
         @ done
         _next
 
-        _header "ACCEPT", accept, _COMPLETE
+        _header "ACCEPT", accept
         @ ( c-addr +n1 –– +n2 )
         _code_word
 
@@ -520,7 +520,7 @@ filz:
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
 
-        _pop_from PS, MAX @ pop max count => MAX
+        _pop_from PS, XRG @ pop max count => XRG
         _pop_from PS, LOC @ pop address => LOC
         MOV CNT, #0 @ initialize CNT
 _accl:
@@ -550,7 +550,7 @@ _acce:
         _poplctl
 
         @ check for buffer end
-        CMP CNT, MAX @ did we hit the limit?
+        CMP CNT, XRG @ did we hit the limit?
         BEQ _accz @ early exit if limit hit!
 	B _accl @ there's room - go back for more!
 
@@ -590,16 +590,16 @@ _accz:
         _push_to PS, CNT
         _next
 
-        _header "TYPE", type, _COMPLETE
+        _header "TYPE", type
         @ ( c-addr u –– )
         _code_word
 
-        _pop_from PS, MAX @ count => MAX
+        _pop_from PS, XRG @ count => XRG
         _pop_from PS, LOC @ address => LOC
         MOV CNT, #0 @ count up
 
 typl:
-        CMP CNT, MAX @ are we done?
+        CMP CNT, XRG @ are we done?
         BGE typz @ exit!
 
         LDRB r0, [LOC, CNT] @ character => r0
@@ -619,7 +619,7 @@ typz:
 _x_addr sdk_key
 _x_addr sdk_emit
 
-        _header "COUNT", "count", _COMPLETE
+        _header "COUNT", "count"
         @ ( c-addr1 –– c-addr2 u )
         _code_word
         _pop_from PS, r0 @ address => LOC
@@ -629,64 +629,70 @@ _x_addr sdk_emit
         _push_to PS, r0
         _next
 
+        @ counted string match
+        _header "cs-match", "c_s_match"
+        @ (c-addr1 c-addr2 -- c-addr1 flag)
+        @ flag is true if strings are identical, false otherwise
+        _code_word
+        _pop_from PS, LOC @ pop addr2 => LOC
+        LDRB CNT, [LOC] @ count of c-addr2 => CNT
+        LDR XRG, [PSP] @ c-addr1 => XRG
+        LDRB r0, [XRG] @ count of c-addr1 => r0
+        CMP r0, CNT @ if the counts aren't equal, we are done!
+        BNE csmf @ fail fast!
+
+csml:
+        @ main compare loop
+        LDRB r0, [LOC, CNT]
+        MOV TMP1, r0 @ char from addr2 => TMP1
+        LDRB r0, [XRG, CNT] @ char from addr1 => r0
+        CMP r0, TMP1 @ fail on first mismatch
+        BNE csmf @ fail a bit slower
+        SUB CNT, #1 @ count down
+        BGT csml @ we already compared the counts
+
+csms:
+        @ success!
+        MOV r0, #0
+        MVN r0, r0 @ TRUE flag => r0
+        _push_to PS, r0 @ push to parameter stack
+        _next
+
+csmf:
+        @ failure
+        MOV r0, #0
+        _push_to PS, r0 @ push to parameter stack
+        _next
+
 /*
         @ number input/output
-        @_header "BASE", "base", _COMPLETE
+        @_header "BASE", "base"
         @_nest
         @_dupe
         @BL _addr_base_v
         @_unnest
 
         @ parsing
-        @_header ">IN", "to_in", _COMPLETE
+        @_header ">IN", "to_in"
         @_nest
         @_dupe
         @BL _addr_to_in_v
         @_unnest
 
-        _header "SOURCE", "source", _COMPLETE
+        _header "SOURCE", "source"
         @_nest
         @BL _addr_term_buf
         @BL count
         @_unnest
 
-        _header "STATE", "state", _COMPLETE
+        _header "STATE", "state"
         @_nest
         @_dupe
         @BL _addr_state_v
         @_unnest
 
-        @_header "cs-match", "c_s_match", _COMPLETE
-        @ (c-addr1 c-addr2 -- caddr1 flag)
-        @ flag is true if strings are identical, false otherwise
-        @_nest
-        @_pop_to INDXA @ pop c-addr2 => INDXA
-        @LDRB r1, [PSTOP] @ count of c-addr1 => r1
-        @LDRB r2, [INDXA] @ count of c-addr2 => r2
-        @CMP r1, r2
-        @BNE csmf @ fail fast!
 
-csml:
-        @LDRB r0, [INDXA, r2]
-        @LDRB r1, [PSTOP, r2]
-        @BNE csmf @ fail a bit slower
-        @SUB r2, #1 @ count down
-        @BGT csml @ we already compared the counts
-
-csms:
-        @ success!
-        @_dupe @ push c-addr1 back on stack
-        @MOV PSTOP, #0
-        @_invert @ true flag
-        @_unnest
-
-csmf:
-        @ failure
-        @_dupe @ push c-addr1 back on stack
-        @MOV PSTOP, #0 @ false flag
-        @_unnest
-
-        @_header "FIND", "find", _COMPLETE
+        @_header "FIND", "find"
         @ ( c-addr –– c-addr 0 | xt 1 | xt -1 )
         @_nest 
 
@@ -739,7 +745,7 @@ fndz:
         MOV PSTOP, #0
         _unnest
 
-        _header "clear-buffer", "clear_buffer", _COMPLETE
+        _header "clear-buffer", "clear_buffer"
         LDR r2, [PT2ND] @ second of stack has buffer address
         MOV r3, PSTOP @ top of stack has max chars.
         MOV r0, #0 @ zero => r0
@@ -749,14 +755,14 @@ cbuf:
         BGE cbuf @ go all the way to count byte!
         _return
 
-        _header "clear-term_buf", "clear_term_buf", _COMPLETE
+        _header "clear-term_buf", "clear_term_buf"
         _nest
         BL _addr_term_buf @ address of term_buf => PSTOP
         BL _maxc_term_buf @ max chars of term_buf => PSTOP
         BL clear_buffer
         _unnest
 
-        @ _header "PARSE-NAME", "parse_name", _COMPLETE
+        @ _header "PARSE-NAME", "parse_name"
         @ _nest
         @ BL source @ buffer address in [PT2ND], count in PSTOP
         @ _drop @ drop count - buffers are null-terminated
@@ -795,7 +801,7 @@ pnz:
         @ _push_from r0
         @ _unnest 
 
-        _header "'", tick, _COMPLETE
+        _header "'", tick
         _nest
         @ TBD
         _unnest
