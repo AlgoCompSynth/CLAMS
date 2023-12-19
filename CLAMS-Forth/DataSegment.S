@@ -78,6 +78,24 @@
         .word 0xdeadbeef
         .word 0xdeadbeef
 
+@ the terminal buffer is a counted string
+.global _terminal_buffer
+.set _terminal_buffer, .
+        .rept _MAX_TERMBUF + 1 @ reserve space for the count byte
+        .byte 0
+        .endr
+.global _end_terminal_buffer
+.set _end_terminal_buffer, .
+
+@ the parsed word is a counted string
+.global _parsed_word
+.set _parsed_word, .
+        .rept _MAX_WNAME + 1 @ reserve space for the count byte
+        .byte 0
+        .endr
+.global _end_parsed_word
+.set _end_parsed_word, .
+
 .global _end_data_space
 .set _end_data_space, .
 
