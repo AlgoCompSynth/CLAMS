@@ -57,10 +57,17 @@ WRD .req r7 @ "Word" register
 INP .req r6 @ Interpreter pointer - the Forth VM's program counter
 PSP .req r5 @ Parameter stack pointer
 RSP .req r4 @ Return stack pointer
-XRG .req r3 @ "eXecute" register - used for branching and calling code functions
-MAX .req r3 @ used in character loops
+XRG .req r3 @ index register - miscellaneous uses
 LOC .req r2 @ used in character loops
 CNT .req r1 @ used in character loops
+
+@ Temporary storage registers
+@ The SDK routines save these if they use them. They're less useful than r0 - r7,
+@ but they're faster than going to RAM.
+TMP1 .req r8
+TMP2 .req r9
+TMP3 .req r10
+TMP4 .req r11
 
 @ symbols for addressing expressions
 @ reference: Forth 2012 standard, section D2.2
@@ -83,9 +90,8 @@ CNT .req r1 @ used in character loops
 .set _DEL, 0x7F @ delete / rubout
 
 @ flags = various bits about a dictionary word
-.set _COMPLETE, 0x80 @ word is complete - compiler sets this when done
-.set _COMPILE_ONLY, 0x40 @ COMPILE-ONLY word
-.set _IMMEDIATE, 0x20 @ IMMEDIATE word
+.set _COMPILE_ONLY, 0x1 @ COMPILE-ONLY word
+.set _IMMEDIATE, 0x2 @ IMMEDIATE word
 
 @ macros for external addressing and function calls
 
@@ -145,34 +151,28 @@ CNT .req r1 @ used in character loops
 @ from these, substituting an underscore for each dash in the pronunciation.
 
         @ generic word header
-        .macro _header wname, pronunciation, flags=_COMPLETE
+        .macro _header wname, pronunciation, flags=0
 
         @ build link field
         @ The CLAMS link field holds the distance in bytes to the previous link
         @ field. That way, we can determine the values during the assembly and
         @ link stages instead of having to make them all global symbols.
+        @ Since link addresses are word-aligned, we can store the two flag bits in
+        @ bits 0 and 1 and mask them off when we need to follow a link!
         .balign _AU_CELL, 0
         .set _link_field, .
         .set _\pronunciation\()_link, . @ debugging symbol for link field
         .if _link_field == _system_dict_start
           .word 0
         .else
-          .word _link_field - _previous_link_field
+          .word (_link_field - _previous_link_field) | \flags\()
         .endif
         .set _previous_link_field, _link_field
 
         @ build name field
         .set _name_field, .
         .set _\pronunciation\()_name, . @ debugging symbol for name field
-
-        @ The "count" field is eight bits, but we only need five bits for a 31
-        @ character name. So we can use the upper 3 bits for flags:
-        @ 0x80: definition is complete. Dictionary searches skip incomplete words.
-        @ 0x40: definition is compile-only. The text interpreter throws an error on
-        @       compile-only words.
-        @ 0x20: definition is immediate. The compiler will execute it rather than
-        @       compile it into the definition.
-        .set _count, 1f - . - 1 | \flags\()
+        .set _count, 1f - . - 1
         .byte _count
         .ascii "\wname\()"
 1:
