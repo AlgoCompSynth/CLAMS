@@ -235,6 +235,9 @@ CNT .req r1 @ used in character loops
         .endm
 
         @ "next" macro
+        @ We follow the Forth 83 model of indirect addressing. In this model, an
+        @ execution token is the code field address of a word in the dictionary.
+        @ See "F83 Overview", section 4.3
         .macro _next
         LDR WRD, [INP] @ next code field address => WRD
         ADD INP, #_AU_CELL @ advance INP
