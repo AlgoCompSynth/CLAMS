@@ -26,172 +26,11 @@
 
 */
 
-.include "SymbolDefs.S"
-
-@ stack macros
-@ stacks grow downwards and stack pointers point to top element
-
-        @ pop from stack to register
-        .macro _pop_from stack, regname
-        LDM \stack\()P!, {\regname}
-        .endm
-
-        @ push to stack from register
-        .macro _push_to stack regname
-        SUB \stack\()P, #_AU_CELL
-        STR \regname, [\stack\()P]
-        .endm
-
-        @ pop two elements to r0, r1
-        .macro _pop_two stack
-        LDM \stack\()P!, {r0, r1}
-        .endm
-
-        @ pop three elements to r0, r1, r2
-        .macro _pop_three stack
-        LDM \stack\()P!, {r0, r1, r2}
-        .endm
-
-@ dictionary construction macros
-
-@ dictionary header
-
-@ wname = word name in dictionary - what the Forth system searches for
-
-@ pronunciation = Forth specifies how to pronounce many words. We make labels
-@ from these, substituting an underscore for each dash in the pronunciation.
-
-        @ generic word header
-        .macro _header wname, pronunciation, flags=0x80
-
-        @ build link field
-        @ The CLAMS link field holds the distance in bytes to the previous link
-        @ field
-        .balign _AU_CELL, 0
-        .set _link_field, .
-        .set _\pronunciation\()_link, . @ debugging symbol for link field
-        .if _link_field == _system_dict_start
-          .word 0
-        .else
-          .word _link_field - _previous_link_field
-        .endif
-        .set _previous_link_field, _link_field
-
-        @ build name field
-        .set _name_field, .
-        .set _\pronunciation\()_name, . @ debugging symbol for name field
-
-        @ The "count" field is eight bits, but we only need five bits for a 31
-        @ character name. So we can use the upper 3 bits for flags:
-        @ 0x80: definition is complete. Dictionary searches skip incomplete words.
-        @ 0x40: definition is compile-only. The text interpreter throws an error on
-        @       compile-only words.
-        @ 0x20: definition is immediate. The compiler will execute it rather than
-        @       compile it into the definition.
-        .set _count, 1f - . - 1 | \flags\()
-        .byte _count
-        .ascii "\wname\()"
-1:
-
-        @ define global symbol for debugging / testing / internal reference.
-        .balign _AU_CELL, 0
-        .thumb_func
-        .global _\pronunciation\()
-        .set _\pronunciation\(), .
-        .endm
-
-        @ assemble code field for a machine code word
-        @ For indirect threading, the code field address points to the next cell
-        .macro _code_word
-        .word . + _AU_CELL | 1
-        .endm
-
-        @ assemble code field for a colon definition
-        .macro _colon_word
-        .word _enter
-        .endm
-
-@ Common code for a word that uses a single instruction binary ALU operator on the
-@ top two stack cells. Such words have the stack effect
-@
-@    ( left right -- result )
-@
-@ where `result` = `left <op> right`. That is, the postfix `left right <op>` has
-@ the same `result` as the infix `left <op> right`.
-
-        .macro _binary_alu opcode:req
-        _pop_two PS @ pop left operand => r0, right operand => r1
-        \opcode\() r0, r1 @ r0 := left <OP> right
-        _push_to PS, r0
-        .endm
-
-@ Common code for a word that compares the top two cells on the stack. Such words
-@ have the stack effect
-@
-@    ( left right -- flag )
-@
-@ where `flag` = true (all ones) if `left <cmp> right` is true, and false (all
-@ zeroes) if `left <cmp> right` is false.
-
-        .macro _binary_cmp cmp:req
-        _pop_two PS @ pop left operand => r0, right operand => r1
-        LDR r2, _TRUE_FLAG @ true flag => r2
-        CMP r0, r1
-        B\cmp\() 1f @ branch if true
-        MVN r2, r2 @ "invert" the true flag
-1:
-        _push_to PS, r2 @ push flag to parameter stack
-        .endm
-
-@ Common code for unary operations
-
-        .macro _unary_op instruction:req
-        LDR r0, [PSP]
-        \instruction\()
-        STR r0, [PSP]
-        .endm
-
-@ character codes
-.set _NUL, 0x00 @ null / string terminator
-.set _BEL, 0x07 @ bell
-.set _BS, 0x08 @ backspace
-.set _LF, 0x0A @ line feed
-.set _CR, 0x0D @ carriage return
-.set _BL, 0x20 @ space
-.set _O, 0x4B @ letter "K"
-.set _O, 0x4F @ letter "O"
-.set _DEL, 0x7F @ delete / rubout
-
-@ flags = various bits about the word
-.set _COMPLETE, 0x80 @ word is complete - compiler sets this when done
-.set _COMPILE_ONLY, 0x40 @ COMPILE-ONLY word
-.set _IMMEDIATE, 0x20 @ IMMEDIATE word
+.include "MacroDefs.S"
 
 @ inner interpreters
-@ see _Moving Forth_ and _eForth Overview_
-
-        @ "next" macro
-        .macro _next
-        LDR WRD, [INP] @ next code field address => WRD
-        ADD INP, #_AU_CELL @ advance INP
-        LDR XRG, [WRD] @ next branch target => XRG
-        BX XRG @ jump to next code routine
-        .endm
-
-        @ unconditional branch macro
-        .macro _ubranch target
-        .word _branch
-        .word \target\()
-        .endm
-
-        @ conditional branch macro
-        .macro _qbranch target
-        .word _question_branch
-        .word \target\()
-        .endm
 
 .global _enter
-.thumb_func
 _enter:
         _push_to RS INP @ nest INP
 	ADD WRD, #_AU_CELL @ point to first word of thread
@@ -199,14 +38,12 @@ _enter:
         _next
 
 .global _dovar
-.thumb_func
 _dovar:
         ADD WRD, #_AU_CELL @ address of variable => WRD
         _push_to PS WRD @ push to parameter stack
         _next
 
 .global _docon
-.thumb_func
 _docon:
         ADD WRD, #_AU_CELL @ address of constant => WRD
         LDR r0, [WRD] @ constant value => r0

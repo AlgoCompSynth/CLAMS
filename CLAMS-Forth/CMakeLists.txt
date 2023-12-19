@@ -14,7 +14,7 @@ add_executable(CLAMS-Forth
   CLAMS-Forth.S
   Dictionary.S
   DataSegment.S
-  SymbolDefs.S
+  MacroDefs.S
   Wrappers.c
 )
 

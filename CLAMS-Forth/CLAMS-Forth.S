@@ -28,7 +28,7 @@
 
 @ test harness for Forth VM
 
-.include "SymbolDefs.S"
+.include "MacroDefs.S"
 
 .thumb_func
 .global main

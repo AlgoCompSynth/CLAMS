@@ -33,7 +33,7 @@
 @ the data space portion of the dictionary - the part created by the user at run
 @ time. And it has a pre-defined maximum size.
 
-.include "SymbolDefs.S"
+.include "MacroDefs.S"
 
 .data
 .balign _AU_CELL, 0
