@@ -619,6 +619,16 @@ typz:
 _x_addr sdk_key
 _x_addr sdk_emit
 
+        _header "COUNT", "count", _COMPLETE
+        @ ( c-addr1 –– c-addr2 u )
+        _code_word
+        _pop_from PS, r0 @ address => LOC
+        LDRB r0, [LOC] @ count byte => r0
+        ADD LOC, #_AU_CHAR @ fix address
+        _push_to PS, LOC
+        _push_to PS, r0
+        _next
+
 /*
         @ number input/output
         @_header "BASE", "base", _COMPLETE
@@ -645,13 +655,6 @@ _x_addr sdk_emit
         @_dupe
         @BL _addr_state_v
         @_unnest
-
-        @_header "COUNT", "count", _COMPLETE
-        @LDRB r0, [r0] @ fetch count byte
-        @ADD PSTOP, #1 @ fix address
-        @_dupe
-        @MOV PSTOP, r0
-        @_return
 
         @_header "cs-match", "c_s_match", _COMPLETE
         @ (c-addr1 c-addr2 -- caddr1 flag)
