@@ -58,6 +58,7 @@ INP .req r6 @ Interpreter pointer - the Forth VM's program counter
 PSP .req r5 @ Parameter stack pointer
 RSP .req r4 @ Return stack pointer
 XRG .req r3 @ "eXecute" register - used for branching and calling code functions
+MAX .req r3 @ used in character loops
 LOC .req r2 @ used in character loops
 CNT .req r1 @ used in character loops
 
@@ -253,4 +254,12 @@ CNT .req r1 @ used in character loops
         .macro _qbranch target
         .word _question_branch
         .word \target\()
+        .endm
+
+        @ register save / restore macros
+        .macro _pushlctl @ push loop control registers
+        PUSH {r1-r3}
+        .endm
+        .macro _poplctl @ pop loop control registers
+        POP {r1-r3}
         .endm

@@ -1783,15 +1783,15 @@ Disassembly of section .text:
 
 10000d44 <_fill>:
 10000d44:	10000d48 	.word	0x10000d48
-10000d48:	cd07      	ldmia	r5!, {r0, r1, r2}
+10000d48:	cd01      	ldmia	r5!, {r0}
+10000d4a:	cd02      	ldmia	r5!, {r1}
+10000d4c:	cd04      	ldmia	r5!, {r2}
 
-10000d4a <fil1>:
-10000d4a:	2900      	cmp	r1, #0
-10000d4c:	dd03      	ble.n	10000d56 <filz>
-10000d4e:	7010      	strb	r0, [r2, #0]
-10000d50:	3201      	adds	r2, #1
-10000d52:	3901      	subs	r1, #1
-10000d54:	e7f9      	b.n	10000d4a <fil1>
+10000d4e <fil1>:
+10000d4e:	3901      	subs	r1, #1
+10000d50:	db01      	blt.n	10000d56 <filz>
+10000d52:	5450      	strb	r0, [r2, r1]
+10000d54:	e7fb      	b.n	10000d4e <fil1>
 
 10000d56 <filz>:
 10000d56:	6837      	ldr	r7, [r6, #0]
@@ -1893,24 +1893,24 @@ Disassembly of section .text:
 
 10000dfc <_type>:
 10000dfc:	10000e00 	.word	0x10000e00
-10000e00:	cd02      	ldmia	r5!, {r1}
+10000e00:	cd08      	ldmia	r5!, {r3}
 10000e02:	cd04      	ldmia	r5!, {r2}
+10000e04:	2100      	movs	r1, #0
 
-10000e04 <typl>:
-10000e04:	2900      	cmp	r1, #0
-10000e06:	dd0b      	ble.n	10000e20 <typz>
-10000e08:	7810      	ldrb	r0, [r2, #0]
-10000e0a:	2800      	cmp	r0, #0
-10000e0c:	d008      	beq.n	10000e20 <typz>
-10000e0e:	b406      	push	{r1, r2}
-10000e10:	4807      	ldr	r0, [pc, #28]	; (10000e30 <_addr_sdk_emit>)
-10000e12:	2301      	movs	r3, #1
-10000e14:	4303      	orrs	r3, r0
-10000e16:	4798      	blx	r3
-10000e18:	b406      	push	{r1, r2}
-10000e1a:	3201      	adds	r2, #1
-10000e1c:	3901      	subs	r1, #1
-10000e1e:	e7f1      	b.n	10000e04 <typl>
+10000e06 <typl>:
+10000e06:	4299      	cmp	r1, r3
+10000e08:	da0a      	bge.n	10000e20 <typz>
+10000e0a:	5c50      	ldrb	r0, [r2, r1]
+10000e0c:	2800      	cmp	r0, #0
+10000e0e:	d007      	beq.n	10000e20 <typz>
+10000e10:	b40e      	push	{r1, r2, r3}
+10000e12:	4807      	ldr	r0, [pc, #28]	; (10000e30 <_addr_sdk_emit>)
+10000e14:	2301      	movs	r3, #1
+10000e16:	4303      	orrs	r3, r0
+10000e18:	4798      	blx	r3
+10000e1a:	bc0e      	pop	{r1, r2, r3}
+10000e1c:	3101      	adds	r1, #1
+10000e1e:	e7f2      	b.n	10000e06 <typl>
 
 10000e20 <typz>:
 10000e20:	6837      	ldr	r7, [r6, #0]

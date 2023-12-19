@@ -499,14 +499,14 @@ OllKorrect: .asciz " Ok\n"
         _header "FILL", fill, _COMPLETE
         @ ( c-addr u char –– )
         _code_word
-        _pop_three PS @ char => r0, u => r1, c-addr => r2
+        _pop_from PS, r0 @ char => r0,
+        _pop_from PS, CNT @ u => CNT
+        _pop_from PS, LOC @ c-addr => LOC
 
 fil1:
-        CMP r1, #0 @ is count zero or less?
-        BLE filz @ exit, stage left!
-        STRB r0, [r2]
-        ADD r2, #_AU_CHAR
-        SUB r1, #1
+        SUB CNT, #_AU_CHAR @ count down
+        BLT filz @ exit, stage left!
+        STRB r0, [LOC, CNT]
         B fil1
 filz:
         @ done
@@ -520,13 +520,13 @@ filz:
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
 
-        _pop_from PS, r3 @ pop max count => r3
-        _pop_from PS, r2 @ pop address => r2
-        MOV r1, #0 @ character count => r1
+        _pop_from PS, MAX @ pop max count => MAX
+        _pop_from PS, LOC @ pop address => LOC
+        MOV CNT, #0 @ initialize CNT
 _accl:
-        PUSH {r1, r2, r3} @ save loop controls
+        _pushlctl
         _x_call sdk_key @ wait for character, which will show up in r0
-        POP {r1, r2, r3} @ restore loop controls
+        _poplctl
 
         @ test for specific control characters
         CMP r0, #_BS
@@ -542,15 +542,15 @@ _accl:
 
         @ a printable character - echo it and append to buffer
 _acce:
-        STRB r0, [r2, r1] @ append char to buffer
-        ADD r1, #1 @ count the character
+        STRB r0, [LOC, CNT] @ append char to buffer
+        ADD CNT, #1 @ count the character
 
-        PUSH {r1, r2, r3} @ save loop controls
+        _pushlctl
         _x_call sdk_emit @ printable - send it out!
-        POP {r1, r2, r3} @ restore loop controls
+        _poplctl
 
         @ check for buffer end
-        CMP r1, r3 @ did we hit the limit?
+        CMP CNT, MAX @ did we hit the limit?
         BEQ _accz @ early exit if limit hit!
 	B _accl @ there's room - go back for more!
 
@@ -561,56 +561,56 @@ _accs:
 
         @ backspace - un-count previous character and erase it
 _accb:
-        CMP r1, #0 @ is buffer empty?
+        CMP CNT, #0 @ is buffer empty?
         BEQ _accl @ ignore a backspace if buffer is empty
 
         @ un-count
-        SUB r1, #1 @ decrement char count
+        SUB CNT, #1 @ decrement char count
 
         @ erase previous character
-        PUSH {r1, r2, r3} @ save loop controls
+        _pushlctl
         _x_call sdk_emit @ emit the backspace we already have
-        POP {r1, r2, r3} @ restore loop controls
+        _poplctl
 
         MOV r0, #_BL
-        PUSH {r1, r2, r3} @ save loop controls
+        _pushlctl
         _x_call sdk_emit @ "erase" the character at the cursor
-        POP {r1, r2, r3} @ restore loop controls
+        _poplctl
 
         MOV r0, #_BS @ queue up another backspace
-        PUSH {r1, r2, r3} @ save loop controls
+        _pushlctl
         _x_call sdk_emit @ move cursor back
-        POP {r1, r2, r3} @ restore loop controls
+        _poplctl
 
         B _accl @ back for more!
 
         @ clean up and exit
 _accz:
         @ push count; exit
-        _push_to PS, r1
+        _push_to PS, CNT
         _next
 
         _header "TYPE", type, _COMPLETE
         @ ( c-addr u –– )
         _code_word
 
-        _pop_from PS, r1 @ count => r1
-        _pop_from PS, r2 @ address => r2
+        _pop_from PS, MAX @ count => MAX
+        _pop_from PS, LOC @ address => LOC
+        MOV CNT, #0 @ count up
 
 typl:
-        CMP r1, #0 @ are we done?
-        BLE typz @ exit!
+        CMP CNT, MAX @ are we done?
+        BGE typz @ exit!
 
-        LDRB r0, [r2] @ character => r0
+        LDRB r0, [LOC, CNT] @ character => r0
         CMP r0, #0 @ is it a null terminator?
         BEQ typz @ exit on null terminator
 
-        PUSH {r1, r2} @ save loop controls
+        _pushlctl
         _x_call sdk_emit @ emit the character
-        PUSH {r1, r2} @ save loop controls
+        _poplctl
 
-        ADD r2, #1 @ increment the address
-        SUB r1, #1 @ count down
+        ADD CNT, #1 @ count up
         B typl @ continue
 
 typz:
