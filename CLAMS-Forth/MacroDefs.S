@@ -95,12 +95,12 @@ CNT .req r1 @ used in character loops
         .macro _x_addr name
         .balign _AU_CELL
         .set _addr_\name\(), .
-        .word \name
+        .word \name\()
         .endm
 
         @ macro to load an "x_addr" word
         .macro _x_load reg, name
-        LDR \reg, _addr_\name\() @ get the address
+        LDR \reg\(), _addr_\name\() @ get the address
         .endm
 
         @ macro to call a function via XRG
@@ -115,13 +115,13 @@ CNT .req r1 @ used in character loops
 
         @ pop from stack to register
         .macro _pop_from stack, regname
-        LDM \stack\()P!, {\regname}
+        LDM \stack\()P!, {\regname\()}
         .endm
 
         @ push to stack from register
         .macro _push_to stack regname
         SUB \stack\()P, #_AU_CELL
-        STR \regname, [\stack\()P]
+        STR \regname\(), [\stack\()P]
         .endm
 
         @ pop two elements to r0, r1
