@@ -433,10 +433,8 @@ _x_addr printf
 
         _header "colon-test", colon_test
         _colon_word
-        .word _literal
-        .word 2
-        .word _literal
-        .word 3
+        _code_literal 2
+        _code_literal 3
         .word _param_top_3
         .word _plus
         .word _param_top_3
@@ -482,14 +480,11 @@ quil:
 
         @ set the buffer to NULs
         .word _dupe
-        .word _literal
-        .word _MAX_TERMBUF
-        .word _literal
-        .word _NUL
+        _code_literal _MAX_TERMBUF
+        _code_literal _NUL
         .word _fill
 
-        .word _literal @ push maximum character count => parameter stack
-        .word _MAX_TERMBUF
+        _code_literal _MAX_TERMBUF @ push max character count => parameter stack
         .word _accept @ get a line
 
         @ stack has actual character count

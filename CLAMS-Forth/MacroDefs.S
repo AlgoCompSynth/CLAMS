@@ -262,6 +262,12 @@ TMP4 .req r11
         .word \target\()
         .endm
 
+        @ literal coder macro
+        .macro _code_literal value
+        .word _literal
+        .word \value\()
+        .endm
+
         @ register save / restore macros
         .macro _pushlctl @ push loop control registers
         PUSH {r1-r3}
