@@ -478,8 +478,24 @@ _ABORT_CFA: .word _abort
         .word _clear_return_stack
 
 quil:
-        .word _accept
-        .word _evaluate
+        .word _term_buf @ push terminal buffer address => parameter stack
+
+        @ set the buffer to NULs
+        .word _dupe
+        .word _literal
+        .word _MAX_TERMBUF
+        .word _literal
+        .word _NUL
+        .word _fill
+
+        .word _literal @ push maximum character count => parameter stack
+        .word _MAX_TERMBUF
+        .word _accept @ get a line
+
+        @ stack has actual character count
+        .word _term_buf @ get terminal buffer address back on stack
+        .word _swap
+        .word _evaluate @ EVALUATE is the text interpreter!
         .word _oll_korrect
         _ubranch quil
         .word _exit @ this should never get executed
@@ -495,6 +511,16 @@ quil:
         _next
 
 OllKorrect: .asciz " Ok\n"
+
+        _header "term-buf", term_buf
+        @ ( -- c-addr )
+        @ c-addr is the address of _terminal_buffer
+        _code_word
+        _x_load r0, _terminal_buffer
+        _push_to PS, r0
+        _next
+
+_x_addr _terminal_buffer
 
         _header "FILL", fill
         @ ( c-addr u char –– )
@@ -665,33 +691,6 @@ csmf:
         _next
 
 /*
-        @ number input/output
-        @_header "BASE", "base"
-        @_nest
-        @_dupe
-        @BL _addr_base_v
-        @_unnest
-
-        @ parsing
-        @_header ">IN", "to_in"
-        @_nest
-        @_dupe
-        @BL _addr_to_in_v
-        @_unnest
-
-        _header "SOURCE", "source"
-        @_nest
-        @BL _addr_term_buf
-        @BL count
-        @_unnest
-
-        _header "STATE", "state"
-        @_nest
-        @_dupe
-        @BL _addr_state_v
-        @_unnest
-
-
         @_header "FIND", "find"
         @ ( c-addr –– c-addr 0 | xt 1 | xt -1 )
         @_nest 
@@ -743,23 +742,6 @@ fndz:
         @ failed search - push a zero and return
         _dupe
         MOV PSTOP, #0
-        _unnest
-
-        _header "clear-buffer", "clear_buffer"
-        LDR r2, [PT2ND] @ second of stack has buffer address
-        MOV r3, PSTOP @ top of stack has max chars.
-        MOV r0, #0 @ zero => r0
-cbuf:
-        STRB r0, [r2, r3]
-        SUB r3, #1 @ count down
-        BGE cbuf @ go all the way to count byte!
-        _return
-
-        _header "clear-term_buf", "clear_term_buf"
-        _nest
-        BL _addr_term_buf @ address of term_buf => PSTOP
-        BL _maxc_term_buf @ max chars of term_buf => PSTOP
-        BL clear_buffer
         _unnest
 
         @ _header "PARSE-NAME", "parse_name"
