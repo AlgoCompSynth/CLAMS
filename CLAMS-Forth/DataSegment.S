@@ -78,10 +78,10 @@
         .word 0xdeadbeef
         .word 0xdeadbeef
 
-@ the terminal buffer is a counted string
+@ the terminal buffer is a null-terminated string
 .global _terminal_buffer
 .set _terminal_buffer, .
-        .rept _MAX_TERMBUF + 1 @ reserve space for the count byte
+        .rept _MAX_TERMBUF
         .byte 0
         .endr
 .global _end_terminal_buffer

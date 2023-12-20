@@ -79,7 +79,7 @@ TMP4 .req r11
 .set _STACK_CELLS, 64 @ number of cells in a stack
 .set _MAX_CSTRING, 255 @ maximum number of characters in a counted string
 .set _MAX_WNAME, 31 @ maximum number of characters in a word name
-.set _MAX_TERMBUF, 87 @ maximum number of characters in a terminal buffer name
+.set _MAX_TERMBUF, 84 @ maximum number of characters in a terminal buffer line
 
 @ character codes
 .set _NUL, 0x00 @ null / string terminator
