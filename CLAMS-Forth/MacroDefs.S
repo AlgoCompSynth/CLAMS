@@ -144,6 +144,14 @@ TMP4 .req r11
         LDM \stack\()P!, {r0, r1, r2}
         .endm
 
+        @ macro for padded counted strings
+        .macro _padded_counted_string string
+        .set _count, 1f - . - 1
+        .byte _count
+        .ascii "\string\()"
+1:      .balign _AU_CELL, 0
+        .endm
+
 @ dictionary construction macros
 
 @ dictionary header
@@ -178,10 +186,9 @@ TMP4 .req r11
         .set _count, 1f - . - 1
         .byte _count
         .ascii "\wname\()"
-1:
+1:      .balign _AU_CELL, 0
 
         @ define global symbol for debugging / testing / internal reference.
-        .balign _AU_CELL, 0
         .global _\pronunciation\()
         .set _\pronunciation\(), .
         .endm
@@ -195,6 +202,26 @@ TMP4 .req r11
         @ assemble code field for a colon definition
         .macro _colon_word
         .word _enter
+        .endm
+
+        @ assemble code field for a C-quote string
+        .macro _cq_word
+        .word _do_cq_string
+        .endm
+
+        @ assemble code field for an S-quote string
+        .macro _sq_word
+        .word _do_sq_string
+        .endm
+
+        @ assemble code field for a constant
+        .macro _const_word
+        .word _do_const
+        .endm
+
+        @ assemble code field for a variable
+        .macro _var_word
+        .word _do_var
         .endm
 
 @ Common code for a word that uses a single instruction binary ALU operator on the
