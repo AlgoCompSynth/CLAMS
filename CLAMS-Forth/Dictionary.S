@@ -37,17 +37,34 @@ _enter:
         MOV INP, WRD @ "branch indirect" to INP
         _next
 
-.global _dovar
-_dovar:
+.global _do_var
+_do_var:
         ADD WRD, #_AU_CELL @ address of variable => WRD
         _push_to PS WRD @ push to parameter stack
         _next
 
-.global _docon
-_docon:
+.global _do_const
+_do_const:
         ADD WRD, #_AU_CELL @ address of constant => WRD
         LDR r0, [WRD] @ constant value => r0
         _push_to PS r0 @ push to parameter stack
+        _next
+
+@ Strings compiled with C" and strings compiled with S" are both stored as counted
+@ strings. So we need two different inner interpreters.
+.global _do_cq_string
+_do_cq_string:
+        ADD WRD, #_AU_CELL @ address of counted string => WRD
+        _push_to PS WRD @ push to parameter stack
+        _next
+
+.global _do_sq_string
+_do_sq_string:
+        ADD WRD, #_AU_CELL @ address of counted string => WRD
+        LDRB r0, [WRD] @ count => r0
+        ADD WRD, #_AU_CHAR @ skip the count byte
+        _push_to PS WRD @ push address to parameter stack
+        _push_to PS r0 @ push count to parameter stack
         _next
 
 @ the dictionary itself!
@@ -685,7 +702,51 @@ csmf:
         _push_to PS, r0 @ push to parameter stack
         _next
 
+        @ _header "PARSE-NAME", "parse_name"
+        @ _nest
+        @ BL source @ buffer address in [PT2ND], count in PSTOP
+        @ _drop @ drop count - buffers are null-terminated
+        @ _pop_to INDXA @ pop address to INDXA
+        @ BL to_in @ get address of input buffer count
+        @ _pop_to INDXB @ pop >IN address to INDXB
+        @ LDR r3, [INDXB] @ >IN to r3
+
+pn1:
+        @ LDRB r2, [INDXA, r3] @ get a character
+        @ CMP r2, #0 @ buffers are null-terminated
+        @ BEQ pnz @ that's all, folks!
+        @ CMP r2, #_BL @ is it a space?
+        @ BNE pn2 @ first non-delimiter!
+        @ ADD r3, #_AU_CHAR
+        @ B pn1 @ next character
+
+pn2:
+        @ ADD r0, INDXA, r3 @ we have the buffer address!
+        @ _push_from r0 @ push it to the stack
+        @ MOV r1, #1 @ initial count
+
+pn3:
+        @ ADD r3, #_AU_CHAR
+        @ LDRB r2, [INDXA, r3]
+        @ CMP r2, #0
+        @ BEQ pnz
+        @ CMP r2, #_BL
+        @ BEQ pnz @ blank - finish up
+        @ ADD r1, #1 @ count and go back for more
+        @ B pn3
+
+pnz:
+        @ STR r3, [INDXB] @ first order of business - save new >IN value
+        @ MOV r0, r1 @ push count and exit
+        @ _push_from r0
+        @ _unnest 
+
 /*
+
+        _header "'", tick
+        _nest
+        @ TBD
+        _unnest
         @_header "FIND", "find"
         @ ( c-addr –– c-addr 0 | xt 1 | xt -1 )
         @_nest 
@@ -739,49 +800,6 @@ fndz:
         MOV PSTOP, #0
         _unnest
 
-        @ _header "PARSE-NAME", "parse_name"
-        @ _nest
-        @ BL source @ buffer address in [PT2ND], count in PSTOP
-        @ _drop @ drop count - buffers are null-terminated
-        @ _pop_to INDXA @ pop address to INDXA
-        @ BL to_in @ get address of input buffer count
-        @ _pop_to INDXB @ pop >IN address to INDXB
-        @ LDR r3, [INDXB] @ >IN to r3
-
-pn1:
-        @ LDRB r2, [INDXA, r3] @ get a character
-        @ CMP r2, #0 @ buffers are null-terminated
-        @ BEQ pnz @ that's all, folks!
-        @ CMP r2, #_BL @ is it a space?
-        @ BNE pn2 @ first non-delimiter!
-        @ ADD r3, #_AU_CHAR
-        @ B pn1 @ next character
-
-pn2:
-        @ ADD r0, INDXA, r3 @ we have the buffer address!
-        @ _push_from r0 @ push it to the stack
-        @ MOV r1, #1 @ initial count
-
-pn3:
-        @ ADD r3, #_AU_CHAR
-        @ LDRB r2, [INDXA, r3]
-        @ CMP r2, #0
-        @ BEQ pnz
-        @ CMP r2, #_BL
-        @ BEQ pnz @ blank - finish up
-        @ ADD r1, #1 @ count and go back for more
-        @ B pn3
-
-pnz:
-        @ STR r3, [INDXB] @ first order of business - save new >IN value
-        @ MOV r0, r1 @ push count and exit
-        @ _push_from r0
-        @ _unnest 
-
-        _header "'", tick
-        _nest
-        @ TBD
-        _unnest
 
 */
 
