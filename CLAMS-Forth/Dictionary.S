@@ -483,12 +483,28 @@ _CRASH_FMT_3: .asciz "\nPSP, RSP: %x, %x\n"
 _ABORT_CFA: .word _abort
 
         _header "ABORT", abort
+        @ ( anything -- )
         _colon_word
         .word _clear_param_stack
         .word _quit
-        .word _exit @ this should never get executed because QUIT never exits
+        .word _crash @ this should never get executed because QUIT never exits
 
         _header "QUIT", quit
+        @ (R: anything -- )
+        @ clear-return-stack
+        @ BEGIN
+        @    term-buf
+        @    DUP
+        @    max-termbuf
+        @    NUL
+        @    FILL
+        @    ACCEPT
+        @    term-buf
+        @    SWAP
+        @    EVALUATE
+        @    oll_korrect
+        @ AGAIN
+
         _colon_word
         .word _clear_return_stack
 
@@ -510,7 +526,7 @@ quil:
         .word _evaluate @ EVALUATE is the text interpreter!
         .word _oll_korrect
         _ubranch quil
-        .word _exit @ this should never get executed
+        .word _crash @ this should never get executed
 
         _header "EVALUATE", evaluate
         _colon_word

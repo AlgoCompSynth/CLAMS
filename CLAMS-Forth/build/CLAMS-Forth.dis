@@ -31,11 +31,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      0000009f  00000000  00000000  0000cf88  2**0
                   CONTENTS, READONLY
- 14 .debug_line   0001729a  00000000  00000000  0000d027  2**0
+ 14 .debug_line   0001729b  00000000  00000000  0000d027  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_info   00031166  00000000  00000000  000242c1  2**0
+ 15 .debug_info   00031166  00000000  00000000  000242c2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_abbrev 0000851c  00000000  00000000  00055427  2**0
+ 16 .debug_abbrev 0000851c  00000000  00000000  00055428  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_aranges 00001600  00000000  00000000  0005d948  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -1744,7 +1744,7 @@ Disassembly of section .text:
 10000ce4:	1000037c 	.word	0x1000037c
 10000ce8:	10000b5c 	.word	0x10000b5c
 10000cec:	10000d00 	.word	0x10000d00
-10000cf0:	100003f4 	.word	0x100003f4
+10000cf0:	10000c68 	.word	0x10000c68
 
 10000cf4 <_quit_link>:
 10000cf4:	0000001c 	.word	0x0000001c
@@ -1774,7 +1774,7 @@ Disassembly of section .text:
 10000d3c:	10000d74 	.word	0x10000d74
 10000d40:	10000450 	.word	0x10000450
 10000d44:	10000d08 	.word	0x10000d08
-10000d48:	100003f4 	.word	0x100003f4
+10000d48:	10000c68 	.word	0x10000c68
 
 10000d4c <_evaluate_link>:
 10000d4c:	00000058 	.word	0x00000058
