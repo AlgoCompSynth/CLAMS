@@ -110,6 +110,7 @@ qbz:
         ADD INP, #_AU_CELL @ flag is true - skip branch destination
         _next
 
+        @ stack operations
         _header "DUP", dupe
         _code_word
         LDR r0, [PSP]
@@ -142,6 +143,57 @@ qbz:
         STR r0, [PSP, #_AU_CELL] @ stash x3
         STR r2, [PSP] @ stash x1
         _next
+
+        @ stacks grow downwards - top of stack is the lowest address
+        @ _param_stack_top is the lowest address that can legally contain a cell
+        @ _param_stack_bottom is one cell *above* the highest address that can
+        @ legally contain a cell!
+        _header "clear_param_stack", clear_param_stack
+        _code_word
+        _x_load PSP, _param_stack_bottom
+        _x_load r1, _param_stack_top
+        LDR r0, _HAMBURGER
+cps1:
+        STR r0, [r1]
+        ADD r1, #_AU_CELL
+        CMP r1, PSP
+        BLO cps1
+        _next
+_x_addr _param_stack_bottom
+_x_addr _param_stack_top
+
+        _header "clear_return_stack", clear_return_stack
+        _code_word
+        _x_load RSP, _return_stack_bottom
+        _x_load r1, _return_stack_top
+        LDR r0, _HAMBURGER
+crs1:
+        STR r0, [r1]
+        ADD r1, #_AU_CELL
+        CMP r1, RSP
+        BLO crs1
+        _next
+_x_addr _return_stack_bottom
+_x_addr _return_stack_top
+.balign _AU_CELL, 0
+_HAMBURGER: .word 0xDEADBEEF
+
+        _header "param_top_3", param_top_3
+        _code_word
+        _x_load r0, _param_format
+        LDM PSP, { r1, r2, r3, PSP}
+        _x_call printf
+        _next
+
+        _header "return_top_3", return_top_3
+        _code_word
+        _x_load r0, _return_format
+        LDM RSP, { r1, r2, r3, RSP}
+        _x_call printf
+        _next
+_x_addr printf
+_x_addr _param_format
+_x_addr _return_format
 
         @ position-independent operations
         _header "@", fetch
@@ -380,10 +432,9 @@ _TRUE_FLAG: .word 0xFFFFFFFF
         _x_call sdk_slash_mod
         _push_to PS, r1 @ push remainder
         _next
-
 _x_addr sdk_slash_mod
 
-        @ terminal I/O words
+        @ terminal I/O / interpreter control words
         _header "KEY", key
         _code_word
         _x_call sdk_key
@@ -396,57 +447,45 @@ _x_addr sdk_slash_mod
         _x_call sdk_emit
         _next
 
-        @ stacks grow downwards - top of stack is the lowest address
-        @ _param_stack_top is the lowest address that can legally contain a cell
-        @ _param_stack_bottom is one cell *above* the highest address that can
-        @ legally contain a cell!
-        _header "clear_param_stack", clear_param_stack
+        @ >IN, BASE, BLK, SCR, SOURCE, SOURCE-ID, STATE
+
+        _header ">IN", to_in
         _code_word
-        _x_load PSP, _param_stack_bottom
-        _x_load r1, _param_stack_top
-        LDR r0, _HAMBURGER
-cps1:
-        STR r0, [r1]
-        ADD r1, #_AU_CELL
-        CMP r1, PSP
-        BLO cps1
+        _x_load r0, _input_cursor
+        _push_to PS, r0
         _next
+_x_addr _input_cursor
 
-_x_addr _param_stack_bottom
-_x_addr _param_stack_top
-
-        _header "clear_return_stack", clear_return_stack
+        _header "BASE", base
         _code_word
-        _x_load RSP, _return_stack_bottom
-        _x_load r1, _return_stack_top
-        LDR r0, _HAMBURGER
-crs1:
-        STR r0, [r1]
-        ADD r1, #_AU_CELL
-        CMP r1, RSP
-        BLO crs1
+        _x_load r0, _number_base
+        _push_to PS, r0
         _next
+_x_addr _number_base
 
-_x_addr _return_stack_bottom
-_x_addr _return_stack_top
-.balign _AU_CELL, 0
-_HAMBURGER: .word 0xDEADBEEF
-
-        _header "param_top_3", param_top_3
+        _header "SOURCE", source
         _code_word
-        LDR r0, =_param_format
-        LDM PSP, { r1, r2, r3, PSP}
-        _x_call printf
+        _x_load r0, _input_source
+        _x_load r1, _input_source_chars
+        _push_to PS, r0
+        _push_to PS, r1
         _next
+_x_addr _input_source
+_x_addr _input_source_chars
 
-        _header "return_top_3", return_top_3
+        _header "SOURCE-ID", source_id
         _code_word
-        LDR r0, =_return_format
-        LDM RSP, { r1, r2, r3, RSP}
-        _x_call printf
+        _x_load r0, _input_source_id
+        _push_to PS, r0
         _next
+_x_addr _input_source_id
 
-_x_addr printf
+        _header "STATE", state
+        _code_word
+        _x_load r0, _input_state
+        _push_to PS, r0
+        _next
+_x_addr _input_state
 
         _header "colon-test", colon_test
         _colon_word
@@ -478,6 +517,8 @@ _x_addr printf
 _CRASH_FMT_1: .asciz "\nr1, r2, XRG: %x, %x, %x"
 _CRASH_FMT_2: .asciz "\nINP, WRD: %x, %x"
 _CRASH_FMT_3: .asciz "\nPSP, RSP: %x, %x\n"
+_param_format: .asciz "parameter stack top, second, third => %x, %x, %x\n"
+_return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
 
 .balign _AU_CELL, 0
 _ABORT_CFA: .word _abort
@@ -547,7 +588,6 @@ OllKorrect: .asciz " Ok\n"
         _x_load r0, _terminal_buffer
         _push_to PS, r0
         _next
-
 _x_addr _terminal_buffer
 
         _header "FILL", fill
@@ -669,7 +709,6 @@ typl:
 
 typz:
         _next
-
 _x_addr sdk_key
 _x_addr sdk_emit
 
@@ -781,8 +820,6 @@ fndz:
 */
 
 
-_param_format: .asciz "parameter stack top, second, third => %x, %x, %x\n"
-_return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
 
 .global _system_dict_end
 _system_dict_end: .word .
