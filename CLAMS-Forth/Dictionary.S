@@ -702,45 +702,6 @@ csmf:
         _push_to PS, r0 @ push to parameter stack
         _next
 
-        @ _header "PARSE-NAME", "parse_name"
-        @ _nest
-        @ BL source @ buffer address in [PT2ND], count in PSTOP
-        @ _drop @ drop count - buffers are null-terminated
-        @ _pop_to INDXA @ pop address to INDXA
-        @ BL to_in @ get address of input buffer count
-        @ _pop_to INDXB @ pop >IN address to INDXB
-        @ LDR r3, [INDXB] @ >IN to r3
-
-pn1:
-        @ LDRB r2, [INDXA, r3] @ get a character
-        @ CMP r2, #0 @ buffers are null-terminated
-        @ BEQ pnz @ that's all, folks!
-        @ CMP r2, #_BL @ is it a space?
-        @ BNE pn2 @ first non-delimiter!
-        @ ADD r3, #_AU_CHAR
-        @ B pn1 @ next character
-
-pn2:
-        @ ADD r0, INDXA, r3 @ we have the buffer address!
-        @ _push_from r0 @ push it to the stack
-        @ MOV r1, #1 @ initial count
-
-pn3:
-        @ ADD r3, #_AU_CHAR
-        @ LDRB r2, [INDXA, r3]
-        @ CMP r2, #0
-        @ BEQ pnz
-        @ CMP r2, #_BL
-        @ BEQ pnz @ blank - finish up
-        @ ADD r1, #1 @ count and go back for more
-        @ B pn3
-
-pnz:
-        @ STR r3, [INDXB] @ first order of business - save new >IN value
-        @ MOV r0, r1 @ push count and exit
-        @ _push_from r0
-        @ _unnest 
-
 /*
 
         _header "'", tick
