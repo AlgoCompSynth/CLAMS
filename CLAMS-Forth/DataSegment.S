@@ -96,6 +96,38 @@
 .global _end_parsed_word
 .set _end_parsed_word, .
 
+@ user variables
+
+@ current character index in parsing >IN
+.global _input_cursor
+.set _input_cursor, .
+        .word 0
+
+@ current number base
+.global _number_base
+.set _number_base, .
+        .word 10
+
+@ current source character address
+.global _input_source
+.set _input_source, .
+        .word _terminal_buffer
+
+@ current source character count
+.global _input_source_chars
+.set _input_source_chars, .
+        .word 0
+
+@ current source ID
+.global _input_source_id
+.set _input_source_id, .
+        .word 0
+
+@ current state
+.global _input_state
+.set _input_state, .
+        .word 0
+
 .global _end_data_space
 .set _end_data_space, .
 
