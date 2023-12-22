@@ -850,7 +850,7 @@ _last_system_link: .word _previous_link_field
 
   Text interpreter pseudo-code
 
-  EVALUATE: EVALUATE does the actual processing. It is usable by other processes
+  INTERPRET: INTERPRET does the actual processing. It is usable by other processes
   besides QUIT, for example, a `BLOCK` loader or a WiFi server for a browser-based
   host tool.
 
@@ -858,12 +858,12 @@ _last_system_link: .word _previous_link_field
 
   BEGIN
 
-      Parse a token with `PARSE-NAME`
+      Parse a token with `WORD`
 
   WHILE parse token length is greater than zero
 
-      Classify the token with `CLASSIFY-TOKEN`. `CLASSIFY-TOKEN` returns two or
-      three cells on the stack. The stack top is the classification of the token:
+      Classify the token with `CLASSIFY-TOKEN`. `CLASSIFY-TOKEN` returns two cells
+      on the stack. The stack top is the classification of the token:
 
           0: The token is garbage; it wasn't found in the dictionary and isn't a
              valid number. Abort with a message; processing should not continue!
@@ -871,7 +871,6 @@ _last_system_link: .word _previous_link_field
           If we get here, the token is valid. Top of stack:
 
           -1: The token is a number. Second of stack has the number.
-          -2: The token is a double-cell number. Second and third have the number.
 
           >0: The token is a name found in the dictionary. Second of stack has a
               "name token" as described in the "Programming-Tools" word set of the
@@ -879,9 +878,7 @@ _last_system_link: .word _previous_link_field
 
               0 Immediate
               1 Compile-only
-              2 Can compile inline
-              3-14 reserved for future use
-              15 word is completed. If this isn't set the search will skip it.
+              2-30 reserved for future use
 
           STATE = interpret:
 
@@ -896,11 +893,8 @@ _last_system_link: .word _previous_link_field
             <0: The token is a number. Compile a literal.
             >0: The token is a found name.
                 immediate: get its execution token and `EXECUTE`.
-                inline: Copy its code into the current definition.
                 other: `NAME>COMPILE` and `COMPILE,`: get the execution token and
-                       compile either a BL or a BLX to its code, depending on how
-                       far away the called routine is from where the call is being
-                       stored in the dictionary.
+                       compile into the dictionary.
 
   REPEAT
 
