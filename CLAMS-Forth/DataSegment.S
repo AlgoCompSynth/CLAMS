@@ -128,6 +128,15 @@
 .set _input_state, .
         .word 0
 
+@ user (writeable) dictionary
+.global _user_dictionary_start
+.set _user_dictionary_start, .
+        .rept _USER_DICT_CELLS
+        .word 0
+        .endr
+.global _user_dictionary_end
+.set _user_dictionary_end, .
+
 .global _end_data_space
 .set _end_data_space, .
 
