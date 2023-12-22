@@ -898,4 +898,18 @@ _last_system_link: .word _previous_link_field
 
   REPEAT
 
+  : CLASSIFY-TOKEN
+
+      word length <= max name size IF
+          search with FIND
+          exit with success if found
+      THEN
+
+      parse number successful? IF
+          exit with success
+      THEN
+
+      exit with failure
+  ;
+
 */
