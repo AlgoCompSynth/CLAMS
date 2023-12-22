@@ -80,6 +80,7 @@ TMP4 .req r11
 .set _MAX_CSTRING, 255 @ maximum number of characters in a counted string
 .set _MAX_WNAME, 31 @ maximum number of characters in a word name
 .set _MAX_TERMBUF, 84 @ maximum number of characters in a terminal buffer line
+.set _USER_DICT_CELLS, 32768 @ about half of the RP2040 RAM!
 
 @ character codes
 .set _NUL, 0x00 @ null / string terminator
