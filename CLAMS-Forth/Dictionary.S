@@ -180,20 +180,20 @@ _HAMBURGER: .word 0xDEADBEEF
 
         _header "param_top_3", param_top_3
         _code_word
-        _x_load r0, _param_format
+        _x_load r0, _PARAM_FORMAT
         LDM PSP, { r1, r2, r3, PSP}
         _x_call printf
         _next
 
         _header "return_top_3", return_top_3
         _code_word
-        _x_load r0, _return_format
+        _x_load r0, _RETURN_FORMAT
         LDM RSP, { r1, r2, r3, RSP}
         _x_call printf
         _next
 _x_addr printf
-_x_addr _param_format
-_x_addr _return_format
+_x_addr _PARAM_FORMAT
+_x_addr _RETURN_FORMAT
 
         @ position-independent operations
         _header "@", fetch
@@ -498,6 +498,8 @@ _x_addr _input_state
 
         _header "crash", crash
         _code_word
+        @ if we get here, Forth has gotten into big trouble and we just want to
+        @ dump as much info as we can and ABORT.
         LDR r0, =_CRASH_FMT_1
         BL printf @ dump r1, r2, r3
 
@@ -511,14 +513,28 @@ _x_addr _input_state
         LDR r0, =_CRASH_FMT_3
         BL printf @ dump PSP and RSP
 
+        LDR r0, =_PARAM_FORMAT
+        LDM PSP, { r1, r2, r3, PSP}
+        BL printf @ top of parameter stack
+
+        LDR r0, =_RETURN_FORMAT
+        LDM PSP, { r1, r2, r3, PSP}
+        BL printf @ top of return stack
+
+        @ INP should be pointing to the cell after the "crash" invocation that got
+        @ us here. Assume there's a null-terminated string there and printf it.
+        MOV r0, INP
+        BL printf
+
+        @ restart Forth via ABORT
         LDR INP, _ABORT_CFA
         _next
 
 _CRASH_FMT_1: .asciz "\nr1, r2, XRG: %x, %x, %x"
 _CRASH_FMT_2: .asciz "\nINP, WRD: %x, %x"
 _CRASH_FMT_3: .asciz "\nPSP, RSP: %x, %x\n"
-_param_format: .asciz "parameter stack top, second, third => %x, %x, %x\n"
-_return_format: .asciz "return stack top, second, third => %x, %x, %x\n"
+_PARAM_FORMAT: .asciz "parameter stack top, second, third => %x, %x, %x\n"
+_RETURN_FORMAT: .asciz "return stack top, second, third => %x, %x, %x\n"
 
 .balign _AU_CELL, 0
 _ABORT_CFA: .word _abort
@@ -683,6 +699,7 @@ _accz:
         @ push count; exit
         _push_to PS, CNT
         _next
+_x_addr sdk_key
 
         _header "TYPE", type
         @ ( c-addr u –– )
@@ -709,7 +726,6 @@ typl:
 
 typz:
         _next
-_x_addr sdk_key
 _x_addr sdk_emit
 
         _header "COUNT", "count"
