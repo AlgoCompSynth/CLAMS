@@ -496,49 +496,6 @@ _x_addr _input_state
         .word _param_top_3
         .word _exit
 
-        _header "crash", crash
-        _code_word
-        @ if we get here, Forth has gotten into big trouble and we just want to
-        @ dump as much info as we can and ABORT.
-        LDR r0, =_CRASH_FMT_1
-        BL printf @ dump r1, r2, r3
-
-        MOV r1, INP
-        MOV r2, WRD
-        LDR r0, =_CRASH_FMT_2
-        BL printf @ dump INP and WRD
-
-        MOV r1, PSP
-        MOV r2, RSP
-        LDR r0, =_CRASH_FMT_3
-        BL printf @ dump PSP and RSP
-
-        LDR r0, =_PARAM_FORMAT
-        LDM PSP, { r1, r2, r3, PSP}
-        BL printf @ top of parameter stack
-
-        LDR r0, =_RETURN_FORMAT
-        LDM PSP, { r1, r2, r3, PSP}
-        BL printf @ top of return stack
-
-        @ INP should be pointing to the cell after the "crash" invocation that got
-        @ us here. Assume there's a null-terminated string there and printf it.
-        MOV r0, INP
-        BL printf
-
-        @ restart Forth via ABORT
-        LDR INP, _ABORT_CFA
-        _next
-
-_CRASH_FMT_1: .asciz "\nr1, r2, XRG: %x, %x, %x"
-_CRASH_FMT_2: .asciz "\nINP, WRD: %x, %x"
-_CRASH_FMT_3: .asciz "\nPSP, RSP: %x, %x\n"
-_PARAM_FORMAT: .asciz "parameter stack top, second, third => %x, %x, %x\n"
-_RETURN_FORMAT: .asciz "return stack top, second, third => %x, %x, %x\n"
-
-.balign _AU_CELL, 0
-_ABORT_CFA: .word _abort
-
         _header "ABORT", abort
         @ ( anything -- )
         _colon_word
@@ -584,6 +541,7 @@ quil:
         .word _oll_korrect
         _ubranch quil
         .word _crash @ this should never get executed
+        .asciz "Unexpected exit from 'forever' loop in 'QUIT'!"
 
         _header "EVALUATE", evaluate
         _colon_word
@@ -772,6 +730,48 @@ csmf:
         MOV r0, #0
         _push_to PS, r0 @ push to parameter stack
         _next
+
+        _header "crash", crash
+        _code_word
+        @ if we get here, Forth has gotten into big trouble and we just want to
+        @ dump as much info as we can and ABORT.
+        LDR r0, =_CRASH_FMT_1
+        BL printf @ dump r1, r2, r3
+
+        MOV r1, INP
+        MOV r2, WRD
+        LDR r0, =_CRASH_FMT_2
+        BL printf @ dump INP and WRD
+
+        MOV r1, PSP
+        MOV r2, RSP
+        LDR r0, =_CRASH_FMT_3
+        BL printf @ dump PSP and RSP
+
+        LDR r0, =_PARAM_FORMAT
+        LDM PSP, { r1, r2, r3, PSP}
+        BL printf @ top of parameter stack
+
+        LDR r0, =_RETURN_FORMAT
+        LDM PSP, { r1, r2, r3, PSP}
+        BL printf @ top of return stack
+
+        @ INP should be pointing to the cell after the "crash" invocation that got
+        @ us here. Assume there's a null-terminated string there and printf it.
+        MOV r0, INP
+        BL printf
+
+        @ restart Forth via ABORT
+        LDR INP, _ABORT_CFA
+        _next
+
+_CRASH_FMT_1: .asciz "\nr1, r2, XRG: %x, %x, %x\n"
+_CRASH_FMT_2: .asciz "\nINP, WRD: %x, %x\n"
+_CRASH_FMT_3: .asciz "\nPSP, RSP: %x, %x\n"
+_PARAM_FORMAT: .asciz "\nparameter stack top, second, third => %x, %x, %x\n"
+_RETURN_FORMAT: .asciz "\nreturn stack top, second, third => %x, %x, %x\n"
+.balign _AU_CELL, 0
+_ABORT_CFA: .word _abort
 
 /*
 
