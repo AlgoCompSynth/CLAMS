@@ -859,7 +859,7 @@ Disassembly of section .text:
 
 100006a0 <_one_plus>:
 100006a0:	100006a5 	.word	0x100006a5
-100006a4:	3001      	adds	r0, #1
+100006a4:	3301      	adds	r3, #1
 100006a6:	602b      	str	r3, [r5, #0]
 100006a8:	6837      	ldr	r7, [r6, #0]
 100006aa:	3604      	adds	r6, #4
@@ -874,7 +874,7 @@ Disassembly of section .text:
 
 100006b8 <_one_minus>:
 100006b8:	100006bd 	.word	0x100006bd
-100006bc:	3801      	subs	r0, #1
+100006bc:	3b01      	subs	r3, #1
 100006be:	602b      	str	r3, [r5, #0]
 100006c0:	6837      	ldr	r7, [r6, #0]
 100006c2:	3604      	adds	r6, #4
@@ -889,7 +889,7 @@ Disassembly of section .text:
 
 100006d0 <_two_star>:
 100006d0:	100006d5 	.word	0x100006d5
-100006d4:	0040      	lsls	r0, r0, #1
+100006d4:	005b      	lsls	r3, r3, #1
 100006d6:	602b      	str	r3, [r5, #0]
 100006d8:	6837      	ldr	r7, [r6, #0]
 100006da:	3604      	adds	r6, #4
@@ -904,7 +904,7 @@ Disassembly of section .text:
 
 100006e8 <_two_slash>:
 100006e8:	100006ed 	.word	0x100006ed
-100006ec:	1040      	asrs	r0, r0, #1
+100006ec:	105b      	asrs	r3, r3, #1
 100006ee:	602b      	str	r3, [r5, #0]
 100006f0:	6837      	ldr	r7, [r6, #0]
 100006f2:	3604      	adds	r6, #4
@@ -920,7 +920,7 @@ Disassembly of section .text:
 
 10000704 <_cell_plus>:
 10000704:	10000709 	.word	0x10000709
-10000708:	3004      	adds	r0, #4
+10000708:	3304      	adds	r3, #4
 1000070a:	602b      	str	r3, [r5, #0]
 1000070c:	6837      	ldr	r7, [r6, #0]
 1000070e:	3604      	adds	r6, #4
@@ -936,7 +936,7 @@ Disassembly of section .text:
 
 10000720 <_cell_minus>:
 10000720:	10000725 	.word	0x10000725
-10000724:	3804      	subs	r0, #4
+10000724:	3b04      	subs	r3, #4
 10000726:	602b      	str	r3, [r5, #0]
 10000728:	6837      	ldr	r7, [r6, #0]
 1000072a:	3604      	adds	r6, #4
@@ -952,7 +952,7 @@ Disassembly of section .text:
 
 1000073c <_cells>:
 1000073c:	10000741 	.word	0x10000741
-10000740:	0080      	lsls	r0, r0, #2
+10000740:	009b      	lsls	r3, r3, #2
 10000742:	602b      	str	r3, [r5, #0]
 10000744:	6837      	ldr	r7, [r6, #0]
 10000746:	3604      	adds	r6, #4
@@ -968,7 +968,7 @@ Disassembly of section .text:
 
 10000758 <_char_plus>:
 10000758:	1000075d 	.word	0x1000075d
-1000075c:	3001      	adds	r0, #1
+1000075c:	3301      	adds	r3, #1
 1000075e:	602b      	str	r3, [r5, #0]
 10000760:	6837      	ldr	r7, [r6, #0]
 10000762:	3604      	adds	r6, #4
@@ -984,7 +984,7 @@ Disassembly of section .text:
 
 10000774 <_char_minus>:
 10000774:	10000779 	.word	0x10000779
-10000778:	3801      	subs	r0, #1
+10000778:	3b01      	subs	r3, #1
 1000077a:	602b      	str	r3, [r5, #0]
 1000077c:	6837      	ldr	r7, [r6, #0]
 1000077e:	3604      	adds	r6, #4
@@ -1071,7 +1071,7 @@ Disassembly of section .text:
 
 10000808 <_negate>:
 10000808:	1000080d 	.word	0x1000080d
-1000080c:	4240      	negs	r0, r0
+1000080c:	425b      	negs	r3, r3
 1000080e:	602b      	str	r3, [r5, #0]
 10000810:	6837      	ldr	r7, [r6, #0]
 10000812:	3604      	adds	r6, #4

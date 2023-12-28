@@ -245,47 +245,47 @@ _x_addr _RETURN_FORMAT
 
         _header "1+", one_plus
         _code_word
-        _unary_op "ADD r0, #1"
+        _unary_op "ADD TOS, #1"
         _next
 
         _header "1-", one_minus
         _code_word
-        _unary_op "SUB r0, #1"
+        _unary_op "SUB TOS, #1"
         _next
 
         _header "2*", two_star
         _code_word
-        _unary_op "LSL r0, #1"
+        _unary_op "LSL TOS, #1"
         _next
 
         _header "2/", two_slash
         _code_word
-        _unary_op "ASR r0, #1"
+        _unary_op "ASR TOS, #1"
         _next
 
         _header "CELL+", cell_plus
         _code_word
-        _unary_op "ADD r0, #_AU_CELL"
+        _unary_op "ADD TOS, #_AU_CELL"
         _next
 
         _header "CELL-", cell_minus
         _code_word
-        _unary_op "SUB r0, #_AU_CELL"
+        _unary_op "SUB TOS, #_AU_CELL"
         _next
 
         _header "CELLS", cells
         _code_word
-        _unary_op "LSL r0, #_CELL_SHIFT"
+        _unary_op "LSL TOS, #_CELL_SHIFT"
         _next
 
         _header "CHAR+", char_plus
         _code_word
-        _unary_op "ADD r0, #_AU_CHAR"
+        _unary_op "ADD TOS, #_AU_CHAR"
         _next
 
         _header "CHAR-", char_minus
         _code_word
-        _unary_op "SUB r0, #_AU_CHAR"
+        _unary_op "SUB TOS, #_AU_CHAR"
         _next
 
         _header "CHARS", chars
@@ -310,7 +310,7 @@ _x_addr _RETURN_FORMAT
 
         _header "NEGATE", negate
         _code_word
-        _unary_op "NEG r0, r0"
+        _unary_op "NEG TOS, TOS"
         _next
 
         _header "ALIGNED", aligned
