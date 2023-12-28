@@ -35,29 +35,32 @@
 @ 2. Names intended to represent Forth words have the Forth syntax. Words that are 
 @ defined in the Forth standard use only upper case letters and behave the same way
 @ they do in the standard. Names created by the user can use either case and the
-@ system is case-sensitive.
+@ system is case-sensitive. Sorry, but if you want "DUP", you won't be able to type
+@ "dup".
 
 @ 3. Register usage: Pico SDK functions save registers r4 - r11, so we can use
 @ them without saving. However, r8 - r11 have limited functionality - essentially
-@ only source or destination of a MOV, one operand of an ADD or CMP, or as a branch
-@ target.
+@ only source or destination of a MOV, one operand of an ADD or CMP, or to hold a
+@ branch target.
 @
 @ Registers r0 - r2 are work registers and are used to interact with SDK functions.
-@ They are not saved / restored, either by the SDK or by Forth words. Although the
-@ SDK allows more than four parameters, there are by design no CLAMS functions
-@ that do.
+@ They are not saved / restored by default, either by the SDK or by Forth words.
+@ Although the SDK allows more than four parameters, there are by design no CLAMS
+@ functions that do.
 @
-@ Register r3 is called TOS and holds a cached copy of the parameter stack. It is
-@ saved when CLAMS-Forth calls an external routine and restored when the routine
-@ returns.
+@ Register r3 is called TOS and holds a cached copy of the top cell of the parameter
+@ stack. It is saved before CLAMS-Forth calls an external routine and restored after
+@ the routine returns.
 
 @ Inner interpreter registers
-@ These are the conventional direct threading registers - see "Moving Forth".
+@ These are the conventional indirect threading registers - see "Moving Forth".
 WRD .req r7 @ "Word" register
 INP .req r6 @ Interpreter pointer - the Forth VM's program counter
 PSP .req r5 @ Parameter stack pointer
 RSP .req r4 @ Return stack pointer
 TOS .req r3 @ cached top of stack
+
+@ working registers in code words
 LOC .req r2 @ used in character loops
 CNT .req r1 @ used in character loops
 
@@ -89,7 +92,7 @@ TMP4 .req r11
 .set _LF, 0x0A @ line feed
 .set _CR, 0x0D @ carriage return
 .set _BL, 0x20 @ space
-.set _O, 0x4B @ letter "K"
+.set _K, 0x4B @ letter "K"
 .set _O, 0x4F @ letter "O"
 .set _DEL, 0x7F @ delete / rubout
 
@@ -100,11 +103,13 @@ TMP4 .req r11
 @ macros for external addressing and function calls
 
 @ We sometimes need to address across the flash - SRAM boundary. To do this, we
-@ create a nearby cell containing the address. If we are going to use that address
-@ as the target of a BX or BLX address, it needs to have the "thumb bit" set or the
-@ RP2040 will hang with a hardware fault!!
+@ create a nearby cell containing the address and load it into a register as needed.
+@
+@ If we are going to use that address as the target of a BX or BLX address, it needs
+@ to have the "thumb bit" set via the assembler or at run time, or the RP2040 will
+@ hang with a hardware fault!!
 
-        @ macro to create a cell containing the address
+        @ macro to create a cell containing an external address
         .macro _x_addr name
         .balign _AU_CELL
         .set _addr_\name\(), .
@@ -119,14 +124,14 @@ TMP4 .req r11
         @ macro to call an external function via WRD
         .macro _x_call name
         PUSH {WRD} @ save WRD!!!
-        _x_load WRD, \name\()
-        BLX WRD
+        _x_load WRD, \name\() @ fetch the external function's address
+        BLX WRD @ call the function
         POP {WRD} @ restore WRD
         .endm
 
 @ stack macros - stacks grow downwards and stack pointers point to top element
 
-        @ pop from stack to register
+        @ pop from stack to register - `stack` must be "PS" or "RS"
         .macro _pop_from stack, regname
         LDM \stack\()P!, {\regname\()}
         .endm
@@ -191,7 +196,9 @@ TMP4 .req r11
         .ascii "\wname\()"
 1:      .balign _AU_CELL, 0
 
-        @ define global symbol for debugging / testing / internal reference.
+        @ define global symbol for debugging / testing / internal reference. This is
+        @ the code field address for the dictionary word! Note that we do *not* set
+        @ the "thumb bit" here!
         .global _\pronunciation\()
         .set _\pronunciation\(), .
         .endm
@@ -199,7 +206,7 @@ TMP4 .req r11
         @ assemble code field for a machine code word
         @ For indirect threading, the code field address points to the next cell
         .macro _code_word
-        .word . + _AU_CELL
+        .word . + _AU_CELL | 0x1 @ set thumb bit for BX through register
         .endm
 
         @ assemble code field for a colon definition
@@ -236,9 +243,12 @@ TMP4 .req r11
 @ the same `result` as the infix `left <op> right`.
 
         .macro _binary_alu opcode:req
-        _pop_two PS @ pop left operand => r0, right operand => r1
-        \opcode\() r0, r1 @ r0 := left <OP> right
-        _push_to PS, r0
+        @ ( left right -- left OP right )
+        ADD PSP, #_AU_CELL @ point to 2nd of stack
+        LDR r0, [PSP] @ left operand => r0
+        \opcode\() r0, TOS @ r0 := left <OP> right
+        MOV TOS, r0
+        STR TOS, [PSP] @ "push" result to parameter stack
         .endm
 
 @ Common code for a word that compares the top two cells on the stack. Such words
@@ -250,21 +260,24 @@ TMP4 .req r11
 @ zeroes) if `left <cmp> right` is false.
 
         .macro _binary_cmp cmp:req
-        _pop_two PS @ pop left operand => r0, right operand => r1
-        LDR r2, _TRUE_FLAG @ true flag => r2
-        CMP r0, r1
+        ADD PSP, #_AU_CELL @ point to 2nd of stack
+        LDR r0, [PSP] @ left operand => r0
+        CMP r0, TOS
         B\cmp\() 1f @ branch if true
-        MVN r2, r2 @ "invert" the true flag
+        MOV TOS, #0 @ FALSE flag => TOS
+        B 2f @ exit
 1:
-        _push_to PS, r2 @ push flag to parameter stack
+        MOV TOS, #0
+        MVN TOS, TOS @ TRUE flag => TOS
+2:
+        STR TOS, [PSP] @ "push" flag to parameter stack
         .endm
 
 @ Common code for unary operations
 
         .macro _unary_op instruction:req
-        LDR r0, [PSP]
-        \instruction\()
-        STR r0, [PSP]
+        \instruction\() @ instruction must perform a unary operation on TOS
+        STR TOS, [PSP] @ save TOS to RAM
         .endm
 
         @ "next" macro
@@ -296,7 +309,7 @@ TMP4 .req r11
         .word \value\()
         .endm
 
-        @ register save / restore macros
+        @ loop control register save / restore macros
         .macro _pushlctl @ push loop control registers
         PUSH {CNT, LOC}
         .endm
