@@ -31,6 +31,7 @@
 @ inner interpreters
 
 .global _enter
+.thumb_func
 _enter:
         _push_to RS INP @ nest INP
 	ADD WRD, #_AU_CELL @ point to first word of thread
@@ -38,12 +39,14 @@ _enter:
         _next
 
 .global _do_var
+.thumb_func
 _do_var:
         ADD WRD, #_AU_CELL @ address of variable => WRD
         _push_to PS WRD @ push to parameter stack
         _next
 
 .global _do_const
+.thumb_func
 _do_const:
         ADD WRD, #_AU_CELL @ address of constant => WRD
         LDR r0, [WRD] @ constant value => r0
@@ -53,12 +56,14 @@ _do_const:
 @ Strings compiled with C" and strings compiled with S" are both stored as counted
 @ strings. So we need two different inner interpreters.
 .global _do_cq_string
+.thumb_func
 _do_cq_string:
         ADD WRD, #_AU_CELL @ address of counted string => WRD
         _push_to PS WRD @ push to parameter stack
         _next
 
 .global _do_sq_string
+.thumb_func
 _do_sq_string:
         ADD WRD, #_AU_CELL @ address of counted string => WRD
         LDRB r0, [WRD] @ count => r0
