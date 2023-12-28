@@ -201,15 +201,14 @@ _x_addr _RETURN_FORMAT
         @ position-independent operations
         _header "@", fetch
         _code_word
-        LDR r0, [PSP] @ address => r0
-        LDR r0, [r0] @ data => r0
-        _push_to PS, r0
+        LDR TOS, [TOS] @ data => TOS
+        STR TOS, [PSP] @ save TOS to RAM
         _next
 
         _header "C@", c_fetch
         _code_word
-        LDR r0, [PSP] @ address => r0
-        LDRB r0, [r0] @ data => r0
+        LDRB TOS, [TOS] @ data => TOS
+        STR TOS, [PSP] @ save TOS to RAM
         _push_to PS, r0
         _next
 
@@ -239,8 +238,9 @@ _x_addr _RETURN_FORMAT
 
         _header "R@", r_fetch, _COMPILE_ONLY
         _code_word
-        LDR r0, [RSP] @ top of return stack => r0
-        _push_to PS, r0 @ push r0 => parameter stack
+        SUB PSP, #_AU_CELL @ increment stack pointer
+        LDR TOS, [RSP] @ top of return stack => TOS
+        STR TOS, [PSP] @ save TOS to RAM
         _next
 
         _header "1+", one_plus
