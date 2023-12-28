@@ -42,14 +42,14 @@
 @ only source or destination of a MOV, one operand of an ADD or CMP, or as a branch
 @ target.
 @
-@ Registers r0 - r3 are work registers and are used to interact with SDK functions.
+@ Registers r0 - r2 are work registers and are used to interact with SDK functions.
 @ They are not saved / restored, either by the SDK or by Forth words. Although the
 @ SDK allows more than four parameters, there are by design no CLAMS functions
 @ that do.
 @
-@ Register r3 is also called XRG and is used to contain the address of code to be
-@ executed, either with a BX (unconditional branch with exchange) or a BLX (branch
-@ and link with exchange).
+@ Register r3 is called TOS and holds a cached copy of the parameter stack. It is
+@ saved when CLAMS-Forth calls an external routine and restored when the routine
+@ returns.
 
 @ Inner interpreter registers
 @ These are the conventional direct threading registers - see "Moving Forth".
@@ -57,7 +57,7 @@ WRD .req r7 @ "Word" register
 INP .req r6 @ Interpreter pointer - the Forth VM's program counter
 PSP .req r5 @ Parameter stack pointer
 RSP .req r4 @ Return stack pointer
-XRG .req r3 @ index register - miscellaneous uses
+TOS .req r3 @ cached top of stack
 LOC .req r2 @ used in character loops
 CNT .req r1 @ used in character loops
 
@@ -99,27 +99,29 @@ TMP4 .req r11
 
 @ macros for external addressing and function calls
 
-@ Because we sometimes need to call across the flash - SRAM boundary, we call
-@ functions via BLX instructions. To do that, we need a word containing the
-@ address of any function we call.
+@ We sometimes need to address across the flash - SRAM boundary. To do this, we
+@ create a nearby cell containing the address. If we are going to use that address
+@ as the target of a BX or BLX address, it needs to have the "thumb bit" set or the
+@ RP2040 will hang with a hardware fault!!
 
+        @ macro to create a cell containing the address
         .macro _x_addr name
         .balign _AU_CELL
         .set _addr_\name\(), .
         .word \name\()
         .endm
 
-        @ macro to load an "x_addr" word
+        @ macro to load an "x_addr" word into a register
         .macro _x_load reg, name
         LDR \reg\(), _addr_\name\() @ get the address
         .endm
 
-        @ macro to call a function via XRG
+        @ macro to call an external function via WRD
         .macro _x_call name
-        _x_load r0, \name\()
-        MOV XRG, #1 @ force the thumb bit before branching!
-        ORR XRG, r0
-        BLX XRG
+        PUSH {WRD} @ save WRD!!!
+        _x_load WRD, \name\()
+        BLX WRD
+        POP {WRD} @ restore WRD
         .endm
 
 @ stack macros - stacks grow downwards and stack pointers point to top element
@@ -272,10 +274,8 @@ TMP4 .req r11
         .macro _next
         LDR WRD, [INP] @ next code field address => WRD
         ADD INP, #_AU_CELL @ advance INP
-        LDR XRG, [WRD] @ next branch target => XRG
-        MOV r0, #1 @ set thumb bit!!
-        ORR XRG, r0
-        BX XRG @ jump to next code routine
+        LDR r0, [WRD] @ next branch target => r0
+        BX r0 @ jump to next code routine
         .endm
 
         @ unconditional branch macro
@@ -298,8 +298,8 @@ TMP4 .req r11
 
         @ register save / restore macros
         .macro _pushlctl @ push loop control registers
-        PUSH {r1-r3}
+        PUSH {CNT, LOC}
         .endm
         .macro _poplctl @ pop loop control registers
-        POP {r1-r3}
+        POP {CNT, LOC}
         .endm

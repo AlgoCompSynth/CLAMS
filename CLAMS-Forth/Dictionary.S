@@ -90,9 +90,7 @@ _system_dict_start: .word .
         _header "EXECUTE", execute
         _code_word
         _pop_from PS, WRD @ execution token => WRD
-        MOV XRG, #1 @ set thumb bit
-        ORR XRG, WRD @ ready for BX
-        BX XRG @ unconditional branch without link
+        BX WRD @ unconditional branch without link
 
         _header "branch", branch, _COMPILE_ONLY
         _code_word
@@ -588,7 +586,8 @@ filz:
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
 
-        _pop_from PS, XRG @ pop max count => XRG
+        _pop_from PS, r0 @ pop max count => r0
+        MOV TMP1, r0 @ max count => TMP1
         _pop_from PS, LOC @ pop address => LOC
         MOV CNT, #0 @ initialize CNT
 _accl:
@@ -618,7 +617,7 @@ _acce:
         _poplctl
 
         @ check for buffer end
-        CMP CNT, XRG @ did we hit the limit?
+        CMP CNT, TMP1 @ did we hit the limit?
         BEQ _accz @ early exit if limit hit!
 	B _accl @ there's room - go back for more!
 
@@ -663,12 +662,13 @@ _x_addr sdk_key
         @ ( c-addr u –– )
         _code_word
 
-        _pop_from PS, XRG @ count => XRG
+        _pop_from PS, r0 @ count => r0
+        MOV TMP1, r0 @ count => TMP1
         _pop_from PS, LOC @ address => LOC
         MOV CNT, #0 @ count up
 
 typl:
-        CMP CNT, XRG @ are we done?
+        CMP CNT, TMP1 @ are we done?
         BGE typz @ exit!
 
         LDRB r0, [LOC, CNT] @ character => r0
@@ -701,18 +701,20 @@ _x_addr sdk_emit
         @ (c-addr1 c-addr2 -- c-addr1 flag)
         @ flag is true if strings are identical, false otherwise
         _code_word
-        _pop_from PS, LOC @ pop addr2 => LOC
-        LDRB CNT, [LOC] @ count of c-addr2 => CNT
-        LDR XRG, [PSP] @ c-addr1 => XRG
-        LDRB r0, [XRG] @ count of c-addr1 => r0
+        LDRB CNT, [TOS] @ count of c-addr2 => CNT
+        ADD TOS, #_AU_CHAR @ point TOS to first character of c-addr2
+        LDR r0, [PSP, #_AU_CELL] @ c-addr1 => r0
+        LDRB r0, [r0] @ count of c-addr1 => r0
         CMP r0, CNT @ if the counts aren't equal, we are done!
         BNE csmf @ fail fast!
+        LDR LOC, [PSP, #_AU_CELL] @ c-addr1 => LOC
+        ADD LOC, #_AU_CHAR @ point LOC to first character of c-addr1
 
 csml:
         @ main compare loop
         LDRB r0, [LOC, CNT]
         MOV TMP1, r0 @ char from addr2 => TMP1
-        LDRB r0, [XRG, CNT] @ char from addr1 => r0
+        LDRB r0, [TOS, CNT] @ char from addr1 => r0
         CMP r0, TMP1 @ fail on first mismatch
         BNE csmf @ fail a bit slower
         SUB CNT, #1 @ count down
@@ -720,15 +722,15 @@ csml:
 
 csms:
         @ success!
-        MOV r0, #0
-        MVN r0, r0 @ TRUE flag => r0
-        _push_to PS, r0 @ push to parameter stack
+        MOV TOS, #0
+        MVN TOS, TOS @ TRUE flag => TOS
+        STR TOS, [PSP] @ save to RAM
         _next
 
 csmf:
         @ failure
-        MOV r0, #0
-        _push_to PS, r0 @ push to parameter stack
+        MOV TOS, #0
+        STR TOS, [PSP] @ save to RAM
         _next
 
         _header "crash", crash
@@ -765,7 +767,7 @@ csmf:
         LDR INP, _ABORT_CFA
         _next
 
-_CRASH_FMT_1: .asciz "\nr1, r2, XRG: %x, %x, %x\n"
+_CRASH_FMT_1: .asciz "\nLOC, CNT, TOS: %x, %x, %x\n"
 _CRASH_FMT_2: .asciz "\nINP, WRD: %x, %x\n"
 _CRASH_FMT_3: .asciz "\nPSP, RSP: %x, %x\n"
 _PARAM_FORMAT: .asciz "\nparameter stack top, second, third => %x, %x, %x\n"
