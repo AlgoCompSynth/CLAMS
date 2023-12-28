@@ -209,7 +209,6 @@ _x_addr _RETURN_FORMAT
         _code_word
         LDRB TOS, [TOS] @ data => TOS
         STR TOS, [PSP] @ save TOS to RAM
-        _push_to PS, r0
         _next
 
         _header "!", store
