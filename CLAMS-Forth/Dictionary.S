@@ -702,7 +702,8 @@ _accb:
         @ clean up and exit
 _accz:
         @ push count; exit
-        _push_to PS, CNT
+        MOV TOS, CNT
+        _push_to PS, TOS
         _next
 _x_addr sdk_key
 
@@ -731,17 +732,18 @@ typl:
         B typl @ continue
 
 typz:
+        LDR TOS, [PSP] @ get new TOS
         _next
 _x_addr sdk_emit
 
         _header "COUNT", "count"
         @ ( c-addr1 –– c-addr2 u )
         _code_word
-        _pop_from PS, r0 @ address => LOC
-        LDRB r0, [LOC] @ count byte => r0
+        MOV LOC, TOS @ address => LOC
+        LDRB TOS, [LOC] @ count byte => TOS
         ADD LOC, #_AU_CHAR @ fix address
-        _push_to PS, LOC
-        _push_to PS, r0
+        STR LOC, [PSP] @ save adjusted address
+        _push_to PS, TOS @ push count
         _next
 
         @ counted string match
@@ -786,7 +788,7 @@ csmf:
         @ if we get here, Forth has gotten into big trouble and we just want to
         @ dump as much info as we can and ABORT.
         LDR r0, =_CRASH_FMT_1
-        BL printf @ dump r1, r2, r3
+        BL printf @ dump CNT, LOC, TOS
 
         MOV r1, INP
         MOV r2, WRD
@@ -803,7 +805,7 @@ csmf:
         BL printf @ top of parameter stack
 
         LDR r0, =_RETURN_FORMAT
-        LDM PSP, { r1, r2, r3, PSP}
+        LDM RSP, { r1, r2, r3, RSP}
         BL printf @ top of return stack
 
         @ INP should be pointing to the cell after the "crash" invocation that got
