@@ -33,7 +33,7 @@
 .global _enter
 .thumb_func
 _enter:
-        _push_to RS INP @ nest INP
+        _push_to RS, INP @ nest INP
 	ADD WRD, #_AU_CELL @ point to first word of thread
         MOV INP, WRD @ "branch indirect" to INP
         _next
@@ -42,34 +42,36 @@ _enter:
 .thumb_func
 _do_var:
         ADD WRD, #_AU_CELL @ address of variable => WRD
-        _push_to PS WRD @ push to parameter stack
+        MOV TOS, WRD
+        _push_to PS, TOS @ push to parameter stack
         _next
 
 .global _do_const
 .thumb_func
 _do_const:
         ADD WRD, #_AU_CELL @ address of constant => WRD
-        LDR r0, [WRD] @ constant value => r0
-        _push_to PS r0 @ push to parameter stack
+        LDR TOS, [WRD] @ constant value => TOS
+        _push_to PS, TOS @ push to parameter stack
         _next
 
-@ Strings compiled with C" and strings compiled with S" are both stored as counted
+@ Strings compiled with C" and strings compiled with S" are both *stored* as counted
 @ strings. So we need two different inner interpreters.
 .global _do_cq_string
 .thumb_func
 _do_cq_string:
         ADD WRD, #_AU_CELL @ address of counted string => WRD
-        _push_to PS WRD @ push to parameter stack
+        MOV TOS, WRD
+        _push_to PS, TOS @ push to parameter stack
         _next
 
 .global _do_sq_string
 .thumb_func
 _do_sq_string:
         ADD WRD, #_AU_CELL @ address of counted string => WRD
-        LDRB r0, [WRD] @ count => r0
+        LDRB TOS, [WRD] @ count => TOS
         ADD WRD, #_AU_CHAR @ skip the count byte
-        _push_to PS WRD @ push address to parameter stack
-        _push_to PS r0 @ push count to parameter stack
+        _push_to PS, WRD @ push address to parameter stack
+        _push_to PS, TOS @ push count to parameter stack
         _next
 
 @ the dictionary itself!
@@ -87,8 +89,8 @@ _system_dict_start: .word .
 
         _header "LITERAL", literal, _COMPILE_ONLY
         _code_word
-        LDR r0, [INP] @ literal value => r0
-        _push_to PS r0 @ push to parameter stack
+        LDR TOS, [INP] @ literal value => TOS
+        _push_to PS, TOS @ push to parameter stack
         ADD INP, #_AU_CELL @ skip over the literal!
         _next
 
@@ -116,35 +118,34 @@ qbz:
         @ stack operations
         _header "DUP", dupe
         _code_word
-        LDR r0, [PSP]
-        _push_to PS, r0
+        _push_to PS, TOS
         _next
 
         _header "OVER", over
         _code_word
-        LDR r0, [PSP, #_AU_CELL] @ 2nd => r0
-        _push_to PS, r0
+        LDR TOS, [PSP, #_AU_CELL] @ 2nd => TOS
+        _push_to PS, TOS
         _next
 
         _header "SWAP", swap
         _code_word
-        LDM PSP, {r0, r1, PSP} @ top => r0, 2nd => r1
-        STR r1, [PSP]
+        LDM PSP, {r0, TOS, PSP} @ top => r0, 2nd => TOS
+        STR TOS, [PSP]
         STR r0, [PSP, #_AU_CELL]
         _next
 
         _header "DROP", drop
         _code_word
-        _pop_from PS, r0
+        _pop_from PS, TOS
         _next
 
         _header "ROT", rote
         _code_word
-        @ x1, x2, x3 -> x2, x3, x1
-        LDM PSP, {r0, r1, r2, PSP} @ x3 => r0, x2 => r1, x1 => r2
+        @ ( x1  x2  x3 -- x2  x3  x1 )
+        LDM PSP, {r0, r1, TOS, PSP} @ x3 => r0, x2 => r1, x1 => TOS
         STR r1, [PSP, #_AU_CELL*2] @ stash x2
         STR r0, [PSP, #_AU_CELL] @ stash x3
-        STR r2, [PSP] @ stash x1
+        STR TOS, [PSP] @ stash x1
         _next
 
         @ stacks grow downwards - top of stack is the lowest address
@@ -153,28 +154,28 @@ qbz:
         @ legally contain a cell!
         _header "clear_param_stack", clear_param_stack
         _code_word
-        _x_load PSP, _param_stack_bottom
-        _x_load r1, _param_stack_top
+        _x_load PSP, _param_stack_bottom @ one cell above highest address
+        _x_load LOC, _param_stack_top @ lowest address
         LDR r0, _HAMBURGER
 cps1:
-        STR r0, [r1]
-        ADD r1, #_AU_CELL
-        CMP r1, PSP
-        BLO cps1
+        STR r0, [LOC]
+        ADD LOC, #_AU_CELL
+        CMP LOC, PSP
+        BLO cps1 @ unsigned strictly less
         _next
 _x_addr _param_stack_bottom
 _x_addr _param_stack_top
 
         _header "clear_return_stack", clear_return_stack
         _code_word
-        _x_load RSP, _return_stack_bottom
-        _x_load r1, _return_stack_top
+        _x_load RSP, _return_stack_bottom @ one cell above highest address
+        _x_load LOC, _return_stack_top @ lowest address
         LDR r0, _HAMBURGER
 crs1:
-        STR r0, [r1]
-        ADD r1, #_AU_CELL
-        CMP r1, RSP
-        BLO crs1
+        STR r0, [LOC]
+        ADD LOC, #_AU_CELL
+        CMP LOC, RSP
+        BLO crs1 @ unsigned strictly less
         _next
 _x_addr _return_stack_bottom
 _x_addr _return_stack_top
@@ -186,6 +187,7 @@ _HAMBURGER: .word 0xDEADBEEF
         _x_load r0, _PARAM_FORMAT
         LDM PSP, { r1, r2, r3, PSP}
         _x_call printf
+        LDR TOS, [PSP] @ restore TOS from RAM
         _next
 
         _header "return_top_3", return_top_3
@@ -215,29 +217,32 @@ _x_addr _RETURN_FORMAT
         _code_word
         _pop_two PS @ pop data => r0, address => r1
         STR r0, [r1]
+        LDR TOS, [PSP] @ fetch new TOS
         _next
 
         _header "C!", c_store
         _code_word
         _pop_two PS @ pop data => r0, address => r1
         STRB r0, [r1]
+        LDR TOS, [PSP] @ fetch new TOS
         _next
 
         _header ">R", to_r, _COMPILE_ONLY
         _code_word
-        _pop_from PS, r0 @ pop parameter stack => r0
-        _push_to RS, r0 @ push r0 => return stack
+        _push_to RS, TOS @ push TOS => return stack
+        ADD PSP, #_AU_CELL @ drop
+        LDR TOS, [PSP]
         _next
 
         _header "R>", r_from, _COMPILE_ONLY
         _code_word
-        _pop_from RS, r0 @ pop return stack => r0
-        _push_to PS, r0 @ push r0 => parameter stack
+        _pop_from RS, TOS @ pop return stack => TOS
+        _push_to PS, TOS @ push TOS => parameter stack
         _next
 
         _header "R@", r_fetch, _COMPILE_ONLY
         _code_word
-        SUB PSP, #_AU_CELL @ increment stack pointer
+        SUB PSP, #_AU_CELL @ increment parameter stack pointer
         LDR TOS, [RSP] @ top of return stack => TOS
         STR TOS, [PSP] @ save TOS to RAM
         _next
@@ -314,13 +319,12 @@ _x_addr _RETURN_FORMAT
 
         _header "ALIGNED", aligned
         _code_word
-        LDR r0, [PSP]
-        MOV r1, #_AU_CELL
-        NEG r1, r1 @ # bitmask => r1
-        ADD r0, #_AU_CELL
-        SUB r0, #1
-        AND r0, r1
-        STR r0, [PSP]
+        MOV r0, #_AU_CELL
+        NEG r0, r0 @ # bitmask => r0
+        ADD TOS, #_AU_CELL
+        SUB TOS, #1 @ TOS + _AU_CELL - 1 => TOS
+        AND TOS, r0 @ TOS & bitmask => TOS
+        STR TOS, [PSP] @ save TOS to RAM
         _next
 
         @ boolean operators
@@ -341,7 +345,7 @@ _x_addr _RETURN_FORMAT
 
         _header "INVERT", invert
         _code_word
-        MVN r0, r0
+        _unary_op "MVN TOS, TOS"
         _next
 
         _header "LSHIFT", l_shift
@@ -405,9 +409,6 @@ _x_addr _RETURN_FORMAT
         _binary_cmp LS
         _next
 
-.balign _AU_CELL, 0
-_TRUE_FLAG: .word 0xFFFFFFFF
-
         @ division operators - use the SDK and hardware divider
         _header "/MOD", slash_mod
         @ ( dividend divisor –– remainder quotient )
@@ -417,6 +418,7 @@ _TRUE_FLAG: .word 0xFFFFFFFF
         _x_call sdk_slash_mod
         _push_to PS, r1 @ push remainder
         _push_to PS, r0 @ push quotient
+        LDR TOS, [PSP] @ new TOS
         _next
 
         _header "/", slash
@@ -425,6 +427,7 @@ _TRUE_FLAG: .word 0xFFFFFFFF
         _pop_from PS, r0 @ dividend => r0
         _x_call sdk_slash_mod
         _push_to PS, r0 @ push quotient
+        LDR TOS, [PSP] @ new TOS
         _next
 
         _header "MOD", mod
@@ -433,6 +436,7 @@ _TRUE_FLAG: .word 0xFFFFFFFF
         _pop_from PS, r0 @ dividend => r0
         _x_call sdk_slash_mod
         _push_to PS, r1 @ push remainder
+        LDR TOS, [PSP] @ new TOS
         _next
 _x_addr sdk_slash_mod
 
@@ -441,51 +445,53 @@ _x_addr sdk_slash_mod
         _code_word
         _x_call sdk_key
         _push_to PS, r0
+        LDR TOS, [PSP] @ new TOS
         _next
 
         _header "EMIT", emit
         _code_word
         _pop_from PS, r0
         _x_call sdk_emit
+        LDR TOS, [PSP] @ new TOS
         _next
 
         @ >IN, BASE, BLK, SCR, SOURCE, SOURCE-ID, STATE
 
         _header ">IN", to_in
         _code_word
-        _x_load r0, _input_cursor
-        _push_to PS, r0
+        _x_load TOS, _input_cursor
+        _push_to PS, TOS
         _next
 _x_addr _input_cursor
 
         _header "BASE", base
         _code_word
-        _x_load r0, _number_base
-        _push_to PS, r0
+        _x_load TOS, _number_base
+        _push_to PS, TOS
         _next
 _x_addr _number_base
 
         _header "SOURCE", source
         _code_word
         _x_load r0, _input_source
-        _x_load r1, _input_source_chars
+        _x_load TOS, _input_source_chars
         _push_to PS, r0
-        _push_to PS, r1
+        _push_to PS, TOS
         _next
 _x_addr _input_source
 _x_addr _input_source_chars
 
         _header "SOURCE-ID", source_id
         _code_word
-        _x_load r0, _input_source_id
-        _push_to PS, r0
+        _x_load TOS, _input_source_id
+        _push_to PS, TOS
         _next
 _x_addr _input_source_id
 
         _header "STATE", state
         _code_word
-        _x_load r0, _input_state
-        _push_to PS, r0
+        _x_load TOS, _input_state
+        _push_to PS, TOS
         _next
 _x_addr _input_state
 
@@ -503,7 +509,6 @@ _x_addr _input_state
         _colon_word
         .word _clear_param_stack
         .word _quit
-        .word _crash @ this should never get executed because QUIT never exits
 
         _header "QUIT", quit
         @ (R: anything -- )
@@ -539,13 +544,11 @@ quil:
         @ stack has actual character count
         .word _term_buf @ get terminal buffer address back on stack
         .word _swap
-        .word _evaluate @ EVALUATE is the text interpreter!
+        .word _interpret @ INTERPRET is the text interpreter!
         .word _oll_korrect
         _ubranch quil
-        .word _crash @ this should never get executed
-        .asciz "Unexpected exit from 'forever' loop in 'QUIT'!"
 
-        _header "EVALUATE", evaluate
+        _header "INTERPRET", interpret
         _colon_word
         .word _exit
 
@@ -561,8 +564,8 @@ OllKorrect: .asciz " Ok\n"
         @ ( -- c-addr )
         @ c-addr is the address of _terminal_buffer
         _code_word
-        _x_load r0, _terminal_buffer
-        _push_to PS, r0
+        _x_load TOS, _terminal_buffer
+        _push_to PS, TOS
         _next
 _x_addr _terminal_buffer
 
@@ -580,6 +583,7 @@ fil1:
         B fil1
 filz:
         @ done
+        LDR TOS, [PSP] @ new TOS
         _next
 
         _header "ACCEPT", accept
