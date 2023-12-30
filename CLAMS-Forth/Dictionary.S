@@ -207,34 +207,34 @@ _x_addr _RETURN_FORMAT
         STR TOS, [PSP] @ save TOS to RAM
         _next
 
-        _header "C@", c_fetch
+        _header "C@", c_fetch @ character fetch
         _code_word
         LDRB TOS, [TOS] @ data => TOS
         STR TOS, [PSP] @ save TOS to RAM
         _next
 
-        _header "b@", b_fetch
+        _header "ub@", ub_fetch @ unsigned byte fetch
         _code_word
         LDRB TOS, [TOS] @ data => TOS
         STR TOS, [PSP] @ save TOS to RAM
         _next
 
-        _header "sb@", sb_fetch
+        _header "sb@", sb_fetch @ signed byte fetch
         _code_word
-        MOV r0, #0
+        MOV r0, #0 @ the signed fetches need a base and offset register
         LDRSB TOS, [TOS, r0] @ data => TOS
         STR TOS, [PSP] @ save TOS to RAM
         _next
 
-        _header "h@", h_fetch
+        _header "uh@", uh_fetch @ unsigned halfword fetch
         _code_word
         LDRH TOS, [TOS] @ data => TOS
         STR TOS, [PSP] @ save TOS to RAM
         _next
 
-        _header "sh@", sh_fetch
+        _header "sh@", sh_fetch @ signed halfword fetch
         _code_word
-        MOV r0, #0
+        MOV r0, #0 @ the signed fetches need a base and offset register
         LDRSH TOS, [TOS, r0] @ data => TOS
         STR TOS, [PSP] @ save TOS to RAM
         _next
@@ -253,14 +253,14 @@ _x_addr _RETURN_FORMAT
         LDR TOS, [PSP] @ fetch new TOS
         _next
 
-        _header "b!", b_store
+        _header "b!", b_store @ byte store
         _code_word
         _pop_two PS @ pop data => r0, address => r1
         STRB r0, [r1]
         LDR TOS, [PSP] @ fetch new TOS
         _next
 
-        _header "h!", h_store
+        _header "h!", h_store @ halfword store
         _code_word
         _pop_two PS @ pop data => r0, address => r1
         STRH r0, [r1]
