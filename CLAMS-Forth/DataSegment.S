@@ -44,9 +44,8 @@
 @ Stack logic:
 
 @ The stacks grow from high addresses downwards. Register `PSP` points to the
-@ top element of the parameter stack, and register `RSP` points to the top of the
-@ return stack.
-
+@ top element of the parameter stack. CLAMS-Forth uses the system stack for the
+@ return stack, so it uses PUSH and POP via the SP register.
 
 @ The stacks
 
@@ -58,20 +57,6 @@
         .endr
 .global _param_stack_bottom
 .set _param_stack_bottom, .
-
-        @ guard words
-        .word 0xdeadbeef
-        .word 0xdeadbeef
-        .word 0xdeadbeef
-
-@ return stack
-.global _return_stack_top
-.set _return_stack_top, .
-        .rept _STACK_CELLS
-        .word 0xdeadbeef
-        .endr
-.global _return_stack_bottom
-.set _return_stack_bottom, .
 
         @ guard words
         .word 0xdeadbeef
@@ -126,6 +111,13 @@
 @ current state
 .global _input_state
 .set _input_state, .
+        .word 0
+
+@ entry system stack pointer
+@ This is SP upon entry at `CLAMS-Forth`. We use this to check for return stack
+@ underflow before popping it, and for clearing the return stack.
+.global _entry_system_stack_pointer
+.set _entry_system_stack_pointer, .
         .word 0
 
 @ user (writeable) dictionary

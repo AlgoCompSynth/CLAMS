@@ -43,24 +43,20 @@
 @ only source or destination of a MOV, one operand of an ADD or CMP, or to hold a
 @ branch target.
 @
-@ Registers r0 - r2 are work registers and are used to interact with SDK functions.
+@ Registers r0 - r3 are work registers and are used to interact with SDK functions.
 @ They are not saved / restored by default, either by the SDK or by Forth words.
 @ Although the SDK allows more than four parameters, there are by design no CLAMS
 @ functions that do.
 @
-@ Register r3 is called TOS and holds a cached copy of the top cell of the parameter
-@ stack. It is saved before CLAMS-Forth calls an external routine and restored after
-@ the routine returns.
-
 @ Inner interpreter registers
 @ These are the conventional indirect threading registers - see "Moving Forth".
 WRD .req r7 @ "Word" register
 INP .req r6 @ Interpreter pointer - the Forth VM's program counter
 PSP .req r5 @ Parameter stack pointer
-RSP .req r4 @ Return stack pointer
-TOS .req r3 @ cached top of stack
+TOS .req r4 @ Cached copy of the top cell of the parameter stack
 
 @ working registers in code words
+MAX .req r3 @ used in character loops
 LOC .req r2 @ used in character loops
 CNT .req r1 @ used in character loops
 
@@ -77,8 +73,10 @@ TMP4 .req r11
 @ For the RP2040 SDK, an address unit is 8 bits aka a byte, and addressing is
 @ little-endian.
 .set _AU_CHAR, 1 @ address units per character
+.set _AU_HALF, 2 @ address units per halfword
 .set _AU_CELL, 4 @ address units per cell
 .set _CELL_SHIFT, 2 @ bits to shift for cell - address unit conversions
+.set _HALF_SHIFT, 1 @ bits to shift for cell - address unit conversions
 .set _STACK_CELLS, 64 @ number of cells in a stack
 .set _MAX_CSTRING, 255 @ maximum number of characters in a counted string
 .set _MAX_WNAME, 31 @ maximum number of characters in a word name
@@ -122,6 +120,7 @@ TMP4 .req r11
         .endm
 
         @ macro to call an external function via WRD
+        @ we use WRD because function parameters can be in r0 - r3
         .macro _x_call name
         PUSH {WRD} @ save WRD!!!
         _x_load WRD, \name\() @ fetch the external function's address
@@ -131,25 +130,25 @@ TMP4 .req r11
 
 @ stack macros - stacks grow downwards and stack pointers point to top element
 
-        @ pop from stack to register - `stack` must be "PS" or "RS"
-        .macro _pop_from stack, regname
-        LDM \stack\()P!, {\regname\()}
+        @ pop from parameter stack to register
+        .macro _pop_from_ps regname
+        LDM PSP!, {\regname\()}
         .endm
 
-        @ push to stack from register
-        .macro _push_to stack regname
-        SUB \stack\()P, #_AU_CELL
-        STR \regname\(), [\stack\()P]
+        @ push to parameter stack from register
+        .macro _push_to_ps regname
+        SUB PSP, #_AU_CELL
+        STR \regname\(), [PSP]
         .endm
 
         @ pop two elements to r0, r1
-        .macro _pop_two stack
-        LDM \stack\()P!, {r0, r1}
+        .macro _pop_two
+        LDM PSP!, {r0, r1}
         .endm
 
         @ pop three elements to r0, r1, r2
-        .macro _pop_three stack
-        LDM \stack\()P!, {r0, r1, r2}
+        .macro _pop_three
+        LDM PSP!, {r0, r1, r2}
         .endm
 
         @ macro for padded counted strings
@@ -310,9 +309,10 @@ TMP4 .req r11
         .endm
 
         @ loop control register save / restore macros
+        @ used before and after function calls
         .macro _pushlctl @ push loop control registers
-        PUSH {CNT, LOC}
+        PUSH {CNT, LOC, MAX}
         .endm
         .macro _poplctl @ pop loop control registers
-        POP {CNT, LOC}
+        POP {CNT, LOC, MAX}
         .endm

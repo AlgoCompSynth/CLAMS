@@ -37,13 +37,21 @@ main:
 	BL stdio_init_all
 
 loop:
+        LDR r0, =welcome
+        BL printf
+        LDR r0, =book
+        BL printf
         LDR r0, =prompt
         BL printf
+
+        BL CLAMS_Forth @ call CLAMS-Forth as a subroutine - 'BYE' returns!
 
         LDR r0, sleep_ms
         BL sdk_sleep_ms
         B loop
 
+welcome: .asciz "\nWelcome to CLAMS-Forth!\n"
+book: .asciz "https://algocompsynth.github.io/CLAMS/\n"
 prompt: .asciz " Ok\n> "
 .balign _AU_CELL, 0
 sleep_ms: .word 1000

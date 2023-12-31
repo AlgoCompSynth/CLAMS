@@ -28,12 +28,26 @@
 
 .include "MacroDefs.S"
 
+@ main entry point
+.global CLAMS_Forth
+.thumb_func
+CLAMS_Forth:
+        PUSH {LR} @ save link register
+        _x_load LOC, _entry_system_stack_pointer
+        MOV r0, SP @ save system stack pointer
+        STR r0, [LOC]
+
+        _x_load INP, _abort @ start with an ABORT
+        _next
+
+_x_addr _abort
+
 @ inner interpreters
 
 .global _enter
 .thumb_func
 _enter:
-        _push_to RS, INP @ nest INP
+        PUSH {INP} @ nest INP
 	ADD WRD, #_AU_CELL @ point to first word of thread
         MOV INP, WRD @ "branch indirect" to INP
         _next
@@ -43,7 +57,7 @@ _enter:
 _do_var:
         ADD WRD, #_AU_CELL @ address of variable => WRD
         MOV TOS, WRD
-        _push_to PS, TOS @ push to parameter stack
+        _push_to_ps TOS @ push to parameter stack
         _next
 
 .global _do_const
@@ -51,7 +65,7 @@ _do_var:
 _do_const:
         ADD WRD, #_AU_CELL @ address of constant => WRD
         LDR TOS, [WRD] @ constant value => TOS
-        _push_to PS, TOS @ push to parameter stack
+        _push_to_ps TOS @ push to parameter stack
         _next
 
 @ Strings compiled with C" and strings compiled with S" are both *stored* as counted
@@ -61,7 +75,7 @@ _do_const:
 _do_cq_string:
         ADD WRD, #_AU_CELL @ address of counted string => WRD
         MOV TOS, WRD
-        _push_to PS, TOS @ push to parameter stack
+        _push_to_ps TOS @ push to parameter stack
         _next
 
 .global _do_sq_string
@@ -70,8 +84,8 @@ _do_sq_string:
         ADD WRD, #_AU_CELL @ address of counted string => WRD
         LDRB TOS, [WRD] @ count => TOS
         ADD WRD, #_AU_CHAR @ skip the count byte
-        _push_to PS, WRD @ push address to parameter stack
-        _push_to PS, TOS @ push count to parameter stack
+        _push_to_ps WRD @ push address to parameter stack
+        _push_to_ps TOS @ push count to parameter stack
         _next
 
 @ the dictionary itself!
@@ -82,21 +96,86 @@ _system_dict_start: .word .
 
         @ code words for base VM
 
+        _header "clear-return-stack", clear_return_stack
+        _code_word
+        _x_load r0, _entry_system_stack_pointer
+        MOV SP, r0
+        _next
+
         _header "EXIT", exit, _COMPILE_ONLY
         _code_word
-        _pop_from RS, INP @ un-nest the return stack to INP
+
+        @ return stack check
+        @ we *never* want to allow the return stack to get popped below where it
+        @ was when CLAMS_Forth was called!!
+        _x_load MAX, _entry_system_stack_pointer @ highest address SP should be
+        MOV LOC, SP @ actual stack pointer
+        SUB CNT, MAX, LOC @ difference in address units
+        CMP CNT, #_AU_CELL
+        BGE rscz @ we have enough on the stack to pop a cell!
+
+        @ sorry, Charlie!
+        _x_load INP, _RS_UNDER
+        _x_load r0, _crash
+rscz:
+        POP {INP} @ un-nest the return stack to INP
         _next
+
+_RS_UNDER: .asciz "\nReturn stack underflow!\n"
+_x_addr _entry_system_stack_pointer
+_x_addr _RS_UNDER
+_x_addr _crash
+
+        _header "crash", crash
+        _code_word
+        @ if we get here, Forth has gotten into big trouble and we just want to
+        @ dump as much info as we can and ABORT.
+        _x_load r0, _CRASH_FMT_1
+        BL printf @ dump CNT, LOC, MAX
+
+        MOV r1, INP
+        MOV r2, WRD
+        _x_load r0, _CRASH_FMT_2
+        BL printf @ dump INP and WRD
+
+        MOV r1, PSP
+        MOV r2, TOS
+        _x_load r0, _CRASH_FMT_3
+        BL printf @ dump PSP and TOS
+
+        _x_load r0, _PARAM_FORMAT
+        LDM PSP, { r1, r2, r3, PSP}
+        BL printf @ top of parameter stack
+
+        @ INP should be pointing to the cell after the "crash" invocation that got
+        @ us here. Assume there's a null-terminated string there and printf it.
+        MOV r0, INP
+        BL printf
+
+        @ restart Forth via ABORT
+        LDR INP, _ABORT_CFA
+        _next
+
+_CRASH_FMT_1: .asciz "\nCNT, LOC, MAX: %x, %x, %x\n"
+_CRASH_FMT_2: .asciz "INP, WRD: %x, %x\n"
+_CRASH_FMT_3: .asciz "PSP, TOS: %x, %x\n"
+_PARAM_FORMAT: .asciz "Parameter stack top, second, third => %x, %x, %x\n"
+_x_addr _CRASH_FMT_1
+_x_addr _CRASH_FMT_2
+_x_addr _CRASH_FMT_3
+_x_addr _PARAM_FORMAT
+_ABORT_CFA: .word _abort
 
         _header "LITERAL", literal, _COMPILE_ONLY
         _code_word
         LDR TOS, [INP] @ literal value => TOS
-        _push_to PS, TOS @ push to parameter stack
+        _push_to_ps TOS @ push to parameter stack
         ADD INP, #_AU_CELL @ skip over the literal!
         _next
 
         _header "EXECUTE", execute
         _code_word
-        _pop_from PS, WRD @ execution token => WRD
+        _pop_from_ps WRD @ execution token => WRD
         BX WRD @ unconditional branch without link
 
         _header "branch", branch, _COMPILE_ONLY
@@ -106,7 +185,7 @@ _system_dict_start: .word .
 
         _header "?branch", question_branch, _COMPILE_ONLY
         _code_word
-        _pop_from PS, r0 @ flag => r0
+        _pop_from_ps r0 @ flag => r0
         CMP r0, #0
         BNE qbz @ branch if flag is TRUE
         LDR INP, [INP] @ flag is false - take the branch
@@ -118,13 +197,13 @@ qbz:
         @ stack operations
         _header "DUP", dupe
         _code_word
-        _push_to PS, TOS
+        _push_to_ps TOS
         _next
 
         _header "OVER", over
         _code_word
         LDR TOS, [PSP, #_AU_CELL] @ 2nd => TOS
-        _push_to PS, TOS
+        _push_to_ps TOS
         _next
 
         _header "SWAP", swap
@@ -136,7 +215,7 @@ qbz:
 
         _header "DROP", drop
         _code_word
-        _pop_from PS, TOS
+        _pop_from_ps TOS
         _next
 
         _header "ROT", rote
@@ -152,7 +231,7 @@ qbz:
         @ _param_stack_top is the lowest address that can legally contain a cell
         @ _param_stack_bottom is one cell *above* the highest address that can
         @ legally contain a cell!
-        _header "clear_param_stack", clear_param_stack
+        _header "clear-param-stack", clear_param_stack
         _code_word
         _x_load PSP, _param_stack_bottom @ one cell above highest address
         _x_load LOC, _param_stack_top @ lowest address
@@ -166,39 +245,8 @@ cps1:
 _x_addr _param_stack_bottom
 _x_addr _param_stack_top
 
-        _header "clear_return_stack", clear_return_stack
-        _code_word
-        _x_load RSP, _return_stack_bottom @ one cell above highest address
-        _x_load LOC, _return_stack_top @ lowest address
-        LDR r0, _HAMBURGER
-crs1:
-        STR r0, [LOC]
-        ADD LOC, #_AU_CELL
-        CMP LOC, RSP
-        BLO crs1 @ unsigned strictly less
-        _next
-_x_addr _return_stack_bottom
-_x_addr _return_stack_top
 .balign _AU_CELL, 0
 _HAMBURGER: .word 0xDEADBEEF
-
-        _header "param_top_3", param_top_3
-        _code_word
-        _x_load r0, _PARAM_FORMAT
-        LDM PSP, { r1, r2, r3, PSP}
-        _x_call printf
-        LDR TOS, [PSP] @ restore TOS from RAM
-        _next
-
-        _header "return_top_3", return_top_3
-        _code_word
-        _x_load r0, _RETURN_FORMAT
-        LDM RSP, { r1, r2, r3, RSP}
-        _x_call printf
-        _next
-_x_addr printf
-_x_addr _PARAM_FORMAT
-_x_addr _RETURN_FORMAT
 
         @ position-independent operations
         _header "@", fetch
@@ -241,50 +289,30 @@ _x_addr _RETURN_FORMAT
 
         _header "!", store
         _code_word
-        _pop_two PS @ pop data => r0, address => r1
+        _pop_two @ pop data => r0, address => r1
         STR r0, [r1]
         LDR TOS, [PSP] @ fetch new TOS
         _next
 
         _header "C!", c_store
         _code_word
-        _pop_two PS @ pop data => r0, address => r1
+        _pop_two @ pop data => r0, address => r1
         STRB r0, [r1]
         LDR TOS, [PSP] @ fetch new TOS
         _next
 
         _header "b!", b_store @ byte store
         _code_word
-        _pop_two PS @ pop data => r0, address => r1
+        _pop_two @ pop data => r0, address => r1
         STRB r0, [r1]
         LDR TOS, [PSP] @ fetch new TOS
         _next
 
         _header "h!", h_store @ halfword store
         _code_word
-        _pop_two PS @ pop data => r0, address => r1
+        _pop_two @ pop data => r0, address => r1
         STRH r0, [r1]
         LDR TOS, [PSP] @ fetch new TOS
-        _next
-
-        _header ">R", to_r, _COMPILE_ONLY
-        _code_word
-        _push_to RS, TOS @ push TOS => return stack
-        ADD PSP, #_AU_CELL @ drop
-        LDR TOS, [PSP]
-        _next
-
-        _header "R>", r_from, _COMPILE_ONLY
-        _code_word
-        _pop_from RS, TOS @ pop return stack => TOS
-        _push_to PS, TOS @ push TOS => parameter stack
-        _next
-
-        _header "R@", r_fetch, _COMPILE_ONLY
-        _code_word
-        SUB PSP, #_AU_CELL @ increment parameter stack pointer
-        LDR TOS, [RSP] @ top of return stack => TOS
-        STR TOS, [PSP] @ save TOS to RAM
         _next
 
         _header "1+", one_plus
@@ -453,29 +481,29 @@ _x_addr _RETURN_FORMAT
         _header "/MOD", slash_mod
         @ ( dividend divisor –– remainder quotient )
         _code_word
-        _pop_from PS, r1 @ divisor => r1
-        _pop_from PS, r0 @ dividend => r0
+        _pop_from_ps r1 @ divisor => r1
+        _pop_from_ps r0 @ dividend => r0
         _x_call sdk_slash_mod
-        _push_to PS, r1 @ push remainder
-        _push_to PS, r0 @ push quotient
+        _push_to_ps r1 @ push remainder
+        _push_to_ps r0 @ push quotient
         LDR TOS, [PSP] @ new TOS
         _next
 
         _header "/", slash
         _code_word
-        _pop_from PS, r1 @ divisor => r1
-        _pop_from PS, r0 @ dividend => r0
+        _pop_from_ps r1 @ divisor => r1
+        _pop_from_ps r0 @ dividend => r0
         _x_call sdk_slash_mod
-        _push_to PS, r0 @ push quotient
+        _push_to_ps r0 @ push quotient
         LDR TOS, [PSP] @ new TOS
         _next
 
         _header "MOD", mod
         _code_word
-        _pop_from PS, r1 @ divisor => r1
-        _pop_from PS, r0 @ dividend => r0
+        _pop_from_ps r1 @ divisor => r1
+        _pop_from_ps r0 @ dividend => r0
         _x_call sdk_slash_mod
-        _push_to PS, r1 @ push remainder
+        _push_to_ps r1 @ push remainder
         LDR TOS, [PSP] @ new TOS
         _next
 _x_addr sdk_slash_mod
@@ -484,13 +512,13 @@ _x_addr sdk_slash_mod
         _header "KEY", key
         _code_word
         _x_call sdk_key
-        _push_to PS, r0
+        _push_to_ps r0
         LDR TOS, [PSP] @ new TOS
         _next
 
         _header "EMIT", emit
         _code_word
-        _pop_from PS, r0
+        _pop_from_ps r0
         _x_call sdk_emit
         LDR TOS, [PSP] @ new TOS
         _next
@@ -500,14 +528,14 @@ _x_addr sdk_slash_mod
         _header ">IN", to_in
         _code_word
         _x_load TOS, _input_cursor
-        _push_to PS, TOS
+        _push_to_ps TOS
         _next
 _x_addr _input_cursor
 
         _header "BASE", base
         _code_word
         _x_load TOS, _number_base
-        _push_to PS, TOS
+        _push_to_ps TOS
         _next
 _x_addr _number_base
 
@@ -515,8 +543,8 @@ _x_addr _number_base
         _code_word
         _x_load r0, _input_source
         _x_load TOS, _input_source_chars
-        _push_to PS, r0
-        _push_to PS, TOS
+        _push_to_ps r0
+        _push_to_ps TOS
         _next
 _x_addr _input_source
 _x_addr _input_source_chars
@@ -524,31 +552,32 @@ _x_addr _input_source_chars
         _header "SOURCE-ID", source_id
         _code_word
         _x_load TOS, _input_source_id
-        _push_to PS, TOS
+        _push_to_ps TOS
         _next
 _x_addr _input_source_id
 
         _header "STATE", state
         _code_word
         _x_load TOS, _input_state
-        _push_to PS, TOS
+        _push_to_ps TOS
         _next
 _x_addr _input_state
-
-        _header "colon-test", colon_test
-        _colon_word
-        _code_literal 2
-        _code_literal 3
-        .word _param_top_3
-        .word _plus
-        .word _param_top_3
-        .word _exit
 
         _header "ABORT", abort
         @ ( anything -- )
         _colon_word
         .word _clear_param_stack
         .word _quit
+
+        _header "BYE", bye
+        @ ( anything -- )
+        _colon_word
+        .word _clear_return_stack
+        .word _return_to_main
+
+        _header "return-to-main", return_to_main
+        _code_word
+        POP {PC} @ return to main program!
 
         _header "QUIT", quit
         @ (R: anything -- )
@@ -605,16 +634,16 @@ OllKorrect: .asciz " Ok\n"
         @ c-addr is the address of _terminal_buffer
         _code_word
         _x_load TOS, _terminal_buffer
-        _push_to PS, TOS
+        _push_to_ps TOS
         _next
 _x_addr _terminal_buffer
 
         _header "FILL", fill
         @ ( c-addr u char –– )
         _code_word
-        _pop_from PS, r0 @ char => r0,
-        _pop_from PS, CNT @ u => CNT
-        _pop_from PS, LOC @ c-addr => LOC
+        _pop_from_ps r0 @ char => r0,
+        _pop_from_ps CNT @ u => CNT
+        _pop_from_ps LOC @ c-addr => LOC
 
 fil1:
         SUB CNT, #_AU_CHAR @ count down
@@ -634,9 +663,9 @@ filz:
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
 
-        _pop_from PS, r0 @ pop max count => r0
+        _pop_from_ps r0 @ pop max count => r0
         MOV TMP1, r0 @ max count => TMP1
-        _pop_from PS, LOC @ pop address => LOC
+        _pop_from_ps LOC @ pop address => LOC
         MOV CNT, #0 @ initialize CNT
 _accl:
         _pushlctl
@@ -703,7 +732,7 @@ _accb:
 _accz:
         @ push count; exit
         MOV TOS, CNT
-        _push_to PS, TOS
+        _push_to_ps TOS
         _next
 _x_addr sdk_key
 
@@ -711,9 +740,9 @@ _x_addr sdk_key
         @ ( c-addr u –– )
         _code_word
 
-        _pop_from PS, r0 @ count => r0
+        _pop_from_ps r0 @ count => r0
         MOV TMP1, r0 @ count => TMP1
-        _pop_from PS, LOC @ address => LOC
+        _pop_from_ps LOC @ address => LOC
         MOV CNT, #0 @ count up
 
 typl:
@@ -734,6 +763,7 @@ typl:
 typz:
         LDR TOS, [PSP] @ get new TOS
         _next
+
 _x_addr sdk_emit
 
         _header "COUNT", "count"
@@ -743,7 +773,7 @@ _x_addr sdk_emit
         LDRB TOS, [LOC] @ count byte => TOS
         ADD LOC, #_AU_CHAR @ fix address
         STR LOC, [PSP] @ save adjusted address
-        _push_to PS, TOS @ push count
+        _push_to_ps TOS @ push count
         _next
 
         @ counted string match
@@ -782,48 +812,6 @@ csmf:
         MOV TOS, #0
         STR TOS, [PSP] @ save to RAM
         _next
-
-        _header "crash", crash
-        _code_word
-        @ if we get here, Forth has gotten into big trouble and we just want to
-        @ dump as much info as we can and ABORT.
-        LDR r0, =_CRASH_FMT_1
-        BL printf @ dump CNT, LOC, TOS
-
-        MOV r1, INP
-        MOV r2, WRD
-        LDR r0, =_CRASH_FMT_2
-        BL printf @ dump INP and WRD
-
-        MOV r1, PSP
-        MOV r2, RSP
-        LDR r0, =_CRASH_FMT_3
-        BL printf @ dump PSP and RSP
-
-        LDR r0, =_PARAM_FORMAT
-        LDM PSP, { r1, r2, r3, PSP}
-        BL printf @ top of parameter stack
-
-        LDR r0, =_RETURN_FORMAT
-        LDM RSP, { r1, r2, r3, RSP}
-        BL printf @ top of return stack
-
-        @ INP should be pointing to the cell after the "crash" invocation that got
-        @ us here. Assume there's a null-terminated string there and printf it.
-        MOV r0, INP
-        BL printf
-
-        @ restart Forth via ABORT
-        LDR INP, _ABORT_CFA
-        _next
-
-_CRASH_FMT_1: .asciz "\nLOC, CNT, TOS: %x, %x, %x\n"
-_CRASH_FMT_2: .asciz "\nINP, WRD: %x, %x\n"
-_CRASH_FMT_3: .asciz "\nPSP, RSP: %x, %x\n"
-_PARAM_FORMAT: .asciz "\nparameter stack top, second, third => %x, %x, %x\n"
-_RETURN_FORMAT: .asciz "\nreturn stack top, second, third => %x, %x, %x\n"
-.balign _AU_CELL, 0
-_ABORT_CFA: .word _abort
 
 /*
 
