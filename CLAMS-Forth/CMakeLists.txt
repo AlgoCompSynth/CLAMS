@@ -16,6 +16,7 @@ add_executable(CLAMS-Forth
   Dictionary.S
   DictMacros.S
   MacroDefs.S
+  SymbolDefs.S
   VirtMachMacros.S
   Wrappers.c
 )

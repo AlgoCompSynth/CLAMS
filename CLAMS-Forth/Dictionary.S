@@ -33,11 +33,11 @@
 .thumb_func
 CLAMS_Forth:
         PUSH {LR} @ save link register
-        _x_load LOC, _entry_system_stack_pointer
+        _x_load ADDRS, _entry_system_stack_pointer
         MOV r0, SP @ save system stack pointer
-        STR r0, [LOC]
+        STR r0, [ADDRS]
 
-        _x_load INP, _abort @ start with an ABORT
+        _x_load INTPR, _abort @ start with an ABORT
         _next
 
 _x_addr _abort
@@ -47,23 +47,23 @@ _x_addr _abort
 .global _enter
 .thumb_func
 _enter:
-        PUSH {INP} @ nest INP
-	ADD WRD, #_AU_CELL @ point to first word of thread
-        MOV INP, WRD @ "branch indirect" to INP
+        PUSH {INTPR} @ nest INTPR
+	ADD WORDR, #_AU_CELL @ point to first word of thread
+        MOV INTPR, WORDR @ "branch indirect" to INTPR
         _next
 
 .global _do_var
 .thumb_func
 _do_var:
-        ADD WRD, #_AU_CELL @ address of variable => WRD
-        MOV TOS, WRD
+        ADD WORDR, #_AU_CELL @ address of variable => WORDR
+        MOV PSTOP, WORDR
         _next
 
 .global _do_const
 .thumb_func
 _do_const:
-        ADD WRD, #_AU_CELL @ address of constant => WRD
-        LDR TOS, [WRD] @ constant value => TOS
+        ADD WORDR, #_AU_CELL @ address of constant => WORDR
+        LDR PSTOP, [WORDR] @ constant value => PSTOP
         _next
 
 @ Strings compiled with C" and strings compiled with S" are both *stored* as counted
@@ -71,18 +71,18 @@ _do_const:
 .global _do_cq_string
 .thumb_func
 _do_cq_string:
-        ADD WRD, #_AU_CELL @ address of counted string => WRD
-        MOV TOS, WRD
+        ADD WORDR, #_AU_CELL @ address of counted string => WORDR
+        MOV PSTOP, WORDR
         _next
 
 .global _do_sq_string
 .thumb_func
 _do_sq_string:
-        ADD WRD, #_AU_CELL @ address of counted string => WRD
-        LDRB CNT, [WRD] @ count => CNT
-        ADD TOS, WRD, #_AU_CHAR @ skip the count byte
+        ADD WORDR, #_AU_CELL @ address of counted string => WORDR
+        LDRB COUNT, [WORDR] @ count => COUNT
+        ADD PSTOP, WORDR, #_AU_CHAR @ skip the count byte
         _dupe_ @ push address to parameter stack
-        MOV TOS, CNT @ push count to parameter stack
+        MOV PSTOP, COUNT @ push count to parameter stack
         _next
 
 @ return stack checker
@@ -91,15 +91,15 @@ _do_sq_string:
 @ push should call this before doing so!
 .thumb_func
 _rstack_check:
-        _x_load MAX, _entry_system_stack_pointer @ highest address SP should be
-        MOV LOC, SP @ actual stack pointer
-        SUB CNT, MAX, LOC @ difference in address units
-        CMP CNT, #_AU_CELL
+        _x_load CTMAX, _entry_system_stack_pointer @ highest address SP should be
+        MOV ADDRS, SP @ actual stack pointer
+        SUB COUNT, CTMAX, ADDRS @ difference in address units
+        CMP COUNT, #_AU_CELL
         BLT rscz @ we don't have enough on the stack to pop a cell!
         BX LR @ we have enough - return
 rscz:
         @ sorry, Charlie!
-        _x_load INP, _RS_UNDER @ address of crash message
+        _x_load INTPR, _RS_UNDER @ address of crash message
         _x_load r0, _crash @ CFA of CRASH
         BX r0 @ and crash!
 
@@ -123,7 +123,7 @@ _system_dict_start: .word .
         _header "EXIT", exit, _COMPILE_ONLY
         _code_word
         BL _rstack_check @ do we have enough return stack cells?
-        POP {INP} @ return stack is OK - un-nest the return stack to INP
+        POP {INTPR} @ return stack is OK - un-nest the return stack to INTPR
         _next
 
 _x_addr _entry_system_stack_pointer
@@ -134,35 +134,35 @@ _x_addr _crash
         @ if we get here, Forth has gotten into big trouble and we just want to
         @ dump as much info as we can and ABORT.
         _x_load r0, _CRASH_FMT_1
-        BL printf @ dump CNT, LOC, MAX
+        BL printf @ dump COUNT, ADDRS, CTMAX
 
-        MOV r1, INP
-        MOV r2, WRD
+        MOV r1, INTPR
+        MOV r2, WORDR
         _x_load r0, _CRASH_FMT_2
-        BL printf @ dump INP and WRD
+        BL printf @ dump INTPR and WORDR
 
-        MOV r1, PS2
-        MOV r2, TOS
+        MOV r1, PT2ND
+        MOV r2, PSTOP
         _x_load r0, _CRASH_FMT_3
-        BL printf @ dump PS2 and TOS
+        BL printf @ dump PT2ND and PSTOP
 
         _x_load r0, _PARAM_FORMAT
-        MOV r1, TOS @ get top of stack
-        LDM PS2, { r2, r3, PS2} @ second and third
+        MOV r1, PSTOP @ get top of stack
+        LDM PT2ND, { r2, r3, PT2ND} @ second and third
         BL printf @ top of parameter stack
 
-        @ INP should be pointing to the cell after the "crash" invocation that got
+        @ INTPR should be pointing to the cell after the "crash" invocation that got
         @ us here. Assume there's a null-terminated string there and printf it.
-        MOV r0, INP
+        MOV r0, INTPR
         BL printf
 
         @ restart Forth via ABORT
-        LDR INP, _ABORT_CFA
+        LDR INTPR, _ABORT_CFA
         _next
 
-_CRASH_FMT_1: .asciz "\nCNT, LOC, MAX: %x, %x, %x\n"
-_CRASH_FMT_2: .asciz "INP, WRD: %x, %x\n"
-_CRASH_FMT_3: .asciz "PS2, TOS: %x, %x\n"
+_CRASH_FMT_1: .asciz "\nCOUNT, ADDRS, CTMAX: %x, %x, %x\n"
+_CRASH_FMT_2: .asciz "INTPR, WORDR: %x, %x\n"
+_CRASH_FMT_3: .asciz "PT2ND, PSTOP: %x, %x\n"
 _PARAM_FORMAT: .asciz "Parameter stack top, second, third => %x, %x, %x\n"
 _x_addr _CRASH_FMT_1
 _x_addr _CRASH_FMT_2
@@ -173,30 +173,30 @@ _ABORT_CFA: .word _abort
         _header "LITERAL", literal, _COMPILE_ONLY
         _code_word
         _dupe_ @ make space on stack
-        LDR TOS, [INP] @ literal value => TOS
-        ADD INP, #_AU_CELL @ skip over the literal!
+        LDR PSTOP, [INTPR] @ literal value => PSTOP
+        ADD INTPR, #_AU_CELL @ skip over the literal!
         _next
 
         _header "EXECUTE", execute
         _code_word
-        MOV WRD, TOS @ execution token => WRD
+        MOV WORDR, PSTOP @ execution token => WORDR
         _drop_ @ we're done with the token
-        BX WRD @ unconditional branch without link
+        BX WORDR @ unconditional branch without link
 
         _header "branch", branch, _COMPILE_ONLY
         _code_word
-        LDR INP, [INP]
+        LDR INTPR, [INTPR]
         _next
 
         _header "?branch", question_branch, _COMPILE_ONLY
         _code_word
-        CMP TOS, #0
+        CMP PSTOP, #0
         BNE qbz @ branch if flag is TRUE
-        LDR INP, [INP] @ flag is false - take the branch
+        LDR INTPR, [INTPR] @ flag is false - take the branch
         _drop_
         _next
 qbz:
-        ADD INP, #_AU_CELL @ flag is true - skip branch destination
+        ADD INTPR, #_AU_CELL @ flag is true - skip branch destination
         _drop_
         _next
 
@@ -276,13 +276,13 @@ qbz:
         @ legally contain a cell!
         _header "clear-param-stack", clear_param_stack
         _code_word
-        _x_load PS2, _param_stack_bottom @ one cell above highest address
-        _x_load LOC, _param_stack_top @ lowest address
-        LDR TOS, _HAMBURGER
+        _x_load PT2ND, _param_stack_bottom @ one cell above highest address
+        _x_load ADDRS, _param_stack_top @ lowest address
+        LDR PSTOP, _HAMBURGER
 cps1:
-        STR TOS, [LOC]
-        ADD LOC, #_AU_CELL
-        CMP LOC, PS2
+        STR PSTOP, [ADDRS]
+        ADD ADDRS, #_AU_CELL
+        CMP ADDRS, PT2ND
         BLO cps1 @ unsigned strictly less
         _next
 _x_addr _param_stack_bottom
@@ -295,11 +295,11 @@ _HAMBURGER: .word 0xDEADBEEF
         _header "/MOD", slash_mod
         @ ( dividend divisor –– remainder quotient )
         _code_word
-        MOV r1, TOS @ divisor => r1
-        LDR r0, [PS2] @ dividend => r0
+        MOV r1, PSTOP @ divisor => r1
+        LDR r0, [PT2ND] @ dividend => r0
         _x_call sdk_slash_mod
-        STR r1, [PS2] @ stash remainder
-        MOV TOS, r0 @ stash quotient
+        STR r1, [PT2ND] @ stash remainder
+        MOV PSTOP, r0 @ stash quotient
         _next
 
 _x_addr sdk_slash_mod
@@ -322,12 +322,12 @@ _x_addr sdk_slash_mod
         _code_word
         _dupe_
         _x_call sdk_key
-        MOV TOS, r0
+        MOV PSTOP, r0
         _next
 
         _header "EMIT", emit
         _code_word
-        MOV r0, TOS
+        MOV r0, PSTOP
         _x_call sdk_emit
         _drop_
         _next
@@ -338,23 +338,23 @@ _x_addr sdk_slash_mod
         _header ">IN", to_in
         _code_word
         _dupe_
-        _x_load TOS, _input_cursor
+        _x_load PSTOP, _input_cursor
         _next
 _x_addr _input_cursor
 
         _header "BASE", base
         _code_word
         _dupe_
-        _x_load TOS, _number_base
+        _x_load PSTOP, _number_base
         _next
 _x_addr _number_base
 
         _header "SOURCE", source
         _code_word
         _dupe_
-        _x_load TOS, _input_source
+        _x_load PSTOP, _input_source
         _dupe_
-        _x_load TOS, _input_source_chars
+        _x_load PSTOP, _input_source_chars
         _next
 _x_addr _input_source
 _x_addr _input_source_chars
@@ -362,14 +362,14 @@ _x_addr _input_source_chars
         _header "SOURCE-ID", source_id
         _code_word
         _dupe_
-        _x_load TOS, _input_source_id
+        _x_load PSTOP, _input_source_id
         _next
 _x_addr _input_source_id
 
         _header "STATE", state
         _code_word
         _dupe_
-        _x_load TOS, _input_state
+        _x_load PSTOP, _input_state
         _next
 _x_addr _input_state
 
@@ -413,11 +413,11 @@ quil:
 
         @ set the buffer to NULs
         .word _dupe
-        _code_literal _MAX_TERMBUF
+        _code_literal _TERMBUF_MAX
         _code_literal _NUL
         .word _fill
 
-        _code_literal _MAX_TERMBUF @ push max character count => parameter stack
+        _code_literal _TERMBUF_MAX @ push max character count => parameter stack
         .word _accept @ get a line
 
         @ stack has actual character count
@@ -444,24 +444,24 @@ OllKorrect: .asciz " Ok\n"
         @ c-addr is the address of _terminal_buffer
         _code_word
         _dupe_
-        _x_load TOS, _terminal_buffer
+        _x_load PSTOP, _terminal_buffer
         _next
 _x_addr _terminal_buffer
 
         _header "FILL", fill
         @ ( c-addr u char –– )
         _code_word
-        MOV r0, TOS @ char => r0,
+        MOV r0, PSTOP @ char => r0,
         _drop_
-        MOV CNT, TOS @ u => CNT
+        MOV COUNT, PSTOP @ u => COUNT
         _drop_
-        MOV LOC, TOS @ c-addr => LOC
+        MOV ADDRS, PSTOP @ c-addr => ADDRS
         _drop_
 
 fil1:
-        SUB CNT, #_AU_CHAR @ count down
+        SUB COUNT, #_AU_CHAR @ count down
         BLT filz @ exit, stage left!
-        STRB r0, [LOC, CNT]
+        STRB r0, [ADDRS, COUNT]
         B fil1
 filz:
         @ done
@@ -475,9 +475,9 @@ filz:
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
 
-        MOV MAX, TOS @ max count => MAX
-        _drop_ @ TOS now has c-addr
-        MOV CNT, #0 @ initialize CNT
+        MOV CTMAX, PSTOP @ max count => CTMAX
+        _drop_ @ PSTOP now has c-addr
+        MOV COUNT, #0 @ initialize COUNT
 
 _accl:
         _pushlctl
@@ -498,15 +498,15 @@ _accl:
 
 _acce:
         @ a printable character - echo it and append to buffer
-        STRB r0, [TOS, CNT] @ append char to buffer
-        ADD CNT, #1 @ count the character
+        STRB r0, [PSTOP, COUNT] @ append char to buffer
+        ADD COUNT, #1 @ count the character
 
         _pushlctl
         _x_call sdk_emit @ printable - send it out!
         _poplctl
 
         @ check for buffer end
-        CMP CNT, MAX @ did we hit the limit?
+        CMP COUNT, CTMAX @ did we hit the limit?
         BEQ _accz @ early exit if limit hit!
 	B _accl @ there's room - go back for more!
 
@@ -517,11 +517,11 @@ _accs:
 
 _accb:
         @ backspace - un-count previous character and erase it
-        CMP CNT, #0 @ is buffer empty?
+        CMP COUNT, #0 @ is buffer empty?
         BEQ _accl @ ignore a backspace if buffer is empty
 
         @ un-count
-        SUB CNT, #1 @ decrement char count
+        SUB COUNT, #1 @ decrement char count
 
         @ erase previous character
         _pushlctl
@@ -542,7 +542,7 @@ _accb:
 
 _accz:
         @ clean up and exit
-        MOV TOS, CNT @ replace address with count in TOS
+        MOV PSTOP, COUNT @ replace address with count in PSTOP
         _next
 _x_addr sdk_key
 
@@ -550,15 +550,15 @@ _x_addr sdk_key
         @ ( c-addr u –– )
         _code_word
 
-        MOV MAX, TOS @ count => MAX
-        _drop_ @ address is now in TOS
-        MOV CNT, #0 @ count up
+        MOV CTMAX, PSTOP @ count => CTMAX
+        _drop_ @ address is now in PSTOP
+        MOV COUNT, #0 @ count up
 
 typl:
-        CMP CNT, MAX @ are we done?
+        CMP COUNT, CTMAX @ are we done?
         BGE typz @ exit!
 
-        LDRB r0, [TOS, CNT] @ character => r0
+        LDRB r0, [PSTOP, COUNT] @ character => r0
         CMP r0, #0 @ is it a null terminator?
         BEQ typz @ exit on null terminator
 
@@ -566,7 +566,7 @@ typl:
         _x_call sdk_emit @ emit the character
         _poplctl
 
-        ADD CNT, #1 @ count up
+        ADD COUNT, #1 @ count up
         B typl @ continue
 
 typz:
@@ -578,10 +578,10 @@ _x_addr sdk_emit
         _header "COUNT", "count"
         @ ( c-addr1 –– c-addr2 u )
         _code_word
-        LDRB CNT, [TOS] @ count byte => CNT
-        ADD TOS, #_AU_CHAR @ fix address
+        LDRB COUNT, [PSTOP] @ count byte => COUNT
+        ADD PSTOP, #_AU_CHAR @ fix address
         _dupe_ @ push address
-        MOV TOS, CNT @ count => TOS
+        MOV PSTOP, COUNT @ count => PSTOP
         _next
 
         @ counted string match
@@ -589,34 +589,34 @@ _x_addr sdk_emit
         @ (c-addr1 c-addr2 -- c-addr1 flag)
         @ flag is true if strings are identical, false otherwise
         _code_word
-        LDRB CNT, [TOS] @ count of c-addr2 => CNT
-        ADD TOS, #_AU_CHAR @ point TOS to first character of c-addr2
-        LDR r0, [PS2] @ c-addr1 => r0
+        LDRB COUNT, [PSTOP] @ count of c-addr2 => COUNT
+        ADD PSTOP, #_AU_CHAR @ point PSTOP to first character of c-addr2
+        LDR r0, [PT2ND] @ c-addr1 => r0
         LDRB r0, [r0] @ count of c-addr1 => r0
-        CMP r0, CNT @ if the counts aren't equal, we are done!
+        CMP r0, COUNT @ if the counts aren't equal, we are done!
         BNE csmf @ fail fast!
 
-        LDR LOC, [PS2] @ c-addr1 => LOC
-        ADD LOC, #_AU_CHAR @ point LOC to first character of c-addr1
+        LDR ADDRS, [PT2ND] @ c-addr1 => ADDRS
+        ADD ADDRS, #_AU_CHAR @ point ADDRS to first character of c-addr1
 
         @ main compare loop
 csml:
-        LDRB r0, [LOC, CNT]
-        LDRB MAX, [TOS, CNT] @ char from c-addr2 => MAX
-        CMP r0, MAX @ fail on first mismatch
+        LDRB r0, [ADDRS, COUNT]
+        LDRB CTMAX, [PSTOP, COUNT] @ char from c-addr2 => CTMAX
+        CMP r0, CTMAX @ fail on first mismatch
         BNE csmf @ fail a bit slower
-        SUB CNT, #1 @ count down
+        SUB COUNT, #1 @ count down
         BGT csml @ we already compared the counts
 
         @ success!
 csms:
-        MOV TOS, #0
-        MVN TOS, TOS @ TRUE flag => TOS
+        MOV PSTOP, #0
+        MVN PSTOP, PSTOP @ TRUE flag => PSTOP
         _next
 
 csmf:
         @ failure
-        MOV TOS, #0
+        MOV PSTOP, #0
         _next
 
 .global _system_dict_end
