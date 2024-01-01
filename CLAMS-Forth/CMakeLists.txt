@@ -12,9 +12,11 @@ include_directories(${CMAKE_SOURCE_DIR})
 
 add_executable(CLAMS-Forth
   CLAMS-Forth.S
-  Dictionary.S
   DataSegment.S
+  Dictionary.S
+  DictMacros.S
   MacroDefs.S
+  VirtMachMacros.S
   Wrappers.c
 )
 
