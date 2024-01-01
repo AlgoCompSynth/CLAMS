@@ -29,43 +29,43 @@
         @ stack operations
         .macro _drop_
         @ ( x1 x2 -- x1 )
-        LDM PS2!, {TOS}
+        LDM PT2ND!, {PSTOP}
         .endm
 
         .macro _dupe_
         @ ( x1 -- x1 x1 )
-        SUB PS2, #_AU_CELL
-        STR TOS, [PS2]
+        SUB PT2ND, #_AU_CELL
+        STR PSTOP, [PT2ND]
         .endm
 
         .macro _swap_
         @ ( x1 x2 -- x2 x1 )
-        LDR r0, [PS2]
-        STR TOS, [PS2]
-        MOV TOS, r0
+        LDR r0, [PT2ND]
+        STR PSTOP, [PT2ND]
+        MOV PSTOP, r0
         .endm
 
         .macro _over_
         @ ( x1 x2 -- x1 x2 x1 )
         _dupe_
-        LDR TOS, [PS2]
+        LDR PSTOP, [PT2ND]
         .endm
 
         .macro _rote_
         @ ( x1  x2  x3 -- x2  x3  x1 )
-        @ x3 is in TOS
-        LDR r1, [PS2, #_AU_CELL] @ x1 => r1
-        LDR r2, [PS2] @ x2 => r2
-        STR r2, [PS2, #_AU_CELL] @ stash x2
-        STR TOS, [PS2] @ stash x3
-        MOV TOS, r1 @ x1 => TOS
+        @ x3 is in PSTOP
+        LDR r1, [PT2ND, #_AU_CELL] @ x1 => r1
+        LDR r2, [PT2ND] @ x2 => r2
+        STR r2, [PT2ND, #_AU_CELL] @ stash x2
+        STR PSTOP, [PT2ND] @ stash x3
+        MOV PSTOP, r1 @ x1 => PSTOP
         .endm
 
         @ templates
         .macro _u_fetch opcode:req
         @ unsigned fetch
         @ ( a-addr -- x )
-        \opcode\() TOS, [TOS]
+        \opcode\() PSTOP, [PSTOP]
         .endm
 
         .macro _s_fetch opcode:req
@@ -73,24 +73,24 @@
         @ ( a-addr -- x )
         @ signed fetches need an offset in a register for M0+
         MOV r0, #0
-        \opcode\() TOS, [TOS, r0]
+        \opcode\() PSTOP, [PSTOP, r0]
         .endm
 
         .macro _store opcode:req
         @ store
         @ ( data a-addr -- )
-        LDR r0, [PS2] @ data cell => r0
-        \opcode\() r0, [TOS] @ do the store
-        LDR TOS, [PS2, #_AU_CELL] @ stack 3rd => TOS
-        ADD PS2, #_AU_CELL*2
+        LDR r0, [PT2ND] @ data cell => r0
+        \opcode\() r0, [PSTOP] @ do the store
+        LDR PSTOP, [PT2ND, #_AU_CELL] @ stack 3rd => PSTOP
+        ADD PT2ND, #_AU_CELL*2
         .endm
 
         .macro _aligned address_units:req
         MOV r0, #\address_units\()
         NEG r0, r0 @ # bitmask => r0
-        ADD TOS, #\address_units\()
-        SUB TOS, #1 @ TOS + \address_units\() - 1 => TOS
-        AND TOS, r0 @ TOS & bitmask => TOS
+        ADD PSTOP, #\address_units\()
+        SUB PSTOP, #1 @ PSTOP + \address_units\() - 1 => PSTOP
+        AND PSTOP, r0 @ PSTOP & bitmask => PSTOP
         .endm
 
 @ Common code for a word that uses a single instruction binary ALU operator on the
@@ -103,10 +103,10 @@
 
         .macro _binary_alu opcode:req
         @ ( left right -- left OP right )
-        LDR r0, [PS2] @ left operand => r0
-        ADD PS2, #_AU_CELL @ point to new 2nd of stack
-        \opcode\() r0, TOS @ r0 := left <OP> right
-        MOV TOS, r0
+        LDR r0, [PT2ND] @ left operand => r0
+        ADD PT2ND, #_AU_CELL @ point to new 2nd of stack
+        \opcode\() r0, PSTOP @ r0 := left <OP> right
+        MOV PSTOP, r0
         .endm
 
 @ Common code for a word that compares the top two cells on the stack. Such words
@@ -118,22 +118,22 @@
 @ zeroes) if `left <cmp> right` is false.
 
         .macro _binary_cmp cmp:req
-        LDR r0, [PS2] @ left operand => r0
-        ADD PS2, #_AU_CELL @ point to new 2nd of stack
-        CMP r0, TOS
+        LDR r0, [PT2ND] @ left operand => r0
+        ADD PT2ND, #_AU_CELL @ point to new 2nd of stack
+        CMP r0, PSTOP
         B\cmp\() 1f @ branch if true
-        MOV TOS, #0 @ FALSE flag => TOS
+        MOV PSTOP, #0 @ FALSE flag => PSTOP
         B 2f @ exit
 1:
-        MOV TOS, #0
-        MVN TOS, TOS @ TRUE flag => TOS
+        MOV PSTOP, #0
+        MVN PSTOP, PSTOP @ TRUE flag => PSTOP
 2:
         .endm
 
 @ Common code for unary operations
 
         .macro _unary_op instruction:req
-        \instruction\() @ instruction must perform a unary operation on TOS
+        \instruction\() @ instruction must perform a unary operation on PSTOP
         .endm
 
         @ fetch operations
@@ -178,54 +178,54 @@
         .endm
 
         .macro _one_plus_
-        _unary_op "ADD TOS, #1"
+        _unary_op "ADD PSTOP, #1"
         .endm
 
         .macro _one_minus_
-        _unary_op "SUB TOS, #1"
+        _unary_op "SUB PSTOP, #1"
         .endm
 
         .macro _two_star_
-        _unary_op "LSL TOS, #1"
+        _unary_op "LSL PSTOP, #1"
         .endm
 
         .macro _two_slash_
-        _unary_op "ASR TOS, #1"
+        _unary_op "ASR PSTOP, #1"
         .endm
 
         .macro _cell_plus_
-        _unary_op "ADD TOS, #_AU_CELL"
+        _unary_op "ADD PSTOP, #_AU_CELL"
         .endm
 
         .macro _cell_minus_
-        _unary_op "SUB TOS, #_AU_CELL"
+        _unary_op "SUB PSTOP, #_AU_CELL"
         .endm
 
         .macro _cells_
-        _unary_op "LSL TOS, #_CELL_SHIFT"
+        _unary_op "LSL PSTOP, #_CELL_SHIFT"
         .endm
 
         .macro _char_plus_
-        _unary_op "ADD TOS, #_AU_CHAR"
+        _unary_op "ADD PSTOP, #_AU_CHAR"
         .endm
 
         .macro _char_minus_
-        _unary_op "SUB TOS, #_AU_CHAR"
+        _unary_op "SUB PSTOP, #_AU_CHAR"
         .endm
 
         .macro _chars_
         .endm
 
         .macro _halfword_plus_
-        _unary_op "ADD TOS, #_AU_HALF"
+        _unary_op "ADD PSTOP, #_AU_HALF"
         .endm
 
         .macro _halfword_minus_
-        _unary_op "SUB TOS, #_AU_HALF"
+        _unary_op "SUB PSTOP, #_AU_HALF"
         .endm
 
         .macro _halfwords_
-        _unary_op "LSL TOS, #_HALF_SHIFT"
+        _unary_op "LSL PSTOP, #_HALF_SHIFT"
         .endm
 
         @ arithmetic operators
@@ -242,7 +242,7 @@
         .endm
 
         .macro _negate_
-        _unary_op "NEG TOS, TOS"
+        _unary_op "NEG PSTOP, PSTOP"
         .endm
 
         .macro _aligned_
@@ -269,7 +269,7 @@
         .endm
 
         .macro _invert_
-        _unary_op "MVN TOS, TOS"
+        _unary_op "MVN PSTOP, PSTOP"
         .endm
 
         .macro _l_shift_

@@ -107,9 +107,9 @@
         @ a register, the code field address MUST have the low-order "thumb" bit set
         @ to 1!
         .macro _next
-        LDR WRD, [INP] @ next code field address => WRD
-        ADD INP, #_AU_CELL @ advance INP
-        LDR r0, [WRD] @ next branch target => r0
+        LDR WORDR, [INTPR] @ next code field address => WORDR
+        ADD INTPR, #_AU_CELL @ advance INTPR
+        LDR r0, [WORDR] @ next branch target => r0
         BX r0 @ jump to next code routine
         .endm
 
@@ -134,10 +134,10 @@
         @ loop control register save / restore macros
         @ used before and after function calls
         .macro _pushlctl @ push loop control registers
-        PUSH {CNT, LOC, MAX}
+        PUSH {COUNT, ADDRS, CTMAX}
         .endm
         .macro _poplctl @ pop loop control registers
-        POP {CNT, LOC, MAX}
+        POP {COUNT, ADDRS, CTMAX}
         .endm
 
 @ macros for external addressing and function calls
@@ -161,11 +161,11 @@
         LDR \reg\(), _addr_\name\() @ get the address
         .endm
 
-        @ macro to call an external function via WRD
-        @ we use WRD because function parameters can be in r0 - r3
+        @ macro to call an external function via WORDR
+        @ we use WORDR because function parameters can be in r0 - r3
         .macro _x_call name
-        PUSH {WRD} @ save WRD!!!
-        _x_load WRD, \name\() @ fetch the external function's address
-        BLX WRD @ call the function
-        POP {WRD} @ restore WRD
+        PUSH {WORDR} @ save WORDR!!!
+        _x_load WORDR, \name\() @ fetch the external function's address
+        BLX WORDR @ call the function
+        POP {WORDR} @ restore WORDR
         .endm
