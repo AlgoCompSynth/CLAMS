@@ -201,14 +201,8 @@ qbz:
         _next
 
 @ "_expand" words
-@ These words are generated from macros in "DictMacros.S", and can be generated with
-@ a single line of code!
-        .macro _expand wname, pronunciation
-        _header "\wname\()", \pronunciation\()
-        _code_word
-        _\pronunciation\()_
-        _next
-        .endm
+@ These words are generated from macros in "VirtMachMacros.S". See that file for
+@ their documentation.
 
         @ stack operations
         _expand "DROP", drop
