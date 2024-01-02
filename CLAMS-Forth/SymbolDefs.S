@@ -28,19 +28,21 @@
 
 @ Inner interpreter registers
 @ These are the conventional indirect threading registers - see "Moving Forth".
+@ SDK functions save these if they are used.
 PT2ND .req r7 @ Pointer to second cell of parameter stack
 WORDR .req r6 @ "Word" register
 INTPR .req r6 @ Interpreter pointer - the Forth VM's program counter
 PSTOP .req r4 @ Top cell of the parameter stack
 
-@ working registers in code words
+@ Working registers in code words
+@ SDK functions do not save them and neither do CLAMS-Forth words.
 CTMAX .req r3 @ used in character loops
 ADDRS .req r2 @ used in character loops
 COUNT .req r1 @ used in character loops
 
 @ Temporary storage registers
 @ SDK functions save these if they use them. They're less useful than r0 - r7,
-@ but they're faster than going to RAM. CLAMS-Forth words do not save them.
+@ but they're faster than going to RAM. CLAMS-Forth words do *not* save them.
 TEMP1 .req r8
 TEMP2 .req r9
 TEMP3 .req r10
@@ -49,13 +51,13 @@ TEMP4 .req r11
 @ symbols for addressing expressions
 @ reference: Forth 2012 standard, section D2.2
 @ For the RP2040 SDK, an address unit is 8 bits aka a byte, and addressing is
-@ little-endian. We use "character" and "byte" interchangeably sometimes without any
+@ little-endian. We use "character" and "byte" interchangeably at times without any
 @ apologies.
 .set _AU_CHAR, 1 @ address units per character
 .set _AU_HALF, 2 @ address units per halfword
 .set _AU_CELL, 4 @ address units per cell
 .set _CELL_SHIFT, 2 @ bits to shift for cell - address unit conversions
-.set _HALF_SHIFT, 1 @ bits to shift for cell - address unit conversions
+.set _HALF_SHIFT, 1 @ bits to shift for halfword - address unit conversions
 .set _STACK_CELLS, 64 @ number of cells in a stack
 .set _CSTRING_MAX, 255 @ maximum number of characters in a counted string
 .set _WNAME_MAX, 31 @ maximum number of characters in a word name

@@ -26,6 +26,41 @@
 
 */
 
+@ The CLAMS-Forth virtual machine is designed using GNU assembly macros. In theory,
+@ one can port this to other Arm systems easily, and to other architectures with
+@ some effort.
+
+@ The return stack is the SDK's system stack and it is used *only* for maintaining
+@ interpreter call / return addresses! I consider other uses of the return stack
+@ footguns at best, and given that CLAMS-Forth shares it with the operating system,
+@ it's just too risky.
+
+@ The parameter stack is in RAM and is currently 64 cells. The top of the stack is
+@ in register PSTOP and the stack pointer PT2ND points to the RAM address of the
+@ *second* cell in the stack. So there is always one cell on the parameter stack in
+@ PSTOP. The parameter stack grows downward in RAM addresses.
+
+@ Most "CODE" words exist in two forms - as assembler macros defined in this file,
+@ and as invocations of those macros in "Dictionary.S". This makes adding primitives
+@ a two-step process, but the intent is to make an assembler easier to build. A
+@ Forth assembler does not need to cover the whole assembly language of a machine,
+@ just the primitive operations of the Forth virtual machine; its reason for
+@ existence is primarily to eliminate the overhead of an interpretive subroutine
+@ call to a two or three instruction operation.
+
+@ The RP2040 is an Arm Cortex M0+ machine. The SDK operates in little-endian mode,
+@ CLAMS-Forth does as well. As far as I know there are no dependencies on
+@ little-endian addressing; if you find one, please open an issue.
+
+@ Arithmetic and logical operations use two's complement 32-bit binary arithmetic.
+@ 32 bits is nine+ decimal digits, so I haven't implemented most double-word
+@ functions. They're vital on a 16-bit Forth but not for the intended application of
+@ CLAMS-Forth.
+
+@ A cell is 32 bits, which is four byte address units. I have also provided signed
+@ halfword and byte fetch operations, since they are available in the RP2040
+@ instruction set. Halfword store operations are also included.
+
         @ stack operations
         .macro _drop_
         @ ( x1 x2 -- x1 )
@@ -34,15 +69,15 @@
 
         .macro _dupe_
         @ ( x1 -- x1 x1 )
-        SUB PT2ND, #_AU_CELL
+        SUB PT2ND, #_AU_CELL @ parameter stack grows downward
         STR PSTOP, [PT2ND]
         .endm
 
         .macro _swap_
         @ ( x1 x2 -- x2 x1 )
-        LDR r0, [PT2ND]
-        STR PSTOP, [PT2ND]
-        MOV PSTOP, r0
+        LDR r0, [PT2ND] @ x1 => r0
+        STR PSTOP, [PT2ND] @ x2 => 2nd of stack
+        MOV PSTOP, r0 @ x1 => PSTOP
         .endm
 
         .macro _over_
@@ -62,27 +97,27 @@
         .endm
 
         @ templates
-        .macro _u_fetch opcode:req
+        .macro _u_fetch opcode:req @ unsigned fetches
         @ unsigned fetch
-        @ ( a-addr -- x )
+        @ ( addr -- x )
         \opcode\() PSTOP, [PSTOP]
         .endm
 
-        .macro _s_fetch opcode:req
+        .macro _s_fetch opcode:req @ signed fetches
         @ signed fetch
-        @ ( a-addr -- x )
-        @ signed fetches need an offset in a register for M0+
+        @ ( addr -- x )
+        @ signed fetches need an offset in a register on the Arm Cortex M0+
         MOV r0, #0
         \opcode\() PSTOP, [PSTOP, r0]
         .endm
 
         .macro _store opcode:req
         @ store
-        @ ( data a-addr -- )
+        @ ( data addr -- )
         LDR r0, [PT2ND] @ data cell => r0
         \opcode\() r0, [PSTOP] @ do the store
         LDR PSTOP, [PT2ND, #_AU_CELL] @ stack 3rd => PSTOP
-        ADD PT2ND, #_AU_CELL*2
+        ADD PT2ND, #_AU_CELL*2 @ drop the consumed parameters
         .endm
 
         .macro _aligned address_units:req
@@ -118,8 +153,7 @@
 @ zeroes) if `left <cmp> right` is false.
 
         .macro _binary_cmp cmp:req
-        LDR r0, [PT2ND] @ left operand => r0
-        ADD PT2ND, #_AU_CELL @ point to new 2nd of stack
+        LDM PT2ND!, {r0} @ pop left operand => r0
         CMP r0, PSTOP
         B\cmp\() 1f @ branch if true
         MOV PSTOP, #0 @ FALSE flag => PSTOP
@@ -135,6 +169,14 @@
         .macro _unary_op instruction:req
         \instruction\() @ instruction must perform a unary operation on PSTOP
         .endm
+
+@ Macro / word naming conventions: In the dictionary, a word has a Forth name and a
+@ pronunciation. The symbol "_\pronunciation" is defined in the dictionary to be the
+@ code field address of the word. In these macros, the symbol "_\pronunciation_"
+@ is the name of the macro that implements the word.
+
+@ In the following, "a-addr" is a cell-aligned address, "c-addr" is a character- /
+@ byte-aligned address, and "h-addr" is a halfword-aligned address.
 
         @ fetch operations
         .macro _fetch_
@@ -153,7 +195,7 @@
         .endm
 
         .macro _s_b_fetch_
-        @ ( b-addr -- signed_byte(b-addr) )
+        @ ( c-addr -- signed_byte(c-addr) )
         _s_fetch LDRSB
         .endm
 
