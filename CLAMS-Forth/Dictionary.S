@@ -243,6 +243,8 @@ qbz:
         _expand "NEGATE", negate
         _expand "ALIGNED", aligned
         _expand "H-ALIGNED", h_aligned
+        _expand "MAX", max
+        _expand "MIN", min
 
         @ boolean operators
         _expand "AND", and

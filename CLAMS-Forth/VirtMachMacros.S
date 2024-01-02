@@ -354,6 +354,30 @@
         _aligned _AU_HALF
         .endm
 
+        .macro _max_
+        @ ( x1 x2 -- max(x1, x2)
+        LDR r0, [PT2ND] @ x1 => r0
+        CMP r0, PSTOP
+        BLE 1f @ skip if PSTOP is maximum
+        MOV PSTOP, r0
+
+        @ exit
+1:
+        ADD PT2ND, #_AU_CELL @ drop the left operand
+        .endm
+
+        .macro _min_
+        @ ( x1 x2 -- min(x1, x2)
+        LDR r0, [PT2ND] @ x1 => r0
+        CMP r0, PSTOP
+        BGE 1f @ skip if PSTOP is minimum
+        MOV PSTOP, r0
+
+        @ exit
+1:
+        ADD PT2ND, #_AU_CELL @ drop the left operand
+        .endm
+
         @ boolean operators
         .macro _and_
         @ ( x1 x2 -- x1 AND x2 )
