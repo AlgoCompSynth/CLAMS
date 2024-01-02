@@ -169,3 +169,14 @@
         BLX WORDR @ call the function
         POP {WORDR} @ restore WORDR
         .endm
+
+@ "_expand" macro
+@ Many words are generated from macros in "VirtMachMacros.S", and can be generated
+@ with @ a single line of code! This is the macro that does the expansion.
+
+        .macro _expand wname, pronunciation
+        _header "\wname\()", \pronunciation\()
+        _code_word
+        _\pronunciation\()_
+        _next
+        .endm
