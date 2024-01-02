@@ -220,6 +220,7 @@ qbz:
         _expand "!", store
         _expand "C!", c_store
         _expand "H!", h_store
+        _expand "+!", plus_store
 
         @ addressing conveniences
         _expand "1+", one_plus
