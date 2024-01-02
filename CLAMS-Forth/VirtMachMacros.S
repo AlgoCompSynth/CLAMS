@@ -233,6 +233,36 @@
         ADD PT2ND, #_AU_CELL*2 @ drop the consumed parameters
         .endm
 
+        .macro _zero_less_
+        @ ( x -- flag(x < 0) )
+        MOV r0, #0
+        CMP PSTOP, r0
+        BGE 1f @ skip if PSTOP >= 0
+        MVN r0, r0 @ invert r0
+1:
+        MOV PSTOP, r0 @ set flag and exit
+        .endm
+
+        .macro _zero_equals_
+        @ ( x -- flag(x = 0) )
+        MOV r0, #0
+        CMP PSTOP, r0
+        BNE 1f @ skip if PSTOP != 0
+        MVN r0, r0 @ invert r0
+1:
+        MOV PSTOP, r0 @ set flag and exit
+        .endm
+
+        .macro _zero_greater_
+        @ ( x -- flag(x > 0) )
+        MOV r0, #0
+        CMP PSTOP, r0
+        BLE 1f @ skip if PSTOP <= 0
+        MVN r0, r0 @ invert r0
+1:
+        MOV PSTOP, r0 @ set flag and exit
+        .endm
+
         .macro _one_plus_
         @ ( x -- x + 1 )
         _unary_op "ADD PSTOP, #1"
