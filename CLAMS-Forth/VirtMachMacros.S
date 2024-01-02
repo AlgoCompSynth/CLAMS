@@ -222,23 +222,34 @@
         _store STRH
         .endm
 
+        .macro _plus_store_
+        @ ( data a-addr -- )
+        @ cell(a-addr) + data => cell(a-addr)
+        LDR r0, [PT2ND] @ data => r0
+        LDR r1, [PSTOP] @ cell(a-addr) => r1
+        ADD r0, r1 @ do the addition
+        STR r0, [PSTOP] @ do the store
+        LDR PSTOP, [PT2ND, #_AU_CELL] @ stack 3rd => PSTOP
+        ADD PT2ND, #_AU_CELL*2 @ drop the consumed parameters
+        .endm
+
         .macro _one_plus_
-        @ (x -- x + 1 )
+        @ ( x -- x + 1 )
         _unary_op "ADD PSTOP, #1"
         .endm
 
         .macro _one_minus_
-        @ (x -- x - 1 )
+        @ ( x -- x - 1 )
         _unary_op "SUB PSTOP, #1"
         .endm
 
         .macro _two_star_
-        @ (x -- x * 2 )
+        @ ( x -- x * 2 )
         _unary_op "LSL PSTOP, #1"
         .endm
 
         .macro _two_slash_
-        @ (x -- x / 2 )
+        @ ( x -- x / 2 )
         _unary_op "ASR PSTOP, #1"
         .endm
 
@@ -253,7 +264,7 @@
         .endm
 
         .macro _cells_
-        @ (x -- x cells )
+        @ ( x -- x cells )
         _unary_op "LSL PSTOP, #_CELL_SHIFT"
         .endm
 
@@ -278,28 +289,28 @@
         .endm
 
         .macro _halfwords_
-        @ (x -- x halfwords )
+        @ ( x -- x halfwords )
         _unary_op "LSL PSTOP, #_HALF_SHIFT"
         .endm
 
         @ arithmetic operators
-        @ (x1 x2 -- x1 + x2 )
+        @ ( x1 x2 -- x1 + x2 )
         .macro _plus_
         _binary_alu ADD
         .endm
 
         .macro _minus_
-        @ (x1 x2 -- x1 - x2 )
+        @ ( x1 x2 -- x1 - x2 )
         _binary_alu SUB
         .endm
 
         .macro _star_
-        @ (x1 x2 -- x1 * x2 )
+        @ ( x1 x2 -- x1 * x2 )
         _binary_alu MUL
         .endm
 
         .macro _negate_
-        @ (x -- -x )
+        @ ( x -- -x )
         _unary_op "NEG PSTOP, PSTOP"
         .endm
 
@@ -315,63 +326,63 @@
 
         @ boolean operators
         .macro _and_
-        @ (x1 x2 -- x1 AND x2 )
+        @ ( x1 x2 -- x1 AND x2 )
         _binary_alu AND
         .endm
 
         .macro _or_
-        @ (x1 x2 -- x1 OR x2 )
+        @ ( x1 x2 -- x1 OR x2 )
         _binary_alu ORR
         .endm
 
         .macro _x_or_
-        @ (x1 x2 -- x1 XOR x2 )
+        @ ( x1 x2 -- x1 XOR x2 )
         _binary_alu EOR
         .endm
 
         .macro _invert_
-        @ (x -- NOT x )
+        @ ( x -- NOT x )
         _unary_op "MVN PSTOP, PSTOP"
         .endm
 
         .macro _l_shift_
-        @ (x1 x2 -- x1 logical shift left x2 )
+        @ ( x1 x2 -- x1 logical shift left x2 )
         _binary_alu LSL
         .endm
 
         .macro _r_shift_
-        @ (x1 x2 -- x1 logical shift right x2 )
+        @ ( x1 x2 -- x1 logical shift right x2 )
         _binary_alu LSR
         .endm
 
         @ binary comparison operators
         .macro _less_than_
-        @ (x1 x2 -- flag x1 < x2 )
+        @ ( x1 x2 -- flag x1 < x2 )
         _binary_cmp LT
         .endm
 
         .macro _less_or_equal_
-        @ (x1 x2 -- flag x1 <= x2 )
+        @ ( x1 x2 -- flag x1 <= x2 )
         _binary_cmp LE
         .endm
 
         .macro _equals_
-        @ (x1 x2 -- flag x1 = x2 )
+        @ ( x1 x2 -- flag x1 = x2 )
         _binary_cmp EQ
         .endm
 
         .macro _not_equal_
-        @ (x1 x2 -- flag x1 != x2 )
+        @ ( x1 x2 -- flag x1 != x2 )
         _binary_cmp NE
         .endm
 
         .macro _greater_than_
-        @ (x1 x2 -- flag x1 > x2 )
+        @ ( x1 x2 -- flag x1 > x2 )
         _binary_cmp GT
         .endm
 
         .macro _greater_or_equal_
-        @ (x1 x2 -- flag x1 >= x2 )
+        @ ( x1 x2 -- flag x1 >= x2 )
         _binary_cmp GE
         .endm
 
