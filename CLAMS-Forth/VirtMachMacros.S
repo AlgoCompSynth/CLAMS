@@ -253,6 +253,16 @@
         MOV PSTOP, r0 @ set flag and exit
         .endm
 
+        .macro _zero_not_equals_
+        @ ( x -- flag(x <> 0) )
+        MOV r0, #0
+        CMP PSTOP, r0
+        BEQ 1f @ skip if PSTOP = 0
+        MVN r0, r0 @ invert r0
+1:
+        MOV PSTOP, r0 @ set flag and exit
+        .endm
+
         .macro _zero_greater_
         @ ( x -- flag(x > 0) )
         MOV r0, #0
@@ -425,8 +435,8 @@
         _binary_cmp EQ
         .endm
 
-        .macro _not_equal_
-        @ ( x1 x2 -- flag x1 != x2 )
+        .macro _not_equals_
+        @ ( x1 x2 -- flag x1 <> x2 )
         _binary_cmp NE
         .endm
 

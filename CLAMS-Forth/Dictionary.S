@@ -257,11 +257,12 @@ qbz:
         @ comparison operators
         _expand "0<", zero_less
         _expand "0=", zero_equals
+        _expand "0<>", zero_not_equals
         _expand "0>", zero_greater
         _expand "<", less_than
         _expand "<=", less_or_equal
         _expand "=", equals
-        _expand "<>", not_equal
+        _expand "<>", not_equals
         _expand ">", greater_than
         _expand ">=", greater_or_equal
         _expand "U>", u_greater_than
