@@ -1342,18 +1342,18 @@ Disassembly of section .text:
 
 10000a48 <_less_than>:
 10000a48:	10000a4d 	.word	0x10000a4d
-10000a4c:	6838      	ldr	r0, [r7, #0]
-10000a4e:	3704      	adds	r7, #4
-10000a50:	42a0      	cmp	r0, r4
-10000a52:	db01      	blt.n	10000a58 <_less_than+0x10>
-10000a54:	2400      	movs	r4, #0
-10000a56:	e001      	b.n	10000a5c <_less_than+0x14>
-10000a58:	2400      	movs	r4, #0
-10000a5a:	43e4      	mvns	r4, r4
-10000a5c:	6836      	ldr	r6, [r6, #0]
-10000a5e:	3604      	adds	r6, #4
-10000a60:	6830      	ldr	r0, [r6, #0]
-10000a62:	4700      	bx	r0
+10000a4c:	cf01      	ldmia	r7!, {r0}
+10000a4e:	42a0      	cmp	r0, r4
+10000a50:	db01      	blt.n	10000a56 <_less_than+0xe>
+10000a52:	2400      	movs	r4, #0
+10000a54:	e001      	b.n	10000a5a <_less_than+0x12>
+10000a56:	2400      	movs	r4, #0
+10000a58:	43e4      	mvns	r4, r4
+10000a5a:	6836      	ldr	r6, [r6, #0]
+10000a5c:	3604      	adds	r6, #4
+10000a5e:	6830      	ldr	r0, [r6, #0]
+10000a60:	4700      	bx	r0
+	...
 
 10000a64 <_less_or_equal_link>:
 10000a64:	00000024 	.word	0x00000024
@@ -1363,18 +1363,18 @@ Disassembly of section .text:
 
 10000a6c <_less_or_equal>:
 10000a6c:	10000a71 	.word	0x10000a71
-10000a70:	6838      	ldr	r0, [r7, #0]
-10000a72:	3704      	adds	r7, #4
-10000a74:	42a0      	cmp	r0, r4
-10000a76:	dd01      	ble.n	10000a7c <_less_or_equal+0x10>
-10000a78:	2400      	movs	r4, #0
-10000a7a:	e001      	b.n	10000a80 <_less_or_equal+0x14>
-10000a7c:	2400      	movs	r4, #0
-10000a7e:	43e4      	mvns	r4, r4
-10000a80:	6836      	ldr	r6, [r6, #0]
-10000a82:	3604      	adds	r6, #4
-10000a84:	6830      	ldr	r0, [r6, #0]
-10000a86:	4700      	bx	r0
+10000a70:	cf01      	ldmia	r7!, {r0}
+10000a72:	42a0      	cmp	r0, r4
+10000a74:	dd01      	ble.n	10000a7a <_less_or_equal+0xe>
+10000a76:	2400      	movs	r4, #0
+10000a78:	e001      	b.n	10000a7e <_less_or_equal+0x12>
+10000a7a:	2400      	movs	r4, #0
+10000a7c:	43e4      	mvns	r4, r4
+10000a7e:	6836      	ldr	r6, [r6, #0]
+10000a80:	3604      	adds	r6, #4
+10000a82:	6830      	ldr	r0, [r6, #0]
+10000a84:	4700      	bx	r0
+	...
 
 10000a88 <_equals_link>:
 10000a88:	00000024 	.word	0x00000024
@@ -1384,18 +1384,18 @@ Disassembly of section .text:
 
 10000a90 <_equals>:
 10000a90:	10000a95 	.word	0x10000a95
-10000a94:	6838      	ldr	r0, [r7, #0]
-10000a96:	3704      	adds	r7, #4
-10000a98:	42a0      	cmp	r0, r4
-10000a9a:	d001      	beq.n	10000aa0 <_equals+0x10>
-10000a9c:	2400      	movs	r4, #0
-10000a9e:	e001      	b.n	10000aa4 <_equals+0x14>
-10000aa0:	2400      	movs	r4, #0
-10000aa2:	43e4      	mvns	r4, r4
-10000aa4:	6836      	ldr	r6, [r6, #0]
-10000aa6:	3604      	adds	r6, #4
-10000aa8:	6830      	ldr	r0, [r6, #0]
-10000aaa:	4700      	bx	r0
+10000a94:	cf01      	ldmia	r7!, {r0}
+10000a96:	42a0      	cmp	r0, r4
+10000a98:	d001      	beq.n	10000a9e <_equals+0xe>
+10000a9a:	2400      	movs	r4, #0
+10000a9c:	e001      	b.n	10000aa2 <_equals+0x12>
+10000a9e:	2400      	movs	r4, #0
+10000aa0:	43e4      	mvns	r4, r4
+10000aa2:	6836      	ldr	r6, [r6, #0]
+10000aa4:	3604      	adds	r6, #4
+10000aa6:	6830      	ldr	r0, [r6, #0]
+10000aa8:	4700      	bx	r0
+	...
 
 10000aac <_not_equal_link>:
 10000aac:	00000024 	.word	0x00000024
@@ -1405,18 +1405,18 @@ Disassembly of section .text:
 
 10000ab4 <_not_equal>:
 10000ab4:	10000ab9 	.word	0x10000ab9
-10000ab8:	6838      	ldr	r0, [r7, #0]
-10000aba:	3704      	adds	r7, #4
-10000abc:	42a0      	cmp	r0, r4
-10000abe:	d101      	bne.n	10000ac4 <_not_equal+0x10>
-10000ac0:	2400      	movs	r4, #0
-10000ac2:	e001      	b.n	10000ac8 <_not_equal+0x14>
-10000ac4:	2400      	movs	r4, #0
-10000ac6:	43e4      	mvns	r4, r4
-10000ac8:	6836      	ldr	r6, [r6, #0]
-10000aca:	3604      	adds	r6, #4
-10000acc:	6830      	ldr	r0, [r6, #0]
-10000ace:	4700      	bx	r0
+10000ab8:	cf01      	ldmia	r7!, {r0}
+10000aba:	42a0      	cmp	r0, r4
+10000abc:	d101      	bne.n	10000ac2 <_not_equal+0xe>
+10000abe:	2400      	movs	r4, #0
+10000ac0:	e001      	b.n	10000ac6 <_not_equal+0x12>
+10000ac2:	2400      	movs	r4, #0
+10000ac4:	43e4      	mvns	r4, r4
+10000ac6:	6836      	ldr	r6, [r6, #0]
+10000ac8:	3604      	adds	r6, #4
+10000aca:	6830      	ldr	r0, [r6, #0]
+10000acc:	4700      	bx	r0
+	...
 
 10000ad0 <_greater_than_link>:
 10000ad0:	00000024 	.word	0x00000024
@@ -1426,18 +1426,18 @@ Disassembly of section .text:
 
 10000ad8 <_greater_than>:
 10000ad8:	10000add 	.word	0x10000add
-10000adc:	6838      	ldr	r0, [r7, #0]
-10000ade:	3704      	adds	r7, #4
-10000ae0:	42a0      	cmp	r0, r4
-10000ae2:	dc01      	bgt.n	10000ae8 <_greater_than+0x10>
-10000ae4:	2400      	movs	r4, #0
-10000ae6:	e001      	b.n	10000aec <_greater_than+0x14>
-10000ae8:	2400      	movs	r4, #0
-10000aea:	43e4      	mvns	r4, r4
-10000aec:	6836      	ldr	r6, [r6, #0]
-10000aee:	3604      	adds	r6, #4
-10000af0:	6830      	ldr	r0, [r6, #0]
-10000af2:	4700      	bx	r0
+10000adc:	cf01      	ldmia	r7!, {r0}
+10000ade:	42a0      	cmp	r0, r4
+10000ae0:	dc01      	bgt.n	10000ae6 <_greater_than+0xe>
+10000ae2:	2400      	movs	r4, #0
+10000ae4:	e001      	b.n	10000aea <_greater_than+0x12>
+10000ae6:	2400      	movs	r4, #0
+10000ae8:	43e4      	mvns	r4, r4
+10000aea:	6836      	ldr	r6, [r6, #0]
+10000aec:	3604      	adds	r6, #4
+10000aee:	6830      	ldr	r0, [r6, #0]
+10000af0:	4700      	bx	r0
+	...
 
 10000af4 <_greater_or_equal_link>:
 10000af4:	00000024 	.word	0x00000024
@@ -1447,18 +1447,18 @@ Disassembly of section .text:
 
 10000afc <_greater_or_equal>:
 10000afc:	10000b01 	.word	0x10000b01
-10000b00:	6838      	ldr	r0, [r7, #0]
-10000b02:	3704      	adds	r7, #4
-10000b04:	42a0      	cmp	r0, r4
-10000b06:	da01      	bge.n	10000b0c <_greater_or_equal+0x10>
-10000b08:	2400      	movs	r4, #0
-10000b0a:	e001      	b.n	10000b10 <_greater_or_equal+0x14>
-10000b0c:	2400      	movs	r4, #0
-10000b0e:	43e4      	mvns	r4, r4
-10000b10:	6836      	ldr	r6, [r6, #0]
-10000b12:	3604      	adds	r6, #4
-10000b14:	6830      	ldr	r0, [r6, #0]
-10000b16:	4700      	bx	r0
+10000b00:	cf01      	ldmia	r7!, {r0}
+10000b02:	42a0      	cmp	r0, r4
+10000b04:	da01      	bge.n	10000b0a <_greater_or_equal+0xe>
+10000b06:	2400      	movs	r4, #0
+10000b08:	e001      	b.n	10000b0e <_greater_or_equal+0x12>
+10000b0a:	2400      	movs	r4, #0
+10000b0c:	43e4      	mvns	r4, r4
+10000b0e:	6836      	ldr	r6, [r6, #0]
+10000b10:	3604      	adds	r6, #4
+10000b12:	6830      	ldr	r0, [r6, #0]
+10000b14:	4700      	bx	r0
+	...
 
 10000b18 <_u_greater_than_link>:
 10000b18:	00000024 	.word	0x00000024
@@ -1468,18 +1468,18 @@ Disassembly of section .text:
 
 10000b20 <_u_greater_than>:
 10000b20:	10000b25 	.word	0x10000b25
-10000b24:	6838      	ldr	r0, [r7, #0]
-10000b26:	3704      	adds	r7, #4
-10000b28:	42a0      	cmp	r0, r4
-10000b2a:	d801      	bhi.n	10000b30 <_u_greater_than+0x10>
-10000b2c:	2400      	movs	r4, #0
-10000b2e:	e001      	b.n	10000b34 <_u_greater_than+0x14>
-10000b30:	2400      	movs	r4, #0
-10000b32:	43e4      	mvns	r4, r4
-10000b34:	6836      	ldr	r6, [r6, #0]
-10000b36:	3604      	adds	r6, #4
-10000b38:	6830      	ldr	r0, [r6, #0]
-10000b3a:	4700      	bx	r0
+10000b24:	cf01      	ldmia	r7!, {r0}
+10000b26:	42a0      	cmp	r0, r4
+10000b28:	d801      	bhi.n	10000b2e <_u_greater_than+0xe>
+10000b2a:	2400      	movs	r4, #0
+10000b2c:	e001      	b.n	10000b32 <_u_greater_than+0x12>
+10000b2e:	2400      	movs	r4, #0
+10000b30:	43e4      	mvns	r4, r4
+10000b32:	6836      	ldr	r6, [r6, #0]
+10000b34:	3604      	adds	r6, #4
+10000b36:	6830      	ldr	r0, [r6, #0]
+10000b38:	4700      	bx	r0
+	...
 
 10000b3c <_u_greater_or_equal_link>:
 10000b3c:	00000024 	.word	0x00000024
@@ -1489,18 +1489,18 @@ Disassembly of section .text:
 
 10000b44 <_u_greater_or_equal>:
 10000b44:	10000b49 	.word	0x10000b49
-10000b48:	6838      	ldr	r0, [r7, #0]
-10000b4a:	3704      	adds	r7, #4
-10000b4c:	42a0      	cmp	r0, r4
-10000b4e:	d201      	bcs.n	10000b54 <_u_greater_or_equal+0x10>
-10000b50:	2400      	movs	r4, #0
-10000b52:	e001      	b.n	10000b58 <_u_greater_or_equal+0x14>
-10000b54:	2400      	movs	r4, #0
-10000b56:	43e4      	mvns	r4, r4
-10000b58:	6836      	ldr	r6, [r6, #0]
-10000b5a:	3604      	adds	r6, #4
-10000b5c:	6830      	ldr	r0, [r6, #0]
-10000b5e:	4700      	bx	r0
+10000b48:	cf01      	ldmia	r7!, {r0}
+10000b4a:	42a0      	cmp	r0, r4
+10000b4c:	d201      	bcs.n	10000b52 <_u_greater_or_equal+0xe>
+10000b4e:	2400      	movs	r4, #0
+10000b50:	e001      	b.n	10000b56 <_u_greater_or_equal+0x12>
+10000b52:	2400      	movs	r4, #0
+10000b54:	43e4      	mvns	r4, r4
+10000b56:	6836      	ldr	r6, [r6, #0]
+10000b58:	3604      	adds	r6, #4
+10000b5a:	6830      	ldr	r0, [r6, #0]
+10000b5c:	4700      	bx	r0
+	...
 
 10000b60 <_u_less_than_link>:
 10000b60:	00000024 	.word	0x00000024
@@ -1510,18 +1510,18 @@ Disassembly of section .text:
 
 10000b68 <_u_less_than>:
 10000b68:	10000b6d 	.word	0x10000b6d
-10000b6c:	6838      	ldr	r0, [r7, #0]
-10000b6e:	3704      	adds	r7, #4
-10000b70:	42a0      	cmp	r0, r4
-10000b72:	d301      	bcc.n	10000b78 <_u_less_than+0x10>
-10000b74:	2400      	movs	r4, #0
-10000b76:	e001      	b.n	10000b7c <_u_less_than+0x14>
-10000b78:	2400      	movs	r4, #0
-10000b7a:	43e4      	mvns	r4, r4
-10000b7c:	6836      	ldr	r6, [r6, #0]
-10000b7e:	3604      	adds	r6, #4
-10000b80:	6830      	ldr	r0, [r6, #0]
-10000b82:	4700      	bx	r0
+10000b6c:	cf01      	ldmia	r7!, {r0}
+10000b6e:	42a0      	cmp	r0, r4
+10000b70:	d301      	bcc.n	10000b76 <_u_less_than+0xe>
+10000b72:	2400      	movs	r4, #0
+10000b74:	e001      	b.n	10000b7a <_u_less_than+0x12>
+10000b76:	2400      	movs	r4, #0
+10000b78:	43e4      	mvns	r4, r4
+10000b7a:	6836      	ldr	r6, [r6, #0]
+10000b7c:	3604      	adds	r6, #4
+10000b7e:	6830      	ldr	r0, [r6, #0]
+10000b80:	4700      	bx	r0
+	...
 
 10000b84 <_u_less_or_equal_link>:
 10000b84:	00000024 	.word	0x00000024
@@ -1531,18 +1531,18 @@ Disassembly of section .text:
 
 10000b8c <_u_less_or_equal>:
 10000b8c:	10000b91 	.word	0x10000b91
-10000b90:	6838      	ldr	r0, [r7, #0]
-10000b92:	3704      	adds	r7, #4
-10000b94:	42a0      	cmp	r0, r4
-10000b96:	d901      	bls.n	10000b9c <_u_less_or_equal+0x10>
-10000b98:	2400      	movs	r4, #0
-10000b9a:	e001      	b.n	10000ba0 <_u_less_or_equal+0x14>
-10000b9c:	2400      	movs	r4, #0
-10000b9e:	43e4      	mvns	r4, r4
-10000ba0:	6836      	ldr	r6, [r6, #0]
-10000ba2:	3604      	adds	r6, #4
-10000ba4:	6830      	ldr	r0, [r6, #0]
-10000ba6:	4700      	bx	r0
+10000b90:	cf01      	ldmia	r7!, {r0}
+10000b92:	42a0      	cmp	r0, r4
+10000b94:	d901      	bls.n	10000b9a <_u_less_or_equal+0xe>
+10000b96:	2400      	movs	r4, #0
+10000b98:	e001      	b.n	10000b9e <_u_less_or_equal+0x12>
+10000b9a:	2400      	movs	r4, #0
+10000b9c:	43e4      	mvns	r4, r4
+10000b9e:	6836      	ldr	r6, [r6, #0]
+10000ba0:	3604      	adds	r6, #4
+10000ba2:	6830      	ldr	r0, [r6, #0]
+10000ba4:	4700      	bx	r0
+	...
 
 10000ba8 <_clear_param_stack_link>:
 10000ba8:	00000024 	.word	0x00000024
