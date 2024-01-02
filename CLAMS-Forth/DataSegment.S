@@ -43,11 +43,10 @@
 
 @ Stack logic:
 
-@ The stacks grow from high addresses downwards. Register `PSP` points to the
-@ top element of the parameter stack. CLAMS-Forth uses the system stack for the
-@ return stack, so it uses PUSH and POP via the SP register.
-
-@ The stacks
+@ The CLAMS-Forth parameter stack grows from high addresses downwards. Register
+@ `PSTOP` holds the top cell of the stack. The rest of the stack is in RAM, and
+@ register `PT2ND` points to the second cell of the stack. CLAMS-Forth uses the
+@ system stack for the return stack, so it uses PUSH and POP via the SP register.
 
 @ parameter stack
 .global _param_stack_top

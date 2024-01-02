@@ -232,6 +232,7 @@ qbz:
         _expand "CELLS", cells
         _expand "CHAR+", char_plus
         _expand "CHAR-", char_minus
+        _expand "CHARS", chars
         _expand "HALFWORD+", halfword_plus
         _expand "HALFWORD-", halfword_minus
         _expand "HALFWORDS", halfwords
