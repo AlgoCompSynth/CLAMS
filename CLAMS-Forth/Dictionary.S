@@ -252,7 +252,10 @@ qbz:
         _expand "LSHIFT", l_shift
         _expand "RSHIFT", r_shift
 
-        @ binary comparison operators
+        @ comparison operators
+        _expand "0<", zero_less
+        _expand "0=", zero_equals
+        _expand "0>", zero_greater
         _expand "<", less_than
         _expand "<=", less_or_equal
         _expand "=", equals
