@@ -318,6 +318,10 @@
         _unary_op "SUB PSTOP, #_AU_CHAR"
         .endm
 
+        .macro _chars_
+        @ ( x -- x chars )
+        .endm
+
         .macro _halfword_plus_
         @ (h-addr -- h-addr + 1 halfword )
         _unary_op "ADD PSTOP, #_AU_HALF"
