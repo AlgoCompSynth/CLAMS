@@ -206,84 +206,100 @@
 
         .macro _store_
         @ ( data a-addr -- )
+        @ data cell => c-addr
         _store STR
         .endm
 
         .macro _c_store_
         @ ( data c-addr -- )
+        @ lowest byte of data => c-addr
         _store STRB
         .endm
 
         .macro _h_store_
         @ ( data h-addr -- )
+        @ lower halfword of data => h-addr
         _store STRH
         .endm
 
         .macro _one_plus_
+        @ (x -- x + 1 )
         _unary_op "ADD PSTOP, #1"
         .endm
 
         .macro _one_minus_
+        @ (x -- x - 1 )
         _unary_op "SUB PSTOP, #1"
         .endm
 
         .macro _two_star_
+        @ (x -- x * 2 )
         _unary_op "LSL PSTOP, #1"
         .endm
 
         .macro _two_slash_
+        @ (x -- x / 2 )
         _unary_op "ASR PSTOP, #1"
         .endm
 
         .macro _cell_plus_
+        @ (a-addr -- a-addr + 1 cell )
         _unary_op "ADD PSTOP, #_AU_CELL"
         .endm
 
         .macro _cell_minus_
+        @ (a-addr -- a-addr - 1 cell )
         _unary_op "SUB PSTOP, #_AU_CELL"
         .endm
 
         .macro _cells_
+        @ (x -- x cells )
         _unary_op "LSL PSTOP, #_CELL_SHIFT"
         .endm
 
         .macro _char_plus_
+        @ (c-addr -- c-addr + 1 char )
         _unary_op "ADD PSTOP, #_AU_CHAR"
         .endm
 
         .macro _char_minus_
+        @ (c-addr -- c-addr - 1 char )
         _unary_op "SUB PSTOP, #_AU_CHAR"
         .endm
 
-        .macro _chars_
-        .endm
-
         .macro _halfword_plus_
+        @ (h-addr -- h-addr + 1 halfword )
         _unary_op "ADD PSTOP, #_AU_HALF"
         .endm
 
         .macro _halfword_minus_
+        @ (h-addr -- h-addr - 1 halfword )
         _unary_op "SUB PSTOP, #_AU_HALF"
         .endm
 
         .macro _halfwords_
+        @ (x -- x halfwords )
         _unary_op "LSL PSTOP, #_HALF_SHIFT"
         .endm
 
         @ arithmetic operators
+        @ (x1 x2 -- x1 + x2 )
         .macro _plus_
         _binary_alu ADD
         .endm
 
         .macro _minus_
+        @ (x1 x2 -- x1 - x2 )
         _binary_alu SUB
         .endm
 
         .macro _star_
+        @ (x1 x2 -- x1 * x2 )
         _binary_alu MUL
         .endm
 
         .macro _negate_
+        @ (x -- -x )
         _unary_op "NEG PSTOP, PSTOP"
         .endm
 
@@ -299,66 +315,83 @@
 
         @ boolean operators
         .macro _and_
+        @ (x1 x2 -- x1 AND x2 )
         _binary_alu AND
         .endm
 
         .macro _or_
+        @ (x1 x2 -- x1 OR x2 )
         _binary_alu ORR
         .endm
 
         .macro _x_or_
+        @ (x1 x2 -- x1 XOR x2 )
         _binary_alu EOR
         .endm
 
         .macro _invert_
+        @ (x -- NOT x )
         _unary_op "MVN PSTOP, PSTOP"
         .endm
 
         .macro _l_shift_
+        @ (x1 x2 -- x1 logical shift left x2 )
         _binary_alu LSL
         .endm
 
         .macro _r_shift_
+        @ (x1 x2 -- x1 logical shift right x2 )
         _binary_alu LSR
         .endm
 
         @ binary comparison operators
         .macro _less_than_
+        @ (x1 x2 -- flag x1 < x2 )
         _binary_cmp LT
         .endm
 
         .macro _less_or_equal_
+        @ (x1 x2 -- flag x1 <= x2 )
         _binary_cmp LE
         .endm
 
         .macro _equals_
+        @ (x1 x2 -- flag x1 = x2 )
         _binary_cmp EQ
         .endm
 
         .macro _not_equal_
+        @ (x1 x2 -- flag x1 != x2 )
         _binary_cmp NE
         .endm
 
         .macro _greater_than_
+        @ (x1 x2 -- flag x1 > x2 )
         _binary_cmp GT
         .endm
 
         .macro _greater_or_equal_
+        @ (x1 x2 -- flag x1 >= x2 )
         _binary_cmp GE
         .endm
 
+        @ unsigned comparisons
         .macro _u_greater_than_
+        @ (u1 u2 -- flag u1 > u2 )
         _binary_cmp HI
         .endm
 
         .macro _u_greater_or_equal_
+        @ (u1 u2 -- flag u1 >= u2 )
         _binary_cmp HS
         .endm
 
         .macro _u_less_than_
+        @ (u1 u2 -- flag u1 < u2 )
         _binary_cmp LO
         .endm
 
         .macro _u_less_or_equal_
+        @ (u1 u2 -- flag u1 <= u2 )
         _binary_cmp LS
         .endm
