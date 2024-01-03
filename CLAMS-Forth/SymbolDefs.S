@@ -56,6 +56,7 @@ TEMP4 .req r11
 .set _AU_CHAR, 1 @ address units per character
 .set _AU_HALF, 2 @ address units per halfword
 .set _AU_CELL, 4 @ address units per cell
+.set _AU_CELL_CHAR, 5 @ address units cell plus a character
 .set _CELL_SHIFT, 2 @ bits to shift for cell - address unit conversions
 .set _HALF_SHIFT, 1 @ bits to shift for halfword - address unit conversions
 .set _STACK_CELLS, 64 @ number of cells in a stack
