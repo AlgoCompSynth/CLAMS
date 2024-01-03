@@ -48,24 +48,21 @@ _x_addr _abort
 .thumb_func
 _enter:
         PUSH {INTPR} @ nest INTPR
-	ADD WORDR, #_AU_CELL @ point to first word of thread
-        MOV INTPR, WORDR @ "branch indirect" to INTPR
+        ADD INTPR, WORDR, #_AU_CELL @ "branch indirect" to cell after WORDR
         _next
 
 .global _do_var @ word is a VARIABLE
 .thumb_func
 _do_var:
-        ADD WORDR, #_AU_CELL @ address of variable => WORDR
         _dupe_ @ make room for variable address
-        MOV PSTOP, WORDR
+        ADD PSTOP, WORDR, #_AU_CELL @ push address of cell after WORDR to stack
         _next
 
 .global _do_const @ word is a CONSTANT
 .thumb_func
 _do_const:
-        ADD WORDR, #_AU_CELL @ address of constant => WORDR
         _dupe_ @ make room for constant
-        LDR PSTOP, [WORDR] @ constant value => PSTOP
+        LDR PSTOP, [WORDR, #_AU_CELL] @ constant value => PSTOP
         _next
 
 @ Strings compiled with C" and strings compiled with S" are both *stored* as counted
@@ -73,18 +70,16 @@ _do_const:
 .global _do_cq_string @ counted string
 .thumb_func
 _do_cq_string:
-        ADD WORDR, #_AU_CELL @ address of counted string => WORDR
         _dupe_ @ make room for counted string address
-        MOV PSTOP, WORDR
+        ADD PSTOP, WORDR, #_AU_CELL @ push address of cell after WORDR to stack
         _next
 
 .global _do_sq_string
 .thumb_func
 _do_sq_string:
-        ADD WORDR, #_AU_CELL @ address of counted string => WORDR
-        LDRB COUNT, [WORDR] @ count => COUNT
+        LDRB COUNT, [WORDR, #_AU_CELL] @ count => COUNT
         _dupe_ @ make room for string address
-        ADD PSTOP, WORDR, #_AU_CHAR @ skip the count byte
+        ADD PSTOP, WORDR, #_AU_CELL_CHAR @ skip the count byte
         _dupe_ @ push address to parameter stack
         MOV PSTOP, COUNT @ push count to parameter stack
         _next
