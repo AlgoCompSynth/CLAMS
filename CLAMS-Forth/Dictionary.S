@@ -44,7 +44,7 @@ _x_addr _abort
 
 @ inner interpreters
 
-.global _enter
+.global _enter @ enter a colon word
 .thumb_func
 _enter:
         PUSH {INTPR} @ nest INTPR
@@ -52,26 +52,29 @@ _enter:
         MOV INTPR, WORDR @ "branch indirect" to INTPR
         _next
 
-.global _do_var
+.global _do_var @ word is a VARIABLE
 .thumb_func
 _do_var:
         ADD WORDR, #_AU_CELL @ address of variable => WORDR
+        _dupe_ @ make room for variable address
         MOV PSTOP, WORDR
         _next
 
-.global _do_const
+.global _do_const @ word is a CONSTANT
 .thumb_func
 _do_const:
         ADD WORDR, #_AU_CELL @ address of constant => WORDR
+        _dupe_ @ make room for constant
         LDR PSTOP, [WORDR] @ constant value => PSTOP
         _next
 
 @ Strings compiled with C" and strings compiled with S" are both *stored* as counted
 @ strings. So we need two different inner interpreters.
-.global _do_cq_string
+.global _do_cq_string @ counted string
 .thumb_func
 _do_cq_string:
         ADD WORDR, #_AU_CELL @ address of counted string => WORDR
+        _dupe_ @ make room for counted string address
         MOV PSTOP, WORDR
         _next
 
@@ -80,6 +83,7 @@ _do_cq_string:
 _do_sq_string:
         ADD WORDR, #_AU_CELL @ address of counted string => WORDR
         LDRB COUNT, [WORDR] @ count => COUNT
+        _dupe_ @ make room for string address
         ADD PSTOP, WORDR, #_AU_CHAR @ skip the count byte
         _dupe_ @ push address to parameter stack
         MOV PSTOP, COUNT @ push count to parameter stack
@@ -91,14 +95,15 @@ _do_sq_string:
 @ push should call this before doing so!
 .thumb_func
 _rstack_check:
-        _x_load CTMAX, _entry_system_stack_pointer @ highest address SP should be
+        _x_load CTMAX, _entry_system_stack_pointer @ the highest valid SP address!
         MOV ADDRS, SP @ actual stack pointer
         SUB COUNT, CTMAX, ADDRS @ difference in address units
         CMP COUNT, #_AU_CELL
         BLT rscz @ we don't have enough on the stack to pop a cell!
         BX LR @ we have enough - return
-rscz:
+
         @ sorry, Charlie!
+rscz:
         _x_load INTPR, _RS_UNDER @ address of crash message
         _x_load r0, _crash @ CFA of CRASH
         BX r0 @ and crash!
@@ -115,12 +120,22 @@ _system_dict_start: .word .
         @ code words for base VM
 
         _header "clear-return-stack", clear_return_stack, _COMPILE_ONLY
+        @ ( R: i*x -- ) clears the return stack
         _code_word
-        _x_load r0, _entry_system_stack_pointer
-        MOV SP, r0
+        _x_load r0, _entry_system_stack_pointer @ get SP we saved on entry
+        MOV SP, r0 @ and put SP where it was
         _next
 
+        _header "BYE", bye
+        @ ( R: i*x -- ) clears the return stack and returns to caller, which
+        @               should be the CLAMS-Forth main program
+        _code_word
+        _x_load r0, _entry_system_stack_pointer @ get SP we saved on entry
+        MOV SP, r0 @ and put SP where it was
+        POP {PC}
+
         _header "EXIT", exit, _COMPILE_ONLY
+        @ ( -- ) interpretive return from colon word
         _code_word
         BL _rstack_check @ do we have enough return stack cells?
         POP {INTPR} @ return stack is OK - un-nest the return stack to INTPR
@@ -131,8 +146,10 @@ _x_addr _crash
 
         _header "crash", crash
         _code_word
-        @ if we get here, Forth has gotten into big trouble and we just want to
-        @ dump as much info as we can and ABORT.
+        @ If we get here, CLAMS-Forth has gotten into big trouble and we just want
+        @ to dump as much info as we can and ABORT. Armed with the disassembly
+        @ listing and sometimes `gdb` we should be able to troubleshoot.
+
         _x_load r0, _CRASH_FMT_1
         BL printf @ dump COUNT, ADDRS, CTMAX
 
@@ -171,6 +188,7 @@ _x_addr _PARAM_FORMAT
 _ABORT_CFA: .word _abort
 
         _header "LITERAL", literal, _COMPILE_ONLY
+        @ ( -- x ) push next cell to parameter stack
         _code_word
         _dupe_ @ make space on stack
         LDR PSTOP, [INTPR] @ literal value => PSTOP
@@ -178,26 +196,47 @@ _ABORT_CFA: .word _abort
         _next
 
         _header "EXECUTE", execute
+        @ ( xt -- ) execute the xt on top of the stack
         _code_word
         MOV WORDR, PSTOP @ execution token => WORDR
         _drop_ @ we're done with the token
-        BX WORDR @ unconditional branch without link
+        BX WORDR @ unconditional branch without link - since we are doing a `BX` the
+                 @ low-order "thumb" bit must be set in the token!
 
         _header "branch", branch, _COMPILE_ONLY
+        @ ( -- ) interpretive unconditional branch
         _code_word
         LDR INTPR, [INTPR]
         _next
 
         _header "?branch", question_branch, _COMPILE_ONLY
+        @ ( flag -- ) interpretive branch if flag is FALSE
         _code_word
         CMP PSTOP, #0
         BNE qbz @ branch if flag is TRUE
-        LDR INTPR, [INTPR] @ flag is false - take the branch
-        _drop_
+        LDR INTPR, [INTPR] @ flag is false - we will take the branch
+        _drop_ @ done with flag
         _next
 qbz:
         ADD INTPR, #_AU_CELL @ flag is true - skip branch destination
         _drop_
+        _next
+
+        _header "?exit", question_exit, _COMPILE_ONLY
+        @ ( flag -- ) interpretive EXIT if flag is FALSE
+        _code_word
+        CMP PSTOP, #0
+        BEQ qez @ branch if flag is FALSE
+
+        @ flag is TRUE - carry on
+        _drop_ @ done with flag
+        _next
+
+        @ flag is FALSE - EXIT
+qez:
+        _drop_ @ done with flag
+        BL _rstack_check @ do we have enough return stack cells?
+        POP {INTPR} @ return stack is OK - un-nest the return stack to INTPR
         _next
 
 @ "_expand" words
@@ -306,6 +345,7 @@ _HAMBURGER: .word 0xDEADBEEF
 _x_addr sdk_slash_mod
 
         _header "/", slash
+        @ ( dividend divisor –– quotient )
         _colon_word
         .word _slash_mod
         .word _swap
@@ -313,13 +353,20 @@ _x_addr sdk_slash_mod
         .word _exit
 
         _header "MOD", mod
+        @ ( dividend divisor –– remainder )
         _colon_word
         .word _slash_mod
         .word _drop
         .word _exit
 
+        @ multi-precision words
+        @ These are the *only* CLAMS-Forth words that deal with quantities large
+        @ than a single 32-bit cell.
+
         @ terminal I/O / interpreter control words
         _header "KEY", key
+        @ ( -- char ) waits for a character from the terminal and puts it on the
+        @ parameter stack.
         _code_word
         _dupe_
         _x_call sdk_key
@@ -327,6 +374,7 @@ _x_addr sdk_slash_mod
         _next
 
         _header "EMIT", emit
+        @ ( char -- ) sends the character on top of the stack to the terminal
         _code_word
         MOV r0, PSTOP
         _x_call sdk_emit
@@ -334,9 +382,10 @@ _x_addr sdk_slash_mod
         _next
 
         @ "user variables"
-        @ >IN, BASE, BLK, SCR, SOURCE, SOURCE-ID, STATE
+        @ >IN, BASE, SOURCE, STATE
 
         _header ">IN", to_in
+        @ ( -- a-addr ) puts cell address of >IN on the stack
         _code_word
         _dupe_
         _x_load PSTOP, _input_cursor
@@ -344,6 +393,7 @@ _x_addr sdk_slash_mod
 _x_addr _input_cursor
 
         _header "BASE", base
+        @ ( -- a-addr ) puts cell address of BASE on the stack
         _code_word
         _dupe_
         _x_load PSTOP, _number_base
@@ -351,6 +401,7 @@ _x_addr _input_cursor
 _x_addr _number_base
 
         _header "SOURCE", source
+        @ ( -- c-addr u ) puts character address and count of SOURCE on the stack
         _code_word
         _dupe_
         _x_load PSTOP, _input_source
@@ -360,14 +411,8 @@ _x_addr _number_base
 _x_addr _input_source
 _x_addr _input_source_chars
 
-        _header "SOURCE-ID", source_id
-        _code_word
-        _dupe_
-        _x_load PSTOP, _input_source_id
-        _next
-_x_addr _input_source_id
-
         _header "STATE", state
+        @ ( -- a-addr ) puts cell address of STATE on the stack
         _code_word
         _dupe_
         _x_load PSTOP, _input_state
@@ -375,20 +420,10 @@ _x_addr _input_source_id
 _x_addr _input_state
 
         _header "ABORT", abort
-        @ ( anything -- )
+        @ ( anything -- ) clears the parameter stack and exits to QUIT
         _colon_word
         .word _clear_param_stack
         .word _quit
-
-        _header "BYE", bye
-        @ ( anything -- )
-        _colon_word
-        .word _clear_return_stack
-        .word _return_to_main
-
-        _header "return-to-main", return_to_main
-        _code_word
-        POP {PC} @ return to main program!
 
         _header "QUIT", quit
         @ (R: anything -- )
@@ -396,13 +431,13 @@ _x_addr _input_state
         @ BEGIN
         @    term-buf
         @    DUP
-        @    max-termbuf
+        @    termbuf-max
         @    NUL
         @    FILL
         @    ACCEPT
         @    term-buf
         @    SWAP
-        @    EVALUATE
+        @    INTERPRET
         @    oll_korrect
         @ AGAIN
 
@@ -433,12 +468,14 @@ quil:
         .word _exit
 
         _header "oll-korrect", oll_korrect
-        _code_word
-        LDR r0, =OllKorrect
-        BL printf @ pretend to be Forth!
-        _next
-
-OllKorrect: .asciz " Ok\n"
+        @ ( -- ) emit " OK"
+        _colon_word
+        _code_literal _BL
+        .word _emit
+        _code_literal _O
+        .word _emit
+        _code_literal _K
+        .word _emit
 
         _header "term-buf", term_buf
         @ ( -- c-addr )
@@ -475,6 +512,11 @@ filz:
         @ On entry, the top of the stack has the maximum allowed characters and
         @ the second has the address of the buffer. On exit, the address has
         @ been consumed and the actual count is on the top of the stack.
+
+        MOV r0, #_CR
+        _x_call sdk_emit @ newline for data entry
+        MOV r0, #_LF
+        _x_call sdk_emit
 
         MOV CTMAX, PSTOP @ max count => CTMAX
         _drop_ @ PSTOP now has c-addr
@@ -545,6 +587,7 @@ _accz:
         @ clean up and exit
         MOV PSTOP, COUNT @ replace address with count in PSTOP
         _next
+
 _x_addr sdk_key
 
         _header "TYPE", type
@@ -577,7 +620,7 @@ typz:
 _x_addr sdk_emit
 
         _header "COUNT", "count"
-        @ ( c-addr1 –– c-addr2 u )
+        @ ( c-addr1 –– c-addr2 u ) convert a counted string address to addr + count
         _code_word
         LDRB COUNT, [PSTOP] @ count byte => COUNT
         ADD PSTOP, #_AU_CHAR @ fix address
@@ -591,14 +634,12 @@ _x_addr sdk_emit
         @ flag is true if strings are identical, false otherwise
         _code_word
         LDRB COUNT, [PSTOP] @ count of c-addr2 => COUNT
-        ADD PSTOP, #_AU_CHAR @ point PSTOP to first character of c-addr2
         LDR r0, [PT2ND] @ c-addr1 => r0
         LDRB r0, [r0] @ count of c-addr1 => r0
         CMP r0, COUNT @ if the counts aren't equal, we are done!
         BNE csmf @ fail fast!
 
         LDR ADDRS, [PT2ND] @ c-addr1 => ADDRS
-        ADD ADDRS, #_AU_CHAR @ point ADDRS to first character of c-addr1
 
         @ main compare loop
 csml:
@@ -617,7 +658,7 @@ csms:
 
 csmf:
         @ failure
-        MOV PSTOP, #0
+        MOV PSTOP, #0 @ FALSE flag => PSTOP
         _next
 
 .global _system_dict_end
