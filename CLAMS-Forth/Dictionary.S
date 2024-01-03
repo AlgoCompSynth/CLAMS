@@ -320,6 +320,17 @@ cps1:
         CMP ADDRS, PT2ND
         BLO cps1 @ unsigned strictly less
         _next
+
+        _header "DEPTH"
+        @ ( -- x ) push stack depth in cells before this push to parameter stack
+        _code_word
+        _x_load r0, _param_stack_bottom @ highest stack address => r0
+        SUB r0, PT2ND @ depth in address units => r0
+        ASR r0, #_CELL_SHIFT @ convert to cells
+        _dupe_ @ make space on stack
+        MOV PSTOP, r0 @ put on the stack
+        _next
+
 _x_addr _param_stack_bottom
 _x_addr _param_stack_top
 
