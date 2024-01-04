@@ -132,4 +132,5 @@
 .set _end_data_space, .
 
 .global _data_space_bytes
-.set _data_space_bytes, _end_data_space - _start_data_space
+.set _data_space_bytes, .
+        .word _end_data_space - _start_data_space
