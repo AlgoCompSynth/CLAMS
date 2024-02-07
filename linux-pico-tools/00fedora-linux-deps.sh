@@ -12,6 +12,7 @@ sudo dnf -y install \
   arm-none-eabi-gcc-cs-c++ \
   arm-none-eabi-newlib \
   cmake \
+  libusb1-devel \
   ninja-build
 
 echo ""
