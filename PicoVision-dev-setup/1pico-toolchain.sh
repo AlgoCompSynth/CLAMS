@@ -14,6 +14,7 @@ sudo apt-get install -qqy --no-install-recommends \
 echo "Setting up Pico SDK"
 source set_pico_envars
 pushd $PICO_HOME
+rm -fr $PICO_PATH
 curl -sOL https://raw.githubusercontent.com/raspberrypi/pico-setup/master/pico_setup.sh
 chmod +x pico_setup.sh
 /usr/bin/time ./pico_setup.sh 2>&1 | tee pico_setup.log
