@@ -9,7 +9,6 @@ sudo apt-get install -y \
   info \
   libusb-dev \
   minicom \
-  obs-studio \
   pkg-config
 
 echo "Setting up Pico SDK"
