@@ -3,6 +3,7 @@
 set -e
 
 source set_pico_envars
+export HERE=$PWD
 pushd $PICO_PATH
 
 echo "Downloading Pimoroni examples"
@@ -16,6 +17,7 @@ git clone -b $PICOVISION_BOILERPLATE_VERSION https://github.com/pimoroni/picovis
 
 echo "Downloading Pimoroni picovision-projects"
 git clone -b $PICOVISION_PROJECTS_VERSION https://github.com/MichaelBell/picovision-projects.git --recurse-submodules
+cp $HERE/CMakeLists.txt.fixed $PICO_PICOVISION_PROJECTS_PATH/CMakeLists.txt
 
 popd
 
