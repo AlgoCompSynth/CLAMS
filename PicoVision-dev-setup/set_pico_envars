@@ -1,11 +1,11 @@
 
 # There's no default for this. You can put this anywhere; if it 
 # doesn't exist it will be created.
-export PICO_HOME=$HOME/Projects
+export PICO_HOME=$HOME
 echo "Creating $PICO_HOME if necessary"; mkdir --parents $PICO_HOME
 
 # Don't change any of these!
-export PICO_PATH=$HOME/Projects/pico
+export PICO_PATH=$PICO_HOME/pico
 export PICO_SDK_PATH=$PICO_PATH/pico-sdk
 export PICO_EXAMPLES_PATH=$PICO_PATH/pico-examples
 export PICO_EXTRAS_PATH=$PICO_PATH/pico-extras
