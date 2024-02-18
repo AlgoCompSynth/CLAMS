@@ -8,7 +8,6 @@ sudo apt-get upgrade -y
 sudo apt-get install -y \
   info \
   libusb-dev \
-  minicom \
   pkg-config
 
 echo "Setting up Pico SDK"
