@@ -2,6 +2,7 @@
 
 set -e
 
+echo "Must be run in host!!!"
 export DEVICE=`mpremote connect list | sed 's/ .*$//'`
 echo $DEVICE
 ls -al $DEVICE
