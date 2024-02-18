@@ -5,10 +5,9 @@ set -e
 source set_pico_envars
 
 echo "Downloading MicroPython release $PICOVISION_VERSION"
-curl -sOL \
-  "https://github.com/pimoroni/picovision/releases/download/v$PICOVISION_VERSION/pimoroni-picovision-v$PICOVISION_VERSION-micropython.uf2"
-curl -sOL \
-  "https://github.com/pimoroni/picovision/releases/download/v$PICOVISION_VERSION/pimoroni-picovision-widescreen-v$PICOVISION_VERSION-micropython.uf2"
+curl -sOL $PICOVISION_PYTHON_DOWNLOAD
+curl -sOL $PICOVISION_PYTHON_WIDESCREEN_DOWNLOAD
+exit
 
 echo "Downloading flash_nuke.uf2"
 # https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html#resetting-flash-memory
