@@ -16,7 +16,6 @@ The scripts all do `source set_pico_envars` to read them.
 3. Run the numbered scripts in order:
     - 1pico-toolchain.sh -- you will need to reboot after running this one.
     - 2pimoroni-repos.sh
-    - 3build-examples.log
     - 3build-examples.sh
     - 4MicroPython.sh
 
@@ -64,3 +63,19 @@ Then you can load another `.uf2` file into the PicoVision.
 ### Listing the firmware files in the examples
 Once you've built all the examples, `list-uf2-files.sh` will list all of
 the firmware files it built!
+
+## Update 2024-02-18: testing on other hosts
+I've done a bit of testing on other hosts. The C/C++ portions should run in
+any recent Ubuntu or Debian system, including rootless containers. However,
+the MicroPython host interface is another story.
+
+The issue is that the `mpremote` tool uses a serial USB device, usually 
+`/dev/ttyACM0`, and frequently runs into permission problems. When I
+first ran this back in October of 2023 I had no issues with the Pi CM4,
+but now that is also giving me grief. I'm not doing much with
+MicroPython but the Picovision is supposed to be a MicroPython and C/C++
+device and that's not currently the case for some hosts.
+
+If you run into this, the workaround is to do `sudo chmod a+rw /dev/ttyXXXX`,
+where `XXXX` is the device you see using `mpremote connect list`. Even with
+that, I've seen the permissions get reset on some Linux hosts. 
