@@ -2,6 +2,9 @@
 
 set -e
 
+echo "Activating mpremeote venv"
+source ../mpremote/bin/activate
+
 mpremote ls
 mpremote cp -r alert/ :
 mpremote cp -r basic/ :
