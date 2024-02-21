@@ -8,7 +8,8 @@ sudo apt-get upgrade -y
 sudo apt-get install -y \
   info \
   libusb-dev \
-  pkg-config
+  pkg-config \
+  usbutils
 
 echo "Setting up Pico SDK"
 source set_pico_envars
