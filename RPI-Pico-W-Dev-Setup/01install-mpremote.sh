@@ -14,5 +14,3 @@ pip install --upgrade mpremote
 
 echo "Testing mpremote"
 mpremote connect list
-export DEVICE=`mpremote connect list | head -n 1 | sed 's/ .*$//'`
-ls -al $DEVICE
