@@ -22,9 +22,6 @@ chmod +x pico_setup.sh
 /usr/bin/time ./pico_setup.sh 2>&1 | tee pico_setup.log
 popd
 
-#echo "Copying picoprobe udev rules"
-#sudo cp 99-pico.rules /etc/udev/rules.d/99-pico.rules
-
 echo "Downloading pinout diagram"
 curl -sL \
   "https://cdn.shopify.com/s/files/1/0174/1800/files/picovision_diagram.pdf?v=1696414342" > picovision_diagram.pdf
