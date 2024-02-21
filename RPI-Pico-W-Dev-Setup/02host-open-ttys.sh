@@ -3,10 +3,7 @@
 set -e
 
 echo "This script must be run in host!!!"
-source mpremote/bin/activate
-echo "mpremote device list"
-mpremote connect list
-export DEVICE=`mpremote connect list | sed 's/ .*$//'`
+export DEVICE="/dev/ttyA*"
 echo "Choosing device $DEVICE"
 ls -al $DEVICE
 echo "Executing 'sudo chmod a+rw $DEVICE || true' in ten seconds!"
