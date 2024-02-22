@@ -2,10 +2,10 @@
 
 set -e
 
-echo "Creating fresh apio venv"
+echo "Creating fresh host-apio venv"
 python3 -m venv --clear host-apio
 
-echo "Activating apio venv"
+echo "Activating host-apio venv"
 source host-apio/bin/activate
 
 echo "Downloading the latest APIO dev version (with pico-ice support):"
