@@ -10,8 +10,8 @@ source host-apio/bin/activate
 
 echo "Downloading the latest APIO dev version (with pico-ice support):"
 pip install --upgrade pip
-pip install --upgrade packaging
-pip install --upgrade git+https://github.com/FPGAwars/apio
+pip install --upgrade apio
+apio --version
  
 echo "Downloading and installing oss-cad-suite"
 apio install -a
