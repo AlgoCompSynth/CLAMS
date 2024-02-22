@@ -1,0 +1,1 @@
+../RPI-Pico-W-Dev-Setup/02host-open-ttys.sh
