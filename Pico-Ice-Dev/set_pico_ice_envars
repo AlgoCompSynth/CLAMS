@@ -1,2 +1,3 @@
 export PICO_ICE_DEFAULT_FIRMWARE="https://github.com/tinyvision-ai-inc/pico-ice/releases/download/pico-ice-default-v1.5/pico_ice_default_firmware_v1.5.uf2"
-export PICO_ICE_SDK="https://github.com/tinyvision-ai-inc/pico-ice-sdk/archive/refs/tags/v1.5.0.tar.gz"
+export PICO_ICE_SDK_VERSION="v1.5.0"
+export PICO_ICE_SDK_REPO="https://github.com/tinyvision-ai-inc/pico-ice-sdk.git"
