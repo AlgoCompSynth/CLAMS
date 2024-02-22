@@ -1,2 +1,4 @@
 pico-ice-sdk*
 *.uf2
+host-apio
+examples
