@@ -5,6 +5,7 @@ set -e
 echo "Installing command line utilities"
 sudo apt-get update
 sudo apt-get upgrade -y
+sudo apt-get autoremove
 sudo apt-get install -y \
   info \
   libusb-dev \
