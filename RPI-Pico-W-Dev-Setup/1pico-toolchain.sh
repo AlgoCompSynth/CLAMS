@@ -31,10 +31,4 @@ echo Downloading latest debug probe firmware!
 curl -sOL \
   "https://github.com/raspberrypi/picoprobe/releases/download/picoprobe-cmsis-v1.0.3/debugprobe.uf2"
 
-if [ -f $HOME/.zshrc ]
-then
-  echo "Adding Pico envars to $HOME/.zshrc"
-  grep -e 'mkdir' -v set_pico_envars >> $HOME/.zshrc
-fi
-
 echo "Finished!"
