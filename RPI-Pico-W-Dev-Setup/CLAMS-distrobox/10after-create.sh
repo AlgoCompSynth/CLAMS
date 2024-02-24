@@ -31,4 +31,5 @@ echo "You can ignore messages about unsandboxed downloads"
 echo "Removing VSCode installer"
 rm -f ./vscode-repo.deb
 
+echo "Restart bash to activate aliases"
 echo "Finished!!"
