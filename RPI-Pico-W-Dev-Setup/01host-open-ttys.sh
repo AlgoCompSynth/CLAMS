@@ -3,7 +3,7 @@
 set -e
 
 echo "This script must be run in host!!!"
-export DEVICE="/dev/ttyA*"
+export DEVICE="/dev/ttyACM*"
 echo "Choosing device $DEVICE"
 ls -al $DEVICE
 echo "Executing 'sudo chmod a+rw $DEVICE || true' in ten seconds!"
