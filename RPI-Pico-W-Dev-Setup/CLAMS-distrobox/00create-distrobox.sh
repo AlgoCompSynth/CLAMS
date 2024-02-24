@@ -3,7 +3,7 @@
 set -e
 
 rm -fr $HOME/CLAMS-distrobox
-distrobox rm -f CLAMS
+distrobox rm -f CLAMS || true
 distrobox create \
   --image docker.io/library/debian:bookworm-backports \
   --name CLAMS \
