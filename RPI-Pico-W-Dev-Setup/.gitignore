@@ -1,5 +1,5 @@
 *.pdf
 *.uf2
-host-mpremote/*
-dbox-mpremote/*
+mpremote/*
+mpremote/*
 *.log
