@@ -6,6 +6,10 @@ echo "Setting bash aliases"
 cat bash_aliases >> $HOME/.bash_aliases
 source $HOME/.bash_aliases
 
+echo "Upgrading Linux"
+sudo apt-get upgrade && sudo apt-get upgrade -y
+sudo apt-get autoremove
+
 export ARCH=`uname -m`
 if [ $ARCH == "aarch64" ]
 then
@@ -21,6 +25,10 @@ else
 fi
 
 echo "Installing VSCode"
-sudo apt install ./vscode-repo.deb
+ls -l ./vscode-repo.deb
+sudo apt-get install -y ./vscode-repo.deb
+echo "You can ignore messages about unsandboxed downloads"
 echo "Removing VSCode installer"
 rm -f ./vscode-repo.deb
+
+echo "Finished!!"
