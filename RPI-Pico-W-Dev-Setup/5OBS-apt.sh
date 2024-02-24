@@ -8,7 +8,6 @@ source set_pico_envars
 
 sudo apt-get update
 sudo apt-get install -qqy --no-install-recommends \
-  libfdk-aac-dev \
   obs-studio
 
 echo "Finished!"
