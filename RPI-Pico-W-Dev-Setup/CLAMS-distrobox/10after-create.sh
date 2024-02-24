@@ -2,10 +2,9 @@
 
 set -e
 
-echo "Defining locale"
-export LANG=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+echo "Setting bash aliases"
+cat bash_aliases >> $HOME/.bash_aliases
+source $HOME/.bash_aliases
 
 export ARCH=`uname -m`
 if [ $ARCH == "aarch64" ]
