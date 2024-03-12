@@ -7,8 +7,8 @@ cat bash_aliases >> $HOME/.bash_aliases
 source $HOME/.bash_aliases
 
 echo "Upgrading Linux"
-sudo apt-get upgrade && sudo apt-get upgrade -y
-sudo apt-get autoremove
+sudo apt-get upgrade -qq && sudo apt-get upgrade -qqy
+sudo apt-get -qqy autoremove
 
 export ARCH=`uname -m`
 if [ $ARCH == "aarch64" ]
