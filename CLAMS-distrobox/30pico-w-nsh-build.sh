@@ -2,7 +2,12 @@
 
 set -e
 
+echo "Building nuttx"
 pushd nuttxspace/nuttx
-cmake -B build -DBOARD_CONFIG=raspberrypi-pico-w:nsh -GNinja
-ls -l build
+make distclean
+./tools/configure.sh -l raspberrypi-pico-w:nsh
+make
+ls -l nuttx*
 popd
+
+echo "Finished!"
