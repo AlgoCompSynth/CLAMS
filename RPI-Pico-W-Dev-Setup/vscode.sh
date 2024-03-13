@@ -16,11 +16,14 @@ else
   exit -1024
 fi
 
+echo ""; sleep 2
 echo "Installing VSCode"
 ls -l ./vscode-repo.deb
 sudo apt-get install -y ./vscode-repo.deb
+echo ""; sleep 2
 echo "You can ignore messages about unsandboxed downloads"
 echo "Removing VSCode installer"
 rm -f ./vscode-repo.deb
 
+echo ""; sleep 2
 echo "Finished!!"

@@ -1,1 +1,0 @@
-../RPI-Pico-W-Dev-Setup/1pico-toolchain.sh

@@ -4,9 +4,12 @@ set -e
 
 source set_pico_envars
 
-# https://raspberrytips.com/install-obs-studio-raspberry-pi/
+echo "Adding OBS Studio PPA"
+sudo add-apt-repository -y ppa:obsproject/obs-studio
+sudo apt-get update -qq
 
-sudo apt-get update
+echo ""; sleep 2
+echo "Installing OBS Studio"
 sudo apt-get install -qqy --no-install-recommends \
   obs-studio
 
