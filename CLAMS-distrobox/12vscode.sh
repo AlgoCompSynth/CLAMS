@@ -2,14 +2,6 @@
 
 set -e
 
-echo "Setting bash aliases"
-cat bash_aliases >> $HOME/.bash_aliases
-source $HOME/.bash_aliases
-
-echo "Upgrading Linux"
-sudo apt-get update -qq && sudo apt-get upgrade -qqy
-sudo apt-get -qqy autoremove
-
 export ARCH=`uname -m`
 if [ $ARCH == "aarch64" ]
 then
@@ -31,5 +23,4 @@ echo "You can ignore messages about unsandboxed downloads"
 echo "Removing VSCode installer"
 rm -f ./vscode-repo.deb
 
-echo "Restart bash to activate aliases"
 echo "Finished!!"
