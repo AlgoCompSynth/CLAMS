@@ -10,15 +10,14 @@ sudo apt-get update -qq
 echo ""; sleep 2
 echo "Installing NuttX dependencies"
 export `grep VERSION_CODENAME /etc/os-release`
-sudo apt-get install -t $VERSION_CODENAME-backports -qqy --no-install-recommends \
-  gcc-multilib \
-  g++-multilib
 sudo apt-get install -qqy --no-install-recommends \
   automake \
   binutils-dev \
   bison \
   build-essential \
   flex \
+  gcc-multilib \
+  g++-multilib \
   gettext \
   genromfs \
   gperf \
@@ -47,7 +46,9 @@ echo ""; sleep 2
 echo "Installing Arm cross-build tools"
 sudo apt-get install -qqy \
   binutils-arm-none-eabi \
+  binutils-riscv64-unknown-elf \
   gcc-arm-none-eabi \
+  gcc-riscv64-unknown-elf \
   gdb-multiarch \
   minicom
 

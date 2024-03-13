@@ -2,15 +2,16 @@
 
 set -e
 
+source ./set_pico_envars
 pushd nuttxspace/nuttx
 for board in \
-  raspberrypi-pico-w:nsh \
-  esp32s3-generic:nsh \
-  esp32c3-generic:nsh \
-  teensy-4.x:nsh-4.1
+  "esp32c3-devkit:nsh" \
+  "esp32s3-devkit:nsh" \
+  "raspberrypi-pico-w:nsh" \
+  "teensy-4.x:nsh-4.1"
 do
-  echo "Testing board $"
-  make distclean
+  echo "Testing board $board"
+  make distclean || true
   ./tools/configure.sh -l $board
   make
   ls -l nuttx*
