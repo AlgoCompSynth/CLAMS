@@ -5,7 +5,7 @@ set -e
 rm -fr $HOME/CLAMS-distrobox
 distrobox rm -f CLAMS || true
 distrobox create \
-  --image quay.io/toolbx-images/debian-toolbox:12 \
+  --image quay.io/toolbx-images/ubuntu-toolbox:22.04 \
   --name CLAMS \
   --home $HOME/CLAMS-distrobox \
   --init \

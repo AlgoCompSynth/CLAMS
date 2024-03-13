@@ -4,12 +4,11 @@ set -e
 
 # https://nuttx.apache.org/docs/latest/quickstart/install.html
 echo ""; sleep 2
-echo "Updating package list"
+echo "Updating package cache"
 sudo apt-get update -qq
 
 echo ""; sleep 2
 echo "Installing NuttX dependencies"
-export `grep VERSION_CODENAME /etc/os-release`
 sudo apt-get install -qqy --no-install-recommends \
   automake \
   binutils-dev \
@@ -43,25 +42,11 @@ sudo apt-get install -qqy \
   kconfig-frontends
 
 echo ""; sleep 2
-echo "Installing Arm cross-build tools"
-sudo apt-get install -qqy \
-  binutils-arm-none-eabi \
-  binutils-riscv64-unknown-elf \
-  gcc-arm-none-eabi \
-  gcc-riscv64-unknown-elf \
-  gdb-multiarch \
-  minicom
-
-echo ""; sleep 2
 export NUTTX_VERSION="12.4.0"
 echo "Downloading NuttX version $NUTTX_VERSION"
 rm -fr nuttxspace; mkdir nuttxspace; cd nuttxspace
-curl -L \
-  https://www.apache.org/dyn/closer.lua/nuttx/$NUTTX_VERSION/apache-nuttx-$NUTTX_VERSION.tar.gz?action=download -o nuttx.tar.gz
-curl -L \
-  https://www.apache.org/dyn/closer.lua/nuttx/$NUTTX_VERSION/apache-nuttx-apps-$NUTTX_VERSION.tar.gz?action=download -o apps.tar.gz
-tar zxf nuttx.tar.gz
-tar zxf apps.tar.gz
+git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx.git nuttx
+git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx-apps.git apps
 
 echo ""; sleep 2
 echo "Listing supported configurations"
