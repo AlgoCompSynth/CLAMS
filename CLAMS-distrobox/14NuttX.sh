@@ -36,7 +36,8 @@ sudo apt-get install -qqy \
 
 echo "Installing KConfig tools"
 sudo apt-get install -qqy \
-  kconfig-frontends
+  kconfig-frontends \
+  python3-kconfiglib
 
 echo "Installing Arm cross-build tools"
 sudo apt-get install -qqy \
