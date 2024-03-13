@@ -9,14 +9,18 @@ sudo apt-get update -qq
 
 echo ""; sleep 2
 echo "Installing NuttX dependencies"
+if [ `uname -m` == "x86_64" ]
+then
+  sudo apt-get install -qqy --no-install-recommends \
+    gcc-multilib \
+    g++-multilib
+fi
 sudo apt-get install -qqy --no-install-recommends \
   automake \
   binutils-dev \
   bison \
   build-essential \
   flex \
-  gcc-multilib \
-  g++-multilib \
   gettext \
   genromfs \
   gperf \
