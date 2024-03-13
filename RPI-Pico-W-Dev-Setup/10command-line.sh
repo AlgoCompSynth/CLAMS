@@ -4,45 +4,31 @@ set -e
 
 echo ""; sleep 2
 echo "Setting bash aliases"
-cat bash_aliases >> $HOME/.bash_aliases
-source $HOME/.bash_aliases
-
-echo ""; sleep 2
-echo "Installing Debian backports"
-export `grep VERSION_CODENAME /etc/os-release`
-sudo cp $VERSION_CODENAME-backports.list /etc/apt/sources.list.d/
-
-echo ""; sleep 2
-echo "Upgrading Linux"
-sudo apt-get update -qq && sudo apt-get upgrade -qqy
-sudo apt-get -qqy autoremove
+cat bash_aliases >> $HOME/.bashrc
+source $HOME/.bashrc
 
 echo ""; sleep 2
 echo "Installing command line tools"
-sudo apt-get install -qqy --no-install-recommends \
-  apt-file \
-  build-essential \
+sudo dnf install -y \
   cmake \
   git \
   git-lfs \
   info \
-  libusb-dev \
+  libusb1-devel \
   man-db \
   minicom \
   ninja-build \
   pkg-config \
-  python3-venv \
   screen \
   time \
   tmux \
   tree \
   usbutils \
-  vim-nox
+  vim
 
 echo ""; sleep 2
 echo "Updating databases"
 sudo mandb
-sudo apt-file update
 
 echo ""; sleep 2
 echo "Creating fresh CLAMS-venv"
