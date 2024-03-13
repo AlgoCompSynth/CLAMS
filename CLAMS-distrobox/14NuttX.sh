@@ -55,4 +55,9 @@ curl -L \
 tar zxf nuttx.tar.gz
 tar zxf apps.tar.gz
 
+echo "Listing supported configurations"
+cd nuttx
+./tools/configure.sh -L > ../../supported-configurations.txt
+cd ..
+
 echo "Finished!!"
