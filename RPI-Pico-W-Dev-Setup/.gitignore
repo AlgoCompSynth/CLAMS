@@ -1,5 +1,4 @@
 *.pdf
 *.uf2
-mpremote/*
-mpremote/*
+CLAMS-venv
 *.log
