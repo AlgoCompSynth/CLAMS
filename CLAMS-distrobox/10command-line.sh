@@ -17,7 +17,6 @@ sudo apt-get install -qqy --no-install-recommends \
   cmake \
   git \
   git-lfs \
-  locate \
   man-db \
   minicom \
   ninja-build \
@@ -30,7 +29,6 @@ sudo apt-get install -qqy --no-install-recommends \
 
 echo "Updating databases"
 sudo mandb
-sudo updatedb
 sudo apt-file update
 
 echo "Restart bash to activate aliases"
