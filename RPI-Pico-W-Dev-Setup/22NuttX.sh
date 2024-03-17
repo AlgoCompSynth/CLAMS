@@ -3,19 +3,17 @@
 set -e
 
 # https://nuttx.apache.org/docs/latest/quickstart/install.html
-echo ""; sleep 2
-echo "Updating package cache"
-sudo apt-get update -qq
+source set_pico_envars
 
 echo ""; sleep 2
 echo "Installing NuttX dependencies"
 if [ `uname -m` == "x86_64" ]
 then
-  sudo apt-get install -qqy --no-install-recommends \
+  sudo apt-get install -qqy \
     gcc-multilib \
     g++-multilib
 fi
-sudo apt-get install -qqy --no-install-recommends \
+sudo apt-get install -qqy \
   automake \
   binutils-dev \
   bison \
@@ -46,9 +44,9 @@ sudo apt-get install -qqy \
   kconfig-frontends
 
 echo ""; sleep 2
-export NUTTX_VERSION="12.4.0"
 echo "Downloading NuttX version $NUTTX_VERSION"
-rm -fr nuttxspace; mkdir nuttxspace; cd nuttxspace
+rm -fr $NUTTX_PATH; mkdir $NUTTX_PATH; pushd $NUTTX_PATH
+
 git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx.git nuttx
 git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx-apps.git apps
 
@@ -57,6 +55,8 @@ echo "Listing supported configurations"
 cd nuttx
 ./tools/configure.sh -L > ../../supported-configurations.txt
 cd ..
+
+popd
 
 echo ""; sleep 2
 echo "Finished!!"
