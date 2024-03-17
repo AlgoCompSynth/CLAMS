@@ -1,1 +1,1 @@
-../RPI-Pico-W-Dev-Setup/02host-open-ttys.sh
+../RPI-Pico-W-Dev-Setup/CLAMS-distrobox/02host-open-ttys.sh
