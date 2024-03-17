@@ -51,9 +51,9 @@ git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx.git nutt
 git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx-apps.git apps
 
 echo ""; sleep 2
-echo "Listing supported configurations"
+echo "Listing supported configurations onto $NUTTX_PATH/supported-configurations.txt"
 cd nuttx
-./tools/configure.sh -L > ../../supported-configurations.txt
+./tools/configure.sh -L > $NUTTX_PATH/supported-configurations.txt
 cd ..
 
 popd
