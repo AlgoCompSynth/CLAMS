@@ -7,6 +7,7 @@ pushd $NUTTX_PATH/nuttx
 
 for configuration in `grep raspberrypi-pico $NUTTX_PATH/supported-configurations.txt`
 do
+  echo ""
   echo "Testing configuration $configuration"
   result_path_name=$NUTTX_PATH/`echo $configuration | sed 's/:/../g'`
   echo "...creating fresh $result_path_name"
@@ -22,7 +23,7 @@ do
   ln -s nuttx nuttx.elf
   arm-none-eabi-objdump -d nuttx.elf > nuttx.dis
 
-  echo "Saving $configuration artifacts to $result_path_name"
+  echo "...saving $configuration artifacts to $result_path_name"
   cp nuttx* $result_path_name/
   ls -dl $result_path_name/*
 done
