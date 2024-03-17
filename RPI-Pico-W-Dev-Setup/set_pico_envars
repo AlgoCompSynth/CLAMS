@@ -4,6 +4,9 @@
 export PICO_HOME=$HOME
 echo "Creating $PICO_HOME if necessary"; mkdir --parents $PICO_HOME
 
+export NUTTX_HOME=$HOME
+echo "Creating $NUTTX_HOME if necessary"; mkdir --parents $NUTTX_HOME
+
 # Don't change any of these!
 export PICO_PATH=$PICO_HOME/pico
 export PICO_SDK_PATH=$PICO_PATH/pico-sdk
@@ -23,3 +26,6 @@ export PICOVISION_PYTHON_DOWNLOAD="https://github.com/pimoroni/picovision/releas
 export PICOVISION_PYTHON_WIDESCREEN_DOWNLOAD="https://github.com/pimoroni/picovision/releases/download/v1.0.2/pimoroni-picovision-widescreen-v1.0.2-micropython.uf2"
 export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.2.10.uf2"
 export MICROPYTHON_DOWNLOAD="https://micropython.org/resources/firmware/RPI_PICO_W-20240105-v1.22.1.uf2"
+
+export NUTTX_PATH=$NUTTX_HOME/nuttxspace
+export NUTTX_VERSION="12.4.0"
