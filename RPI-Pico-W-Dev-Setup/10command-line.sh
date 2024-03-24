@@ -6,6 +6,11 @@ echo ""; sleep 2
 echo "Setting bash aliases"
 cat bash_aliases >> $HOME/.bashrc
 source $HOME/.bashrc
+if [ -e "$HOME/.zshrc" ]
+then
+  echo "Setting zsh aliases"
+  cat bash_aliases >> $HOME/.zshrc
+fi
 
 echo ""; sleep 2
 echo "Synchronizing distribution"
