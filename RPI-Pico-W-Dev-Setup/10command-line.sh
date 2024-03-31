@@ -55,7 +55,7 @@ echo "Activating CLAMS-venv"
 source CLAMS-venv/bin/activate
 
 echo ""; sleep 2
-echo "Installing packages"
+echo "Installing Python packages"
 pip install --upgrade pip
 pip install --upgrade \
   kconfiglib \
