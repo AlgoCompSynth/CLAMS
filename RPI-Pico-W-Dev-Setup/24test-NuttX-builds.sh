@@ -5,7 +5,8 @@ set -e
 source ./set_pico_envars
 pushd $NUTTX_PATH/nuttx
 
-  for configuration in `grep raspberrypi-pico $NUTTX_PATH/supported-configurations.txt`
+  for configuration in \
+    `grep -E 'raspberrypi-pico|teensy-4|2040|esp32c3|esp32s3' $NUTTX_PATH/supported-configurations.txt`
   do
     echo ""
     echo ""
