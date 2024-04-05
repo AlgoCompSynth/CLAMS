@@ -4,9 +4,6 @@ set -e
 
 source ./set_pico_envars
 
-echo "Adding ESP32 tools to PATH"
-source $HOME/Projects/esp-idf/export.sh
-
 pushd $NUTTX_PATH/nuttx
 
   for configuration in \
