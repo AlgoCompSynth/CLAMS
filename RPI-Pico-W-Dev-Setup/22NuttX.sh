@@ -19,6 +19,7 @@ sudo apt-get install -qqy \
   bison \
   build-essential \
   flex \
+  gcc-riscv64-unknown-elf \
   gettext \
   genromfs \
   gperf \
@@ -47,7 +48,8 @@ echo ""; sleep 2
 echo "Downloading NuttX version $NUTTX_VERSION"
 rm -fr $NUTTX_PATH; mkdir $NUTTX_PATH; pushd $NUTTX_PATH
 
-git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx.git nuttx
+#git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx.git nuttx
+git clone --branch fix-rp2040-defconfigs https://github.com/masayuki2009/incubator-nuttx.git nuttx
 git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx-apps.git apps
 
 echo ""; sleep 2
