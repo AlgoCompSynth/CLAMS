@@ -10,7 +10,6 @@ source $HOME/Projects/esp-idf/export.sh
 pushd $NUTTX_PATH/nuttx
 
   for configuration in \
-    #`grep -E 'raspberrypi-pico|teensy-4|2040|esp32c3|esp32s3' $NUTTX_PATH/supported-configurations.txt`
     `grep -E 'raspberrypi-pico|teensy-4|2040' $NUTTX_PATH/supported-configurations.txt`
   do
     echo ""
