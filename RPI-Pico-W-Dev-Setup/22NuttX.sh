@@ -48,8 +48,14 @@ echo ""; sleep 2
 echo "Downloading NuttX version $NUTTX_VERSION"
 rm -fr $NUTTX_PATH; mkdir $NUTTX_PATH; pushd $NUTTX_PATH
 
-git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx.git nuttx
-git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx-apps.git apps
+if [ "$NUTTX_VERSION" = "master" ]
+then
+  git clone --branch master https://github.com/apache/nuttx.git nuttx
+  git clone --branch master https://github.com/apache/nuttx-apps.git apps
+else
+  git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx.git nuttx
+  git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx-apps.git apps
+fi
 
 echo ""; sleep 2
 echo "Listing supported configurations onto $NUTTX_PATH/supported-configurations.txt"

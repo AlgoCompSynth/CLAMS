@@ -28,4 +28,4 @@ export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry
 export MICROPYTHON_DOWNLOAD="https://micropython.org/resources/firmware/RPI_PICO_W-20240105-v1.22.1.uf2"
 
 export NUTTX_PATH=$NUTTX_HOME/nuttxspace
-export NUTTX_VERSION="12.5.0-RC0"
+export NUTTX_VERSION="master"
