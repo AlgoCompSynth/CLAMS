@@ -26,6 +26,7 @@ sudo apt-get install -qqy --no-install-recommends \
   cmake \
   git \
   git-lfs \
+  htop \
   info \
   libusb-dev \
   man-db \
