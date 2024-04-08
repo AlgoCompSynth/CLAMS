@@ -28,9 +28,9 @@ export PATH=$PATH:$NUTTX_PATH/tools/xtensa-esp32s3-elf-gcc/bin
       echo "...cleaning"
       make distclean || true
       echo "...configuring"
-      ./tools/configure.sh -l $configuration 2>&1 | tee $result_path_name/configure.log
+      ./tools/configure.sh -l $configuration > $result_path_name/configure.log
       echo "...compiling and linking"
-      /usr/bin/time make 2>&1 | tee $result_path_name/make.log || true
+      /usr/bin/time make > $result_path_name/make.log
   
       # make artifacts like Pico SDK makes
       ln -s nuttx nuttx.elf
