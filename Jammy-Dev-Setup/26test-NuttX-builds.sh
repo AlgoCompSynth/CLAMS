@@ -10,7 +10,7 @@ echo "Adding EPS32-S3 tools to path"
 export PATH=$PATH:$NUTTX_PATH/tools/xtensa-esp32s3-elf-gcc/bin
 
   for configuration in \
-    grep -E 'esp32s3|raspberrypi-pico|teensy-4|2040' $NUTTX_PATH/supported-configurations.txt`
+    `grep -E 'esp32s3|raspberrypi-pico|teensy-4|2040' $NUTTX_PATH/supported-configurations.txt`
   do
     echo ""
     echo ""
