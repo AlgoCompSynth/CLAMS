@@ -19,4 +19,7 @@ rm -fr $NUTTX_PATH/tools
 docker cp --follow-link nuttx-tools-container:/tools $NUTTX_PATH/
 sudo chown -R $USER:$USER $NUTTX_PATH/tools
 
+echo "Removing tools container"
+docker rm nuttx-tools-container
+
 echo "Finisehd!"

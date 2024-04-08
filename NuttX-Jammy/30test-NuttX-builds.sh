@@ -13,7 +13,7 @@ echo "Adding EPS32-S3 tools to path"
 export PATH=$PATH:$NUTTX_PATH/tools/xtensa-esp32s3-elf-gcc/bin
 
   for configuration in \
-    `grep -E 'esp32s3|raspberrypi-pico|teensy-4|2040' $NUTTX_PATH/supported-configurations.txt`
+   `grep -E 'esp32s3|raspberrypi-pico|teensy-4|2040' $NUTTX_PATH/supported-configurations.txt`
   do
     echo ""
     echo ""
@@ -28,9 +28,9 @@ export PATH=$PATH:$NUTTX_PATH/tools/xtensa-esp32s3-elf-gcc/bin
       echo "...cleaning"
       make distclean || true
       echo "...configuring"
-      ./tools/configure.sh -l $configuration > $result_path_name/configure.log
+      ./tools/configure.sh -l $configuration > $result_path_name/configure.log 2>&1
       echo "...compiling and linking"
-      /usr/bin/time make > $result_path_name/make.log
+      /usr/bin/time make > $result_path_name/make.log 2>&1
   
       # make artifacts like Pico SDK makes
       ln -s nuttx nuttx.elf
