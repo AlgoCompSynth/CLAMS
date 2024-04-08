@@ -6,8 +6,11 @@ source ./set_pico_envars
 
 pushd $NUTTX_PATH/nuttx
 
+echo "Adding EPS32-S3 tools to path"
+export PATH=$PATH:$NUTTX_PATH/tools/xtensa-esp32s3-elf-gcc/bin
+
   for configuration in \
-    `grep -E 'raspberrypi-pico|teensy-4|2040' $NUTTX_PATH/supported-configurations.txt`
+    grep -E 'esp32s3|raspberrypi-pico|teensy-4|2040' $NUTTX_PATH/supported-configurations.txt`
   do
     echo ""
     echo ""
@@ -28,7 +31,10 @@ pushd $NUTTX_PATH/nuttx
   
       # make artifacts like Pico SDK makes
       ln -s nuttx nuttx.elf
-      arm-none-eabi-objdump -d nuttx.elf > nuttx.dis
+      if [[ ! "$configuration" =~ "esp32" ]]
+      then 
+        arm-none-eabi-objdump -d nuttx.elf > nuttx.dis
+      fi
   
       echo "...saving $configuration artifacts to $result_path_name"
       cp nuttx* $result_path_name/
