@@ -29,4 +29,3 @@ export MICROPYTHON_DOWNLOAD="https://micropython.org/resources/firmware/RPI_PICO
 
 export NUTTX_PATH=$NUTTX_HOME/nuttxspace
 export NUTTX_VERSION="master"
-export NUTTX_ESP32_TOOLS=$NUTTX_PATH/esp32-tools
