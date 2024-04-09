@@ -9,11 +9,11 @@ pushd $NUTTX_PATH/nuttx
 echo "Creating test output directory"
 mkdir --parents tests
 
-echo "Adding EPS32-S3 tools to path"
-export PATH=$PATH:$NUTTX_PATH/tools/xtensa-esp32s3-elf-gcc/bin
+echo "Adding ESP32-S3 tools to PATH"
+export PATH=$NUTTX_PATH/tools/xtensa-esp32s3-elf-gcc/bin:$PATH
 
   for configuration in \
-   `grep -E 'esp32s3|raspberrypi-pico|teensy-4' $NUTTX_PATH/supported-configurations.txt`
+   `grep -E 'esp32s3-devkit|raspberrypi-pico|teensy-4' $NUTTX_PATH/supported-configurations.txt`
   do
     echo ""
     echo ""
