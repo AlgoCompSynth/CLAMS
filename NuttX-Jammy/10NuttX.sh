@@ -5,15 +5,9 @@ set -e
 # https://nuttx.apache.org/docs/latest/quickstart/install.html
 source set_pico_envars
 
-echo "Installing crossbuild-essential for targets"
-sudo apt-get install -qqy \
-  crossbuild-essential-arm64 \
-  crossbuild-essential-armhf \
-  crossbuild-essential-amd64 \
-  crossbuild-essential-i386 \
-  crossbuild-essential-riscv64
-
 echo "Installing NuttX dependencies"
+sudo apt-get update -qq
+sudo apt-get upgrade -qqy
 sudo apt-get install -qqy \
   automake \
   binutils-dev \
