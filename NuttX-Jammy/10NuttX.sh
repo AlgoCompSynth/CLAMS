@@ -37,6 +37,15 @@ echo "Installing KConfig tools"
 sudo apt-get install -qqy \
   kconfig-frontends
 
+echo "Installing Rust toolchain"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+echo "$HOME/.cargo/env" >> $HOME/.bashrc
+if [ -f "$HOME/.zshrc" ]
+then
+  echo "$HOME/.cargo/env" >> $HOME/.zshrc
+fi
+
+
 echo "Downloading NuttX version $NUTTX_VERSION"
 rm -fr $NUTTX_PATH; mkdir $NUTTX_PATH; pushd $NUTTX_PATH
 
