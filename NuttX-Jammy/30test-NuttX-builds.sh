@@ -29,7 +29,7 @@ rm -fr $NUTTX_TESTS; mkdir --parents $NUTTX_TESTS
       echo "...configuring"
       ./tools/configure.sh -l $configuration > $result_path_name/configure.log 2>&1
       echo "...compiling and linking"
-      /usr/bin/time make > $result_path_name/make.log 2>&1 || true
+      /usr/bin/time make > $result_path_name/make.log 2>&1
   
       # make artifacts like Pico SDK makes
       ln -s nuttx nuttx.elf

@@ -5,6 +5,7 @@ set -e
 # https://nuttx.apache.org/docs/latest/quickstart/install.html
 source set_pico_envars
 
+echo ""
 echo "Installing NuttX dependencies"
 sudo apt-get update -qq
 sudo apt-get upgrade -qqy
@@ -33,13 +34,16 @@ sudo apt-get install -qqy \
   util-linux \
   xxd
 
+echo ""
 echo "Installing KConfig tools"
 sudo apt-get install -qqy \
   kconfig-frontends
 
+echo ""
 echo "Installing Rust toolchain"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
+echo ""
 echo "Downloading NuttX version $NUTTX_VERSION"
 rm -fr $NUTTX_PATH; mkdir $NUTTX_PATH; pushd $NUTTX_PATH
 
@@ -52,6 +56,7 @@ else
   git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx-apps.git apps
 fi
 
+echo ""
 echo "Listing supported configurations onto $NUTTX_PATH/supported-configurations.txt"
 cd nuttx
 ./tools/configure.sh -L | sort -u > $NUTTX_PATH/supported-configurations.txt
