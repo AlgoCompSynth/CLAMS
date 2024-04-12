@@ -19,4 +19,4 @@ echo "Copying tools"
 rm -fr $NUTTX_TOOLS
 docker cp --follow-link nuttx-tools-container:/tools $NUTTX_PATH/
 
-echo "Finisehd!"
+echo "Finished!"
