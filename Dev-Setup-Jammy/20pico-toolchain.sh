@@ -17,6 +17,8 @@ popd
 echo ""; sleep 2
 echo Downloading latest debug probe firmware!
 curl -sOL \
-  "https://github.com/raspberrypi/picoprobe/releases/download/picoprobe-cmsis-v1.0.3/debugprobe.uf2"
+  "https://github.com/raspberrypi/debugprobe/releases/download/debugprobe-v2.0/debugprobe_on_pico.uf2"
+curl -sOL \
+  "https://github.com/raspberrypi/debugprobe/releases/download/debugprobe-v2.0/debugprobe.uf2"
 
 echo "Finished!"
