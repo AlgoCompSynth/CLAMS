@@ -2,10 +2,13 @@
 # There's no default for this. You can put this anywhere; if it 
 # doesn't exist it will be created.
 export PICO_HOME=$HOME
-echo "Creating $PICO_HOME if necessary"; mkdir --parents $PICO_HOME
+echo "Creating PICO_HOME if necessary"; mkdir --parents $PICO_HOME
+
+export ESP_IDF_HOME=$HOME
+echo "Creating ESP_IDF_HOME if necessary"; mkdir --parents $ESP_IDF_HOME
 
 export NUTTX_HOME=$HOME
-echo "Creating $NUTTX_HOME if necessary"; mkdir --parents $NUTTX_HOME
+echo "Creating NUTTX_HOME if necessary"; mkdir --parents $NUTTX_HOME
 
 # Don't change any of these!
 export PICO_PATH=$PICO_HOME/pico
@@ -27,6 +30,12 @@ export PICOVISION_PYTHON_WIDESCREEN_DOWNLOAD="https://github.com/pimoroni/picovi
 export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.2.10.uf2"
 export MICROPYTHON_DOWNLOAD="https://micropython.org/resources/firmware/RPI_PICO_W-20240105-v1.22.1.uf2"
 
+# ESP-IDF
+export ESP_IDF_PATH=$ESP_IDF_HOME/esp
+export ESP_IDF_VERSION="5.2.1"
+export ESP_IDF_EXPORT_SH=$ESP_IDF_PATH/esp-idf/export.sh
+
+# NuttX
 export NUTTX_PATH=$NUTTX_HOME/nuttxspace
 export NUTTX_VERSION="master"
 export NUTTX_TOOLS=$NUTTX_PATH/tools
