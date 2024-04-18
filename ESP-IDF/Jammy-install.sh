@@ -2,6 +2,9 @@
 
 set -e
 
+echo "Setting environment variables"
+source set_pico_envars
+
 echo "Linux prerequisites"
 sudo apt-get update -qq
 sudo apt-get upgrade -qqy
@@ -23,8 +26,8 @@ sudo apt-get install -qqy --no-install-recommends \
   wget
 
 echo "Cloning ESP-IDF repository"
-rm -fr $HOME/esp; mkdir --parents $HOME/esp; pushd $HOME/esp
-git clone -b v5.2.1 --recursive https://github.com/espressif/esp-idf.git
+rm -fr $ESP_IDF_PATH; mkdir --parents $ESP_IDF_PATH; pushd $ESP_IDF_PATH
+git clone -b v$ESP_IDF_VERSION --recursive https://github.com/espressif/esp-idf.git
 
 echo "Installing tools"
 cd esp-idf
