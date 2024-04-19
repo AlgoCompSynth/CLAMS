@@ -17,6 +17,6 @@ docker ps -a
 
 echo "Copying tools"
 rm -fr $NUTTX_TOOLS
-docker cp --follow-link nuttx-tools-container:/tools $NUTTX_PATH/
+docker cp nuttx-tools-container:/tools $NUTTX_PATH/
 
 echo "Finished!"
