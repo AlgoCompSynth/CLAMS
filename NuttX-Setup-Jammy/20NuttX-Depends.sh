@@ -2,8 +2,14 @@
 
 set -e
 
+echo "Setting CLAMS_BASE to $HOME"
+export CLAMS_BASE=$HOME
+
+echo ""
+echo "Setting environment variables"
+source ./set_pico_envars
+
 # https://nuttx.apache.org/docs/latest/quickstart/install.html
-source set_pico_envars
 
 echo ""
 echo "Installing NuttX dependencies"
