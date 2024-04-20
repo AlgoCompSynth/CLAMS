@@ -2,8 +2,11 @@
 
 set -e
 
+echo "Setting CLAMS_BASE to $HOME"
+export CLAMS_BASE=$HOME
+
 echo "Setting environment variables"
-source set_pico_envars
+source ./set_pico_envars
 
 echo "Linux prerequisites"
 sudo apt-get update -qq
