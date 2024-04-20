@@ -20,7 +20,7 @@ pushd $NUTTX_PATH/nuttx
 echo ""
 echo "Creating and activating 'esptool' virtual environment"
 rm -fr esptool; python3 -m venv esptool; source ./esptool/bin/activate
-pip install esptool
+pip install --upgrade esptool imgtool
 echo "PATH: $PATH"
 
 echo "Creating fresh test output directory"
