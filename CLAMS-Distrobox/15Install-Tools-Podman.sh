@@ -25,4 +25,11 @@ echo "Copying tools"
 rm -fr $NUTTX_TOOLS
 podman cp nuttx-tools-container:/tools $NUTTX_PATH/
 
+echo ""
+echo "CLAMS Distrobox is ready!"
+echo "1. 'cd ../NuttX-Setup-Jammy'"
+echo "2. 'distrobox enter CLAMS'"
+echo "3. Continue from './20NuttX-Depends.sh'"
+
+echo ""
 echo "Finished!"
