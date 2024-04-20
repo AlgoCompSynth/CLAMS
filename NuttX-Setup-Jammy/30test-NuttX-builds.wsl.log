@@ -1,0 +1,1319 @@
+Setting CLAMS_BASE to /home/znmeb
+
+Setting environment variables
+Checking for CLAMS_BASE
+Creating CLAMS_BASE if necessary
+Adding NuttX tools to PATH
+~/nuttxspace/nuttx ~/Projects/CLAMS/NuttX-Setup-Jammy
+PATH: /home/znmeb/nuttxspace/tools/rust/cargo/bin:/home/znmeb/nuttxspace/tools/gcc-arm-none-eabi/bin:/home/znmeb/nuttxspace/tools/riscv-none-elf-gcc/bin:/home/znmeb/nuttxspace/tools/xtensa-esp32s3-elf-gcc/bin:/home/znmeb/.local/bin:/home/znmeb/bin:/home/znmeb/.cargo/bin:/home/znmeb/mambaforge/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/PowerShell/7/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Calibre2/:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/usbipd-win/:/mnt/c/Program Files/RedHat/Podman/:/mnt/c/Users/znmeb/AppData/Local/Microsoft/WindowsApps:/snap/bin:/home/znmeb/bin:/home/znmeb/.local/bin:/home/znmeb/bin:/home/znmeb/.local/bin
+Creating fresh test output directory
+
+
+Testing configuration esp32s3-devkit:audio
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:audio artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:09 /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio/configure.log
+-rw-r--r-- 1 znmeb znmeb   65749 Apr 20 11:10 /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio/make.log
+-rwxr-xr-x 1 znmeb znmeb 1542768 Apr 20 11:10 /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio/nuttx
+-rw-r--r-- 1 znmeb znmeb  613744 Apr 20 11:10 /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 9223706 Apr 20 11:10 /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 1542768 Apr 20 11:10 /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb 1726108 Apr 20 11:10 /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:10 /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 6177382 Apr 20 11:10 /home/znmeb/nuttxspace/tests/esp32s3-devkit..audio/nuttx.map
+
+
+Testing configuration esp32s3-devkit:ble
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:ble artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:10 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble/configure.log
+-rw-r--r-- 1 znmeb znmeb   54738 Apr 20 11:11 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble/make.log
+-rwxr-xr-x 1 znmeb znmeb  764176 Apr 20 11:11 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble/nuttx
+-rw-r--r-- 1 znmeb znmeb  276592 Apr 20 11:11 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 4357098 Apr 20 11:11 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  764176 Apr 20 11:11 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  776601 Apr 20 11:11 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:11 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 3462888 Apr 20 11:11 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ble/nuttx.map
+
+
+Testing configuration esp32s3-devkit:blewifi
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:blewifi artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi
+-rw-r--r-- 1 znmeb znmeb     2297 Apr 20 11:11 /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi/configure.log
+-rw-r--r-- 1 znmeb znmeb    68090 Apr 20 11:13 /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi/make.log
+-rwxr-xr-x 1 znmeb znmeb  1745592 Apr 20 11:13 /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi/nuttx
+-rw-r--r-- 1 znmeb znmeb   702832 Apr 20 11:13 /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 10581563 Apr 20 11:13 /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  1745592 Apr 20 11:13 /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  1976689 Apr 20 11:13 /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb       47 Apr 20 11:13 /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb  7177000 Apr 20 11:13 /home/znmeb/nuttxspace/tests/esp32s3-devkit..blewifi/nuttx.map
+
+
+Testing configuration esp32s3-devkit:buttons
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:buttons artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:13 /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons/configure.log
+-rw-r--r-- 1 znmeb znmeb   46833 Apr 20 11:14 /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons/make.log
+-rwxr-xr-x 1 znmeb znmeb 2445480 Apr 20 11:14 /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons/nuttx
+-rw-r--r-- 1 znmeb znmeb  144656 Apr 20 11:14 /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1580743 Apr 20 11:14 /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2445480 Apr 20 11:14 /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  288590 Apr 20 11:14 /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:14 /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2137890 Apr 20 11:14 /home/znmeb/nuttxspace/tests/esp32s3-devkit..buttons/nuttx.map
+
+
+Testing configuration esp32s3-devkit:coremark
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:coremark artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:14 /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark/configure.log
+-rw-r--r-- 1 znmeb znmeb   46762 Apr 20 11:15 /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark/make.log
+-rwxr-xr-x 1 znmeb znmeb  258020 Apr 20 11:15 /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark/nuttx
+-rw-r--r-- 1 znmeb znmeb  120320 Apr 20 11:15 /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1204023 Apr 20 11:15 /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  258020 Apr 20 11:15 /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  199465 Apr 20 11:15 /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:15 /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1322847 Apr 20 11:15 /home/znmeb/nuttxspace/tests/esp32s3-devkit..coremark/nuttx.map
+
+
+Testing configuration esp32s3-devkit:cxx
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:cxx artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:15 /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx/configure.log
+-rw-r--r-- 1 znmeb znmeb   54296 Apr 20 11:16 /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx/make.log
+-rwxr-xr-x 1 znmeb znmeb 7813652 Apr 20 11:16 /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx/nuttx
+-rw-r--r-- 1 znmeb znmeb  244704 Apr 20 11:16 /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 3848040 Apr 20 11:16 /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 7813652 Apr 20 11:16 /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  605252 Apr 20 11:16 /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:16 /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 4577906 Apr 20 11:16 /home/znmeb/nuttxspace/tests/esp32s3-devkit..cxx/nuttx.map
+
+
+Testing configuration esp32s3-devkit:eth_lan9250
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:eth_lan9250 artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:17 /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250/configure.log
+-rw-r--r-- 1 znmeb znmeb   55426 Apr 20 11:17 /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250/make.log
+-rwxr-xr-x 1 znmeb znmeb  536016 Apr 20 11:17 /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250/nuttx
+-rw-r--r-- 1 znmeb znmeb  199168 Apr 20 11:17 /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 2558674 Apr 20 11:17 /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  536016 Apr 20 11:17 /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  456815 Apr 20 11:17 /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:17 /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2341207 Apr 20 11:17 /home/znmeb/nuttxspace/tests/esp32s3-devkit..eth_lan9250/nuttx.map
+
+
+Testing configuration esp32s3-devkit:gpio
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:gpio artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio/configure.log
+-rw-r--r-- 1 znmeb znmeb   46781 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio/make.log
+-rwxr-xr-x 1 znmeb znmeb 2436628 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio/nuttx
+-rw-r--r-- 1 znmeb znmeb  144896 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1585141 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2436628 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  292534 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2127450 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..gpio/nuttx.map
+
+
+Testing configuration esp32s3-devkit:i2c
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:i2c artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:18 /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c/configure.log
+-rw-r--r-- 1 znmeb znmeb   47248 Apr 20 11:19 /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c/make.log
+-rwxr-xr-x 1 znmeb znmeb  386308 Apr 20 11:19 /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c/nuttx
+-rw-r--r-- 1 znmeb znmeb  150560 Apr 20 11:19 /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1705928 Apr 20 11:19 /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  386308 Apr 20 11:19 /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  325147 Apr 20 11:19 /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:19 /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1758896 Apr 20 11:19 /home/znmeb/nuttxspace/tests/esp32s3-devkit..i2c/nuttx.map
+
+
+Testing configuration esp32s3-devkit:knsh
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:knsh artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:19 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/configure.log
+-rw-r--r-- 1 znmeb znmeb   92135 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/make.log
+-rwxr-xr-x 1 znmeb znmeb 2781792 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx
+-rwxr-xr-x 1 znmeb znmeb  138128 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1461288 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2781792 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  260073 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      66 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2453843 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx.map
+-rwxr-xr-x 1 znmeb znmeb  132368 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx_user.bin
+-rwxr-xr-x 1 znmeb znmeb 1053168 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx_user.elf
+-rw-r--r-- 1 znmeb znmeb  281225 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..knsh/nuttx_user.hex
+
+
+Testing configuration esp32s3-devkit:ksta_softap
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:ksta_softap artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:21 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/configure.log
+-rw-r--r-- 1 znmeb znmeb  123050 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/make.log
+-rwxr-xr-x 1 znmeb znmeb 1351452 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx
+-rwxr-xr-x 1 znmeb znmeb  550160 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 8204889 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 1351452 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb 1547290 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      66 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 5931523 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx.map
+-rwxr-xr-x 1 znmeb znmeb  179140 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx_user.bin
+-rwxr-xr-x 1 znmeb znmeb  369688 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx_user.elf
+-rw-r--r-- 1 znmeb znmeb  453199 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..ksta_softap/nuttx_user.hex
+
+
+Testing configuration esp32s3-devkit:mcuboot_nsh
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:mcuboot_nsh artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:23 /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh/configure.log
+-rw-r--r-- 1 znmeb znmeb   46885 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh/make.log
+-rwxr-xr-x 1 znmeb znmeb  259480 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh/nuttx
+-rw-r--r-- 1 znmeb znmeb 1048576 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1510150 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  259480 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  273109 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1640935 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..mcuboot_nsh/nuttx.map
+
+
+Testing configuration esp32s3-devkit:nsh
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:nsh artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh/configure.log
+-rw-r--r-- 1 znmeb znmeb   46669 Apr 20 11:24 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh/make.log
+-rwxr-xr-x 1 znmeb znmeb 2366704 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh/nuttx
+-rw-r--r-- 1 znmeb znmeb  140768 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1512220 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2366704 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  275757 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2063639 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nsh/nuttx.map
+
+
+Testing configuration esp32s3-devkit:nxlooper
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:nxlooper artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper/configure.log
+-rw-r--r-- 1 znmeb znmeb   47350 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper/make.log
+-rwxr-xr-x 1 znmeb znmeb  397628 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper/nuttx
+-rw-r--r-- 1 znmeb znmeb  161008 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1883783 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  397628 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  346125 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1812799 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..nxlooper/nuttx.map
+
+
+Testing configuration esp32s3-devkit:oneshot
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:oneshot artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:25 /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot/configure.log
+-rw-r--r-- 1 znmeb znmeb   47097 Apr 20 11:26 /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot/make.log
+-rwxr-xr-x 1 znmeb znmeb 2484548 Apr 20 11:26 /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot/nuttx
+-rw-r--r-- 1 znmeb znmeb  147792 Apr 20 11:26 /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1637376 Apr 20 11:26 /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2484548 Apr 20 11:26 /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  300728 Apr 20 11:26 /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:26 /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2171460 Apr 20 11:26 /home/znmeb/nuttxspace/tests/esp32s3-devkit..oneshot/nuttx.map
+
+
+Testing configuration esp32s3-devkit:psram_octal
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:psram_octal artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:26 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal/configure.log
+-rw-r--r-- 1 znmeb znmeb   46823 Apr 20 11:27 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal/make.log
+-rwxr-xr-x 1 znmeb znmeb 2446300 Apr 20 11:27 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal/nuttx
+-rw-r--r-- 1 znmeb znmeb  143712 Apr 20 11:27 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1593395 Apr 20 11:27 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2446300 Apr 20 11:27 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  293090 Apr 20 11:27 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:27 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2145840 Apr 20 11:27 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_octal/nuttx.map
+
+
+Testing configuration esp32s3-devkit:psram_quad
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:psram_quad artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:27 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad/configure.log
+-rw-r--r-- 1 znmeb znmeb   46821 Apr 20 11:28 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad/make.log
+-rwxr-xr-x 1 znmeb znmeb 2448396 Apr 20 11:28 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad/nuttx
+-rw-r--r-- 1 znmeb znmeb  143712 Apr 20 11:28 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1590785 Apr 20 11:28 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2448396 Apr 20 11:28 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  292640 Apr 20 11:28 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:28 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2148629 Apr 20 11:28 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_quad/nuttx.map
+
+
+Testing configuration esp32s3-devkit:psram_usrheap
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:psram_usrheap artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:28 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap/configure.log
+-rw-r--r-- 1 znmeb znmeb   49767 Apr 20 11:29 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap/make.log
+-rwxr-xr-x 1 znmeb znmeb  451932 Apr 20 11:29 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap/nuttx
+-rw-r--r-- 1 znmeb znmeb  172624 Apr 20 11:29 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 2166231 Apr 20 11:29 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  451932 Apr 20 11:29 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  454931 Apr 20 11:29 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:29 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2109055 Apr 20 11:29 /home/znmeb/nuttxspace/tests/esp32s3-devkit..psram_usrheap/nuttx.map
+
+
+Testing configuration esp32s3-devkit:pwm
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:pwm artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:29 /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm/configure.log
+-rw-r--r-- 1 znmeb znmeb   46809 Apr 20 11:30 /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm/make.log
+-rwxr-xr-x 1 znmeb znmeb  365504 Apr 20 11:30 /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm/nuttx
+-rw-r--r-- 1 znmeb znmeb  139936 Apr 20 11:30 /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1500480 Apr 20 11:30 /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  365504 Apr 20 11:30 /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  276925 Apr 20 11:30 /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:30 /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1641300 Apr 20 11:30 /home/znmeb/nuttxspace/tests/esp32s3-devkit..pwm/nuttx.map
+
+
+Testing configuration esp32s3-devkit:random
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..random
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:random artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..random
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:30 /home/znmeb/nuttxspace/tests/esp32s3-devkit..random/configure.log
+-rw-r--r-- 1 znmeb znmeb   46747 Apr 20 11:31 /home/znmeb/nuttxspace/tests/esp32s3-devkit..random/make.log
+-rwxr-xr-x 1 znmeb znmeb 2409840 Apr 20 11:31 /home/znmeb/nuttxspace/tests/esp32s3-devkit..random/nuttx
+-rw-r--r-- 1 znmeb znmeb  142272 Apr 20 11:31 /home/znmeb/nuttxspace/tests/esp32s3-devkit..random/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1540774 Apr 20 11:31 /home/znmeb/nuttxspace/tests/esp32s3-devkit..random/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2409840 Apr 20 11:31 /home/znmeb/nuttxspace/tests/esp32s3-devkit..random/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  281104 Apr 20 11:31 /home/znmeb/nuttxspace/tests/esp32s3-devkit..random/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:31 /home/znmeb/nuttxspace/tests/esp32s3-devkit..random/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2113590 Apr 20 11:31 /home/znmeb/nuttxspace/tests/esp32s3-devkit..random/nuttx.map
+
+
+Testing configuration esp32s3-devkit:rmt
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:rmt artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:31 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt/configure.log
+-rw-r--r-- 1 znmeb znmeb   47087 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt/make.log
+-rwxr-xr-x 1 znmeb znmeb  380008 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt/nuttx
+-rw-r--r-- 1 znmeb znmeb  147184 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1648963 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  380008 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  304447 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1711924 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rmt/nuttx.map
+
+
+Testing configuration esp32s3-devkit:rtc
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:rtc artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc/configure.log
+-rw-r--r-- 1 znmeb znmeb   46825 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc/make.log
+-rwxr-xr-x 1 znmeb znmeb  375576 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc/nuttx
+-rw-r--r-- 1 znmeb znmeb  145648 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1610048 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  375576 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  295728 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1689383 Apr 20 11:32 /home/znmeb/nuttxspace/tests/esp32s3-devkit..rtc/nuttx.map
+
+
+Testing configuration esp32s3-devkit:smp
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:smp artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp/configure.log
+-rw-r--r-- 1 znmeb znmeb   48502 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp/make.log
+-rwxr-xr-x 1 znmeb znmeb 3025816 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp/nuttx
+-rw-r--r-- 1 znmeb znmeb  180672 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 2299020 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3025816 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  469445 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2698260 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..smp/nuttx.map
+
+
+Testing configuration esp32s3-devkit:sotest
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:sotest artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:33 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest/configure.log
+-rw-r--r-- 1 znmeb znmeb   48080 Apr 20 11:34 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest/make.log
+-rwxr-xr-x 1 znmeb znmeb  386404 Apr 20 11:34 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest/nuttx
+-rw-r--r-- 1 znmeb znmeb  148544 Apr 20 11:34 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1656538 Apr 20 11:34 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  386404 Apr 20 11:34 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  320839 Apr 20 11:34 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:34 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1751972 Apr 20 11:34 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sotest/nuttx.map
+
+
+Testing configuration esp32s3-devkit:spi
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:spi artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:34 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi/configure.log
+-rw-r--r-- 1 znmeb znmeb   46999 Apr 20 11:35 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi/make.log
+-rwxr-xr-x 1 znmeb znmeb  367988 Apr 20 11:35 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi/nuttx
+-rw-r--r-- 1 znmeb znmeb  141440 Apr 20 11:35 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1530682 Apr 20 11:35 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  367988 Apr 20 11:35 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  281859 Apr 20 11:35 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:35 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1659105 Apr 20 11:35 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spi/nuttx.map
+
+
+Testing configuration esp32s3-devkit:spiflash
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:spiflash artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:35 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash/configure.log
+-rw-r--r-- 1 znmeb znmeb   47517 Apr 20 11:36 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash/make.log
+-rwxr-xr-x 1 znmeb znmeb 2621532 Apr 20 11:36 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash/nuttx
+-rw-r--r-- 1 znmeb znmeb  158192 Apr 20 11:36 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1832903 Apr 20 11:36 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2621532 Apr 20 11:36 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  329982 Apr 20 11:36 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:36 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2185582 Apr 20 11:36 /home/znmeb/nuttxspace/tests/esp32s3-devkit..spiflash/nuttx.map
+
+
+Testing configuration esp32s3-devkit:sta_softap
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:sta_softap artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:36 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap/configure.log
+-rw-r--r-- 1 znmeb znmeb   67698 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap/make.log
+-rwxr-xr-x 1 znmeb znmeb 1550296 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap/nuttx
+-rw-r--r-- 1 znmeb znmeb  615008 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 9314264 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 1550296 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb 1729642 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 6294075 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..sta_softap/nuttx.map
+
+
+Testing configuration esp32s3-devkit:stack
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:stack artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack/configure.log
+-rw-r--r-- 1 znmeb znmeb   46868 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack/make.log
+-rwxr-xr-x 1 znmeb znmeb 2632512 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack/nuttx
+-rw-r--r-- 1 znmeb znmeb  201232 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 2722652 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2632512 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  461945 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2300710 Apr 20 11:38 /home/znmeb/nuttxspace/tests/esp32s3-devkit..stack/nuttx.map
+
+
+Testing configuration esp32s3-devkit:tickless
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:tickless artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:39 /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless/configure.log
+-rw-r--r-- 1 znmeb znmeb   47506 Apr 20 11:39 /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless/make.log
+-rwxr-xr-x 1 znmeb znmeb 2914984 Apr 20 11:39 /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless/nuttx
+-rw-r--r-- 1 znmeb znmeb  175456 Apr 20 11:39 /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 2161757 Apr 20 11:39 /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2914984 Apr 20 11:39 /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  451736 Apr 20 11:39 /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:39 /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2588677 Apr 20 11:39 /home/znmeb/nuttxspace/tests/esp32s3-devkit..tickless/nuttx.map
+
+
+Testing configuration esp32s3-devkit:timer
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:timer artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer/configure.log
+-rw-r--r-- 1 znmeb znmeb   46859 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer/make.log
+-rwxr-xr-x 1 znmeb znmeb 2444868 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer/nuttx
+-rw-r--r-- 1 znmeb znmeb  145488 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1596459 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2444868 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  292268 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2140177 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..timer/nuttx.map
+
+
+Testing configuration esp32s3-devkit:toywasm
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:toywasm artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm
+-rw-r--r-- 1 znmeb znmeb     2297 Apr 20 11:40 /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm/configure.log
+-rw-r--r-- 1 znmeb znmeb   100290 Apr 20 11:42 /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm/make.log
+-rwxr-xr-x 1 znmeb znmeb  1952584 Apr 20 11:42 /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm/nuttx
+-rw-r--r-- 1 znmeb znmeb   811712 Apr 20 11:42 /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 11917576 Apr 20 11:42 /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  1952584 Apr 20 11:42 /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  2227610 Apr 20 11:42 /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb       47 Apr 20 11:42 /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb  7924869 Apr 20 11:42 /home/znmeb/nuttxspace/tests/esp32s3-devkit..toywasm/nuttx.map
+
+
+Testing configuration esp32s3-devkit:twai
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:twai artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:42 /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai/configure.log
+-rw-r--r-- 1 znmeb znmeb   46806 Apr 20 11:43 /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai/make.log
+-rwxr-xr-x 1 znmeb znmeb 2452668 Apr 20 11:43 /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai/nuttx
+-rw-r--r-- 1 znmeb znmeb  146352 Apr 20 11:43 /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1608019 Apr 20 11:43 /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2452668 Apr 20 11:43 /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  294821 Apr 20 11:43 /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:43 /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2124988 Apr 20 11:43 /home/znmeb/nuttxspace/tests/esp32s3-devkit..twai/nuttx.map
+
+
+Testing configuration esp32s3-devkit:usb_device
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:usb_device artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:43 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device/configure.log
+-rw-r--r-- 1 znmeb znmeb   47083 Apr 20 11:44 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device/make.log
+-rwxr-xr-x 1 znmeb znmeb 2515252 Apr 20 11:44 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device/nuttx
+-rw-r--r-- 1 znmeb znmeb  153440 Apr 20 11:44 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1732378 Apr 20 11:44 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2515252 Apr 20 11:44 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  319468 Apr 20 11:44 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:44 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2154012 Apr 20 11:44 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usb_device/nuttx.map
+
+
+Testing configuration esp32s3-devkit:usbnsh
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:usbnsh artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:44 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh/configure.log
+-rw-r--r-- 1 znmeb znmeb   47030 Apr 20 11:45 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh/make.log
+-rwxr-xr-x 1 znmeb znmeb 2476476 Apr 20 11:45 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh/nuttx
+-rw-r--r-- 1 znmeb znmeb  151856 Apr 20 11:45 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1702895 Apr 20 11:45 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2476476 Apr 20 11:45 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  307858 Apr 20 11:45 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:45 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2114193 Apr 20 11:45 /home/znmeb/nuttxspace/tests/esp32s3-devkit..usbnsh/nuttx.map
+
+
+Testing configuration esp32s3-devkit:watchdog
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:watchdog artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:45 /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog/configure.log
+-rw-r--r-- 1 znmeb znmeb   46831 Apr 20 11:46 /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog/make.log
+-rwxr-xr-x 1 znmeb znmeb 2435128 Apr 20 11:46 /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog/nuttx
+-rw-r--r-- 1 znmeb znmeb  144688 Apr 20 11:46 /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 1581167 Apr 20 11:46 /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2435128 Apr 20 11:46 /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  290838 Apr 20 11:46 /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:46 /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2128922 Apr 20 11:46 /home/znmeb/nuttxspace/tests/esp32s3-devkit..watchdog/nuttx.map
+
+
+Testing configuration esp32s3-devkit:wifi
+...creating /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:wifi artifacts to /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi
+-rw-r--r-- 1 znmeb znmeb    2297 Apr 20 11:46 /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi/configure.log
+-rw-r--r-- 1 znmeb znmeb   67077 Apr 20 11:47 /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi/make.log
+-rwxr-xr-x 1 znmeb znmeb 1543816 Apr 20 11:47 /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi/nuttx
+-rw-r--r-- 1 znmeb znmeb  610368 Apr 20 11:47 /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi/nuttx.bin
+-rw-r--r-- 1 znmeb znmeb 9222928 Apr 20 11:47 /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 1543816 Apr 20 11:47 /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb 1716592 Apr 20 11:47 /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      47 Apr 20 11:47 /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 6240250 Apr 20 11:47 /home/znmeb/nuttxspace/tests/esp32s3-devkit..wifi/nuttx.map
+
+
+Testing configuration raspberrypi-pico-w:audiopack
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:audiopack artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:47 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack/configure.log
+-rw-r--r-- 1 znmeb znmeb   43157 Apr 20 11:48 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack/make.log
+-rwxr-xr-x 1 znmeb znmeb 3060448 Apr 20 11:48 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack/nuttx
+-rw-r--r-- 1 znmeb znmeb 2850649 Apr 20 11:48 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3060448 Apr 20 11:48 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:48 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1828894 Apr 20 11:48 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  367616 Apr 20 11:48 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..audiopack/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:composite
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:composite artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:48 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite/configure.log
+-rw-r--r-- 1 znmeb znmeb   43147 Apr 20 11:49 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite/make.log
+-rwxr-xr-x 1 znmeb znmeb 2983516 Apr 20 11:49 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite/nuttx
+-rw-r--r-- 1 znmeb znmeb 2631234 Apr 20 11:49 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2983516 Apr 20 11:49 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:49 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1722111 Apr 20 11:49 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  344064 Apr 20 11:49 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..composite/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:displaypack
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:displaypack artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:49 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack/configure.log
+-rw-r--r-- 1 znmeb znmeb   54218 Apr 20 11:50 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack/make.log
+-rwxr-xr-x 1 znmeb znmeb 3244560 Apr 20 11:50 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack/nuttx
+-rw-r--r-- 1 znmeb znmeb 2899707 Apr 20 11:50 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3244560 Apr 20 11:50 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:50 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2030160 Apr 20 11:50 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  391168 Apr 20 11:50 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..displaypack/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:enc28j60
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:enc28j60 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:50 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60/configure.log
+-rw-r--r-- 1 znmeb znmeb   50620 Apr 20 11:51 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60/make.log
+-rwxr-xr-x 1 znmeb znmeb 3631660 Apr 20 11:51 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60/nuttx
+-rw-r--r-- 1 znmeb znmeb 3094938 Apr 20 11:51 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3631660 Apr 20 11:51 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:51 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2263437 Apr 20 11:51 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  399360 Apr 20 11:51 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..enc28j60/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:lcd1602
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:lcd1602 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:51 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602/configure.log
+-rw-r--r-- 1 znmeb znmeb   41990 Apr 20 11:52 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602/make.log
+-rwxr-xr-x 1 znmeb znmeb 2604768 Apr 20 11:52 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602/nuttx
+-rw-r--r-- 1 znmeb znmeb 2063070 Apr 20 11:52 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2604768 Apr 20 11:52 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:52 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1572858 Apr 20 11:52 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  277504 Apr 20 11:52 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..lcd1602/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:nsh
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:nsh artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:52 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh/configure.log
+-rw-r--r-- 1 znmeb znmeb   41594 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh/make.log
+-rwxr-xr-x 1 znmeb znmeb 2520988 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh/nuttx
+-rw-r--r-- 1 znmeb znmeb 1950452 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2520988 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1530599 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  264192 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:nsh-flash
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:nsh-flash artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash/configure.log
+-rw-r--r-- 1 znmeb znmeb   42477 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash/make.log
+-rwxr-xr-x 1 znmeb znmeb 2797316 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash/nuttx
+-rw-r--r-- 1 znmeb znmeb 2514023 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2797316 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1647273 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  344064 Apr 20 11:53 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nsh-flash/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:nshsram
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:nshsram artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:54 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram/configure.log
+-rw-r--r-- 1 znmeb znmeb   41377 Apr 20 11:54 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram/make.log
+-rwxr-xr-x 1 znmeb znmeb 2495960 Apr 20 11:54 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram/nuttx
+-rw-r--r-- 1 znmeb znmeb 2016912 Apr 20 11:54 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2495960 Apr 20 11:54 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:54 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1304096 Apr 20 11:54 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  272384 Apr 20 11:54 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..nshsram/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:smp
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:smp artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:54 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp/configure.log
+-rw-r--r-- 1 znmeb znmeb   42533 Apr 20 11:55 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp/make.log
+-rwxr-xr-x 1 znmeb znmeb 2668796 Apr 20 11:55 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp/nuttx
+-rw-r--r-- 1 znmeb znmeb 2081232 Apr 20 11:55 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2668796 Apr 20 11:55 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:55 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1650589 Apr 20 11:55 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  280576 Apr 20 11:55 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..smp/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:spisd
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:spisd artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:55 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd/configure.log
+-rw-r--r-- 1 znmeb znmeb   42542 Apr 20 11:56 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd/make.log
+-rwxr-xr-x 1 znmeb znmeb 2812148 Apr 20 11:56 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd/nuttx
+-rw-r--r-- 1 znmeb znmeb 2362022 Apr 20 11:56 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2812148 Apr 20 11:56 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:56 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1660338 Apr 20 11:56 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  311296 Apr 20 11:56 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..spisd/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:ssd1306
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:ssd1306 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:56 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306/configure.log
+-rw-r--r-- 1 znmeb znmeb   53563 Apr 20 11:57 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306/make.log
+-rwxr-xr-x 1 znmeb znmeb  271884 Apr 20 11:57 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306/nuttx
+-rw-r--r-- 1 znmeb znmeb 2393914 Apr 20 11:57 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  271884 Apr 20 11:57 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:57 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1312106 Apr 20 11:57 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  324096 Apr 20 11:57 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..ssd1306/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:st7735
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:st7735 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:57 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735/configure.log
+-rw-r--r-- 1 znmeb znmeb   41923 Apr 20 11:58 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735/make.log
+-rwxr-xr-x 1 znmeb znmeb 2666764 Apr 20 11:58 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735/nuttx
+-rw-r--r-- 1 znmeb znmeb 2078886 Apr 20 11:58 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2666764 Apr 20 11:58 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:58 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1592996 Apr 20 11:58 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  280576 Apr 20 11:58 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..st7735/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:telnet
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:telnet artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:58 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet/configure.log
+-rw-r--r-- 1 znmeb znmeb   51037 Apr 20 11:59 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet/make.log
+-rwxr-xr-x 1 znmeb znmeb 4069956 Apr 20 11:59 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet/nuttx
+-rw-r--r-- 1 znmeb znmeb 4214779 Apr 20 11:59 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 4069956 Apr 20 11:59 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 11:59 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 3137367 Apr 20 11:59 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  562688 Apr 20 11:59 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..telnet/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:usbmsc
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:usbmsc artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 11:59 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc/configure.log
+-rw-r--r-- 1 znmeb znmeb   43129 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc/make.log
+-rwxr-xr-x 1 znmeb znmeb 2961544 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc/nuttx
+-rw-r--r-- 1 znmeb znmeb 2611290 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2961544 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1716082 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  343040 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbmsc/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:usbnsh
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:usbnsh artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh/configure.log
+-rw-r--r-- 1 znmeb znmeb   41864 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh/make.log
+-rwxr-xr-x 1 znmeb znmeb 2554192 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh/nuttx
+-rw-r--r-- 1 znmeb znmeb 2024387 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2554192 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1544015 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  272896 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..usbnsh/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:waveshare-lcd-1.14
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:waveshare-lcd-1.14 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 12:00 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14/configure.log
+-rw-r--r-- 1 znmeb znmeb   53945 Apr 20 12:01 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14/make.log
+-rwxr-xr-x 1 znmeb znmeb 3209080 Apr 20 12:01 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14/nuttx
+-rw-r--r-- 1 znmeb znmeb 2806200 Apr 20 12:01 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3209080 Apr 20 12:01 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:01 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2015804 Apr 20 12:01 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  381440 Apr 20 12:01 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.14/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico-w:waveshare-lcd-1.3
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico-w:waveshare-lcd-1.3 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 12:01 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3/configure.log
+-rw-r--r-- 1 znmeb znmeb   53945 Apr 20 12:02 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3/make.log
+-rwxr-xr-x 1 znmeb znmeb 3209072 Apr 20 12:02 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3/nuttx
+-rw-r--r-- 1 znmeb znmeb 2805966 Apr 20 12:02 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3209072 Apr 20 12:02 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:02 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2015804 Apr 20 12:02 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  381440 Apr 20 12:02 /home/znmeb/nuttxspace/tests/raspberrypi-pico-w..waveshare-lcd-1.3/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:audiopack
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:audiopack artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:02 /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack/configure.log
+-rw-r--r-- 1 znmeb znmeb   43148 Apr 20 12:03 /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack/make.log
+-rwxr-xr-x 1 znmeb znmeb 3063880 Apr 20 12:03 /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack/nuttx
+-rw-r--r-- 1 znmeb znmeb 2853361 Apr 20 12:03 /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3063880 Apr 20 12:03 /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:03 /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1832835 Apr 20 12:03 /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  368128 Apr 20 12:03 /home/znmeb/nuttxspace/tests/raspberrypi-pico..audiopack/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:composite
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:composite artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:03 /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite/configure.log
+-rw-r--r-- 1 znmeb znmeb   43143 Apr 20 12:04 /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite/make.log
+-rwxr-xr-x 1 znmeb znmeb 2986956 Apr 20 12:04 /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite/nuttx
+-rw-r--r-- 1 znmeb znmeb 2633946 Apr 20 12:04 /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2986956 Apr 20 12:04 /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:04 /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1726091 Apr 20 12:04 /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  344576 Apr 20 12:04 /home/znmeb/nuttxspace/tests/raspberrypi-pico..composite/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:displaypack
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:displaypack artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:04 /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack/configure.log
+-rw-r--r-- 1 znmeb znmeb   54214 Apr 20 12:05 /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack/make.log
+-rwxr-xr-x 1 znmeb znmeb 3248200 Apr 20 12:05 /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack/nuttx
+-rw-r--r-- 1 znmeb znmeb 2902421 Apr 20 12:05 /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3248200 Apr 20 12:05 /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:05 /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2034140 Apr 20 12:05 /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  391168 Apr 20 12:05 /home/znmeb/nuttxspace/tests/raspberrypi-pico..displaypack/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:enc28j60
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:enc28j60 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:05 /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60/configure.log
+-rw-r--r-- 1 znmeb znmeb   50616 Apr 20 12:06 /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60/make.log
+-rwxr-xr-x 1 znmeb znmeb 3635104 Apr 20 12:06 /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60/nuttx
+-rw-r--r-- 1 znmeb znmeb 3097652 Apr 20 12:06 /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3635104 Apr 20 12:06 /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:06 /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2267378 Apr 20 12:06 /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  399360 Apr 20 12:06 /home/znmeb/nuttxspace/tests/raspberrypi-pico..enc28j60/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:lcd1602
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:lcd1602 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602
+-rw-r--r-- 1 znmeb znmeb    2277 Apr 20 12:06 /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602/configure.log
+-rw-r--r-- 1 znmeb znmeb   42531 Apr 20 12:07 /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602/make.log
+-rwxr-xr-x 1 znmeb znmeb 2668796 Apr 20 12:07 /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602/nuttx
+-rw-r--r-- 1 znmeb znmeb 2081295 Apr 20 12:07 /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2668796 Apr 20 12:07 /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:07 /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1650589 Apr 20 12:07 /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  280576 Apr 20 12:07 /home/znmeb/nuttxspace/tests/raspberrypi-pico..lcd1602/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:nsh
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:nsh artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:07 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh/configure.log
+-rw-r--r-- 1 znmeb znmeb   41591 Apr 20 12:08 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh/make.log
+-rwxr-xr-x 1 znmeb znmeb 2524496 Apr 20 12:08 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh/nuttx
+-rw-r--r-- 1 znmeb znmeb 1953762 Apr 20 12:08 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2524496 Apr 20 12:08 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:08 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1534560 Apr 20 12:08 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  264704 Apr 20 12:08 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:nsh-flash
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:nsh-flash artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:08 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash/configure.log
+-rw-r--r-- 1 znmeb znmeb   42473 Apr 20 12:08 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash/make.log
+-rwxr-xr-x 1 znmeb znmeb 2800820 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash/nuttx
+-rw-r--r-- 1 znmeb znmeb 2517337 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2800820 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1651273 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  344064 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nsh-flash/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:nshsram
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:nshsram artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram/configure.log
+-rw-r--r-- 1 znmeb znmeb   41375 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram/make.log
+-rwxr-xr-x 1 znmeb znmeb 2499524 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram/nuttx
+-rw-r--r-- 1 znmeb znmeb 2020097 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2499524 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1307595 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  272896 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..nshsram/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:smp
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:smp artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:09 /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp/configure.log
+-rw-r--r-- 1 znmeb znmeb   42529 Apr 20 12:10 /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp/make.log
+-rwxr-xr-x 1 znmeb znmeb 2672312 Apr 20 12:10 /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp/nuttx
+-rw-r--r-- 1 znmeb znmeb 2084553 Apr 20 12:10 /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2672312 Apr 20 12:10 /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:10 /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1654589 Apr 20 12:10 /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  281088 Apr 20 12:10 /home/znmeb/nuttxspace/tests/raspberrypi-pico..smp/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:spisd
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:spisd artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:10 /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd/configure.log
+-rw-r--r-- 1 znmeb znmeb   42540 Apr 20 12:11 /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd/make.log
+-rwxr-xr-x 1 znmeb znmeb 2815588 Apr 20 12:11 /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd/nuttx
+-rw-r--r-- 1 znmeb znmeb 2364734 Apr 20 12:11 /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2815588 Apr 20 12:11 /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:11 /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1664318 Apr 20 12:11 /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  311296 Apr 20 12:11 /home/znmeb/nuttxspace/tests/raspberrypi-pico..spisd/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:ssd1306
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:ssd1306 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:11 /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306/configure.log
+-rw-r--r-- 1 znmeb znmeb   53561 Apr 20 12:12 /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306/make.log
+-rwxr-xr-x 1 znmeb znmeb  272128 Apr 20 12:12 /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306/nuttx
+-rw-r--r-- 1 znmeb znmeb 2397228 Apr 20 12:12 /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  272128 Apr 20 12:12 /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:12 /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1314965 Apr 20 12:12 /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  324608 Apr 20 12:12 /home/znmeb/nuttxspace/tests/raspberrypi-pico..ssd1306/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:st7735
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:st7735 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:12 /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735/configure.log
+-rw-r--r-- 1 znmeb znmeb   41921 Apr 20 12:13 /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735/make.log
+-rwxr-xr-x 1 znmeb znmeb 2670196 Apr 20 12:13 /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735/nuttx
+-rw-r--r-- 1 znmeb znmeb 2081601 Apr 20 12:13 /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2670196 Apr 20 12:13 /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:13 /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1596937 Apr 20 12:13 /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  280576 Apr 20 12:13 /home/znmeb/nuttxspace/tests/raspberrypi-pico..st7735/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:usbmsc
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:usbmsc artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:13 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc/configure.log
+-rw-r--r-- 1 znmeb znmeb   43126 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc/make.log
+-rwxr-xr-x 1 znmeb znmeb 2964980 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc/nuttx
+-rw-r--r-- 1 znmeb znmeb 2613998 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2964980 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1719984 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  343040 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbmsc/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:usbnsh
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:usbnsh artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh/configure.log
+-rw-r--r-- 1 znmeb znmeb   41862 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh/make.log
+-rwxr-xr-x 1 znmeb znmeb 2557776 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh/nuttx
+-rw-r--r-- 1 znmeb znmeb 2028878 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 2557776 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1548113 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  273408 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..usbnsh/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:waveshare-lcd-1.14
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:waveshare-lcd-1.14 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:14 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14/configure.log
+-rw-r--r-- 1 znmeb znmeb   53943 Apr 20 12:15 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14/make.log
+-rwxr-xr-x 1 znmeb znmeb 3212720 Apr 20 12:15 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14/nuttx
+-rw-r--r-- 1 znmeb znmeb 2808911 Apr 20 12:15 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3212720 Apr 20 12:15 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:15 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2019745 Apr 20 12:15 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  381952 Apr 20 12:15 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.14/nuttx.uf2
+
+
+Testing configuration raspberrypi-pico:waveshare-lcd-1.3
+...creating /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3
+...cleaning
+...configuring
+...compiling and linking
+...saving raspberrypi-pico:waveshare-lcd-1.3 artifacts to /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3
+-rw-r--r-- 1 znmeb znmeb    2271 Apr 20 12:15 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3/configure.log
+-rw-r--r-- 1 znmeb znmeb   53943 Apr 20 12:16 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3/make.log
+-rwxr-xr-x 1 znmeb znmeb 3212716 Apr 20 12:16 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3/nuttx
+-rw-r--r-- 1 znmeb znmeb 2808673 Apr 20 12:16 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb 3212716 Apr 20 12:16 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:16 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2019706 Apr 20 12:16 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3/nuttx.map
+-rw-r--r-- 1 znmeb znmeb  381952 Apr 20 12:16 /home/znmeb/nuttxspace/tests/raspberrypi-pico..waveshare-lcd-1.3/nuttx.uf2
+
+
+Testing configuration teensy-4.x:can-4.1
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:can-4.1 artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:16 /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1/configure.log
+-rw-r--r-- 1 znmeb znmeb   45899 Apr 20 12:17 /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1/make.log
+-rwxr-xr-x 1 znmeb znmeb  213660 Apr 20 12:17 /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1/nuttx
+-rw-r--r-- 1 znmeb znmeb 1772908 Apr 20 12:17 /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  213660 Apr 20 12:17 /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  353849 Apr 20 12:17 /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:17 /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb  997458 Apr 20 12:17 /home/znmeb/nuttxspace/tests/teensy-4.x..can-4.1/nuttx.map
+
+
+Testing configuration teensy-4.x:enc-4.1
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:enc-4.1 artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:17 /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1/configure.log
+-rw-r--r-- 1 znmeb znmeb   42666 Apr 20 12:18 /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1/make.log
+-rwxr-xr-x 1 znmeb znmeb  164092 Apr 20 12:18 /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1/nuttx
+-rw-r--r-- 1 znmeb znmeb 1281859 Apr 20 12:18 /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  164092 Apr 20 12:18 /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  261380 Apr 20 12:18 /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:18 /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb  814741 Apr 20 12:18 /home/znmeb/nuttxspace/tests/teensy-4.x..enc-4.1/nuttx.map
+
+
+Testing configuration teensy-4.x:lcd-4.1
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:lcd-4.1 artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:18 /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1/configure.log
+-rw-r--r-- 1 znmeb znmeb   42662 Apr 20 12:19 /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1/make.log
+-rwxr-xr-x 1 znmeb znmeb  183148 Apr 20 12:19 /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1/nuttx
+-rw-r--r-- 1 znmeb znmeb 1465348 Apr 20 12:19 /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  183148 Apr 20 12:19 /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  294410 Apr 20 12:19 /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:19 /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb  839435 Apr 20 12:19 /home/znmeb/nuttxspace/tests/teensy-4.x..lcd-4.1/nuttx.map
+
+
+Testing configuration teensy-4.x:lua-4.1
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:lua-4.1 artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:19 /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1/configure.log
+-rw-r--r-- 1 znmeb znmeb   48112 Apr 20 12:20 /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1/make.log
+-rwxr-xr-x 1 znmeb znmeb  390988 Apr 20 12:20 /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1/nuttx
+-rw-r--r-- 1 znmeb znmeb 3575501 Apr 20 12:20 /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  390988 Apr 20 12:20 /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  706578 Apr 20 12:20 /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:20 /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1455444 Apr 20 12:20 /home/znmeb/nuttxspace/tests/teensy-4.x..lua-4.1/nuttx.map
+
+
+Testing configuration teensy-4.x:netnsh-4.1
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:netnsh-4.1 artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:20 /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1/configure.log
+-rw-r--r-- 1 znmeb znmeb   52393 Apr 20 12:21 /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1/make.log
+-rwxr-xr-x 1 znmeb znmeb  287844 Apr 20 12:21 /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1/nuttx
+-rw-r--r-- 1 znmeb znmeb 2508691 Apr 20 12:21 /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  287844 Apr 20 12:21 /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  475290 Apr 20 12:21 /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:21 /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 1332948 Apr 20 12:21 /home/znmeb/nuttxspace/tests/teensy-4.x..netnsh-4.1/nuttx.map
+
+
+Testing configuration teensy-4.x:nsh-4.0
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:nsh-4.0 artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:21 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0/configure.log
+-rw-r--r-- 1 znmeb znmeb   42373 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0/make.log
+-rwxr-xr-x 1 znmeb znmeb  163620 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0/nuttx
+-rw-r--r-- 1 znmeb znmeb 1310238 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  163620 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  265499 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb  781260 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.0/nuttx.map
+
+
+Testing configuration teensy-4.x:nsh-4.1
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:nsh-4.1 artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1/configure.log
+-rw-r--r-- 1 znmeb znmeb   42373 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1/make.log
+-rwxr-xr-x 1 znmeb znmeb  163620 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1/nuttx
+-rw-r--r-- 1 znmeb znmeb 1310238 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  163620 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  265499 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb  781260 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..nsh-4.1/nuttx.map
+
+
+Testing configuration teensy-4.x:pikron-bb
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:pikron-bb artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:22 /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb/configure.log
+-rw-r--r-- 1 znmeb znmeb   57697 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb/make.log
+-rwxr-xr-x 1 znmeb znmeb  547704 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb/nuttx
+-rw-r--r-- 1 znmeb znmeb 4744922 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  547704 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  948045 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb 2548326 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pikron-bb/nuttx.map
+
+
+Testing configuration teensy-4.x:pwm-4.1
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:pwm-4.1 artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1/configure.log
+-rw-r--r-- 1 znmeb znmeb   42636 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1/make.log
+-rwxr-xr-x 1 znmeb znmeb  163988 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1/nuttx
+-rw-r--r-- 1 znmeb znmeb 1294186 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  163988 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  264452 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb  815048 Apr 20 12:24 /home/znmeb/nuttxspace/tests/teensy-4.x..pwm-4.1/nuttx.map
+
+
+Testing configuration teensy-4.x:sd-4.1
+...creating /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1
+...cleaning
+...configuring
+...compiling and linking
+...saving teensy-4.x:sd-4.1 artifacts to /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1
+-rw-r--r-- 1 znmeb znmeb    2149 Apr 20 12:25 /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1/configure.log
+-rw-r--r-- 1 znmeb znmeb   43398 Apr 20 12:25 /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1/make.log
+-rwxr-xr-x 1 znmeb znmeb  198264 Apr 20 12:25 /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1/nuttx
+-rw-r--r-- 1 znmeb znmeb 1672841 Apr 20 12:25 /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1/nuttx.dis
+-rwxr-xr-x 1 znmeb znmeb  198264 Apr 20 12:25 /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1/nuttx.elf
+-rw-r--r-- 1 znmeb znmeb  329174 Apr 20 12:25 /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1/nuttx.hex
+-rw-r--r-- 1 znmeb znmeb      37 Apr 20 12:25 /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1/nuttx.manifest
+-rw-r--r-- 1 znmeb znmeb  859064 Apr 20 12:25 /home/znmeb/nuttxspace/tests/teensy-4.x..sd-4.1/nuttx.map
+~/Projects/CLAMS/NuttX-Setup-Jammy
+Finished!
+3779.12user 692.35system 1:16:52elapsed 96%CPU (0avgtext+0avgdata 506516maxresident)k
+817336inputs+25709128outputs (3918major+529193452minor)pagefaults 0swaps
