@@ -32,3 +32,7 @@ export NUTTX_PATH=$CLAMS_BASE/nuttxspace
 export NUTTX_VERSION="master"
 export NUTTX_TOOLS=$NUTTX_PATH/tools
 export NUTTX_TESTS=$NUTTX_PATH/tests
+
+# ESP-IDF
+export ESP_IDF_PATH=$CLAMS_BASE/esp
+export ESP_IDF_VERSION="5.2.1"
