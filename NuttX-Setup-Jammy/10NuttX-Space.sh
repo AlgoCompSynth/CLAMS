@@ -3,7 +3,12 @@
 set -e
 
 # https://nuttx.apache.org/docs/latest/quickstart/install.html
-source set_pico_envars
+echo "Setting CLAMS_BASE to CLAMS-Distrobox home"
+export CLAMS_BASE=$HOME/CLAMS-Distrobox
+
+echo ""
+echo "Setting environment variables"
+source ./set_pico_envars
 
 echo ""
 echo "Downloading NuttX version $NUTTX_VERSION"
