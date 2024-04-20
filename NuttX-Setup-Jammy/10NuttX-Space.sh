@@ -6,44 +6,6 @@ set -e
 source set_pico_envars
 
 echo ""
-echo "Installing NuttX dependencies"
-sudo apt-get update -qq
-sudo apt-get upgrade -qqy
-sudo apt-get install -qqy \
-  automake \
-  binutils-dev \
-  bison \
-  build-essential \
-  flex \
-  gettext \
-  genromfs \
-  gperf \
-  libelf-dev \
-  libexpat-dev \
-  libgmp-dev \
-  libisl-dev \
-  libmpc-dev \
-  libmpfr-dev \
-  libncurses5-dev \
-  libncursesw5-dev \
-  libtool \
-  picocom \
-  pkg-config \
-  texinfo \
-  u-boot-tools \
-  util-linux \
-  xxd
-
-echo ""
-echo "Installing KConfig tools"
-sudo apt-get install -qqy \
-  kconfig-frontends
-
-echo ""
-echo "Installing Rust toolchain"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
-echo ""
 echo "Downloading NuttX version $NUTTX_VERSION"
 rm -fr $NUTTX_PATH; mkdir $NUTTX_PATH; pushd $NUTTX_PATH
 

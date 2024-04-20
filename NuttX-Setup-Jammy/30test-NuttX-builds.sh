@@ -8,6 +8,10 @@ export PATH=$NUTTX_TOOLS/xtensa-esp32s3-elf-gcc/bin:$PATH
 export PATH=$NUTTX_TOOLS/riscv-none-elf-gcc/bin:$PATH
 export PATH=$NUTTX_TOOLS/gcc-arm-none-eabi/bin:$PATH
 export PATH=$NUTTX_TOOLS/rust/cargo/bin:$PATH
+<<<<<<< HEAD
+=======
+echo "PATH: $PATH"
+>>>>>>> 872a73e0759760a7e6e6bc01e56913bd5f09b699
 
 pushd $NUTTX_PATH/nuttx
 
@@ -16,7 +20,7 @@ rm -fr $NUTTX_TESTS; mkdir --parents $NUTTX_TESTS
 
   for configuration in \
    `grep -E \
-      'esp32c6-devkit|esp32c3-devkit|esp32s3-devkit|raspberrypi-pico|teensy-4' \
+      'esp32c6-devkitc:esp32c3-devkit|esp32s3-devkit|raspberrypi-pico|teensy-4' \
       $NUTTX_PATH/supported-configurations.txt`
   do
     echo ""
