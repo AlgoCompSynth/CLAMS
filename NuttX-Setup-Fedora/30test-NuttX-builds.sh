@@ -1,1 +1,0 @@
-../NuttX-Setup-Jammy/30test-NuttX-builds.sh
