@@ -38,14 +38,4 @@ pip install --upgrade esptool imgtool
 deactivate
 popd
 
-echo "Cloning ESP-IDF repository"
-rm -fr $ESP_IDF_PATH; mkdir --parents $ESP_IDF_PATH; pushd $ESP_IDF_PATH
-git clone -b v$ESP_IDF_VERSION --recursive https://github.com/espressif/esp-idf.git > /dev/null 2>&1
-
-echo "Installing esp32s3 tools - RISC-V is handled by NuttX"
-cd esp-idf
-./install.sh esp32s3
-
-popd
-
 echo "Finished!"
