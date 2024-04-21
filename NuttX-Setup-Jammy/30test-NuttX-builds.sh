@@ -9,26 +9,26 @@ echo ""
 echo "Setting environment variables"
 source ./set_pico_envars
 
-echo "Adding NuttX tools to PATH"
+echo "Adding esp32s3 tools to PATH"
 export PATH=$NUTTX_TOOLS/xtensa-esp32s3-elf-gcc/bin:$PATH
+source $NUTTX_PATH/esptool/bin/activate
+
+echo ""
+echo "Adding esp32-c3 tools to PATH"
 export PATH=$NUTTX_TOOLS/riscv-none-elf-gcc/bin:$PATH
-export PATH=$NUTTX_TOOLS/gcc-arm-none-eabi/bin:$PATH
-export PATH=$NUTTX_TOOLS/rust/cargo/bin:$PATH
+
+echo ""
+echo "PATH: $PATH"
 
 pushd $NUTTX_PATH/nuttx
 
-#echo ""
-#echo "Creating and activating 'esptool' virtual environment"
-#rm -fr esptool; python3 -m venv esptool; source ./esptool/bin/activate
-#pip install --upgrade esptool imgtool
-echo "PATH: $PATH"
-
+echo ""
 echo "Creating fresh test output directory"
 rm -fr $NUTTX_TESTS; mkdir --parents $NUTTX_TESTS
 
   for configuration in \
+    'esp32c6-devkitc:esp32c3-devkit|esp32s3-devkit|raspberrypi-pico|teensy-4' \
    `grep -E \
-      'esp32c6-devkitc:esp32c3-devkit|esp32s3-devkit|raspberrypi-pico|teensy-4' \
       $NUTTX_PATH/supported-configurations.txt`
   do
     echo ""
@@ -51,6 +51,9 @@ rm -fr $NUTTX_TESTS; mkdir --parents $NUTTX_TESTS
       # make artifacts like Pico SDK makes
       ln -s nuttx nuttx.elf
       if [[ "$configuration" =~ "esp32c3" ]]
+      then
+        riscv-none-elf-objdump -d nuttx.elf > nuttx.dis
+      elif [[ "$configuration" =~ "esp32c6" ]]
       then
         riscv-none-elf-objdump -d nuttx.elf > nuttx.dis
       elif [[ "$configuration" =~ "esp32s3" ]]
