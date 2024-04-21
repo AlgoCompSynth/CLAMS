@@ -27,9 +27,13 @@ podman cp nuttx-tools-container:/tools $NUTTX_PATH/
 
 echo ""
 echo "CLAMS Distrobox is ready!"
-echo "1. 'cd ../NuttX-Setup-Jammy'"
+echo "1. 'cd ../Pico-Setup-Jammy'"
 echo "2. 'distrobox enter CLAMS'"
-echo "3. Continue from './20NuttX-Depends.sh'"
+echo "3. Install Pico SDK"
+echo "   * ./10command-line.sh"
+echo "   * ./20pico-toolchain.sh"
+echo "4. 'cd ../Nuttx-Setup-Jammy'"
+echo "5. Continue with './20NuttX-Depends.sh'"
 
 echo ""
 echo "Finished!"
