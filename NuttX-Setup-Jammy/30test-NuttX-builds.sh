@@ -14,11 +14,11 @@ echo "Adding rust tools to PATH"
 export PATH=$NUTTX_TOOLS/rust/cargo/bin:$PATH
 
 echo ""
-echo "Adding esp32-c3 tools to PATH"
+echo "Adding esp32-c3/c6 tools to PATH"
 export PATH=$NUTTX_TOOLS/riscv-none-elf-gcc/bin:$PATH
 
-echo "Adding esp32s3 tools to PATH"
-source $ESP_IDF_PATH/esp-idf/export.sh
+echo "Adding esp32-s3 tools to PATH"
+export PATH=$NUTTX_TOOLS/xtensa-esp32s3-elf-gcc/bin:$PATH
 source $NUTTX_PATH/esptool/bin/activate
 
 echo ""
