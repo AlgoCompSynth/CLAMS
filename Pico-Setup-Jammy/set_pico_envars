@@ -1,0 +1,38 @@
+echo "Checking for CLAMS_BASE"
+if [ "${#CLAMS_BASE}" -lt "1" ]
+then
+  echo "CLAMS_BASE must be defined - exiting with error -1024!"
+  exit -1024
+fi
+
+# Don't change any of these!
+echo "Creating CLAMS_BASE if necessary"; mkdir --parents $CLAMS_BASE
+
+export PICO_PATH=$CLAMS_BASE/pico
+export PICO_SDK_PATH=$PICO_PATH/pico-sdk
+export PICO_EXAMPLES_PATH=$PICO_PATH/pico-examples
+export PICO_EXTRAS_PATH=$PICO_PATH/pico-extras
+export PICO_PLAYGROUND_PATH=$PICO_PATH/pico-playground
+export PICO_PIMORONI_PATH=$PICO_PATH/pimoroni-pico
+export PICO_OPENOCD_PATH=$PICO_PATH/openocd
+export PICO_PICOTOOL_PATH=$PICO_PATH/picotool
+export PICO_PICOVISION_PATH=$PICO_PATH/picovision
+export PICO_PICOVISION_PROJECTS_PATH=$PICO_PATH/picovision-projects
+export PIMORONI_PICO_VERSION="v1.21.0"
+export PICOVISION_VERSION="v1.0.2"
+export PICOVISION_BOILERPLATE_VERSION="main"
+export PICOVISION_PROJECTS_VERSION="main"
+export PICOVISION_PYTHON_DOWNLOAD="https://github.com/pimoroni/picovision/releases/download/v1.0.2/pimoroni-picovision-v1.0.2-micropython.uf2"
+export PICOVISION_PYTHON_WIDESCREEN_DOWNLOAD="https://github.com/pimoroni/picovision/releases/download/v1.0.2/pimoroni-picovision-widescreen-v1.0.2-micropython.uf2"
+export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.2.10.uf2"
+export MICROPYTHON_DOWNLOAD="https://micropython.org/resources/firmware/RPI_PICO_W-20240105-v1.22.1.uf2"
+
+# NuttX
+export NUTTX_PATH=$CLAMS_BASE/nuttxspace
+export NUTTX_VERSION="master"
+export NUTTX_TOOLS=$NUTTX_PATH/tools
+export NUTTX_TESTS=$NUTTX_PATH/tests
+
+# ESP-IDF
+export ESP_IDF_PATH=$CLAMS_BASE/esp
+export ESP_IDF_VERSION="5.2.1"
