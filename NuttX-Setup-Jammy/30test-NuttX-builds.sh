@@ -9,27 +9,28 @@ echo ""
 echo "Setting environment variables"
 source ./set_pico_envars
 
-echo "Adding esp32s3 tools to PATH"
-export PATH=$NUTTX_TOOLS/xtensa-esp32s3-elf-gcc/bin:$PATH
-source $NUTTX_PATH/esptool/bin/activate
+echo ""
+echo "Adding rust tools to PATH"
+export PATH=$NUTTX_TOOLS/rust/cargo/bin:$PATH
 
 echo ""
 echo "Adding esp32-c3 tools to PATH"
 export PATH=$NUTTX_TOOLS/riscv-none-elf-gcc/bin:$PATH
+
+echo "Adding esp32s3 tools to PATH"
+source $ESP_IDF_PATH/esp-idf/export.sh
+source $NUTTX_PATH/esptool/bin/activate
 
 echo ""
 echo "PATH: $PATH"
 
 pushd $NUTTX_PATH/nuttx
 
-echo ""
-echo "Creating fresh test output directory"
-rm -fr $NUTTX_TESTS; mkdir --parents $NUTTX_TESTS
-
   for configuration in \
    `grep -E \
-      'esp32c6-devkitc:esp32c3-devkit|esp32s3-devkit|raspberrypi-pico|teensy-4' \
-      $NUTTX_PATH/supported-configurations.txt`
+      'esp32c3-devkit|esp32c6-devkitc|esp32s3-devkit|raspberrypi-pico|teensy-4' \
+      $NUTTX_PATH/supported-configurations.txt \
+      | sort -u`
   do
     echo ""
     echo ""
@@ -42,7 +43,7 @@ rm -fr $NUTTX_TESTS; mkdir --parents $NUTTX_TESTS
       mkdir --parents $result_path_name
   
       echo "...cleaning"
-      make distclean || true
+      make distclean > $result_path_name/clean.log 2>&1
       echo "...configuring"
       ./tools/configure.sh -l $configuration > $result_path_name/configure.log 2>&1
       echo "...compiling and linking"

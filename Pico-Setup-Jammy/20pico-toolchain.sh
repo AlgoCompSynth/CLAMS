@@ -23,7 +23,7 @@ echo ""
 echo "Running pico_setup.sh"
 export SKIP_UART=1
 export SKIP_VSCODE=1
-/usr/bin/time ./pico_setup.sh 2>&1 | tee pico_setup.log
+/usr/bin/time ./pico_setup.sh > pico_setup.log 2>&1
 popd
 
 echo ""

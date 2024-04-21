@@ -15,7 +15,7 @@ echo ""
 echo "Installing NuttX dependencies"
 sudo apt-get update -qq
 sudo apt-get upgrade -qqy
-sudo apt-get install -qqy \
+sudo apt-get install -qqy --no-install-recommends \
   automake \
   binutils-dev \
   bison \
@@ -42,7 +42,7 @@ sudo apt-get install -qqy \
 
 echo ""
 echo "Installing KConfig tools"
-sudo apt-get install -qqy \
+sudo apt-get install -qqy --no-install-recommends \
   kconfig-frontends
 
 echo "Finished!!"
