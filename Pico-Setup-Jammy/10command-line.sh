@@ -29,7 +29,7 @@ sudo apt-get install -qqy --no-install-recommends \
   tmux \
   tree \
   usbutils \
-  vim-nox
+  vim
 
 echo ""
 echo "Updating databases"

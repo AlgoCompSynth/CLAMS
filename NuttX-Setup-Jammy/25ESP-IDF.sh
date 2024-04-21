@@ -28,13 +28,23 @@ sudo apt-get install -qqy --no-install-recommends \
   python3-venv \
   wget
 
+echo "Installing esptool and imgtool"
+pushd $NUTTX_PATH
+rm -fr esptool
+python3 -m venv esptool
+source ./esptool/bin/activate
+pip install --upgrade pip
+pip install --upgrade esptool imgtool
+deactivate
+popd
+
 echo "Cloning ESP-IDF repository"
 rm -fr $ESP_IDF_PATH; mkdir --parents $ESP_IDF_PATH; pushd $ESP_IDF_PATH
-git clone -b v$ESP_IDF_VERSION --recursive https://github.com/espressif/esp-idf.git
+git clone -b v$ESP_IDF_VERSION --recursive https://github.com/espressif/esp-idf.git > /dev/null 2>&1
 
-echo "Installing tools"
+echo "Installing esp32s3 tools - RISC-V is handled by NuttX"
 cd esp-idf
-./install.sh esp32s3,esp32c3,esp32c6
+./install.sh esp32s3
 
 popd
 
