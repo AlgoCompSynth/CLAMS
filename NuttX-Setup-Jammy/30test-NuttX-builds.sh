@@ -27,8 +27,8 @@ echo "Creating fresh test output directory"
 rm -fr $NUTTX_TESTS; mkdir --parents $NUTTX_TESTS
 
   for configuration in \
-    'esp32c6-devkitc:esp32c3-devkit|esp32s3-devkit|raspberrypi-pico|teensy-4' \
    `grep -E \
+      'esp32c6-devkitc:esp32c3-devkit|esp32s3-devkit|raspberrypi-pico|teensy-4' \
       $NUTTX_PATH/supported-configurations.txt`
   do
     echo ""
