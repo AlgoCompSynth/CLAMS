@@ -3,8 +3,8 @@
 set -e
 
 # https://nuttx.apache.org/docs/latest/quickstart/install.html
-echo "Setting CLAMS_BASE to CLAMS-Distrobox home"
-export CLAMS_BASE=$HOME/CLAMS-Distrobox
+echo "Setting CLAMS_BASE to $HOME"
+export CLAMS_BASE=$HOME
 
 echo ""
 echo "Setting environment variables"
