@@ -16,8 +16,8 @@ rm -fr $NUTTX_PATH; mkdir $NUTTX_PATH; pushd $NUTTX_PATH
 
 if [ "$NUTTX_VERSION" = "master" ]
 then
-  git clone --branch master https://github.com/apache/nuttx.git nuttx
-  git clone --branch master https://github.com/apache/nuttx-apps.git apps
+  git clone git@github.com:AlgoCompSynth/nuttx.git nuttx
+  git clone git@github.com:AlgoCompSynth/nuttx-apps.git apps
 else
   git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx.git nuttx
   git clone --branch nuttx-$NUTTX_VERSION https://github.com/apache/nuttx-apps.git apps
