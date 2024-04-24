@@ -14,7 +14,7 @@ distrobox create \
   --home $HOME/CLAMS-Distrobox \
   --init \
   --additional-packages \
-    "systemd libpam-systemd apt-file git git-lfs time tree vim"
+    "systemd libpam-systemd apt-file git git-lfs locate software-properties-common time tree vim-nox zsh zsh-autosuggestions zsh-syntax-highlighting"
 
 echo ""
 echo "Copying $HOME/.ssh into Distrobox home directory"
