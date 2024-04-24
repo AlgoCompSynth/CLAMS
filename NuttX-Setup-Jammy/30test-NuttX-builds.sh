@@ -9,11 +9,9 @@ echo ""
 echo "Setting environment variables"
 source ./set_pico_envars
 
-echo ""
 echo "Adding Arm tools to PATH"
 export PATH=$NUTTX_TOOLS/gcc-arm-none-eabi/bin:$PATH
 
-echo ""
 echo "Adding ESP32-C3/C6 tools to PATH"
 export PATH=$NUTTX_TOOLS/riscv-none-elf-gcc/bin:$PATH
 
@@ -21,7 +19,9 @@ echo "Adding ESP32-S3 tools to PATH"
 export PATH=$NUTTX_TOOLS/xtensa-esp32s3-elf-gcc/bin:$PATH
 source $NUTTX_PATH/esptool/bin/activate
 
-echo ""
+echo "Adding kconfig front ends to PATH"
+export PATH=$NUTTX_TOOLS/kconfig-frontends/bin:$PATH
+
 echo "Adding rust tools to PATH"
 export PATH=$NUTTX_TOOLS/rust/cargo/bin:$PATH
 echo "Setting default rust to stable"
