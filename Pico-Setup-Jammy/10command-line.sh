@@ -18,6 +18,7 @@ sudo apt-get install -qqy --no-install-recommends \
   htop \
   info \
   libusb-dev \
+  locate \
   man-db \
   minicom \
   ninja-build \
@@ -29,7 +30,10 @@ sudo apt-get install -qqy --no-install-recommends \
   tmux \
   tree \
   usbutils \
-  vim
+  vim-nox \
+  zsh \
+  zsh-autosuggestions \
+  zsh-syntax-highlighting
 
 echo ""
 echo "Updating databases"
