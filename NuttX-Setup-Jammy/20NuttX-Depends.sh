@@ -20,14 +20,18 @@ sudo apt-get install -qqy --no-install-recommends \
   binutils-dev \
   bison \
   build-essential \
+  gcc-multilib \
   flex \
   gettext \
   genromfs \
   gperf \
+  libasound2-dev \
   libelf-dev \
   libexpat-dev \
   libgmp-dev \
   libisl-dev \
+  libmad0-dev \
+  libmp3lame-dev \
   libmpc-dev \
   libmpfr-dev \
   libncurses5-dev \
