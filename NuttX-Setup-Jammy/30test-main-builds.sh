@@ -44,9 +44,8 @@ pushd $NUTTX_PATH/nuttx
 
   for configuration in \
    `grep -E \
-      "esp32c3-devkit|esp32c6-devkitc|esp32s3-devkit|raspberrypi-pico|sim:|teensy-4" \
+      "esp32c3-devkit|esp32c6-devkitc|esp32s3-devkit|raspberrypi-pico|teensy-4" \
       $NUTTX_PATH/supported-configurations.txt \
-      | grep -v "z80" \
       | sort -u`
   do
     echo ""
