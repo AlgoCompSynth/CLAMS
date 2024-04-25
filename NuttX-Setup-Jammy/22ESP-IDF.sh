@@ -8,6 +8,7 @@ export CLAMS_BASE=$HOME
 echo "Setting environment variables"
 source ./set_pico_envars
 
+# https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html#get-started-prerequisites
 echo "Linux prerequisites"
 sudo apt-get update -qq
 sudo apt-get upgrade -qqy
@@ -29,13 +30,8 @@ sudo apt-get install -qqy --no-install-recommends \
   wget
 
 echo "Installing esptool and imgtool"
-pushd $NUTTX_PATH
-rm -fr esptool
-python3 -m venv esptool
-source ./esptool/bin/activate
-pip install --upgrade pip
+source $NUTTX_VENV/bin/activate
 pip install --upgrade esptool imgtool
 deactivate
-popd
 
 echo "Finished!"
