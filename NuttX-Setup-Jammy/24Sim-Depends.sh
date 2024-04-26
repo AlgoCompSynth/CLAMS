@@ -16,6 +16,7 @@ echo "Installing 'sim board' dependencies"
 sudo apt-get install -qqy --no-install-recommends \
   libasound2-dev \
   libxext-dev \
+  libmad0-dev \
   libmp3lame-dev \
   libx11-dev
 

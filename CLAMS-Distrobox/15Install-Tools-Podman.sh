@@ -7,7 +7,7 @@ export CLAMS_BASE=$HOME/CLAMS-Distrobox
 
 source ./set_pico_envars
 
-pushd $NUTTX_PATH/nuttx/tools/ci/docker/linux
+pushd $NUTTX_DOCKERFILE_PATH
 echo ""
 echo "Builing tools image"
 /usr/bin/time podman build --tag localhost/nuttx-tools-image:latest .
