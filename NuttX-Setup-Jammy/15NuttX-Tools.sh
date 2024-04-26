@@ -7,7 +7,7 @@ export CLAMS_BASE=$HOME
 
 source ./set_pico_envars
 
-pushd $NUTTX_PATH/nuttx/tools/ci/docker/linux
+pushd $NUTTX_DOCKERFILE_PATH
 echo ""
 echo "Builing tools image"
 /usr/bin/time docker build --tag localhost/nuttx-tools-image:latest .

@@ -10,8 +10,6 @@ source ./set_pico_envars
 
 # https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html#get-started-prerequisites
 echo "Linux prerequisites"
-sudo apt-get update -qq
-sudo apt-get upgrade -qqy
 sudo apt-get install -qqy --no-install-recommends \
   bison \
   ccache \

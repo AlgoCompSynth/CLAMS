@@ -33,7 +33,11 @@ export NUTTX_VERSION="master"
 export NUTTX_TOOLS=$NUTTX_PATH/tools
 export NUTTX_TESTS=$NUTTX_PATH/tests
 export NUTTX_VENV=$NUTTX_PATH/nuttx-venv
-
-# ESP-IDF
-export ESP_IDF_PATH=$CLAMS_BASE/esp
-export ESP_IDF_VERSION="5.2.1"
+export NUTTX_DOCKERFILE_PATH=$NUTTX_PATH/nuttx/tools/ci/docker/linux
+export NUTTX_ARM_TOOLS=$NUTTX_TOOLS/gcc-arm-none-eabi/bin
+export NUTTX_RISCV_TOOLS=$NUTTX_TOOLS/riscv-none-elf-gcc/bin
+export NUTTX_XTENSA_TOOLS=$NUTTX_TOOLS/xtensa-esp32s3-elf-gcc/bin
+export NUTTX_KCONFIG_TOOLS=$NUTTX_TOOLS/kconfig-frontends/bin
+export NUTTX_RUST_TOOLS=$NUTTX_TOOLS/rust/cargo/bin
+export NUTTX_WASI_TOOLS=$NUTTX_TOOLS/wasi-sdk/bin
+export NUTTX_FAILED_TESTS=$NUTTX_PATH/failed_tests
