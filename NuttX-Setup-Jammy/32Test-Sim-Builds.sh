@@ -63,6 +63,11 @@ pushd $NUTTX_PATH/nuttx
       make distclean > $result_path_name/clean.log 2>&1
       echo "...configuring"
       ./tools/configure.sh -l $configuration > $result_path_name/configure.log 2>&1
+
+      echo "...disabling CONFIG_SIM_M32"
+      kconfig-tweak --disable CONFIG_SIM_M32 >> $result_path_name/configure.log 2>&1
+      make olddefconfig >> $result_path_name/configure.log 2>&1
+
       echo "...compiling and linking"
       /usr/bin/time make > $result_path_name/make.log 2>&1 || true
   
