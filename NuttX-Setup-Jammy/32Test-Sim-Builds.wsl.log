@@ -1,0 +1,783 @@
+Setting CLAMS_BASE to /home/znmeb
+
+Setting environment variables
+Checking for CLAMS_BASE
+Creating CLAMS_BASE if necessary
+Adding Python virtual environment
+Adding Arm tools to PATH
+Adding ESP32-C3/C6 tools to PATH
+Adding ESP32-S3 tools to PATH
+Adding kconfig front ends to PATH
+Adding rust tools to PATH
+Setting default rust to stable
+info: using existing install for 'stable-x86_64-unknown-linux-gnu'
+info: default toolchain set to 'stable-x86_64-unknown-linux-gnu'
+
+  stable-x86_64-unknown-linux-gnu unchanged - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+Adding wasi-sdk to PATH
+
+PATH: /home/znmeb/nuttxspace/tools/wasi-sdk/bin:/home/znmeb/nuttxspace/tools/rust/cargo/bin:/home/znmeb/nuttxspace/tools/kconfig-frontends/bin:/home/znmeb/nuttxspace/tools/xtensa-esp32s3-elf-gcc/bin:/home/znmeb/nuttxspace/tools/riscv-none-elf-gcc/bin:/home/znmeb/nuttxspace/tools/gcc-arm-none-eabi/bin:/home/znmeb/nuttxspace/nuttx-venv/bin:/home/znmeb/.local/bin:/home/znmeb/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Calibre2/:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/usbipd-win/:/mnt/c/Program Files/PowerShell/7/:/mnt/c/Users/znmeb/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/znmeb/AppData/Local/Programs/Microsoft VS Code Insiders/bin:/snap/bin:/home/znmeb/bin:/home/znmeb/.local/bin:/home/znmeb/bin:/home/znmeb/.local/bin
+~/nuttxspace/nuttx ~/Projects/CLAMS/NuttX-Setup-Jammy
+
+Creating fresh directory for failed tests
+
+
+Testing configuration sim:adb
+...creating /home/znmeb/nuttxspace/tests/sim..adb
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:adb artifacts to /home/znmeb/nuttxspace/tests/sim..adb
+
+
+Testing configuration sim:alsa
+...creating /home/znmeb/nuttxspace/tests/sim..alsa
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:alsa artifacts to /home/znmeb/nuttxspace/tests/sim..alsa
+
+
+Testing configuration sim:asan
+...creating /home/znmeb/nuttxspace/tests/sim..asan
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:asan artifacts to /home/znmeb/nuttxspace/tests/sim..asan
+
+
+Testing configuration sim:bas
+...creating /home/znmeb/nuttxspace/tests/sim..bas
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:bas artifacts to /home/znmeb/nuttxspace/tests/sim..bas
+
+
+Testing configuration sim:bastest
+...creating /home/znmeb/nuttxspace/tests/sim..bastest
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:bastest artifacts to /home/znmeb/nuttxspace/tests/sim..bastest
+
+
+Testing configuration sim:bluetooth
+...creating /home/znmeb/nuttxspace/tests/sim..bluetooth
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:bluetooth artifacts to /home/znmeb/nuttxspace/tests/sim..bluetooth
+
+
+Testing configuration sim:bthcisock
+...creating /home/znmeb/nuttxspace/tests/sim..bthcisock
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:bthcisock artifacts to /home/znmeb/nuttxspace/tests/sim..bthcisock
+
+
+Testing configuration sim:btuart
+...creating /home/znmeb/nuttxspace/tests/sim..btuart
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:btuart artifacts to /home/znmeb/nuttxspace/tests/sim..btuart
+
+
+Testing configuration sim:citest
+...creating /home/znmeb/nuttxspace/tests/sim..citest
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...make failed - moving logfiles to /home/znmeb/nuttxspace/failed_tests
+
+
+Testing configuration sim:configdata
+...creating /home/znmeb/nuttxspace/tests/sim..configdata
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:configdata artifacts to /home/znmeb/nuttxspace/tests/sim..configdata
+
+
+Testing configuration sim:crypto
+...creating /home/znmeb/nuttxspace/tests/sim..crypto
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...make failed - moving logfiles to /home/znmeb/nuttxspace/failed_tests
+
+
+Testing configuration sim:cxxtest
+...creating /home/znmeb/nuttxspace/tests/sim..cxxtest
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:cxxtest artifacts to /home/znmeb/nuttxspace/tests/sim..cxxtest
+
+
+Testing configuration sim:duktape
+...creating /home/znmeb/nuttxspace/tests/sim..duktape
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:duktape artifacts to /home/znmeb/nuttxspace/tests/sim..duktape
+
+
+Testing configuration sim:dynconns
+...creating /home/znmeb/nuttxspace/tests/sim..dynconns
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:dynconns artifacts to /home/znmeb/nuttxspace/tests/sim..dynconns
+
+
+Testing configuration sim:elf
+...creating /home/znmeb/nuttxspace/tests/sim..elf
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:elf artifacts to /home/znmeb/nuttxspace/tests/sim..elf
+
+
+Testing configuration sim:fb
+...creating /home/znmeb/nuttxspace/tests/sim..fb
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:fb artifacts to /home/znmeb/nuttxspace/tests/sim..fb
+
+
+Testing configuration sim:foc
+...creating /home/znmeb/nuttxspace/tests/sim..foc
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:foc artifacts to /home/znmeb/nuttxspace/tests/sim..foc
+
+
+Testing configuration sim:ipforward
+...creating /home/znmeb/nuttxspace/tests/sim..ipforward
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:ipforward artifacts to /home/znmeb/nuttxspace/tests/sim..ipforward
+
+
+Testing configuration sim:kasan
+...creating /home/znmeb/nuttxspace/tests/sim..kasan
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:kasan artifacts to /home/znmeb/nuttxspace/tests/sim..kasan
+
+
+Testing configuration sim:libcxxtest
+...creating /home/znmeb/nuttxspace/tests/sim..libcxxtest
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...make failed - moving logfiles to /home/znmeb/nuttxspace/failed_tests
+
+
+Testing configuration sim:linuxi2c
+...creating /home/znmeb/nuttxspace/tests/sim..linuxi2c
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:linuxi2c artifacts to /home/znmeb/nuttxspace/tests/sim..linuxi2c
+
+
+Testing configuration sim:linuxspi
+...creating /home/znmeb/nuttxspace/tests/sim..linuxspi
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:linuxspi artifacts to /home/znmeb/nuttxspace/tests/sim..linuxspi
+
+
+Testing configuration sim:loadable
+...creating /home/znmeb/nuttxspace/tests/sim..loadable
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:loadable artifacts to /home/znmeb/nuttxspace/tests/sim..loadable
+
+
+Testing configuration sim:lua
+...creating /home/znmeb/nuttxspace/tests/sim..lua
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:lua artifacts to /home/znmeb/nuttxspace/tests/sim..lua
+
+
+Testing configuration sim:lvgl_fb
+...creating /home/znmeb/nuttxspace/tests/sim..lvgl_fb
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:lvgl_fb artifacts to /home/znmeb/nuttxspace/tests/sim..lvgl_fb
+
+
+Testing configuration sim:lvgl_lcd
+...creating /home/znmeb/nuttxspace/tests/sim..lvgl_lcd
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:lvgl_lcd artifacts to /home/znmeb/nuttxspace/tests/sim..lvgl_lcd
+
+
+Testing configuration sim:matter
+...creating /home/znmeb/nuttxspace/tests/sim..matter
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...make failed - moving logfiles to /home/znmeb/nuttxspace/failed_tests
+
+
+Testing configuration sim:minibasic
+...creating /home/znmeb/nuttxspace/tests/sim..minibasic
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:minibasic artifacts to /home/znmeb/nuttxspace/tests/sim..minibasic
+
+
+Testing configuration sim:minmea
+...creating /home/znmeb/nuttxspace/tests/sim..minmea
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...make failed - moving logfiles to /home/znmeb/nuttxspace/failed_tests
+
+
+Testing configuration sim:module
+...creating /home/znmeb/nuttxspace/tests/sim..module
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:module artifacts to /home/znmeb/nuttxspace/tests/sim..module
+
+
+Testing configuration sim:module32
+...creating /home/znmeb/nuttxspace/tests/sim..module32
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:module32 artifacts to /home/znmeb/nuttxspace/tests/sim..module32
+
+
+Testing configuration sim:mount
+...creating /home/znmeb/nuttxspace/tests/sim..mount
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:mount artifacts to /home/znmeb/nuttxspace/tests/sim..mount
+
+
+Testing configuration sim:mtdpart
+...creating /home/znmeb/nuttxspace/tests/sim..mtdpart
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:mtdpart artifacts to /home/znmeb/nuttxspace/tests/sim..mtdpart
+
+
+Testing configuration sim:mtdrwb
+...creating /home/znmeb/nuttxspace/tests/sim..mtdrwb
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:mtdrwb artifacts to /home/znmeb/nuttxspace/tests/sim..mtdrwb
+
+
+Testing configuration sim:nettest
+...creating /home/znmeb/nuttxspace/tests/sim..nettest
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nettest artifacts to /home/znmeb/nuttxspace/tests/sim..nettest
+
+
+Testing configuration sim:nimble
+...creating /home/znmeb/nuttxspace/tests/sim..nimble
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nimble artifacts to /home/znmeb/nuttxspace/tests/sim..nimble
+
+
+Testing configuration sim:note
+...creating /home/znmeb/nuttxspace/tests/sim..note
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:note artifacts to /home/znmeb/nuttxspace/tests/sim..note
+
+
+Testing configuration sim:nsh
+...creating /home/znmeb/nuttxspace/tests/sim..nsh
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nsh artifacts to /home/znmeb/nuttxspace/tests/sim..nsh
+
+
+Testing configuration sim:nsh2
+...creating /home/znmeb/nuttxspace/tests/sim..nsh2
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nsh2 artifacts to /home/znmeb/nuttxspace/tests/sim..nsh2
+
+
+Testing configuration sim:nshcromfs
+...creating /home/znmeb/nuttxspace/tests/sim..nshcromfs
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nshcromfs artifacts to /home/znmeb/nuttxspace/tests/sim..nshcromfs
+
+
+Testing configuration sim:nx
+...creating /home/znmeb/nuttxspace/tests/sim..nx
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nx artifacts to /home/znmeb/nuttxspace/tests/sim..nx
+
+
+Testing configuration sim:nx11
+...creating /home/znmeb/nuttxspace/tests/sim..nx11
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nx11 artifacts to /home/znmeb/nuttxspace/tests/sim..nx11
+
+
+Testing configuration sim:nxcamera
+...creating /home/znmeb/nuttxspace/tests/sim..nxcamera
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...make failed - moving logfiles to /home/znmeb/nuttxspace/failed_tests
+
+
+Testing configuration sim:nxffs
+...creating /home/znmeb/nuttxspace/tests/sim..nxffs
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nxffs artifacts to /home/znmeb/nuttxspace/tests/sim..nxffs
+
+
+Testing configuration sim:nxlines
+...creating /home/znmeb/nuttxspace/tests/sim..nxlines
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nxlines artifacts to /home/znmeb/nuttxspace/tests/sim..nxlines
+
+
+Testing configuration sim:nxscope
+...creating /home/znmeb/nuttxspace/tests/sim..nxscope
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nxscope artifacts to /home/znmeb/nuttxspace/tests/sim..nxscope
+
+
+Testing configuration sim:nxwm
+...creating /home/znmeb/nuttxspace/tests/sim..nxwm
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:nxwm artifacts to /home/znmeb/nuttxspace/tests/sim..nxwm
+
+
+Testing configuration sim:ostest
+...creating /home/znmeb/nuttxspace/tests/sim..ostest
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:ostest artifacts to /home/znmeb/nuttxspace/tests/sim..ostest
+
+
+Testing configuration sim:ostest_oneholder
+...creating /home/znmeb/nuttxspace/tests/sim..ostest_oneholder
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:ostest_oneholder artifacts to /home/znmeb/nuttxspace/tests/sim..ostest_oneholder
+
+
+Testing configuration sim:pf_ieee802154
+...creating /home/znmeb/nuttxspace/tests/sim..pf_ieee802154
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:pf_ieee802154 artifacts to /home/znmeb/nuttxspace/tests/sim..pf_ieee802154
+
+
+Testing configuration sim:pktradio
+...creating /home/znmeb/nuttxspace/tests/sim..pktradio
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:pktradio artifacts to /home/znmeb/nuttxspace/tests/sim..pktradio
+
+
+Testing configuration sim:posix_spawn
+...creating /home/znmeb/nuttxspace/tests/sim..posix_spawn
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:posix_spawn artifacts to /home/znmeb/nuttxspace/tests/sim..posix_spawn
+
+
+Testing configuration sim:posix_test
+...creating /home/znmeb/nuttxspace/tests/sim..posix_test
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...make failed - moving logfiles to /home/znmeb/nuttxspace/failed_tests
+
+
+Testing configuration sim:rc
+...creating /home/znmeb/nuttxspace/tests/sim..rc
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:rc artifacts to /home/znmeb/nuttxspace/tests/sim..rc
+
+
+Testing configuration sim:romfs
+...creating /home/znmeb/nuttxspace/tests/sim..romfs
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:romfs artifacts to /home/znmeb/nuttxspace/tests/sim..romfs
+
+
+Testing configuration sim:rpproxy
+...creating /home/znmeb/nuttxspace/tests/sim..rpproxy
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:rpproxy artifacts to /home/znmeb/nuttxspace/tests/sim..rpproxy
+
+
+Testing configuration sim:rpserver
+...creating /home/znmeb/nuttxspace/tests/sim..rpserver
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:rpserver artifacts to /home/znmeb/nuttxspace/tests/sim..rpserver
+
+
+Testing configuration sim:rtptools
+...creating /home/znmeb/nuttxspace/tests/sim..rtptools
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:rtptools artifacts to /home/znmeb/nuttxspace/tests/sim..rtptools
+
+
+Testing configuration sim:rust
+...creating /home/znmeb/nuttxspace/tests/sim..rust
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:rust artifacts to /home/znmeb/nuttxspace/tests/sim..rust
+
+
+Testing configuration sim:segger
+...creating /home/znmeb/nuttxspace/tests/sim..segger
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:segger artifacts to /home/znmeb/nuttxspace/tests/sim..segger
+
+
+Testing configuration sim:sensor
+...creating /home/znmeb/nuttxspace/tests/sim..sensor
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:sensor artifacts to /home/znmeb/nuttxspace/tests/sim..sensor
+
+
+Testing configuration sim:sixlowpan
+...creating /home/znmeb/nuttxspace/tests/sim..sixlowpan
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:sixlowpan artifacts to /home/znmeb/nuttxspace/tests/sim..sixlowpan
+
+
+Testing configuration sim:smartfs
+...creating /home/znmeb/nuttxspace/tests/sim..smartfs
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:smartfs artifacts to /home/znmeb/nuttxspace/tests/sim..smartfs
+
+
+Testing configuration sim:smp
+...creating /home/znmeb/nuttxspace/tests/sim..smp
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:smp artifacts to /home/znmeb/nuttxspace/tests/sim..smp
+
+
+Testing configuration sim:sotest
+...creating /home/znmeb/nuttxspace/tests/sim..sotest
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:sotest artifacts to /home/znmeb/nuttxspace/tests/sim..sotest
+
+
+Testing configuration sim:sotest32
+...creating /home/znmeb/nuttxspace/tests/sim..sotest32
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:sotest32 artifacts to /home/znmeb/nuttxspace/tests/sim..sotest32
+
+
+Testing configuration sim:spiffs
+...creating /home/znmeb/nuttxspace/tests/sim..spiffs
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:spiffs artifacts to /home/znmeb/nuttxspace/tests/sim..spiffs
+
+
+Testing configuration sim:tcpblaster
+...creating /home/znmeb/nuttxspace/tests/sim..tcpblaster
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:tcpblaster artifacts to /home/znmeb/nuttxspace/tests/sim..tcpblaster
+
+
+Testing configuration sim:tcploop
+...creating /home/znmeb/nuttxspace/tests/sim..tcploop
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:tcploop artifacts to /home/znmeb/nuttxspace/tests/sim..tcploop
+
+
+Testing configuration sim:touchscreen
+...creating /home/znmeb/nuttxspace/tests/sim..touchscreen
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:touchscreen artifacts to /home/znmeb/nuttxspace/tests/sim..touchscreen
+
+
+Testing configuration sim:toywasm
+...creating /home/znmeb/nuttxspace/tests/sim..toywasm
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:toywasm artifacts to /home/znmeb/nuttxspace/tests/sim..toywasm
+
+
+Testing configuration sim:udgram
+...creating /home/znmeb/nuttxspace/tests/sim..udgram
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:udgram artifacts to /home/znmeb/nuttxspace/tests/sim..udgram
+
+
+Testing configuration sim:unionfs
+...creating /home/znmeb/nuttxspace/tests/sim..unionfs
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:unionfs artifacts to /home/znmeb/nuttxspace/tests/sim..unionfs
+
+
+Testing configuration sim:usbdev
+...creating /home/znmeb/nuttxspace/tests/sim..usbdev
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:usbdev artifacts to /home/znmeb/nuttxspace/tests/sim..usbdev
+
+
+Testing configuration sim:usbhost
+...creating /home/znmeb/nuttxspace/tests/sim..usbhost
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:usbhost artifacts to /home/znmeb/nuttxspace/tests/sim..usbhost
+
+
+Testing configuration sim:userfs
+...creating /home/znmeb/nuttxspace/tests/sim..userfs
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:userfs artifacts to /home/znmeb/nuttxspace/tests/sim..userfs
+
+
+Testing configuration sim:usrsocktest
+...creating /home/znmeb/nuttxspace/tests/sim..usrsocktest
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:usrsocktest artifacts to /home/znmeb/nuttxspace/tests/sim..usrsocktest
+
+
+Testing configuration sim:ustream
+...creating /home/znmeb/nuttxspace/tests/sim..ustream
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:ustream artifacts to /home/znmeb/nuttxspace/tests/sim..ustream
+
+
+Testing configuration sim:vncserver
+...creating /home/znmeb/nuttxspace/tests/sim..vncserver
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:vncserver artifacts to /home/znmeb/nuttxspace/tests/sim..vncserver
+
+
+Testing configuration sim:vpnkit
+...creating /home/znmeb/nuttxspace/tests/sim..vpnkit
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:vpnkit artifacts to /home/znmeb/nuttxspace/tests/sim..vpnkit
+
+
+Testing configuration sim:wakaama
+...creating /home/znmeb/nuttxspace/tests/sim..wakaama
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:wakaama artifacts to /home/znmeb/nuttxspace/tests/sim..wakaama
+
+
+Testing configuration sim:wamr
+...creating /home/znmeb/nuttxspace/tests/sim..wamr
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...make failed - moving logfiles to /home/znmeb/nuttxspace/failed_tests
+
+
+Testing configuration sim:windows
+...creating /home/znmeb/nuttxspace/tests/sim..windows
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...make failed - moving logfiles to /home/znmeb/nuttxspace/failed_tests
+
+
+Testing configuration sim:zipfs
+...creating /home/znmeb/nuttxspace/tests/sim..zipfs
+...cleaning
+...configuring
+...disabling CONFIG_SIM_M32
+...compiling and linking
+...saving sim:zipfs artifacts to /home/znmeb/nuttxspace/tests/sim..zipfs
+~/Projects/CLAMS/NuttX-Setup-Jammy
+Finished!
+2995.40user 527.21system 1:00:45elapsed 96%CPU (0avgtext+0avgdata 191260maxresident)k
+256592inputs+16195440outputs (6772major+524067828minor)pagefaults 0swaps
