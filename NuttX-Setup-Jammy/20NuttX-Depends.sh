@@ -48,8 +48,9 @@ sudo apt-get install -qqy --no-install-recommends \
   kconfig-frontends
 
 echo "Creating 'nuttx-venv' Python virtual environment'"
-python3 -m venv $NUTTX_VENV
+python3 -m venv --clear $NUTTX_VENV
 source $NUTTX_VENV/bin/activate
+pip install --upgrade wheel
 pip install --upgrade kconfiglib
 deactivate
 
