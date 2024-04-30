@@ -11,10 +11,23 @@ Adding ESP32-S3 tools to PATH
 Adding kconfig front ends to PATH
 Adding rust tools to PATH
 Setting default rust to stable
-info: using existing install for 'stable-x86_64-unknown-linux-gnu'
+info: syncing channel updates for 'stable-x86_64-unknown-linux-gnu'
+info: latest update on 2024-04-09, rust version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading component 'cargo'
+info: downloading component 'clippy'
+info: downloading component 'rust-docs'
+info: downloading component 'rust-std'
+info: downloading component 'rustc'
+info: downloading component 'rustfmt'
+info: installing component 'cargo'
+info: installing component 'clippy'
+info: installing component 'rust-docs'
+info: installing component 'rust-std'
+info: installing component 'rustc'
+info: installing component 'rustfmt'
 info: default toolchain set to 'stable-x86_64-unknown-linux-gnu'
 
-  stable-x86_64-unknown-linux-gnu unchanged - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+  stable-x86_64-unknown-linux-gnu installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
 
 Adding wasi-sdk to PATH
 
@@ -544,6 +557,14 @@ Testing configuration esp32s3-devkit:oneshot
 ...saving esp32s3-devkit:oneshot artifacts to /var/home/znmeb/CLAMS-Distrobox/nuttxspace/tests/esp32s3-devkit..oneshot
 
 
+Testing configuration esp32s3-devkit:pm
+...creating /var/home/znmeb/CLAMS-Distrobox/nuttxspace/tests/esp32s3-devkit..pm
+...cleaning
+...configuring
+...compiling and linking
+...saving esp32s3-devkit:pm artifacts to /var/home/znmeb/CLAMS-Distrobox/nuttxspace/tests/esp32s3-devkit..pm
+
+
 Testing configuration esp32s3-devkit:psram_octal
 ...creating /var/home/znmeb/CLAMS-Distrobox/nuttxspace/tests/esp32s3-devkit..psram_octal
 ...cleaning
@@ -1056,5 +1077,5 @@ Testing configuration teensy-4.x:sd-4.1
 ...saving teensy-4.x:sd-4.1 artifacts to /var/home/znmeb/CLAMS-Distrobox/nuttxspace/tests/teensy-4.x..sd-4.1
 /var/home/znmeb/Projects/CLAMS/NuttX-Setup-Jammy
 Finished!
-6701.32user 3165.77system 2:41:26elapsed 101%CPU (0avgtext+0avgdata 506604maxresident)k
-197584inputs+38689200outputs (5105major+948384978minor)pagefaults 0swaps
+6777.26user 3223.82system 2:43:24elapsed 102%CPU (0avgtext+0avgdata 506624maxresident)k
+307760inputs+42041192outputs (4980major+956727189minor)pagefaults 0swaps
