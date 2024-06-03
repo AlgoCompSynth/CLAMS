@@ -2,27 +2,28 @@
 
 set -e
 
-echo "Defining environment variables"
+echo ""
+echo "Setting environment variables"
+source ./SetEnvars.sh
+
+echo "Defining LOGFILE"
 export LOGFILE=$PWD/Logs/ZephyrSDK.log
-export ZEPHYR_PROJECT=$HOME/zephyrproject
-export ZEPHYR_SDK_URL="https://github.com/zephyrproject-rtos/sdk-ng/releases/download"
-export ZEPHYR_SDK_VERSION="0.16.5-1"
-export ZEPHYR_SDK_TARBALL="zephyr-sdk-${ZEPHYR_SDK_VERSION}_linux-x86_64.tar.xz"
 
 # https://docs.zephyrproject.org/latest/develop/getting_started/index.html
 echo ""
-echo "Downloading and checking tarball"
 pushd /tmp
 rm -fr zephyr-sdk-* *.sha256sum
+echo "Downloading tarball"
 wget --quiet \
   "$ZEPHYR_SDK_URL/v$ZEPHYR_SDK_VERSION/$ZEPHYR_SDK_TARBALL"
+echo "Checking tarball"
 wget --quiet -O - "$ZEPHYR_SDK_URL/v$ZEPHYR_SDK_VERSION/sha256.sum" \
   | shasum --check --ignore-missing
 echo "Unpacking tarball"
-tar xf "$ZEPHYR_SDK_TARBALL" \
+/usr/bin/time tar xf "$ZEPHYR_SDK_TARBALL" \
   >> $LOGFILE 2>&1
-echo "Moving zephyr-sdk-$ZEPHYR_SDK_VERSION to $ZEPHYR_PROJECT"
-mv zephyr-sdk-$ZEPHYR_SDK_VERSION $ZEPHYR_PROJECT/
+echo "Moving $ZEPHYR_SDK_DIR to $ZEPHYR_HOME"
+mv $ZEPHYR_SDK_DIR $ZEPHYR_HOME/
 popd
 
 echo ""
