@@ -2,6 +2,8 @@
 
 set -e
 
+echo "Defining LOGFILE"
+export LOGFILE=$PWD/Logs/Dependencies.log
 
 # https://docs.zephyrproject.org/latest/develop/getting_started/index.html
 echo ""
@@ -35,7 +37,7 @@ echo "Installing Linux dependencies"
   python3-wheel \
   wget \
   xz-utils \
-  2>&1 | tee LinuxDependencies.log
+  >> $LOGFILE 2>&1
 
 echo "Checking versions"
 cmake --version
@@ -52,18 +54,23 @@ source $ZEPHYR_PROJECT/.venv/bin/activate
 echo "PATH: $PATH"
 
 echo "Installing 'west'"
-pip install west
+/usr/bin/time pip install west \
+  >> $LOGFILE 2>&1
 
 echo "Getting Zephyr source code"
-west init $ZEPHYR_PROJECT
+/usr/bin/time west init $ZEPHYR_PROJECT \
+  >> $LOGFILE 2>&1
 pushd $ZEPHYR_PROJECT
-west update
+/usr/bin/time west update \
+  >> $LOGFILE 2>&1
 
 echo "Exporting Zephyr CMake package"
-west zephyr-export
+/usr/bin/time west zephyr-export \
+  >> $LOGFILE 2>&1
 
 echo "Installing Python dependencies in virtual environment"
-pip install -r $ZEPHYR_PROJECT/zephyr/scripts/requirements.txt
+/usr/bin/time pip install -r $ZEPHYR_PROJECT/zephyr/scripts/requirements.txt \
+  >> $LOGFILE 2>&1
 
 echo "Wrapping up"
 popd
