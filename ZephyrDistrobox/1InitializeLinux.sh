@@ -3,6 +3,7 @@
 set -e
 
 echo ""
+./unminimize.sh
 ./upgrades.sh
 
 echo "Creating $HOME/.local/bin and $HOME/bin"

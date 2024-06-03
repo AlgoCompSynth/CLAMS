@@ -2,7 +2,10 @@
 
 set -e
 
+echo "Updating package lists"
 sudo apt-get update -qq
-sudo apt-get upgrade -qqy
+echo "Upgrading"
+sudo apt-get upgrade -qqy > unminimize.log 2>&1
+echo "Unminimizing"
 sudo touch /etc/dpkg/dpkg.cfg.d/excludes
-echo "Y" | sudo unminimize 2>&1 | tee unminimize.log
+echo "Y" | sudo unminimize >> unminimize.log 2>&1
