@@ -10,8 +10,7 @@ echo "Defining LOGFILE"
 export LOGFILE=$PWD/Logs/ZephyrSDK.log
 
 # https://docs.zephyrproject.org/latest/develop/getting_started/index.html
-echo ""
-pushd /tmp
+echo ""; pushd /tmp
 rm -fr zephyr-sdk-* *.sha256sum
 echo "Downloading tarball"
 wget --quiet \
@@ -22,9 +21,13 @@ wget --quiet -O - "$ZEPHYR_SDK_URL/v$ZEPHYR_SDK_VERSION/sha256.sum" \
 echo "Unpacking tarball"
 /usr/bin/time tar xf "$ZEPHYR_SDK_TARBALL" \
   >> $LOGFILE 2>&1
-echo "Moving $ZEPHYR_SDK_DIR to $ZEPHYR_HOME"
-mv $ZEPHYR_SDK_DIR $ZEPHYR_HOME/
-popd
+echo "Moving $ZEPHYR_SDK_DIR to $HOME"
+mv $ZEPHYR_SDK_DIR $HOME/
+popd; echo ""
 
-echo ""
+echo ""; pushd $HOME/$ZEPHYR_SDK_DIR
+echo "Running SDK setup script"
+./setup.sh
+popd; echo ""
+
 echo "Finished"
