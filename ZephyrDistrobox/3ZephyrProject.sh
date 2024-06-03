@@ -10,6 +10,8 @@ export LOGFILE=$PWD/Logs/ZephyrProject.log
 echo "Defining ZEPHYR_PROJECT"
 export ZEPHYR_PROJECT=$HOME/zephyrproject
 echo "ZEPHYR_PROJECT: $ZEPHYR_PROJECT"
+echo "Removing any existing $ZEPHYR_PROJECT"
+rm -fr $ZEPHYR_PROJECT
 
 echo "Creating Python virtual environment"
 python3 -m venv $ZEPHYR_PROJECT/.venv
@@ -37,6 +39,7 @@ echo "Installing Python dependencies in virtual environment"
 
 echo "Wrapping up"
 popd
+echo ""
 deactivate
 echo "PATH: $PATH"
 

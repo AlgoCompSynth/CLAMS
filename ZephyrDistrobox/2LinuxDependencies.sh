@@ -9,9 +9,12 @@ export LOGFILE=$PWD/Logs/LinuxDependencies.log
 echo ""
 echo "Getting CMake repository"
 pushd /tmp
-wget https://apt.kitware.com/kitware-archive.sh
-sudo bash kitware-archive.sh
+wget https://apt.kitware.com/kitware-archive.sh \
+  >> $LOGFILE 2>&1
+sudo bash kitware-archive.sh \
+  >> $LOGFILE 2>&1
 popd
+echo ""
 
 echo "Installing Linux dependencies"
 /usr/bin/time sudo apt-get install -qqy --no-install-recommends \
