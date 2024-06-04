@@ -6,8 +6,8 @@ echo ""
 echo "Setting environment variables"
 source ./SetEnvars.sh
 
-echo "Defining LOGFILE"
 export LOGFILE=$PWD/Logs/ZephyrProject.log
+export SUPPORTED_BOARDS=$PWD/supported-boards.txt
 
 # https://docs.zephyrproject.org/latest/develop/getting_started/index.html
 
@@ -42,8 +42,9 @@ echo "Installing Python dependencies in virtual environment"
 /usr/bin/time pip install -r $ZEPHYR_HOME/zephyr/scripts/requirements.txt \
   >> $LOGFILE 2>&1
 
-echo "Listing boards"
-west boards | sort -u > $ZEPHYR_HOME/supported-boards.txt
+echo "Listing supported boards"
+west boards | sort -u > $SUPPORTED_BOARDS
+cp $SUPPORTED_BOARDS $ZEPHYR_HOME
 
 echo "Wrapping up"
 popd
