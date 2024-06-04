@@ -21,11 +21,11 @@ wget --quiet -O - "$ZEPHYR_SDK_URL/v$ZEPHYR_SDK_VERSION/sha256.sum" \
 echo "Unpacking tarball"
 /usr/bin/time tar xf "$ZEPHYR_SDK_TARBALL" \
   >> $LOGFILE 2>&1
-echo "Moving $ZEPHYR_SDK_DIR to $HOME"
-mv $ZEPHYR_SDK_DIR $HOME/
+echo "Moving $ZEPHYR_SDK_DIRECTORY to $HOME/$ZEPHYR_SDK_DIRECTORY"
+mv $ZEPHYR_SDK_DIRECTORY $HOME/$ZEPHYR_SDK_DIRECTORY
 popd; echo ""
 
-echo ""; pushd $HOME/$ZEPHYR_SDK_DIR
+echo ""; pushd $HOME/$ZEPHYR_SDK_DIRECTORY
 echo "Running SDK setup script"
 ./setup.sh
 popd; echo ""
