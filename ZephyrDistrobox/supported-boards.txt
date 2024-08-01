@@ -71,6 +71,7 @@ blueclover_plt_demo_v2
 bt510
 bt610
 b_u585i_iot02a
+bytesensi_l
 cc1352p1_launchxl
 cc1352r1_launchxl
 cc1352r_sensortag
@@ -133,6 +134,7 @@ frdm_k64f
 frdm_k82f
 frdm_ke15z
 frdm_ke17z
+frdm_ke17z512
 frdm_kl25z
 frdm_kw41z
 frdm_mcxn947
@@ -218,6 +220,9 @@ m5stack_atoms3_lite
 m5stack_core2
 m5stack_stamps3
 m5stickc_plus
+max32655evkit
+max32655fthr
+max32680evkit
 max32690evkit
 mec1501modular_assy6885
 mec15xxevb_assy6853
@@ -322,6 +327,7 @@ nucleo_g071rb
 nucleo_g0b1re
 nucleo_g431rb
 nucleo_g474re
+nucleo_h533re
 nucleo_h563zi
 nucleo_h723zg
 nucleo_h743zi
@@ -478,6 +484,7 @@ stm32h745i_disco
 stm32h747i_disco
 stm32h750b_dk
 stm32h7b3i_dk
+stm32h7s78_dk
 stm32l152c_disco
 stm32l1_disco
 stm32l476g_disco
