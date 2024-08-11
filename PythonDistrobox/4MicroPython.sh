@@ -7,7 +7,7 @@ export CLAMS_BASE=$HOME
 
 echo ""
 echo "Setting environment variables"
-source ./set_pico_envars
+source ../set_pico_envars
 
 echo "Downloading PicoVision MicroPython"
 curl -sOL $PICOVISION_PYTHON_DOWNLOAD
@@ -19,6 +19,8 @@ curl -sOL $MICROPYTHON_DOWNLOAD
 
 echo "Downloading flash_nuke.uf2"
 # https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html#resetting-flash-memory
+pushd ..
 curl -sOL https://datasheets.raspberrypi.com/soft/flash_nuke.uf2
+popd
 
 echo "Finished!"
