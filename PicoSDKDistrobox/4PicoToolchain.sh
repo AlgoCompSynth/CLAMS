@@ -7,7 +7,7 @@ export CLAMS_BASE=$HOME
 
 echo ""
 echo "Setting environment variables"
-source ./set_pico_envars
+source ../set_pico_envars
 
 echo ""
 echo "Creating fresh $PICO_PATH"
