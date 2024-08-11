@@ -1,0 +1,1 @@
+../PythonDistrobox/p10k.zsh
