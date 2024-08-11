@@ -7,7 +7,7 @@ export CLAMS_BASE=$HOME
 
 echo ""
 echo "Setting environment variables"
-source ./set_pico_envars
+source ../set_pico_envars
 
 export HERE=$PWD
 pushd $PICO_PATH
@@ -23,6 +23,7 @@ git clone -b $PICOVISION_BOILERPLATE_VERSION https://github.com/pimoroni/picovis
 
 echo "Downloading Pimoroni picovision-projects"
 git clone -b $PICOVISION_PROJECTS_VERSION https://github.com/MichaelBell/picovision-projects.git --recurse-submodules
+diff $HERE/CMakeLists.txt.fixed $PICO_PICOVISION_PROJECTS_PATH/CMakeLists.txt || true
 cp $HERE/CMakeLists.txt.fixed $PICO_PICOVISION_PROJECTS_PATH/CMakeLists.txt
 
 popd
