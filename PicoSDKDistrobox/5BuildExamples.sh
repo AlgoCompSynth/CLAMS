@@ -7,11 +7,17 @@ export CLAMS_BASE=$HOME
 
 echo ""
 echo "Setting environment variables"
-source ./set_pico_envars
+source ../set_pico_envars
 
-echo "Building the examples"
-for dir in $PICO_EXAMPLES_PATH $PICO_PLAYGROUND_PATH $PICO_PIMORONI_PATH $PICO_PICOVISION_PROJECTS_PATH
-do
+echo "Downloading the examples"
+pushd $PICO_PATH
+rm -fr $PICO_EXAMPLES_TARBALL $PICO_EXAMPLES_PATH
+wget --quiet $PICO_EXAMPLES_URL
+tar xf $PICO_EXAMPLES_TARBALL
+
+echo "Finished!"
+exit
+
   pushd $dir
   echo ""
   echo "Configuring $dir"
@@ -20,6 +26,4 @@ do
   echo "Compiling $dir"
   /usr/bin/time make -j`nproc` 2>&1 | tee make.log || true
   popd
-done
 
-echo "Finished!"

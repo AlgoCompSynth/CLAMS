@@ -13,17 +13,29 @@ echo ""
 echo "Creating fresh $PICO_PATH"
 pushd $CLAMS_BASE
 rm -fr $PICO_PATH
+mkdir --parents $PICO_PATH
 
 echo ""
-echo "Downloading pico_setup.sh script"
-curl -sOL https://raw.githubusercontent.com/raspberrypi/pico-setup/master/pico_setup.sh
-chmod +x pico_setup.sh
+echo "Cloning repositories"
+pushd $PICO_PATH
+
+for repo in $PICO_SDK_URL $PICOTOOL_URL $PICO_EXAMPLES_URL
+do
+  git clone --recursive $repo
+done
 
 echo ""
-echo "Running pico_setup.sh"
-export SKIP_UART=1
-export SKIP_VSCODE=1
-/usr/bin/time ./pico_setup.sh > pico_setup.log 2>&1
+echo "Building picotool"
+
+pushd $PICOTOOL_PATH
+rm -fr build; mkdir build; cd build
+cmake .. 2>&1 | tee cmake.log
+make 2>&1 | tee make.log
+
+echo "Installing picotool in $HOME/.local/bin"
+cp picotool $HOME/.local/bin
+picotool version
+
 popd
 
 echo ""
@@ -32,5 +44,7 @@ curl -sOL \
   "https://github.com/raspberrypi/debugprobe/releases/download/debugprobe-v2.0/debugprobe_on_pico.uf2"
 curl -sOL \
   "https://github.com/raspberrypi/debugprobe/releases/download/debugprobe-v2.0/debugprobe.uf2"
+
+popd
 
 echo "Finished!"

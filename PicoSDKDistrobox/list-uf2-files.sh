@@ -7,7 +7,7 @@ export CLAMS_BASE=$HOME/CLAMS-Distrobox
 
 echo ""
 echo "Setting environment variables"
-source ./set_pico_envars
+source ../set_pico_envars
 
 find $PICO_PATH -name '*.uf2'
 

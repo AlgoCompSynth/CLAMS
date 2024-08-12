@@ -9,35 +9,15 @@ fi
 echo "Creating CLAMS_BASE if necessary"; mkdir --parents $CLAMS_BASE
 
 export PICO_PATH=$CLAMS_BASE/pico
-export PICO_SDK_PATH=$PICO_PATH/pico-sdk
-export PICO_EXAMPLES_PATH=$PICO_PATH/pico-examples
-export PICO_EXTRAS_PATH=$PICO_PATH/pico-extras
-export PICO_PLAYGROUND_PATH=$PICO_PATH/pico-playground
-export PICO_PIMORONI_PATH=$PICO_PATH/pimoroni-pico
-export PICO_OPENOCD_PATH=$PICO_PATH/openocd
-export PICO_PICOTOOL_PATH=$PICO_PATH/picotool
-export PICO_PICOVISION_PATH=$PICO_PATH/picovision
-export PICO_PICOVISION_PROJECTS_PATH=$PICO_PATH/picovision-projects
-export PIMORONI_PICO_VERSION="v1.21.0"
-export PICOVISION_VERSION="v1.0.2"
-export PICOVISION_BOILERPLATE_VERSION="main"
-export PICOVISION_PROJECTS_VERSION="main"
-export PICOVISION_PYTHON_DOWNLOAD="https://github.com/pimoroni/picovision/releases/download/v1.0.2/pimoroni-picovision-v1.0.2-micropython.uf2"
-export PICOVISION_PYTHON_WIDESCREEN_DOWNLOAD="https://github.com/pimoroni/picovision/releases/download/v1.0.2/pimoroni-picovision-widescreen-v1.0.2-micropython.uf2"
-export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.2.10.uf2"
-export MICROPYTHON_DOWNLOAD="https://micropython.org/resources/firmware/RPI_PICO_W-20240105-v1.22.1.uf2"
 
-# NuttX
-export NUTTX_PATH=$CLAMS_BASE/nuttxspace
-export NUTTX_VERSION="master"
-export NUTTX_TOOLS=$NUTTX_PATH/tools
-export NUTTX_TESTS=$NUTTX_PATH/tests
-export NUTTX_VENV=$NUTTX_PATH/nuttx-venv
-export NUTTX_DOCKERFILE_PATH=$NUTTX_PATH/nuttx/tools/ci/docker/linux
-export NUTTX_ARM_TOOLS=$NUTTX_TOOLS/gcc-arm-none-eabi/bin
-export NUTTX_RISCV_TOOLS=$NUTTX_TOOLS/riscv-none-elf-gcc/bin
-export NUTTX_XTENSA_TOOLS=$NUTTX_TOOLS/xtensa-esp32s3-elf-gcc/bin
-export NUTTX_KCONFIG_TOOLS=$NUTTX_TOOLS/kconfig-frontends/bin
-export NUTTX_RUST_TOOLS=$NUTTX_TOOLS/rust/cargo/bin
-export NUTTX_WASI_TOOLS=$NUTTX_TOOLS/wasi-sdk/bin
-export NUTTX_FAILED_TESTS=$NUTTX_PATH/failed_tests
+# we just use the "master" branch for now
+export PICO_SDK_URL="https://github.com/raspberrypi/pico-sdk.git"
+export PICO_SDK_PATH="$PICO_PATH/pico-sdk"
+export PICOTOOL_URL="https://github.com/raspberrypi/picotool.git"
+export PICOTOOL_PATH="$PICO_PATH/picotool"
+export PICO_EXAMPLES_URL="https://github.com/raspberrypi/pico-examples.git"
+export PICO_EXAMPLES_PATH="$PICO_PATH/pico-examples"
+
+# latest stable Pico W Pythons - not RP2350-aware!!!!
+export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.1.1.uf2"
+export MICROPYTHON_DOWNLOAD="https://micropython.org/resources/firmware/RPI_PICO_W-20240602-v1.23.0.uf2"
