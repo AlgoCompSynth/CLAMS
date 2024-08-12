@@ -30,7 +30,8 @@ echo "Installing picotool"
 pushd $PICOTOOL_PATH
 rm -fr build; mkdir build; cd build
 cmake .. 2>&1 | tee cmake.log
-sudo make install 2>&1 | tee make.log
+make 2>&1 | tee make.log
+sudo make install
 picotool version
 popd
 
