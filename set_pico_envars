@@ -21,3 +21,6 @@ export PICO_EXAMPLES_PATH="$PICO_PATH/pico-examples"
 # latest stable Pico W Pythons - not RP2350-aware!!!!
 export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.1.1.uf2"
 export MICROPYTHON_DOWNLOAD="https://micropython.org/resources/firmware/RPI_PICO_W-20240602-v1.23.0.uf2"
+
+# RP2350 Pythons
+export SPARKFUN_PRO_MICRO_RP2350_MICROPYTHON_DOWNLOAD="https://cdn.sparkfun.com/assets/6/3/c/f/d/firmware_pro_micro_rp2350.uf2"
