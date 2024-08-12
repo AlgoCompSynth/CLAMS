@@ -12,7 +12,7 @@ source ../set_pico_envars
 echo ""
 echo "Creating fresh $PICO_PATH"
 pushd $CLAMS_BASE
-rm -fr $PICO_PATH
+sudo rm -fr $PICO_PATH
 mkdir --parents $PICO_PATH
 
 echo ""
@@ -25,17 +25,13 @@ do
 done
 
 echo ""
-echo "Building picotool"
+echo "Installing picotool"
 
 pushd $PICOTOOL_PATH
 rm -fr build; mkdir build; cd build
 cmake .. 2>&1 | tee cmake.log
-make 2>&1 | tee make.log
-
-echo "Installing picotool in $HOME/.local/bin"
-cp picotool $HOME/.local/bin
+sudo make install 2>&1 | tee make.log
 picotool version
-
 popd
 
 echo ""
