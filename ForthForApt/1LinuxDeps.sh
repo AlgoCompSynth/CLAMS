@@ -2,7 +2,7 @@
 
 set -e
 
-export LOGFILE=$PWD/Logs/1_linux_install.log
+export LOGFILE=$PWD/Logs/1LinuxDeps.log
 
 /usr/bin/time sudo apt-get install \
   gforth \
