@@ -13,7 +13,7 @@ pushd $PICO_EXAMPLES_PATH
 echo ""
 echo "Configuring $PICO_EXAMPLES_PATH"
 rm -fr build; mkdir build; cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug 2>&1 | tee cmake.log
+/usr/bin/time cmake .. -DCMAKE_BUILD_TYPE=Debug > cmake.log 2>&1
 echo "Compiling $PICO_EXAMPLES_PATH"
-/usr/bin/time make -j`nproc` 2>&1 | tee make.log || true
+/usr/bin/time make -j`nproc` > make.log 2>&1 || true
 popd
