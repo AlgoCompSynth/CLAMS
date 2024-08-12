@@ -9,9 +9,6 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-echo "Downloading PicoVision MicroPython"
-curl -sOL $PICOVISION_PYTHON_DOWNLOAD
-curl -sOL $PICOVISION_PYTHON_WIDESCREEN_DOWNLOAD
 echo "Downloading CircuitPython"
 curl -sOL $CIRCUITPYTHON_DOWNLOAD
 echo "Downloading Base MicroPython"
