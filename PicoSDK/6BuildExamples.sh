@@ -4,6 +4,7 @@ set -e
 
 echo "Setting CLAMS_BASE to $HOME"
 export CLAMS_BASE=$HOME
+export PICO_BOARD=sparkfun_promicro_rp2350
 
 echo ""
 echo "Setting environment variables"
