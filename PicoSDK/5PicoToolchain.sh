@@ -2,6 +2,8 @@
 
 set -e
 
+export SUPPORTED_BOARDS="$PWD/SupportedBoards.log"
+
 echo "Setting CLAMS_BASE to $HOME"
 export CLAMS_BASE=$HOME
 
@@ -23,6 +25,10 @@ for repo in $PICO_SDK_URL $PICOTOOL_URL $PICO_EXAMPLES_URL
 do
   git clone --recursive $repo
 done
+
+echo ""
+echo "Listing supported boards to $SUPPORTED_BOARDS"
+ls -l $PICO_PATH/pico-sdk/src/boards/include/boards > $SUPPORTED_BOARDS
 
 echo ""
 echo "Installing picotool"
