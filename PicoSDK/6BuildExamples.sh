@@ -2,6 +2,7 @@
 
 set -e
 
+export UF2_FILES="$PWD/uf2Files.log"
 echo "Setting CLAMS_BASE to $HOME"
 export CLAMS_BASE=$HOME
 
@@ -36,5 +37,9 @@ do
   /usr/bin/time make -j`nproc` > make.log 2>&1
   popd
 done
+
+echo ""
+echo "Listing uf2 files to $UF2_FILES"
+./list-uf2-files.sh > $UF2_FILES
 
 echo "Finished"
