@@ -21,7 +21,7 @@ echo ""
 echo "Cloning repositories"
 pushd $PICO_PATH
 
-for repo in $PICO_SDK_URL $PICOTOOL_URL $PICO_EXAMPLES_URL
+for repo in $PICO_SDK_URL $PICOTOOL_URL $PICO_EXAMPLES_URL $PICO_EXTRAS_URL $PICO_PLAYGROUND_URL
 do
   git clone --recursive $repo
 done

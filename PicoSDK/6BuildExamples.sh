@@ -10,11 +10,17 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-pushd $PICO_EXAMPLES_PATH
-echo ""
-echo "Configuring $PICO_EXAMPLES_PATH"
-rm -fr build; mkdir build; cd build
-/usr/bin/time cmake .. -DCMAKE_BUILD_TYPE=Debug > cmake.log 2>&1
-echo "Compiling $PICO_EXAMPLES_PATH"
-/usr/bin/time make -j`nproc` > make.log 2>&1 || true
-popd
+echo "Building the examples"
+for dir in $PICO_EXAMPLES_PATH $PICO_PLAYGROUND_PATH $PICO_PIMORONI_PATH $PICO_PICOVISION_PROJECTS_PATH
+do
+  pushd $dir
+  echo ""
+  echo "Configuring $dir"
+  rm -fr build; mkdir build; cd build
+  cmake .. -DCMAKE_BUILD_TYPE=Debug -DPICO_SDK_POST_LIST_DIRS=$PICO_EXTRAS_PATH > cmake.log 2>&1
+  echo "Compiling $dir"
+  /usr/bin/time make -j`nproc` > make.log 2>&1
+  popd
+done
+
+echo "Finished"
