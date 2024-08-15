@@ -18,10 +18,12 @@ sudo rm -fr $PICO_PATH
 mkdir --parents $PICO_PATH
 
 echo ""
-echo "Cloning repositories"
+echo "Cloning Raspberry Pi repositories"
 pushd $PICO_PATH
 
-for repo in $PICO_SDK_URL $PICOTOOL_URL $PICO_EXAMPLES_URL $PICO_EXTRAS_URL $PICO_PLAYGROUND_URL
+for repo in \
+  $PICO_SDK_URL $PICOTOOL_URL $PICO_EXAMPLES_URL $PICO_EXTRAS_URL $PICO_PLAYGROUND_URL \
+  $PIMORONI_PICO_URL $PICOVISION_URL $PICOVISION_PROJECTS_URL
 do
   git clone --recursive $repo
 done
