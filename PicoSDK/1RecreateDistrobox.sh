@@ -1,1 +1,1 @@
-../PythonDistrobox/1RecreateDistrobox.sh
+../Python/1RecreateDistrobox.sh

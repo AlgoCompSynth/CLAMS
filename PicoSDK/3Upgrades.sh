@@ -1,1 +1,1 @@
-../PythonDistrobox/3Upgrades.sh
+../Python/3Upgrades.sh

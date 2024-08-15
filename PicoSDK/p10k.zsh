@@ -1,1 +1,1 @@
-../PythonDistrobox/p10k.zsh
+../Python/p10k.zsh
