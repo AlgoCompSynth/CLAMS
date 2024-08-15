@@ -14,7 +14,7 @@ source ../set_pico_envars
 echo ""
 echo "Creating fresh $PICO_PATH"
 pushd $CLAMS_BASE
-sudo rm -fr $PICO_PATH
+rm -fr $PICO_PATH
 mkdir --parents $PICO_PATH
 
 echo ""
