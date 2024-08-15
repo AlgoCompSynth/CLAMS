@@ -1,1 +1,1 @@
-../PythonDistrobox/2CommandLineSetup.sh
+../Python/2CommandLineSetup.sh
