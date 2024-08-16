@@ -25,7 +25,7 @@ export PICO_PLAYGROUND_URL="https://github.com/raspberrypi/pico-playground.git"
 export PICO_PLAYGROUND_PATH="$PICO_PATH/pico-playground"
 
 # Utilities
-export PICO_UTILITIES_PATH=$PICO_PATH/Utilities
+export PICO_UTILITIES_PATH=$PICO_PATH/pico-utilities
 
 # RISC-V compiler
 # https://www.embecosm.com/resources/tool-chain-downloads/#corev
