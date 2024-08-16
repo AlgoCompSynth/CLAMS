@@ -24,18 +24,8 @@ export PICO_EXTRAS_PATH="$PICO_PATH/pico-extras"
 export PICO_PLAYGROUND_URL="https://github.com/raspberrypi/pico-playground.git"
 export PICO_PLAYGROUND_PATH="$PICO_PATH/pico-playground"
 
-# Pimoroni sample projects
-export PIMORONI_PICO_URL=https://github.com/pimoroni/pimoroni-pico.git
-export PIMORONI_PICO_PATH=$PICO_PATH/pimoroni-pico
-
-export PICOVISION_URL=https://github.com/pimoroni/picovision.git
-export PICOVISION_PATH=$PICO_PATH/picovision
-
-export PICOVISION_PROJECTS_URL=https://github.com/MichaelBell/picovision-projects.git
-export PICOVISION_PROJECTS_PATH=$PICO_PATH/picovision-projects
-
 # Utilities
-export PICO_UTILITIES=$PICO_PATH/Utilities
+export PICO_UTILITIES_PATH=$PICO_PATH/Utilities
 
 # RISC-V compiler
 # https://www.embecosm.com/resources/tool-chain-downloads/#corev
