@@ -22,24 +22,24 @@ pushd $CLAMS_BASE
   echo "Cloning Raspberry Pi repositories"
   pushd $PICO_PATH
 
-    for repo in \
-      $PICO_SDK_URL $PICOTOOL_URL $PICO_EXAMPLES_URL $PICO_EXTRAS_URL $PICO_PLAYGROUND_URL
-    do
-      git clone --recursive $repo
-    done
+    git clone --recursive $PICO_SDK_URL
+    git clone --recursive $PICOTOOL_URL
+    git clone --recursive $PICO_EXAMPLES_URL
+    git clone --recursive $PICO_EXTRAS_URL
+    git clone --recursive $PICO_PLAYGROUND_URL
+    git clone --recursive $FREERTOS_KERNEL_URL
 
     echo ""
     echo "Listing supported boards to $SUPPORTED_BOARDS"
     ls -l $PICO_PATH/pico-sdk/src/boards/include/boards > $SUPPORTED_BOARDS
 
     echo ""
-    echo "Installing RISC-V cross-compiler"
     echo "Downloading RISC-V cross-compiler tarball"
     mkdir --parents $PICO_UTILITIES_PATH
 
     pushd $PICO_UTILITIES_PATH
       rm -f $RISC_V_COMPILER_TARBALL
-      /usr/bin/time wget --quiet $RISC_V_COMPILER_URL
+      /usr/bin/time curl -sOL $RISC_V_COMPILER_URL
 
       echo "Installing to /usr/local/bin"
       /usr/bin/time sudo tar --extract \

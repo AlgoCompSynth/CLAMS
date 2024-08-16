@@ -11,18 +11,23 @@ echo "Creating CLAMS_BASE if necessary"; mkdir --parents $CLAMS_BASE
 export PICO_PATH=$CLAMS_BASE/pico
 
 # we just use the "master" branch for now
-export PICO_SDK_URL="https://github.com/raspberrypi/pico-sdk.git"
+export PICO_SDK_URL="--branch 2.0.0 https://github.com/raspberrypi/pico-sdk.git"
 export PICO_SDK_PATH="$PICO_PATH/pico-sdk"
-export PICOTOOL_URL="https://github.com/raspberrypi/picotool.git"
+export PICOTOOL_URL="--branch 2.0.0 https://github.com/raspberrypi/picotool.git"
 export PICOTOOL_PATH="$PICO_PATH/picotool"
 
 # Raspberry Pi sample projects
-export PICO_EXAMPLES_URL="https://github.com/raspberrypi/pico-examples.git"
+export PICO_EXAMPLES_URL="--branch sdk-2.0.0 https://github.com/raspberrypi/pico-examples.git"
 export PICO_EXAMPLES_PATH="$PICO_PATH/pico-examples"
-export PICO_EXTRAS_URL="https://github.com/raspberrypi/pico-extras.git"
+export PICO_EXTRAS_URL="--branch sdk-2.0.0 https://github.com/raspberrypi/pico-extras.git"
 export PICO_EXTRAS_PATH="$PICO_PATH/pico-extras"
-export PICO_PLAYGROUND_URL="https://github.com/raspberrypi/pico-playground.git"
+export PICO_PLAYGROUND_URL="--branch sdk-2.0.0 https://github.com/raspberrypi/pico-playground.git"
 export PICO_PLAYGROUND_PATH="$PICO_PATH/pico-playground"
+
+# FreeRTOS kernel
+#export FREERTOS_KERNEL_URL="https://github.com/FreeRTOS/FreeRTOS-Kernel.git"
+export FREERTOS_KERNEL_URL="https://github.com/raspberrypi/FreeRTOS-Kernel.git"
+export FREERTOS_KERNEL_PATH="$PICO_PATH/FreeRTOS-Kernel"
 
 # Utilities
 export PICO_UTILITIES_PATH=$PICO_PATH/pico-utilities
@@ -30,8 +35,8 @@ export PICO_UTILITIES_PATH=$PICO_PATH/pico-utilities
 # RISC-V compiler
 # https://www.embecosm.com/resources/tool-chain-downloads/#corev
 # recommended by Raspberry Pi Pico C/C++ SDK documentation
-export RISC_V_COMPILER_TARBALL=corev-openhw-gcc-ubuntu2204-20240530.tar.gz
-export RISC_V_COMPILER_URL=https://buildbot.embecosm.com/job/corev-gcc-ubuntu2204/47/artifact/$RISC_V_COMPILER_TARBALL
+export RISC_V_COMPILER_TARBALL="corev-openhw-gcc-ubuntu2204-20240530.tar.gz"
+export RISC_V_COMPILER_URL="https://buildbot.embecosm.com/job/corev-gcc-ubuntu2204/47/artifact/$RISC_V_COMPILER_TARBALL"
 
 # latest stable Pico W Pythons - not RP2350-aware!!!!
 export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.1.1.uf2"
