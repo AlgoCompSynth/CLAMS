@@ -68,10 +68,6 @@ pushd $CLAMS_BASE
         "https://github.com/raspberrypi/debugprobe/releases/download/debugprobe-v2.0/debugprobe_on_pico.uf2"
       curl -sOL \
         "https://github.com/raspberrypi/debugprobe/releases/download/debugprobe-v2.0/debugprobe.uf2"
-
-      echo "Downloading flash_nuke.uf2"
-      # https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html#resetting-flash-memory
-      curl -sOL "https://datasheets.raspberrypi.com/soft/flash_nuke.uf2"
     popd
 
   popd
