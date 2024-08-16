@@ -35,13 +35,14 @@ for dir in \
   $PICO_PLAYGROUND_PATH
 do
 
-  for PICO_BOARD in \
-    pico_w \
+  for board in \
     sparkfun_promicro_rp2350 \
     pimoroni_pico_plus2_rp2350 \
     ilabs_challenger_rp2350_bconnect \
-    ilabs_challenger_rp2350_wifi_ble
+    ilabs_challenger_rp2350_wifi_ble \
+    pico_w
   do
+    export PICO_BOARD=$board
     sdk_build
   done
 
