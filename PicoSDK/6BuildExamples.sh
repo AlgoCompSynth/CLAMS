@@ -2,43 +2,64 @@
 
 set -e
 
+function sdk_build {
+  pushd $dir > /dev/null
+
+    target="$dir/build_$PICO_BOARD"
+    echo ""
+    echo "Re-creating $target"
+    rm -fr $target; mkdir $target; pushd $target > /dev/null
+
+      echo "Configuring $target"
+      cmake .. -DCMAKE_BUILD_TYPE=Debug -DPICO_SDK_POST_LIST_DIRS=$PICO_EXTRAS_PATH > cmake.log 2>&1
+
+      echo "Compiling $target"
+      /usr/bin/time make -j`nproc` > make.log 2>&1
+
+      popd
+
+    popd
+}
+
 export UF2_FILES="$PWD/uf2Files.log"
 echo "Setting CLAMS_BASE to $HOME"
 export CLAMS_BASE=$HOME
-
-echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-echo "Building the regular examples"
-export PICO_BOARD=sparkfun_promicro_rp2350
-for dir in $PICO_EXAMPLES_PATH $PICO_PLAYGROUND_PATH
-do
-  pushd $dir
-  echo ""
-  echo "Re-creating $dir/build"
-  rm -fr build; mkdir build; cd build
-  echo "Configuring $dir"
-  cmake .. -DCMAKE_BUILD_TYPE=Debug -DPICO_SDK_POST_LIST_DIRS=$PICO_EXTRAS_PATH > cmake.log 2>&1
-  echo "Compiling $dir"
-  /usr/bin/time make -j`nproc` > make.log 2>&1
-  popd
-done
-
+echo ""
+echo ""
 echo "Building the Pimoroni examples"
-export PICO_BOARD=pico_w
 #for dir in $PIMORONI_PICO_PATH $PICOVISION_PATH $PICOVISION_PROJECTS_PATH
 for dir in $PIMORONI_PICO_PATH $PICOVISION_PATH
 do
-  pushd $dir
-  echo ""
-  echo "Refreshing $dir/build"
-  rm -fr build; mkdir build; cd build
-  echo "Configuring $dir"
-  cmake .. -DCMAKE_BUILD_TYPE=Debug -DPICO_SDK_POST_LIST_DIRS=$PICO_EXTRAS_PATH > cmake.log 2>&1
-  echo "Compiling $dir"
-  /usr/bin/time make -j`nproc` > make.log 2>&1
-  popd
+
+  for PICO_BOARD in \
+    pico_w
+  do
+    sdk_build
+  done
+
+done
+
+echo ""
+echo ""
+echo "Building the regular examples"
+for dir in \
+  $PICO_EXAMPLES_PATH \
+  $PICO_PLAYGROUND_PATH
+do
+
+  for PICO_BOARD in \
+    pico_w \
+    sparkfun_promicro_rp2350 \
+    pimoroni_pico_plus2_rp2350 \
+    ilabs_challenger_rp2350_bconnect \
+    ilabs_challenger_rp2350_wifi_ble
+  do
+    sdk_build
+  done
+
 done
 
 echo ""

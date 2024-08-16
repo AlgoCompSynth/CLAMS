@@ -4,6 +4,7 @@ set -e
 
 echo "Installing base packages"
 sudo apt-get install -y \
+  build-essential \
   cmake \
   g++ \
   gcc \
