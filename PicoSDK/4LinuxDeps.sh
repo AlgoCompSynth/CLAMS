@@ -6,15 +6,15 @@ echo "Installing base packages"
 sudo apt-get install -y \
   build-essential \
   cmake \
-  g++ \
-  gcc \
   gcc-arm-none-eabi \
   gdb-multiarch \
   libnewlib-arm-none-eabi \
   libstdc++-arm-none-eabi-newlib \
   libusb-1.0-0-dev \
-  make \
   minicom \
   pkg-config
+
+echo "Installing RISC-V cross-compiler"
+./install-risc-v-compiler.sh
 
 echo "Finished"

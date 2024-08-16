@@ -17,11 +17,10 @@ rm -f $RISC_V_COMPILER_TARBALL
 /usr/bin/time wget --quiet $RISC_V_COMPILER_URL
 
 echo "Installing to /usr/local/bin"
-/usr/bin/time tar --extract \
+/usr/bin/time sudo tar --extract \
   --file $RISC_V_COMPILER_TARBALL \
   --directory /usr/local \
   --strip-components=1 \
   > extract.log 2>&1
 popd
-
-echo "Finished!"
+echo "Install complete"
