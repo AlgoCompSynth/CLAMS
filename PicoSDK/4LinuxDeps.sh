@@ -14,7 +14,4 @@ sudo apt-get install -y \
   minicom \
   pkg-config
 
-echo "Installing RISC-V cross-compiler"
-./install-risc-v-compiler.sh
-
 echo "Finished"
