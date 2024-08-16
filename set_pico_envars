@@ -10,7 +10,7 @@ echo "Creating CLAMS_BASE if necessary"; mkdir --parents $CLAMS_BASE
 
 export PICO_PATH=$CLAMS_BASE/pico
 
-# we just use the "master" branch for now
+# SDK and tools
 export PICO_SDK_URL="--branch 2.0.0 https://github.com/raspberrypi/pico-sdk.git"
 export PICO_SDK_PATH="$PICO_PATH/pico-sdk"
 export PICOTOOL_URL="--branch 2.0.0 https://github.com/raspberrypi/picotool.git"

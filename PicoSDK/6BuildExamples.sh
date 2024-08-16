@@ -11,10 +11,15 @@ function sdk_build {
     rm -fr $target; mkdir $target; pushd $target > /dev/null
 
       echo "Configuring $target"
-      cmake .. -DCMAKE_BUILD_TYPE=Debug -DPICO_SDK_POST_LIST_DIRS=$PICO_EXTRAS_PATH > cmake.log 2>&1
+      cmake .. \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DPICO_SDK_POST_LIST_DIRS=$PICO_EXTRAS_PATH \
+        -DPICO_ARM_TOOLCHAIN_PATH="/usr" \
+        -DPICO_RISCV_TOOLCHAIN_PATH="/usr/local" \
+        > cmake.log 2>&1
 
       echo "Compiling $target"
-      /usr/bin/time make -j`nproc` > make.log 2>&1
+      /usr/bin/time make -j`nproc` > make.log 2>&1 || true
 
       popd
 
@@ -36,11 +41,11 @@ for dir in \
 do
 
   for board in \
+    pico_w \
     sparkfun_promicro_rp2350 \
     pimoroni_pico_plus2_rp2350 \
     ilabs_challenger_rp2350_bconnect \
-    ilabs_challenger_rp2350_wifi_ble \
-    pico_w
+    ilabs_challenger_rp2350_wifi_ble
   do
     export PICO_BOARD=$board
     sdk_build
