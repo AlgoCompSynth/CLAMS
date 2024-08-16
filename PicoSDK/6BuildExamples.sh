@@ -29,21 +29,6 @@ source ../set_pico_envars
 
 echo ""
 echo ""
-echo "Building the Pimoroni examples"
-#for dir in $PIMORONI_PICO_PATH $PICOVISION_PATH $PICOVISION_PROJECTS_PATH
-for dir in $PIMORONI_PICO_PATH $PICOVISION_PATH
-do
-
-  for PICO_BOARD in \
-    pico_w
-  do
-    sdk_build
-  done
-
-done
-
-echo ""
-echo ""
 echo "Building the regular examples"
 for dir in \
   $PICO_EXAMPLES_PATH \
