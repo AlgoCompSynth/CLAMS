@@ -14,12 +14,10 @@ function sdk_build {
       cmake .. \
         -DCMAKE_BUILD_TYPE=Debug \
         -DPICO_SDK_POST_LIST_DIRS=$PICO_EXTRAS_PATH \
-        -DPICO_ARM_TOOLCHAIN_PATH="/usr" \
-        -DPICO_RISCV_TOOLCHAIN_PATH="/usr/local" \
         > cmake.log 2>&1
 
       echo "Compiling $target"
-      /usr/bin/time make -j`nproc` > make.log 2>&1 || true
+      /usr/bin/time make -j`nproc` > make.log 2>&1
 
       popd
 
