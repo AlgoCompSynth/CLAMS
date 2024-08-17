@@ -9,6 +9,6 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-find $PICO_PATH -name '*.uf2' | sort > uf2files.log
+find $PICO_PATH -name '*.uf2' | sort
 
 echo "Finished"
