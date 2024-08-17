@@ -1,3 +1,9 @@
+# WiFi credentials
+# Fill these in before building!
+export WIFI_SSID="Bogus"
+export WIFI_PASSWORD="Bogus"
+
+# Don't change anything below here!
 echo "Checking for CLAMS_BASE"
 if [ "${#CLAMS_BASE}" -lt "1" ]
 then
@@ -5,9 +11,7 @@ then
   exit -1024
 fi
 
-# Don't change any of these!
 echo "Creating CLAMS_BASE if necessary"; mkdir --parents $CLAMS_BASE
-
 export PICO_PATH=$CLAMS_BASE/pico
 
 # SDK and tools
