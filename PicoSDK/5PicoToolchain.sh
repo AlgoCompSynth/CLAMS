@@ -34,23 +34,6 @@ pushd $CLAMS_BASE
     ls -l $PICO_PATH/pico-sdk/src/boards/include/boards > $SUPPORTED_BOARDS
 
     echo ""
-    echo "Downloading RISC-V cross-compiler tarball"
-    mkdir --parents $PICO_UTILITIES_PATH
-
-    pushd $PICO_UTILITIES_PATH
-      rm -f $RISC_V_COMPILER_TARBALL
-      /usr/bin/time curl -sOL $RISC_V_COMPILER_URL
-
-      echo "Installing to /usr/local/bin"
-      /usr/bin/time sudo tar --extract \
-        --file $RISC_V_COMPILER_TARBALL \
-        --directory /usr/local \
-        --strip-components=1 \
-        > extract.log 2>&1
-      riscv32-corev-elf-gcc --version
-    popd
-
-    echo ""
     echo "Installing picotool"
 
     pushd $PICOTOOL_PATH
@@ -63,6 +46,7 @@ pushd $CLAMS_BASE
 
     echo ""
     echo Downloading latest debug probe firmware!
+    mkdir --parents $PICO_UTILITIES_PATH
     pushd $PICO_UTILITIES_PATH
       curl -sOL \
         "https://github.com/raspberrypi/debugprobe/releases/download/debugprobe-v2.0/debugprobe_on_pico.uf2"

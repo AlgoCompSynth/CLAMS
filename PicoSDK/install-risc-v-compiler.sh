@@ -11,9 +11,8 @@ source ../set_pico_envars
 
 echo ""
 echo "Downloading RISC-V cross-compiler tarball"
-mkdir --parents $PICO_UTILITIES_PATH
 
-pushd $PICO_UTILITIES_PATH
+pushd /tmp
   rm -f $RISC_V_COMPILER_TARBALL
   /usr/bin/time wget --quiet $RISC_V_COMPILER_URL
 
@@ -24,5 +23,6 @@ pushd $PICO_UTILITIES_PATH
     --strip-components=1 \
     > extract.log 2>&1
 popd
+riscv32-corev-elf-gcc --version
 
 echo "Install complete"
