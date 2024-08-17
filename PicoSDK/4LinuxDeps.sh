@@ -14,4 +14,6 @@ sudo apt-get install -y \
   minicom \
   pkg-config
 
+./install-risc-v-compiler.sh
+
 echo "Finished"
