@@ -5,7 +5,7 @@ set -e
 function sdk_build {
   pushd $dir > /dev/null
 
-    target="$dir/build_$PICO_BOARD_$PICO_PLATFORM"
+    target="$dir/build_${PICO_BOARD}_${PICO_PLATFORM}"
     echo ""
     echo "Re-creating $target"
     rm -fr $target; mkdir $target; pushd $target > /dev/null
@@ -25,9 +25,9 @@ function sdk_build {
         /usr/bin/time make -j`nproc` > make.log 2>&1
       fi
 
-      popd
+      popd > /dev/null
 
-    popd
+    popd > /dev/null
 }
 
 echo ""
