@@ -9,8 +9,8 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-mkdir --parents $CLAMS_COMPILERS
-pushd $CLAMS_COMPILERS
+mkdir --parents $PICO_UTILITIES
+pushd $PICO_UTILITIES
   echo ""
   echo "Downloading RISC-V cross-compiler tarball"
   rm -f $RISCV_COMPILER_TARBALL
