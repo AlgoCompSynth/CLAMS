@@ -1,0 +1,92 @@
+
+
+If you want to run in single-job 'make' mode for troubleshooting,
+restart this script with a non-empty parameter string as the first
+argument.
+
+Setting CLAMS_BASE to /home/znmeb
+Setting environment variables
+Checking for CLAMS_BASE
+Creating CLAMS_BASE if necessary
+
+
+Building the rp2350 examples
+
+Re-creating /home/znmeb/pico/pico-examples/build_sparkfun_promicro_rp2350_rp2350-riscv
+Configuring /home/znmeb/pico/pico-examples/build_sparkfun_promicro_rp2350_rp2350-riscv
+Compiling /home/znmeb/pico/pico-examples/build_sparkfun_promicro_rp2350_rp2350-riscv
+
+Re-creating /home/znmeb/pico/pico-examples/build_sparkfun_promicro_rp2350_rp2350-arm-s
+Configuring /home/znmeb/pico/pico-examples/build_sparkfun_promicro_rp2350_rp2350-arm-s
+Compiling /home/znmeb/pico/pico-examples/build_sparkfun_promicro_rp2350_rp2350-arm-s
+
+Re-creating /home/znmeb/pico/pico-examples/build_pimoroni_pico_plus2_rp2350_rp2350-riscv
+Configuring /home/znmeb/pico/pico-examples/build_pimoroni_pico_plus2_rp2350_rp2350-riscv
+Compiling /home/znmeb/pico/pico-examples/build_pimoroni_pico_plus2_rp2350_rp2350-riscv
+
+Re-creating /home/znmeb/pico/pico-examples/build_pimoroni_pico_plus2_rp2350_rp2350-arm-s
+Configuring /home/znmeb/pico/pico-examples/build_pimoroni_pico_plus2_rp2350_rp2350-arm-s
+Compiling /home/znmeb/pico/pico-examples/build_pimoroni_pico_plus2_rp2350_rp2350-arm-s
+
+Re-creating /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_bconnect_rp2350-riscv
+Configuring /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_bconnect_rp2350-riscv
+Compiling /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_bconnect_rp2350-riscv
+
+Re-creating /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_bconnect_rp2350-arm-s
+Configuring /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_bconnect_rp2350-arm-s
+Compiling /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_bconnect_rp2350-arm-s
+
+Re-creating /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_wifi_ble_rp2350-riscv
+Configuring /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_wifi_ble_rp2350-riscv
+Compiling /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_wifi_ble_rp2350-riscv
+
+Re-creating /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_wifi_ble_rp2350-arm-s
+Configuring /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_wifi_ble_rp2350-arm-s
+Compiling /home/znmeb/pico/pico-examples/build_ilabs_challenger_rp2350_wifi_ble_rp2350-arm-s
+
+Re-creating /home/znmeb/pico/pico-playground/build_sparkfun_promicro_rp2350_rp2350-riscv
+Configuring /home/znmeb/pico/pico-playground/build_sparkfun_promicro_rp2350_rp2350-riscv
+Compiling /home/znmeb/pico/pico-playground/build_sparkfun_promicro_rp2350_rp2350-riscv
+
+Re-creating /home/znmeb/pico/pico-playground/build_sparkfun_promicro_rp2350_rp2350-arm-s
+Configuring /home/znmeb/pico/pico-playground/build_sparkfun_promicro_rp2350_rp2350-arm-s
+Compiling /home/znmeb/pico/pico-playground/build_sparkfun_promicro_rp2350_rp2350-arm-s
+
+Re-creating /home/znmeb/pico/pico-playground/build_pimoroni_pico_plus2_rp2350_rp2350-riscv
+Configuring /home/znmeb/pico/pico-playground/build_pimoroni_pico_plus2_rp2350_rp2350-riscv
+Compiling /home/znmeb/pico/pico-playground/build_pimoroni_pico_plus2_rp2350_rp2350-riscv
+
+Re-creating /home/znmeb/pico/pico-playground/build_pimoroni_pico_plus2_rp2350_rp2350-arm-s
+Configuring /home/znmeb/pico/pico-playground/build_pimoroni_pico_plus2_rp2350_rp2350-arm-s
+Compiling /home/znmeb/pico/pico-playground/build_pimoroni_pico_plus2_rp2350_rp2350-arm-s
+
+Re-creating /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_bconnect_rp2350-riscv
+Configuring /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_bconnect_rp2350-riscv
+Compiling /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_bconnect_rp2350-riscv
+
+Re-creating /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_bconnect_rp2350-arm-s
+Configuring /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_bconnect_rp2350-arm-s
+Compiling /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_bconnect_rp2350-arm-s
+
+Re-creating /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_wifi_ble_rp2350-riscv
+Configuring /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_wifi_ble_rp2350-riscv
+Compiling /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_wifi_ble_rp2350-riscv
+
+Re-creating /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_wifi_ble_rp2350-arm-s
+Configuring /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_wifi_ble_rp2350-arm-s
+Compiling /home/znmeb/pico/pico-playground/build_ilabs_challenger_rp2350_wifi_ble_rp2350-arm-s
+
+Building the pico_w examples
+
+Re-creating /home/znmeb/pico/pico-examples/build_pico_w_rp2040
+Configuring /home/znmeb/pico/pico-examples/build_pico_w_rp2040
+Compiling /home/znmeb/pico/pico-examples/build_pico_w_rp2040
+
+Re-creating /home/znmeb/pico/pico-playground/build_pico_w_rp2040
+Configuring /home/znmeb/pico/pico-playground/build_pico_w_rp2040
+Compiling /home/znmeb/pico/pico-playground/build_pico_w_rp2040
+
+Listing uf2 files to /home/znmeb/Projects/CLAMS/PicoSDK/uf2Files.log
+Finished
+8164.87user 1966.36system 13:03.69elapsed 1292%CPU (0avgtext+0avgdata 194528maxresident)k
+0inputs+27389160outputs (38223major+402444898minor)pagefaults 0swaps
