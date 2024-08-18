@@ -17,12 +17,23 @@ function sdk_build {
         > cmake.log 2>&1
 
       echo "Compiling $target"
-      /usr/bin/time make -j`nproc` > make.log 2>&1
+      if [ "${#SJMAKE}" -gt "0" ]
+      then
+        echo "Single-job 'make' enabled"
+        /usr/bin/time make -j1 > make.log 2>&1
+      else
+        /usr/bin/time make -j`nproc` > make.log 2>&1
+      fi
 
       popd
 
     popd
 }
+
+echo "If you want to run in single-job 'make' mode for troubleshooting,"
+echo "restart this script with a non-empty parameter string as the first"
+echo "argument."
+export SJMAKE=$1
 
 export UF2_FILES="$PWD/uf2Files.log"
 echo "Setting CLAMS_BASE to $HOME"
