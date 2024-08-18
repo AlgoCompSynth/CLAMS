@@ -11,8 +11,14 @@ then
   exit -1024
 fi
 
-echo "Creating CLAMS_BASE if necessary"; mkdir --parents $CLAMS_BASE
+if [ ! -d $CLAMS_BASE ]
+then
+  echo "Creating $CLAMS_BASE"
+  mkdir --parents $CLAMS_BASE
+fi
+
 export PICO_PATH=$CLAMS_BASE/pico
+export CLAMS_COMPILERS=$CLAMS_BASE/compilers
 
 # SDK and tools
 export PICO_SDK_URL="--branch 2.0.0 https://github.com/raspberrypi/pico-sdk.git"
@@ -39,8 +45,10 @@ export PICO_UTILITIES_PATH=$PICO_PATH/pico-utilities
 # RISC-V compiler
 # https://www.embecosm.com/resources/tool-chain-downloads/#corev
 # recommended by Raspberry Pi Pico C/C++ SDK documentation
-export RISC_V_COMPILER_TARBALL="corev-openhw-gcc-ubuntu2204-20240530.tar.gz"
-export RISC_V_COMPILER_URL="https://buildbot.embecosm.com/job/corev-gcc-ubuntu2204/47/artifact/$RISC_V_COMPILER_TARBALL"
+export RISCV_COMPILER_VERSION="corev-openhw-gcc-ubuntu2204-20240530"
+export RISCV_COMPILER_TARBALL="$RISCV_COMPILER_VERSION.tar.gz"
+export RISCV_COMPILER_URL="https://buildbot.embecosm.com/job/corev-gcc-ubuntu2204/47/artifact/$RISCV_COMPILER_TARBALL"
+export RISCV_COMPILER_PATH="$CLAMS_COMPILERS/$RISCV_COMPILER_VERSION"
 
 # latest stable Pico W Pythons - not RP2350-aware!!!!
 export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.1.1.uf2"
