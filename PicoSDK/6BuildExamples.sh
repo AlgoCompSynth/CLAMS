@@ -5,7 +5,7 @@ set -e
 function sdk_build {
   pushd $dir > /dev/null
 
-    target="$dir/build_$PICO_BOARD"
+    target="$dir/build_$PICO_BOARD_$PICO_PLATFORM"
     echo ""
     echo "Re-creating $target"
     rm -fr $target; mkdir $target; pushd $target > /dev/null
@@ -30,11 +30,15 @@ function sdk_build {
     popd
 }
 
+echo ""
+echo ""
 echo "If you want to run in single-job 'make' mode for troubleshooting,"
 echo "restart this script with a non-empty parameter string as the first"
 echo "argument."
+sleep 10
 export SJMAKE=$1
 
+echo ""
 export UF2_FILES="$PWD/uf2Files.log"
 echo "Setting CLAMS_BASE to $HOME"
 export CLAMS_BASE=$HOME
@@ -43,23 +47,39 @@ source ../set_pico_envars
 
 echo ""
 echo ""
-echo "Building the regular examples"
+echo "Building the rp2350 examples"
 for dir in \
   $PICO_EXAMPLES_PATH \
   $PICO_PLAYGROUND_PATH
 do
 
   for board in \
-    pico_w \
     sparkfun_promicro_rp2350 \
     pimoroni_pico_plus2_rp2350 \
     ilabs_challenger_rp2350_bconnect \
     ilabs_challenger_rp2350_wifi_ble
   do
     export PICO_BOARD=$board
-    sdk_build
+
+    for platform in rp2350-riscv rp2350-arm-s
+    do
+      export PICO_PLATFORM=$platform
+      sdk_build $SJMAKE
+    done
+
   done
 
+done
+
+echo ""
+echo "Building the pico_w examples"
+for dir in \
+  $PICO_EXAMPLES_PATH \
+  $PICO_PLAYGROUND_PATH
+do
+    export PICO_BOARD=pico_w
+    export PICO_PLATFORM=rp2040
+    sdk_build $SJMAKE
 done
 
 echo ""
