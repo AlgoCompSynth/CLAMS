@@ -9,6 +9,7 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
+echo "Creating fresh $PICO_UTILITIES_PATH"
 mkdir --parents $PICO_UTILITIES_PATH
 pushd $PICO_UTILITIES_PATH
   echo ""
