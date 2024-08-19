@@ -19,14 +19,9 @@ fi
 # main SDK and friends
 export PICO_PATH=$CLAMS_BASE/pico
 
-# Utilities and compilers
-export PICO_UTILITIES=$CLAMS_BASE/pico-utilities
-
-# SDK and tools
+# SDK
 export PICO_SDK_URL="--branch 2.0.0 https://github.com/raspberrypi/pico-sdk.git"
 export PICO_SDK_PATH="$PICO_PATH/pico-sdk"
-export PICOTOOL_URL="--branch 2.0.0 https://github.com/raspberrypi/picotool.git"
-export PICOTOOL_PATH="$PICO_PATH/picotool"
 
 # Raspberry Pi sample projects
 export PICO_EXAMPLES_URL="--branch sdk-2.0.0 https://github.com/raspberrypi/pico-examples.git"
@@ -41,17 +36,17 @@ export PICO_PLAYGROUND_PATH="$PICO_PATH/pico-playground"
 export FREERTOS_KERNEL_URL="https://github.com/raspberrypi/FreeRTOS-Kernel.git"
 export FREERTOS_KERNEL_PATH="$PICO_PATH/FreeRTOS-Kernel"
 
+# Utilities
+export PICO_UTILITIES_PATH=$CLAMS_BASE/pico-utilities
+export PICOTOOL_URL="--branch 2.0.0 https://github.com/raspberrypi/picotool.git"
+export PICOTOOL_REPO_PATH="$PICO_UTILITIES_PATH/picotool-repo"
+export OPENOCD_URL="https://github.com/raspberrypi/openocd.git"
+export OPENOCD_REPO_PATH="$PICO_UTILITIES_PATH/openocd-repo"
+
 # RISC-V compiler
 # https://www.embecosm.com/resources/tool-chain-downloads/#corev
 # recommended by Raspberry Pi Pico C/C++ SDK documentation
 export RISCV_COMPILER_VERSION="corev-openhw-gcc-ubuntu2204-20240530"
 export RISCV_COMPILER_TARBALL="$RISCV_COMPILER_VERSION.tar.gz"
 export RISCV_COMPILER_URL="https://buildbot.embecosm.com/job/corev-gcc-ubuntu2204/47/artifact/$RISCV_COMPILER_TARBALL"
-export RISCV_COMPILER_PATH="$PICO_UTILITIES/$RISCV_COMPILER_VERSION"
-
-# latest stable Pico W Pythons - not RP2350-aware!!!!
-export CIRCUITPYTHON_DOWNLOAD="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.1.1.uf2"
-export MICROPYTHON_DOWNLOAD="https://micropython.org/resources/firmware/RPI_PICO_W-20240602-v1.23.0.uf2"
-
-# RP2350 Pythons
-export SPARKFUN_PRO_MICRO_RP2350_MICROPYTHON_DOWNLOAD="https://cdn.sparkfun.com/assets/6/3/c/f/d/firmware_pro_micro_rp2350.uf2"
+export RISCV_COMPILER_PATH="$PICO_UTILITIES_PATH/$RISCV_COMPILER_VERSION"
