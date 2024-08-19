@@ -44,8 +44,8 @@ echo "Setting CLAMS_BASE to $HOME"
 export CLAMS_BASE=$HOME
 echo "Setting environment variables"
 source ../set_pico_envars
-echo "Adding RISC-V compiler to PATH"
-export PATH=$PATH:$RISCV_COMPILER_PATH/bin
+echo "Prepending RISC-V and Arm compiler locations to PATH"
+export PATH=$RISCV_COMPILER_PATH/bin:$ARM_COMPILER_PATH/bin:$PATH
 echo $PATH
 
 echo ""
@@ -74,6 +74,7 @@ do
 
 done
 
+echo ""
 echo ""
 echo "Building the pico_w examples"
 for dir in \

@@ -51,3 +51,11 @@ export RISCV_COMPILER_VERSION="corev-openhw-gcc-ubuntu2204-20240530"
 export RISCV_COMPILER_TARBALL="$RISCV_COMPILER_VERSION.tar.gz"
 export RISCV_COMPILER_URL="https://buildbot.embecosm.com/job/corev-gcc-ubuntu2204/47/artifact/$RISCV_COMPILER_TARBALL"
 export RISCV_COMPILER_PATH="$PICO_UTILITIES_PATH/$RISCV_COMPILER_VERSION"
+
+# Arm compiler
+# https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
+export ARM_COMPILER_RELEASE="13.3.rel1"
+export ARM_COMPILER_VERSION="arm-gnu-toolchain-$ARM_COMPILER_RELEASE-x86_64-arm-none-eabi"
+export ARM_COMPILER_TARBALL="$ARM_COMPILER_VERSION.tar.xz"
+export ARM_COMPILER_URL="https://developer.arm.com/-/media/Files/downloads/gnu/$ARM_COMPILER_RELEASE/binrel/$ARM_COMPILER_TARBALL"
+export ARM_COMPILER_PATH="$PICO_UTILITIES_PATH/$ARM_COMPILER_VERSION"
