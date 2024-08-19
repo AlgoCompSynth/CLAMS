@@ -3,6 +3,7 @@
 set -e
 
 echo "Installing base packages"
+sudo apt-get update
 sudo apt-get install -y \
   apt-file \
   file \
