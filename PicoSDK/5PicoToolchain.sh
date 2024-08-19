@@ -47,7 +47,8 @@ pushd $CLAMS_BASE
       cd build
       cmake ../
       make -j`nproc`
-      cp picotool $PICO_UTILITIES_PATH
+      sudo make install
+      picotool version
     popd
 
     echo ""
@@ -56,7 +57,8 @@ pushd $CLAMS_BASE
       ./bootstrap
       ./configure --enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio --disable-werror
       make -j`nproc`
-      cp src/openocd $PICO_UTILITIES_PATH
+      sudo make install
+      openocd --version
     popd
 
     echo ""
