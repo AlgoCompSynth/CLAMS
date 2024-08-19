@@ -23,5 +23,6 @@ sudo apt-get install -qqy --no-install-recommends \
   texinfo
 
 ./install-risc-v-compiler.sh
+./install-arm-compiler.sh
 
 echo "Finished"
