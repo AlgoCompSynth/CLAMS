@@ -9,12 +9,12 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-mkdir --parents $PICO_UTILITIES
-pushd $PICO_UTILITIES
+mkdir --parents $PICO_UTILITIES_PATH
+pushd $PICO_UTILITIES_PATH
   echo ""
   echo "Downloading RISC-V cross-compiler tarball"
   rm -f $RISCV_COMPILER_TARBALL
-  /usr/bin/time wget $RISCV_COMPILER_URL
+  /usr/bin/time curl -sOL $RISCV_COMPILER_URL
 
   echo "Installing"
   rm -fr $RISCV_COMPILER_PATH

@@ -3,7 +3,8 @@
 set -e
 
 echo "Installing base packages"
-sudo apt-get install -y \
+export DEBIAN_FRONTEND=noninteractive
+sudo apt-get install -qqy --no-install-recommends \
   autoconf \
   automake \
   build-essential \

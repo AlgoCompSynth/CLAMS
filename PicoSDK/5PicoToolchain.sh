@@ -59,6 +59,10 @@ pushd $CLAMS_BASE
       cp src/openocd $PICO_UTILITIES_PATH
     popd
 
+    echo ""
+    echo "Downloading Debug Probe firmware"
+    curl -sOL $DEBUG_PROBE_FIRMWARE
+
   popd
 
 popd
