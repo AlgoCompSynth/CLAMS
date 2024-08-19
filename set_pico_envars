@@ -42,6 +42,7 @@ export PICOTOOL_URL="--branch 2.0.0 https://github.com/raspberrypi/picotool.git"
 export PICOTOOL_REPO_PATH="$PICO_UTILITIES_PATH/picotool-repo"
 export OPENOCD_URL="https://github.com/raspberrypi/openocd.git"
 export OPENOCD_REPO_PATH="$PICO_UTILITIES_PATH/openocd-repo"
+export DEBUG_PROBE_FIRMWARE="https://github.com/raspberrypi/debugprobe/releases/download/debugprobe-v2.0.1/debugprobe.uf2"
 
 # RISC-V compiler
 # https://www.embecosm.com/resources/tool-chain-downloads/#corev
