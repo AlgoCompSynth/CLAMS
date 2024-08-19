@@ -11,11 +11,8 @@ sudo apt-get install -qqy --no-install-recommends \
   cmake \
   g++ \
   gcc \
-  gcc-arm-none-eabi \
   gdb-multiarch \
   libftdi-dev \
-  libnewlib-arm-none-eabi \
-  libstdc++-arm-none-eabi-newlib \
   libtool \
   libusb-1.0-0-dev \
   minicom \
