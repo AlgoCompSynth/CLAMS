@@ -75,3 +75,12 @@ export PIMORONI_PICO_PLUS2_URL="https://github.com/pimoroni/pimoroni-pico-rp2350
 ## https://github.com/sparkfun/SparkFun_Pro_Micro_RP2350
 export SPARKFUN_PRO_MICRO_RP2350_UF2="firmware_pro_micro_rp2350.uf2"
 export SPARKFUN_PRO_MICRO_RP2350_URL="https://cdn.sparkfun.com/assets/6/3/c/f/d/$SPARKFUN_PRO_MICRO_RP2350_UF2"
+
+# Arduino IDE
+export PICO_ARDUINO_PATH="$CLAMS_BASE/pico-arduino"
+export ARDUINO_IDE_VERSION="2.3.2"
+export ARDUINO_IDE_NAME="arduino-ide_${ARDUINO_IDE_VERSION}_Linux_64bit"
+export ARDUINO_IDE_ZIPFILE="$ARDUINO_IDE_NAME.zip"
+export ARDUINO_IDE_URL="https://downloads.arduino.cc/arduino-ide/$ARDUINO_IDE_ZIPFILE"
+export ARDUINO_LOGFILE_PATH="$HOME/.local/arduino_logfiles"
+export ARDUINO_IDE_PATH="$PICO_ARDUINO_PATH/$ARDUINO_IDE_NAME"
