@@ -9,17 +9,26 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-echo "Downloading Base CircuitPython"
-curl -sOL $CIRCUITPYTHON_DOWNLOAD
-echo "Downloading Base MicroPython"
-curl -sOL $MICROPYTHON_DOWNLOAD
-echo "Downloading SparkFun Pro Micro RP2350 MicroPython"
-curl -sOL $SPARKFUN_PRO_MICRO_RP2350_MICROPYTHON_DOWNLOAD
+echo "Creating fresh $PICO_PYTHON"
+rm -fr $PICO_PYTHON
+mkdir --parents $PICO_PYTHON
+echo ""
+pushd $PICO_PYTHON
 
-echo "Downloading flash_nuke.uf2"
-# https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html#resetting-flash-memory
-pushd ..
-curl -sOL https://datasheets.raspberrypi.com/soft/flash_nuke.uf2
+  echo $PIMORONI_PICO_PLUS2_UF2
+  curl -sOL $PIMORONI_PICO_PLUS2_URL
+  echo $SPARKFUN_PRO_MICRO_RP2350_UF2
+  curl -sOL $SPARKFUN_PRO_MICRO_RP2350_URL
+
 popd
 
-echo "Finished!"
+echo ""
+echo ""
+echo "Note: 'flash_nuke.uf2' files are now board-specific."
+echo "You will find them in the appropriate"
+echo ""
+echo "    $PICO_EXAMPLES_PATH/build_*"
+echo ""
+echo "directories."
+echo ""
+echo "Finished"
