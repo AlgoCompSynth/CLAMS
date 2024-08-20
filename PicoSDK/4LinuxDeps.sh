@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Installing base packages"
+echo "Installing Linux dependencies"
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get install -qqy --no-install-recommends \
   autoconf \
