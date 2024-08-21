@@ -16,10 +16,12 @@ pushd $PICO_UTILITIES_PATH
   /usr/bin/time curl -sOL $ARM_COMPILER_URL
 
   echo "Installing"
-  rm -fr $ARM_COMPILER_PATH
+  mkdir --parents $ARM_COMPILER_PATH
   /usr/bin/time tar --extract \
     --file $ARM_COMPILER_TARBALL \
-    > extract.log 2>&1
+    --strip-components=1 \
+    --directory=$ARM_COMPILER_PATH \
+    > arm-extract.log 2>&1
 popd
 $ARM_COMPILER_PATH/bin/arm-none-eabi-gcc --version
 
