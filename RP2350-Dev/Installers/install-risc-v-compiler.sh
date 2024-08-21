@@ -9,7 +9,6 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-mkdir --parents $PICO_UTILITIES_PATH
 pushd $PICO_UTILITIES_PATH
   echo ""
   echo "Downloading RISC-V cross-compiler tarball"
