@@ -17,7 +17,11 @@ sudo apt-get install -qqy --no-install-recommends \
   libusb-1.0-0-dev \
   minicom \
   pkg-config \
-  texinfo
+  python3-dev \
+  python3-pip \
+  python3-venv \
+  texinfo \
+  thonny
 
 ./install-risc-v-compiler.sh
 ./install-arm-compiler.sh

@@ -16,7 +16,7 @@ then
   mkdir --parents $CLAMS_BASE
 fi
 
-# main SDK and friends
+# main directory
 export PICO_PATH=$CLAMS_BASE/pico
 
 # SDK
@@ -32,7 +32,6 @@ export PICO_PLAYGROUND_URL="--branch sdk-2.0.0 https://github.com/raspberrypi/pi
 export PICO_PLAYGROUND_PATH="$PICO_PATH/pico-playground"
 
 # FreeRTOS kernel
-#export FREERTOS_KERNEL_URL="https://github.com/FreeRTOS/FreeRTOS-Kernel.git"
 export FREERTOS_KERNEL_URL="https://github.com/raspberrypi/FreeRTOS-Kernel.git"
 export FREERTOS_KERNEL_PATH="$PICO_PATH/FreeRTOS-Kernel"
 
@@ -63,7 +62,12 @@ export ARM_COMPILER_PATH="$PICO_UTILITIES_PATH/$ARM_COMPILER_VERSION"
 # Python!
 
 ## Main directory
-export PICO_PYTHON="$CLAMS_BASE/pico-python"
+export PICO_PYTHON_PATH="$PICO_PATH/python"
+
+## Amy
+export AMY_URL="--branch main https://github.com/shorepine/amy.git"
+export AMY_PATH="$PICO_PYTHON_PATH/amy"
+export AMY_VENV_PATH="$PICO_PYTHON/amy_venv"
 
 ## Pimoroni Pico Plus 2
 ## https://github.com/pimoroni/pimoroni-pico-rp2350
@@ -77,7 +81,7 @@ export SPARKFUN_PRO_MICRO_RP2350_UF2="firmware_pro_micro_rp2350.uf2"
 export SPARKFUN_PRO_MICRO_RP2350_URL="https://cdn.sparkfun.com/assets/6/3/c/f/d/$SPARKFUN_PRO_MICRO_RP2350_UF2"
 
 # Arduino IDE
-export PICO_ARDUINO_PATH="$CLAMS_BASE/pico-arduino"
+export PICO_ARDUINO_PATH="$CLAMS_BASE/arduino"
 export ARDUINO_IDE_VERSION="2.3.2"
 export ARDUINO_IDE_NAME="arduino-ide_${ARDUINO_IDE_VERSION}_Linux_64bit"
 export ARDUINO_IDE_ZIPFILE="$ARDUINO_IDE_NAME.zip"
