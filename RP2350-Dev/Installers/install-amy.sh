@@ -12,7 +12,7 @@ source ../set_pico_envars
 echo "Cloning $AMY_PATH"
 pushd $PICO_PYTHON
   rm -fr $AMY_PATH
-  echo $AML_URL
+  echo $AMY_URL
   git clone $AMY_URL
 
   pushd $AMY_PATH/src
