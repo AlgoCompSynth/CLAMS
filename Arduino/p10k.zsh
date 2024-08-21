@@ -1,1 +1,0 @@
-../Python/p10k.zsh
