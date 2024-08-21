@@ -10,7 +10,7 @@ echo "Setting environment variables"
 source ../set_pico_envars
 
 echo "Cloning $AMY_PATH"
-pushd $PICO_PYTHON
+pushd $PICO_PYTHON_PATH
   rm -fr $AMY_PATH
   echo $AMY_URL
   git clone $AMY_URL

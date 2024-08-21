@@ -9,11 +9,11 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-echo "Creating fresh $PICO_PYTHON"
-rm -fr $PICO_PYTHON
-mkdir --parents $PICO_PYTHON
+echo "Creating fresh $PICO_PYTHON_PATH"
+rm -fr $PICO_PYTHON_PATH
+mkdir --parents $PICO_PYTHON_PATH
 echo ""
-pushd $PICO_PYTHON
+pushd $PICO_PYTHON_PATH
 
   echo $PIMORONI_PICO_PLUS2_UF2
   curl -sOL $PIMORONI_PICO_PLUS2_URL
@@ -21,6 +21,8 @@ pushd $PICO_PYTHON
   curl -sOL $SPARKFUN_PRO_MICRO_RP2350_URL
 
 popd
+
+./Installers/install-amy.sh
 
 echo ""
 echo ""
