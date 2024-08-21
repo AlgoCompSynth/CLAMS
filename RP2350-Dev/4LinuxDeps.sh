@@ -24,7 +24,4 @@ export DEBIAN_FRONTEND=noninteractive
   thonny \
   > 4LinuxDeps.log 2>&1
 
-./Installers/install-risc-v-compiler.sh
-./Installers/install-arm-compiler.sh
-
 echo "Finished"
