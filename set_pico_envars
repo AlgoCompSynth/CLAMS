@@ -36,7 +36,7 @@ export FREERTOS_KERNEL_URL="--recursive https://github.com/raspberrypi/FreeRTOS-
 export FREERTOS_KERNEL_PATH="$PICO_PATH/FreeRTOS-Kernel"
 
 # Utilities
-export PICO_UTILITIES_PATH=$CLAMS_BASE/pico-utilities
+export PICO_UTILITIES_PATH=$PICO_PATH/pico-utilities
 export PICOTOOL_URL="--recursive --branch 2.0.0 https://github.com/raspberrypi/picotool.git"
 export PICOTOOL_REPO_PATH="$PICO_UTILITIES_PATH/picotool-repo"
 export OPENOCD_URL="--depth=1 https://github.com/raspberrypi/openocd.git"
