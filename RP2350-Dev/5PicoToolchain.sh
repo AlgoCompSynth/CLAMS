@@ -47,19 +47,21 @@ pushd $PICO_UTILITIES_PATH
   pushd $PICOTOOL_REPO_PATH
     mkdir build
     cd build
-    cmake ../
-    make -j`nproc`
-    sudo make install
+    cmake ../ > $PICO_UTILITIES_PATH/picotool.log 2>&1
+    /usr/bin/time make -j`nproc` >> $PICO_UTILITIES_PATH/picotool.log 2>&1
+    sudo make install >> $PICO_UTILITIES_PATH/picotool.log 2>&1
     picotool version
   popd
 
   echo ""
   echo "Building openocd"
   pushd $OPENOCD_REPO_PATH
-    ./bootstrap
-    ./configure --enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio --disable-werror
-    make -j`nproc`
-    sudo make install
+    ./bootstrap > $PICO_UTILITIES_PATH/openocd.log 2>&1
+    ./configure \
+      --enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio --disable-werror \
+      >> $PICO_UTILITIES_PATH/openocd.log 2>&1
+    /usr/bin/time make -j`nproc` >> $PICO_UTILITIES_PATH/openocd.log 2>&1
+    sudo make install >> $PICO_UTILITIES_PATH/openocd.log 2>&1
     openocd --version
   popd
 
