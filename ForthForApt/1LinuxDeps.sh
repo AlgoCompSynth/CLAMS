@@ -3,10 +3,11 @@
 set -e
 
 export LOGFILE=$PWD/Logs/1LinuxDeps.log
+export DEBIAN_FRONTEND=noninteractive
 
-/usr/bin/time sudo apt-get install \
+/usr/bin/time sudo apt-get install -qqy --no-install-recommends \
   gforth \
-  pforth \
+  ninja-build \
   texlive-base \
   >> $LOGFILE 2>&1
 
