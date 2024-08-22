@@ -20,13 +20,6 @@ cp vimrc $HOME/.vimrc
 cp zshrc $HOME/.zshrc
 cp p10k.zsh $HOME/.p10k.zsh
 
-echo "Setting git configuration"
-git config --global pull.rebase false
-git config --global push.default simple
-git config --global user.email "znmeb@znmeb.net"
-git config --global user.name "M. Edward (Ed) Borasky"
-git config --global advice.detachedHead false
-
 echo "Creating $HOME/.local/bin and $HOME/bin"
 mkdir --parents $HOME/.local/bin
 mkdir --parents $HOME/bin
