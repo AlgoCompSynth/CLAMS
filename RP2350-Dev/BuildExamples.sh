@@ -42,12 +42,13 @@ echo ""
 export UF2_FILES="$PWD/uf2Files.log"
 echo "Setting environment variables"
 source ../set_pico_envars
-echo "Prepending RISC-V and Arm compiler locations to PATH"
-export PATH=$RISCV_COMPILER_PATH/bin:$ARM_COMPILER_PATH/bin:$PATH
-echo $PATH
 echo "Setting WiFi credentials - some examples need them to build"
 export WIFI_SSID="Bogus"
 export WIFI_PASSWORD="Also bogus"
+echo "Prepending RISC-V and Arm compiler locations to PATH"
+export PATH=$RISCV_COMPILER_PATH/bin:$ARM_COMPILER_PATH/bin:$PATH
+echo ""
+echo "PATH: $PATH"
 
 echo ""
 echo ""
