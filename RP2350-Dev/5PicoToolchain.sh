@@ -2,28 +2,19 @@
 
 set -e
 
-export SUPPORTED_BOARDS="$PWD/SupportedBoards.log"
-
-echo "Setting CLAMS_BASE to $HOME"
-export CLAMS_BASE=$HOME
-
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
+export SUPPORTED_BOARDS="$PWD/SupportedBoards.log"
+echo "Creating fresh $PICO_SDK_REPOS"
+rm -fr $PICO_SDK_REPOS
+mkdir --parents $PICO_SDK_REPOS
 
-echo "Creating fresh $PICO_PATH"
-rm -fr $PICO_PATH
-mkdir --parents $PICO_PATH
-mkdir --parents $PICO_UTILITIES_PATH
+pushd $PICO_SDK_REPOS
 
-echo "Installing compilers"
-./Installers/install-arm-compiler.sh*
-./Installers/install-risc-v-compiler.sh*
-
-echo ""
-echo "Cloning Raspberry Pi Pico SDK repositories"
-pushd $PICO_PATH
-
+  echo ""
+  echo "Cloning Raspberry Pi Pico SDK repositories"
+  git config --global advice.detachedHead false
   git clone --quiet $PICO_SDK_URL
   git clone --quiet $PICO_EXAMPLES_URL
   git clone --quiet $PICO_EXTRAS_URL
@@ -32,36 +23,39 @@ pushd $PICO_PATH
 
   echo ""
   echo "Listing supported boards to $SUPPORTED_BOARDS"
-  ls -l $PICO_PATH/pico-sdk/src/boards/include/boards > $SUPPORTED_BOARDS
+  ls -l $PICO_SDK_REPOS/pico-sdk/src/boards/include/boards > $SUPPORTED_BOARDS
 
-popd
-
-echo ""
-echo "Cloning Pico utilities"
-pushd $PICO_UTILITIES_PATH
-  rm -fr $PICOTOOL_REPO_PATH; git clone --quiet $PICOTOOL_URL $PICOTOOL_REPO_PATH
-  rm -fr $OPENOCD_REPO_PATH; git clone --quiet $OPENOCD_URL $OPENOCD_REPO_PATH
+  echo ""
+  echo "Cloning Pico utilities"
+  git clone --quiet $PICOTOOL_URL
+  git clone --quiet $OPENOCD_URL
 
   echo ""
   echo "Building picotool"
-  pushd $PICOTOOL_REPO_PATH
+  pushd $PICOTOOL_PATH
     mkdir build
     cd build
-    cmake ../ > $PICO_UTILITIES_PATH/picotool.log 2>&1
-    /usr/bin/time make -j`nproc` >> $PICO_UTILITIES_PATH/picotool.log 2>&1
-    sudo make install >> $PICO_UTILITIES_PATH/picotool.log 2>&1
+    cmake ../ \
+      > $PICO_SDK_REPOS/picotool.log 2>&1
+    /usr/bin/time make -j`nproc` \
+      >> $PICO_SDK_REPOS/picotool.log 2>&1
+    sudo make install \
+      >> $PICO_SDK_REPOS/picotool.log 2>&1
     picotool version
   popd
 
   echo ""
   echo "Building openocd"
-  pushd $OPENOCD_REPO_PATH
-    ./bootstrap > $PICO_UTILITIES_PATH/openocd.log 2>&1
+  pushd $OPENOCD_PATH
+    ./bootstrap \
+      > $PICO_SDK_REPOS/openocd.log 2>&1
     ./configure \
       --enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio --disable-werror \
-      >> $PICO_UTILITIES_PATH/openocd.log 2>&1
-    /usr/bin/time make -j`nproc` >> $PICO_UTILITIES_PATH/openocd.log 2>&1
-    sudo make install >> $PICO_UTILITIES_PATH/openocd.log 2>&1
+      >> $PICO_SDK_REPOS/openocd.log 2>&1
+    /usr/bin/time make -j`nproc` \
+      >> $PICO_SDK_REPOS/openocd.log 2>&1
+    sudo make install \
+      >> $PICO_SDK_REPOS/openocd.log 2>&1
     openocd --version
   popd
 
