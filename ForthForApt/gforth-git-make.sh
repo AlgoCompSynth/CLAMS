@@ -12,11 +12,7 @@ fi
 
 echo "Installing gforth"
 pushd $HOME/Projects/gforth
-#make clean
 ./BUILD-FROM-SCRATCH
 make -j`nproc` 2>&1 | tee /tmp/make.log
 cd doc; make pdf 2>&1 | tee ../pdf.log; cd ..
-sudo make install
-hash -r
-gforth --version
 popd
