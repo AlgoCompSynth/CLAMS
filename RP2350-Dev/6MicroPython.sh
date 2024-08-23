@@ -19,8 +19,6 @@ pushd $PICO_PYTHON_PATH
 
 popd
 
-./Installers/install-amy.sh
-
 echo ""
 echo ""
 echo "Note: 'flash_nuke.uf2' files are board-specific."

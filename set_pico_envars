@@ -51,11 +51,6 @@ export ARM_COMPILER_PATH="$HOME/.local"
 ## Main directory
 export PICO_PYTHON_PATH="$CLAMS_BASE/python"
 
-## Amy
-export AMY_URL="--branch main https://github.com/shorepine/amy.git"
-export AMY_PATH="$PICO_PYTHON_PATH/amy"
-export AMY_VENV_PATH="$PICO_PYTHON_PATH/amy-venv"
-
 ## Pimoroni Pico Plus 2
 ## https://github.com/pimoroni/pimoroni-pico-rp2350
 export PIMORONI_PICO_PLUS2_VERSION="v0.0.4"
