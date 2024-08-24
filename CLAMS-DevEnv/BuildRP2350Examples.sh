@@ -38,8 +38,6 @@ echo "argument."
 sleep 10
 export SJMAKE=$1
 
-echo ""
-export UF2_FILES="$PWD/uf2Files.log"
 echo "Setting environment variables"
 source ../set_pico_envars
 echo "Setting WiFi credentials - some examples need them to build"
@@ -75,9 +73,5 @@ do
   done
 
 done
-
-echo ""
-echo "Listing uf2 files to $UF2_FILES"
-./list-uf2-files.sh > $UF2_FILES
 
 echo "Finished"
