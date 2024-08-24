@@ -2,6 +2,10 @@
 
 set -e
 
+echo ""
+echo "Setting environment variables"
+source ../set_pico_envars
+
 echo "Installing Linux dependencies"
 export DEBIAN_FRONTEND=noninteractive
 /usr/bin/time sudo apt-get install -qqy --no-install-recommends \

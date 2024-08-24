@@ -80,3 +80,7 @@ export PICOVISION_MICROPYTHON_UF2="pimoroni-picovision-v1.0.2-micropython.uf2"
 export PICOVISION_MICROPYTHON_URL="https://github.com/pimoroni/picovision/releases/download/v1.0.2/$PICOVISION_MICROPYTHON_UF2"
 export PICOVISION_WIDESCREEN_MICROPYTHON_UF2="pimoroni-picovision-widescreen-v1.0.2-micropython.uf2"
 export PICOVISION_WIDESCREEN_MICROPYTHON_URL="https://github.com/pimoroni/picovision/releases/download/v1.0.2/$PICOVISION_WIDESCREEN_MICROPYTHON_UF2"
+
+# Arduino
+export ARDUINO_CLI_PATH=$HOME/.local/bin
+export ARDUINO_CLI_URL="https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh"
