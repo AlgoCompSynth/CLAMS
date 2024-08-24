@@ -52,21 +52,19 @@ echo "PATH: $PATH"
 
 echo ""
 echo ""
-echo "Building the rp2350 examples"
+echo "Building the rp2040 examples"
 for dir in \
   $PICO_EXAMPLES_PATH \
   $PICO_PLAYGROUND_PATH
 do
 
   for board in \
-    sparkfun_promicro_rp2350 \
-    pimoroni_pico_plus2_rp2350 \
-    ilabs_challenger_rp2350_bconnect \
-    ilabs_challenger_rp2350_wifi_ble
+    pico_w \
+    pico
   do
     export PICO_BOARD=$board
 
-    for platform in rp2350-riscv rp2350-arm-s
+    for platform in rp2040
     do
       export PICO_PLATFORM=$platform
       sdk_build $SJMAKE
@@ -75,21 +73,5 @@ do
   done
 
 done
-
-echo ""
-echo ""
-echo "Building the pico_w examples"
-for dir in \
-  $PICO_EXAMPLES_PATH \
-  $PICO_PLAYGROUND_PATH
-do
-    export PICO_BOARD=pico_w
-    export PICO_PLATFORM=rp2040
-    sdk_build $SJMAKE
-done
-
-echo ""
-echo "Listing uf2 files to $UF2_FILES"
-./list-uf2-files.sh > $UF2_FILES
 
 echo "Finished"
