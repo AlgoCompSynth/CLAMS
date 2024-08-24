@@ -16,6 +16,7 @@ sudo apt-get install -y \
   speedtest-cli \
   systemd \
   time \
+  tmux \
   tree \
   vim-nox \
   zsh
