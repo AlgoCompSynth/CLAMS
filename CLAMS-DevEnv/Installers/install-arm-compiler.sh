@@ -2,10 +2,6 @@
 
 set -e
 
-echo ""
-echo "Setting environment variables"
-source ../set_pico_envars
-
 pushd /tmp
   echo ""
   echo "Downloading Arm cross-compiler tarball"
