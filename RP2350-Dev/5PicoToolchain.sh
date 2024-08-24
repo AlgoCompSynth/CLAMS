@@ -19,6 +19,10 @@ pushd $PICO_SDK_REPOS
   git clone --quiet $PICO_EXAMPLES_URL
   git clone --quiet $PICO_EXTRAS_URL
   git clone --quiet $PICO_PLAYGROUND_URL
+  git clone --quiet $PIMORONI_PICO_URL
+  git clone --quiet $PIMORONI_PICO_RP2350_URL
+  git clone --quiet $PICOVISION_URL
+  git clone --quiet $PICODVI_URL
   git clone --quiet $FREERTOS_KERNEL_URL
 
   echo ""
