@@ -7,11 +7,11 @@ export CLAMS_BASE="$HOME/CLAMS-base"
 # Pico SDK repositories
 export PICO_SDK_REPOS=$CLAMS_BASE/pico-repos
 
-# SDK
+## SDK
 export PICO_SDK_URL="--recursive --branch 2.0.0 https://github.com/raspberrypi/pico-sdk.git"
 export PICO_SDK_PATH="$PICO_SDK_REPOS/pico-sdk"
 
-# Raspberry Pi sample projects
+## Raspberry Pi sample projects
 export PICO_EXAMPLES_URL="--recursive --branch sdk-2.0.0 https://github.com/raspberrypi/pico-examples.git"
 export PICO_EXAMPLES_PATH="$PICO_SDK_REPOS/pico-examples"
 export PICO_EXTRAS_URL="--recursive --branch sdk-2.0.0 https://github.com/raspberrypi/pico-extras.git"
@@ -19,7 +19,7 @@ export PICO_EXTRAS_PATH="$PICO_SDK_REPOS/pico-extras"
 export PICO_PLAYGROUND_URL="--recursive --branch sdk-2.0.0 https://github.com/raspberrypi/pico-playground.git" # for audio pack
 export PICO_PLAYGROUND_PATH="$PICO_SDK_REPOS/pico-playground"
 
-# Pimoroni
+## Pimoroni
 export PIMORONI_PICO_URL="--recursive --branch v1.23.0-1 https://github.com/pimoroni/pimoroni-pico.git"
 export PIMORONI_PICO_PATH="$PICO_SDK_REPOS/pimoroni-pico"
 export PIMORONI_PICO_RP2350_URL="--recursive --branch  v0.0.5 https://github.com/pimoroni/pimoroni-pico-rp2350.git"
@@ -29,27 +29,27 @@ export PICOVISION_PATH="$PICO_SDK_REPOS/picovision"
 export PICODVI_URL="--recursive --branch master https://github.com/Wren6991/PicoDVI.git"
 export PICODVI_PATH="$PICO_SDK_REPOS/PicoDVI"
 
-# FreeRTOS kernel
+## FreeRTOS kernel
 export FREERTOS_KERNEL_URL="--recursive https://github.com/raspberrypi/FreeRTOS-Kernel.git"
 export FREERTOS_KERNEL_PATH="$PICO_SDK_REPOS/FreeRTOS-Kernel"
 
-# Utilities
+## Utilities
 export PICOTOOL_URL="--recursive --branch 2.0.0 https://github.com/raspberrypi/picotool.git"
 export PICOTOOL_PATH="$PICO_SDK_REPOS/picotool"
 export OPENOCD_URL="--depth=1 https://github.com/raspberrypi/openocd.git"
 export OPENOCD_PATH="$PICO_SDK_REPOS/openocd"
 export DEBUG_PROBE_FIRMWARE="https://github.com/raspberrypi/debugprobe/releases/download/debugprobe-v2.0.1/debugprobe.uf2"
 
-# RISC-V compiler
-# https://www.embecosm.com/resources/tool-chain-downloads/#corev
-# recommended by Raspberry Pi Pico C/C++ SDK documentation
+## RISC-V compiler
+## https://www.embecosm.com/resources/tool-chain-downloads/#corev
+## recommended by Raspberry Pi Pico C/C++ SDK documentation
 export RISCV_COMPILER_VERSION="corev-openhw-gcc-ubuntu2204-20240530"
 export RISCV_COMPILER_TARBALL="$RISCV_COMPILER_VERSION.tar.gz"
 export RISCV_COMPILER_URL="https://buildbot.embecosm.com/job/corev-gcc-ubuntu2204/47/artifact/$RISCV_COMPILER_TARBALL"
 export RISCV_COMPILER_PATH="$HOME/.local"
 
-# Arm compiler
-# https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
+## Arm compiler
+## https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
 export ARM_COMPILER_RELEASE="13.3.rel1"
 export ARM_COMPILER_VERSION="arm-gnu-toolchain-$ARM_COMPILER_RELEASE-x86_64-arm-none-eabi"
 export ARM_COMPILER_TARBALL="$ARM_COMPILER_VERSION.tar.xz"
@@ -58,7 +58,7 @@ export ARM_COMPILER_PATH="$HOME/.local"
 
 # Python!
 
-## Main directory
+## RP2350
 export PICO_PYTHON_PATH="$CLAMS_BASE/python"
 
 ## Pimoroni Pico Plus 2
@@ -71,3 +71,12 @@ export PIMORONI_PICO_PLUS2_URL="https://github.com/pimoroni/pimoroni-pico-rp2350
 ## https://github.com/sparkfun/SparkFun_Pro_Micro_RP2350
 export SPARKFUN_PRO_MICRO_RP2350_UF2="firmware_pro_micro_rp2350.uf2"
 export SPARKFUN_PRO_MICRO_RP2350_URL="https://cdn.sparkfun.com/assets/6/3/c/f/d/$SPARKFUN_PRO_MICRO_RP2350_UF2"
+
+## RP2040
+export PICOVISION_EXAMPLES_ZIPFILE="pimoroni-picovision-examples-v1.0.2.zip"
+export PICOVISION_EXAMPLES_URL="https://github.com/pimoroni/picovision/releases/download/v1.0.2/$PICOVISION_EXAMPLES_ZIPFILE"
+export PICOVISION_EXAMPLES_PATH="$PICO_PYTHON_PATH/pimoroni-picovision-examples-v1.0.2"
+export PICOVISION_MICROPYTHON_UF2="pimoroni-picovision-v1.0.2-micropython.uf2"
+export PICOVISION_MICROPYTHON_URL="https://github.com/pimoroni/picovision/releases/download/v1.0.2/$PICOVISION_MICROPYTHON_UF2"
+export PICOVISION_WIDESCREEN_MICROPYTHON_UF2="pimoroni-picovision-widescreen-v1.0.2-micropython.uf2"
+export PICOVISION_WIDESCREEN_MICROPYTHON_URL="https://github.com/pimoroni/picovision/releases/download/v1.0.2/$PICOVISION_WIDESCREEN_MICROPYTHON_UF2"
