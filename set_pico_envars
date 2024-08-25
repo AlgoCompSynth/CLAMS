@@ -88,6 +88,10 @@ export MICROPYTHON_VERSION="20240602-v1.23.0"
 export PICO_W_MICROPYTHON_UF2="RPI_PICO_W-$MICROPYTHON_VERSION.uf2"
 export PICO_W_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_W_MICROPYTHON_UF2"
 
+## Virtual environment for host Python tools
+export CLAMS_VENV=$PICO_PYTHON_PATH/clams-venv
+export CLAMS_VENV_ACTIVATE="$CLAMS_VENV/bin/activate"
+
 # Arduino
 export ARDUINO_CLI_PATH=$HOME/.local/bin
 export ARDUINO_CLI_URL="https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh"
