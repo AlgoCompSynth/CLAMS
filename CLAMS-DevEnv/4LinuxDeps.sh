@@ -25,7 +25,6 @@ export DEBIAN_FRONTEND=noninteractive
   python3-pip \
   python3-venv \
   texinfo \
-  thonny \
   > 4LinuxDeps.log 2>&1
 
 ./Installers/install-arduino-cli.sh*
