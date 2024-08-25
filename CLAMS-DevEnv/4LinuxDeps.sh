@@ -23,6 +23,7 @@ export DEBIAN_FRONTEND=noninteractive
   pkg-config \
   python3-dev \
   python3-pip \
+  python3-tk \
   python3-venv \
   texinfo \
   > 4LinuxDeps.log 2>&1
