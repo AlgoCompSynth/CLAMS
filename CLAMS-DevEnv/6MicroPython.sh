@@ -14,8 +14,9 @@ pushd $PICO_PYTHON_PATH
 
   echo "Creating virtual environment $CLAMS_VENV"
   python3 -m venv $CLAMS_VENV
+  echo "Activating virtual environment $CLAMS_VENV"
+  source $ACTIVATE_CLAMS_VENV
   echo "Installing mpremote and thonny"
-  source $CLAMS_VENV/bin/activate
   pip3 install --upgrade mpremote thonny
   echo "Deactivating virtual environment $CLAMS_VENV"
   deactivate

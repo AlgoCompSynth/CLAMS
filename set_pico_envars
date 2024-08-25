@@ -90,7 +90,7 @@ export PICO_W_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_
 
 ## Virtual environment for host Python tools
 export CLAMS_VENV=$PICO_PYTHON_PATH/clams-venv
-export CLAMS_VENV_ACTIVATE="$CLAMS_VENV/bin/activate"
+export ACTIVATE_CLAMS_VENV="$CLAMS_VENV/bin/activate"
 
 # Arduino
 export ARDUINO_CLI_PATH=$HOME/.local/bin
