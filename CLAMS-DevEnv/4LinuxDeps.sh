@@ -28,7 +28,6 @@ export DEBIAN_FRONTEND=noninteractive
   texinfo \
   > 4LinuxDeps.log 2>&1
 
-./Installers/install-arduino-cli.sh*
 ./Installers/install-arm-compiler.sh*
 ./Installers/install-risc-v-compiler.sh*
 
