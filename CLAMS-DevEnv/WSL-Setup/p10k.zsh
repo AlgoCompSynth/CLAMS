@@ -1,0 +1,1 @@
+../Distrobox-Setup/p10k.zsh

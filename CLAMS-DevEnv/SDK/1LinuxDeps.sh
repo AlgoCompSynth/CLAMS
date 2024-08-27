@@ -26,9 +26,9 @@ export DEBIAN_FRONTEND=noninteractive
   python3-tk \
   python3-venv \
   texinfo \
-  > 4LinuxDeps.log 2>&1
+  > 1LinuxDeps.log 2>&1
 
-./Installers/install-arm-compiler.sh*
-./Installers/install-risc-v-compiler.sh*
+./install-arm-compiler.sh*
+./install-risc-v-compiler.sh*
 
 echo "Finished"

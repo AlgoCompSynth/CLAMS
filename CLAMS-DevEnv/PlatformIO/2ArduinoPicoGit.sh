@@ -2,18 +2,20 @@
 
 set -e
 
-export LOGFILE="$PWD/5ArduinoPicoGit.log"
+echo ""
+echo "Setting environment variables"
+source ../set_pico_envars
+
+export LOGFILE="$PWD/2ArduinoPicoGit.log"
 echo "LOGFILE: $LOGFILE"
-echo "Removing any existing $HOME/Arduino"
-rm -fr $HOME/Arduino
 
 # https://arduino-pico.readthedocs.io/en/latest/install.html#installing-via-git
 echo "Installing Arduino Pico from GitHub"
-mkdir --parents $HOME/Arduino/hardware/pico
-/usr/bin/time git clone https://github.com/earlephilhower/arduino-pico.git $HOME/Arduino/hardware/pico/rp2040 \
+mkdir --parents $ARDUINO_PICO_PATH; rm -fr $ARDUINO_PICO_PATH
+/usr/bin/time git clone $ARDUINO_PICO_URL $ARDUINO_PICO_PATH \
   >> $LOGFILE 2>&1
 
-pushd $HOME/Arduino/hardware/pico/rp2040
+pushd $ARDUINO_PICO_PATH
   echo "Updating main submodules"
   /usr/bin/time git submodule update --init \
     >> $LOGFILE 2>&1
