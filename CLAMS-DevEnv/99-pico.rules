@@ -1,1 +1,4 @@
-../99-pico.rules
+# /etc/udev/rules.d/99-pico.rules
+
+#picoprobe
+SUBSYSTEM=="usb", ATTRS{idVendor}=="2e8a", MODE="0666"
