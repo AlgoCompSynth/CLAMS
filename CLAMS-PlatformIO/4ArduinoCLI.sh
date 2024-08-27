@@ -26,8 +26,14 @@ sudo mv /tmp/_arduino-cli.sh /usr/share/zsh/vendor-completions/_arduino-cli
 echo "Installing Arduino MBED RP2040 core"
 arduino-cli core install arduino:mbed_rp2040
 
-echo "Listing RP2040 boards to arduino-boards.log"
+echo "Listing MBED RP2040 boards to mbed_rp2040-boards.log"
 arduino-cli board search mbed_rp2040 > mbed-rp2040-boards.log
+
+echo "Listing MBED RP2040 examples to mbed-rp2040-examples.log"
+find $HOME/.arduino15/packages/arduino/hardware/mbed_rp2040 -name 'examples' \
+  | sed 's;^.*arduino/hardware/;;' \
+  | sort -u \
+  > mbed-rp2040-examples.log
 
 echo "Listing connected boards"
 arduino-cli board list

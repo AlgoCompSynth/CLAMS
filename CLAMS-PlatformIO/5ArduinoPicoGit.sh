@@ -31,7 +31,10 @@ echo "Listing Arduino Pico boards to arduino-pico-boards.log"
 arduino-cli board search pico:rp2040 > arduino-pico-boards.log
 
 echo "Listing Arduino Pico examples to arduino-pico-examples.log"
-find $HOME/Arduino/hardware/pico -name 'examples' | sed 's;^.*Arduino/hardware/;;' | sort -u > arduino-pico-examples.log
+find $HOME/Arduino/hardware/pico -name 'examples' \
+  | sed 's;^.*Arduino/hardware/;;' \
+  | sort -u \
+  > arduino-pico-examples.log
 
 echo "Listing connected boards"
 arduino-cli board list
