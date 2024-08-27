@@ -2,15 +2,11 @@
 
 set -e
 
-echo "Defining LOGFILE"
-export LOGFILE="$PWD/5ArduinoCLI.log"
-
 echo "Installing via 'curl'"
 # https://arduino.github.io/arduino-cli/0.20/installation/
 /usr/bin/time curl -fsSL \
   https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh \
-  | BINDIR=~/.local/bin sh \
-  > $LOGFILE 2>&1
+  | BINDIR=~/.local/bin sh
 
 echo "Creating fresh configuration file"
 # https://arduino.github.io/arduino-cli/0.20/getting-started/
@@ -18,9 +14,6 @@ arduino-cli config init --overwrite
 
 echo "Updating index"
 arduino-cli core update-index
-
-echo "Listing connected boards"
-arduino-cli board list
 
 echo "Installing bash completion file"
 arduino-cli completion bash > /tmp/ardunio-cli.sh
@@ -34,6 +27,9 @@ echo "Installing Arduino MBED RP2040 core"
 arduino-cli core install arduino:mbed_rp2040
 
 echo "Listing RP2040 boards to arduino-boards.log"
-arduino-cli board search rp2040 > rp2040-boards.log
+arduino-cli board search mbed_rp2040 > mbed-rp2040-boards.log
+
+echo "Listing connected boards"
+arduino-cli board list
 
 echo "Finished"
