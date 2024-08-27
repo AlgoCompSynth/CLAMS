@@ -59,7 +59,8 @@ export ARM_COMPILER_PATH="$HOME/.local"
 # Python!
 
 ## RP2350
-export PICO_PYTHON_PATH="$CLAMS_BASE/python"
+export PICO_MICROPYTHON_PATH="$CLAMS_BASE/micropython"
+export PICO_CIRCUITPYTHON_PATH="$CLAMS_BASE/circuitpython"
 
 ## Pimoroni Pico Plus 2
 ## https://github.com/pimoroni/pimoroni-pico-rp2350
@@ -75,21 +76,22 @@ export SPARKFUN_PRO_MICRO_RP2350_URL="https://cdn.sparkfun.com/assets/6/3/c/f/d/
 ## RP2040
 export PICOVISION_EXAMPLES_ZIPFILE="pimoroni-picovision-examples-v1.0.2.zip"
 export PICOVISION_EXAMPLES_URL="https://github.com/pimoroni/picovision/releases/download/v1.0.2/$PICOVISION_EXAMPLES_ZIPFILE"
-export PICOVISION_EXAMPLES_PATH="$PICO_PYTHON_PATH/pimoroni-picovision-examples-v1.0.2"
+export PICOVISION_EXAMPLES_PATH="$PICO_MICROPYTHON_PATH/pimoroni-picovision-examples-v1.0.2"
 export PICOVISION_MICROPYTHON_UF2="pimoroni-picovision-v1.0.2-micropython.uf2"
 export PICOVISION_MICROPYTHON_URL="https://github.com/pimoroni/picovision/releases/download/v1.0.2/$PICOVISION_MICROPYTHON_UF2"
 export PICOVISION_WIDESCREEN_MICROPYTHON_UF2="pimoroni-picovision-widescreen-v1.0.2-micropython.uf2"
 export PICOVISION_WIDESCREEN_MICROPYTHON_URL="https://github.com/pimoroni/picovision/releases/download/v1.0.2/$PICOVISION_WIDESCREEN_MICROPYTHON_UF2"
 
-export CIRCUITPYTHON_VERSION="9.1.2"
-export PICO_W_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico_w-en_US-$CIRCUITPYTHON_VERSION.uf2"
-export PICO_W_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/$PICO_W_CIRCUITPYTHON_UF2"
 export MICROPYTHON_VERSION="20240602-v1.23.0"
 export PICO_W_MICROPYTHON_UF2="RPI_PICO_W-$MICROPYTHON_VERSION.uf2"
 export PICO_W_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_W_MICROPYTHON_UF2"
 
+export CIRCUITPYTHON_VERSION="9.1.2"
+export PICO_W_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico_w-en_US-$CIRCUITPYTHON_VERSION.uf2"
+export PICO_W_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/$PICO_W_CIRCUITPYTHON_UF2"
+
 ## Virtual environment for host Python tools
-export CLAMS_VENV=$PICO_PYTHON_PATH/clams-venv
+export CLAMS_VENV=$CLAMS_BASE/clams-venv
 export ACTIVATE_CLAMS_VENV="$CLAMS_VENV/bin/activate"
 
 # Arduino
