@@ -99,3 +99,7 @@ export ARDUINO_CLI_PATH=$HOME/.local/bin
 export ARDUINO_CLI_URL="https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh"
 export ARDUINO_PICO_PATH="$HOME/Arduino/hardware/pico/rp2040"
 export ARDUINO_PICO_URL="https://github.com/earlephilhower/arduino-pico.git"
+
+# PlatformIO
+export PLATFORMIO_UDEV_RULES_URL="https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/system/99-platformio-udev.rules"
+export PLATFORMIO_UDEV_RULES_PATH="/etc/udev/rules.d/99-platformio-udev.rules"
