@@ -87,6 +87,8 @@ export PICO_W_MICROPYTHON_UF2="RPI_PICO_W-$MICROPYTHON_VERSION.uf2"
 export PICO_W_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_W_MICROPYTHON_UF2"
 
 export CIRCUITPYTHON_VERSION="9.1.2"
+export PICO_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico-en_US-$CIRCUITPYTHON_VERSION.uf2"
+export PICO_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico/en_US/$PICO_CIRCUITPYTHON_UF2"
 export PICO_W_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico_w-en_US-$CIRCUITPYTHON_VERSION.uf2"
 export PICO_W_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/$PICO_W_CIRCUITPYTHON_UF2"
 
