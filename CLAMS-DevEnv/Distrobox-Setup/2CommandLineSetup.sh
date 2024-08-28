@@ -24,4 +24,7 @@ echo "Creating $HOME/.local/bin and $HOME/bin"
 mkdir --parents $HOME/.local/bin
 mkdir --parents $HOME/bin
 
+echo "Copying ../set_pico_envars to $HOME"
+cp ../set_pico_envars $HOME/
+
 echo "Finished"
