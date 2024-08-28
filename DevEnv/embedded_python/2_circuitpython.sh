@@ -12,6 +12,8 @@ mkdir --parents $PICO_CIRCUITPYTHON_PATH
 echo ""
 pushd $PICO_CIRCUITPYTHON_PATH
 
+  echo "Downloading $PICO_CIRCUITPYTHON_UF2"
+  curl -sOL $PICO_CIRCUITPYTHON_URL
   echo "Downloading $PICO_W_CIRCUITPYTHON_UF2"
   curl -sOL $PICO_W_CIRCUITPYTHON_URL
 
