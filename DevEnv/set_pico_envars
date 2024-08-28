@@ -1,11 +1,11 @@
 # All files will be stored in directories below here
 # Change this if you want them stored somewhere else
-export CLAMS_BASE="$HOME/CLAMS-base"
+export CLAMS_BASE="$HOME/CLAMS_base"
 
 # Don't change anything below here!
 
 # Pico SDK repositories
-export PICO_SDK_REPOS=$CLAMS_BASE/pico-repos
+export PICO_SDK_REPOS=$CLAMS_BASE/pico_repos
 
 ## SDK
 export PICO_SDK_URL="--recursive --branch 2.0.0 https://github.com/raspberrypi/pico-sdk.git"
@@ -91,7 +91,7 @@ export PICO_W_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico_w-en_U
 export PICO_W_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/$PICO_W_CIRCUITPYTHON_UF2"
 
 ## Virtual environment for host Python tools
-export CLAMS_VENV=$CLAMS_BASE/clams-venv
+export CLAMS_VENV=$CLAMS_BASE/clams_venv
 export ACTIVATE_CLAMS_VENV="$CLAMS_VENV/bin/activate"
 
 # Arduino
