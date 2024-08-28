@@ -83,6 +83,8 @@ export PICOVISION_WIDESCREEN_MICROPYTHON_UF2="pimoroni-picovision-widescreen-v1.
 export PICOVISION_WIDESCREEN_MICROPYTHON_URL="https://github.com/pimoroni/picovision/releases/download/v1.0.2/$PICOVISION_WIDESCREEN_MICROPYTHON_UF2"
 
 export MICROPYTHON_VERSION="20240602-v1.23.0"
+export PICO_MICROPYTHON_UF2="RPI_PICO-$MICROPYTHON_VERSION.uf2"
+export PICO_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_MICROPYTHON_UF2"
 export PICO_W_MICROPYTHON_UF2="RPI_PICO_W-$MICROPYTHON_VERSION.uf2"
 export PICO_W_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_W_MICROPYTHON_UF2"
 
