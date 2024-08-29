@@ -2,7 +2,7 @@
 
 set -e
 
-export DBX_NAME="CLAMS_devenv"
+export DBX_NAME="CLAMS_dev_env"
 echo "Run this script on the Distrobox host to force-remove the"
 echo "Distrobox container"
 echo ""
