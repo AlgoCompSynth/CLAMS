@@ -3,9 +3,11 @@
 set -e
 
 function sdk_build {
+  target="$dir/build_${PICO_BOARD}_${PICO_PLATFORM}"
+  repo=`echo $dir | sed 's;^.*/;;'`
+  zipfile="${repo}_${PICO_BOARD}_${PICO_PLATFORM}.zip"
   pushd $dir > /dev/null
 
-    target="$dir/build_${PICO_BOARD}_${PICO_PLATFORM}"
     echo ""
     echo "Re-creating $target"
     rm -fr $target; mkdir $target; pushd $target > /dev/null
@@ -28,6 +30,14 @@ function sdk_build {
       popd > /dev/null
 
     popd > /dev/null
+
+  echo "Creating $zipfile"
+  zip -r -q $zipfile `find $target -name "*.elf.map"` 
+  zip -r -q $zipfile `find $target -name "*.elf"` 
+  zip -r -q $zipfile `find $target -name "*.dis"` 
+  zip -r -q $zipfile `find $target -name "*.bin"` 
+  zip -r -q $zipfile `find $target -name "*.uf2"` 
+
 }
 
 echo ""
