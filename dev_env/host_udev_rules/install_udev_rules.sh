@@ -10,10 +10,10 @@ echo "Installing PlatformIO rules"
 curl -fsSL $PLATFORMIO_UDEV_RULES_URL | sudo tee $PLATFORMIO_UDEV_RULES_PATH
 
 echo "Installing Raspberry Pi Pico rules"
-sudo cp 99-pico.rules $SYSTEM_UDEV_PATH/
+sudo cp 99-picotool.rules $SYSTEM_UDEV_PATH/
 
 echo "Installing SparkFun rules"
-sudo cp 99-sparkfun.rules $SYSTEM_UDEV_PATH/
+sudo cp 99-sparkfun-promicro-rp2350.rules $SYSTEM_UDEV_PATH/
 
 echo "Installing Arduino MBED rules"
 sudo ./arduino_mbed_rules.sh
