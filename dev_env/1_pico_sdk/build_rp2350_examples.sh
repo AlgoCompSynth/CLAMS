@@ -31,9 +31,6 @@ function sdk_build {
 
     popd > /dev/null
 
-  echo "Creating $zipfile"
-  zip -r -q $zipfile $target
-
 }
 
 echo ""
