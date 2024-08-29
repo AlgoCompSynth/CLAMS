@@ -1,1 +1,1 @@
-../Distrobox-Setup/p10k.zsh
+../distrobox_setup/p10k.zsh
