@@ -6,5 +6,5 @@ SUBSYSTEM=="usb", \
     ATTRS{idVendor}=="1b4f", \
     ATTRS{idProduct}=="0026", \
     TAG+="uaccess" \
-    MODE="660", \
+    MODE="666", \
     GROUP="plugdev"
