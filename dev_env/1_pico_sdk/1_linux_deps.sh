@@ -16,6 +16,7 @@ export DEBIAN_FRONTEND=noninteractive
   g++ \
   gcc \
   gdb-multiarch \
+  libc6-dev-i386 \
   libftdi-dev \
   libtool \
   libusb-1.0-0-dev \
