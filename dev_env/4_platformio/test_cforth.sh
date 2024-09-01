@@ -8,6 +8,14 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
+echo "Installing Linux dependencies"
+sudo apt-get update
+sudo apt-get install -y \
+  libc6-dev-i386 \
+  libc6-dev-i386-cross \
+  screen \
+  2>&1 | tee dependencies.log
+
 echo "Activating CLAMS Python virtual environment"
 source $ACTIVATE_CLAMS_VENV
 
