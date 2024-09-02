@@ -59,8 +59,8 @@ export ARM_COMPILER_PATH="$HOME/.local"
 # Python!
 
 ## RP2350
-export PICO_MICROPYTHON_PATH="$CLAMS_BASE/micropython"
-export PICO_CIRCUITPYTHON_PATH="$CLAMS_BASE/circuitpython"
+export PICO_MICROPYTHON_PATH="$CLAMS_BASE/micropython_uf2s"
+export PICO_CIRCUITPYTHON_PATH="$CLAMS_BASE/circuitpython_uf2s"
 
 ## Pimoroni Pico Plus 2
 ## https://github.com/pimoroni/pimoroni-pico-rp2350
