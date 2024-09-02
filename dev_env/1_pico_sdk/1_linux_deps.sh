@@ -15,12 +15,12 @@ export DEBIAN_FRONTEND=noninteractive
   cmake \
   g++ \
   gcc \
+  gcc-multilib \
   gdb-multiarch \
-  libc6-dev-i386 \
-  libc6-dev-i386-cross \
   libftdi-dev \
   libtool \
   libusb-1.0-0-dev \
+  make \
   minicom \
   pkg-config \
   python3-dev \
@@ -28,6 +28,7 @@ export DEBIAN_FRONTEND=noninteractive
   python3-tk \
   python3-venv \
   texinfo \
+  usbutils \
   > 1_linux_deps.log 2>&1
 
 ./install_arm_compiler.sh*
