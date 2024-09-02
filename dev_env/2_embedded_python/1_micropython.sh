@@ -6,13 +6,13 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-echo "Creating virtual environment $CLAMS_VENV"
-python3 -m venv $CLAMS_VENV
-echo "Activating virtual environment $CLAMS_VENV"
-source $ACTIVATE_CLAMS_VENV
+echo "Creating virtual environment $MICROPYTHON_VENV"
+python3 -m venv $MICROPYTHON_VENV
+echo "Activating virtual environment $MICROPYTHON_VENV"
+source $ACTIVATE_MICROPYTHON_VENV
 echo "Installing mpremote"
 pip3 install --upgrade mpremote
-echo "Deactivating virtual environment $CLAMS_VENV"
+echo "Deactivating virtual environment $MICROPYTHON_VENV"
 deactivate
 
 echo "Creating fresh $PICO_MICROPYTHON_PATH"

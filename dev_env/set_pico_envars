@@ -95,8 +95,8 @@ export PICO_W_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico_w-en_U
 export PICO_W_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/$PICO_W_CIRCUITPYTHON_UF2"
 
 ## Virtual environment for host Python tools
-export CLAMS_VENV=$CLAMS_BASE/clams_venv
-export ACTIVATE_CLAMS_VENV="$CLAMS_VENV/bin/activate"
+export MICROPYTHON_VENV=$CLAMS_BASE/micropython_venv
+export ACTIVATE_MICROPYTHON_VENV="$MICROPYTHON_VENV/bin/activate"
 
 # Arduino
 export ARDUINO_CLI_PATH=$HOME/.local/bin
@@ -109,3 +109,7 @@ export ARDUINO_PICO_PACKAGE_URL="https://github.com/earlephilhower/arduino-pico/
 export SYSTEM_UDEV_PATH="/etc/udev/rules.d"
 export PLATFORMIO_UDEV_RULES_PATH="$SYSTEM_UDEV_PATH/99-platformio-udev.rules"
 export PLATFORMIO_UDEV_RULES_URL="https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/system/99-platformio-udev.rules"
+
+## Virtual environment for PlatformIO
+export PLATFORMIO_VENV=$CLAMS_BASE/platformio_venv
+export ACTIVATE_PLATFORMIO_VENV="$PLATFORMIO_VENV/bin/activate"
