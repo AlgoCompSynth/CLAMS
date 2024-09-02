@@ -26,7 +26,7 @@ echo "Cloning cforth repository"
 pushd $HOME/Projects
 
   rm -fr cforth
-  git clone https://github.com/AlgoCompSynth/cforth.git
+  git clone git@github.com:AlgoCompSynth/cforth.git
   pushd cforth
 
   echo "Building host cforth"
