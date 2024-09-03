@@ -23,7 +23,6 @@ arduino-cli board list
 
 echo "Listing Arduino Pico examples to arduino_pico_examples.log"
 find $HOME/.arduino15/packages/rp2040/hardware/rp2040 -name 'examples' \
-  | sed 's;^.*/hardware/;;' \
   | sort -u \
   > arduino_pico_examples.log
 

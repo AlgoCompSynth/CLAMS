@@ -33,7 +33,6 @@ arduino-cli board listall | grep "arduino:mbed_rp2040" > mbed_rp2040_boards.log
 
 echo "Listing MBED RP2040 examples to mbed_rp2040_examples.log"
 find $HOME/.arduino15/packages/arduino/hardware/mbed_rp2040 -name 'examples' \
-  | sed 's;^.*arduino/hardware/;;' \
   | sort -u \
   > mbed_rp2040_examples.log
 
