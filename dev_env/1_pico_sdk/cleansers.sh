@@ -8,7 +8,8 @@ source ../set_pico_envars
 
 echo "Creating cleansers.zip"
 pushd $PICO_EXAMPLES_PATH
-  zip -9r cleansers.zip `find . -name "flash_nuke.uf2"`
+  zip -9r cleansers.zip `find . -name "blink.uf2"`
+  zip -9r cleansers.zip `find . -name "hello_serial.uf2"`
   zip -9r cleansers.zip `find . -name "hello_usb.uf2"`
   mv cleansers.zip $CLAMS_BASE
 popd
