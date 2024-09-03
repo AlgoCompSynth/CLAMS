@@ -27,6 +27,7 @@ export DEBIAN_FRONTEND=noninteractive
   python3-pip \
   python3-tk \
   python3-venv \
+  screen \
   texinfo \
   usbutils \
   > 1_linux_deps.log 2>&1
