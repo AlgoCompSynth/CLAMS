@@ -20,9 +20,12 @@ export PICO_PLAYGROUND_URL="--recursive --branch sdk-2.0.0 https://github.com/ra
 export PICO_PLAYGROUND_PATH="$PICO_SDK_REPOS/pico-playground"
 
 ## Pimoroni
-export PIMORONI_PICO_URL="--recursive --branch v1.23.0-1 https://github.com/pimoroni/pimoroni-pico.git"
+export PIMORONI_PICO_VERSION="v1.23.0-1"
+export PIMORONI_PICO_URL="--recursive --branch $PIMORONI_PICO_VERSION https://github.com/pimoroni/pimoroni-pico.git"
 export PIMORONI_PICO_PATH="$PICO_SDK_REPOS/pimoroni-pico"
-export PIMORONI_PICO_RP2350_URL="--recursive --branch  v0.0.5 https://github.com/pimoroni/pimoroni-pico-rp2350.git"
+
+export PIMORONI_PICO_RP2350_VERSION="v0.0.5"
+export PIMORONI_PICO_RP2350_URL="--recursive --branch $PIMORONI_PICO_RP2350_VERSION https://github.com/pimoroni/pimoroni-pico-rp2350.git"
 export PIMORONI_PICO_RP2350_PATH="$PICO_SDK_REPOS/pimoroni-pico-rp2350"
 export PICOVISION_URL="--recursive --branch v1.0.2 https://github.com/pimoroni/picovision.git"
 export PICOVISION_PATH="$PICO_SDK_REPOS/picovision"
@@ -64,7 +67,7 @@ export PICO_CIRCUITPYTHON_PATH="$CLAMS_BASE/circuitpython_uf2s"
 
 ## Pimoroni Pico Plus 2
 ## https://github.com/pimoroni/pimoroni-pico-rp2350
-export PIMORONI_PICO_PLUS2_VERSION="v0.0.4"
+export PIMORONI_PICO_PLUS2_VERSION="v0.0.5"
 export PIMORONI_PICO_PLUS2_UF2="pico_plus2_rp2350_psram-$PIMORONI_PICO_PLUS2_VERSION-pimoroni-micropython.uf2"
 export PIMORONI_PICO_PLUS2_URL="https://github.com/pimoroni/pimoroni-pico-rp2350/releases/download/$PIMORONI_PICO_PLUS2_VERSION/$PIMORONI_PICO_PLUS2_UF2"
 
