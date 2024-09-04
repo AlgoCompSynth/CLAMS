@@ -6,8 +6,9 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-echo "Creating virtual environment $MICROPYTHON_VENV"
-python3 -m venv $MICROPYTHON_VENV
+echo "Creating fresh virtual environment $MICROPYTHON_VENV"
+rm -fr $MICROPYTHON_VENV
+python3 -m venv $MICROPYTHON_VENV --upgrade-deps
 echo "Activating virtual environment $MICROPYTHON_VENV"
 source $ACTIVATE_MICROPYTHON_VENV
 echo "Installing mpremote"
