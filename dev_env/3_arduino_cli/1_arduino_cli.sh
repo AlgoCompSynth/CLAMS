@@ -23,7 +23,7 @@ sudo mv /tmp/ardunio-cli.sh /etc/bash_completion.d/ardunio-cli.sh
 
 echo "Installing zsh completion file"
 arduino-cli completion zsh > /tmp/_arduino-cli.sh
-sudo mv /tmp/_arduino-cli.sh /usr/share/zsh/vendor-completions/_arduino-cli
+mv /tmp/_arduino-cli.sh $ZSH_LOCAL_COMPLETIONS_PATH/_arduino-cli
 
 echo "Installing Arduino MBED RP2040 core"
 arduino-cli core install arduino:mbed_rp2040

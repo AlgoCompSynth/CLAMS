@@ -104,6 +104,7 @@ export ARDUINO_CLI_URL="https://raw.githubusercontent.com/arduino/arduino-cli/ma
 export ARDUINO_PICO_PATH="$HOME/Arduino/hardware/pico/rp2040"
 export ARDUINO_PICO_URL="https://github.com/earlephilhower/arduino-pico.git"
 export ARDUINO_PICO_PACKAGE_URL="https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json"
+export ZSH_LOCAL_COMPLETIONS_PATH="$HOME/.zsh_completions"
 
 # PlatformIO
 export SYSTEM_UDEV_PATH="/etc/udev/rules.d"
