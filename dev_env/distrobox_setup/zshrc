@@ -1,3 +1,6 @@
+# Local path for zsh completions
+fpath=($HOME/.zsh_completions $fpath)
+
 # Set up the prompt
 
 autoload -Uz promptinit

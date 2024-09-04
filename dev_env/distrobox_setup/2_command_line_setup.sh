@@ -19,6 +19,7 @@ cp bash_aliases $HOME/.bash_aliases
 cp vimrc $HOME/.vimrc
 cp zshrc $HOME/.zshrc
 cp p10k.zsh $HOME/.p10k.zsh
+mkdir --parents $HOME/.zsh_completions
 
 echo "Creating $HOME/.local/bin and $HOME/bin"
 mkdir --parents $HOME/.local/bin
