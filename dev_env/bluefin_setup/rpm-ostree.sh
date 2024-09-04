@@ -15,7 +15,6 @@ rpm-ostree install --idempotent --allow-inactive \
   make \
   minicom \
   pkgconf \
-  python3-devel \
   python3-pip \
   screen \
   texinfo \
