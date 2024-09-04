@@ -22,4 +22,6 @@ rpm-ostree install --idempotent --allow-inactive \
   tmux \
   2>&1 | tee rpm-ostree.log
 
+echo "Copying 'set_pico_envars' to $HOME"
+cp ../set_pico_envars $HOME/
 echo "Finished"
