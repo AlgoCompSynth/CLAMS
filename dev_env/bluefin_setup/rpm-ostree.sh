@@ -8,6 +8,7 @@ rpm-ostree install --idempotent --allow-inactive \
   automake \
   capstone-devel \
   cmake \
+  glibc-devel.i686 \
   hidapi-devel \
   libftdi-devel \
   libtool \
