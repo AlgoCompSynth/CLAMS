@@ -63,7 +63,8 @@ do
     sparkfun_promicro_rp2350 \
     pimoroni_pico_plus2_rp2350 \
     ilabs_challenger_rp2350_bconnect \
-    ilabs_challenger_rp2350_wifi_ble
+    ilabs_challenger_rp2350_wifi_ble \
+    pico2
   do
     export PICO_BOARD=$board
 
