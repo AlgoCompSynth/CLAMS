@@ -34,23 +34,26 @@ pushd $PICO_SDK_REPOS
   git clone --quiet $PICOTOOL_URL
   git clone --quiet $OPENOCD_URL
 
-  echo ""
-  echo "Building picotool"
   pushd $PICOTOOL_PATH
+    echo ""
+    echo "Building picotool"
     mkdir build
     cd build
     cmake ../ \
       > $PICO_SDK_REPOS/picotool.log 2>&1
     /usr/bin/time make -j`nproc` \
       >> $PICO_SDK_REPOS/picotool.log 2>&1
+    echo ""
+    echo ""
+    echo "Installing picotool as 'root'!!"
     sudo make install \
       >> $PICO_SDK_REPOS/picotool.log 2>&1
     picotool version
   popd
 
-  echo ""
-  echo "Building openocd"
   pushd $OPENOCD_PATH
+    echo ""
+    echo "Building openocd"
     ./bootstrap \
       > $PICO_SDK_REPOS/openocd.log 2>&1
     ./configure \
@@ -58,6 +61,9 @@ pushd $PICO_SDK_REPOS
       >> $PICO_SDK_REPOS/openocd.log 2>&1
     /usr/bin/time make -j`nproc` \
       >> $PICO_SDK_REPOS/openocd.log 2>&1
+    echo ""
+    echo ""
+    echo "Installing openocd as 'root'!!"
     sudo make install \
       >> $PICO_SDK_REPOS/openocd.log 2>&1
     openocd --version
