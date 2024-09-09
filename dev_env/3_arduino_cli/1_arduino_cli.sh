@@ -6,6 +6,9 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
+echo "Removing any previous installation"
+rm -fr $HOME/.arduino15
+
 echo "Installing via 'curl'"
 # https://arduino.github.io/arduino-cli/0.20/installation/
 /usr/bin/time curl -fsSL $ARDUINO_CLI_URL | BINDIR=$ARDUINO_CLI_PATH sh
