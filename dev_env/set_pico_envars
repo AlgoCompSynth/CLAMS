@@ -5,7 +5,7 @@ export CLAMS_BASE="$HOME/CLAMS_base"
 # Don't change anything below here!
 
 # Pico SDK repositories
-export PICO_SDK_REPOS=$CLAMS_BASE/pico_repos
+export PICO_SDK_REPOS="$CLAMS_BASE/pico_repos"
 
 ## SDK
 export PICO_SDK_URL="--recursive --branch 2.0.0 https://github.com/raspberrypi/pico-sdk.git"
@@ -98,11 +98,12 @@ export PICO_W_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico_w-en_U
 export PICO_W_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/$PICO_W_CIRCUITPYTHON_UF2"
 
 ## Virtual environment for host Python tools
-export MICROPYTHON_VENV=$CLAMS_BASE/micropython_venv
+export MICROPYTHON_VENV="$CLAMS_BASE/micropython_venv"
 export ACTIVATE_MICROPYTHON_VENV="$MICROPYTHON_VENV/bin/activate"
 
 # Arduino
-export ARDUINO_CLI_PATH=$HOME/.local/bin
+export ARDUINO_INSTALL_PATH="$HOME/.arduino15"
+export ARDUINO_CLI_PATH="$HOME/.local/bin"
 export ARDUINO_CLI_URL="https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh"
 export ARDUINO_PICO_PATH="$HOME/Arduino/hardware/pico/rp2040"
 export ARDUINO_PICO_URL="https://github.com/earlephilhower/arduino-pico.git"
@@ -115,5 +116,5 @@ export PLATFORMIO_UDEV_RULES_PATH="$SYSTEM_UDEV_PATH/99-platformio-udev.rules"
 export PLATFORMIO_UDEV_RULES_URL="https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/system/99-platformio-udev.rules"
 
 ## Virtual environment for PlatformIO
-export PLATFORMIO_VENV=$CLAMS_BASE/platformio_venv
+export PLATFORMIO_VENV="$CLAMS_BASE/platformio_venv"
 export ACTIVATE_PLATFORMIO_VENV="$PLATFORMIO_VENV/bin/activate"
