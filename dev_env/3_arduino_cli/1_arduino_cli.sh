@@ -5,22 +5,27 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
+export LOGFILE=$PWD/1_arduino_cli.log
+rm -f $LOGFILE
 
 echo "Removing any previous installation"
-rm -fr $HOME/.arduino15
+rm -fr $ARDUINO_INSTALL_PATH
 
-echo "Installing via 'curl'"
+echo "Installing locally via 'curl'"
 # https://arduino.github.io/arduino-cli/0.20/installation/
-/usr/bin/time curl -fsSL $ARDUINO_CLI_URL | BINDIR=$ARDUINO_CLI_PATH sh
+/usr/bin/time curl -fsSL $ARDUINO_CLI_URL | BINDIR=$ARDUINO_CLI_PATH sh \
+  >> $LOGFILE 2>&1
 
 echo "Creating fresh configuration file"
 # https://arduino.github.io/arduino-cli/0.20/getting-started/
-arduino-cli config init --overwrite
+arduino-cli config init --overwrite \
+  >> $LOGFILE 2>&1
 
 echo "Updating index"
-arduino-cli core update-index
+arduino-cli core update-index \
+  >> $LOGFILE 2>&1
 
-echo "Installing bash completion file"
+echo "Installing bash completion file as 'root'!!"
 arduino-cli completion bash > /tmp/ardunio-cli.sh
 sudo mv /tmp/ardunio-cli.sh /etc/bash_completion.d/ardunio-cli.sh
 
