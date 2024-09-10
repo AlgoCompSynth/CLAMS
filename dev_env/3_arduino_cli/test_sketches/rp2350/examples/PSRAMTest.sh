@@ -10,7 +10,7 @@ lsusb || true
 ls -al /dev/ttyACM0 || true
 
 echo "Capturing begin time for 'journalctl' filtering"
-echo "begin `date +%s`" > datestamps.log
+echo "begin `date +%H:%M:%S`" > datestamps.log
 
 echo "Sleeping 15 seconds for devices to settle"
 sleep 15
@@ -22,7 +22,7 @@ echo "Sleeping 15 seconds for devices to settle"
 sleep 15
 
 echo "Capturing end time for 'journalctl' filtering"
-echo "end `date +%s`" >> datestamps.log
+echo "end `date +%H:%M:%S`" >> datestamps.log
 
 echo "USB and TTY status after upload"
 lsusb || true
