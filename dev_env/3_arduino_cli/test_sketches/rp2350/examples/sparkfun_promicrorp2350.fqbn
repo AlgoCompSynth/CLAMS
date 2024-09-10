@@ -1,2 +1,0 @@
-export FQBN="rp2040:rp2040:sparkfun_promicrorp2350"
-echo "FQBN: $FQBN"
