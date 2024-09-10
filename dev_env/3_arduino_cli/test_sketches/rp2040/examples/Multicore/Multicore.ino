@@ -24,17 +24,17 @@ void setup() {
 }
 
 void loop() {
-  Serial.print("C0: Blue leader standing by...\n");
+  Serial.printf("C0: Blue leader standing by...\n");
   delay(1000);
 }
 
 // Running on core1
 void setup1() {
   delay(5000);
-  Serial.print("C1: Red leader standing by...\n");
+  Serial.printf("C1: Red leader standing by...\n");
 }
 
 void loop1() {
-  Serial.print("C1: Stay on target...\n");
+  Serial.printf("C1: Stay on target...\n");
   delay(500);
 }
