@@ -1,0 +1,1 @@
+../../rp2350/examples/test_usb_serial_output.sh
