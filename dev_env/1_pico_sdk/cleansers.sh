@@ -16,6 +16,13 @@ pushd $PICO_EXAMPLES_PATH
     zip -9r cleansers.zip `find . -name "hello_usb.$suffix"`
   done
   mv cleansers.zip $CLAMS_BASE
+
+  pushd $CLAMS_BASE
+    echo "Unpacking cleansers.zip"
+    rm -fr build_*
+    unzip cleansers.zip
+  popd
+
 popd
 
 echo "Finished"
