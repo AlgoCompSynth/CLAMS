@@ -24,7 +24,7 @@ export PIMORONI_PICO_VERSION="v1.23.0-1"
 export PIMORONI_PICO_URL="--recursive --branch $PIMORONI_PICO_VERSION https://github.com/pimoroni/pimoroni-pico.git"
 export PIMORONI_PICO_PATH="$PICO_SDK_REPOS/pimoroni-pico"
 
-export PIMORONI_PICO_RP2350_VERSION="v0.0.5"
+export PIMORONI_PICO_RP2350_VERSION="v0.0.7"
 export PIMORONI_PICO_RP2350_URL="--recursive --branch $PIMORONI_PICO_RP2350_VERSION https://github.com/pimoroni/pimoroni-pico-rp2350.git"
 export PIMORONI_PICO_RP2350_PATH="$PICO_SDK_REPOS/pimoroni-pico-rp2350"
 export PICOVISION_URL="--recursive --branch v1.0.2 https://github.com/pimoroni/picovision.git"
@@ -67,7 +67,7 @@ export PICO_CIRCUITPYTHON_PATH="$CLAMS_BASE/circuitpython_uf2s"
 
 ## Pimoroni Pico Plus 2
 ## https://github.com/pimoroni/pimoroni-pico-rp2350
-export PIMORONI_PICO_PLUS2_VERSION="v0.0.5"
+export PIMORONI_PICO_PLUS2_VERSION="$PIMORONI_PICO_RP2350_VERSION"
 export PIMORONI_PICO_PLUS2_UF2="pico_plus2_rp2350_psram-$PIMORONI_PICO_PLUS2_VERSION-pimoroni-micropython.uf2"
 export PIMORONI_PICO_PLUS2_URL="https://github.com/pimoroni/pimoroni-pico-rp2350/releases/download/$PIMORONI_PICO_PLUS2_VERSION/$PIMORONI_PICO_PLUS2_UF2"
 
@@ -91,11 +91,16 @@ export PICO_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_MI
 export PICO_W_MICROPYTHON_UF2="RPI_PICO_W-$MICROPYTHON_VERSION.uf2"
 export PICO_W_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_W_MICROPYTHON_UF2"
 
-export CIRCUITPYTHON_VERSION="9.1.2"
+export CIRCUITPYTHON_VERSION="9.1.3"
 export PICO_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico-en_US-$CIRCUITPYTHON_VERSION.uf2"
 export PICO_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico/en_US/$PICO_CIRCUITPYTHON_UF2"
 export PICO_W_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico_w-en_US-$CIRCUITPYTHON_VERSION.uf2"
 export PICO_W_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/$PICO_W_CIRCUITPYTHON_UF2"
+
+# Alpha for Pico 2
+export CIRCUITPYTHON_ALPHA_VERSION="9.2.0-alpha.2351"
+export PICO2_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico2-en_US-$CIRCUITPYTHON_ALPHA_VERSION.uf2"
+export PICO2_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico2/en_US/$PICO2_CIRCUITPYTHON_UF2"
 
 ## Virtual environment for host Python tools
 export MICROPYTHON_VENV="$CLAMS_BASE/micropython_venv"
