@@ -40,7 +40,7 @@ sudo apt-get install -qqy \
   tmux \
   tree \
   usbutils \
-  vim-nox \
+  vim \
   zsh \
   > 1_base_packages.log 2>&1
 
