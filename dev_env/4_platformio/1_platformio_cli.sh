@@ -14,7 +14,9 @@ source $ACTIVATE_PLATFORMIO_VENV
 
 echo "Installing with pip"
 # https://docs.platformio.org/en/latest/core/installation/methods/pypi.html#installation-pypi
-python3 -m pip install --upgrade platformio
+/usr/bin/time python3 -m pip install --upgrade platformio \
+  > 1_platformio_cli.log 2>&1
+pio --version
 
 echo "Deactivating virtual environment $PLATFORMIO_VENV"
 deactivate
