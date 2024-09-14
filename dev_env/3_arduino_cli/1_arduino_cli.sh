@@ -15,6 +15,7 @@ echo "Installing locally via 'curl'"
 # https://arduino.github.io/arduino-cli/0.20/installation/
 /usr/bin/time curl -fsSL $ARDUINO_CLI_URL | BINDIR=$ARDUINO_CLI_PATH sh \
   >> $LOGFILE 2>&1
+arduino-cli version
 
 echo "Creating fresh configuration file"
 # https://arduino.github.io/arduino-cli/0.20/getting-started/
