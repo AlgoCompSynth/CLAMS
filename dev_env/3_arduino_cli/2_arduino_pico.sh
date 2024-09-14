@@ -15,6 +15,7 @@ arduino-cli core update-index \
   >> $LOGFILE 2>&1
 arduino-cli core install rp2040:rp2040 \
   >> $LOGFILE 2>&1
+arduino-cli core list
 
 echo "Listing Arduino Pico boards to arduino_pico_boards.log"
 arduino-cli board listall | grep "rp2040:rp2040" > arduino_pico_boards.log
