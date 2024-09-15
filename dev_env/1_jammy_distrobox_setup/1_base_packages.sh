@@ -4,8 +4,9 @@ set -e
 
 echo "Installing base packages"
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get update -qq
-sudo apt-get install -qqy \
+sudo apt-get update \
+  > 1_base_packages.log 2>&1
+sudo apt-get install --assume-yes \
   apt-file \
   autoconf \
   automake \
@@ -42,7 +43,7 @@ sudo apt-get install -qqy \
   usbutils \
   vim \
   zsh \
-  > 1_base_packages.log 2>&1
+  >> 1_base_packages.log 2>&1
 
 echo "Copying 'set_pico_envars' to $HOME"
 cp ../set_pico_envars $HOME/
