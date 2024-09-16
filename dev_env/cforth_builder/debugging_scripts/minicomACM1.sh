@@ -1,1 +1,0 @@
-../../../debugging_scripts/minicomACM1.sh
