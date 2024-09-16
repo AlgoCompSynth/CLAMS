@@ -62,6 +62,15 @@
     ./test_board.sh generic_rp2350 "-pimoroni_pico_plus_2"
     ```
 
+    which generated
+
+    ```
+    generic_rp2350-pimoroni_pico_plus_2.elf
+    generic_rp2350-pimoroni_pico_plus_2.uf2
+    generic_rp2350-pimoroni_pico_plus_2.dis
+    generic_rp2350-pimoroni_pico_plus_2.log
+    ```
+
 ## What the `test_board.sh` script does
 
 Aside from logging information possibly useful in troubleshooting, the
