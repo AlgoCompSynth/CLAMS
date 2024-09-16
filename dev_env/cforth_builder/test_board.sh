@@ -22,7 +22,7 @@ pushd $CFORTH_PATH
 
   echo "Listing USB devices"
   echo "" >> $LOGFILE 2>&1; echo "" >> $LOGFILE 2>&1
-  lsusb \
+  lsusb --tree --verbose \
     >> $LOGFILE 2>&1
   echo "" >> $LOGFILE 2>&1; echo "" >> $LOGFILE 2>&1
   echo "Listing relevant TTYs"
@@ -41,7 +41,7 @@ pushd $CFORTH_PATH
 
   echo "" >> $LOGFILE 2>&1; echo "" >> $LOGFILE 2>&1
   echo "Listing USB devices"
-  lsusb \
+  lsusb --tree --verbose \
     >> $LOGFILE 2>&1
   echo "" >> $LOGFILE 2>&1; echo "" >> $LOGFILE 2>&1
   echo "Listing relevant TTYs"
