@@ -1,0 +1,1 @@
+../../../debugging_scripts/minicomUSB0.sh
