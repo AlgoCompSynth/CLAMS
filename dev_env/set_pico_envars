@@ -123,3 +123,7 @@ export PLATFORMIO_UDEV_RULES_URL="https://raw.githubusercontent.com/platformio/p
 ## Virtual environment for PlatformIO
 export PLATFORMIO_VENV="$CLAMS_BASE/platformio_venv"
 export ACTIVATE_PLATFORMIO_VENV="$PLATFORMIO_VENV/bin/activate"
+
+## cforth
+export CFORTH_URL="https://github.com/MitchBradley/cforth.git"
+export CFORTH_PATH="$HOME/Projects/cforth"
