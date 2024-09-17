@@ -61,7 +61,8 @@ do
 
   for board in \
     pico_w \
-    pico
+    pico \
+    arduino_nano_rp2040_connect
   do
     export PICO_BOARD=$board
 
