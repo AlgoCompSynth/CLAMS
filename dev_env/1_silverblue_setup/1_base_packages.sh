@@ -2,8 +2,11 @@
 
 set -e
 
+echo "Upgrading"
+/usr/bin/time rpm-ostree upgrade \
+  > 1_base_packages.log 2>&1
 echo "Installing Pico SDK dependecies"
-rpm-ostree install --idempotent --allow-inactive \
+/usr/bin/time rpm-ostree install --idempotent --allow-inactive \
   autoconf \
   automake \
   capstone-devel \
@@ -31,9 +34,11 @@ rpm-ostree install --idempotent --allow-inactive \
   usbutils \
   vim-enhanced \
   zsh \
-  2>&1 | tee 1_base_packages.log
+  >> 1_base_packages.log 2>&1
 
 echo "Copying 'set_pico_envars' to $HOME"
 cp ../set_pico_envars $HOME/
+
+rpm-ostree status
 
 echo "Finished"
