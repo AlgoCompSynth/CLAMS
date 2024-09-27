@@ -1,1 +1,1 @@
-../../rp2350/examples/board-listall.txt
+../../../board-listall.txt
