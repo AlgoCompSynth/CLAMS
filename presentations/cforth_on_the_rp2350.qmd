@@ -5,17 +5,16 @@ date: "2024-09-28"
 format: 
   beamer:
     theme: Montpellier
-editor: visual
 ---
 
 # A (Welcome) Surprise in the (E)mail
 
 ## August 8, 2024 - the Raspberry Pi Pico 2 is announced
 
-- [Raspberry Pi Pico 2, our new $5 microcontroller board, on sale now](https://www.raspberrypi.com/news/raspberry-pi-pico-2-our-new-5-microcontroller-board-on-sale-now/)
-- [Our RP2350 Partners made all this excellent stuff for you](https://www.raspberrypi.com/news/our-rp2350-partners-made-all-this-excellent-stuff-for-you/)
-- [What’s new in Raspberry Pi Pico 2](https://www.raspberrypi.com/news/whats-new-in-pico-2/)
-- [RP2350: the brains of Raspberry Pi Pico 2](https://www.raspberrypi.com/news/rp2350-the-brains-of-raspberry-pi-pico-2/)
+-   [Raspberry Pi Pico 2, our new \$5 microcontroller board, on sale now](https://www.raspberrypi.com/news/raspberry-pi-pico-2-our-new-5-microcontroller-board-on-sale-now/)
+-   [Our RP2350 Partners made all this excellent stuff for you](https://www.raspberrypi.com/news/our-rp2350-partners-made-all-this-excellent-stuff-for-you/)
+-   [What’s new in Raspberry Pi Pico 2](https://www.raspberrypi.com/news/whats-new-in-pico-2/)
+-   [RP2350: the brains of Raspberry Pi Pico 2](https://www.raspberrypi.com/news/rp2350-the-brains-of-raspberry-pi-pico-2/)
 
 ## Pico vs. Pico 2
 
@@ -23,40 +22,40 @@ editor: visual
 
 ## So I bought a few partner boards
 
-- [Pimoroni Pico Plus 2](https://shop.pimoroni.com/products/pimoroni-pico-plus-2-w?variant=42182811942995)
-- [SparkFun Pro Micro - RP2350](https://www.sparkfun.com/products/24870)
-- [iLabs Challenger+ RP2350 BConnect](https://ilabs.se/challenger-rp2350-bconnect-datasheet/)
-- [iLabs Challenger+ RP2350 WiFi6/BLE5](https://ilabs.se/challenger-rp2350-wifi-ble/)
+-   [Pimoroni Pico Plus 2](https://shop.pimoroni.com/products/pimoroni-pico-plus-2-w?variant=42182811942995)
+-   [SparkFun Pro Micro - RP2350](https://www.sparkfun.com/products/24870)
+-   [iLabs Challenger+ RP2350 BConnect](https://ilabs.se/challenger-rp2350-bconnect-datasheet/)
+-   [iLabs Challenger+ RP2350 WiFi6/BLE5](https://ilabs.se/challenger-rp2350-wifi-ble/)
 
 # The CLAMS Development Environment
 
 ## A collection of command-line Linux tools
 
-- [Raspberry Pi Pico-series C/C++ SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf)
-- [Raspberry Pi Pico Python SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-python-sdk.pdf)
-- [CircuitPython](https://circuitpython.org/)
-- [Arduino-Pico](https://arduino-pico.readthedocs.io/en/latest/)
-- [PlatformIO Core (CLI)](https://docs.platformio.org/en/latest/core/index.html)
-- Coming soon! [Zephyr](https://docs.zephyrproject.org/latest/index.html)
+-   [Raspberry Pi Pico-series C/C++ SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf)
+-   [Raspberry Pi Pico Python SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-python-sdk.pdf)
+-   [CircuitPython](https://circuitpython.org/)
+-   [Arduino-Pico](https://arduino-pico.readthedocs.io/en/latest/)
+-   [PlatformIO Core (CLI)](https://docs.platformio.org/en/latest/core/index.html)
+-   Coming soon! [Zephyr](https://docs.zephyrproject.org/latest/index.html)
 
 ## A container to run them in!
 
-- Many third parties have limited testing resources
-- If they support Linux at all, it's RHEL (expensive), or
-- Ubuntu 22.04 LTS aka "Jammy Jellyfish"
-- So I built a [Distrobox](https://distrobox.it/) container running Ubuntu 22.04 LTS
-- Hosted on [Universal Blue Bluefin](https://projectbluefin.io/)
-- (But any Distrobox host will work - any recent Linux distro)
+-   Many third parties have limited testing resources
+-   If they support Linux at all, it's RHEL (expensive), or
+-   Ubuntu 22.04 LTS aka "Jammy Jellyfish"
+-   So I built a [Distrobox](https://distrobox.it/) container running Ubuntu 22.04 LTS
+-   Hosted on [Universal Blue Bluefin](https://projectbluefin.io/)
+-   (But any Distrobox host will work - any recent Linux distro)
 
 # C Forth
 
 ## Why C Forth?
 
-- Optimized for microcontrollers
-- Comprehensive - derived from Mitch Bradley's Open FirmWare
-- Extensible in either C or Forth!
-- Portable - I want to run Forth on other microcontrollers
-- Linux build process is straightforward using PlatformIO
+-   Optimized for microcontrollers
+-   Comprehensive - derived from Mitch Bradley's Open FirmWare
+-   Extensible in either C or Forth!
+-   Portable - I want to run Forth on other microcontrollers
+-   Linux build process is straightforward using PlatformIO
 
 # Demo
 
@@ -66,7 +65,7 @@ editor: visual
 
 ## Where's all that stuff?
 
-- C Forth: <https://github.com/MitchBradley/cforth>
-- CLAMS development environment: <https://github.com/AlgoCompSynth/CLAMS/tree/main/dev_env>
-    - warning - not much documentation yet!
-- These slides: <https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/cforth_on_the_rp2350.pdf>
+-   C Forth: <https://github.com/MitchBradley/cforth>
+-   CLAMS development environment: <https://github.com/AlgoCompSynth/CLAMS/tree/main/dev_env>
+    -   warning - not much documentation yet!
+-   These slides: <https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/cforth_on_the_rp2350.pdf>
