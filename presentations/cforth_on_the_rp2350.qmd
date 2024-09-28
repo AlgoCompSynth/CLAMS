@@ -46,7 +46,7 @@ format:
 
 -   The RP2350 actually has four cores!
 
--   The two ARM Cortex M33 cores you know about, and
+-   The two Arm Cortex M33 cores you know about, and
 
 -   Two [[*RISC-V Hazard3*]{.underline}](https://github.com/Wren6991/Hazard3) cores
 
@@ -83,9 +83,11 @@ format:
 -   Hosted on [[*Universal Blue Bluefin*]{.underline}](https://projectbluefin.io/)
 -   (But any Distrobox host will work - any recent Linux distro)
 
-# C Forth [[*https://github.com/MitchBradley/cforth*]{.underline}](https://github.com/MitchBradley/cforth)
+# C Forth
 
 ## Why C Forth?
+
+URL: [[*https://github.com/MitchBradley/cforth*]{.underline}](https://github.com/MitchBradley/cforth)
 
 -   Optimized for microcontrollers
 -   Comprehensive - derived from Mitch Bradley's Open FirmWare
