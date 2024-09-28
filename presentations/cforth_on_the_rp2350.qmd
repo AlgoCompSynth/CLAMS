@@ -4,21 +4,24 @@ author: "M. Edward (Ed) Borasky"
 date: "2024-09-28"
 format: 
   beamer:
-    theme: Montpellier
+    theme: EastLansing
 editor: visual
 ---
 
 # A (Welcome) Surprise in the (E)mail
 
-## August 8, 2024 - the Raspberry Pi Pico 2
+## August 8, 2024 - the Raspberry Pi Pico 2 is announced
 
 - [Raspberry Pi Pico 2, our new $5 microcontroller board, on sale now](https://www.raspberrypi.com/news/raspberry-pi-pico-2-our-new-5-microcontroller-board-on-sale-now/)
+- [Our RP2350 Partners made all this excellent stuff for you](https://www.raspberrypi.com/news/our-rp2350-partners-made-all-this-excellent-stuff-for-you/)
+- [What’s new in Raspberry Pi Pico 2](https://www.raspberrypi.com/news/whats-new-in-pico-2/)
+- [RP2350: the brains of Raspberry Pi Pico 2](https://www.raspberrypi.com/news/rp2350-the-brains-of-raspberry-pi-pico-2/)
 
 ## Pico vs. Pico 2
 
 ## RP2040 vs. RP2350
 
-## Partner boards
+## So I bought a few partner boards
 
 - [Pimoroni Pico Plus 2](https://shop.pimoroni.com/products/pimoroni-pico-plus-2-w?variant=42182811942995)
 - [SparkFun Pro Micro - RP2350](https://www.sparkfun.com/products/24870)
@@ -37,13 +40,13 @@ editor: visual
 - Coming soon! [Zephyr](https://docs.zephyrproject.org/latest/index.html)
 
 ## A container to run them in!
+
 - Many third parties have limited testing resources
 - If they support Linux at all, it's RHEL (expensive), or
 - Ubuntu 22.04 LTS aka "Jammy Jellyfish"
 - So I built a [Distrobox](https://distrobox.it/) container running Ubuntu 22.04 LTS
 - Hosted on [Universal Blue Bluefin](https://projectbluefin.io/)
 - (But any Distrobox host will work - any recent Linux distro)
-- There are several way
 
 # C Forth
 
@@ -61,9 +64,9 @@ editor: visual
 
 # URLs
 
-## Where's stuff?
+## Where's all that stuff?
 
-- [C Forth](https://github.com/MitchBradley/cforth)
-- [CLAMS development environment](https://github.com/AlgoCompSynth/CLAMS/tree/main/dev_env)
+- C Forth: <https://github.com/MitchBradley/cforth>
+- CLAMS development environment: <https://github.com/AlgoCompSynth/CLAMS/tree/main/dev_env>
     - warning - not much documentation yet!
-- [These slides](https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/cforth_on_the_rp2350.pdf)
+- These slides: <https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/cforth_on_the_rp2350.pdf>
