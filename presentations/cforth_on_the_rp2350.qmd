@@ -48,7 +48,7 @@ format:
 
 -   The two ARM Cortex M33 cores you know about, and
 
--   Two [[*RISC-V Hazard 3*]{.underline}](https://github.com/Wren6991/Hazard3) cores
+-   Two [[*RISC-V Hazard3*]{.underline}](https://github.com/Wren6991/Hazard3) cores
 
 -   At boot time, you can boot up any two of the four cores.
 
