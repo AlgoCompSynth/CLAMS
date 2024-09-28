@@ -4,7 +4,7 @@ author: "M. Edward (Ed) Borasky"
 date: "2024-09-28"
 format: 
   beamer:
-    theme: EastLansing
+    theme: Montpellier
 editor: visual
 ---
 
