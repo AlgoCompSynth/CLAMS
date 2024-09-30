@@ -141,6 +141,9 @@ export ZEPHYR_OS_SDK_DEST="$HOME/.local"
 
 ## TinyVision.ai pico-ice
 export PICO_ICE_PATH="$CLAMS_BASE/pico_ice_tools"
-export PICO_ICE_FIRMWARE_VERSION="1.6.1"
-export PICO_ICE_FIRMWARE_UF2="pico_ice_default_firmware_v${PICO_ICE_FIRMWARE_VERSION}.uf2"
+export PICO_ICE_VERSION="1.6.1"
+export PICO_ICE_FIRMWARE_UF2="pico_ice_default_firmware_v${PICO_ICE_VERSION}.uf2"
 export PICO_ICE_FIRMWARE_URL="https://github.com/tinyvision-ai-inc/pico-ice/releases/download/pico-ice-default-v${PICO_ICE_FIRMWARE_VERSION}/$PICO_ICE_FIRMWARE_UF2"
+
+export PICO_ICE_SDK_URL="--recursive --branch v$PICO_ICE_VERSION https://github.com/tinyvision-ai-inc/pico-ice-sdk.git"
+export PICO_ICE_SDK_PATH="$PICO_ICE_PATH/pico-ice-sdk"
