@@ -35,6 +35,7 @@ sudo apt-get install --assume-yes \
   man-db \
   minicom \
   ninja-build \
+  picocom \
   pkg-config \
   plocate \
   python3-dev \
