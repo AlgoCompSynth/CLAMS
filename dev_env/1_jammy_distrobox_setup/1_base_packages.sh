@@ -23,6 +23,7 @@ sudo apt-get install --assume-yes \
   gdb-multiarch \
   git-lfs \
   gperf \
+  gtkwave \
   libftdi-dev \
   libmagic1 \
   libpam-systemd \
