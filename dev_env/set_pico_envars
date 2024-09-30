@@ -147,3 +147,7 @@ export PICO_ICE_FIRMWARE_URL="https://github.com/tinyvision-ai-inc/pico-ice/rele
 
 export PICO_ICE_SDK_URL="--recursive --branch v$PICO_ICE_VERSION https://github.com/tinyvision-ai-inc/pico-ice-sdk.git"
 export PICO_ICE_SDK_PATH="$PICO_ICE_PATH/pico-ice-sdk"
+
+## Virtual environment for apio
+export APIO_VENV="$CLAMS_BASE/apio_venv"
+export ACTIVATE_APIO_VENV="$APIO_VENV/bin/activate"
