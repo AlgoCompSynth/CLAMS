@@ -151,3 +151,4 @@ export PICO_ICE_SDK_PATH="$PICO_ICE_PATH/pico-ice-sdk"
 ## Virtual environment for apio
 export APIO_VENV="$CLAMS_BASE/apio_venv"
 export ACTIVATE_APIO_VENV="$APIO_VENV/bin/activate"
+export OSS_CAD_SUITE="$HOME/.apio/packages/tools-oss-cad-suite"
