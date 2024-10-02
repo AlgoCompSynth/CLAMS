@@ -70,6 +70,8 @@ export PICO_CIRCUITPYTHON_PATH="$CLAMS_BASE/circuitpython_uf2s"
 export PIMORONI_PICO_PLUS2_VERSION="$PIMORONI_PICO_RP2350_VERSION"
 export PIMORONI_PICO_PLUS2_UF2="pico_plus2_rp2350_psram-$PIMORONI_PICO_PLUS2_VERSION-pimoroni-micropython.uf2"
 export PIMORONI_PICO_PLUS2_URL="https://github.com/pimoroni/pimoroni-pico-rp2350/releases/download/$PIMORONI_PICO_PLUS2_VERSION/$PIMORONI_PICO_PLUS2_UF2"
+export PIMORONI_PICO_PLUS2_WIRELESS_UF2="pico_plus2_rp2350_wireless-11d6a944ae9ed79e89cc9082327e787fad25f653-pimoroni-micropython.uf2"
+export PIMORONI_PICO_PLUS2_WIRELESS_URL="https://github.com/pimoroni/pimoroni-pico-rp2350/releases/download/$PIMORONI_PICO_PLUS2_VERSION/$PIMORONI_PICO_PLUS2_WIRELESS_UF2"
 
 ## SparkFun Pro Micro 2350
 ## https://github.com/sparkfun/SparkFun_Pro_Micro_RP2350
@@ -91,16 +93,19 @@ export PICO_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_MI
 export PICO_W_MICROPYTHON_UF2="RPI_PICO_W-$MICROPYTHON_VERSION.uf2"
 export PICO_W_MICROPYTHON_URL="https://micropython.org/resources/firmware/$PICO_W_MICROPYTHON_UF2"
 
-export CIRCUITPYTHON_VERSION="9.1.3"
+export CIRCUITPYTHON_VERSION="9.1.4"
 export PICO_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico-en_US-$CIRCUITPYTHON_VERSION.uf2"
 export PICO_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico/en_US/$PICO_CIRCUITPYTHON_UF2"
 export PICO_W_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico_w-en_US-$CIRCUITPYTHON_VERSION.uf2"
 export PICO_W_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/$PICO_W_CIRCUITPYTHON_UF2"
 
-# Alpha for Pico 2
-export CIRCUITPYTHON_ALPHA_VERSION="9.2.0-alpha.2351"
-export PICO2_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico2-en_US-$CIRCUITPYTHON_ALPHA_VERSION.uf2"
+## Pico 2
+export CIRCUITPYTHON_VERSION="9.2.0-beta.0"
+export PICO2_CIRCUITPYTHON_UF2="adafruit-circuitpython-raspberry_pi_pico2-en_US-$CIRCUITPYTHON_VERSION.uf2"
 export PICO2_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/raspberry_pi_pico2/en_US/$PICO2_CIRCUITPYTHON_UF2"
+
+export SPARKFUN_RP2350_CIRCUITPYTHON_UF2="adafruit-circuitpython-sparkfun_pro_micro_rp2350-en_US-$CIRCUITPYTHON_VERSION.uf2"
+export SPARKFUN_RP2350_CIRCUITPYTHON_URL="https://downloads.circuitpython.org/bin/sparkfun_pro_micro_rp2350/en_US/$SPARKFUN_RP2350_CIRCUITPYTHON_UF2"
 
 ## Virtual environment for host Python tools
 export MICROPYTHON_VENV="$CLAMS_BASE/micropython_venv"
