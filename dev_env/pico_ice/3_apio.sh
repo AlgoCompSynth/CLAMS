@@ -15,8 +15,20 @@ echo "Installing apio"
 pip3 install --upgrade apio
 echo "Installing packages"
 apio install --all
+
+echo "Listing boards, FPGAs, and examples"
+apio boards --list > apio-boards.txt
+apio boards --fpga > apio-fpgas.txt
+apio examples --list > apio-examples.txt
+
 echo "Deactivating virtual environment $APIO_VENV"
 deactivate
+
+echo "Patching apio!!"
+diff boards.json $APIO_VENV/lib/python3.10/site-packages/apio/resources/boards.json || true
+cp boards.json $APIO_VENV/lib/python3.10/site-packages/apio/resources/boards.json || true
+diff SConstruct $APIO_VENV/lib/python3.10/site-packages/apio/resources/ice40/SConstruct || true
+cp SConstruct $APIO_VENV/lib/python3.10/site-packages/apio/resources/ice40/SConstruct || true
 
 echo ""
 echo "Finished"
