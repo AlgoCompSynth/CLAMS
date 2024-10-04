@@ -55,6 +55,8 @@ export ARDUINO_PICO_URL="https://github.com/earlephilhower/arduino-pico.git"
 export ARDUINO_PICO_PACKAGE_URL="https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json"
 export ZSH_LOCAL_COMPLETIONS_PATH="$HOME/.zsh_completions"
 
+export TEENSYDUINO_PACKAGE_URL="https://www.pjrc.com/teensy/package_teensy_index.json"
+
 # PlatformIO
 export SYSTEM_UDEV_PATH="/etc/udev/rules.d"
 export PLATFORMIO_UDEV_RULES_PATH="$SYSTEM_UDEV_PATH/99-platformio-udev.rules"
