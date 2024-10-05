@@ -6,6 +6,7 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 export LOGFILE=$PWD/3_teensyduino.log
+rm -f $LOGFILE
 
 # https://www.pjrc.com/teensy/td_download.html
 echo "Installing Teensyduino from package release"
@@ -16,4 +17,22 @@ arduino-cli core update-index \
 arduino-cli core install teensy:avr \
   >> $LOGFILE 2>&1
 
+echo "Cloning fresh teensy_loader_cli project repository"
+mkdir --parents $TEENSY_LOADER_CLI_PATH
+pushd $TEENSY_LOADER_CLI_PATH/..
+  rm --force --recursive $TEENSY_LOADER_CLI_PATH
+  /usr/bin/time git clone $TEENSY_LOADER_CLI_URL \
+    >> $LOGFILE 2>&1
+popd
+
+echo "Installing teensy_loader_cli"
+pushd $TEENSY_LOADER_CLI_PATH
+  make \
+    >> $LOGFILE 2>&1
+  cp teensy_loader_cli $HOME/.local/bin
+popd
+
 echo "Finished"
+
+
+

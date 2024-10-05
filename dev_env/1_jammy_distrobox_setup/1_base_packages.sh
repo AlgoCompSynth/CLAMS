@@ -25,6 +25,7 @@ sudo apt-get install --assume-yes \
   gperf \
   gtkwave \
   libftdi-dev \
+  libgtk-3-0 \
   libmagic1 \
   libpam-systemd \
   libsdl2-dev \
