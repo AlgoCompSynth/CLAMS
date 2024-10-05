@@ -6,12 +6,16 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 
-echo "Listing boards to board-listall.txt"
-arduino-cli board listall > board-listall.txt
+echo "Updating indexes"
+arduino-cli update
+
+echo "Listing cores to cores.txt"
+arduino-cli core list > cores.txt
+
+echo "Listing boards to boards.txt"
+arduino-cli board listall > boards.txt
 
 echo "Listing examples to examples.txt"
-find $HOME/.arduino15/packages -name 'examples' \
-  | sort -u \
-  > examples.txt
+arduino-cli lib examples > examples.txt
 
 echo "Finished"
