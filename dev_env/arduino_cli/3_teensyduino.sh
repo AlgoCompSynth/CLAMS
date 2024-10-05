@@ -9,7 +9,7 @@ export LOGFILE=$PWD/3_teensyduino.log
 rm -f $LOGFILE
 
 # https://www.pjrc.com/teensy/td_download.html
-echo "Installing Teensyduino from package release"
+echo "Installing teensy:avr core"
 arduino-cli config add board_manager.additional_urls $TEENSYDUINO_PACKAGE_URL \
   >> $LOGFILE 2>&1
 arduino-cli core update-index \
