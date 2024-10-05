@@ -9,7 +9,8 @@ export LOGFILE=$PWD/1_arduino_cli.log
 rm -f $LOGFILE
 
 echo "Removing any previous installation"
-rm -fr $ARDUINO_INSTALL_PATH
+rm --force --recursive $ARDUINO_INSTALL_PATH
+rm --force --recursive $ARDUINO_IDE_PATH
 
 echo "Installing locally via 'curl'"
 # https://arduino.github.io/arduino-cli/0.20/installation/
