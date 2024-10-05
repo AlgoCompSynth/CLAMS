@@ -11,8 +11,6 @@ export BOARD_TAG=${2-""}
 export LOGFILE="$PWD/${PIO_ENVIRONMENT}${BOARD_TAG}.log"
 rm -f $LOGFILE
 
-export TOOL_BIN_PATH="$HOME/.platformio/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/bin/"
-
 echo "Activating PlatformIO virtual environment"
 source $ACTIVATE_PLATFORMIO_VENV
 
@@ -54,14 +52,8 @@ popd
 echo "Deactivating"
 deactivate
 
-echo "Fetching firmware files"
+echo "Fetching firmware file"
 cp $CFORTH_PATH/.pio/build/$PIO_ENVIRONMENT/firmware.elf "${PIO_ENVIRONMENT}${BOARD_TAG}.elf"
-cp $CFORTH_PATH/.pio/build/$PIO_ENVIRONMENT/firmware.uf2 "${PIO_ENVIRONMENT}${BOARD_TAG}.uf2"
-echo "Disassembling"
-$TOOL_BIN_PATH/objdump \
-  -d \
-  "${PIO_ENVIRONMENT}${BOARD_TAG}.elf" \
-  > "${PIO_ENVIRONMENT}${BOARD_TAG}.dis"
 
 echo "Active TTYs"
 ls -l /dev/ttyACM* || true
