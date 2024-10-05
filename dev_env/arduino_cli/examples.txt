@@ -288,7 +288,129 @@ Examples for library [32mBTstack (rp2040:rp2040@4.1.1)[0m
 Examples for library [32mCapacitiveSensor (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/CapacitiveSensor/examples/[22mCapacitiveSensorSketch
 
+Examples for library [32mCMSIS_DSP (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/CMSIS_DSP/examples/[22marm_sin_cos_example_f32
+
 Examples for library [32mCryptoAccel (teensy:avr@1.59.0)[0m
+
+Examples for library [32mDaisyDuino[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Field/[22mKeyboardTest
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Field/[22mMidi
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Field/[22mmodalvoice
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Field/[22moled
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Field/[22mstringvoice
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mAudioSettings
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mCV_Input
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mCV_Output
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mGate_Input
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mGate_Output
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mMomentary_Switch
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mPot_Input
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mReverb
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mToggle_Switch
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch SM/[22mTripleSaw
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mCompressor
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mEncoder
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mFilterBank
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mGateIns
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mLfo
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mlogic
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mMidi
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mMixer
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mMultiDelay
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mNoise
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mOled
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mPassThru
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mPatchMajorChord
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mPatchSine
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mPluckEcho
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mPolyOsc
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mQuadEnvelope
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mQuadMixer
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mReverb
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mSampleAndHold
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mSequencer
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mSequentialSwitch
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mSvf
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Patch/[22mVco
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Petal/[22mCombFilter
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Petal/[22mdistortion
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Petal/[22mFilterBank
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Petal/[22mLooper
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Petal/[22mMultiDelay
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Petal/[22mMultiEffect
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Petal/[22mVerb
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mChordMachine
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mEncoder
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mEuclideanDrums
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mLooper
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mMidi
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mMultiEffect
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mMusicBox
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mSimpleButton
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mSimpleOscillator
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mStepSequencer
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Pod/[22mSynthVoice
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22madenv
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22madsr
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mallpass
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22manalogbassdrum
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22manalogsnaredrum
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22matone
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mautowah
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mbalance
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mbiquad
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mbitcrush
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mblosc
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mButton
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mbypass
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mclockednoise
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mcomb
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mcompressor
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mcrossfade
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mdcblock
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mdecimator
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mdelayline
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mdrip
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mdust
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mfm2
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mformantosc
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mfractal_noise
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mgrainlet
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mharmonic_osc
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mhihat
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mjitter
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mKnob
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mline
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mmaytrig
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mmetro
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mmodalvoice
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mmoogladder
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mnlfilt
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22moscbank
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22moscillator
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22moverdrive
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mparticle
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mphasor
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mpitchshifter
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mpluck
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mport
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mresonator
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mreverbsc
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22msamplehold
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22msampleratereducer
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22msmooth_random
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mStereoDelay
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mstring
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22msvf
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22msynthbassdrum
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22msynthsnaredrum
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mtone
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mvariableshapeosc
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mvarisaw
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mvosim
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mwhitenoise
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/DaisyDuino/examples/Seed/[22mzoscillator
 
 Examples for library [32mDmxSimple (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/DmxSimple/examples/[22mFadeUp
@@ -317,11 +439,6 @@ Examples for library [32mEasyTransferI2C (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/EasyTransferI2C/examples/[22mEasyTransfer_RX_Example
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/EasyTransferI2C/examples/[22mEasyTransfer_TX_Example
 
-Examples for library [32mEEPROM (rp2040:rp2040@4.1.1)[0m
-  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/EEPROM/examples/[22meeprom_clear
-  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/EEPROM/examples/[22meeprom_read
-  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/EEPROM/examples/[22meeprom_write
-
 Examples for library [32mEEPROM (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/EEPROM/examples/[22meeprom_clear
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/EEPROM/examples/[22meeprom_crc
@@ -333,6 +450,21 @@ Examples for library [32mEEPROM (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/EEPROM/examples/[22meeprom_read
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/EEPROM/examples/[22meeprom_update
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/EEPROM/examples/[22meeprom_write
+
+Examples for library [32mEEPROM (rp2040:rp2040@4.1.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/EEPROM/examples/[22meeprom_clear
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/EEPROM/examples/[22meeprom_read
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/EEPROM/examples/[22meeprom_write
+
+Examples for library [32mEEPROM (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/EEPROM/examples/[22meeprom_clear
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/EEPROM/examples/[22meeprom_crc
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/EEPROM/examples/[22meeprom_get
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/EEPROM/examples/[22meeprom_iteration
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/EEPROM/examples/[22meeprom_put
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/EEPROM/examples/[22meeprom_read
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/EEPROM/examples/[22meeprom_update
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/EEPROM/examples/[22meeprom_write
 
 Examples for library [32mEncoder (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/Encoder/examples/[22mBasic
@@ -638,6 +770,9 @@ Examples for library [32mIRremote (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/IRremote/examples/[22mSimpleSender
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/IRremote/examples/[22mUnitTest
 
+Examples for library [32mIWatchdog (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/IWatchdog/examples/[22mIWDG_Button
+
 Examples for library [32mJoystick (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/Joystick/examples/[22mJoystick-AllFunctions
 
@@ -646,6 +781,9 @@ Examples for library [32mJoystickBLE (rp2040:rp2040@4.1.1)[0m
 
 Examples for library [32mJoystickBT (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/JoystickBT/examples/[22mBTJoystick-AllFunctions
+
+Examples for library [32mKeyboard (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Keyboard/examples/[22mKeyboardMessage
 
 Examples for library [32mKeyboard (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/Keyboard/examples/[22mKeyboardPassword
@@ -714,6 +852,10 @@ Examples for library [32mLiquidCrystalFast (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/LiquidCrystalFast/examples/[22mTestAllMega
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/LiquidCrystalFast/examples/[22mTextDirection
 
+Examples for library [32mLittleFS (rp2040:rp2040@4.1.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/LittleFS/examples/[22mFSUpload
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/LittleFS/examples/[22mSpeedTest
+
 Examples for library [32mLittleFS (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/LittleFS/examples/[22mListFiles
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/LittleFS/examples/[22mLittleFS_Program_Simple_Datalogger-dates
@@ -729,10 +871,6 @@ Examples for library [32mLittleFS (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/LittleFS/examples/Test_Integrity/[22mRAM
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/LittleFS/examples/Test_Integrity/[22mSPI
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/LittleFS/examples/[22mWrite_Speed_Test
-
-Examples for library [32mLittleFS (rp2040:rp2040@4.1.1)[0m
-  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/LittleFS/examples/[22mFSUpload
-  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/LittleFS/examples/[22mSpeedTest
 
 Examples for library [32mLowPower (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/LowPower/examples/[22mpowerDownWakeExternalInterrupt
@@ -797,6 +935,9 @@ Examples for library [32mMIDI Library (teensy:avr@1.59.0)[0m
 
 Examples for library [32mMouse (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/Mouse/examples/[22mCircle
+
+Examples for library [32mMouse (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Mouse/examples/[22mButtonMouseControl
 
 Examples for library [32mMouseAbsolute (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/MouseAbsolute/examples/[22mCircleAbsolute
@@ -1049,6 +1190,9 @@ Examples for library [32mRadioHead (teensy:avr@1.59.0)[0m
 Examples for library [32mResponsiveAnalogRead (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/ResponsiveAnalogRead/examples/[22mResponsiveAnalogRead
 
+Examples for library [32mRGB_LED_TLC59731 (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/RGB_LED_TLC59731/examples/[22mRGB_LED_TLC59731
+
 Examples for library [32mrp2040 (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/rp2040/examples/[22mBootsel
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/rp2040/examples/[22mDMAMemcpy
@@ -1119,6 +1263,11 @@ Examples for library [32mSerialFlash (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/SerialFlash/examples/[22mRawHardwareTest
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/SerialFlash/examples/[22mReadBenchmark
 
+Examples for library [32mServo (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Servo/examples/[22mfs90r
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Servo/examples/[22mKnob
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Servo/examples/[22mSweep
+
 Examples for library [32mServo (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/Servo/examples/[22mKnob
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/Servo/examples/[22mSweep
@@ -1161,18 +1310,29 @@ Examples for library [32mSoftwareSerial (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/SoftwareSerial/examples/[22mSoftwareSerialExample
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/SoftwareSerial/examples/[22mTwoPortReceive
 
-Examples for library [32mSPI (teensy:avr@1.59.0)[0m
-  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/SPI/examples/[22mBarometricPressureSensor
-  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/SPI/examples/[22mDigitalPotControl
+Examples for library [32mSoftwareSerial (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/SoftwareSerial/examples/[22mSoftwareSerialExample
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/SoftwareSerial/examples/[22mTwoPortReceive
+
+Examples for library [32mSPI (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/SPI/examples/[22mBarometricPressureSensor
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/SPI/examples/[22mDigitalPotControl
 
 Examples for library [32mSPI (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/SPI/examples/[22mSPItoMyselfAsync
+
+Examples for library [32mSPI (teensy:avr@1.59.0)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/SPI/examples/[22mBarometricPressureSensor
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/SPI/examples/[22mDigitalPotControl
 
 Examples for library [32mSPIFlash (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/SPIFlash/examples/[22mSPIFlash_ReadWrite
 
 Examples for library [32mSPISlave (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/SPISlave/examples/[22mSPItoMyself
+
+Examples for library [32mSrcWrapper (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/SrcWrapper/examples/[22mBareMinimum
 
 Examples for library [32mST7735_t3 (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/ST7735_t3/examples/[22mgraphicstest
@@ -1186,6 +1346,9 @@ Examples for library [32mST7735_t3 (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/ST7735_t3/examples/[22mTFT_String_Align
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/ST7735_t3/examples/[22muncannyEyes7735
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/ST7735_t3/examples/[22muncannyEyes_async_st7789_240x240
+
+Examples for library [32mSubGhz (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/SubGhz/examples/[22mReadRegister
 
 Examples for library [32mTalkie (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/Talkie/examples/[22m_1_Getting_Started
@@ -1283,7 +1446,80 @@ Examples for library [32mTouchScreen (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/TouchScreen/examples/[22mtouchscreendemo
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/TouchScreen/examples/[22mtouchscreendemoshield
 
+Examples for library [32mU8g2[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mFontUsage
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mFPS
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mGraphicsTest
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mHelloWorld
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mIconMenu
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mPrintUTF8
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mScreenShot
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mSelectionList
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mShennong
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mU8g2Logo
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mUpdateArea
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/full_buffer/[22mWeather
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/games/[22mLittleRookChess
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/games/[22mSpaceTrash
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIBlink
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUICountDown
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIInput1BtnBounce2
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIInput2BtnBounce2
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIInput3BtnBounce2
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIInput3BtnWithU8g2
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIInputSimpleRotary
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIInputVersatileRotaryEncoder
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIMinimal
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIStopwatch
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIWaveformBounce2
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/mui/[22mMUIWaveformSimpleRotary
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mA2Printer
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mButtonEmoticon
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mChinese
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mClipWindow
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mClock
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mContrastTest
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mDevanagari
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mDirectAccess
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mDrawLog
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mExtUTF8
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mFlipMode
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mFPS
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mGraphicsTest
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mHelloWorld
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mIconMenu
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mJapanese
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mKorean
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mLoadFromSD
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mMechCount
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mPowerSaveTest
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mPrintHelloWorld
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mPrintProgmem
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mPrintUTF8
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mScrollingText
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mSelectionList
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mSerial
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mShennong
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mStateBufferLoop
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mTerminal
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mU8g2Logo
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mUpdatePartly
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mWeather
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mXBM
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/page_buffer/[22mXORTest
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/u8x8/[22m16x16Font
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/u8x8/[22mArduboyTest
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/u8x8/[22mFlipMode
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/u8x8/[22mGraphicsTest
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/u8x8/[22mHelloWorld
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/u8x8/[22mMessageBox
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/u8x8/[22mRotate90
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/Arduino/libraries/U8g2/examples/u8x8/[22mTerminal
+
 Examples for library [32mUpdater (rp2040:rp2040@4.1.1)[0m
+
+Examples for library [32mUSBDevice (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/USBDevice/examples/[22mBareMinimum
 
 Examples for library [32mUSBHost_t36 (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/USBHost_t36/examples/[22mAntPlus
@@ -1362,6 +1598,9 @@ Examples for library [32mUTFT (teensy:avr@1.59.0)[0m
 Examples for library [32mVFS (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/VFS/examples/[22mVFSMultipleMounts
 
+Examples for library [32mVirtIO (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/VirtIO/examples/[22mloopback
+
 Examples for library [32mVirtualWire (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/VirtualWire/examples/[22mclient
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/VirtualWire/examples/[22mreceiver
@@ -1405,6 +1644,17 @@ Examples for library [32mWire (teensy:avr@1.59.0)[0m
 Examples for library [32mWire (rp2040:rp2040@4.1.1)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/Wire/examples/[22mTalkingToMyself
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/Wire/examples/[22mTalkingToMyselfAsync
+
+Examples for library [32mWire (STMicroelectronics:stm32@2.8.1)[0m
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Wire/examples/[22mdigital_potentiometer
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Wire/examples/[22mi2c_scanner
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Wire/examples/[22mmaster_reader
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Wire/examples/[22mmaster_reader_writer
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Wire/examples/[22mmaster_writer
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Wire/examples/[22mSFRRanger_reader
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Wire/examples/[22mslave_receiver
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Wire/examples/[22mslave_sender
+  - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/Wire/examples/[22mslave_sender_receiver
 
 Examples for library [32mWS2812Serial (teensy:avr@1.59.0)[0m
   - [2m/var/home/znmeb/dbx-homes/CLAMS_dev_jammy/.arduino15/packages/teensy/hardware/avr/1.59.0/libraries/WS2812Serial/examples/[22mBasicTest

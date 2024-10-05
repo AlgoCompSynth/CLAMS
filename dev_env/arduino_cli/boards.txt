@@ -1,5 +1,6 @@
 Board Name                           FQBN
 0xCB Helios                          rp2040:rp2040:0xcb_helios
+3D printer boards                    STMicroelectronics:stm32:3dprinter
 Adafruit Feather RP2040              rp2040:rp2040:adafruit_feather
 Adafruit Feather RP2040 Adalogger    rp2040:rp2040:adafruit_feather_adalogger
 Adafruit Feather RP2040 CAN          rp2040:rp2040:adafruit_feather_can
@@ -23,6 +24,7 @@ Amken Revelop Plus                   rp2040:rp2040:amken_revelop_plus
 Amken Revelop eS                     rp2040:rp2040:amken_revelop_es
 Arduino Nano RP2040 Connect          rp2040:rp2040:arduino_nano_connect
 ArtronShop RP2 Nano                  rp2040:rp2040:artronshop_rp2_nano
+Blues boards                         STMicroelectronics:stm32:Blues
 Breadstick Raspberry                 rp2040:rp2040:breadstick_raspberry
 BridgeTek IDM2040-43A                rp2040:rp2040:bridgetek_idm2040_43a
 BridgeTek IDM2040-7A                 rp2040:rp2040:bridgetek_idm2040_7a
@@ -36,19 +38,51 @@ DatanoiseTV PicoADK                  rp2040:rp2040:datanoisetv_picoadk
 DatanoiseTV PicoADK v2               rp2040:rp2040:datanoisetv_picoadk_v2
 DeRuiLab FlyBoard2040Core            rp2040:rp2040:flyboard2040_core
 Degz Robotics Suibo RP2040           rp2040:rp2040:degz_suibo
+Discovery                            STMicroelectronics:stm32:Disco
+ELV Modular System boards            STMicroelectronics:stm32:ELV_Modular_System
 EVN Alpha                            rp2040:rp2040:evn_alpha
+Elecgator boards                     STMicroelectronics:stm32:Elecgator
+Electronic speed controllers         STMicroelectronics:stm32:ESC_board
 ElectronicCats HunterCat NFC RP2040  rp2040:rp2040:electroniccats_huntercat_nfc
+Eval                                 STMicroelectronics:stm32:Eval
 ExtremeElectronics RC2040            rp2040:rp2040:extelec_rc2040
+Garatronic-McHobby                   STMicroelectronics:stm32:Garatronic
+Generic Flight Controllers           STMicroelectronics:stm32:GenFlight
 Generic RP2040                       rp2040:rp2040:generic
 Generic RP2350                       rp2040:rp2040:generic_rp2350
+Generic STM32C0 series               STMicroelectronics:stm32:GenC0
+Generic STM32F0 series               STMicroelectronics:stm32:GenF0
+Generic STM32F1 series               STMicroelectronics:stm32:GenF1
+Generic STM32F2 series               STMicroelectronics:stm32:GenF2
+Generic STM32F3 series               STMicroelectronics:stm32:GenF3
+Generic STM32F4 series               STMicroelectronics:stm32:GenF4
+Generic STM32F7 series               STMicroelectronics:stm32:GenF7
+Generic STM32G0 series               STMicroelectronics:stm32:GenG0
+Generic STM32G4 series               STMicroelectronics:stm32:GenG4
+Generic STM32H5 series               STMicroelectronics:stm32:GenH5
+Generic STM32H7 Series               STMicroelectronics:stm32:GenH7
+Generic STM32L0 series               STMicroelectronics:stm32:GenL0
+Generic STM32L1 series               STMicroelectronics:stm32:GenL1
+Generic STM32L4 series               STMicroelectronics:stm32:GenL4
+Generic STM32L5 series               STMicroelectronics:stm32:GenL5
+Generic STM32U5 series               STMicroelectronics:stm32:GenU5
+Generic STM32WB series               STMicroelectronics:stm32:GenWB
+Generic STM32WBA series              STMicroelectronics:stm32:GenWBA
+Generic STM32WL series               STMicroelectronics:stm32:GenWL
 Generic Sea-Picro                    rp2040:rp2040:sea_picro
 GroundStudio Marble Pico             rp2040:rp2040:groundstudio_marble_pico
+IoT continuum boards                 STMicroelectronics:stm32:IotContinuum
 L'atelier d'Arnoz DudesCab           rp2040:rp2040:DudesCab
+LoRa boards                          STMicroelectronics:stm32:LoRa
 METE HOCA Akana R1                   rp2040:rp2040:akana_r1
 Melopero Cookie RP2040               rp2040:rp2040:melopero_cookie_rp2040
 Melopero Shake RP2040                rp2040:rp2040:melopero_shake_rp2040
+Midatronics boards                   STMicroelectronics:stm32:Midatronics
 Neko Systems BL2040 Mini             rp2040:rp2040:nekosystems_bl2040_mini
 Newsan Archi                         rp2040:rp2040:newsan_archi
+Nucleo-144                           STMicroelectronics:stm32:Nucleo_144
+Nucleo-32                            STMicroelectronics:stm32:Nucleo_32
+Nucleo-64                            STMicroelectronics:stm32:Nucleo_64
 Olimex RP2040-Pico30 16MB            rp2040:rp2040:olimex_rp2040pico30_16mb
 Olimex RP2040-Pico30 2MB             rp2040:rp2040:olimex_rp2040pico30_2mb
 Pimoroni PGA2040                     rp2040:rp2040:pimoroni_pga2040
@@ -62,12 +96,14 @@ RAKwireless RAK11300                 rp2040:rp2040:rakwireless_rak11300
 Raspberry Pi Pico                    rp2040:rp2040:rpipico
 Raspberry Pi Pico 2                  rp2040:rp2040:rpipico2
 Raspberry Pi Pico W                  rp2040:rp2040:rpipicow
+STM32MP1 series coprocessor          STMicroelectronics:stm32:STM32MP1
 Seeed INDICATOR RP2040               rp2040:rp2040:seeed_indicator_rp2040
 Seeed XIAO RP2040                    rp2040:rp2040:seeed_xiao_rp2040
 Silicognition RP2040-Shim            rp2040:rp2040:silicognition_rp2040_shim
 Solder Party RP2040 Stamp            rp2040:rp2040:solderparty_rp2040_stamp
 Solder Party RP2350 Stamp            rp2040:rp2040:solderparty_rp2350_stamp
 Solder Party RP2350 Stamp XL         rp2040:rp2040:solderparty_rp2350_stamp_xl
+SparkFun Boards                      STMicroelectronics:stm32:SparkFun
 SparkFun MicroMod RP2040             rp2040:rp2040:sparkfun_micromodrp2040
 SparkFun ProMicro RP2040             rp2040:rp2040:sparkfun_promicrorp2040
 SparkFun ProMicro RP2350             rp2040:rp2040:sparkfun_promicrorp2350

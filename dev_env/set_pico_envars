@@ -62,6 +62,9 @@ export TEENSYDUINO_PACKAGE_URL="https://www.pjrc.com/teensy/package_teensy_index
 export TEENSY_LOADER_CLI_URL="https://github.com/PaulStoffregen/teensy_loader_cli.git"
 export TEENSY_LOADER_CLI_PATH="$HOME/Projects/teensy_loader_cli"
 
+## Daisyduino
+export DAISYDUINO_PACKAGE_URL="https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json"
+
 # PlatformIO
 export SYSTEM_UDEV_PATH="/etc/udev/rules.d"
 export PLATFORMIO_UDEV_RULES_PATH="$SYSTEM_UDEV_PATH/99-platformio-udev.rules"
