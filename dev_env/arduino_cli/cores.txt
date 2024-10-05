@@ -1,0 +1,4 @@
+ID            Installed Latest Name
+rp2040:rp2040 4.1.1     4.1.1  Raspberry Pi Pico/RP2040/RP2350
+teensy:avr    1.59.0    1.59.0 Teensy (for Arduino IDE 2.0.4 or later)
+
