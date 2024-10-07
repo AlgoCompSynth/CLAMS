@@ -23,7 +23,7 @@ pushd $PICO_SDK_REPOS
 
   echo ""
   echo "Listing supported boards to $SUPPORTED_BOARDS"
-  ls -l $PICO_SDK_REPOS/pico-sdk/src/boards/include/boards > $SUPPORTED_BOARDS
+  ls -1 $PICO_SDK_REPOS/pico-sdk/src/boards/include/boards > $SUPPORTED_BOARDS
 
   echo ""
   echo "Cloning Pico utilities"

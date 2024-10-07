@@ -1,91 +1,90 @@
-total 368
--rw-rw-r--. 1 znmeb znmeb 2010 Oct  6 21:12 0xcb_helios.h
--rw-rw-r--. 1 znmeb znmeb 2135 Oct  6 21:12 adafruit_feather_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 2087 Oct  6 21:12 adafruit_feather_rp2040_usb_host.h
--rw-rw-r--. 1 znmeb znmeb 2189 Oct  6 21:12 adafruit_itsybitsy_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 2005 Oct  6 21:12 adafruit_kb2040.h
--rw-rw-r--. 1 znmeb znmeb 4248 Oct  6 21:12 adafruit_macropad_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 2158 Oct  6 21:12 adafruit_qtpy_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 1814 Oct  6 21:12 adafruit_trinkey_qt2040.h
--rw-rw-r--. 1 znmeb znmeb 2491 Oct  6 21:12 amethyst_fpga.h
--rw-rw-r--. 1 znmeb znmeb 2395 Oct  6 21:12 archi.h
--rw-rw-r--. 1 znmeb znmeb 1894 Oct  6 21:12 arduino_nano_rp2040_connect.h
--rw-rw-r--. 1 znmeb znmeb 3906 Oct  6 21:12 cytron_maker_pi_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 1559 Oct  6 21:12 datanoisetv_rp2040_dsp.h
--rw-rw-r--. 1 znmeb znmeb 3653 Oct  6 21:12 defcon32_badge.h
--rw-rw-r--. 1 znmeb znmeb 2088 Oct  6 21:12 eetree_gamekit_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 2071 Oct  6 21:12 garatronic_pybstick26_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 2850 Oct  6 21:12 gen4_rp2350_24ct.h
--rw-rw-r--. 1 znmeb znmeb 2792 Oct  6 21:12 gen4_rp2350_24.h
--rw-rw-r--. 1 znmeb znmeb 2796 Oct  6 21:12 gen4_rp2350_24t.h
--rw-rw-r--. 1 znmeb znmeb 2850 Oct  6 21:12 gen4_rp2350_28ct.h
--rw-rw-r--. 1 znmeb znmeb 2792 Oct  6 21:12 gen4_rp2350_28.h
--rw-rw-r--. 1 znmeb znmeb 2796 Oct  6 21:12 gen4_rp2350_28t.h
--rw-rw-r--. 1 znmeb znmeb 2877 Oct  6 21:12 gen4_rp2350_32ct.h
--rw-rw-r--. 1 znmeb znmeb 2792 Oct  6 21:12 gen4_rp2350_32.h
--rw-rw-r--. 1 znmeb znmeb 2796 Oct  6 21:12 gen4_rp2350_32t.h
--rw-rw-r--. 1 znmeb znmeb 2877 Oct  6 21:12 gen4_rp2350_35ct.h
--rw-rw-r--. 1 znmeb znmeb 2792 Oct  6 21:12 gen4_rp2350_35.h
--rw-rw-r--. 1 znmeb znmeb 2796 Oct  6 21:12 gen4_rp2350_35t.h
--rw-rw-r--. 1 znmeb znmeb 2310 Oct  6 21:12 hellbender_2350A_devboard.h
--rw-rw-r--. 1 znmeb znmeb 2144 Oct  6 21:12 ilabs_challenger_rp2350_bconnect.h
--rw-rw-r--. 1 znmeb znmeb 3353 Oct  6 21:12 ilabs_challenger_rp2350_wifi_ble.h
--rw-rw-r--. 1 znmeb znmeb 1480 Oct  6 21:12 ilabs_opendec02.h
--rw-rw-r--. 1 znmeb znmeb 2286 Oct  6 21:12 melopero_perpetuo_rp2350_lora.h
--rw-rw-r--. 1 znmeb znmeb 1971 Oct  6 21:12 melopero_shake_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 5576 Oct  6 21:12 metrotech_xerxes_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 1738 Oct  6 21:12 net8086_usb_interposer.h
--rw-rw-r--. 1 znmeb znmeb  380 Oct  6 21:12 none.h
--rw-rw-r--. 1 znmeb znmeb 2683 Oct  6 21:12 nullbits_bit_c_pro.h
--rw-rw-r--. 1 znmeb znmeb 1918 Oct  6 21:12 phyx_rick_tny_rp2350.h
--rw-rw-r--. 1 znmeb znmeb 2343 Oct  6 21:12 pico2.h
--rw-rw-r--. 1 znmeb znmeb 2290 Oct  6 21:12 pico.h
--rw-rw-r--. 1 znmeb znmeb 3205 Oct  6 21:12 pico_w.h
--rw-rw-r--. 1 znmeb znmeb 2965 Oct  6 21:12 pimoroni_badger2040.h
--rw-rw-r--. 1 znmeb znmeb 2669 Oct  6 21:12 pimoroni_interstate75.h
--rw-rw-r--. 1 znmeb znmeb 2307 Oct  6 21:12 pimoroni_keybow2040.h
--rw-rw-r--. 1 znmeb znmeb 3615 Oct  6 21:12 pimoroni_motor2040.h
--rw-rw-r--. 1 znmeb znmeb 1785 Oct  6 21:12 pimoroni_pga2040.h
--rw-rw-r--. 1 znmeb znmeb 2049 Oct  6 21:12 pimoroni_pga2350.h
--rw-rw-r--. 1 znmeb znmeb 1973 Oct  6 21:12 pimoroni_picolipo_16mb.h
--rw-rw-r--. 1 znmeb znmeb 1968 Oct  6 21:12 pimoroni_picolipo_4mb.h
--rw-rw-r--. 1 znmeb znmeb 2605 Oct  6 21:12 pimoroni_pico_plus2_rp2350.h
--rw-rw-r--. 1 znmeb znmeb 2468 Oct  6 21:12 pimoroni_picosystem.h
--rw-rw-r--. 1 znmeb znmeb 2276 Oct  6 21:12 pimoroni_plasma2040.h
--rw-rw-r--. 1 znmeb znmeb 2806 Oct  6 21:12 pimoroni_plasma2350.h
--rw-rw-r--. 1 znmeb znmeb 3030 Oct  6 21:12 pimoroni_servo2040.h
--rw-rw-r--. 1 znmeb znmeb 2357 Oct  6 21:12 pimoroni_tiny2040_2mb.h
--rw-rw-r--. 1 znmeb znmeb 2349 Oct  6 21:12 pimoroni_tiny2040.h
--rw-rw-r--. 1 znmeb znmeb 2201 Oct  6 21:12 pimoroni_tiny2350.h
--rw-rw-r--. 1 znmeb znmeb 1915 Oct  6 21:12 pi-plates_micropi.h
--rw-rw-r--. 1 znmeb znmeb  814 Oct  6 21:12 pololu_3pi_2040_robot.h
--rw-rw-r--. 1 znmeb znmeb  817 Oct  6 21:12 pololu_zumo_2040_robot.h
--rw-rw-r--. 1 znmeb znmeb 2248 Oct  6 21:12 seeed_xiao_rp2040.h
--rw-rw-r--. 1 znmeb znmeb 2884 Oct  6 21:12 seeed_xiao_rp2350.h
--rw-rw-r--. 1 znmeb znmeb  914 Oct  6 21:12 solderparty_rp2040_stamp_carrier.h
--rw-rw-r--. 1 znmeb znmeb 2096 Oct  6 21:12 solderparty_rp2040_stamp.h
--rw-rw-r--. 1 znmeb znmeb 2030 Oct  6 21:12 solderparty_rp2040_stamp_round_carrier.h
--rw-rw-r--. 1 znmeb znmeb 1988 Oct  6 21:12 solderparty_rp2350_stamp.h
--rw-rw-r--. 1 znmeb znmeb 2000 Oct  6 21:12 solderparty_rp2350_stamp_xl.h
--rw-rw-r--. 1 znmeb znmeb 2055 Oct  6 21:12 sparkfun_micromod.h
--rw-rw-r--. 1 znmeb znmeb 2205 Oct  6 21:12 sparkfun_promicro.h
--rw-rw-r--. 1 znmeb znmeb 2184 Oct  6 21:12 sparkfun_promicro_rp2350.h
--rw-rw-r--. 1 znmeb znmeb 2289 Oct  6 21:12 sparkfun_thingplus.h
--rw-rw-r--. 1 znmeb znmeb 1973 Oct  6 21:12 switchscience_picossci2_conta_base.h
--rw-rw-r--. 1 znmeb znmeb 2002 Oct  6 21:12 switchscience_picossci2_dev_board.h
--rw-rw-r--. 1 znmeb znmeb 1743 Oct  6 21:12 switchscience_picossci2_micro.h
--rw-rw-r--. 1 znmeb znmeb 1997 Oct  6 21:12 switchscience_picossci2_rp2350_breakout.h
--rw-rw-r--. 1 znmeb znmeb 1955 Oct  6 21:12 switchscience_picossci2_tiny.h
--rw-rw-r--. 1 znmeb znmeb 2442 Oct  6 21:12 tinycircuits_thumby_color_rp2350.h
--rw-rw-r--. 1 znmeb znmeb 2733 Oct  6 21:12 vgaboard.h
--rw-rw-r--. 1 znmeb znmeb 2477 Oct  6 21:12 waveshare_rp2040_lcd_0.96.h
--rw-rw-r--. 1 znmeb znmeb 2457 Oct  6 21:12 waveshare_rp2040_lcd_1.28.h
--rw-rw-r--. 1 znmeb znmeb 1817 Oct  6 21:12 waveshare_rp2040_one.h
--rw-rw-r--. 1 znmeb znmeb 1977 Oct  6 21:12 waveshare_rp2040_plus_16mb.h
--rw-rw-r--. 1 znmeb znmeb 1972 Oct  6 21:12 waveshare_rp2040_plus_4mb.h
--rw-rw-r--. 1 znmeb znmeb 1819 Oct  6 21:12 waveshare_rp2040_zero.h
--rw-rw-r--. 1 znmeb znmeb 1914 Oct  6 21:12 weact_studio_rp2040_16mb.h
--rw-rw-r--. 1 znmeb znmeb 1908 Oct  6 21:12 weact_studio_rp2040_2mb.h
--rw-rw-r--. 1 znmeb znmeb 1908 Oct  6 21:12 weact_studio_rp2040_4mb.h
--rw-rw-r--. 1 znmeb znmeb 1908 Oct  6 21:12 weact_studio_rp2040_8mb.h
--rw-rw-r--. 1 znmeb znmeb 2300 Oct  6 21:12 wiznet_w5100s_evb_pico.h
+0xcb_helios.h
+adafruit_feather_rp2040.h
+adafruit_feather_rp2040_usb_host.h
+adafruit_itsybitsy_rp2040.h
+adafruit_kb2040.h
+adafruit_macropad_rp2040.h
+adafruit_qtpy_rp2040.h
+adafruit_trinkey_qt2040.h
+amethyst_fpga.h
+archi.h
+arduino_nano_rp2040_connect.h
+cytron_maker_pi_rp2040.h
+datanoisetv_rp2040_dsp.h
+defcon32_badge.h
+eetree_gamekit_rp2040.h
+garatronic_pybstick26_rp2040.h
+gen4_rp2350_24ct.h
+gen4_rp2350_24.h
+gen4_rp2350_24t.h
+gen4_rp2350_28ct.h
+gen4_rp2350_28.h
+gen4_rp2350_28t.h
+gen4_rp2350_32ct.h
+gen4_rp2350_32.h
+gen4_rp2350_32t.h
+gen4_rp2350_35ct.h
+gen4_rp2350_35.h
+gen4_rp2350_35t.h
+hellbender_2350A_devboard.h
+ilabs_challenger_rp2350_bconnect.h
+ilabs_challenger_rp2350_wifi_ble.h
+ilabs_opendec02.h
+melopero_perpetuo_rp2350_lora.h
+melopero_shake_rp2040.h
+metrotech_xerxes_rp2040.h
+net8086_usb_interposer.h
+none.h
+nullbits_bit_c_pro.h
+phyx_rick_tny_rp2350.h
+pico2.h
+pico.h
+pico_w.h
+pimoroni_badger2040.h
+pimoroni_interstate75.h
+pimoroni_keybow2040.h
+pimoroni_motor2040.h
+pimoroni_pga2040.h
+pimoroni_pga2350.h
+pimoroni_picolipo_16mb.h
+pimoroni_picolipo_4mb.h
+pimoroni_pico_plus2_rp2350.h
+pimoroni_picosystem.h
+pimoroni_plasma2040.h
+pimoroni_plasma2350.h
+pimoroni_servo2040.h
+pimoroni_tiny2040_2mb.h
+pimoroni_tiny2040.h
+pimoroni_tiny2350.h
+pi-plates_micropi.h
+pololu_3pi_2040_robot.h
+pololu_zumo_2040_robot.h
+seeed_xiao_rp2040.h
+seeed_xiao_rp2350.h
+solderparty_rp2040_stamp_carrier.h
+solderparty_rp2040_stamp.h
+solderparty_rp2040_stamp_round_carrier.h
+solderparty_rp2350_stamp.h
+solderparty_rp2350_stamp_xl.h
+sparkfun_micromod.h
+sparkfun_promicro.h
+sparkfun_promicro_rp2350.h
+sparkfun_thingplus.h
+switchscience_picossci2_conta_base.h
+switchscience_picossci2_dev_board.h
+switchscience_picossci2_micro.h
+switchscience_picossci2_rp2350_breakout.h
+switchscience_picossci2_tiny.h
+tinycircuits_thumby_color_rp2350.h
+vgaboard.h
+waveshare_rp2040_lcd_0.96.h
+waveshare_rp2040_lcd_1.28.h
+waveshare_rp2040_one.h
+waveshare_rp2040_plus_16mb.h
+waveshare_rp2040_plus_4mb.h
+waveshare_rp2040_zero.h
+weact_studio_rp2040_16mb.h
+weact_studio_rp2040_2mb.h
+weact_studio_rp2040_4mb.h
+weact_studio_rp2040_8mb.h
+wiznet_w5100s_evb_pico.h
