@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
-export SUPPORTED_BOARDS="$PWD/supported_boards.log"
+export SUPPORTED_BOARDS="$PWD/supported_boards.txt"
 echo "Creating fresh $PICO_SDK_REPOS"
 rm -fr $PICO_SDK_REPOS
 mkdir --parents $PICO_SDK_REPOS
