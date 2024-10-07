@@ -2,10 +2,10 @@
 
 set -e
 
+./unminimize.sh
+
 echo "Installing base packages"
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get update \
-  > 1_base_packages.log 2>&1
 sudo apt-get install --assume-yes \
   apt-file \
   autoconf \
@@ -58,7 +58,7 @@ sudo apt-get install --assume-yes \
   xz-utils \
   wget \
   zsh \
-  >> 1_base_packages.log 2>&1
+  > 1_base_packages.log 2>&1
 
 echo "Copying 'set_pico_envars' to $HOME"
 cp ../set_pico_envars $HOME/

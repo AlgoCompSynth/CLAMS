@@ -40,4 +40,7 @@ pushd /tmp
 
 popd
 
+echo "Generating compiler 'man' pages"
+mandb $HOME/.local/share/man
+
 echo "Finished"
