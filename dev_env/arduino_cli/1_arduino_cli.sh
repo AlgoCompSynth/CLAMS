@@ -8,10 +8,6 @@ source ../set_pico_envars
 export LOGFILE=$PWD/1_arduino_cli.log
 rm -f $LOGFILE
 
-echo "Removing any previous installation"
-rm --force --recursive $ARDUINO_INSTALL_PATH
-rm --force --recursive $ARDUINO_IDE_PATH
-
 echo "Installing locally via 'curl'"
 # https://arduino.github.io/arduino-cli/0.20/installation/
 /usr/bin/time curl -fsSL $ARDUINO_CLI_URL | BINDIR=$ARDUINO_CLI_PATH sh \
