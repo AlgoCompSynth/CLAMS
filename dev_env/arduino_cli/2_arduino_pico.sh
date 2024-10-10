@@ -16,4 +16,8 @@ arduino-cli core update-index \
 arduino-cli core install rp2040:rp2040 \
   >> $LOGFILE 2>&1
 
+echo "Installing Adafruit TinyUSB Library"
+arduino-cli lib install "Adafruit TinyUSB Library" \
+  >> $LOGFILE 2>&1
+
 echo "Finished"
