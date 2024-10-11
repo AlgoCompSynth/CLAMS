@@ -6,6 +6,7 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 export LOGFILE=$PWD/2_arduino_pico.log
+rm --force $LOGFILE
 
 # https://arduino-pico.readthedocs.io/en/latest/install.html#installing-via-arduino-cli
 echo "Installing Arduino Pico from package release"

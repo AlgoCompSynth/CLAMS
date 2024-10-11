@@ -6,7 +6,7 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 export LOGFILE=$PWD/3_teensyduino.log
-rm -f $LOGFILE
+rm --force $LOGFILE
 
 # https://www.pjrc.com/teensy/td_download.html
 echo "Installing teensy:avr core"
