@@ -4,9 +4,12 @@ export CLAMS_BASE="$HOME/CLAMS_base"
 
 # Container image and name
 export CLAMS_CONTAINER_IMAGE="docker.io/library/ubuntu:22.04"
-export CLAMS_CONTAINER_NAME="CLAMS_devel"
+export CLAMS_CONTAINER_NAME="CLAMS-devel"
 
 # Don't change anything below here!
+
+# make sure PATH has our binaries
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 # Pico SDK repositories
 export PICO_SDK_REPOS="$CLAMS_BASE/pico_repos"
@@ -73,6 +76,9 @@ export TEENSY_LOADER_CLI_PATH="$HOME/Projects/teensy_loader_cli"
 
 ## Daisyduino
 export DAISYDUINO_PACKAGE_URL="https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json"
+
+# Arduino for ESP32
+export ARDUINO_ESP32_PACKAGE_URL="https://espressif.github.io/arduino-esp32/package_esp32_index.json"
 
 # PlatformIO
 export SYSTEM_UDEV_PATH="/etc/udev/rules.d"
