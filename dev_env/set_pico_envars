@@ -56,6 +56,10 @@ export ARDUINO_PICO_URL="https://github.com/earlephilhower/arduino-pico.git"
 export ARDUINO_PICO_PACKAGE_URL="https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json"
 export ZSH_LOCAL_COMPLETIONS_PATH="$HOME/.zsh_completions"
 
+## Adafruit_TinyUSB_Arduino testing
+export ADAFRUIT_TINYUSB_ARDUINO_PATH="$HOME/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/Adafruit_TinyUSB_Arduino"
+export ADAFRUIT_TINYUSB_ARDUINO_URL="--recursive --branch Audio https://github.com/pschatzmann/Adafruit_TinyUSB_Arduino.git"
+
 ## Teensyduino
 export TEENSYDUINO_PACKAGE_URL="https://www.pjrc.com/teensy/package_teensy_index.json"
 
