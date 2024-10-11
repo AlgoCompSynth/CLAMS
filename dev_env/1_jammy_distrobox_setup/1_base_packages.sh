@@ -60,7 +60,4 @@ sudo apt-get install --assume-yes \
   zsh \
   > 1_base_packages.log 2>&1
 
-echo "Copying 'set_pico_envars' to $HOME"
-cp ../set_pico_envars $HOME/
-
 echo "Finished"

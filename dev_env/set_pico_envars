@@ -2,6 +2,10 @@
 # Change this if you want them stored somewhere else
 export CLAMS_BASE="$HOME/CLAMS_base"
 
+# Container image and name
+export CLAMS_CONTAINER_IMAGE="docker.io/library/ubuntu:22.04"
+export CLAMS_CONTAINER_NAME="CLAMS_devel"
+
 # Don't change anything below here!
 
 # Pico SDK repositories

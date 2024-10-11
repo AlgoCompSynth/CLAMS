@@ -28,4 +28,11 @@ mkdir --parents $HOME/bin
 echo "Copying ../set_pico_envars to $HOME"
 cp ../set_pico_envars $HOME/
 
+echo "Copying ../edit_me_then_run_4_git_config.sh to $HOME"
+cp ../edit_me_then_run_4_git_config.sh $HOME/
+
+echo ""
+echo "Copying debugging scripts to $HOME/.local/bin/"
+cp ../debugging_scripts/* $HOME/.local/bin/
+
 echo "Finished"
