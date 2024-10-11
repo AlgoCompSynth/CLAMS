@@ -6,7 +6,7 @@ echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
 export LOGFILE=$PWD/4_daisyduino.log
-rm -f $LOGFILE
+rm --force $LOGFILE
 
 # https://github.com/stm32duino/Arduino_Core_STM32/wiki/Getting-Started
 echo "Installing STMicroelectronics:stm32 core"
