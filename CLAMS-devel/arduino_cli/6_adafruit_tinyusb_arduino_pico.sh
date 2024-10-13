@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
-export LOGFILE=$PWD/2a_install_test_Adafruit_TinyUSB_Arduino.log
+export LOGFILE=$PWD/6_adafruit_tinyusb_arduino_pico.log
 rm --force $LOGFILE
 
 # https://github.com/pschatzmann/Adafruit_TinyUSB_Arduino/discussions/1
