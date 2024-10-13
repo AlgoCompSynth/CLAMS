@@ -20,6 +20,9 @@ echo "Installing with pip"
   >> $LOGFILE 2>&1
 pio --version
 
+echo "Listing boards"
+pio boards > board_list.txt
+
 echo "Deactivating virtual environment $PLATFORMIO_VENV"
 deactivate
 
