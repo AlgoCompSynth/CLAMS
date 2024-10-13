@@ -67,6 +67,9 @@ export ZSH_LOCAL_COMPLETIONS_PATH="$HOME/.zsh_completions"
 export ADAFRUIT_TINYUSB_ARDUINO_PATH="$HOME/.arduino15/packages/rp2040/hardware/rp2040/4.1.1/libraries/Adafruit_TinyUSB_Arduino"
 export ADAFRUIT_TINYUSB_ARDUINO_URL="--recursive --branch Audio https://github.com/pschatzmann/Adafruit_TinyUSB_Arduino.git"
 
+## Arduino Audio Tools
+export ARDUINO_AUDIO_TOOLS_URL="https://github.com/pschatzmann/arduino-audio-tools.git#v1.0.0"
+
 ## Teensyduino
 export TEENSYDUINO_PACKAGE_URL="https://www.pjrc.com/teensy/package_teensy_index.json"
 
