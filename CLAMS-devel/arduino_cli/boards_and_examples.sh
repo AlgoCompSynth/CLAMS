@@ -9,16 +9,16 @@ source ../set_pico_envars
 echo "Updating indexes"
 arduino-cli update
 
-echo "Listing cores to cores.txt"
-arduino-cli core list --no-color > cores.txt
+echo "Listing cores to core_list.txt"
+arduino-cli core list --no-color > core_list.txt
 
-echo "Listing boards to boards.txt"
-arduino-cli board listall --no-color > boards.txt
+echo "Listing boards to board_list.txt"
+arduino-cli board listall --no-color > board_list.txt
 
-echo "Listing libraries to libraries.txt"
-arduino-cli lib list --no-color > libraries.txt
+echo "Listing libraries to library_list.txt"
+arduino-cli lib list --no-color > library_list.txt
 
-echo "Listing examples to examples.txt"
-arduino-cli lib examples --no-color > examples.txt
+echo "Listing examples to example_list.txt"
+arduino-cli lib examples --no-color > example_list.txt
 
 echo "Finished"
