@@ -33,6 +33,3 @@ pushd $TEENSY_LOADER_CLI_PATH
 popd
 
 echo "Finished"
-
-
-
