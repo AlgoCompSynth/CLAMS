@@ -9,7 +9,7 @@ export LOGFILE="$PWD/1_setup.log"
 rm --force $LOGFILE
 
 echo "Installing python3-pip and python3-venv if necessary"
-sudo apt-get install \
+sudo apt-get install -y \
   python3-pip \
   python3-venv \
   >> $LOGFILE 2>&1
