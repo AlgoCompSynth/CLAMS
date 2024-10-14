@@ -2,24 +2,26 @@
 
 1. Run './1_setup.sh`. This will
 
-    a. Remove the PlatformIO cache `$HOME/.platformio`.
+    a. Install `python3-pip` and `python3-venv` if necessary.
 
-    b. Create and activate a fresh virtual environment `$HOME/platformio_venv`.
+    b. Remove the PlatformIO cache `$HOME/.platformio`.
 
-    c. Install PlatformIO core in the environment with `pip`.
+    c. Create and activate a fresh virtual environment `$HOME/platformio_venv`.
 
-    d. List the supported boards to `board_list.txt`. Note that RP2040 / RP2350 boards
+    d. Install PlatformIO core in the environment with `pip`.
+
+    e. List the supported boards to `board_list.txt`. Note that RP2040 / RP2350 boards
 supported by the platform <https://github.com/maxgerhardt/platform-raspberrypi.git>
 are ***not*** included!
 
-    e. Make a fresh clone of <https://github.com/MitchBradley/cforth.git> to
+    f. Make a fresh clone of <https://github.com/MitchBradley/cforth.git> to
 `$HOME/Projects/cforth`.
 
-    f. Append `testing_platformio.ini` to `$HOME/Projects/cforth/platformio.ini`.
+    g. Append `testing_platformio.ini` to `$HOME/Projects/cforth/platformio.ini`.
 
-    g. Build the host `cforth`. This creates dictionary data for the embedded Forth.
+    h. Build the host `cforth`. This creates dictionary data for the embedded Forth.
 
-    h. Deactivate the virtual environment.
+    i. Deactivate the virtual environment.
 
 3.  Connect your board and put it in `BOOTSEL` mode. You should only
     have one board connected at a time.
