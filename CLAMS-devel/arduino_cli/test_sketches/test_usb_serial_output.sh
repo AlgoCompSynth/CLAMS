@@ -37,8 +37,11 @@ echo "FQBN: $FQBN"
 export PORT=${3-/dev/ttyACM0}
 echo "PORT: $PORT"
 
-export BAUDRATE=${3-115200}
+export BAUDRATE=${4-115200}
 echo "BAUDRATE: $BAUDRATE"
+
+export MONITOR=${5-/dev/ttyACM0}
+echo "MONITOR: $MONITOR"
 
 echo ""
 echo ""
@@ -59,6 +62,6 @@ pushd $TEST_DIR
   echo ""
   echo ""
   echo "Monitoring"
-  arduino-cli monitor --port $PORT --config baudrate=$BAUDRATE
+  arduino-cli monitor --port $MONITOR --config baudrate=$BAUDRATE
 
 popd

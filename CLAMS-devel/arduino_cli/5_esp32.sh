@@ -9,6 +9,8 @@ export LOGFILE=$PWD/5_esp32.log
 rm --force $LOGFILE
 
 echo "Installing Arduino ESP32 from package release"
+arduino-cli config add board_manager.additional_urls $ARDUINO_ESP32_PACKAGE_URL \
+  >> $LOGFILE 2>&1
 arduino-cli core update-index \
   >> $LOGFILE 2>&1
 arduino-cli core install esp32:esp32 \
