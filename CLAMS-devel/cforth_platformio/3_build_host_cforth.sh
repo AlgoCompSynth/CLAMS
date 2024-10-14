@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
-export LOGFILE=$PWD/2_build_host_cforth.log
+export LOGFILE=$PWD/3_build_host_cforth.log
 rm -f $LOGFILE
 
 echo "Clearing PlatformIO caches"
