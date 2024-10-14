@@ -24,6 +24,7 @@ apio examples --list > apio-examples.txt
 echo "Deactivating virtual environment $APIO_VENV"
 deactivate
 
+# https://github.com/FPGAwars/apio/issues/377#issuecomment-2385653940
 echo "Patching apio!!"
 diff boards.json $APIO_VENV/lib/python3.10/site-packages/apio/resources/boards.json || true
 cp boards.json $APIO_VENV/lib/python3.10/site-packages/apio/resources/boards.json || true
