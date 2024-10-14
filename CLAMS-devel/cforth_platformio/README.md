@@ -17,7 +17,7 @@ are ***not*** included!
 
     f. Append `testing_platformio.ini` to `$HOME/Projects/cforth/platformio.ini`.
 
-    g. Build the host `cforth`.
+    g. Build the host `cforth`. This creates dictionary data for the embedded Forth.
 
     h. Deactivate the virtual environment.
 
