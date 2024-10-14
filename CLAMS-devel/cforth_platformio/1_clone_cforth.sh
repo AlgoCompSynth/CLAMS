@@ -16,7 +16,4 @@ pushd $CFORTH_PATH/..
     >> $LOGFILE 2>&1
 popd
 
-echo "Appending test envioronments to $CFORTH_PATH/platformio.ini"
-cat testing_platformio.ini >> $CFORTH_PATH/platformio.ini
-
 echo "Finished"
