@@ -42,6 +42,7 @@ sudo apt-get install --assume-yes \
   plocate \
   python3-dev \
   python3-pip \
+  python3-serial \
   python3-setuptools \
   python3-tk \
   python3-venv \
