@@ -6,8 +6,9 @@ if [ ! "${#1}" -gt "0" ]
 then
   echo "Mandatory first parameter is test directory"
   echo "Mandatory second parameter is fully-qualified board name"
-  echo "Optional third parameter is port - default '/dev/ttyACM0'"
+  echo "Optional third parameter is upload port - default '/dev/ttyACM0'"
   echo "Optional fourth parameter is baudrate - default 115200"
+  echo "Optional fifth parameter is monitor port - default '/dev/ttyACM0'"
   echo "First parameter is empty - bailing out!!"
   exit -1024
 fi
@@ -16,8 +17,9 @@ if [ ! -d $1 ]
 then
   echo "Mandatory first parameter is test directory"
   echo "Mandatory second parameter is fully-qualified board name"
-  echo "Optional third parameter is port - default '/dev/ttyACM0'"
+  echo "Optional third parameter is upload port - default '/dev/ttyACM0'"
   echo "Optional fourth parameter is baudrate - default 115200"
+  echo "Optional fifth parameter is monitor port - default '/dev/ttyACM0'"
   echo "$1 is not a directory - bailing out!!"
   exit -1024
 fi
