@@ -2,7 +2,7 @@
 
 1. Run './1_setup.sh`. This will
 
-    a. Removing the PlatformIO cache `$HOME/.platformio`.
+    a. Remove the PlatformIO cache `$HOME/.platformio`.
 
     b. Create and activate a fresh virtual environment `$HOME/platformio_venv`.
 
