@@ -48,6 +48,8 @@ export WIFI_SSID="Bogus"
 export WIFI_PASSWORD="Also bogus"
 echo "Prepending RISC-V and Arm compiler locations to PATH"
 export PATH=$RISCV_COMPILER_PATH/bin:$ARM_COMPILER_PATH/bin:$PATH
+$ARM_COMPILER_PATH/bin/arm-none-eabi-gcc --version
+$RISCV_COMPILER_PATH/bin/riscv32-corev-elf-gcc --version
 echo ""
 echo "PATH: $PATH"
 
