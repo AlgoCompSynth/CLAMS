@@ -9,7 +9,7 @@ source ../set_pico_envars
 export PIO_ENVIRONMENT=${1-rpipico}
 export BOARD_TAG=${2-""}
 export LOGFILE="$PWD/${PIO_ENVIRONMENT}${BOARD_TAG}.log"
-rm -f $LOGFILE
+rm --force $LOGFILE
 
 echo "Activating PlatformIO virtual environment"
 source $ACTIVATE_PLATFORMIO_VENV
