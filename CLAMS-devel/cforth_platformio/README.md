@@ -8,7 +8,9 @@
 
     c. Install PlatformIO core in the environment with `pip`.
 
-    d. List the supported boards to `board_list.txt`.
+    d. List the supported boards to `board_list.txt`. Note that RP2040 / RP2350 boards
+supported by the platform <https://github.com/maxgerhardt/platform-raspberrypi.git>
+are ***not*** included!
 
     e. Make a fresh clone of <https://github.com/MitchBradley/cforth.git> to
 `$HOME/Projects/cforth`.
@@ -19,7 +21,7 @@
 
     h. Deactivate the virtual environment.
 
-2.  Connect your board and put it in `BOOTSEL` mode. You should only
+3.  Connect your board and put it in `BOOTSEL` mode. You should only
     have one board connected at a time.
 
     I have had intermittent issues with boards when connected by a USB
@@ -27,7 +29,7 @@
     problems, connect with a known good USB cable directly to the host
     computer.
 
-3.  Run the test with the script `./test_board.sh`. The parameters are
+4.  Run the test with the script `./test_board.sh`. The parameters are
 
     a.  `PIO_ENVIRONMENT`: The environment from `platformio.ini` to
         use. The default is a Raspberry Pi Pico, `rpipico`.
