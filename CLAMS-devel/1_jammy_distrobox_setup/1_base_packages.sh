@@ -4,9 +4,13 @@ set -e
 
 ./unminimize.sh
 
+echo "Defining LOGFILE"
+export LOGFILE=$PWD/1_base_packages.log
+rm --force $LOGFILE
+
 echo "Installing base packages"
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get install --assume-yes \
+/usr/bin/time sudo apt-get install --assume-yes \
   apt-file \
   autoconf \
   automake \
@@ -59,6 +63,6 @@ sudo apt-get install --assume-yes \
   xz-utils \
   wget \
   zsh \
-  > 1_base_packages.log 2>&1
+  >> $LOGFILE 2>&1
 
 echo "Finished"
