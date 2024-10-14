@@ -64,7 +64,8 @@ upload the `cforth` firmware to the board. It then fetches the firmware
 
 Finally, it lists the active "/dev/ttyACM*" and "/dev/ttyUSB*" TTYs.
 This is almost always just `/dev/ttyACM0`, unless you have more than
-one board connected or a board with a UART-to-USB bridge. If
-all went well you can do `screen /dev/ttyACM0 115200`, do an `Enter`,
-and receive the `cforth` `ok` prompt. I have not tested `cforth` itself
-extensively yet, but `2 3 + . Enter` behaves as expected.
+one board connected or a board with both a USB serial port and a
+UART-to-USB bridge port. If all went well you can do
+`screen /dev/ttyACM0 115200`, do an `Enter`, and receive the `cforth`
+`ok` prompt. I have not tested `cforth` itself extensively yet, but
+`2 3 + . Enter` behaves as expected.
