@@ -12,8 +12,12 @@ echo "Enabling GitHub library installs"
 arduino-cli config set library.enable_unsafe_install true
 arduino-cli config dump
 
-# installing Audio tools
+# installing Arduino Audio tools
 arduino-cli lib install --git-url $ARDUINO_AUDIO_TOOLS_URL \
   >> $LOGFILE 2>&1
+
+echo "Disabling GitHub library installs"
+arduino-cli config set library.enable_unsafe_install false
+arduino-cli config dump
 
 echo "Finished"
