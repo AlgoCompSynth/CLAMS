@@ -2,14 +2,21 @@
 
 1. Run './1_setup.sh`. This will
 
-    a. Removing the PlatformIO cache `$HOME/.platformio`
+    a. Removing the PlatformIO cache `$HOME/.platformio`.
+
     b. Create and activate a fresh virtual environment `$HOME/platformio_venv`.
+
     c. Install PlatformIO core in the environment with `pip`.
+
     d. List the supported boards to `board_list.txt`.
+
     e. Make a fresh clone of <https://github.com/MitchBradley/cforth.git> to
 `$HOME/Projects/cforth`.
+
     f. Append `testing_platformio.ini` to `$HOME/Projects/cforth/platformio.ini`.
+
     g. Build the host `cforth`.
+
     h. Deactivate the virtual environment.
 
 2.  Connect your board and put it in `BOOTSEL` mode. You should only
