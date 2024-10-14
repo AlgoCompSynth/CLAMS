@@ -26,6 +26,8 @@ pushd $CFORTH_PATH
   echo "Listing relevant TTYs"
   ls -l /dev/ttyACM* \
     >> $LOGFILE 2>&1 || true
+  ls -l /dev/ttyUSB* \
+    >> $LOGFILE 2>&1 || true
   echo "" >> $LOGFILE 2>&1; echo "" >> $LOGFILE 2>&1
 
   echo "Building and uploading"
@@ -45,6 +47,8 @@ pushd $CFORTH_PATH
   echo "Listing relevant TTYs"
   ls -l /dev/ttyACM* \
     >> $LOGFILE 2>&1 || true
+  ls -l /dev/ttyUSB* \
+    >> $LOGFILE 2>&1 || true
   date +"%F %T" \
     >> $LOGFILE 2>&1
 popd
@@ -57,5 +61,6 @@ cp $CFORTH_PATH/.pio/build/$PIO_ENVIRONMENT/firmware.elf "${PIO_ENVIRONMENT}${BO
 
 echo "Active TTYs"
 ls -l /dev/ttyACM* || true
+ls -l /dev/ttyUSB* || true
 
 echo "Finished"
