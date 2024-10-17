@@ -2,10 +2,11 @@
 
 set -e
 
+./add_git_ppa.sh
 ./unminimize.sh
 
 echo "Defining LOGFILE"
-export LOGFILE=$PWD/1_base_packages.log
+export LOGFILE=$PWD/1_global_installs.log
 rm --force $LOGFILE
 
 echo "Installing base packages"
@@ -55,14 +56,11 @@ export DEBIAN_FRONTEND=noninteractive
   speedtest-cli \
   systemd \
   texinfo \
-  time \
   tmux \
   tree \
   usbutils \
-  vim \
   xz-utils \
   wget \
-  zsh \
   >> $LOGFILE 2>&1
 
 echo "Finished"

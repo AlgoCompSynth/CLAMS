@@ -7,7 +7,6 @@ export LOGFILE=$PWD/unminimize.log
 rm --force $LOGFILE
 
 echo "Updating package cache"
-export DEBIAN_FRONTEND=noninteractive
 /usr/bin/time sudo apt-get update \
   >> $LOGFILE 2>&1
 
