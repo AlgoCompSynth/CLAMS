@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
-export LOGFILE=$PWD/7_arduino_audio_tools.log
+export LOGFILE=$PWD/3_arduino_audio_tools.log
 rm --force $LOGFILE
 
 echo "Enabling GitHub library installs"

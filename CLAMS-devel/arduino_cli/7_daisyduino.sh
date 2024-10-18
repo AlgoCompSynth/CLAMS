@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
-export LOGFILE=$PWD/4_daisyduino.log
+export LOGFILE=$PWD/7_daisyduino.log
 rm --force $LOGFILE
 
 # https://github.com/stm32duino/Arduino_Core_STM32/wiki/Getting-Started
