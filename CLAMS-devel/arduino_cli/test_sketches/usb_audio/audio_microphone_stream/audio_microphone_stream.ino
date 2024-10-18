@@ -6,22 +6,21 @@
  MIT license, check LICENSE for more information
  Copyright (c) 2024 Phl Schatzmann
 
- This example reads audio data from an I2S ADC which you can output 
- on your PC
+ This example generates a sawtooth that you can output on your PC
+ We use the AudioTools to generate the data input.
+
+ We could use the callback function here as well, but we demo how
+ to integrate with a (fast) Arduino Stream.
 
 *********************************************************************/
-#ifndef ARDUINO_ARCH_RP2040
-#  error This example is using the RP2040 I2S API: Adapt it for your platform
-#endif
 
 #include "Adafruit_TinyUSB.h"
-#include "I2S.h"
+#include "AudioTools.h"  // https://github.com/pschatzmann/arduino-audio-tools
 
-I2S i2s(INPUT);
 Adafruit_USBD_Audio usb;
-const int sample_rate = 44100;
-const int bits = 16;
-const int channels = 2;
+AudioInfo info(44100, 2, 16);
+SawToothGenerator<int16_t> sawtooth;               
+GeneratedSoundStream<int16_t> sawthooth_stream(sawtooth);
 
 void setup() {
   // Manual begin() is required on core without built-in support e.g. mbed rp2040
@@ -30,17 +29,14 @@ void setup() {
   }
 
   Serial.begin(115200);
-  
-  // setup i2s
-  i2s.setDATA(0);
-  i2s.setBCLK(1); // Note: LRCLK = BCLK + 1
-  i2s.setBitsPerSample(bits);
-  i2s.setFrequency(sample_rate);
-  i2s.begin();
+  //while(!Serial);  // wait for serial
+
+  // generate 493 hz (note B4)
+  sawtooth.begin(info, 493.0f);
 
   // Start USB device as Audio Source
-  usb.setInput(i2s);
-  usb.begin(sample_rate, channels, bits);
+  usb.setInput(sawthooth_stream);
+  usb.begin(info.sample_rate, info.channels, info.bits_per_sample);
 
   // If already enumerated, additional class driverr begin() e.g msc, hid, midi won't take effect until re-enumeration
   if (TinyUSBDevice.mounted()) {
@@ -51,6 +47,10 @@ void setup() {
 }
 
 void loop() {
-  // use LED do display status
+  #ifdef TINYUSB_NEED_POLLING_TASK
+  // Manual call tud_task since it isn't called by Core's background
+  TinyUSBDevice.task();
+  #endif
+  // optional: use LED do display status
   usb.updateLED();
 }
