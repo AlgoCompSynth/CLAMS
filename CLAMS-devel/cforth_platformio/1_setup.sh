@@ -30,9 +30,6 @@ echo "Installing PlatformIO core with pip"
   >> $LOGFILE 2>&1
 pio --version
 
-echo "Listing supported boards"
-pio boards > board_list.txt
-
 echo "Cloning fresh cforth project repository"
 mkdir --parents $CFORTH_PATH
 pushd $CFORTH_PATH/..
@@ -44,15 +41,28 @@ popd
 echo "Appending test envioronments to $CFORTH_PATH/platformio.ini"
 cat testing_platformio.ini >> $CFORTH_PATH/platformio.ini
 
-echo "Building host cforth"
 pushd $CFORTH_PATH
+
+  echo "Building host cforth"
   date +"%F %T" \
     >> $LOGFILE 2>&1
   /usr/bin/time pio run --verbose \
     >> $LOGFILE 2>&1
   date +"%F %T" \
     >> $LOGFILE 2>&1
+
 popd
+
+echo "Installing RP2040 platform"
+pio platform install \
+  "https://github.com/maxgerhardt/platform-raspberrypi.git"
+
+echo "Installing ESP32 platform"
+pio platform install \
+  "https://github.com/pioarduino/platform-espressif32/archive/refs/tags/51.03.05.zip"
+
+echo "Listing supported boards"
+pio boards > board_list.txt
 
 echo "Deactivating"
 deactivate
