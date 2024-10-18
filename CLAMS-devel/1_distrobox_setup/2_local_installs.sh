@@ -32,19 +32,12 @@ echo "Installing Starship"
 export BIN_DIR=$HOME/.local/bin
 curl -sS https://starship.rs/install.sh | sh
 mkdir --parents $HOME/.config
-starship preset nerd-font-symbols -o $HOME/.config/starship.toml
+cp starship.toml $HOME/.config/starship.toml
 
 echo "Adding Starship prompt to bash"
 echo 'eval "$(starship init bash)"' >> $HOME/.bashrc
 
 echo ""
 echo "Restart bash to get new Starship prompt"
-
-echo "Copying ../set_pico_envars to $HOME"
-cp ../set_pico_envars $HOME/
-
-echo ""
-echo "Copying debugging scripts to $HOME/.local/bin/"
-cp ../debugging_scripts/* $HOME/.local/bin/
 
 echo "Finished"
