@@ -27,8 +27,11 @@ echo "Installing bash completion file as 'root'!!"
 arduino-cli completion bash > /tmp/ardunio-cli.sh
 sudo mv /tmp/ardunio-cli.sh /etc/bash_completion.d/ardunio-cli.sh
 
-echo "Installing zsh completion file"
-arduino-cli completion zsh > /tmp/_arduino-cli.sh
-mv /tmp/_arduino-cli.sh $ZSH_LOCAL_COMPLETIONS_PATH/_arduino-cli
+echo "Installing zsh completion file if needed"
+if [ -d $ZSH_LOCAL_COMPLETIONS_PATH ]
+then
+  arduino-cli completion zsh > /tmp/_arduino-cli.sh
+  mv /tmp/_arduino-cli.sh $ZSH_LOCAL_COMPLETIONS_PATH/_arduino-cli
+fi
 
 echo "Finished"
