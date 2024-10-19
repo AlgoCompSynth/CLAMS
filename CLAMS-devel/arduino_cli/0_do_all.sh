@@ -8,12 +8,12 @@ for script in \
   uninstall_arduino_cli.sh \
   1_arduino_cli.sh \
   2_arduino_pico.sh \
-  3_teensyduino.sh \
-  4_daisyduino.sh \
-  5_esp32.sh \
-  6_adafruit_tinyusb_arduino_pico.sh \
-  7_arduino_audio_tools.sh \
-  boards_and_examples.sh
+  3_arduino_audio_tools.sh \
+  4_adafruit_tinyusb_arduino_pico.sh \
+  7_daisyduino.sh \
+  8_teensyduino.sh \
+  9_esp32.sh \
+  list_boards_and_examples.sh
 do
   ./$script
 done
