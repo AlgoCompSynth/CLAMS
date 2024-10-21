@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
-export LOGFILE=$PWD/1_arduino_cli.log
+export LOGFILE=$PWD/10_arduino_cli.log
 rm -f $LOGFILE
 
 echo "Installing locally via 'curl'"

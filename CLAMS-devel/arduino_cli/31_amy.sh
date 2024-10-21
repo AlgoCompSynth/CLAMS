@@ -5,15 +5,15 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
-export LOGFILE=$PWD/3_arduino_audio_tools.log
+export LOGFILE=$PWD/31_amy.log
 rm --force $LOGFILE
 
 echo "Enabling GitHub library installs"
 arduino-cli config set library.enable_unsafe_install true
 arduino-cli config dump
 
-# installing Arduino Audio tools
-arduino-cli lib install --git-url $ARDUINO_AUDIO_TOOLS_URL \
+# installing AMY library
+arduino-cli lib install --git-url $AMY_URL \
   >> $LOGFILE 2>&1
 
 echo "Disabling GitHub library installs"

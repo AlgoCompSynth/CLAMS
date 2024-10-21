@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
-export LOGFILE=$PWD/9_esp32.log
+export LOGFILE=$PWD/21_esp32.log
 rm --force $LOGFILE
 
 echo "Installing Arduino ESP32 from package release"
