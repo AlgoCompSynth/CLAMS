@@ -7,7 +7,6 @@ mkdir --parents $HOME/Projects
 
 echo "Creating output destination"
 export PREFIX=$HOME/.local
-rm -fr $PREFIX
 export LOGS=$PREFIX/logs
 export PDFS=$PREFIX/pdfs
 mkdir --parents $LOGS
