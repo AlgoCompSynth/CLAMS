@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "Setting environment variables"
 source ../set_pico_envars
-export LOGFILE=$PWD/8_teensyduino.log
+export LOGFILE=$PWD/22_teensyduino.log
 rm --force $LOGFILE
 
 # https://www.pjrc.com/teensy/td_download.html
