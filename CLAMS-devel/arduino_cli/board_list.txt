@@ -5,6 +5,7 @@ Board Name                                         FQBN
 AI Thinker ESP32-CAM                               esp32:esp32:esp32cam
 ALKS ESP32                                         esp32:esp32:alksesp32
 ATD1.47-S3                                         esp32:esp32:atd147_s3
+ATD3.5-S3                                          esp32:esp32:atd35s3
 ATMegaZero ESP32-S2                                esp32:esp32:atmegazero_esp32s2
 Adafruit ESP32 Feather                             esp32:esp32:featheresp32
 Adafruit Feather ESP32 V2                          esp32:esp32:adafruit_feather_esp32_v2
@@ -64,6 +65,9 @@ Bee Motion                                         esp32:esp32:Bee_Motion
 Bee Motion Mini                                    esp32:esp32:Bee_Motion_Mini
 Bee Motion S3                                      esp32:esp32:Bee_Motion_S3
 Bee S3                                             esp32:esp32:Bee_S3
+BharatPi A7672S 4G Module                          esp32:esp32:BharatPi-A7672S-4G
+BharatPi LoRa Module                               esp32:esp32:BharatPi-LoRa
+BharatPi Node Wifi Module                          esp32:esp32:BharatPi-Node-Wifi
 Blues boards                                       STMicroelectronics:stm32:Blues
 Breadstick Raspberry                               rp2040:rp2040:breadstick_raspberry
 BridgeTek IDM2040-43A                              rp2040:rp2040:bridgetek_idm2040_43a
@@ -194,6 +198,7 @@ Hornbill ESP32 Minima                              esp32:esp32:hornbill32minima
 IMBRIOS LOGSENS_V1P1                               esp32:esp32:imbrios-logsens-v1p1
 INEX OpenKB                                        esp32:esp32:OpenKB
 IOXESP32                                           esp32:esp32:ioxesp32
+IOXESP32-C6                                        esp32:esp32:ioxesp32c6
 IOXESP32PS                                         esp32:esp32:ioxesp32ps
 IntoRobot Fig                                      esp32:esp32:intorobot-fig
 IoT continuum boards                               STMicroelectronics:stm32:IotContinuum
@@ -327,6 +332,7 @@ SparkFun ESP32 Thing Plus C                        esp32:esp32:esp32thing_plus_c
 SparkFun ESP32-C6 Qwiic Pocket                     esp32:esp32:sparkfun_esp32c6_qwiic_pocket
 SparkFun ESP32-C6 Thing Plus                       esp32:esp32:sparkfun_esp32c6_thing_plus
 SparkFun ESP32-S2 Thing Plus                       esp32:esp32:sparkfun_esp32s2_thing_plus
+SparkFun ESP32-S3 Thing Plus                       esp32:esp32:sparkfun_esp32s3_thing_plus
 SparkFun LoRa Gateway 1-Channel                    esp32:esp32:sparkfun_lora_gateway_1-channel
 SparkFun MicroMod RP2040                           rp2040:rp2040:sparkfun_micromodrp2040
 SparkFun Pro Micro - ESP32C3                       esp32:esp32:sparkfun_pro_micro_esp32c3
@@ -388,8 +394,16 @@ WT32-SC01 PLUS                                     esp32:esp32:wt32-sc01-plus
 Watchy                                             esp32:esp32:watchy
 Waveshare ESP32-S3-LCD-1.69                        esp32:esp32:waveshare_esp32_s3_lcd_169
 Waveshare ESP32-S3-Matrix                          esp32:esp32:ws_esp32_s3_matrix
+Waveshare ESP32-S3-Touch-AMOLED-1.8                esp32:esp32:waveshare_esp32_s3_touch_amoled_18
 Waveshare ESP32-S3-Touch-AMOLED-2.41               esp32:esp32:waveshare_esp32_s3_touch_amoled_241
 Waveshare ESP32-S3-Touch-LCD-1.69                  esp32:esp32:waveshare_esp32_s3_touch_lcd_169
+Waveshare ESP32-S3-Touch-LCD-1.85                  esp32:esp32:waveshare_esp32_s3_touch_lcd_185
+Waveshare ESP32-S3-Touch-LCD-4                     esp32:esp32:waveshare_esp32_s3_touch_lcd_4
+Waveshare ESP32-S3-Touch-LCD-4.3                   esp32:esp32:waveshare_esp32_s3_touch_lcd_43
+Waveshare ESP32-S3-Touch-LCD-4.3B                  esp32:esp32:waveshare_esp32_s3_touch_lcd_43B
+Waveshare ESP32-S3-Touch-LCD-5                     esp32:esp32:waveshare_esp32_s3_touch_lcd_5
+Waveshare ESP32-S3-Touch-LCD-5B                    esp32:esp32:waveshare_esp32_s3_touch_lcd_5B
+Waveshare ESP32-S3-Touch-LCD-7                     esp32:esp32:waveshare_esp32_s3_touch_lcd_7
 Waveshare ESP32-S3-Zero                            esp32:esp32:waveshare_esp32_s3_zero
 Waveshare ESP32S3 Touch LCD 128                    esp32:esp32:waveshare_esp32s3_touch_lcd_128
 Waveshare RP2040 LCD 0.96                          rp2040:rp2040:waveshare_rp2040_lcd_0_96
@@ -411,6 +425,7 @@ XIAO_ESP32C3                                       esp32:esp32:XIAO_ESP32C3
 XIAO_ESP32C6                                       esp32:esp32:XIAO_ESP32C6
 XIAO_ESP32S3                                       esp32:esp32:XIAO_ESP32S3
 XinaBox CW02                                       esp32:esp32:cw02
+cezerio dev ESP32C6                                esp32:esp32:cezerio_dev_esp32c6
 iLabs Challenger 2040 LTE                          rp2040:rp2040:challenger_2040_lte
 iLabs Challenger 2040 LoRa                         rp2040:rp2040:challenger_2040_lora
 iLabs Challenger 2040 NFC                          rp2040:rp2040:challenger_2040_nfc
