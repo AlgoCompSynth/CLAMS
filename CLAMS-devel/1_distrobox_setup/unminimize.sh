@@ -2,7 +2,6 @@
 
 set -e
 
-echo "Defining LOGFILE"
 export LOGFILE=$PWD/unminimize.log
 rm --force $LOGFILE
 
