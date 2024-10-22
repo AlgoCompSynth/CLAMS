@@ -10,7 +10,8 @@ rm -f $LOGFILE
 
 echo "Installing locally via 'curl'"
 # https://arduino.github.io/arduino-cli/0.20/installation/
-/usr/bin/time curl -fsSL $ARDUINO_CLI_URL | BINDIR=$ARDUINO_CLI_PATH sh \
+/usr/bin/time --output=$LOGFILE --append \
+  curl -fsSL $ARDUINO_CLI_URL | BINDIR=$ARDUINO_CLI_PATH sh \
   >> $LOGFILE 2>&1
 arduino-cli version
 
