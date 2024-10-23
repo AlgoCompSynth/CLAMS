@@ -61,6 +61,9 @@ echo "Installing ESP32 platform"
 pio platform install \
   "https://github.com/pioarduino/platform-espressif32/archive/refs/tags/51.03.05.zip"
 
+echo "Installing Teensy platform"
+pio platform install teensy
+
 echo "Listing supported boards"
 pio boards > board_list.txt
 
