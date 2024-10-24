@@ -4,7 +4,7 @@ set -e
 
 echo ""
 echo "Setting environment variables"
-source ../set_pico_envars
+source ./set_envars
 
 export PIO_ENVIRONMENT=${1-rpipico}
 export BOARD_TAG=${2-""}
@@ -12,7 +12,7 @@ export LOGFILE="$PWD/${PIO_ENVIRONMENT}${BOARD_TAG}.log"
 rm --force $LOGFILE
 
 echo "Activating PlatformIO virtual environment"
-source $ACTIVATE_PLATFORMIO_VENV
+source $PLATFORMIO_VENV/bin/activate
 
 pushd $CFORTH_PATH
   date +"%F %T" \
