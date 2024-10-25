@@ -49,9 +49,11 @@ export DEBIAN_FRONTEND=noninteractive
   pkg-config \
   plocate \
   python3-dev \
+  python3-myst-parser \
   python3-pip \
   python3-serial \
   python3-setuptools \
+  python3-sphinx \
   python3-tk \
   python3-venv \
   python3-wheel \
