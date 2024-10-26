@@ -29,7 +29,7 @@ these boards using the Arduino tools.
 
 The Teensy and the Daisy already have both Arduino support and extensive
 audio libraries, so all I need to build there is the Forth control
-structure. For the other boards, there are two libraries I can use:
+structure. For the other boards, there are two excellent libraries I can use:
 [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools.git)
 and [AMY](https://github.com/shorepine/amy.git). My plan is to have both,
 assuming there is space in the flash on the boards.
@@ -39,6 +39,7 @@ There will be one submodule for the development environment:
 <https://github.com/AlgoCompSynth/CLAMS-devel.git>, one for the documentation:
 <https://github.com/AlgoCompSynth/CLAMS-doc.git>, and one for the Forth itself:
 <https://github.com/AlgoCompSynth/CLAMS-Forth.git>.
+
 * * * * *
 
 ## Overview
@@ -60,18 +61,20 @@ enters `CLAMS` / Forth code interactively.
 > “Premature optimization may be the root of all evil, but it is damned
 > fun!” ~ M. Edward (Ed) Borasky
 
-1.  Forth (Brodie 2022) is an extensible interactive operating system.
-    It supports editing, assembling, compiling, debugging and running
-    real-time tasks from a terminal.
+1.  Forth <https://www.forth.com/starting-forth/> is an extensible
+    interactive operating system. It supports editing, assembling,
+    compiling, debugging and running real-time tasks from a terminal.
+
 2.  Forth is efficient. A well-designed Forth will usually run a task at
     no worse than half the speed of a hand-optimized assembly version.
     `CLAMS` will have several optimizations built in for the ultimate
     speed.
+
 3.  Forth is lean. There are very few concepts to learn, there is
     minimal run-time overhead in RAM, and the whole package takes up
     much less flash space than MicroPython or CircuitPython.
 
-## What about Forth standard (Forth 200x Committee 2012) compatibility?
+## What about Forth 2012 standard compatibility?
 
 Not really. `CLAMS` is an extended subset of the standard. It won’t
 contain all of the standard’s core word set, and it will contain some
@@ -119,30 +122,3 @@ implement both the definitions of synthesized instruments and the
 sequences of sounds they make, intended for [live coding /
 algorave](https://github.com/toplap/awesome-livecoding "Awesome Live Coding list on GitHub")
 performances.
-
-## References
-
-<div id="refs" class="references csl-bib-body hanging-indent">
-
-<div id="ref-brodie2022" class="csl-entry">
-
-Brodie, Leo. 2022. “Starting Forth.” FORTH, Inc.
-<https://www.forth.com/starting-forth/0-starting-forth/>.
-
-</div>
-
-<div id="ref-forth2022" class="csl-entry">
-
-Forth 200x Committee. 2012. “Forth 2012 Standard.” Forth 200x Committee.
-<http://www.forth200x.org/documents/forth-2012.pdf>.
-
-</div>
-
-<div id="ref-salazar2014programming" class="csl-entry">
-
-Salazar, S., A. Kapur, G. Wang, and P. Cook. 2014. *Programming for
-Musicians and Digital Artists: Creating Music with ChucK*. Manning.
-
-</div>
-
-</div>
