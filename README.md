@@ -5,6 +5,42 @@ M. Edward (Ed) Borasky
 > “I’ve never seen a happy clam. In fact, most of them were really
 > steamed.” ~ M. Edward (Ed) Borasky
 
+## Update - 2024-10-25
+
+I haven't posted much here other than code for the past few months. Like many folks,
+I was caught off-guard by the
+[Raspberry Pi Pico 2 / RP2350 announcement on 2024-08-08](https://www.raspberrypi.com/news/raspberry-pi-pico-2-our-new-5-microcontroller-board-on-sale-now/).
+That led to me acquiring several boards from some of the partners, and a complete
+rethinking of my development environment and long-term goals for the project.
+
+The development environment is working mostly to my satisfaction. There are some
+enhancements I want to make, but I can build projects for RP2040 and RP2350
+boards and ***some*** other Arm Cortex M and ***some*** ESP32 boards.
+
+And that leads into the goal shift. Portability is now highly desirable.
+I want to be able to run on ESP32-S3, -C3 and -C6 boards, Teensy 4.1
+boards, and Electro-Smith Daisy boards in addition to RP2040 and RP2350
+boards.
+
+The only development framework / platform that supports this diversity is
+Arduino. PlatrformiO can do it, but it uses Arduino under the hood, adding
+a number of moving parts. So I need to develop a Forth that works on all
+these boards using the Arduino tools.
+
+The Teensy and the Daisy already have both Arduino support and extensive
+audio libraries, so all I need to build there is the Forth control
+structure. For the other boards, there are two libraries I can use:
+[Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools.git)
+and [AMY](https://github.com/shorepine/amy.git). My plan is to have both,
+assuming there is space in the flash on the boards.
+
+Finally, I am going to restructure this repository using Git submodules.
+There will be one submodule for the development environment:
+<https://github.com/AlgoCompSynth/CLAMS-devel.git>, one for the documentation:
+<https://github.com/AlgoCompSynth/CLAMS-doc.git>, and one for the Forth itself:
+<https://github.com/AlgoCompSynth/CLAMS-Forth.git>.
+* * * * *
+
 ## Overview
 
 `CLAMS` is a text-based interactive environment for composing and
