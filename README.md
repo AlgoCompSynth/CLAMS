@@ -5,6 +5,16 @@ M. Edward (Ed) Borasky
 > “I’ve never seen a happy clam. In fact, most of them were really
 > steamed.” ~ M. Edward (Ed) Borasky
 
+## Update - 2024-11-05
+
+Two more audio libraries for Arduino have come to my attention:
+
+1. [Seeed Arduino Audio](https://github.com/Seeed-Studio/Seeed_Arduino_Audio): This appears to be a port
+of the Teensy audio library to a generic Arduino board.
+2. [Mozzi](https://github.com/sensorium/Mozzi): This is a full-featured digital synthesizer. I've seen
+references to Mozzi in books on musical applications of Arduino, most notably _Arduino for Musicians_
+by Brent Edstrom.
+
 ## Update - 2024-10-25
 
 I haven't posted much here other than code for the past few months. Like many folks,
