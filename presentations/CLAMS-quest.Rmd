@@ -1,0 +1,105 @@
+---
+title: "CLAMS - The Quest for Portability and Audio"
+subtitle: "Forth Day 2024"
+author: "M. Edward (Ed) Borasky"
+date: 2023-11-16
+bibliography: references.bib
+output:
+  beamer_presentation:
+    theme: "Montpellier"
+    incremental: false
+    slide_level: 2
+---
+
+# Previously on CLAMS
+
+## The original concept - early 2022
+- Forth for the Electro-Smith Daisy Seed [@electrosmith2024]
+    - Microcontroller board designed for digital music
+    - ARM Cortex-M7 MCU, running at 480MHz
+    - Hardware floating point and DSP instructions
+    - 64MB of SDRAM for up to 10 minute long audio buffers
+    - 8MB external flash
+    - Stereo audio IO - 96kHz / 24-bit audio hardware
+    - No WiFi or Bluetooth
+    - $29.95US quantity one
+    - Available in various packaged modules
+    - Control logic and synthesis both done in Forth
+
+## Revised concept - early 2023
+- Forth for the Raspberry Pi Pico (WH)
+    - Microcontroller board designed for general applications
+    - Dual-core ARM Cortex-M0+, running at 133 Mhz
+    - Co-processor for division, interpolation and I/O
+    - No floating point or DSP instructions
+    - 262KB RAM
+    - 2 MB flash
+    - No SD card
+    - No audio hardware
+    - 2.4 GHz WiFi and Bluetooth
+    - $7.00 US
+    - Audio expansion packs available
+    - Control logic and synthesis both done in Forth
+    
+## Stepping up a level - what does a digital synthesizer need?
+    - A way of reliably generating accurately-timed pulse-code modulated samples
+    - A way of converting those samples to analog voltages for recording or performance
+    - An interface for the composer / performer
+
+## So what was wrong with the previous two concepts?
+1. Portability - Forth needs to be hand-ported to individual MCUs.
+    - Other desirable boards: Teensy 4.1 and ESP32-S3, C3 and C6
+2. Only I2S audio was realistically supportable
+    - USB audio and Bluetooth audio cannot be realistically done in Forth
+
+# CLAMS - the New Design
+
+## Arduino for portability
+- All target boards (Daisy, Teensy, ESP32 and Pico / Pico 2) have Arduino support
+- I2S audio is supported on all test boards
+- Bluetooth audio is supported if the board has the hardware
+- USB audio is in alpha testing
+
+## C3 Forth for Arduino [@c3forth2024]
+- Token-threaded Forth written in C/C++
+- Runs on Linux (native), Raspberry Pi Pico and Teensy 4.1 (Arduino)
+- Under active development
+- Well-documented
+
+## CLAMS architecture
+- a domain-specific language implemented in Forth
+- conceptually, ChucK (<https://chuck.cs.princeton.edu>),
+[@salazar2014programming] semantics with Forth syntax
+    - low-level words: digital synthesis and microcontroller audio
+    - mid-level words: construct signal flow graph
+    - high-level words: algorithmic composition and live performance
+
+# Forth base: C3
+
+# Road map
+
+## Target audio hardware
+- Pimoroni Pico Audio Pack
+    - ~ $16US plus shipping
+    - requires an expander board for UART connection (~ $9US)
+- Waveshare Pico Audio Expansion Module 
+    - ~ $20US plus shipping
+    - includes speakers
+- Waveshare Overall Evaluation Board
+    - ~ $50US plus shipping
+    - includes 3.5 inch resistive touch screen
+    - includes serial-to-USB adapter
+    - includes microSD card adapter
+
+## CLAMS on the web
+- GitHub: <https://github.com/AlgoCompSynth/CLAMS>
+- blog: <https://www.algocompsynth.com/#category:CLAMS>
+- this presentation:
+<https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/CLAMS-intro.pdf>
+
+## Me on the web
+- Mastodon: <https://ravenation.club/@AlgoCompSynth>
+- LinkedIn: <https://www.linkedin.com/in/znmeb>
+- Bandcamp: <https://algocompsynth.bandcamp.com>
+
+## References
