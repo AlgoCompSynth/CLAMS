@@ -20,7 +20,7 @@ output:
     - Hardware floating point and DSP instructions
     - 64MB of SDRAM for up to 10 minute long audio buffers
     - 8MB external flash
-    - Stereo audio IO - 96kHz / 24-bit audio hardware
+    - Stereo audio output - 96kHz / 24-bit audio hardware
     - No WiFi or Bluetooth
     - $29.95US quantity one
     - Available in various packaged modules
@@ -35,32 +35,42 @@ output:
     - 262KB RAM
     - 2 MB flash
     - No SD card
-    - No audio hardware
+    - No audio hardware, I2S audio expansion packs available
     - 2.4 GHz WiFi and Bluetooth
     - $7.00 US
-    - Audio expansion packs available
     - Control logic and synthesis both done in Forth
     
 ## Stepping up a level - what does a digital synthesizer need?
-    - A way of reliably generating accurately-timed pulse-code modulated samples
-    - A way of converting those samples to analog voltages for recording or performance
+    - Reliable generation of accurately-timed pulse-code modulated sample stream
+    - Conversion of the stream to analog voltages for recording or performance
     - An interface for the composer / performer
 
 ## So what was wrong with the previous two concepts?
-1. Portability - Forth needs to be hand-ported to individual MCUs.
-    - Other desirable boards: Teensy 4.1 and ESP32-S3, C3 and C6
-2. Only I2S audio was realistically supportable
-    - USB audio and Bluetooth audio cannot be realistically done in Forth
+1. Portability - Forth needs to be hand-ported to individual MCUs. Other desirable boards:
+    - Raspberry Pi Zero 2 W
+    - Teensy 4.1
+    - ESP32-S3, -C3 and -C6
+2. Only I2S audio was realistic. Other desirable interfaces:
+    - Class-compliant USB audio and MIDI
+    - Bluetooth audio
+    - Only MIDI is realistic in Forth
 
-# CLAMS - the New Design
+# CLAMS - The New Design
 
-## Arduino for portability
-- All target boards (Daisy, Teensy, ESP32 and Pico / Pico 2) have Arduino support
-- I2S audio is supported on all test boards
+## Arduino or Linux for portability
+- Target MCU boards (Daisy, Teensy, ESP32 and Pico / Pico 2) have Arduino support
+- Raspberry Pi Zero 2 W has Linux support
+- I2S audio is supported on all boards
 - Bluetooth audio is supported if the board has the hardware
-- USB audio is in alpha testing
+- USB audio is supported on Teensy and Zero 2 W, others in alpha testing
 
-## C3 Forth for Arduino [@c3forth2024]
+## ShorePine Systems AMY synthesizer
+- Highly portable - written in C
+- Has a Python interface for Linux and microcontrollers
+- Handles synthesis and I2S audio generation
+- Very capable synthesizer - saves me months of Forth coding!
+
+# C3 Forth for Arduino [@c3forth2024]
 - Token-threaded Forth written in C/C++
 - Runs on Linux (native), Raspberry Pi Pico and Teensy 4.1 (Arduino)
 - Under active development
