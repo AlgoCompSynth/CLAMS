@@ -36,7 +36,6 @@ output:
     - No floating point or DSP instructions
     - 262KB RAM
     - 2 MB flash
-    - No SD card
     - No audio hardware, I2S audio expansion packs available
     - 2.4 GHz WiFi and Bluetooth
     - $7.00 US
@@ -47,23 +46,23 @@ output:
 - Digital-analog conversion for recording / performance
 - A user interface for the composer / performer
 
-## Previous concepts problem 1: Lack of portability:
+## Previous concepts problem 1: Lack of portability
 - Need to hand-port Forth to individual MCUs
 - Other desirable boards:
     - Raspberry Pi Zero 2 W
+    - Raspberry Pi Pico 2
     - (<https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>)
     - Teensy 4.1
     - (<https://www.pjrc.com/store/teensy41.html>)
-    - ESP32-S3, -C3 and -C6
+    - ESP32-S3 (Xtensa architecture), -C3 and -C6 (RISC-V architecture)
     - (<https://www.espressif.com/en/products/socs/esp32>)
         
 ## Previous concepts problem 2: Limited audio capability
-- Limited audio capability
-    - Only built-in DAC or I2S audio is practical in Forth
-    - Other desirable interfaces:
-        - Class-compliant USB audio and MIDI
-        - Bluetooth audio and MIDI
-        - Specs too complex for easy Forth implementation
+- Only built-in DAC or I2S audio is practical in Forth
+- Other desirable interfaces:
+    - Class-compliant USB audio and MIDI
+    - Bluetooth audio and MIDI
+    - Specs too complex for easy Forth implementation
 
 # CLAMS - The New Design
 
@@ -125,6 +124,13 @@ output:
 - Another project of mine 
 - Open source on GitHub [@borasky2024a]
 - Collection of open source tools for experimental music
+    - CSound
+    - SuperCollider
+    - Pure Data
+    - ChucK
+    - My own R music software
+    - JupyterLab with Python audio and AI software
+= Probably won't run on Pi Zero 2 W but runs fine on Pi 4
 
 ## Longer range
 - Electrosmith Daisy port
@@ -141,7 +147,7 @@ output:
 <https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/CLAMS-quest.pdf>
 
 ## Me on the web
-- Mastodon: <https://ravenation.club/@AlgoCompSynth>
+- Mastodon: <https://mastodon.social/@AlgoCompSynth>
 - LinkedIn: <https://www.linkedin.com/in/znmeb>
 - Bandcamp: <https://algocompsynth.bandcamp.com>
 
