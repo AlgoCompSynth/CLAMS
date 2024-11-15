@@ -14,7 +14,8 @@ output:
 # Previously on CLAMS
 
 ## The original concept - early 2022
-- Forth for the Electro-Smith Daisy Seed [@electrosmith2024]
+- Forth for the Electro-Smith Daisy Seed
+    - <https://electro-smith.com/products/daisy-seed>
     - Microcontroller board designed for digital music
     - ARM Cortex-M7 MCU, running at 480MHz
     - Hardware floating point and DSP instructions
@@ -28,6 +29,7 @@ output:
 
 ## Revised concept - early 2023
 - Forth for the Raspberry Pi Pico (WH)
+    - <https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html>
     - Microcontroller board designed for general applications
     - Dual-core ARM Cortex-M0+, running at 133 Mhz
     - Co-processor for division, interpolation and I/O
@@ -41,22 +43,23 @@ output:
     - User interface and synthesis both done in Forth
     
 ## Stepping up a level - what does a digital synthesizer need?
-    - Accurately-timed PCM samples
-    - Digital-analog conversion for recording / performance
-    - An interface for the composer / performer
+- Accurately-timed PCM samples
+- Digital-analog conversion for recording / performance
+- A user interface for the composer / performer
 
-## What was wrong with previous concepts? (Part 1)
-- Lack of portability:
-    - Need to hand-port to individual MCUs
-    - Other desirable boards:
-        - Raspberry Pi Zero 2 W
-        - Teensy 4.1
-        - ESP32-S3, -C3 and -C6
-        - Electrosmith Daisy
-
-## What was wrong with previous concepts? (Part 2)
+## Previous concepts problem 1: Lack of portability:
+- Need to hand-port Forth to individual MCUs
+- Other desirable boards:
+    - Raspberry Pi Zero 2 W
+    - (<https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>)
+    - Teensy 4.1
+    - (<https://www.pjrc.com/store/teensy41.html>)
+    - ESP32-S3, -C3 and -C6
+    - (<https://www.espressif.com/en/products/socs/esp32>)
+        
+## Previous concepts problem 2: Limited audio capability
 - Limited audio capability
-    - Only I2S audio is practical in Forth
+    - Only built-in DAC or I2S audio is practical in Forth
     - Other desirable interfaces:
         - Class-compliant USB audio and MIDI
         - Bluetooth audio and MIDI
@@ -65,46 +68,67 @@ output:
 # CLAMS - The New Design
 
 ## Arduino or Linux for portability
-- Target MCU boards have Arduino support
+- Target MCU boards all have Arduino support
 - Raspberry Pi Zero 2 W has Linux support
 - I2S audio is supported on all boards
-- Bluetooth audio is supported if the board has hardware
-- USB MIDI supported on all boards
+    - DAC is either onboard or expansion hardware
+- Bluetooth audio is supported on boards with hardware
+- USB MIDI is supported on all boards
 - USB audio is supported on Teensy and Zero 2 W
     - Others in alpha testing
 
-## ShorePine Systems AMY synthesizer
+## Shore Pine Sound Systems AMY synthesizer
+- Open source on GitHub  [@shorepine2024a]
 - Highly portable - written in C
-- Has a Python interface for Linux and MCUs
-- Handles synthesis and I2S audio generation
+- Has Arduino library
+- Has a Python interface for both Linux and MCUs
+- Handles synthesis and I2S audio
 - Very capable synthesizer - saves me months of Forth coding!
-- Heart of the Tulip Creative Computer
+- Heart of the Tulip Creative Computer [@shorepine2024b]
 
 # Forth base: C3
 
-## C3 Forth for Arduino [@c3forth2024]
+## C3 Forth
+- Open source on GitHub [@ccurl2024a]
 - Token-threaded Forth written in C/C++
 - Runs on Linux (native), Raspberry Pi Pico and Teensy 4.1 (Arduino)
 - Under active development
 - Well-documented
 
 ## Bonus Forth content - C4!
+- Open source on GitHub [@ccurl2024b]
+- Uses concepts from Tachyon Forth and colorForth
+- Arduino support in progress!
 
 # Road map - Tasks mostly in Priority Order
 
 ## Integrate C3 and AMY on Raspberry Pi Zero 2 W
+- Devlopment cycle is easier on Linux
+- Linux USB audio and MIDI are well understood
+- Many supportingsoftware tools available
+- Total hardware cost is $54.00US
+- <https://vilros.com/products/vilros-raspberry-pi-zero-w-2-port-n-play-ready-to-use-kit>
 
 ## Make an album
+- Adding AMY synthesizer has shortened development time
+- The dogfooding process will hone the Forth user interface
 
 ## Integrate C3 and AMY on Pico I2S
+- Backporting of album to small system will stress-test the system
 
 ## Integrate C3 and AMY and USB audio on Teensy 4.1
+- Teensy has no native I2S / DAC hardware
+- Teensy does have native USB audio and MIDI in Arduino
+- More powerful MCU than the Pico
 
-## Add AMY to Experimental Music Toolbox
+## Add CLAMS to Experimental Music Toolbox
+- Another project of mine 
+- Open source on GitHub [@borasky2024a]
+- Collection of open source tools for experimental music
 
 ## Longer range
-- Electrosmith Daisy
-- ESP32
+- Electrosmith Daisy port
+- ESP32 port
 - USB MIDI
 - USB audio on non-Teensy boards
 
@@ -121,4 +145,4 @@ output:
 - LinkedIn: <https://www.linkedin.com/in/znmeb>
 - Bandcamp: <https://algocompsynth.bandcamp.com>
 
-## References
+## References {.small}
