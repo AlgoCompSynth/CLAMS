@@ -11,6 +11,39 @@ output:
     slide_level: 2
 ---
 
+# Introduction
+
+## What is CLAMS?
+- Command Line Algorithmic Music Synthesizer
+- Forth-controlled synthesizer for microcontrollers / SBCs
+
+## Some embedded audio terminology
+- GPIO pin: General Purpose Input-Output
+    - a pin that can be configured for I/O
+- MIDI: Musical Instrument Digital Interface
+    - a protocol for controlling synthesizers
+- PCM: Pulse-Code Modulation
+    - digital audio streams of fixed-width binary words
+- DAC: Digital-Analog Converter
+    - converts a PCM stream from digital to analog
+- I2S: Inter-Integrated circuit Sound
+    - a serial protocol for transmitting stereo PCM
+- DSP: Digital Signal Processing
+    - algorithms for manipulating PCM data
+
+## A typical digital performance setup
+- Controller: keyboard, touchscreen, buttons, knobs, etc.
+- Sequencer: stores programs of MIDI for playback
+- Synthesizer: generates the sound
+- Effects: echo, reverb, chorus, flanger, etc.
+- Headphones / speakers / recorders
+
+## A CLAMS performance setup
+- A microcontroller / single board computer
+- A serial terminal
+- A DAC / amplifier, headphones / speakers / recorders
+- Forth / C code DSL controller, synthesizer, effects
+
 # Previously on CLAMS
 
 ## The original concept - early 2022
@@ -21,15 +54,15 @@ output:
     - Hardware floating point and DSP instructions
     - 64 MB of SDRAM for up to 10 minute long audio buffers
     - 8 MB external flash
-    - Stereo audio output - 96kHz / 24-bit audio hardware
+    - Stereo DAC output - 96kHz / 24-bit audio hardware
     - Both native and Arduino audio development tools
     - No WiFi or Bluetooth
     - $29.95US quantity one
     - Available in various packaged modules
-    - User interface and synthesis both done in Forth
+    - Controller and synthesis both done in Forth
 
 ## Revised concept - early 2023
-- Forth for the Raspberry Pi Pico (WH)
+- Forth for the Raspberry Pi Pico WH
     - <https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html>
     - Microcontroller board designed for general applications
     - Dual-core ARM Cortex-M0+, running at 133 Mhz
@@ -39,15 +72,13 @@ output:
     - 2 MB flash
     - No audio hardware, I2S audio expansion packs available
     - 2.4 GHz WiFi and Bluetooth
-    - $7.00 US quantity one
-    - User interface and synthesis both done in Forth
+    - $7US quantity one
+    - Controller and synthesis both done in Forth
     
 ## Stepping up a level - what does a digital synthesizer need?
 - Accurately-timed PCM samples
-- Digital-analog conversion for recording / performance
+- Audio I/O (DAC / USB / Bluetooth)
 - A user interface for the composer / performer
-
-## I2S protocol
 
 ## Previous concepts problem 1: Lack of portability
 - Need to hand-port Forth to individual MCUs
@@ -69,11 +100,10 @@ output:
 - No WiFi / Bluetooth
 - Comprehensive native audio library
 - (<https://www.pjrc.com/teensy/td_libs_Audio.html>)
-- HDMI video
 - $29.60US quantity one
 
 ## Raspberry Pi Zero 2 W
-- Microcontroller board designed for general applications
+- Single-board computer designed for general applications
 - Quad-core 64-bit ARM Cortex-A53, running at 1 GHz
 - Hardware floating point and DSP instructions
 - 512MB of RAM
@@ -85,19 +115,21 @@ output:
 - $15US quantity one
 
 ## Previous concepts problem 2: Limited audio capability
-- Only built-in DAC or I2S audio is practical in Forth
+- Only DAC or I2S audio is practical in Forth
 - Other desirable interfaces:
     - Class-compliant USB audio and MIDI
     - Bluetooth audio and MIDI
     - Specs too complex for easy Forth implementation
+        - Effort/payoff ratio is enormous
+    - Well-documented and tested C libraries exist
 
 # CLAMS - The New Design
 
 ## Arduino or Linux for portability
 - Target MCU boards all have Arduino support
 - Raspberry Pi Zero 2 W has Linux support
-- I2S audio is supported on all boards
-    - DAC is either onboard or expansion hardware
+- I2S / DAC audio is supported on all boards
+    - either onboard or expansion hardware
 - Bluetooth audio is supported on boards with hardware
 - USB MIDI is supported on all boards
 - USB audio is supported on Teensy and Zero 2 W
@@ -134,42 +166,32 @@ output:
 - Open source on GitHub [@ccurl2024b]
 - "c4: A Forth system inspired by Tachyon and ColorForth"
 - Arduino support in progress!
-- I will evaluate it when Arduino support is done
 
 # Road map - Tasks mostly in Priority Order
 
-## Integrate C3 and AMY on Raspberry Pi Zero 2 W
-- Devlopment cycle is easier on Linux
-- Linux USB audio and MIDI are well understood
-- Many supporting audio software tools available
-- Total hardware cost is $54.00US
-- <https://vilros.com/products/vilros-raspberry-pi-zero-w-2-port-n-play-ready-to-use-kit>
+## Integrate C3 and AMY on Pico WH / audio expansion
+- Essentially complete second concept
+- All the components work in Arduino
 
 ## Make an album
-- Using the Raspberry Pi Zero 2 W
 - Adding AMY synthesizer has shortened development time
 - The dogfooding process will hone the Forth user interface
 - Some recording and editing software runs on the Zero 2 W
 
-## Integrate C3 and AMY on Pico I2S
-- Backporting of album to small system will stress-test the system
+## Integrate C3 and AMY on Raspberry Pi Zero 2 W
+- This is really the sweet spot for CLAMS
+    - Devlopment cycle is easier on Linux
+    - Synthesis capacity many times that of microcontrollers!
+    - Linux USB audio and MIDI are well understood
+    - May also test Bluetooth audio and MIDI
+    - Many supporting audio software tools available
+    - Total hardware cost is $54.99US
+    - <https://vilros.com/products/vilros-raspberry-pi-zero-w-2-port-n-play-ready-to-use-kit>
 
 ## Integrate C3 and AMY and USB audio on Teensy 4.1
 - Teensy has no native I2S / DAC hardware
 - Teensy does have native USB audio and MIDI in Arduino
 - More powerful MCU than the Pico
-
-## Add CLAMS to Experimental Music Toolbox
-- Another project of mine 
-- Open source on GitHub [@borasky2024a]
-- Collection of open source tools for experimental music
-    - CSound
-    - SuperCollider
-    - Pure Data
-    - ChucK
-    - My own R music software
-    - JupyterLab with Python audio and AI software
-= Probably won't run on Pi Zero 2 W but runs fine on Pi 4
 
 ## Longer range
 - Electrosmith Daisy port
