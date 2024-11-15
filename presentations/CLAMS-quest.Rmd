@@ -19,9 +19,10 @@ output:
     - Microcontroller board designed for digital music
     - ARM Cortex-M7 MCU, running at 480MHz
     - Hardware floating point and DSP instructions
-    - 64MB of SDRAM for up to 10 minute long audio buffers
-    - 8MB external flash
+    - 64 MB of SDRAM for up to 10 minute long audio buffers
+    - 8 MB external flash
     - Stereo audio output - 96kHz / 24-bit audio hardware
+    - Both native and Arduino audio development tools
     - No WiFi or Bluetooth
     - $29.95US quantity one
     - Available in various packaged modules
@@ -34,11 +35,11 @@ output:
     - Dual-core ARM Cortex-M0+, running at 133 Mhz
     - Co-processor for division, interpolation and I/O
     - No floating point or DSP instructions
-    - 262KB RAM
+    - 262 KB RAM
     - 2 MB flash
     - No audio hardware, I2S audio expansion packs available
     - 2.4 GHz WiFi and Bluetooth
-    - $7.00 US
+    - $7.00 US quantity one
     - User interface and synthesis both done in Forth
     
 ## Stepping up a level - what does a digital synthesizer need?
@@ -46,17 +47,43 @@ output:
 - Digital-analog conversion for recording / performance
 - A user interface for the composer / performer
 
+## I2S protocol
+
 ## Previous concepts problem 1: Lack of portability
 - Need to hand-port Forth to individual MCUs
 - Other desirable boards:
-    - Raspberry Pi Zero 2 W
-    - Raspberry Pi Pico 2
-    - (<https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>)
     - Teensy 4.1
     - (<https://www.pjrc.com/store/teensy41.html>)
+    - Raspberry Pi Zero 2 W
+    - (<https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>)
     - ESP32-S3 (Xtensa architecture), -C3 and -C6 (RISC-V architecture)
     - (<https://www.espressif.com/en/products/socs/esp32>)
-        
+
+## Teensy 4.1
+- Microcontroller board designed for general applications
+- ARM Cortex-M7, running at 400 MHz
+- Hardware floating point and DSP instructions
+- 1024 KB of RAM
+- 7936 KB of flash
+- No audio hardware but many add-on modules
+- No WiFi / Bluetooth
+- Comprehensive native audio library
+- (<https://www.pjrc.com/teensy/td_libs_Audio.html>)
+- HDMI video
+- $29.60US quantity one
+
+## Raspberry Pi Zero 2 W
+- Microcontroller board designed for general applications
+- Quad-core 64-bit ARM Cortex-A53, running at 1 GHz
+- Hardware floating point and DSP instructions
+- 512MB of RAM
+- No flash - uses SD card
+- Runs Linux
+- USB audio and MIDI
+- Hardware for WiFi and Bluetooth
+- HDMI video
+- $15US quantity one
+
 ## Previous concepts problem 2: Limited audio capability
 - Only built-in DAC or I2S audio is practical in Forth
 - Other desirable interfaces:
@@ -89,28 +116,40 @@ output:
 
 ## C3 Forth
 - Open source on GitHub [@ccurl2024a]
-- Token-threaded Forth written in C/C++
-- Runs on Linux (native), Raspberry Pi Pico and Teensy 4.1 (Arduino)
+- Stack-based, byte-coded Forth VM written in C/C++
+- Runs on Windows, MacOS, Linux (native)
+- Runs on development boards - Raspberry Pi Pico and Teensy 4.1 (Arduino)
 - Under active development
-- Well-documented
+- Well-documented - comprehensive README
+
+## C3 Forth extensions
+- Virtual regiters
+- Temporary words
+- Inline words
+- Lexicons
+- Easy to extend with user-defined op codes
+- vi-inspired editor 
 
 ## Bonus Forth content - C4!
 - Open source on GitHub [@ccurl2024b]
-- Uses concepts from Tachyon Forth and colorForth
+- "c4: A Forth system inspired by Tachyon and ColorForth"
 - Arduino support in progress!
+- I will evaluate it when Arduino support is done
 
 # Road map - Tasks mostly in Priority Order
 
 ## Integrate C3 and AMY on Raspberry Pi Zero 2 W
 - Devlopment cycle is easier on Linux
 - Linux USB audio and MIDI are well understood
-- Many supportingsoftware tools available
+- Many supporting audio software tools available
 - Total hardware cost is $54.00US
 - <https://vilros.com/products/vilros-raspberry-pi-zero-w-2-port-n-play-ready-to-use-kit>
 
 ## Make an album
+- Using the Raspberry Pi Zero 2 W
 - Adding AMY synthesizer has shortened development time
 - The dogfooding process will hone the Forth user interface
+- Some recording and editing software runs on the Zero 2 W
 
 ## Integrate C3 and AMY on Pico I2S
 - Backporting of album to small system will stress-test the system
