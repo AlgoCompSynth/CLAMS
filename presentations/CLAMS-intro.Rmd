@@ -2,7 +2,7 @@
 title: "Command Line Algorithmic Music System (CLAMS)"
 author: "M. Edward (Ed) Borasky"
 date: 2023-03-25
-bibliography: ../The-Book-of-CLAMS/references.bib
+bibliography: references.bib
 output:
   beamer_presentation:
     theme: "Montpellier"

@@ -1,0 +1,201 @@
+---
+title: "CLAMS - The Quest for Portability and Audio"
+subtitle: "Forth Day 2024"
+author: "M. Edward (Ed) Borasky"
+date: 2023-11-16
+bibliography: references.bib
+output:
+  beamer_presentation:
+    theme: "Montpellier"
+    incremental: false
+    slide_level: 2
+---
+
+# Introduction
+
+## What is CLAMS?
+- Command Line Algorithmic Music System
+- Forth-controlled synthesizer for microcontrollers / SBCs
+
+## Some embedded audio terminology
+- MIDI: Musical Instrument Digital Interface
+    - a protocol for controlling synthesizers
+- PCM: Pulse-Code Modulation
+    - digital audio streams of fixed-width binary words
+    - most common digital audio format
+- DAC: Digital-Analog Converter
+    - converts a PCM stream from digital to analog
+- I2S: Inter-Integrated-circuit Sound
+    - a serial protocol for transmitting stereo PCM
+- DSP: Digital Signal Processing
+    - algorithms for manipulating PCM data
+
+## A typical digital performance setup
+- Controller: keyboard, touchscreen, buttons, knobs, etc.
+- Sequencer: stores programs of MIDI for playback
+- Synthesizer: generates the sound
+- Effects: filters, echo/delay, reverb, chorus, flanger, etc.
+- Headphones / speakers / recorders
+- Can all be in one box or separate boxes
+
+## A CLAMS performance setup
+- A microcontroller / single board computer
+- A serial terminal
+- A DAC, amplifier, headphones / speakers / recorders
+- Forth / C code DSL controller, synthesizer, effects
+
+# Previously on CLAMS
+
+## The original concept - early 2022
+- Forth for the Electro-Smith Daisy Seed
+    - <https://electro-smith.com/products/daisy-seed>
+    - Microcontroller board designed for digital music
+    - ARM Cortex-M7 MCU, running at 480MHz
+    - Hardware floating point and DSP instructions
+    - 64 MB of SDRAM for up to 10 minute long audio buffers
+    - 8 MB external flash
+    - Stereo DAC output - 96kHz / 24-bit audio hardware
+    - Both native and Arduino audio development tools
+    - $29.95US quantity one
+    - Available in various packaged modules
+    - Plan was both controller and synthesis in Forth
+
+## Revised concept - early 2023
+- Forth for the Raspberry Pi Pico WH
+    - <https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html>
+    - Microcontroller board designed for general applications
+    - Dual-core ARM Cortex-M0+, running at 133 Mhz
+    - Co-processor for division, interpolation and I/O
+    - No floating point or DSP instructions
+    - 262 KB RAM
+    - 2 MB flash
+    - No audio hardware -- I2S / DAC / amplifer expansion pack required
+    - $7US quantity one
+    - Plan was both controller and synthesis in Forth
+    
+## Previous concepts problem 1: Lack of portability
+- Need to hand-port Forth to individual MCUs
+- Other desirable boards:
+    - Teensy 4.1
+        - <https://www.pjrc.com/store/teensy41.html>
+    - Raspberry Pi Zero 2 W
+        - <https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>
+    - ESP32-S3 (Xtensa ISA), -C3 and -C6 (RISC-V ISA)
+        - <https://www.espressif.com/en/products/socs/esp32>
+
+## Teensy 4.1
+- Microcontroller board designed for general applications
+- ARM Cortex-M7, running at 400 MHz
+- Hardware floating point and DSP instructions
+- 1024 KB of RAM
+- 7936 KB of flash
+- No audio hardware but many add-on modules
+- Comprehensive native audio library
+    - <https://www.pjrc.com/teensy/td_libs_Audio.html>
+- $29.60US quantity one
+
+## Raspberry Pi Zero 2 W
+- Single-board computer designed for general applications
+- Quad-core 64-bit ARM Cortex-A53, running at 1 GHz
+- Hardware floating point and DSP instructions
+- 512MB of RAM
+- No flash - uses SD card
+- No audio hardware but many add-on modules
+- Runs Linux
+- $15US quantity one
+
+## Previous concepts problem 2: Limited audio capability
+- Only I2s/DAC/amplifier audio is practical in Forth
+- Other desirable interfaces:
+    - Class-compliant USB audio and MIDI
+    - Bluetooth audio and MIDI
+    - Specs too complex for easy Forth implementation
+        - Effort/payoff ratio is enormous
+    - Well-documented and tested C libraries exist
+
+# CLAMS - The New Design
+
+## Arduino or Linux for portability
+- Target MCU boards all have Arduino support
+- Raspberry Pi Zero 2 W has Linux support
+- I2S / DAC audio is available on all boards
+    - either onboard or expansion hardware
+- Bluetooth audio is supported on boards with hardware
+- USB MIDI is supported on all boards
+- USB audio is supported on Teensy and Zero 2 W
+    - Others in alpha testing
+
+## Shore Pine Sound Systems AMY synthesizer
+- Open source on GitHub  [@shorepine2024a]
+- Highly portable - written in C
+- Has Arduino library
+- Has a Python interface for both Linux and MCUs
+- Handles both synthesis and I2S audio
+- Very capable synthesizer - saves me months of Forth coding!
+- Heart of the Tulip Creative Computer [@shorepine2024b]
+
+# Forth base: C3
+
+## C3 Forth
+- Open source on GitHub [@ccurl2024a]
+- Stack-based, byte-coded Forth VM written in C/C++
+- Runs on Windows, MacOS, Linux (native)
+- Runs on development boards - Raspberry Pi Pico and Teensy 4.1 (Arduino)
+- Under active development
+- Well-documented - comprehensive README
+
+## C3 Forth extensions
+- 10 Virtual registers
+- 10 Temporary words
+- Inline words
+- Lexicons
+- Easy to extend with user-defined op codes
+- vi-inspired editor 
+
+## Bonus Forth content - C4!
+- Open source on GitHub [@ccurl2024b]
+- "c4: A Forth system inspired by Tachyon and ColorForth"
+- Arduino support in progress!
+    - Very active "next-version" branch
+
+# Road map - Tasks mostly in Priority Order
+
+## 1. Integrate C3 and AMY on Pico WH / audio expansion
+- Complete the second concept
+- All the components work in Arduino
+- Main new code is adding C3 opcodes for AMY
+
+## 2. Make an album
+- Adding AMY synthesizer has shortened development time
+- Forth DSL will be built here
+- The dogfooding process will hone the Forth DSL
+
+## 3. Integrate C3 and AMY on Raspberry Pi Zero 2 W
+- This is really the sweet spot for CLAMS!
+    - Devlopment cycle is easier on Linux
+    - Synthesis capacity many times that of microcontrollers!
+    - Linux USB audio and MIDI are well understood
+    - Bluetooth audio and MIDI may be added
+    - Many supporting audio software tools available
+    - Total hardware cost is $54.99US
+        - <https://vilros.com/products/vilros-raspberry-pi-zero-w-2-port-n-play-ready-to-use-kit>
+
+## Longer range
+- Teensy with USB audio and MIDI
+- Electro-Smith Daisy with Daisy hardware, USB MIDI
+- ESP32
+
+# Back Matter
+
+## CLAMS on the web
+- GitHub: <https://github.com/AlgoCompSynth/CLAMS>
+- blog: <https://www.algocompsynth.com/#category:CLAMS>
+- this presentation:
+    - <https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/CLAMS-quest.pdf>
+
+## Me on the web
+- Mastodon: <https://mastodon.social/@AlgoCompSynth>
+- LinkedIn: <https://www.linkedin.com/in/znmeb>
+- Bandcamp: <https://algocompsynth.bandcamp.com>
+
+## References {.small}
