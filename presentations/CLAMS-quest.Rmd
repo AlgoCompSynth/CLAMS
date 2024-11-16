@@ -15,11 +15,11 @@ output:
 
 ## What is CLAMS?
 - Command Line Algorithmic Music System
-- Forth-controlled synthesizer for microcontrollers / SBCs
+- Forth-controlled synthesizer (synth) for microcontrollers / SBCs
 
 ## Some embedded audio terminology
 - MIDI: Musical Instrument Digital Interface
-    - a protocol for controlling synthesizers
+    - a protocol for controlling synth
 - PCM: Pulse-Code Modulation
     - digital audio streams of fixed-width binary words
     - most common digital audio format
@@ -33,7 +33,7 @@ output:
 ## A typical digital performance setup
 - Controller: keyboard, touchscreen, buttons, knobs, etc.
 - Sequencer: stores programs of MIDI for playback
-- Synthesizer: generates the sound
+- Synth: generates the sound
 - Effects: filters, echo/delay, reverb, chorus, flanger, etc.
 - Headphones / speakers / recorders
 - Can all be in one box or separate boxes
@@ -42,7 +42,7 @@ output:
 - A microcontroller / single board computer
 - A serial terminal
 - A DAC, amplifier, headphones / speakers / recorders
-- Forth / C code DSL controller, synthesizer, effects
+- Forth / C code DSL controller, synth, effects
 
 # Previously on CLAMS
 
@@ -58,7 +58,7 @@ output:
     - Both native and Arduino audio development tools
     - $29.95US quantity one
     - Available in various packaged modules
-    - Plan was both controller and synthesis in Forth
+    - Plan was both controller and synth in Forth
 
 ## Revised concept - early 2023
 - Forth for the Raspberry Pi Pico WH
@@ -71,7 +71,7 @@ output:
     - 2 MB flash
     - No audio hardware -- I2S / DAC / amplifer expansion pack required
     - $7US quantity one
-    - Plan was both controller and synthesis in Forth
+    - Plan was both controller and synth in Forth
     
 ## Previous concepts problem 1: Lack of portability
 - Need to hand-port Forth to individual MCUs
@@ -125,13 +125,13 @@ output:
 - USB audio is supported on Teensy and Zero 2 W
     - Others in alpha testing
 
-## Shore Pine Sound Systems AMY synthesizer
+## Shore Pine Sound Systems AMY synth
 - Open source on GitHub  [@shorepine2024a]
 - Highly portable - written in C
 - Has Arduino library
 - Has a Python interface for both Linux and MCUs
-- Handles both synthesis and I2S audio
-- Very capable synthesizer - saves me months of Forth coding!
+- Handles both synth and I2S audio
+- Very capable synth - saves me months of Forth coding!
 - Heart of the Tulip Creative Computer [@shorepine2024b]
 
 # Forth base: C3
@@ -166,14 +166,14 @@ output:
 - Main new code is adding C3 opcodes for AMY
 
 ## 2. Make an album
-- Adding AMY synthesizer has shortened development time
+- Adding AMY synth has shortened development time
 - Forth DSL will be built here
 - The dogfooding process will hone the Forth DSL
 
 ## 3. Integrate C3 and AMY on Raspberry Pi Zero 2 W
 - This is really the sweet spot for CLAMS!
     - Devlopment cycle is easier on Linux
-    - Synthesis capacity many times that of microcontrollers!
+    - Synth capacity many times that of microcontrollers!
     - Linux USB audio and MIDI are well understood
     - Bluetooth audio and MIDI may be added
     - Many supporting audio software tools available
