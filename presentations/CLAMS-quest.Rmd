@@ -14,7 +14,7 @@ output:
 # Introduction
 
 ## What is CLAMS?
-- Command Line Algorithmic Music Synthesizer
+- Command Line Algorithmic Music System
 - Forth-controlled synthesizer for microcontrollers / SBCs
 
 ## Some embedded audio terminology
@@ -22,6 +22,7 @@ output:
     - a protocol for controlling synthesizers
 - PCM: Pulse-Code Modulation
     - digital audio streams of fixed-width binary words
+    - most common digital audio format
 - DAC: Digital-Analog Converter
     - converts a PCM stream from digital to analog
 - I2S: Inter-Integrated-circuit Sound
@@ -33,7 +34,7 @@ output:
 - Controller: keyboard, touchscreen, buttons, knobs, etc.
 - Sequencer: stores programs of MIDI for playback
 - Synthesizer: generates the sound
-- Effects: echo, reverb, chorus, flanger, etc.
+- Effects: filters, echo/delay, reverb, chorus, flanger, etc.
 - Headphones / speakers / recorders
 - Can all be in one box or separate boxes
 
@@ -57,7 +58,7 @@ output:
     - Both native and Arduino audio development tools
     - $29.95US quantity one
     - Available in various packaged modules
-    - Plan was both Controller and synthesis in Forth
+    - Plan was both controller and synthesis in Forth
 
 ## Revised concept - early 2023
 - Forth for the Raspberry Pi Pico WH
@@ -68,19 +69,19 @@ output:
     - No floating point or DSP instructions
     - 262 KB RAM
     - 2 MB flash
-    - No audio hardware, I2S / DAC / amplifer expansion pack required
+    - No audio hardware -- I2S / DAC / amplifer expansion pack required
     - $7US quantity one
-    - Plan was both Controller and synthesis in Forth
+    - Plan was both controller and synthesis in Forth
     
 ## Previous concepts problem 1: Lack of portability
 - Need to hand-port Forth to individual MCUs
 - Other desirable boards:
     - Teensy 4.1
-    - (<https://www.pjrc.com/store/teensy41.html>)
+        - <https://www.pjrc.com/store/teensy41.html>
     - Raspberry Pi Zero 2 W
-    - (<https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>)
+        - <https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>
     - ESP32-S3 (Xtensa ISA), -C3 and -C6 (RISC-V ISA)
-    - (<https://www.espressif.com/en/products/socs/esp32>)
+        - <https://www.espressif.com/en/products/socs/esp32>
 
 ## Teensy 4.1
 - Microcontroller board designed for general applications
@@ -90,7 +91,7 @@ output:
 - 7936 KB of flash
 - No audio hardware but many add-on modules
 - Comprehensive native audio library
-- (<https://www.pjrc.com/teensy/td_libs_Audio.html>)
+    - <https://www.pjrc.com/teensy/td_libs_Audio.html>
 - $29.60US quantity one
 
 ## Raspberry Pi Zero 2 W
@@ -144,7 +145,7 @@ output:
 - Well-documented - comprehensive README
 
 ## C3 Forth extensions
-- 10 Virtual regiters
+- 10 Virtual registers
 - 10 Temporary words
 - Inline words
 - Lexicons
@@ -155,16 +156,18 @@ output:
 - Open source on GitHub [@ccurl2024b]
 - "c4: A Forth system inspired by Tachyon and ColorForth"
 - Arduino support in progress!
+    - Very active "next-version" branch
 
 # Road map - Tasks mostly in Priority Order
 
 ## 1. Integrate C3 and AMY on Pico WH / audio expansion
-- Essentially complete second concept
+- Complete the second concept
 - All the components work in Arduino
 - Main new code is adding C3 opcodes for AMY
 
 ## 2. Make an album
 - Adding AMY synthesizer has shortened development time
+- Forth DSL will be built here
 - The dogfooding process will hone the Forth DSL
 
 ## 3. Integrate C3 and AMY on Raspberry Pi Zero 2 W
@@ -175,16 +178,11 @@ output:
     - Bluetooth audio and MIDI may be added
     - Many supporting audio software tools available
     - Total hardware cost is $54.99US
-    - <https://vilros.com/products/vilros-raspberry-pi-zero-w-2-port-n-play-ready-to-use-kit>
-
-## Integrate C3 and AMY and USB audio on Teensy 4.1
-- Teensy has no native I2S / DAC hardware
-- Teensy does have native USB audio and MIDI in Arduino
-- More powerful MCU than the Pico
+        - <https://vilros.com/products/vilros-raspberry-pi-zero-w-2-port-n-play-ready-to-use-kit>
 
 ## Longer range
 - Teensy with USB audio and MIDI
-- Electrosmith Daisy
+- Electro-Smith Daisy with Daisy hardware, USB MIDI
 - ESP32
 
 # Back Matter
@@ -193,7 +191,7 @@ output:
 - GitHub: <https://github.com/AlgoCompSynth/CLAMS>
 - blog: <https://www.algocompsynth.com/#category:CLAMS>
 - this presentation:
-<https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/CLAMS-quest.pdf>
+    - <https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/CLAMS-quest.pdf>
 
 ## Me on the web
 - Mastodon: <https://mastodon.social/@AlgoCompSynth>
