@@ -18,15 +18,13 @@ output:
 - Forth-controlled synthesizer for microcontrollers / SBCs
 
 ## Some embedded audio terminology
-- GPIO pin: General Purpose Input-Output
-    - a pin that can be configured for I/O
 - MIDI: Musical Instrument Digital Interface
     - a protocol for controlling synthesizers
 - PCM: Pulse-Code Modulation
     - digital audio streams of fixed-width binary words
 - DAC: Digital-Analog Converter
     - converts a PCM stream from digital to analog
-- I2S: Inter-Integrated circuit Sound
+- I2S: Inter-Integrated-circuit Sound
     - a serial protocol for transmitting stereo PCM
 - DSP: Digital Signal Processing
     - algorithms for manipulating PCM data
@@ -37,11 +35,12 @@ output:
 - Synthesizer: generates the sound
 - Effects: echo, reverb, chorus, flanger, etc.
 - Headphones / speakers / recorders
+- Can all be in one box or separate boxes
 
 ## A CLAMS performance setup
 - A microcontroller / single board computer
 - A serial terminal
-- A DAC / amplifier, headphones / speakers / recorders
+- A DAC, amplifier, headphones / speakers / recorders
 - Forth / C code DSL controller, synthesizer, effects
 
 # Previously on CLAMS
@@ -56,10 +55,9 @@ output:
     - 8 MB external flash
     - Stereo DAC output - 96kHz / 24-bit audio hardware
     - Both native and Arduino audio development tools
-    - No WiFi or Bluetooth
     - $29.95US quantity one
     - Available in various packaged modules
-    - Controller and synthesis both done in Forth
+    - Plan was both Controller and synthesis in Forth
 
 ## Revised concept - early 2023
 - Forth for the Raspberry Pi Pico WH
@@ -70,16 +68,10 @@ output:
     - No floating point or DSP instructions
     - 262 KB RAM
     - 2 MB flash
-    - No audio hardware, I2S audio expansion packs available
-    - 2.4 GHz WiFi and Bluetooth
+    - No audio hardware, I2S / DAC / amplifer expansion pack required
     - $7US quantity one
-    - Controller and synthesis both done in Forth
+    - Plan was both Controller and synthesis in Forth
     
-## Stepping up a level - what does a digital synthesizer need?
-- Accurately-timed PCM samples
-- Audio I/O (DAC / USB / Bluetooth)
-- A user interface for the composer / performer
-
 ## Previous concepts problem 1: Lack of portability
 - Need to hand-port Forth to individual MCUs
 - Other desirable boards:
@@ -87,7 +79,7 @@ output:
     - (<https://www.pjrc.com/store/teensy41.html>)
     - Raspberry Pi Zero 2 W
     - (<https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>)
-    - ESP32-S3 (Xtensa architecture), -C3 and -C6 (RISC-V architecture)
+    - ESP32-S3 (Xtensa ISA), -C3 and -C6 (RISC-V ISA)
     - (<https://www.espressif.com/en/products/socs/esp32>)
 
 ## Teensy 4.1
@@ -97,7 +89,6 @@ output:
 - 1024 KB of RAM
 - 7936 KB of flash
 - No audio hardware but many add-on modules
-- No WiFi / Bluetooth
 - Comprehensive native audio library
 - (<https://www.pjrc.com/teensy/td_libs_Audio.html>)
 - $29.60US quantity one
@@ -108,14 +99,12 @@ output:
 - Hardware floating point and DSP instructions
 - 512MB of RAM
 - No flash - uses SD card
+- No audio hardware but many add-on modules
 - Runs Linux
-- USB audio and MIDI
-- Hardware for WiFi and Bluetooth
-- HDMI video
 - $15US quantity one
 
 ## Previous concepts problem 2: Limited audio capability
-- Only DAC or I2S audio is practical in Forth
+- Only I2s/DAC/amplifier audio is practical in Forth
 - Other desirable interfaces:
     - Class-compliant USB audio and MIDI
     - Bluetooth audio and MIDI
@@ -128,7 +117,7 @@ output:
 ## Arduino or Linux for portability
 - Target MCU boards all have Arduino support
 - Raspberry Pi Zero 2 W has Linux support
-- I2S / DAC audio is supported on all boards
+- I2S / DAC audio is available on all boards
     - either onboard or expansion hardware
 - Bluetooth audio is supported on boards with hardware
 - USB MIDI is supported on all boards
@@ -140,7 +129,7 @@ output:
 - Highly portable - written in C
 - Has Arduino library
 - Has a Python interface for both Linux and MCUs
-- Handles synthesis and I2S audio
+- Handles both synthesis and I2S audio
 - Very capable synthesizer - saves me months of Forth coding!
 - Heart of the Tulip Creative Computer [@shorepine2024b]
 
@@ -155,8 +144,8 @@ output:
 - Well-documented - comprehensive README
 
 ## C3 Forth extensions
-- Virtual regiters
-- Temporary words
+- 10 Virtual regiters
+- 10 Temporary words
 - Inline words
 - Lexicons
 - Easy to extend with user-defined op codes
@@ -169,21 +158,21 @@ output:
 
 # Road map - Tasks mostly in Priority Order
 
-## Integrate C3 and AMY on Pico WH / audio expansion
+## 1. Integrate C3 and AMY on Pico WH / audio expansion
 - Essentially complete second concept
 - All the components work in Arduino
+- Main new code is adding C3 opcodes for AMY
 
-## Make an album
+## 2. Make an album
 - Adding AMY synthesizer has shortened development time
-- The dogfooding process will hone the Forth user interface
-- Some recording and editing software runs on the Zero 2 W
+- The dogfooding process will hone the Forth DSL
 
-## Integrate C3 and AMY on Raspberry Pi Zero 2 W
-- This is really the sweet spot for CLAMS
+## 3. Integrate C3 and AMY on Raspberry Pi Zero 2 W
+- This is really the sweet spot for CLAMS!
     - Devlopment cycle is easier on Linux
     - Synthesis capacity many times that of microcontrollers!
     - Linux USB audio and MIDI are well understood
-    - May also test Bluetooth audio and MIDI
+    - Bluetooth audio and MIDI may be added
     - Many supporting audio software tools available
     - Total hardware cost is $54.99US
     - <https://vilros.com/products/vilros-raspberry-pi-zero-w-2-port-n-play-ready-to-use-kit>
@@ -194,10 +183,9 @@ output:
 - More powerful MCU than the Pico
 
 ## Longer range
-- Electrosmith Daisy port
-- ESP32 port
-- USB MIDI
-- USB audio on non-Teensy boards
+- Teensy with USB audio and MIDI
+- Electrosmith Daisy
+- ESP32
 
 # Back Matter
 
