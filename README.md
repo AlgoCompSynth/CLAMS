@@ -5,6 +5,30 @@ M. Edward (Ed) Borasky
 > “I’ve never seen a happy clam. In fact, most of them were really
 > steamed.” ~ M. Edward (Ed) Borasky
 
+## Update - 2024-11-17
+
+I presented a brief status report to the Silicon Valley Forth Interest Group for their annual
+Forth Day meetup yesterday (2024-11-16). The video should be up on YouTube in a day or so. The slides
+are at <https://github.com/AlgoCompSynth/CLAMS/blob/main/presentations/CLAMS-quest.pdf>.
+
+I've made some design decisions and have a preliminary roadmap.
+
+1. The Forth component will be Christopher Curl's C3:
+    (<https://github.com/CCurl/c3>).
+2. The synthesizer component will be shore pine sound systems' AMY:
+    (<https://github.com/shorepine/amy>).
+3. The first integrations will be for Raspberry Pi Pico / Pico 2 with
+I2S audio outputs. Target boards:
+    - [Pimoroni Pico Audio Pack](https://shop.pimoroni.com/products/pico-audio-pack?variant=32369490853971),
+    - [Pimoroni PicoVision](https://shop.pimoroni.com/products/picovision?variant=41048911904851),
+    - [Pimornni DV Demo Base](https://shop.pimoroni.com/products/pimoroni-pico-dv-demo-base?variant=39494203998291),
+    - [Waveshare Audio Expansion Module for Raspberry Pi Pico](https://www.waveshare.com/pico-audio.htm)), and
+    - [Waveshare Overall Evaluation Board for Pico](https://www.waveshare.com/pico-eval-board.htm).
+
+Once the first integrations are done, I am planning to develop the CLAMS Forth Domain Specific Language and an
+album-length collection of electronic music concurrently. After that, the only integration I'm sure I will be
+doing is a Raspberry Pi Zero 2 W with USB audio. I may also do USB MIDI and Bluetooth audio / MIDI, but neither
+of those is as important to me as USB audio.
 ## Update - 2024-11-05
 
 Two more audio libraries for Arduino have come to my attention:
