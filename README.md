@@ -57,7 +57,7 @@ boards, and Electro-Smith Daisy boards in addition to RP2040 and RP2350
 boards.
 
 The only development framework / platform that supports this diversity is
-Arduino. PlatrformiO can do it, but it uses Arduino under the hood, adding
+Arduino. PlatformiO can do it, but it uses Arduino under the hood, adding
 a number of moving parts. So I need to develop a Forth that works on all
 these boards using the Arduino tools.
 
