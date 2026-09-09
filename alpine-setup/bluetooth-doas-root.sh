@@ -18,14 +18,10 @@ apk add \
     bluez-alsa-doc \
     bluez-alsa-openrc \
     bluez-alsa-utils \
-    dbus \
-    dbus-doc \
     tinyalsa \
     tinyalsa-doc
 
 echo "....Enabling/starting services"
-rc-update add dbus
-rc-service dbus start
 rc-update add bluetooth
 rc-service bluetooth start
 
