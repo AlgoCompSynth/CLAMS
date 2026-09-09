@@ -11,6 +11,10 @@ apk add \
     avahi-doc \
     avahi-openrc \
     avahi-tools \
+    bash \
+    bash-doc \
+    bash-completion \
+    bash-completion-doc \
     checkbashisms \
     curl \
     dbus \
@@ -26,6 +30,7 @@ apk add \
     plocate \
     plocate-doc \
     ripgrep \
+    starship \
     time \
     tree \
     wget \
