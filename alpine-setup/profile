@@ -25,3 +25,7 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+# set XDG_RUNTIME_DIR
+# https://wiki.alpinelinux.org/wiki/XDG_RUNTIME_DIR#Initialising_via_mkrundir
+export XDG_RUNTIME_DIR=$(mkrundir)
