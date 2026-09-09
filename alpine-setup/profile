@@ -29,3 +29,6 @@ fi
 # set XDG_RUNTIME_DIR
 # https://wiki.alpinelinux.org/wiki/XDG_RUNTIME_DIR#Initialising_via_mkrundir
 export XDG_RUNTIME_DIR=$(mkrundir)
+
+# start services at login
+openrc -U console
