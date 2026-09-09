@@ -1,0 +1,134 @@
+FAUST Version 2.85.5
+Embedded backends: 
+   DSP to AssemblyScript
+   DSP to C
+   DSP to C++
+   DSP to Cmajor
+   DSP to Codebox
+   DSP to CSharp
+   DSP to DLang
+   DSP to FIR
+   DSP to Interpreter
+   DSP to Java
+   DSP to JAX
+   DSP to Julia
+   DSP to JSFX
+   DSP to LLVM IR
+   DSP to old C++
+   DSP to Rust
+   DSP to SDF3
+   DSP to VHDL
+   DSP to WebAssembly (wast/wasm)
+Build with LLVM version 20.1.8
+Copyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved. 
+
+faust2alqt
+faust2alsa
+faust2alsaconsole
+faust2android
+faust2androidunity
+faust2api
+faust2atomsnippets
+faust2audiokit
+faust2bela
+faust2bench
+faust2caconsole
+faust2cagtk
+faust2caqt
+faust2caqtios
+faust2clap.py
+faust2cmajor
+faust2comparator
+faust2cpalrust
+faust2cpalrust.orig
+faust2csound
+faust2csvplot
+faust2daisy
+faust2daisy.orig
+faust2dplug
+faust2dssi
+faust2dummy
+faust2dummymem
+faust2eps
+faust2esp32
+faust2faustvst
+faust2feh
+faust2firefox
+faust2gen
+faust2graph
+faust2graphviewer
+faust2hothouse
+faust2ios
+faust2jack
+faust2jackconsole
+faust2jackrust
+faust2jackrust.orig
+faust2jackserver
+faust2jaqt
+faust2jaqtchain
+faust2juce
+faust2ladspa
+faust2linuxunity
+faust2lv2
+faust2magtk
+faust2mathdoc
+faust2mathviewer
+faust2max6
+faust2md
+faust2minimal
+faust2msp
+faust2netjackconsole
+faust2netjackqt
+faust2nodejs
+faust2octave
+faust2osxiosunity
+faust2owl
+faust2paconsole
+faust2paqt
+faust2pdf
+faust2plot
+faust2png
+faust2portaudiojulia
+faust2portaudiorust
+faust2portaudiorust.orig
+faust2pure
+faust2puredata
+faust2pwconsole
+faust2pwgtk
+faust2pwqt
+faust2raqt
+faust2rnbo
+faust2ros
+faust2rosgtk
+faust2rpialsaconsole
+faust2rpinetjackconsole
+faust2sam
+faust2sc
+faust2sc.py
+faust2sig
+faust2sigviewer
+faust2smartkeyb
+faust2sndfile
+faust2stratus
+faust2sublimecompletions
+faust2supercollider
+faust2svg
+faust2svgplot
+faust2svgviewer
+faust2teensy
+faust2tidalcycles
+faust2unity
+faust2vcvrack
+faust2vst
+faust2vsti
+faust2w32max6
+faust2w32msp
+faust2w32puredata
+faust2w32vst
+faust2w64max6
+faust2w64puredata
+faust2w64vst
+faust2winunity
+faust2wwise
+faust2wwise.cmd
+faust2wwise.py
