@@ -6,11 +6,7 @@ set -eu
 echo "....Adding packages"
 apk add \
     bluez \
-    bluez-doc \
-    bluez-alsa \
-    bluez-alsa-doc \
-    bluez-alsa-openrc \
-    bluez-alsa-utils
+    bluez-doc
 
 echo "....Enabling/starting services"
 rc-update add bluetooth
