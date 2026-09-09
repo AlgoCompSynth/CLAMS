@@ -17,9 +17,9 @@ apk add \
     dbus-doc \
     file \
     git \
-    fennel \
+    fennel5.5 \
     htop \
-    lua \
+    lua5.5 \
     mandoc \
     mandoc-apropos \
     neovim \
