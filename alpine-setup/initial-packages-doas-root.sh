@@ -31,6 +31,7 @@ apk add \
     plocate \
     plocate-doc \
     ripgrep \
+    shadow \
     starship \
     time \
     tree \
