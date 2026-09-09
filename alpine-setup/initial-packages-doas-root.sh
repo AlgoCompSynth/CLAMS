@@ -14,11 +14,19 @@ apk add \
     fennel \
     htop \
     lua \
+    mandoc \
+    mandoc-apropos \
     neovim \
+    plocate \
+    plocate-doc \
     ripgrep \
     time \
     tree \
-    wget
+    wget \
+    xdg-utils
+
+echo "....Updating plocate database"
+updatedb
 
 echo "....Finished"
 echo ""
