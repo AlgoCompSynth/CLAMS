@@ -27,6 +27,7 @@ apk add \
     mandoc \
     mandoc-apropos \
     neovim \
+    nerd-fonts-all \
     plocate \
     plocate-doc \
     ripgrep \
