@@ -33,6 +33,7 @@ apk add \
     ripgrep \
     shadow \
     starship \
+    sudo \
     time \
     tree \
     wget \
