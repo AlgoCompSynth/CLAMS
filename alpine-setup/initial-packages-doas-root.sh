@@ -24,6 +24,7 @@ apk add \
     fennel5.5 \
     htop \
     lua5.5 \
+    lynx \
     mandoc \
     mandoc-apropos \
     neovim \
