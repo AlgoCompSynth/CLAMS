@@ -10,7 +10,6 @@ apk add \
   pipewire \
   pipewire-alsa \
   pipewire-doc \
-  pipewire-jack \
   pipewire-pulse \
   pipewire-tools \
   rtkit \
