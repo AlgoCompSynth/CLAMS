@@ -3,10 +3,13 @@
 set -eu
 
 # https://wiki.alpinelinux.org/wiki/Bluetooth
+# https://wiki.alpinelinux.org/wiki/PipeWire
 echo "....Adding packages"
 apk add \
     bluez \
-    bluez-doc
+    bluez-doc \
+    bluez-openrc \
+    pipewire-spa-bluez
 
 echo "....Enabling/starting services"
 rc-update add bluetooth

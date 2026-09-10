@@ -5,8 +5,6 @@ set -eu
 # https://wiki.alpinelinux.org/wiki/PipeWire
 echo "....Adding packages"
 apk add \
-  bluez \
-  bluez-openrc \
   pipemixer \
   pipemixer-doc \
   pipewire \
@@ -14,17 +12,12 @@ apk add \
   pipewire-doc \
   pipewire-jack \
   pipewire-pulse \
-  pipewire-spa-bluez \
   pipewire-tools \
   rtkit \
   rtkit-doc \
   wireplumber \
   wireplumber-doc \
   wireplumber-bash-completion
-
-echo "....Enabling/starting services"
-rc-update add bluetooth
-rc-service bluetooth start
 
 echo "....Updating plocate database"
 updatedb
