@@ -7,9 +7,7 @@ apk add \
     alsa-plugins \
     alsa-plugins-doc \
     alsa-utils \
-    alsa-utils-doc \
-    tinyalsa \
-    tinyalsa-doc
+    alsa-utils-doc
 
 echo "....Updating plocate database"
 updatedb
