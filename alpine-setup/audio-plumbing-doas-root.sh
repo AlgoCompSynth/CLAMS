@@ -7,14 +7,20 @@ echo "....Adding packages"
 apk add \
   bluez \
   bluez-openrc \
+  pipemixer \
+  pipemixer-doc \
   pipewire \
   pipewire-alsa \
   pipewire-doc \
   pipewire-jack \
   pipewire-pulse \
   pipewire-spa-bluez \
+  pipewire-tools \
+  rtkit \
+  rtkit-doc \
   wireplumber \
-  wireplumber-doc
+  wireplumber-doc \
+  wireplumber-bash-completion
 
 echo "....Enabling/starting services"
 rc-update add bluetooth
