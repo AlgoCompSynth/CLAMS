@@ -31,7 +31,6 @@ apk add \
     nerd-fonts-all \
     plocate \
     plocate-doc \
-    raspberrypi-bootloader-cutdown \
     raspberrypi-utils \
     ripgrep \
     shadow \
