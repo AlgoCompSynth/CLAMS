@@ -19,6 +19,7 @@ apk add \
     curl \
     dbus \
     dbus-doc \
+    dbus-openrc \
     file \
     git \
     fennel5.5 \
