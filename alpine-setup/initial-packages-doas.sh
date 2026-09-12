@@ -28,6 +28,7 @@ apk add \
     lynx \
     mandoc \
     mandoc-apropos \
+    mkrundir \
     neovim \
     nerd-fonts-all \
     plocate \

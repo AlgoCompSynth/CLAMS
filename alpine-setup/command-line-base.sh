@@ -3,27 +3,22 @@
 set -eu
 
 echo "....Setting up home directory"
-mkdir --parents $HOME/.local/bin $HOME/Logfiles $HOME/Projects
+# https://wiki.alpinelinux.org/wiki/OpenRC_User_Services#User_runlevels
+mkdir --parents $HOME/.local/bin $HOME/Logfiles $HOME/Projects $HOME/.config/rc/runlevels/console
 
 echo "....Setting startup dotfiles"
 cat profile >> $HOME/.profile
 
-if [[ "$(grep 'end aliases' $HOME/.bashrc 2> /dev/null | wc -l)" == 0 ]]
+if [ "$(grep 'end aliases' $HOME/.bashrc 2> /dev/null | wc -l)" = "0" ]
 then
 
 echo "....Appending aliases to $HOME/.bashrc"
 cat << ALIASES_END >> $HOME/.bashrc
 
 # begin aliases
-# make sure \$HOME/.local/bin is in \$PATH
-if [[ ! "\$PATH" =~ "\$HOME/.local/bin" ]]
-then
-  export PATH="\$HOME/.local/bin:\$PATH"
-
-fi
 
 # workaround for ghostty clients
-if [[ "\$TERM" == "xterm-ghostty" ]]
+if [ "\$TERM" = "xterm-ghostty" ]
 then
   export TERM="xterm-256color"
 
@@ -37,6 +32,7 @@ alias vim=nvim
 
 export EDITOR=nvim
 export VISUAL=nvim
+
 # end aliases
 
 ALIASES_END
@@ -50,7 +46,7 @@ cp -rp nvim $HOME/.config
 echo "....Setting starship configuration file"
 cp starship.toml $HOME/.config/
 
-if [[ "$(grep starship $HOME/.bashrc | wc -l)" == 0 ]]
+if [ "$(grep starship $HOME/.bashrc | wc -l)" = "0" ]
 then
   echo "....Appending starship init to $HOME/.bashrc"
   echo "" >> $HOME/.bashrc
