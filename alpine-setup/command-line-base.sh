@@ -2,40 +2,22 @@
 
 set -eu
 
-echo "....Setting up home directory"
+echo "....Setting up home directories"
 # https://wiki.alpinelinux.org/wiki/OpenRC_User_Services#User_runlevels
 mkdir --parents $HOME/.local/bin $HOME/Logfiles $HOME/Projects $HOME/.config/rc/runlevels/console
 
 echo "....Setting startup dotfiles"
-cat profile >> $HOME/.profile
-
-if [ "$(grep 'end aliases' $HOME/.bashrc 2> /dev/null | wc -l)" = "0" ]
+if [ "$(grep 'end startup code' $HOME/.profile 2> /dev/null | wc -l)" = "0" ]
 then
-
-echo "....Appending aliases to $HOME/.bashrc"
-cat << ALIASES_END >> $HOME/.bashrc
-
-# begin aliases
-
-# workaround for ghostty clients
-if [ "\$TERM" = "xterm-ghostty" ]
-then
-  export TERM="xterm-256color"
+    echo "....Appending startup code to $HOME/.profile"
+    cat startup-code.sh >> $HOME/.profile
 
 fi
 
-alias l='ls -CF --color=auto'
-alias ll='ls -Fltr'
-alias la='ls -FAltr'
-alias vi=nvim
-alias vim=nvim
-
-export EDITOR=nvim
-export VISUAL=nvim
-
-# end aliases
-
-ALIASES_END
+if [ "$(grep 'end bash aliases' $HOME/.bashrc 2> /dev/null | wc -l)" = "0" ]
+then
+    echo "....Appending bash aliases to $HOME/.bashrc"
+    cat bash-aliases.sh >> $HOME/.bashrc
 
 fi
 
