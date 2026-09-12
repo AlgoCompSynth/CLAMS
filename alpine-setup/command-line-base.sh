@@ -54,5 +54,8 @@ then
 
 fi
 
+echo "....Changing $USER shell to /bin/bash"
+doas chsh --shell "/bin/bash" $USER
+
 echo "....Finished"
 echo ""
