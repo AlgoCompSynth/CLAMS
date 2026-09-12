@@ -30,6 +30,7 @@ apk add \
     mandoc-apropos \
     mkrundir \
     neovim \
+    neovim-doc \
     nerd-fonts-all \
     plocate \
     plocate-doc \
