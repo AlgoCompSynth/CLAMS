@@ -33,7 +33,6 @@ apk add \
     nerd-fonts-all \
     plocate \
     plocate-doc \
-    raspberrypi-utils \
     ripgrep \
     shadow \
     starship \
