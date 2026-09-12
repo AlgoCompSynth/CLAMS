@@ -23,8 +23,6 @@ echo tun >> /etc/modules
 echo "....Enabling/starting services"
 rc-update add cgroups default
 rc-service cgroups start
-rc-update add podman default
-rc-service podman start
 
 echo "....Updating plocate database"
 updatedb
