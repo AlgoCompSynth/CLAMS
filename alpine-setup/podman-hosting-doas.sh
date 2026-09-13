@@ -11,10 +11,7 @@ apk add \
     podman-doc \
     podman-compose \
     podman-compose-bash-completion \
-    podman-compose-doc \
-    podman-openrc \
-    podman-remote \
-    podman-tui
+    podman-compose-doc
 
 echo "....Starting/enabling tun module"
 modprobe tun
