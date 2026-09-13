@@ -13,5 +13,7 @@ echo "....Configuring groups"
 doas adduser $USER pipewire
 doas adduser $USER rtkit
 
+echo "....Log out and back in to start audio daemons"
+
 echo "....Finished"
 echo ""
