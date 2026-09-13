@@ -26,6 +26,7 @@ apk add \
     htop \
     lua5.5 \
     lynx \
+    man-pages \
     mandoc \
     mandoc-doc \
     mandoc-apropos \
@@ -35,6 +36,8 @@ apk add \
     nerd-fonts-all \
     plocate \
     plocate-doc \
+    raspberrypi-utils-vcgencmd \
+    raspberrypi-utils-vcgencmd-doc \
     ripgrep \
     shadow \
     starship \
