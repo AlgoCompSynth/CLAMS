@@ -50,6 +50,10 @@ rc-service avahi-daemon start
 rc-update add dbus
 rc-service dbus start
 
+# https://wiki.alpinelinux.org/wiki/Eudev
+echo "....Setting up udev"
+setup-devd udev
+
 echo "....Updating plocate database"
 updatedb
 
