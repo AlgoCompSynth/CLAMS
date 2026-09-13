@@ -5,13 +5,18 @@ set -eu
 # https://wiki.alpinelinux.org/wiki/Podman
 echo "....Adding packages"
 apk add \
+    buildah \
+    buildah-doc \
     iptables \
     podman \
     podman-bash-completion \
     podman-doc \
     podman-compose \
     podman-compose-bash-completion \
-    podman-compose-doc
+    podman-compose-doc \
+    skopeo \
+    skopeo-bash-completion \
+    skopeo-doc
 
 echo "....Starting/enabling tun module"
 modprobe tun
