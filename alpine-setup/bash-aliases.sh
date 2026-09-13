@@ -2,11 +2,11 @@
 # begin bash aliases
 
 # workaround for ghostty clients
-if [ "$TERM" = "xterm-ghostty" ]
-then
-  export TERM="xterm-256color"
+#if [ "$TERM" = "xterm-ghostty" ]
+#then
+  #export TERM="xterm-256color"
 
-fi
+#fi
 
 alias l='ls -CF --color=auto'
 alias ll='ls -Fltr --color=auto'
