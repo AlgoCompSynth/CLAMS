@@ -9,7 +9,6 @@ echo "....Adding packages"
 apk add \
     avahi \
     avahi-doc \
-    avahi-openrc \
     avahi-tools \
     bash \
     bash-doc \
@@ -19,7 +18,8 @@ apk add \
     curl \
     dbus \
     dbus-doc \
-    dbus-openrc \
+    doas-sudo-shim \
+    doas-sudo-shim-doc \
     file \
     git \
     fennel5.5 \
@@ -27,6 +27,7 @@ apk add \
     lua5.5 \
     lynx \
     mandoc \
+    mandoc-doc \
     mandoc-apropos \
     mkrundir \
     neovim \
