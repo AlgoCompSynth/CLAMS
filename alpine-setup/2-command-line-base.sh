@@ -39,5 +39,7 @@ fi
 echo "....Changing $USER shell to /bin/bash"
 doas chsh --shell "/bin/bash" $USER
 
+echo "....Log out and back in again to activate 'bash' shell"
+
 echo "....Finished"
 echo ""

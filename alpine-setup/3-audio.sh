@@ -13,6 +13,12 @@ apk add \
     bluez \
     bluez-doc \
     bluez-openrc \
+    faust \
+    faust-dev \
+    faust-doc \
+    faust-static \
+    faust-tools \
+    faust-vim \
     pipemixer \
     pipemixer-doc \
     pipewire \
@@ -30,6 +36,11 @@ apk add \
 echo "....Enabling/starting services"
 rc-update add bluetooth
 rc-service bluetooth start
+
+echo "....Listing Faust version"
+faust --version > faust-version.txt
+echo "" >> faust-version.txt
+ls -1 /usr/bin/faust2* | sed 's;/usr/bin/;;' >> faust-version.txt
 
 echo "....Updating plocate database"
 updatedb
