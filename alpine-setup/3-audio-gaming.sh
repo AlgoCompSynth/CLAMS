@@ -16,16 +16,23 @@ apk add \
     faust \
     faust-doc \
     faust-tools \
+    love \
+    love-doc \
+    milkytracker \
+    milkytracker-doc \
     pipemixer \
     pipemixer-doc \
     pipewire \
     pipewire-alsa \
     pipewire-doc \
+    pipewire-jack \
     pipewire-pulse \
     pipewire-spa-bluez \
     pipewire-tools \
     rtkit \
     rtkit-doc \
+    schismtracker \
+    schismtracker-doc \
     wireplumber \
     wireplumber-doc \
     wireplumber-bash-completion
