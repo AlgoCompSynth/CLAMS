@@ -8,6 +8,7 @@ apk update && apk upgrade
 echo "....Adding packages"
 apk add \
     avahi \
+    avahi2dns \
     avahi-doc \
     avahi-tools \
     bash \
@@ -56,6 +57,8 @@ echo ""
 echo "....Enabling/starting services"
 rc-update add avahi-daemon
 rc-service avahi-daemon start
+rc-update add avahi2dns
+rc-service avahi2dns start
 rc-update add dbus
 rc-service dbus start
 
