@@ -18,8 +18,6 @@ apk add \
     faust-tools \
     love \
     love-doc \
-    milkytracker \
-    milkytracker-doc \
     pipemixer \
     pipemixer-doc \
     pipewire \
@@ -31,8 +29,6 @@ apk add \
     pipewire-tools \
     rtkit \
     rtkit-doc \
-    schismtracker \
-    schismtracker-doc \
     wireplumber \
     wireplumber-doc \
     wireplumber-bash-completion
@@ -48,6 +44,8 @@ ls -1 /usr/bin/faust2* | sed 's;/usr/bin/;;' >> faust-version.txt
 
 echo "....Updating plocate database"
 updatedb
+
+echo "....Log out and back in again to start user services"
 
 echo "....Finished"
 echo ""
