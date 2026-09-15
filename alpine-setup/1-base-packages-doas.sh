@@ -14,12 +14,16 @@ apk add \
     bash-doc \
     bash-completion \
     bash-completion-doc \
+    build-base \
+    ccache \
     checkbashisms \
+    cmake \
     curl \
     dbus \
     dbus-doc \
     doas-sudo-shim \
     doas-sudo-shim-doc \
+    extra-cmake-modules \
     file \
     git \
     fenneljit \
