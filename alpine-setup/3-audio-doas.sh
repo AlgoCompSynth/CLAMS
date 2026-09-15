@@ -16,8 +16,6 @@ apk add \
     faust \
     faust-doc \
     faust-tools \
-    love \
-    love-doc \
     pipemixer \
     pipemixer-doc \
     pipewire \
