@@ -22,9 +22,13 @@ apk add \
     doas-sudo-shim-doc \
     file \
     git \
-    fennel5.5 \
+    fenneljit \
+    fennel-doc \
     htop \
-    lua5.5 \
+    lua5.1 \
+    lua5.1-doc \
+    luajit \
+    luajit-doc \
     lynx \
     man-pages \
     mandoc \
@@ -36,8 +40,6 @@ apk add \
     nerd-fonts-all \
     plocate \
     plocate-doc \
-    raspberrypi-utils-vcgencmd \
-    raspberrypi-utils-vcgencmd-doc \
     ripgrep \
     shadow \
     starship \

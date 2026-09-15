@@ -14,11 +14,8 @@ apk add \
     bluez-doc \
     bluez-openrc \
     faust \
-    faust-dev \
     faust-doc \
-    faust-static \
     faust-tools \
-    faust-vim \
     pipemixer \
     pipemixer-doc \
     pipewire \
