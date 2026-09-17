@@ -51,6 +51,11 @@ apk add \
     openssl-doc \
     plocate \
     plocate-doc \
+    R \
+    R-dev \
+    R-doc \
+    R-mathlib \
+    R-static \
     raspberrypi-bootloader-doc \
     ripgrep \
     ripgrep-doc \
