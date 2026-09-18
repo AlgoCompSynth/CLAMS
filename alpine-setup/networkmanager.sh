@@ -20,7 +20,7 @@ doas adduser $USER plugdev
 
 echo "....Updating /etc/NetworkManager/NetworkManager.conf"
 doas mkdir -p /etc/NetworkManager/
-doas cat NetworkManager.conf >> /etc/NetworkManager/NetworkManager.conf
+cat NetworkManager.conf | doas tee -a /etc/NetworkManager/NetworkManager.conf > /dev/null
 
 echo ""
 echo "....Enabling/starting services"
