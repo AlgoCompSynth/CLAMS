@@ -3,9 +3,14 @@
 set -eu
 
 # References:
+# https://wiki.alpinelinux.org/wiki/Eudev
+# https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working 
 # https://wiki.alpinelinux.org/wiki/MDNS
 # https://wiki.alpinelinux.org/wiki/NetworkManager
 # https://wiki.alpinelinux.org/wiki/OpenRC_User_Services#User_runlevels
+# https://wiki.alpinelinux.org/wiki/Raspberry_Pi
+# https://wiki.alpinelinux.org/wiki/Repositories
+# https://wiki.alpinelinux.org/wiki/Shell_management
 
 echo "....Setting up home directories"
 mkdir --parents $HOME/.local/bin $HOME/Logfiles $HOME/Projects $HOME/.config/rc/runlevels/console
@@ -87,7 +92,6 @@ doas apk add -vv \
     xdg-utils-doc \
     >> $LOGFILE 2>&1
 
-# https://wiki.alpinelinux.org/wiki/Eudev
 echo "....Setting up udev"
 doas setup-devd udev
 
@@ -156,6 +160,8 @@ fi
 echo "....Updating plocate database"
 doas updatedb
 
+echo ""
+echo ""
 echo "....Setup complete - reboot"
 echo "....WARNING! You will have to configure and enable wireless from a *wired* connection"
 
