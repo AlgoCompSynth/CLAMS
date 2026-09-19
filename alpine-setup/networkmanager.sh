@@ -22,16 +22,8 @@ echo "....Updating /etc/NetworkManager/NetworkManager.conf"
 doas mkdir -p /etc/NetworkManager/
 cat NetworkManager.conf | doas tee -a /etc/NetworkManager/NetworkManager.conf > /dev/null
 
-echo ""
-echo "....Enabling/starting services"
-doas rc-update add networkmanager default
-doas rc-update del networking boot
-doas rc-update del wpa_supplicant boot
-
 echo "....Updating plocate database"
 doas updatedb
-
-echo "....Reboot to switch to NetworkManager"
 
 echo "....Finished"
 echo ""
