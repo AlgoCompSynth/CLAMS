@@ -2,8 +2,12 @@
 
 set -eu
 
-echo "....Setting up home directories"
+# References:
+# https://wiki.alpinelinux.org/wiki/MDNS
+# https://wiki.alpinelinux.org/wiki/NetworkManager
 # https://wiki.alpinelinux.org/wiki/OpenRC_User_Services#User_runlevels
+
+echo "....Setting up home directories"
 mkdir --parents $HOME/.local/bin $HOME/Logfiles $HOME/Projects $HOME/.config/rc/runlevels/console
 
 echo "....Creating logfile"
@@ -19,6 +23,10 @@ doas apk upgrade
 
 echo "....Adding packages"
 doas apk add -vv \
+    avahi \
+    avahi-doc \
+    avahi-tools \
+    avahi2dns@testing \
     bash \
     bash-doc \
     bash-completion \
@@ -31,6 +39,7 @@ doas apk add -vv \
     doas-doc \
     doas-sudo-shim \
     doas-sudo-shim-doc \
+    drill \
     file \
     git \
     git-doc \
@@ -52,6 +61,12 @@ doas apk add -vv \
     neovim \
     neovim-doc \
     nerd-fonts-all \
+    networkmanager \
+    networkmanager-cli \
+    networkmanager-dnsmasq \
+    networkmanager-doc \
+    networkmanager-tui \
+    networkmanager-wifi \
     openssh-doc \
     openssl-doc \
     plocate \
@@ -76,10 +91,37 @@ doas apk add -vv \
 echo "....Setting up udev"
 doas setup-devd udev
 
+echo "....Setting configuration files"
+echo "......NetworkManager.conf"
+doas mkdir -p /etc/NetworkManager/
+diff NetworkManager.conf /etc/NetworkManager/NetworkManager.conf || true
+doas cp NetworkManager.conf /etc/NetworkManager/NetworkManager.conf
+
+echo "......mdns.conf"
+doas mkdir -p /etc/NetworkManager/dnsmasq.d/
+diff mdns.conf /etc/NetworkManager/dnsmasq.d/mdns.conf || true
+doas cp mdns.conf /etc/NetworkManager/dnsmasq.d/mdns.conf
+
+echo "......resolvconf"
+doas mkdir -p /etc/udhcpc/post-bound/resolvconf
+diff resolvconf /etc/udhcpc/post-bound/resolvconf || true
+doas cp resolvconf /etc/udhcpc/post-bound/resolvconf
+
 echo ""
-echo "....Enabling/starting services"
+echo "....Setting up services for next reboot"
+doas rc-update add avahi-daemon
+doas rc-update add avahi2dns
 doas rc-update add dbus
-doas rc-service dbus start
+doas rc-update add networkmanager default
+doas rc-update del networking boot || true
+doas rc-update del wpa_supplicant boot || true
+echo ""
+
+echo "....Changing $USER shell to /bin/bash"
+doas chsh --shell "/bin/bash" $USER
+
+echo "....Adding $USER to the plugdev group"
+doas adduser $USER plugdev
 
 echo "....Setting startup dotfiles"
 if [ "$(grep 'end startup code' $HOME/.profile 2> /dev/null | wc -l)" = "0" ]
@@ -114,10 +156,8 @@ fi
 echo "....Updating plocate database"
 doas updatedb
 
-echo "....Changing $USER shell to /bin/bash"
-doas chsh --shell "/bin/bash" $USER
-
-echo "....Log out and back in again to activate 'bash' shell"
+echo "....Setup complete - reboot"
+echo "....WARNING! You will have to configure and enable wireless from a *wired* connection"
 
 echo "....Finished"
 echo ""
