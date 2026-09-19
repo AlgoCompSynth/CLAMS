@@ -3,14 +3,21 @@
 set -eu
 
 # https://wiki.alpinelinux.org/wiki/NetworkManager
+# https://wiki.alpinelinux.org/wiki/MDNS
 echo "....Creating logfile"
 export LOGFILE=$HOME/Logfiles/networkmanager.log
 echo "" > $LOGFILE
 
 echo "....Adding packages"
 doas apk add -vv \
+    avahi \
+    avahi-doc \
+    avahi-tools \
+    avahi2dns@testing \
+    drill \
     networkmanager \
     networkmanager-cli \
+    networkmanager-dnsmasq \
     networkmanager-doc \
     networkmanager-tui \
     networkmanager-wifi \
@@ -19,16 +26,31 @@ doas apk add -vv \
 echo "....Adding $USER to the plugdev group"
 doas adduser $USER plugdev
 
-echo "....Updating /etc/NetworkManager/NetworkManager.conf"
+echo "....Setting configuration files"
+
+echo "......NetworkManager.conf"
 doas mkdir -p /etc/NetworkManager/
-cat NetworkManager.conf | doas tee -a /etc/NetworkManager/NetworkManager.conf > /dev/null
+diff NetworkManager.conf /etc/NetworkManager/NetworkManager.conf || true
+doas cp NetworkManager.conf /etc/NetworkManager/NetworkManager.conf
+
+echo "......mdns.conf"
+doas mkdir -p /etc/NetworkManager/dnsmasq.d/
+diff mdns.conf /etc/NetworkManager/dnsmasq.d/mdns.conf || true
+doas cp mdns.conf /etc/NetworkManager/dnsmasq.d/mdns.conf
+
+echo "......resolvconf"
+doas mkdir -p /etc/udhcpc/post-bound/resolvconf
+diff resolvconf /etc/udhcpc/post-bound/resolvconf || true
+doas cp resolvconf /etc/udhcpc/post-bound/resolvconf
 
 echo ""
-echo "....Setting up NetworkManager for next reboot"
+echo "....Setting up services for next reboot"
 echo "....WARNING! You will have to configure and enable wireless from a *wired* connection"
+doas rc-update add avahi-daemon
+doas rc-update add avahi2dns
 doas rc-update add networkmanager default
-doas rc-update del networking boot
-doas rc-update del wpa_supplicant boot
+doas rc-update del networking boot || true
+doas rc-update del wpa_supplicant boot || true
 echo ""
 
 echo "....Updating plocate database"
