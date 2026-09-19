@@ -24,7 +24,7 @@ doas mkdir -p /etc/NetworkManager/
 cat NetworkManager.conf | doas tee -a /etc/NetworkManager/NetworkManager.conf > /dev/null
 
 echo ""
-echo "....Setting up NetworkManager after reboot"
+echo "....Setting up NetworkManager for next reboot"
 echo "....WARNING! You will have to configure and enable wireless from a *wired* connection"
 doas rc-update add networkmanager default
 doas rc-update del networking boot
