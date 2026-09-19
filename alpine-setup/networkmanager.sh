@@ -12,6 +12,7 @@ doas apk add -vv \
     networkmanager \
     networkmanager-cli \
     networkmanager-doc \
+    networkmanager-tui \
     networkmanager-wifi \
     >> $LOGFILE 2>&1
 
