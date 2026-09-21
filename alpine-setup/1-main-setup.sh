@@ -11,6 +11,7 @@ set -eu
 # https://wiki.alpinelinux.org/wiki/Raspberry_Pi
 # https://wiki.alpinelinux.org/wiki/Repositories
 # https://wiki.alpinelinux.org/wiki/Shell_management
+# https://github.com/macmpi/alpine-linux-headless-bootstrap
 
 echo "....Setting up home directories"
 mkdir --parents $HOME/.local/bin $HOME/Logfiles $HOME/Projects $HOME/.config/rc/runlevels/console
