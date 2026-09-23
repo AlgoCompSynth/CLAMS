@@ -1,0 +1,5 @@
+
+auto usb0
+iface usb0 inet static
+    address 10.42.0.2/24
+    gateway 10.42.0.1
