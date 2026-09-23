@@ -131,6 +131,9 @@ then
 
 fi
 
+echo "....Indexing man pages"
+doas makewhatis
+
 echo "....Updating plocate database"
 doas updatedb
 
