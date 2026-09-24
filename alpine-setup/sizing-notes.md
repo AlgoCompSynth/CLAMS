@@ -12,10 +12,10 @@
 ## Raspberry Pi OS Lite base - Raspberry Pi Zero 2 W
 
 
-- OS + mDNS + NetworkManager
+- OS + mDNS + NetworkManager + PipeWire + WirePlumber + rtkit
 
-    $ free -h
+    ❯ free -h
                    total        used        free      shared  buff/cache   available
-    Mem:           415Mi       152Mi        81Mi       2.5Mi       235Mi       262Mi
+    Mem:           415Mi       150Mi       160Mi       2.5Mi       158Mi       265Mi
     Swap:          414Mi          0B       414Mi
 

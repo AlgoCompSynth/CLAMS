@@ -1,3 +1,6 @@
+
+# begin startup code
+
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -26,9 +29,5 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# set XDG_RUNTIME_DIR
-# https://wiki.alpinelinux.org/wiki/XDG_RUNTIME_DIR#Initialising_via_mkrundir
-export XDG_RUNTIME_DIR=$(mkrundir)
+# end startup code
 
-# start services at login
-openrc -U console
