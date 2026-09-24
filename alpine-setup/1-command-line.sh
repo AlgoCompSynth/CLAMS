@@ -3,7 +3,6 @@
 set -eu
 
 # References:
-# https://wiki.alpinelinux.org/wiki/Developer_Documentation
 # https://wiki.alpinelinux.org/wiki/Eudev
 # https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working 
 # https://wiki.alpinelinux.org/wiki/OpenRC_User_Services#User_runlevels
@@ -16,7 +15,7 @@ echo "....Setting up home directories"
 mkdir --parents $HOME/.local/bin $HOME/Logfiles $HOME/Projects $HOME/.config/rc/runlevels/console
 
 echo "....Creating logfile"
-export LOGFILE=$HOME/Logfiles/base-devel.log
+export LOGFILE=$HOME/Logfiles/command-line.log
 echo "" > $LOGFILE
 
 echo "....Switching to edge release with tagged @testing!"
@@ -32,23 +31,12 @@ doas apk add -vv \
     bash-doc \
     bash-completion \
     bash-completion-doc \
-    build-base \
-    ccache \
-    ccache-doc \
     checkbashisms \
-    cmake \
-    cmake-doc \
-    distcc \
-    distcc-doc \
-    extra-cmake-modules \
-    extra-cmake-modules-doc \
     curl \
     curl-doc \
     dbus \
     dbus-doc \
     doas-doc \
-    doas-sudo-shim \
-    doas-sudo-shim-doc \
     file \
     git \
     git-doc \
@@ -82,6 +70,8 @@ doas apk add -vv \
     starship \
     time \
     time-doc \
+    tmux \
+    tmux-doc \
     tree \
     tree-doc \
     wget \
@@ -96,6 +86,7 @@ doas setup-devd udev
 echo ""
 echo "....Setting up services for next reboot"
 doas rc-update add dbus
+doas rc-service dbus start
 echo ""
 
 echo "....Changing $USER shell to /bin/bash"
@@ -139,7 +130,7 @@ doas updatedb
 
 echo ""
 echo ""
-echo "....Setup complete - reboot"
+echo "....Command line setup complete - log out and back in again"
 
 echo "....Finished"
 echo ""
