@@ -28,17 +28,14 @@ doas apk add -vv \
 echo "....Setting configuration files"
 echo "......NetworkManager.conf"
 doas mkdir -p /etc/NetworkManager/
-diff NetworkManager.conf /etc/NetworkManager/NetworkManager.conf || true
 doas cp NetworkManager.conf /etc/NetworkManager/NetworkManager.conf
 
 echo "......mdns.conf"
 doas mkdir -p /etc/NetworkManager/dnsmasq.d/
-diff mdns.conf /etc/NetworkManager/dnsmasq.d/mdns.conf || true
 doas cp mdns.conf /etc/NetworkManager/dnsmasq.d/mdns.conf
 
 echo "......resolvconf"
 doas mkdir -p /etc/udhcpc/post-bound/resolvconf
-diff resolvconf /etc/udhcpc/post-bound/resolvconf || true
 doas cp resolvconf /etc/udhcpc/post-bound/resolvconf
 
 echo ""
