@@ -111,6 +111,9 @@ echo "....Setting neovim configuration files"
 mkdir --parents $HOME/.config
 cp -rp nvim $HOME/.config
 
+echo "....Setting tmux configuration file"
+cp tmux.conf $HOME/.tmux.conf
+
 echo "....Setting starship configuration file"
 cp starship.toml $HOME/.config/
 
