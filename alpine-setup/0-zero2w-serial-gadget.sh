@@ -13,17 +13,11 @@ echo "....Setting configuration files"
 echo "....../etc/modules-load.d/gadget.conf"
 doas cp gadget.conf /etc/modules-load.d/gadget.conf
 
-echo "....Indexing man pages"
-doas makewhatis
-
-echo "....Updating plocate database"
-doas updatedb
-
 echo ""
 echo ""
 echo "....Setup complete - connect a host USB cable to the Zero 2 W USB port and reboot"
 echo "....Console should be /dev/ttyGS0 on Zero 2 W and /dev/ttyACMn on a Linux host.
-echo "....Baud rate is 112500."
+echo "....Baud rate is 115200."
 
 echo "....Finished"
 echo ""
