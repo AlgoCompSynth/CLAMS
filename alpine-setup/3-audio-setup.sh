@@ -16,6 +16,8 @@ doas apk add -vv \
     alsa-plugins-doc \
     alsa-utils \
     alsa-utils-doc \
+    bluetui@testing \
+    bluetui-doc@testing \
     bluez \
     bluez-doc \
     bluez-openrc \
