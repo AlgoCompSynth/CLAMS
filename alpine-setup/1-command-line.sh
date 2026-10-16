@@ -40,12 +40,13 @@ doas apk add -vv \
     file \
     git \
     git-doc \
+    fennel5.5 \
     fenneljit \
     fennel-doc \
     htop \
     htop-doc \
-    lua5.1 \
-    lua5.1-doc \
+    lua5.5 \
+    lua5.5-doc \
     luajit \
     luajit-doc \
     lynx \
