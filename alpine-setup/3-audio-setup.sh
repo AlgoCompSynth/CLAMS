@@ -21,12 +21,29 @@ doas apk add -vv \
     bluez \
     bluez-doc \
     bluez-openrc \
+    clang20 \
+    clang20-ccache \
+    clang20-dev \
+    clang20-extra-tools \
+    clang20-headers \
+    clang20-libclang \
+    clang20-libs \
+    clang20-rtlib \
+    clang20-static \
     faust@testing \
     faust-dev@testing \
     faust-doc@testing \
     faust-static@testing \
     faust-tools@testing \
     faust-vim@testing \
+    llvm20 \
+    llvm20-dev \
+    llvm20-gtest \
+    llvm20-libs \
+    llvm20-linker-tools \
+    llvm20-static \
+    llvm20-test-utils \
+    llvm20-test-utils-pyc \
     pipemixer@testing \
     pipemixer-doc@testing \
     pipewire \
