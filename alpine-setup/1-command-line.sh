@@ -43,9 +43,6 @@ doas apk add -vv \
     fennel5.5 \
     fenneljit \
     fennel-doc \
-    gambit@testing \
-    gambit-dev@testing \
-    gambit-doc@testing \
     helix \
     helix-tree-sitter-vendor \
     htop \
@@ -71,14 +68,7 @@ doas apk add -vv \
     openssl-doc \
     plocate \
     plocate-doc \
-    R \
-    R-dev \
-    R-doc \
-    R-mathlib \
-    R-static \
     raspberrypi-bootloader-doc \
-    retroforth@testing \
-    retroforth-doc@testing \
     ripgrep \
     ripgrep-doc \
     shadow \
