@@ -27,24 +27,36 @@ doas apk upgrade
 
 echo "....Adding packages"
 doas apk add -vv \
+    alpine-sdk \
     bash \
     bash-doc \
     bash-completion \
     bash-completion-doc \
+    ccache \
+    ccache-doc \
     checkbashisms \
+    cmake \
+    cmake-doc \
     curl \
     curl-doc \
     dbus \
     dbus-doc \
     doas-doc \
+    extra-cmake-modules \
+    extra-cmake-modules-doc \
     file \
     git \
     git-doc \
     fennel5.5 \
     fenneljit \
     fennel-doc \
+    helix \
+    helix-tree-sitter-vendor \
     htop \
     htop-doc \
+    kakoune \
+    kakoune-doc \
+    kakoune-lsp \
     lua5.5 \
     lua5.5-doc \
     luajit \
