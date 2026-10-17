@@ -18,13 +18,6 @@ echo "....Creating logfile"
 export LOGFILE=$HOME/Logfiles/command-line.log
 echo "" > $LOGFILE
 
-echo "....Switching to edge release with tagged @testing!"
-diff repositories /etc/apk/repositories || true
-doas cp repositories /etc/apk/repositories
-
-echo "....Upgrading if needed"
-doas apk upgrade
-
 echo "....Adding packages"
 doas apk add -vv \
     alpine-sdk \
