@@ -17,7 +17,9 @@ doas apk add -vv \
     avahi2dns@testing \
     drill \
     openresolv \
+    openresolv-doc \
     unbound \
+    unbound-doc \
     >> $LOGFILE 2>&1
 
 echo "....Setting configuration files"
