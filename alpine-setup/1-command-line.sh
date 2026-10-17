@@ -64,6 +64,8 @@ doas apk add -vv \
     plocate \
     plocate-doc \
     raspberrypi-bootloader-doc \
+    retroforth@testing \
+    retroforth-doc@testing \
     ripgrep \
     ripgrep-doc \
     shadow \
