@@ -2,11 +2,11 @@
 
 ## Alpine base - Raspberry Pi Zero 2 W
 
-- OS + mDNS + NetworkManager + PipeWire + WirePlumber + rtkit
+- OS + Avahi + WiFi + Bluetooth + PipeWire + WirePlumber + rtkit
 
     ❯ free -h
                   total        used        free      shared  buff/cache   available
-    Mem:         415.7M       61.6M      143.9M      648.0K      210.2M      343.1M
+    Mem:         415.6M       65.1M      288.1M      640.0K       62.4M      339.6M
     Swap:             0           0           0
 
 ## Raspberry Pi OS Lite base - Raspberry Pi Zero 2 W
