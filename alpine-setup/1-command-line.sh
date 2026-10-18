@@ -8,13 +8,23 @@ set -eu
 # https://wiki.alpinelinux.org/wiki/MDNS
 # https://wiki.alpinelinux.org/wiki/OpenRC_User_Services#User_runlevels
 # https://wiki.alpinelinux.org/wiki/Raspberry_Pi
-# https://wiki.alpinelinux.org/wiki/Repositories
+# https://wiki.alpinelinux.org/wiki/Repositories#Upgrading_to_edge
 # https://wiki.alpinelinux.org/wiki/Shell_management
 # https://github.com/macmpi/alpine-linux-headless-bootstrap
+
+echo "....Setting up home directories"
+mkdir --parents $HOME/.local/bin $HOME/Logfiles $HOME/Projects $HOME/.config/rc/runlevels/console
 
 echo "....Creating logfile"
 export LOGFILE=$HOME/Logfiles/command-line.log
 echo "" > $LOGFILE
+
+echo "....Switching to edge release with tagged @testing!"
+doas cp repositories /etc/apk/repositories
+
+echo "....Upgrading if needed"
+doas apk upgrade -vv \
+    >> $LOGFILE 2>&1
 
 echo "....Adding packages"
 doas apk add -vv \
@@ -143,7 +153,7 @@ doas updatedb
 
 echo ""
 echo ""
-echo "....Command line setup complete - log out and back in again"
+echo "....Command line setup complete - reboot!"
 
 echo "....Finished"
 echo ""
