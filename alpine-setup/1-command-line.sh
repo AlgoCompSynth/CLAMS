@@ -5,6 +5,7 @@ set -eu
 # References:
 # https://wiki.alpinelinux.org/wiki/Eudev
 # https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working 
+# https://wiki.alpinelinux.org/wiki/MDNS
 # https://wiki.alpinelinux.org/wiki/OpenRC_User_Services#User_runlevels
 # https://wiki.alpinelinux.org/wiki/Raspberry_Pi
 # https://wiki.alpinelinux.org/wiki/Repositories
@@ -18,6 +19,9 @@ echo "" > $LOGFILE
 echo "....Adding packages"
 doas apk add -vv \
     alpine-sdk \
+    avahi \
+    avahi-doc \
+    avahi-tools \
     bash \
     bash-doc \
     bash-completion \
@@ -32,6 +36,7 @@ doas apk add -vv \
     dbus \
     dbus-doc \
     doas-doc \
+    drill \
     extra-cmake-modules \
     extra-cmake-modules-doc \
     file \
@@ -88,6 +93,8 @@ doas setup-devd udev
 
 echo ""
 echo "....Setting up services for next reboot"
+doas rc-update add avahi-daemon
+doas rc-service avahi-daemon start
 doas rc-update add dbus
 doas rc-service dbus start
 echo ""
