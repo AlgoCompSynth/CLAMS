@@ -3,6 +3,7 @@
 set -eu
 
 # References:
+# https://wiki.alpinelinux.org/wiki/ALSA
 # https://wiki.alpinelinux.org/wiki/Bluetooth
 # https://wiki.alpinelinux.org/wiki/PipeWire
 
@@ -14,6 +15,9 @@ echo "....Adding packages"
 doas apk add -vv \
     alsa-lib \
     alsa-lib-dev \
+    alsa-utils \
+    alsa-utils-doc \
+    alsaconf \
     bluetui@testing \
     bluetui-doc@testing \
     bluez \
@@ -48,6 +52,11 @@ rc-update -U add pipewire-pulse console
 rc-update -U add wireplumber console
 doas rc-update add bluetooth
 doas rc-service bluetooth start
+
+echo ""
+echo "....Enabling ALSA sequencer"
+doas modprobe snd-seq
+echo snd-seq | doas tee -a /etc/modules
 
 echo "....Adding $USER to the pipewire and rtkit groups"
 doas adduser $USER pipewire
