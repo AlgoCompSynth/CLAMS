@@ -12,6 +12,7 @@ echo "" > $LOGFILE
 
 echo "....Adding packages"
 doas apk add -vv \
+    alsa-lib \
     alsa-lib-dev \
     bluetui@testing \
     bluetui-doc@testing \
@@ -24,8 +25,11 @@ doas apk add -vv \
     pipemixer@testing \
     pipemixer-doc@testing \
     pipewire \
+    pipewire-alsa \
     pipewire-dev \
     pipewire-doc \
+    pipewire-jack \
+    pipewire-jack-dev \
     pipewire-pulse \
     pipewire-spa-bluez \
     pipewire-spa-tools \
