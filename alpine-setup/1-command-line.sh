@@ -28,6 +28,7 @@ doas apk upgrade -vv \
 
 echo "....Adding packages"
 doas apk add -vv \
+    apk-tools-doc \
     avahi \
     avahi-doc \
     avahi-tools \
@@ -35,9 +36,11 @@ doas apk add -vv \
     bash-doc \
     bash-completion \
     bash-completion-doc \
+    busybox-doc \
     checkbashisms \
     curl \
     curl-doc \
+    doas-doc \
     dbus \
     dbus-doc \
     doas-doc \
@@ -51,6 +54,8 @@ doas apk add -vv \
     fennel-doc \
     htop \
     htop-doc \
+    ifupdown-ng-doc \
+    iw-doc \
     lua5.5 \
     lua5.5-doc \
     luajit \
@@ -64,6 +69,7 @@ doas apk add -vv \
     mkrundir \
     neovim \
     neovim-doc \
+    openrc-doc \
     openssh-doc \
     openssl-doc \
     plocate \
@@ -82,6 +88,7 @@ doas apk add -vv \
     tree-doc \
     wget \
     wget-doc \
+    wpa_supplicant-doc \
     xdg-utils \
     xdg-utils-doc \
     >> $LOGFILE 2>&1
