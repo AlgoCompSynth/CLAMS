@@ -18,6 +18,9 @@ doas apk add -vv \
     bluez \
     bluez-doc \
     bluez-openrc \
+    fluidsynth \
+    fluidsynth-dev \
+    fluidsynth-doc \
     pipemixer@testing \
     pipemixer-doc@testing \
     pipewire \
