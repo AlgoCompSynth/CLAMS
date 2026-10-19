@@ -3,6 +3,7 @@
 set -eu
 
 # References:
+# https://wiki.alpinelinux.org/wiki/ALSA
 # https://wiki.alpinelinux.org/wiki/Eudev
 # https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working 
 # https://wiki.alpinelinux.org/wiki/MDNS
@@ -28,7 +29,9 @@ doas apk upgrade -vv \
 
 echo "....Adding packages"
 doas apk add -vv \
-    alpine-sdk \
+    alsa-utils \
+    alsa-utils-doc \
+    alsaconf \
     avahi \
     avahi-doc \
     avahi-tools \
@@ -36,32 +39,22 @@ doas apk add -vv \
     bash-doc \
     bash-completion \
     bash-completion-doc \
-    ccache \
-    ccache-doc \
     checkbashisms \
-    cmake \
-    cmake-doc \
     curl \
     curl-doc \
     dbus \
     dbus-doc \
     doas-doc \
     drill \
-    extra-cmake-modules \
-    extra-cmake-modules-doc \
     file \
+    font-cascadia-code-nerd \
     git \
     git-doc \
     fennel5.5 \
     fenneljit \
     fennel-doc \
-    helix \
-    helix-tree-sitter-vendor \
     htop \
     htop-doc \
-    kakoune \
-    kakoune-doc \
-    kakoune-lsp \
     lua5.5 \
     lua5.5-doc \
     luajit \
@@ -75,7 +68,6 @@ doas apk add -vv \
     mkrundir \
     neovim \
     neovim-doc \
-    nerd-fonts-all \
     openssh-doc \
     openssl-doc \
     plocate \
@@ -101,8 +93,14 @@ doas apk add -vv \
 echo "....Setting up udev"
 doas setup-devd udev
 
+echo "....Setting up ALSA sequencer"
+doas modprobe snd-seq
+echo "snd-seq" | doas tee -a /etc/modules
+
 echo ""
 echo "....Setting up services for next reboot"
+doas rc-update add alsa
+doas rc-service alsa start
 doas rc-update add avahi-daemon
 doas rc-service avahi-daemon start
 doas rc-update add dbus
@@ -111,6 +109,10 @@ echo ""
 
 echo "....Changing $USER shell to /bin/bash"
 doas chsh --shell "/bin/bash" $USER
+
+echo "....Setting groups"
+doas adduser root audio
+doas adduser $USER audio
 
 echo "....Setting startup dotfiles"
 if [ "$(grep 'end startup code' $HOME/.profile 2> /dev/null | wc -l)" = "0" ]
