@@ -8,8 +8,10 @@ echo "" > $LOGFILE
 
 echo "....Adding packages"
 doas apk add -vv \
+    binutils-doc \
     build-base \
     ccache \
+    ccache-doc \
     clang20 \
     clang20-ccache \
     clang20-dev \
@@ -25,6 +27,8 @@ doas apk add -vv \
     faust-static@testing \
     faust-tools@testing \
     faust-vim@testing \
+    gcc-doc \
+    gmp-doc \
     llvm20 \
     llvm20-dev \
     llvm20-gtest \
@@ -33,6 +37,10 @@ doas apk add -vv \
     llvm20-static \
     llvm20-test-utils \
     llvm20-test-utils-pyc \
+    make-doc \
+    mpc1-doc \
+    mpfr4-doc \
+    patch-doc \
     >> $LOGFILE 2>&1
 
 echo "....Listing Faust version"
