@@ -7,15 +7,12 @@ set -eu
 # https://wiki.alpinelinux.org/wiki/PipeWire
 
 echo "....Creating logfile"
-export LOGFILE=$HOME/Logfiles/audio-setup.log
+export LOGFILE=$HOME/Logfiles/audio-plumbing.log
 echo "" > $LOGFILE
 
 echo "....Adding packages"
 doas apk add -vv \
-    alsa-plugins \
-    alsa-plugins-doc \
-    alsa-utils \
-    alsa-utils-doc \
+    alsa-lib-dev \
     bluetui@testing \
     bluetui-doc@testing \
     bluez \
@@ -24,17 +21,17 @@ doas apk add -vv \
     pipemixer@testing \
     pipemixer-doc@testing \
     pipewire \
-    pipewire-alsa \
+    pipewire-dev \
     pipewire-doc \
-    pipewire-jack \
     pipewire-pulse \
     pipewire-spa-bluez \
+    pipewire-spa-tools \
     pipewire-tools \
     rtkit \
     rtkit-doc \
     wireplumber \
+    wireplumber-dev \
     wireplumber-doc \
-    wireplumber-bash-completion \
     >> $LOGFILE 2>&1
 
 echo ""

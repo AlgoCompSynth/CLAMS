@@ -49,15 +49,12 @@ doas apk add -vv \
     font-cascadia-code-nerd \
     git \
     git-doc \
-    fennel5.5 \
     fenneljit \
     fennel-doc \
     htop \
     htop-doc \
     ifupdown-ng-doc \
     iw-doc \
-    lua5.5 \
-    lua5.5-doc \
     luajit \
     luajit-doc \
     lynx \
