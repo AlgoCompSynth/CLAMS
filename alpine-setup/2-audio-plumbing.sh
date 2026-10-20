@@ -40,6 +40,14 @@ doas apk add -vv \
     pipewire-tools \
     rtkit \
     rtkit-doc \
+    sox \
+    sox-dev \
+    sox-doc \
+    sox-static \
+    soxr \
+    soxr-dev \
+    soxr-doc \
+    soxr-static \
     wireplumber \
     wireplumber-dev \
     wireplumber-doc \
