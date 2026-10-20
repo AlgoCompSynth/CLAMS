@@ -1,7 +1,7 @@
 # CLAMS - Command Line Algorithmic Music System
 
 > "Happy as a clam? You know what? I've never seen a happy clam. In
-> fact, most of them were pretty steamed!" -Buck Borasky, Frontier
+> fact, most of them were pretty steamed!" - Buck Borasky, Frontier
 > Programmer
 
 CLAMS is a minimalist system for making computer music on Raspberry Pi
