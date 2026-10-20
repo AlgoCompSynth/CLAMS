@@ -8,6 +8,7 @@ echo "" > $LOGFILE
 
 echo "....Adding packages"
 doas apk add -vv \
+    arduino-cli@testing \
     binutils-doc \
     build-base \
     ccache \
@@ -41,6 +42,7 @@ doas apk add -vv \
     mpc1-doc \
     mpfr4-doc \
     patch-doc \
+    platformio-core@testing \
     >> $LOGFILE 2>&1
 
 echo "....Listing Faust version"
