@@ -19,16 +19,19 @@ and Bluetooth,
 [FluidSynth](https://www.fluidsynth.org/) SoundFont-based synthesizer,
 - The
 [Faust](https://faust.grame.fr/) functional music programming language
-and development tool chain,
+and development toolchain,
 - The
 [ChucK](https://chuck.stanford.edu/) real-time music programming language, and
-- Cross-development environments for common microcontrollers, including
-the Daisy Seed, PJRC Teensy and RP2040/2350.
+- The
+[Arduino CLI](https://docs.arduino.cc/arduino-cli/) and
+[PlatformIO Core](https://docs.platformio.org/en/latest/core/) cross-development
+toolchains for common microcontrollers, including the Daisy Seed, PJRC Teensy
+and RP2040/2350.
 
 ## Why Alpine Linux?
 
 The initial target for CLAMS is the Raspberry Pi Zero 2 W. The
-available RAM on a freshly-booted Zero 2 W with a wired connection
+available RAM on a freshly-booted Zero 2 W with a wireles connection
 is almost 100 megabytes more for 64-bit Alpine Linux than for 64-bit
 Raspberry Pi OS Lite.
 
