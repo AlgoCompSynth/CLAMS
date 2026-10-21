@@ -17,7 +17,7 @@ microcontrollers. CLAMS features
 and Bluetooth,
 - Audio plumbing:
     - [PipeWire](https://docs.pipewire.org/) with ALSA, JACK, and PulseAudio
-    support,
+    compatibility support,
     - [WirePlumber](https://pipewire.pages.freedesktop.org/wireplumber/),
     - [rtkit](https://gitlab.freedesktop.org/pipewire/rtkit?anubis_answer=lemon),
 - The
