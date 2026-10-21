@@ -110,10 +110,10 @@ focus at this time is exploring the capacity boundaries of the Raspberry Pi Zero
 
 ## Capacity notes
 
-The CPU is unlikely to be an issue for audio; it has four 1 GHz 64-bit Arm cores
-that include the Neon SIMD instructions. And the available RAM is more than enough
+The CPU is unlikely to be an issue for audio; the Zero 2 W has four 1 GHz 64-bit Arm
+cores that include the Neon SIMD instructions. And the available RAM is more than enough
 for most conceivable audio processing. Many commercial musical instruments use
-microcontrollers with much less CPU capacity than the Zero 2 W.
+microcontrollers with much less CPU and RAM capacity than the Zero 2 W.
 
 Where the rough edges are is RAM usage during compilation. Faust is a compiler,
 and most of its outputs need to be run through the target device's compiler.
