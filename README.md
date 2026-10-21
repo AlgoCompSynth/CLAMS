@@ -122,7 +122,7 @@ half of the RAM in the Zero 2 W on some routines.
 
 As a result, on the Zero 2 W, using multiple cores in compiling is often problematic.
 So there are going to be some interesting musical artifacts that can't be produced
-for the Zero 2 W on the Zero 2 W.
+for the Zero 2 W ***on*** the Zero 2 W.
 
 If you're interested in cross-development of musical software / firmware with CLAMS,
 you might well need a larger Raspberry Pi. I have an 8 GB Pi 4 and a 16 GB Pi 5 I can test
