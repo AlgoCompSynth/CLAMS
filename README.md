@@ -59,6 +59,12 @@ Faust is an optimizing compiler for computer music programming. Target environme
 include the Daisy Seed, PJRC Teensy, Bela, Rust and WebAssembly. There is a vibrant
 Faust community, including AI toolmakers.
 
+## Why ChucK?
+
+ChucK is a strongly-timed real-time music programming language. In addition to the
+classic digital sythesis techniques, like FM, virtual analogue, granular, and sample
+playback, ChucK allows creating music algorithmically, one sample at a time.
+
 ## Project status
 
 This is the first alpha release, `v0.7.5`. It has most of what I want and can be
@@ -76,9 +82,3 @@ Setting this up is a bit tricky; see the README in `alpine-setup` for the detail
 I'm not at the moment looking for pull requests and will unceremoniously delete them.
 If you want to work on something,
 [open an issue](https://github.com/AlgoCompSynth/CLAMS/issues/new).
-
-## Why ChucK?
-
-ChucK is a strongly-timed real-time music programming language. In addition to the
-classic digital sythesis techniques, like FM, virtual analogue, granular, and sample
-playback, ChucK allows creating music algorithmically, one sample at a time.
