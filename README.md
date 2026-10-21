@@ -25,7 +25,8 @@ and Bluetooth,
 - The
 [Faust](https://faust.grame.fr/) functional music programming language
 and development toolchain,
-- The [GCC 15](https://gcc.gnu.org/onlinedocs/15.3.0/) and [LLVM 20](https://releases.llvm.org/20.1.0/docs/index.html)
+- The [GCC 15](https://gcc.gnu.org/onlinedocs/15.3.0/)
+and [LLVM 20](https://releases.llvm.org/20.1.0/docs/index.html) toolchains,
 - The
 [ChucK](https://chuck.stanford.edu/) real-time music programming language, and
 - The
