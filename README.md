@@ -35,7 +35,7 @@ and RP2040/2350.
 
 ## Why Alpine Linux?
 
-The initial target for CLAMS is the Raspberry Pi Zero 2 W. The
+The primary target for CLAMS is the Raspberry Pi Zero 2 W. The
 available RAM on a freshly-booted Zero 2 W with a wireles connection
 is almost 100 megabytes more for 64-bit Alpine Linux than for 64-bit
 Raspberry Pi OS Lite.
@@ -62,13 +62,31 @@ Raspberry Pi OS Lite.
 
 Faust is an optimizing compiler for computer music programming. Target environments
 include the Daisy Seed, PJRC Teensy, Bela, Rust and WebAssembly. There is a vibrant
-Faust community, including AI toolmakers.
+Faust community, including AI toolmakers. Faust comes with many examples and has an
+extensive online manual. See also
+[Audio Signal Processing in FAUST](https://ccrma.stanford.edu/~jos/aspf/)
 
 ## Why ChucK?
 
-ChucK is a strongly-timed real-time music programming language. In addition to the
-classic digital sythesis techniques, like FM, virtual analogue, granular, and sample
-playback, ChucK allows creating music algorithmically, one sample at a time.
+ChucK is a strongly-timed real-time music programming language. In addition to
+classic digital sythesis techniques like FM, virtual analogue, granular, and sample
+playback, ChucK allows creating music algorithmically, one sample at a time. Like
+Faust, ChucK comes with many examples. There is an excellent ChucK textbook at
+[Programming for Musicians and Digital Artists](https://www.manning.com/books/programming-for-musicians-and-digital-artists).
+
+## The command line
+
+The CLAMS command line uses the standard Linux `bash` shell instead of the minimalist
+shell Alpine Linux provides as a default. The [Starship](https://starship.rs/)
+cross-shell prompt generator is included. For best results you will need a
+[nerd font](https://www.nerdfonts.com/) ***in your terminal emulator***.
+
+Also installed:
+- [Neovim](https://neovim.io/doc/),
+- [tmux](https://tmux.app/doc/),
+- [LuaJIT](https://luajit.org/),
+- [Fennel](https://fennel-lang.org/), and
+- [Lynx](https://lynx.browser.org/).
 
 ## Project status
 
@@ -83,8 +101,26 @@ of testing into an Alpine stable release.
 
 I'm actively looking for feature requests and, to a lesser extent, testers.
 Setting this up is a bit tricky; see [./alpine-setup/README.md](./alpine-setup/README.md)
-for the details.
+for the details. For feature requests, questions about usage and bug reports, open an
+issue at <https://github.com/AlgoCompSynth/CLAMS/issues/new>. I have a few outstanding
+upstream issues and plenty of remaining testing / dogfooding queued up, but my primary
+focus at this time is exploring the capacity boundaries of the Raspberry Pi Zero 2 W.
 
-I'm not at the moment looking for pull requests and will unceremoniously delete them.
-If you want to work on something,
-[open an issue](https://github.com/AlgoCompSynth/CLAMS/issues/new).
+## Capacity notes
+
+The CPU is unlikely to be an issue for audio; it has four 1 GHz 64-bit Arm cores
+that include the Neon SIMD instructions. And the available RAM is more than enough
+for most conceivable audio processing. Many commercial musical instruments use
+microcontrollers with much less CPU capacity than the Zero 2 W.
+
+Where the rough edges are is RAM usage during compilation. Faust is a compiler,
+and most of its outputs need to be run through the target device's compiler.
+Optimizing compilers use a fair amount of RAM; for example, compiling ChucK can use
+half of the RAM in the Zero 2 W on some routines.
+
+As a result, on the Zero 2 W, using multiple cores in compiling is often problematic.
+So there are going to be some interesting musical artifacts that can't be produced
+on the Pi Zero 2 W. If you're interested in cross-development of musical software
+with CLAMS, you might well need a larger Raspberry Pi. I have an 8 GB Pi 4 and a
+16 GB Pi 5 I can test on, to determine the requirements of large examples that
+break in the Zero 2 W.
