@@ -19,7 +19,7 @@ and Bluetooth,
     - [PipeWire](https://docs.pipewire.org/) with ALSA, JACK, and PulseAudio
     support,
     - [WirePlumber](https://pipewire.pages.freedesktop.org/wireplumber/),
-    - [rtkit](https://gitlab.freedesktop.org/pipewire/rtkit?anubis_answer=lemon)
+    - [rtkit](https://gitlab.freedesktop.org/pipewire/rtkit?anubis_answer=lemon),
 - The
 [FluidSynth](https://www.fluidsynth.org/) SoundFont-based synthesizer,
 - The
