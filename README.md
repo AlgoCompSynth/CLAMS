@@ -32,7 +32,7 @@ and [LLVM 20](https://releases.llvm.org/20.1.0/docs/index.html) toolchains,
 - The
 [Arduino CLI](https://docs.arduino.cc/arduino-cli/) and
 [PlatformIO Core](https://docs.platformio.org/en/latest/core/) cross-development
-toolchains for common microcontrollers, including the Daisy Seed, PJRC Teensy
+frameworks for common microcontrollers, including the Daisy Seed, PJRC Teensy
 and RP2040/2350.
 
 ## Why Alpine Linux?
