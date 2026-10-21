@@ -15,6 +15,11 @@ microcontrollers. CLAMS features
 [Alpine Linux](https://wiki.alpinelinux.org/wiki/Main_Page),
 - Multiple connection options - USB, HDMI, wired / wireless Ethernet
 and Bluetooth,
+- Audio plumbing:
+    - [PipeWire](https://docs.pipewire.org/) with ALSA, JACK, and PulseAudio
+    support,
+    - [WirePlumber](https://pipewire.pages.freedesktop.org/wireplumber/),
+    - [rtkit](https://gitlab.freedesktop.org/pipewire/rtkit?anubis_answer=lemon)
 - The
 [FluidSynth](https://www.fluidsynth.org/) SoundFont-based synthesizer,
 - The
@@ -77,7 +82,8 @@ of testing into an Alpine stable release.
 ## Contributing
 
 I'm actively looking for feature requests and, to a lesser extent, testers.
-Setting this up is a bit tricky; see the README in `alpine-setup` for the details.
+Setting this up is a bit tricky; see [./alpine-setup/README.md](./alpine-setup/README.md)
+for the details.
 
 I'm not at the moment looking for pull requests and will unceremoniously delete them.
 If you want to work on something,
