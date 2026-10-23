@@ -80,7 +80,8 @@ environments include the Daisy Seed, PJRC Teensy, Bela, Rust and
 WebAssembly. There is a vibrant Faust community, including AI
 toolmakers. Faust comes with many examples and has an extensive online
 manual. See also [Audio Signal Processing in
-FAUST](https://ccrma.stanford.edu/~jos/aspf/)
+FAUST](https://ccrma.stanford.edu/~jos/aspf/) and [Faust and AI
+Programming](https://ccrma.stanford.edu/~jos/pdf/IFC26-handout.pdf`).
 
 ## Why ChucK?
 
