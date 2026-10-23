@@ -130,15 +130,15 @@ document as well.
 
 I'm actively looking for feature requests and, to a lesser extent,
 testers. Setting this up is a bit tricky; see
-[./alpine-setup/README.md](./alpine-setup/README.md) for the details.
-For feature requests, questions about usage and bug reports, open an
-issue at <https://github.com/AlgoCompSynth/CLAMS/issues/new>.
+[./getting-started](./getting-started) for the details. For feature
+requests, questions about usage and bug reports, open an issue at
+<https://github.com/AlgoCompSynth/CLAMS/issues/new>.
 
-Note that there are a lot of existing music software packages for Linux.
-The three I've included are the ones best suited to a command line
-environment. I'd love to include Pure Data, SuperCollider and trackers,
-but they depend on graphical user interfaces that would be problematic
-on the Raspberry Pi Zero 2 W with only 512 MiB of RAM.
+There are numerous music software packages for Linux already. The three
+I've included are the ones best suited to a command line environment.
+I'd love to include Pure Data, SuperCollider and trackers, but they
+depend on graphical user interfaces that might be problematic on the
+Raspberry Pi Zero 2 W with only 512 MiB of RAM.
 
 ## Capacity notes
 
