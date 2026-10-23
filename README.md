@@ -37,14 +37,15 @@ the Daisy Seed, PJRC Teensy and Raspberry Pi RP2040/2350.
 
 ## Intended use case
 
-CLAMS is primarily intended for use on a Raspberry Pi Zero 2 W or larger
-as a software platform, either stand-alone with a monitor, heyboard and
-mouse, or headless on a network with a wired or wireless connection. I'm
-not a hardware maker in any sense. If you are, and want to build a
-musical device using this software with a Pi board inside, I'd love to
-hear about it, but I cannot offer any practical support on hardware
-issues. The closest CLAMS will ever get to the Pi hardware is 64-bit Arm
-assembly language.
+CLAMS is primarily intended for use on a
+[Raspberry Pi Zero 2 W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/)
+or larger as a software platform, either stand-alone with a monitor,
+heyboard and mouse, or headless on a network with a wired or wireless
+connection. I'm not a hardware maker in any sense. If you are, and
+want to build a musical device using this software with a Pi board
+inside, I'd love to hear about it, but I cannot offer any practical
+support on hardware issues. The closest CLAMS will ever get to the Pi
+hardware is 64-bit Arm assembly language.
 
 ## Why Alpine Linux?
 
