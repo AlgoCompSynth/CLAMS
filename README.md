@@ -25,17 +25,15 @@ Bluetooth,
 - The
 [Faust](https://faust.grame.fr/) functional music programming language
 and development toolchain,
+- The [ChucK](https://chuck.stanford.edu/) real-time music programming
+language,
 - The [GCC 15](https://gcc.gnu.org/onlinedocs/15.3.0/)
 and [LLVM 20](https://releases.llvm.org/20.1.0/docs/index.html)
-toolchains,
-- The
-[ChucK](https://chuck.stanford.edu/) real-time music programming
-language, and
-- The
-[Arduino CLI](https://docs.arduino.cc/arduino-cli/) and [PlatformIO
-Core](https://docs.platformio.org/en/latest/core/) cross-development
-frameworks for common microcontrollers, including the Daisy Seed, PJRC
-Teensy and Raspberry Pi RP2040/2350.
+toolchains, and
+- The [Arduino CLI](https://docs.arduino.cc/arduino-cli/) and
+[PlatformIO Core](https://docs.platformio.org/en/latest/core/)
+cross-development frameworks for common microcontrollers, including
+the Daisy Seed, PJRC Teensy and Raspberry Pi RP2040/2350.
 
 ## Intended use case
 
@@ -99,7 +97,10 @@ The CLAMS command line uses the standard Linux `bash` shell instead of
 the minimalist `ash` shell Alpine Linux provides as a default. The
 [Starship](https://starship.rs/) cross-shell prompt generator is
 included. For best results you will need a [nerd
-font](https://www.nerdfonts.com/) ***in your terminal emulator***.
+font](https://www.nerdfonts.com/) ***in your terminal emulator***. The
+Cascaydia Cove nerd font is installed with CLAMS if you're using CLAMS
+on a stand-alone console, and you can copy it to your host for a 
+headless system.
 
 Also installed:
 - [Neovim](https://neovim.io/doc/),
