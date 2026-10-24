@@ -9,7 +9,7 @@
 2. Go through the menus. First, choose your board. On the next page,
 "Choose operating system", select "Other general-purpose OS". On the
 next page, select "Alpine Linux". On the next page, if you have a
-choice select 64-bit. Some of the packages CLAMS requires are not
+choice, select 64-bit. Some of the packages CLAMS requires are not
 present in 32-bit Alpine Linux.
 
 3. Select your storage device, either an SD card or USB drive,
