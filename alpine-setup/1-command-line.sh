@@ -36,19 +36,32 @@ doas apk add -vv \
     bash-doc \
     bash-completion \
     bash-completion-doc \
+    binutils-doc \
+    build-base \
     busybox-doc \
+    ccache \
+    ccache-doc \
     checkbashisms \
+    cmake \
+    cmake-doc \
     curl \
     curl-doc \
+    distcc \
+    distcc-doc \
+    distcc-pump \
     doas-doc \
     dbus \
     dbus-doc \
     doas-doc \
     drill \
+    extra-cmake-modules \
+    extra-cmake-modules-doc \
     file \
     font-cascadia-code-nerd \
+    gcc-doc \
     git \
     git-doc \
+    gmp-doc \
     fenneljit \
     fennel-doc \
     htop \
@@ -59,16 +72,20 @@ doas apk add -vv \
     luajit-doc \
     lynx \
     lynx-doc \
+    make-doc \
     man-pages \
     mandoc \
     mandoc-doc \
     mandoc-apropos \
     mkrundir \
+    mpc1-doc \
+    mpfr4-doc \
     neovim \
     neovim-doc \
     openrc-doc \
     openssh-doc \
     openssl-doc \
+    patch-doc \
     plocate \
     plocate-doc \
     raspberrypi-bootloader-doc \
