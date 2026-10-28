@@ -23,10 +23,16 @@
 
 - OS + git + mDNS + NetworkManager
 
-
     $ free -h
                    total        used        free      shared  buff/cache   available
     Mem:           413Mi       149Mi       142Mi       1.8Mi       175Mi       264Mi
     Swap:          206Mi          0B       206Mi
 
+## DietPi trixie
 
+- OS + git + mDNS
+
+    $ free -h
+                   total        used        free      shared  buff/cache   available
+    Mem:           462Mi        62Mi       161Mi       1.9Mi       250Mi       399Mi
+    Swap:          1.5Gi          0B       1.5Gi
