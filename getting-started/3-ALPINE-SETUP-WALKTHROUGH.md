@@ -323,7 +323,10 @@ WARNING: opening /media/mmcblk0p1/apks/aarch64/APKINDEX.tar.gz: No such file or 
 * Configured kernel vmlinuz-rpi / initramfs-rpi
 
 Installation is complete. Please reboot.
-alpine-headless:~# 
+alpine-headless:~# reboot 
+alpine-headless:~# Read from remote host alpine-headless.local: Connection reset by peer
+Connection to alpine-headless.local closed.
+client_loop: send disconnect: Broken pipe
 ```
 
 Congratulations! You now have a minimal Alpine Linux system. As you will
