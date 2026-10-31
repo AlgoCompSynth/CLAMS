@@ -12,7 +12,7 @@ Pi single-board computers, compute modules and microcontrollers. CLAMS
 features
 
 - A minimalist command line approach based on [Alpine
-Linux](https://wiki.alpinelinux.org/wiki/Main_Page),
+Linux](https://wiki.alpinelinux.org/wiki/Raspberry_Pi),
 - Multiple connection options - USB, HDMI, wired / wireless Ethernet and
 Bluetooth,
 - Audio plumbing:

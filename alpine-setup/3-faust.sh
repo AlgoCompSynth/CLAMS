@@ -25,8 +25,6 @@ doas apk add -vv \
     faust-static@testing \
     faust-tools@testing \
     faust-vim@testing \
-    gcc-doc \
-    gmp-doc \
     llvm20 \
     llvm20-dev \
     llvm20-gtest \
