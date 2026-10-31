@@ -24,16 +24,10 @@ Bluetooth,
 [FluidSynth](https://www.fluidsynth.org/) SoundFont-based synthesizer,
 - The
 [Faust](https://faust.grame.fr/) functional music programming language
-and development toolchain,
-- The [ChucK](https://chuck.stanford.edu/) real-time music programming
-language,
+and development toolchain, and
 - The [GCC 15](https://gcc.gnu.org/onlinedocs/15.3.0/)
 and [LLVM 20](https://releases.llvm.org/20.1.0/docs/index.html)
-toolchains, and
-- The [Arduino CLI](https://docs.arduino.cc/arduino-cli/) and
-[PlatformIO Core](https://docs.platformio.org/en/latest/core/)
-cross-development frameworks for common microcontrollers, including
-the Daisy Seed, PJRC Teensy and Raspberry Pi RP2040/2350.
+toolchains.
 
 ## Intended use case
 
@@ -82,16 +76,6 @@ manual. See also [Audio Signal Processing in
 FAUST](https://ccrma.stanford.edu/~jos/aspf/) and [Faust and AI
 Programming](https://ccrma.stanford.edu/~jos/pdf/IFC26-handout.pdf`).
 
-## Why ChucK?
-
-ChucK is a strongly-timed real-time music programming language. In
-addition to classic digital sythesis techniques like FM, virtual
-analogue, granular, and sample playback, ChucK allows creating music
-algorithmically, one sample at a time. Like Faust, ChucK comes with many
-examples, and there is an excellent ChucK textbook at [Programming for
-Musicians and Digital 
-Artists](https://www.manning.com/books/programming-for-musicians-and-digital-artists).
-
 ## The command line
 
 The CLAMS command line uses the standard Linux `bash` shell instead of
@@ -122,10 +106,10 @@ migrated out of testing into an Alpine stable release.
 
 For the road map, see <https://github.com/AlgoCompSynth/CLAMS/issues>
 and <https://github.com/orgs/AlgoCompSynth/projects/26>. My near-term
-plan is mostly testing the ChucK and Faust examples to see what will
-and what won't run in the limited-capacity Zero 2 W. There are a
-couple of upstream issues blocking some planned features I need to
-document as well.
+plan is mostly testing the Faust examples to see what will and what
+won't run in the limited-capacity Zero 2 W. There are a couple of
+upstream issues blocking some planned features I need to document as
+well.
 
 ## Contributing
 
@@ -135,11 +119,11 @@ testers. Setting this up is a bit tricky; see
 requests, questions about usage and bug reports, open an issue at
 <https://github.com/AlgoCompSynth/CLAMS/issues/new>.
 
-There are numerous music software packages for Linux already. The three
+There are numerous music software packages for Linux already. The ones
 I've included are the ones best suited to a command line environment.
 I'd love to include Pure Data, SuperCollider and trackers, but they
 depend on graphical user interfaces that might be problematic on the
-Raspberry Pi Zero 2 W with only 512 MiB of RAM.
+Raspberry Pi Zero 2 W with only 512 MB of RAM.
 
 ## Capacity notes
 
@@ -151,12 +135,10 @@ microcontrollers with much less CPU and RAM capacity than the Zero 2 W.
 
 Where the rough edges are is RAM usage during compilation. Faust is a
 compiler, and most of its outputs need to be compiled with the target
-device's compiler.
-
-Optimizing compilers use a fair amount of RAM. For example, compiling
-ChucK can use half of the RAM in the Zero 2 W on some routines. As a
+device's compiler. Optimizing compilers use a fair amount of RAM. As a
 result, on the Zero 2 W, using multiple cores in compiling is often
-problematic.
+problematic, and some code won't even compile with a single `make`
+job.
 
 So there are going to be some interesting musical artifacts that can't
 be produced for the Zero 2 W ***on*** the Zero 2 W. If you're interested
@@ -165,3 +147,7 @@ might well need a larger Raspberry Pi. I have an 8 GB Pi 4 and a 16 GB
 Pi 5 I can use to determine the requirements of large examples that
 break in the Zero 2 W. Nobody will stop you from developing for the
 Zero 2 W on your Pi 500+.
+
+There is also a GPU on the Pi Zero 2 W and by default Alpine reserves
+64 MB of RAM for it. There is quite a bit of software for it but I do
+not have using it on the road map yet.
