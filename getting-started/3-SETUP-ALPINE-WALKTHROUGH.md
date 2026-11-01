@@ -330,5 +330,5 @@ client_loop: send disconnect: Broken pipe
 ```
 
 Congratulations! You now have a minimal Alpine Linux system. As you will
-see in the next part, it is really minimal. But the bulk of the typing
+see in the next part, it is ***really*** minimal. But the bulk of the typing
 and decision points are done; scripts do most of the heavy lifting.
