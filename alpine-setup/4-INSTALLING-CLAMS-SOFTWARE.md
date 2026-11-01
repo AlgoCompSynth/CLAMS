@@ -1,0 +1,1 @@
+../getting-started/4-INSTALLING-CLAMS-SOFTWARE.md
