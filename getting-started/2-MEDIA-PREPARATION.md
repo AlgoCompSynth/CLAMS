@@ -17,7 +17,7 @@ depending on your Pi system setup.
 4. Write image.
 
 If you Pi is connected to a keyboard, monitor and mouse you can proceed
-to [./3-ALPINE-SETUP-WALKTHROUGH.md](./3-SETUP-ALPINE-WALKTHROUGH.md).
+to [./3-SETUP-ALPINE-WALKTHROUGH.md](./3-SETUP-ALPINE-WALKTHROUGH.md).
 Otherwise, continue with the next steps below.
 
 ## Headless
@@ -44,4 +44,4 @@ one you want to mount.
 7. Copy `headless.apkovl.tar.gz` and the edited `wpa_supplicant.conf`
 to `PIBOOT` and unmount `PIBOOT`. You can now remove the SD card or
 USB drive and plug it into your Raspberry Pi and proceed to
-[./3-ALPINE-SETUP-WALKTHROUGH.md](./3-ALPINE-SETUP-WALKTHROUGH.md).
+[./3-SETUP-ALPINE-WALKTHROUGH.md](./3-SETUP-ALPINE-WALKTHROUGH.md).
