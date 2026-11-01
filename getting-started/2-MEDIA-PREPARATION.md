@@ -17,7 +17,7 @@ depending on your Pi system setup.
 4. Write image.
 
 If you Pi is connected to a keyboard, monitor and mouse you can proceed
-to [./3-ALPINE-SETUP-WALKTHROUGH.md](./3-ALPINE-SETUP-WALKTHROUGH.md).
+to [./3-ALPINE-SETUP-WALKTHROUGH.md](./3-SETUP-ALPINE-WALKTHROUGH.md).
 Otherwise, continue with the next steps below.
 
 ## Headless
