@@ -151,3 +151,14 @@ Zero 2 W on your Pi 500+.
 There is also a GPU on the Pi Zero 2 W and by default Alpine reserves
 64 MB of RAM for it. There is quite a bit of software for it but I do
 not have using it on the road map yet.
+
+## Getting started
+
+If you want to experiment with CLAMS, see the following. Note that as I
+noted above, a formal release candidate won't happen at least until
+Faust moves from the `testing` repository to a stable release.
+
+1. [Enclosures](./getting-started/1-ENCLOSURES.md)
+2. [Media preparation](./getting-started/2-MEDIA-PREPARATION.md)
+3. [`setup-alpine` walkthrough](./getting-started/3-SETUP-ALPINE-WALKTHROUGH.md)
+4. [Installing CLAMS software](./getting-started/4-INSTALLING-CLAMS-SOFTWARE.md)
