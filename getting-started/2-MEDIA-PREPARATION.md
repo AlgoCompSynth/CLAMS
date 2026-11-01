@@ -30,7 +30,7 @@ GitHub repository.
 not unpack it!***
 
 3. Download the
-[`wpa_supplicant` wireless connection file](https://github.com/macmpi/alpine-linux-headless-bootstrap/blob/main/contribs/wpa_supplicant.conf).
+[wpa_supplicant wireless connection file](https://github.com/macmpi/alpine-linux-headless-bootstrap/blob/main/contribs/wpa_supplicant.conf).
 
 5. Edit this file for your network. You will need to set the `country`,
 `ssid` and `psk` values for your router.
