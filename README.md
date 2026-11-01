@@ -15,7 +15,7 @@ features
 Linux](https://wiki.alpinelinux.org/wiki/Raspberry_Pi),
 - Multiple connection options - USB, HDMI, wired / wireless Ethernet and
 Bluetooth,
-- Audio plumbing:
+- Up-to-date Linux audio plumbing:
     - [PipeWire](https://docs.pipewire.org/) with ALSA, JACK, and
     PulseAudio compatibility support,
     - [WirePlumber](https://pipewire.pages.freedesktop.org/wireplumber/),
