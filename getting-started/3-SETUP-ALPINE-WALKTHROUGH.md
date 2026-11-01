@@ -122,8 +122,8 @@ You can use any name you want but the domain should be `.local`.
 ### Network interfaces
 
 How you set these up will depend on your local area network
-configuration. I have two interfaces and use DHCP for both IPV4 and
-IPV6.
+configuration. I have two interfaces and use DHCP for both IPv4 and
+IPv6.
 
 ```
  Interface
