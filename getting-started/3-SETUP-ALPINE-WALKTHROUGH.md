@@ -116,8 +116,8 @@ alpine-headless:~# setup-alpine
 Enter system hostname (fully qualified form, e.g. 'foo.example.org') [alpine-headless] egret.local
 ```
 
-The system will be called `egret` on the `.local` domain. You can use
-any name you want but the domain should be `.local`.
+For this walkthrough, the system will be called `egret` on the `.local` domain.
+You can use any name you want but the domain should be `.local`.
 
 ### Network interfaces
 
