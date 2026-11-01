@@ -1,4 +1,4 @@
-# `alpine-setup` Walkthrough
+# `setup-alpine` Walkthrough
 
 ## Headless setup
 
