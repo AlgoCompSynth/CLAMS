@@ -48,8 +48,8 @@ doas (znmeb@egret.local) password:
 egret:~$ 
 ```
 
-You'll probably want to set up a full development environment, but for
-now just clone the repository and install the software.
+You'll probably want to fork this repository and set up a full development
+environment, but for now just clone the repository and install the software.
 
 ```
 egret:~$ mkdir -p Projects
