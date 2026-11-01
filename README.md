@@ -108,8 +108,8 @@ For the road map, see <https://github.com/AlgoCompSynth/CLAMS/issues>
 and <https://github.com/orgs/AlgoCompSynth/projects/26>. My near-term
 plan is mostly testing the Faust examples to see what will and what
 won't run in the limited-capacity Zero 2 W. There are a couple of
-upstream issues blocking some planned features I need to document as
-well.
+upstream issues that I need to document that are blocking some planned
+features as well.
 
 ## Contributing
 
