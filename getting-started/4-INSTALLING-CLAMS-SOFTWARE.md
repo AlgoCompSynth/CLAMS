@@ -59,7 +59,7 @@ egret:~/Projects$ cd CLAMS/alpine-setup
 egret:~/Projects/CLAMS/alpine-setup$ 
 ```
 
-## Updating and installing the command line
+## Upgrading Alpine Linux and installing the command line
 
 ```
 egret:~/Projects/CLAMS/alpine-setup$ ls
