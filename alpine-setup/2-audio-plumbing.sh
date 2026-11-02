@@ -70,12 +70,6 @@ echo "....Adding $USER to the pipewire and rtkit groups"
 doas adduser $USER pipewire
 doas adduser $USER rtkit
 
-echo "....Indexing man pages"
-doas makewhatis
-
-echo "....Updating plocate database"
-doas updatedb
-
 echo "....Log out and back in again to start user services"
 
 echo "....Finished"

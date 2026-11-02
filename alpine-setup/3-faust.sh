@@ -44,11 +44,5 @@ faust --version > faust-version.txt
 echo "" >> faust-version.txt
 ls -1 /usr/bin/faust2* | sed 's;/usr/bin/;;' >> faust-version.txt
 
-echo "....Indexing man pages"
-doas makewhatis
-
-echo "....Updating plocate database"
-doas updatedb
-
 echo "....Finished"
 echo ""

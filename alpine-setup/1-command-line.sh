@@ -154,12 +154,6 @@ then
 
 fi
 
-echo "....Indexing man pages"
-doas makewhatis
-
-echo "....Updating plocate database"
-doas updatedb
-
 echo ""
 echo ""
 echo "....Command line setup complete - reboot!"
