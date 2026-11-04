@@ -4,6 +4,37 @@
 > fact, most of them were pretty steamed!" - Buck Borasky, Frontier
 > Programmer
 
+## Update 2026-11-04
+
+I'm putting this project on hold for a little while. The reason:
+
+A few days ago, a small group of well-known folks in the computer music
+industry went public with something awesome that they've been working on
+called `sndstation`. Here are the links:
+
+- [sndstation: music distro for handhelds (soon!) #synth #linux](https://youtu.be/V-WRcwsgQ_Q)
+- [sndstation on BlueSky](https://bsky.app/profile/sndstation.bsky.social)
+
+This is a game changer (pun intended) and my plan is to start developing
+some more advanced music creation tools for their platform as soon as I
+can get my hands on a compatible device and they post their open source
+platform code.
+
+I've held off (another pun intended) getting a handheld gaming device
+until now because
+
+1. I'm not a gamer, I'm a Linux and computer music nerd, and
+2. Hand cramps suck.
+
+But an open source handheld Linux platform I can develop applications
+for is worth an occasional hand cramp. I've heard they have Faust
+running on it. I assume they're cross-compiling the `.dsp` files
+because the tools for that are well-developed.
+
+In short, `sndstation` looks like it can free me of platform development
+efforts so I can spend time developing applications and computer music.
+Win-win!
+
 ## What is this?
 
 The goal of CLAMS is to get the most possible computer music out of the
