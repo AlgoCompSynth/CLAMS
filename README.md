@@ -27,9 +27,7 @@ until now because
 2. Hand cramps suck.
 
 But an open source handheld Linux platform I can develop applications
-for is worth an occasional hand cramp. I've heard they have Faust
-running on it. I assume they're cross-compiling the `.dsp` files
-because the tools for that are well-developed.
+for is worth an occasional hand cramp.
 
 In short, `sndstation` looks like it can free me of platform development
 efforts so I can spend time developing applications and computer music.
